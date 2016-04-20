@@ -1,0 +1,11 @@
+{
+  "name": "silver-bullet",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "meteor-node-stubs": "~0.2.0",
+    "react-kup": "^1.0.0"
+  }
+}
