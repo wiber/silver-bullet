@@ -1,3 +1,4 @@
+
 mount = require('react-mounter').mount
 #containerMainLayout = require('../api/MainLayoutContainer.coffee')
 FlowRouter.route '/about',
@@ -17,6 +18,8 @@ React = require('react')
 
 MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme} = require('../ui/theme.coffee')
+#require('react-select/dist/react-select.css') # 1.3.2 but here just include file
+# require('../ui/cssimport.js') # unexpected token so putting it in root
 #{Selected} = require('../ui/selected.coffee') # not maintained
 MainLayout = React.createClass
   getDefaultProps: ->
@@ -59,7 +62,7 @@ FlatButton = require 'material-ui/lib/flat-button'
 CardText = require 'material-ui/lib/card/card-text'
 
 Select = require('react-select')
-#require('react-select/dist/react-select.css') # 1.3.2 but here just include file
+
 Card = require 'material-ui/lib/card/card'
 
 
