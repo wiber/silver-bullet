@@ -135,8 +135,10 @@ MainCard = React.createClass
   handleToggle: (e) ->
     #console.log @props, 'handleToggle', e.target, e.target.type, this.refs.mainToggler, e.target == @, e.target == this.refs.mainToggler
     #console.log e.target, 'handleToggle', arguments.callee, e.caller,
-    FlowRouter.setQueryParams
-      expandMainCard: !@props.expanded
+    console.log e.target, e.currentTarget
+    if e.target == e.currentTarget
+      FlowRouter.setQueryParams
+        expandMainCard: !@props.expanded
     #e.stopPropagation()
   stopPropagationNow: (e) ->
     console.log e.target()
