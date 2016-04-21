@@ -3,8 +3,8 @@ ReactiveVar = require('meteor/reactive-var')
 reactKup = require('react-kup')
 require('../imports/startup/routes.coffee')
 #require('../imports/api/MainLayoutContainer.coffee')
-injectTapEventPlugin = require('react-tap-event-plugin')
-injectTapEventPlugin();
+#injectTapEventPlugin = require('react-tap-event-plugin')
+#injectTapEventPlugin();
 
 WebFontConfig = google: families: [ 'Roboto:400,300,500:latin' ]
 do ->
