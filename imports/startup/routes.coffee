@@ -68,9 +68,6 @@ Selected = React.createClass
     newQueryParams = {}
     newQueryParams[this.props.type] = val.value
     FlowRouter.setQueryParams newQueryParams
-  onClick: (event) ->
-    console.log event,event.target
-    event.stopPropagation()
   render: ->
     that = this
     reactKup (k) ->
@@ -87,7 +84,6 @@ Selected = React.createClass
             ref: that.props.type
             options: that.props.options
             onChange: that.logChange
-            onClick: that.onClick
             tabIndex: if that.props.type is 'from' then '2' else '3'
 
 {createContainer} = require 'meteor/react-meteor-data'
