@@ -133,16 +133,10 @@ MainCard = React.createClass
   getDefaultProps: ->
     expanded: false
   handleToggle: (e) ->
-    #console.log @props, 'handleToggle', e.target, e.target.type, this.refs.mainToggler, e.target == @, e.target == this.refs.mainToggler
-    #console.log e.target, 'handleToggle', arguments.callee, e.caller,
     console.log e.target, e.currentTarget
     if e.target == e.currentTarget
       FlowRouter.setQueryParams
         expandMainCard: !@props.expanded
-    #e.stopPropagation()
-  stopPropagationNow: (e) ->
-    console.log e.target()
-    e.stopPropagation()
   render: ->
     that = this
     reactKup (k) ->
@@ -159,7 +153,6 @@ MainCard = React.createClass
           k.build CardText,
           ->
             k.build selectedContainer,
-              onClick: that.stopPropagationNow
               label: 'Default'
               from: that.props.from
               to: that.props.to
