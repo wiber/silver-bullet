@@ -39,20 +39,10 @@ MainLayout = React.createClass
               k.div
                 className: 'main'
                 ->
-                  k.build selectedContainer,
-                    label: 'Default'
-                    something: 'else'
-                    from: that.props.from
-                    to: that.props.to
-                    type: 'from'
-                  k.build selectedContainer,
-                    label: 'Default'
-                    something: 'else'
-                    to: that.props.to
-                    from: that.props.from
-                    type: 'to'
                   k.build MainCard, # need comma here because the second arg is prop
                     expanded: that.props.expandMainCard
+                    to: that.props.to
+                    from: that.props.from
               k.div 'footer'
 
 
@@ -78,18 +68,27 @@ Selected = React.createClass
     newQueryParams = {}
     newQueryParams[this.props.type] = val.value
     FlowRouter.setQueryParams newQueryParams
+  onClick: (event) ->
+    console.log event,event.target
+    event.stopPropagation()
   render: ->
     that = this
     reactKup (k) ->
-      k.build Select,
+      k.span
         style:
+          #display: 'inline'
+          position: 'relative'
+          float: 'left'
           width: '25%'
-        name: that.props.from
-        value: that.props[that.props.type]
-        ref: that.props.type
-        options: that.props.options
-        onChange: that.logChange
-        tabIndex: if that.props.type is 'from' then '2' else '3'
+        ->
+          k.build Select,
+            name: that.props.from
+            value: that.props[that.props.type]
+            ref: that.props.type
+            options: that.props.options
+            onChange: that.logChange
+            onClick: that.onClick
+            tabIndex: if that.props.type is 'from' then '2' else '3'
 
 {createContainer} = require 'meteor/react-meteor-data'
 selectedContainer = createContainer ((props) ->
@@ -133,10 +132,15 @@ Toggle = require('material-ui/lib/toggle').default
 MainCard = React.createClass
   getDefaultProps: ->
     expanded: false
-  handleToggle: ->
-    console.log @props, 'handleToggle'
+  handleToggle: (e) ->
+    #console.log @props, 'handleToggle', e.target, e.target.type, this.refs.mainToggler, e.target == @, e.target == this.refs.mainToggler
+    #console.log e.target, 'handleToggle', arguments.callee, e.caller,
     FlowRouter.setQueryParams
       expandMainCard: !@props.expanded
+    #e.stopPropagation()
+  stopPropagationNow: (e) ->
+    console.log e.target()
+    e.stopPropagation()
   render: ->
     that = this
     reactKup (k) ->
@@ -151,11 +155,23 @@ MainCard = React.createClass
             #actAsExpander: true
             showExpandableButton: true
           k.build CardText,
-            style:
-              opacity: 1
-            ->
-              k.build Toggle,
-                toggled: that.props.expanded #.state.expanded
-                onToggle: that.handleToggle
-                labelPosition: 'right'
-                label: "This toggle controls the expanded state of the component."
+          ->
+            k.build selectedContainer,
+              onClick: that.stopPropagationNow
+              label: 'Default'
+              from: that.props.from
+              to: that.props.to
+              type: 'from'
+            k.build selectedContainer,
+              label: 'Default'
+              to: that.props.to
+              from: that.props.from
+              type: 'to'
+          k.build CardText,
+          ->
+            k.build Toggle,
+              ref: 'mainToggler'
+              toggled: that.props.expanded #.state.expanded
+              onToggle: that.handleToggle
+              labelPosition: 'right'
+              label: "This toggle controls the expanded state of the component."
