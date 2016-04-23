@@ -68,15 +68,20 @@ Selected = React.createClass
     newQueryParams = {}
     newQueryParams[this.props.type] = val.value
     FlowRouter.setQueryParams newQueryParams
+  stopPropagation: (e) ->
+    console.log e.target == e.currentTarget, e.target
+    if e.target == e.currentTarget
+      e.stopPropagation()
   render: ->
     that = this
     reactKup (k) ->
       k.span
         style:
-          #display: 'inline'
+          display: 'inline'
           position: 'relative'
           float: 'left'
           width: '25%'
+        #onMouseEnter: that.stopPropagation
         ->
           k.build Select,
             name: that.props.from
@@ -129,7 +134,7 @@ MainCard = React.createClass
   getDefaultProps: ->
     expanded: false
   handleToggle: (e) ->
-    console.log e.target, e.currentTarget
+    #console.log e.target, e.currentTarget
     if e.target == e.currentTarget
       FlowRouter.setQueryParams
         expandMainCard: !@props.expanded
@@ -143,26 +148,28 @@ MainCard = React.createClass
         ->
           k.build CardHeader,
             title: "URL Avatar"
-            subtitle: "Subtitle"
+            #subtitle: "Subtitle"
             #actAsExpander: true
-            showExpandableButton: true
+            #showExpandableButton: true
+            -> k.build Toggle,
+                style:
+                  float: 'right'
+                ref: 'mainToggler'
+                toggled: that.props.expanded #.state.expanded
+                onToggle: that.handleToggle
+                labelPosition: 'left'
+                label: "This toggle controls the expanded state of the component."
           k.build CardText,
-          ->
-            k.build selectedContainer,
-              label: 'Default'
-              from: that.props.from
-              to: that.props.to
-              type: 'from'
-            k.build selectedContainer,
-              label: 'Default'
-              to: that.props.to
-              from: that.props.from
-              type: 'to'
-          k.build CardText,
-          ->
-            k.build Toggle,
-              ref: 'mainToggler'
-              toggled: that.props.expanded #.state.expanded
-              onToggle: that.handleToggle
-              labelPosition: 'right'
-              label: "This toggle controls the expanded state of the component."
+            style:
+              height: 'auto'
+            ->
+              k.build selectedContainer,
+                label: 'Default'
+                from: that.props.from
+                to: that.props.to
+                type: 'from'
+              k.build selectedContainer,
+                label: 'Default'
+                to: that.props.to
+                from: that.props.from
+                type: 'to'
