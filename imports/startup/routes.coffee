@@ -163,13 +163,24 @@ MainCard = React.createClass
             style:
               height: 'auto'
             ->
+              k.build FromToSense,
+                from: that.props.from
+                to: that.props.to
+FromToSense = React.createClass
+  render: ->
+    that = this
+    reactKup (k) ->
+      k.div 'start',
+        ->
+          k.div 'more',
+            ->
               k.build selectedContainer,
-                label: 'Default'
                 from: that.props.from
                 to: that.props.to
                 type: 'from'
+          k.div 'fires',
+            ->
               k.build selectedContainer,
-                label: 'Default'
                 to: that.props.to
                 from: that.props.from
                 type: 'to'
