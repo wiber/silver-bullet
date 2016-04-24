@@ -68,26 +68,34 @@ Selected = React.createClass
     newQueryParams = {}
     newQueryParams[this.props.type] = val.value
     FlowRouter.setQueryParams newQueryParams
-  onClick: (event) ->
-    console.log event,event.target
-    event.stopPropagation()
+  stopPropagation: (e) ->
+    console.log e.target == e.currentTarget, e.target
+    if e.target == e.currentTarget
+      e.stopPropagation()
   render: ->
     that = this
     reactKup (k) ->
       k.span
         style:
-          #display: 'inline'
+          display: 'inline-block'
           position: 'relative'
-          float: 'left'
+          #float: 'left'
+          clear: 'right'
           width: '25%'
+        #onMouseEnter: that.stopPropagation
         ->
           k.build Select,
+            style:
+              #display: 'inline'
+              position: 'relative'
+              #clear: 'right'
+              #height: '20em'
+              #float: 'left'
             name: that.props.from
             value: that.props[that.props.type]
             ref: that.props.type
             options: that.props.options
             onChange: that.logChange
-            onClick: that.onClick
             tabIndex: if that.props.type is 'from' then '2' else '3'
 
 {createContainer} = require 'meteor/react-meteor-data'
@@ -133,14 +141,10 @@ MainCard = React.createClass
   getDefaultProps: ->
     expanded: false
   handleToggle: (e) ->
-    #console.log @props, 'handleToggle', e.target, e.target.type, this.refs.mainToggler, e.target == @, e.target == this.refs.mainToggler
-    #console.log e.target, 'handleToggle', arguments.callee, e.caller,
-    FlowRouter.setQueryParams
-      expandMainCard: !@props.expanded
-    #e.stopPropagation()
-  stopPropagationNow: (e) ->
-    console.log e.target()
-    e.stopPropagation()
+    #console.log e.target, e.currentTarget
+    if e.target == e.currentTarget
+      FlowRouter.setQueryParams
+        expandMainCard: !@props.expanded
   render: ->
     that = this
     reactKup (k) ->
@@ -151,27 +155,38 @@ MainCard = React.createClass
         ->
           k.build CardHeader,
             title: "URL Avatar"
-            subtitle: "Subtitle"
+            #subtitle: "Subtitle"
             #actAsExpander: true
-            showExpandableButton: true
+            #showExpandableButton: true
+            -> k.build Toggle,
+                style:
+                  float: 'right'
+                ref: 'mainToggler'
+                toggled: that.props.expanded #.state.expanded
+                onToggle: that.handleToggle
+                labelPosition: 'left'
+                label: "This toggle controls the expanded state of the component."
           k.build CardText,
-          ->
-            k.build selectedContainer,
-              onClick: that.stopPropagationNow
-              label: 'Default'
-              from: that.props.from
-              to: that.props.to
-              type: 'from'
-            k.build selectedContainer,
-              label: 'Default'
-              to: that.props.to
-              from: that.props.from
-              type: 'to'
-          k.build CardText,
-          ->
-            k.build Toggle,
-              ref: 'mainToggler'
-              toggled: that.props.expanded #.state.expanded
-              onToggle: that.handleToggle
-              labelPosition: 'right'
-              label: "This toggle controls the expanded state of the component."
+            style:
+              height: 'auto'
+            ->
+              k.build FromToSense,
+                from: that.props.from
+                to: that.props.to
+FromToSense = React.createClass
+  render: ->
+    that = this
+    reactKup (k) ->
+      k.span 'start', ->
+        k.span 'more', ->
+          style:
+            clear: 'left'
+          k.build selectedContainer,
+            from: that.props.from
+            to: that.props.to
+            type: 'from'
+        k.span 'fires', ->
+          k.build selectedContainer,
+            to: that.props.to
+            from: that.props.from
+            type: 'to'
