@@ -77,13 +77,20 @@ Selected = React.createClass
     reactKup (k) ->
       k.span
         style:
-          display: 'inline'
+          display: 'inline-block'
           position: 'relative'
-          float: 'left'
+          #float: 'left'
+          clear: 'right'
           width: '25%'
         #onMouseEnter: that.stopPropagation
         ->
           k.build Select,
+            style:
+              #display: 'inline'
+              position: 'relative'
+              #clear: 'right'
+              #height: '20em'
+              #float: 'left'
             name: that.props.from
             value: that.props[that.props.type]
             ref: that.props.type
@@ -170,17 +177,16 @@ FromToSense = React.createClass
   render: ->
     that = this
     reactKup (k) ->
-      k.div 'start',
-        ->
-          k.div 'more',
-            ->
-              k.build selectedContainer,
-                from: that.props.from
-                to: that.props.to
-                type: 'from'
-          k.div 'fires',
-            ->
-              k.build selectedContainer,
-                to: that.props.to
-                from: that.props.from
-                type: 'to'
+      k.span 'start', ->
+        k.span 'more', ->
+          style:
+            clear: 'left'
+          k.build selectedContainer,
+            from: that.props.from
+            to: that.props.to
+            type: 'from'
+        k.span 'fires', ->
+          k.build selectedContainer,
+            to: that.props.to
+            from: that.props.from
+            type: 'to'
