@@ -36,14 +36,14 @@ http@1.1.5
 id-map@1.0.7
 insecure@1.0.7
 jquery@1.11.8
-kadira:flow-router-ssr@3.12.2
+kadira:flow-router-ssr@3.13.0
 launch-screen@1.0.11
 livedata@1.0.18
 localstorage@1.0.9
 logging@1.0.12
 meteor@1.1.14
 meteor-base@1.0.4
-meteorhacks:fast-render@2.13.0
+meteorhacks:fast-render@2.14.0
 meteorhacks:inject-data@2.0.0
 meteorhacks:meteorx@1.4.1
 meteorhacks:picker@1.0.3

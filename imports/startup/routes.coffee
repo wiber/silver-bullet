@@ -52,7 +52,8 @@ FlatButton = require 'material-ui/lib/flat-button'
 CardText = require 'material-ui/lib/card/card-text'
 
 Select = require('react-select')
-
+SimpleSelect = require("react-selectize").SimpleSelect
+#require('node_modules/react-selectize/themes/index.css')
 Card = require 'material-ui/lib/card/card'
 
 
@@ -78,24 +79,18 @@ Selected = React.createClass
       k.span
         style:
           display: 'inline-block'
-          position: 'relative'
-          #float: 'left'
-          clear: 'right'
-          width: '25%'
-        #onMouseEnter: that.stopPropagation
+          #position: 'relative'
+          width: 'auto'
         ->
-          k.build Select,
-            style:
-              #display: 'inline'
-              position: 'relative'
-              #clear: 'right'
-              #height: '20em'
-              #float: 'left'
-            name: that.props.from
-            value: that.props[that.props.type]
+          k.build SimpleSelect,
+            placeholder: "Select a fruit"
+            theme: "material"# // can be one of "default" | "bootstrap3" | "material" | ...
+            transitionEnter: true
+            #name: that.props.from
+            #value: that.props[that.props.type]
             ref: that.props.type
             options: that.props.options
-            onChange: that.logChange
+            #onChange: that.logChange
             tabIndex: if that.props.type is 'from' then '2' else '3'
 
 {createContainer} = require 'meteor/react-meteor-data'
@@ -113,6 +108,10 @@ selectedContainer = createContainer ((props) ->
       {
         value: 'there'
         label: 'There'
+      }
+      {
+        value: 'therethere  '
+        label: 'ThereThereThereThereThereThereThereThereThereThereThereThere'
       }
     ]
   }
@@ -179,8 +178,6 @@ FromToSense = React.createClass
     reactKup (k) ->
       k.span 'start', ->
         k.span 'more', ->
-          style:
-            clear: 'left'
           k.build selectedContainer,
             from: that.props.from
             to: that.props.to
