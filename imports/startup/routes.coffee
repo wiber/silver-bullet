@@ -25,7 +25,6 @@ MainLayout = React.createClass
   getDefaultProps: ->
     #expandMainCard: true
   componentDidMount: ->
-    console.log this.props, 'props are mounting'
   render: ->
     that = this
     reactKup (k) ->
@@ -56,7 +55,10 @@ SimpleSelect = require("react-selectize").SimpleSelect
 #require('node_modules/react-selectize/themes/index.css')
 Card = require 'material-ui/lib/card/card'
 
-
+changeQueryParams = (key,value) ->
+  newQueryParams = {}
+  newQueryParams[key] = value
+  FlowRouter.setQueryParams newQueryParams
 
 Selected = React.createClass
   propTypes: (props) ->
@@ -64,91 +66,32 @@ Selected = React.createClass
     to: React.propTypes.string
     type: React.propTypes.string
     options: React.propTypes.array
-  logChange: (val)->
-    newQueryParams = {}
-    newQueryParams[this.props.type] = @getValue().value #val.value
-    FlowRouter.setQueryParams newQueryParams
-    #newer = FlowRouter.getQueryParams @props.type
-    console.log 'Selected: ',
-    val ,
-    'newQueryParams',newQueryParams
-    , @getValue()
-    , @getValue().value
-    ,'getObj', @getObj()#,'objectify', @props.options,_.object(@props.options),_.object(@props.options)[@props[@props.type]]
-    , _.object(@props.options)[@props[@props.type]]
-    , _.object(@props.options)
-    , typeof @props.options
-  getObj: ->
-    returner = {}
-    for i in @props.options
-      returner[i.value] = i.label
-      console.log returner,i,'many'
-    returner
-    #_.object(@props.options)[@props[@props.type]]
-  getValue: ->
-    currentValue =  @props[@props.type]
-    options = @props.options
-
-    #wholeItemFromString = _.find options, (currentValue) -> options.value is currentValue
-    console.log currentValue,options#,wholeItemFromString
-    for i in @props.options
-      if i.value = @props[@props.type]
-        console.log i, i.value, @props[@props.type]
-        toReturn = i
-    if !toReturn
-      toReturn =
-        label: currentValue
-        value: currentValue
-    toReturn
-  loopObj: ->
-    for i in @props.options
-      if i.value = @props[@props.type]
-        console.log i, i.value, @props[@props.type]
-        return i
+  queryParamChange: (val)->
+    changeQueryParams @props.type, val.value
   render: ->
     that = this
-    console.log _.object(that.props.options)[that.props[that.props.type]]
-    console.log that.props.options[_.indexOf(that.props.options, {value: that.props[that.props.type]})]
-    , 'indexOf'
-    , that.props.options
-    ,_.indexOf(that.props.options, {value: that.props[that.props.type]})
-    ,{value: that.props[that.props.type]}
     reactKup (k) ->
-
       k.span
         style:
           display: 'inline-block'
-          #position: 'relative'
           width: 'auto'
         ->
           k.build SimpleSelect,
             placeholder: "Select a fruit"
             theme: "material"# // can be one of "default" | "bootstrap3" | "material" | ...
             transitionEnter: true
-            #name: that.props.from
-            #value: that.getValue #that.props[that.props.type]
-            onValueChange: that.logChange
+            onValueChange: that.queryParamChange
             defaultValue: _.find(that.props.options, (obj) ->
               obj.value == that.props[that.props.type]
             )
-
-            #_.find(that.props.options,(obj) -> obj.value = that.props[that.props.value])
-            #that.loopObj #that.props.options[_.indexOf(that.props.options, {value: that.props[that.props.type]})]
-            #-> #that.loopObj #_.object(that.props.options)[that.props[that.props.type]]
-            ###  for i in that.props.options
-                if i.value = that.props[that.props.type]
-                  console.log i, i.value, that.props[that.props.type]
-                  return i ###
             ref: that.props.type
             options: that.props.options
-            #onChange: that.logChange
             tabIndex: if that.props.type is 'from' then '2' else '3'
 
 {createContainer} = require 'meteor/react-meteor-data'
 selectedContainer = createContainer ((props) ->
-  console.log props, 'selectedContainer'
   {
-    from: props.from # one arg?
+    from: props.from
     to: props.to
     type: props.type
     options: [
@@ -169,7 +112,6 @@ selectedContainer = createContainer ((props) ->
 ), Selected
 
 containerMainLayout = createContainer ((props) ->
-  console.log props, 'containerMainLayout'
   {
     #from: props.from # one arg?
     #to: props.to
@@ -186,12 +128,10 @@ FlatButton = require('material-ui/lib/flat-button' ).default
 CardText =  require('material-ui/lib/card/card-text').default
 Toggle = require('material-ui/lib/toggle').default
 
-#RaisedButton = require('material-ui/lib/raised-button').default
 MainCard = React.createClass
   getDefaultProps: ->
     expanded: false
   handleToggle: (e) ->
-    #console.log e.target, e.currentTarget
     if e.target == e.currentTarget
       FlowRouter.setQueryParams
         expandMainCard: !@props.expanded
@@ -212,7 +152,7 @@ MainCard = React.createClass
                 style:
                   float: 'right'
                 ref: 'mainToggler'
-                toggled: that.props.expanded #.state.expanded
+                toggled: that.props.expanded
                 onToggle: that.handleToggle
                 labelPosition: 'left'
                 label: "This toggle controls the expanded state of the component."
