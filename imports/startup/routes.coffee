@@ -64,18 +64,57 @@ Selected = React.createClass
     to: React.propTypes.string
     type: React.propTypes.string
     options: React.propTypes.array
-  logChange: (val) ->
-    console.log 'Selected: ',val
+  logChange: (val)->
     newQueryParams = {}
-    newQueryParams[this.props.type] = val.value
+    newQueryParams[this.props.type] = @getValue().value #val.value
     FlowRouter.setQueryParams newQueryParams
-  stopPropagation: (e) ->
-    console.log e.target == e.currentTarget, e.target
-    if e.target == e.currentTarget
-      e.stopPropagation()
+    #newer = FlowRouter.getQueryParams @props.type
+    console.log 'Selected: ',
+    val ,
+    'newQueryParams',newQueryParams
+    , @getValue()
+    , @getValue().value
+    ,'getObj', @getObj()#,'objectify', @props.options,_.object(@props.options),_.object(@props.options)[@props[@props.type]]
+    , _.object(@props.options)[@props[@props.type]]
+    , _.object(@props.options)
+    , typeof @props.options
+  getObj: ->
+    returner = {}
+    for i in @props.options
+      returner[i.value] = i.label
+      console.log returner,i,'many'
+    returner
+    #_.object(@props.options)[@props[@props.type]]
+  getValue: ->
+    currentValue =  @props[@props.type]
+    options = @props.options
+
+    #wholeItemFromString = _.find options, (currentValue) -> options.value is currentValue
+    console.log currentValue,options#,wholeItemFromString
+    for i in @props.options
+      if i.value = @props[@props.type]
+        console.log i, i.value, @props[@props.type]
+        toReturn = i
+    if !toReturn
+      toReturn =
+        label: currentValue
+        value: currentValue
+    toReturn
+  loopObj: ->
+    for i in @props.options
+      if i.value = @props[@props.type]
+        console.log i, i.value, @props[@props.type]
+        return i
   render: ->
     that = this
+    console.log _.object(that.props.options)[that.props[that.props.type]]
+    console.log that.props.options[_.indexOf(that.props.options, {value: that.props[that.props.type]})]
+    , 'indexOf'
+    , that.props.options
+    ,_.indexOf(that.props.options, {value: that.props[that.props.type]})
+    ,{value: that.props[that.props.type]}
     reactKup (k) ->
+
       k.span
         style:
           display: 'inline-block'
@@ -87,7 +126,19 @@ Selected = React.createClass
             theme: "material"# // can be one of "default" | "bootstrap3" | "material" | ...
             transitionEnter: true
             #name: that.props.from
-            #value: that.props[that.props.type]
+            #value: that.getValue #that.props[that.props.type]
+            onValueChange: that.logChange
+            defaultValue: _.find(that.props.options, (obj) ->
+              obj.value == that.props[that.props.type]
+            )
+
+            #_.find(that.props.options,(obj) -> obj.value = that.props[that.props.value])
+            #that.loopObj #that.props.options[_.indexOf(that.props.options, {value: that.props[that.props.type]})]
+            #-> #that.loopObj #_.object(that.props.options)[that.props[that.props.type]]
+            ###  for i in that.props.options
+                if i.value = that.props[that.props.type]
+                  console.log i, i.value, that.props[that.props.type]
+                  return i ###
             ref: that.props.type
             options: that.props.options
             #onChange: that.logChange
