@@ -9,10 +9,10 @@
     "meteor-node-stubs": "~0.2.0",
     "react-kup": "^1.0.0",
     "react-mounter": "^1.2.0",
-    "react-select": "^1.0.0-beta12"
+    "react-select": "^1.0.0-beta12",
+    "react-pure-render-mixin": "^15.0.0"
   },
   "peerDependencies": {
     "react": "^15.0.0",
-    "react-pure-render-mixin": "^15.0.0"
   }
 }
