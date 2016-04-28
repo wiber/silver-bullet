@@ -145,9 +145,9 @@ MainCard = React.createClass
         ->
           k.build CardHeader,
             title: "URL Avatar"
-            #subtitle: "Subtitle"
             #actAsExpander: true
             #showExpandableButton: true
+            subtitle: "Subtitle"
             -> k.build Toggle,
                 style:
                   float: 'right'
