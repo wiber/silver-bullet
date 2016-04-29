@@ -13,9 +13,6 @@ FlowRouter.route '/about',
 reactKup = require('react-kup')
 React = require('react')
 
-
-
-
 MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme} = require('../ui/theme.coffee')
 #require('react-select/dist/react-select.css') # 1.3.2 but here just include file
@@ -159,16 +156,15 @@ MainCard = React.createClass
           k.build CardText,
             style:
               height: 'auto'
-            ->
-              k.build FromToSense,
-                from: that.props.from
-                to: that.props.to
+            -> k.build FromToSense,
+              from: that.props.from
+              to: that.props.to
 FromToSense = React.createClass
   render: ->
     that = this
     reactKup (k) ->
-      k.span 'start', ->
-        k.span 'more', ->
+      k.div ->
+        k.span 'start more', ->
           k.build selectedContainer,
             from: that.props.from
             to: that.props.to
