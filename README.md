@@ -14,7 +14,7 @@ Aims
   - [x] material-ui
   - [x] react-kup
   - [x] meteorJS
-  - [ ] wallaby.js runs tests continously?
+  - [ ] wallaby.js runs tests continously
   - [ ] meteor -test--fullApp
 - [x] Serverside Rendering by kadira:flowrouter-ssr
 - [ ] App-State on the queryParam
