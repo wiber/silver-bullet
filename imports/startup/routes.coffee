@@ -71,10 +71,13 @@ Selected = React.createClass
       k.span
         style:
           display: 'inline-block'
-          width: 'auto'
         ->
           k.build SimpleSelect,
-            placeholder: "Select a fruit"
+            maxValues: 1
+            style:
+              width: 150
+              overflowX: 'hidden'
+              display: 'inline'
             theme: "material"# // can be one of "default" | "bootstrap3" | "material" | ...
             transitionEnter: true
             onValueChange: that.queryParamChange
@@ -84,6 +87,9 @@ Selected = React.createClass
             ref: that.props.type
             options: that.props.options
             tabIndex: if that.props.type is 'from' then '2' else '3'
+            tether: true
+            editable: (item) ->
+              item.label
 
 {createContainer} = require 'meteor/react-meteor-data'
 selectedContainer = createContainer ((props) ->
@@ -164,13 +170,48 @@ FromToSense = React.createClass
     that = this
     reactKup (k) ->
       k.div ->
-        k.span 'start more', ->
+        k.span 'to connect', ->
           k.build selectedContainer,
             from: that.props.from
             to: that.props.to
             type: 'from'
-        k.span 'fires', ->
+        k.span 'to', ->
           k.build selectedContainer,
             to: that.props.to
             from: that.props.from
             type: 'to'
+
+# distill down how this place fits into the world
+# who and what is behind it pushing or in front of it pulling
+# or the opposite directions, valence and intesity
+aboutnessSubtitle = React.createClass
+  render: ->
+    that = this
+    reactKup(k) ->
+      k.span that.props.from
+aboutnessHere = React.createClass
+  render: ->
+    that = this
+    reactKup(k) ->
+      k.build Card,
+        expanded: that.props.expanded
+        style:
+          height: 'auto'
+        ->
+          k.build CardHeader,
+            title: "About This Place"
+            subtitle: that.props.from
+            -> k.build Toggle,
+                style:
+                  float: 'right'
+                ref: 'mainToggler'
+                toggled: that.props.expanded
+                onToggle: that.handleToggle
+                labelPosition: 'left'
+                label: "This toggle controls the expanded state of the component."
+          k.build CardText,
+            style:
+              height: 'auto'
+            -> k.build FromToSense,
+              from: that.props.from
+              to: that.props.to
