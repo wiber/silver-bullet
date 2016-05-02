@@ -51,7 +51,7 @@ Select = require('react-select')
 SimpleSelect = require("react-selectize").SimpleSelect
 #require('node_modules/react-selectize/themes/index.css')
 Card = require 'material-ui/lib/card/card'
-
+ReactDOM = require('react-dom')
 changeQueryParams = (key,value) ->
   newQueryParams = {}
   newQueryParams[key] = value
@@ -63,20 +63,22 @@ Selected = React.createClass
     to: React.propTypes.string
     type: React.propTypes.string
     options: React.propTypes.array
-  queryParamChange: (val)->
+  queryParamChange: (val) ->
     if val.value
       changeQueryParams @props.type, val.value
   render: ->
     that = this
+    window[that.props.type] = this
     reactKup (k) ->
       k.span
+        id: that.props.type+'span'
         style:
           display: 'inline-block'
+          width: '17%'
         ->
           k.build SimpleSelect,
             maxValues: 1
             style:
-              width: 150
               overflowX: 'hidden'
               display: 'inline'
             theme: "material"# // can be one of "default" | "bootstrap3" | "material" | ...
@@ -86,22 +88,22 @@ Selected = React.createClass
               obj.value == that.props[that.props.type]
             )
             ref: that.props.type
+            id: that.props.type
             options: that.props.options
             tabIndex: if that.props.type is 'from' then '2' else '3'
             tether: true
             hideResetButton: true
             renderValue: (item) ->
-              that = this
               reactKup (k) ->
                 k.div
                   style:
                     overflow: "hidden"
                     textOverflow: "ellipsis"
                     whiteSpace: "nowrap"
-                    maxWidth: 300
+                    maxWidth: 600
                   item.label
-            onBlur: (originalEvent, value, open) ->
-              console.log originalEvent,Item,open
+
+
 
 
 {createContainer} = require 'meteor/react-meteor-data'
@@ -147,10 +149,9 @@ Toggle = require('material-ui/lib/toggle').default
 MainCard = React.createClass
   getDefaultProps: ->
     expanded: false
-  handleToggle: (e) ->
-    if e.target == e.currentTarget
-      FlowRouter.setQueryParams
-        expandMainCard: !@props.expanded
+  handleToggle: () ->
+    console.log !@props.expanded
+    changeQueryParams 'expandMainCard', !@props.expanded
   render: ->
     that = this
     reactKup (k) ->
@@ -164,21 +165,27 @@ MainCard = React.createClass
             #actAsExpander: true
             #showExpandableButton: true
             subtitle: "Subtitle"
-            -> k.build Toggle,
-                tabIndex: -6
-                style:
-                  float: 'right'
-                ref: 'mainToggler'
-                toggled: that.props.expanded
-                onToggle: that.handleToggle
-                labelPosition: 'left'
-                label: "This toggle controls the expanded state of the component."
           k.build CardText,
             style:
               height: 'auto'
             -> k.build FromToSense,
               from: that.props.from
               to: that.props.to
+          k.build CardActions, -> # return innerhtml, tags before
+            k.build Toggle,
+              style:
+                display: 'inline'
+              toggled: that.props.expanded
+              onToggle: that.handleToggle
+              labelPosition: 'left'
+              label: "See more about here"
+            k.build FlatButton,
+              style:
+                height: 0
+              label: 'Tab here to go back to "From"'
+              onFocus: () ->
+                window.from.refs.from.focus()
+
 
 
 TextField = require('material-ui/lib/TextField').default
@@ -187,23 +194,23 @@ FromToSense = React.createClass
     that = this
     reactKup (k) ->
       k.div ->
-        k.span 'to connect ', ->
-          k.build selectedContainer,
-            from: that.props.from
-            to: that.props.to
-            type: 'from'
+        k.build selectedContainer,
+          from: that.props.from
+          to: that.props.to
+          type: 'from'
         k.build TextField,
           style:
+            width: '60%'
             tabIndex: 0
-            paddingLeft: 2
+            paddingLeft: 4
+            marginRight: 7
             bottom: -4
-          floatingLabelText: "with a few words about"
-          hintText: "what one means to the other"
-        k.span ' ', ->
-          k.build selectedContainer,
-            to: that.props.to
-            from: that.props.from
-            type: 'to'
+          floatingLabelText: "is like ... to"
+          hintText: "say something to connect them"
+        k.build selectedContainer,
+          to: that.props.to
+          from: that.props.from
+          type: 'to'
 
 # distill down how this place fits into the world
 # who and what is behind it pushing or in front of it pulling
@@ -225,6 +232,12 @@ aboutnessHere = React.createClass
           k.build CardHeader,
             title: "About This Place"
             subtitle: that.props.from
+          k.build CardText,
+            style:
+              height: 'auto'
+            -> k.build FromToSense,
+              from: that.props.from
+              to: that.props.todo
             -> k.build Toggle,
                 style:
                   float: 'right'
@@ -232,10 +245,8 @@ aboutnessHere = React.createClass
                 toggled: that.props.expanded
                 onToggle: that.handleToggle
                 labelPosition: 'left'
-                label: "This toggle controls the expanded state of the component."
-          k.build CardText,
-            style:
-              height: 'auto'
-            -> k.build FromToSense,
-              from: that.props.from
-              to: that.props.to
+                label: ->
+                  k.build FlatButton,
+                    label: 'Tab around'
+                    onFocus: () ->
+                      window.from.refs.from.focus()
