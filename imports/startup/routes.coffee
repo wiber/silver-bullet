@@ -88,6 +88,7 @@ Selected = React.createClass
             options: that.props.options
             tabIndex: if that.props.type is 'from' then '2' else '3'
             tether: true
+            hideResetButton: true
             renderValue: (item) ->
               that = this
               reactKup (k) ->
@@ -182,7 +183,7 @@ FromToSense = React.createClass
     that = this
     reactKup (k) ->
       k.div ->
-        k.span 'to connect', ->
+        k.span 'to connect ', ->
           k.build selectedContainer,
             from: that.props.from
             to: that.props.to
@@ -194,12 +195,12 @@ FromToSense = React.createClass
             bottom: -4
           floatingLabelText: "with a few words about"
           hintText: "what one means to the other"
-          #hint: ''
         k.span ' ', ->
           k.build selectedContainer,
             to: that.props.to
             from: that.props.from
             type: 'to'
+
 
 # distill down how this place fits into the world
 # who and what is behind it pushing or in front of it pulling
