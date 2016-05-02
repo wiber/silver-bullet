@@ -64,7 +64,8 @@ Selected = React.createClass
     type: React.propTypes.string
     options: React.propTypes.array
   queryParamChange: (val)->
-    changeQueryParams @props.type, val.value
+    if val.value
+      changeQueryParams @props.type, val.value
   render: ->
     that = this
     reactKup (k) ->
@@ -99,6 +100,9 @@ Selected = React.createClass
                     whiteSpace: "nowrap"
                     maxWidth: 300
                   item.label
+            onBlur: (originalEvent, value, open) ->
+              console.log originalEvent,Item,open
+
 
 {createContainer} = require 'meteor/react-meteor-data'
 selectedContainer = createContainer ((props) ->
@@ -200,7 +204,6 @@ FromToSense = React.createClass
             to: that.props.to
             from: that.props.from
             type: 'to'
-
 
 # distill down how this place fits into the world
 # who and what is behind it pushing or in front of it pulling
