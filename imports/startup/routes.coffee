@@ -88,8 +88,16 @@ Selected = React.createClass
             options: that.props.options
             tabIndex: if that.props.type is 'from' then '2' else '3'
             tether: true
-            editable: (item) ->
-              item.label
+            renderValue: (item) ->
+              that = this
+              reactKup (k) ->
+                k.div
+                  style:
+                    overflow: "hidden"
+                    textOverflow: "ellipsis"
+                    whiteSpace: "nowrap"
+                    maxWidth: 300
+                  item.label
 
 {createContainer} = require 'meteor/react-meteor-data'
 selectedContainer = createContainer ((props) ->
@@ -152,6 +160,7 @@ MainCard = React.createClass
             #showExpandableButton: true
             subtitle: "Subtitle"
             -> k.build Toggle,
+                tabIndex: -6
                 style:
                   float: 'right'
                 ref: 'mainToggler'
@@ -165,6 +174,9 @@ MainCard = React.createClass
             -> k.build FromToSense,
               from: that.props.from
               to: that.props.to
+
+
+TextField = require('material-ui/lib/TextField').default
 FromToSense = React.createClass
   render: ->
     that = this
@@ -175,7 +187,15 @@ FromToSense = React.createClass
             from: that.props.from
             to: that.props.to
             type: 'from'
-        k.span 'to', ->
+        k.build TextField,
+          style:
+            tabIndex: 0
+            paddingLeft: 2
+            bottom: -4
+          floatingLabelText: "with a few words about"
+          hintText: "what one means to the other"
+          #hint: ''
+        k.span ' ', ->
           k.build selectedContainer,
             to: that.props.to
             from: that.props.from
