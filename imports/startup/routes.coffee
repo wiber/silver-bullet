@@ -173,13 +173,15 @@ MainCard = React.createClass
             -> k.build FromToSense,
               from: that.props.from
               to: that.props.to
-          k.build CardActions, -> # return innerhtml, tags before
-            k.build FlatButton,
-              style:
-                height: 0
-              label: 'Tab here to go back to "From"'
-              onFocus: () ->
-                window.from.refs.from.focus()
+          k.build CardActions,
+            expandable: true
+            -> # return innerhtml, tags before
+              k.build FlatButton,
+                style:
+                  height: 'auto'
+                label: 'Tab here to go back to "From"'
+                onFocus: () ->
+                  window.from.refs.from.focus()
 
 
 
