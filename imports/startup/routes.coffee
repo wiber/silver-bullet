@@ -149,8 +149,9 @@ Toggle = require('material-ui/lib/toggle').default
 MainCard = React.createClass
   getDefaultProps: ->
     expanded: false
-  handleToggle: () ->
-    console.log !@props.expanded
+  handleToggle: (e) ->
+    if e.target == e.currentTarget
+      console.log !@props.expanded, 'targeted'
     changeQueryParams 'expandMainCard', !@props.expanded
   render: ->
     that = this
@@ -163,8 +164,9 @@ MainCard = React.createClass
           k.build CardHeader,
             title: "URL Avatar"
             #actAsExpander: true
-            #showExpandableButton: true
+            showExpandableButton: true
             subtitle: "Subtitle"
+            onClick: that.handleToggle
           k.build CardText,
             style:
               height: 'auto'
@@ -172,13 +174,6 @@ MainCard = React.createClass
               from: that.props.from
               to: that.props.to
           k.build CardActions, -> # return innerhtml, tags before
-            k.build Toggle,
-              style:
-                display: 'inline'
-              toggled: that.props.expanded
-              onToggle: that.handleToggle
-              labelPosition: 'left'
-              label: "See more about here"
             k.build FlatButton,
               style:
                 height: 0
@@ -245,8 +240,4 @@ aboutnessHere = React.createClass
                 toggled: that.props.expanded
                 onToggle: that.handleToggle
                 labelPosition: 'left'
-                label: ->
-                  k.build FlatButton,
-                    label: 'Tab around'
-                    onFocus: () ->
-                      window.from.refs.from.focus()
+                label: 'old togg'
