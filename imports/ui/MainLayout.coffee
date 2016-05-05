@@ -1,13 +1,13 @@
 reactKup = require('react-kup')
 React = require('react')
+{changeQueryParams} = require('../api/changeQueryParams.coffee')
 
 MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme} = require('../ui/theme.coffee')
-#require('react-select/dist/react-select.css') # 1.3.2 but here just include file
-# require('../ui/cssimport.js') # unexpected token so putting it in root
-MainLayout = React.createClass
+{FromToSense} = require('../ui/FromToSense.coffee')
+exports.MainLayout = React.createClass
   getDefaultProps: ->
-    #expandMainCard: true
+    expandMainCard: true
   componentDidMount: ->
   render: ->
     that = this
@@ -35,18 +35,11 @@ FlatButton = require 'material-ui/lib/flat-button'
 CardText = require 'material-ui/lib/card/card-text'
 Card = require 'material-ui/lib/card/card'
 ReactDOM = require('react-dom')
-changeQueryParams = require('./changeQueryParams.coffee').changeQueryParams
-{createContainer} = require 'meteor/react-meteor-data'
+
 
 selectedContainer = require('./Selected.coffee').selectedContainer
 
-containerMainLayout = createContainer ((props) ->
-  {
-    #from: props.from # one arg?
-    #to: props.to
-    #expandMainCard: props.expandMainCard # all props
-  }
-), MainLayout
+
 
 Card = require('material-ui/lib/card/card').default
 CardActions = require('material-ui/lib/card/card-actions' ).default
@@ -61,8 +54,6 @@ MainCard = React.createClass
   getDefaultProps: ->
     expanded: false
   handleToggle: (e) ->
-    if e.target == e.currentTarget
-      console.log !@props.expanded, 'targeted'
     changeQueryParams 'expandMainCard', !@props.expanded
   render: ->
     that = this
@@ -74,7 +65,6 @@ MainCard = React.createClass
         ->
           k.build CardHeader,
             title: "URL Avatar"
-            #actAsExpander: true
             showExpandableButton: true
             subtitle: "Subtitle"
             onClick: that.handleToggle
@@ -96,9 +86,5 @@ MainCard = React.createClass
                   height: 0
                 label: 'Tab here to go back to "From"'
                 onFocus: () ->
+                  # TODO avoid global here..
                   window.from.refs.from.focus()
-
-TextField = require('material-ui/lib/TextField').default
-{FromToSense} = require('../ui/FromToSense.coffee')
-
-exports.containerMainLayout = containerMainLayout
