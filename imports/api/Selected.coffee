@@ -23,5 +23,3 @@ exports.selectedContainer = createContainer ((props) ->
     ]
   }
 ), Selected
-
-#exports.selectedContainer = selectedContainer

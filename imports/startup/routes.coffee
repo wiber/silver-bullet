@@ -1,6 +1,6 @@
 
 mount = require('react-mounter').mount
-containerMainLayout = require('../api/containerMainLayout.coffee').containerMainLayout
+containerMainLayout = require('../api/MainLayout.coffee').containerMainLayout
 
 FlowRouter.route '/about',
   name: 'home'
