@@ -35,34 +35,11 @@ FlatButton = require 'material-ui/lib/flat-button'
 CardText = require 'material-ui/lib/card/card-text'
 Card = require 'material-ui/lib/card/card'
 ReactDOM = require('react-dom')
-selectedContainer = require('./Selected.coffee').selectedContainer
 changeQueryParams = require('./changeQueryParams.coffee').changeQueryParams
 {createContainer} = require 'meteor/react-meteor-data'
-SimpleSelect = require("react-selectize").SimpleSelect
-#require('node_modules/react-selectize/themes/index.css')
 
-Selected = require('../ui/Selected.coffee').Selected
-selectedContainer = createContainer ((props) ->
-  {
-    from: props.from
-    to: props.to
-    type: props.type
-    options: [
-      {
-        value: 'here'
-        label: 'Here'
-      }
-      {
-        value: 'there'
-        label: 'There'
-      }
-      {
-        value: 'therethere  '
-        label: 'ThereThereThereThereThereThereThereThereThereThereThereThere'
-      }
-    ]
-  }
-), Selected
+selectedContainer = require('./Selected.coffee').selectedContainer
+
 containerMainLayout = createContainer ((props) ->
   {
     #from: props.from # one arg?
