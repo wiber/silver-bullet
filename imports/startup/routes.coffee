@@ -73,9 +73,9 @@ Selected = React.createClass
       k.build SimpleSelect,
         maxValues: 1
         style:
-          overflowX: 'hidden'
+          overflow: 'hidden'
           display: 'inline-block'
-          textOverflow: "ellipsis"
+          #textOverflow: "ellipsis"
           whiteSpace: "nowrap"
           maxWidth: '25%' #150
         theme: "material"# // can be one of "default" | "bootstrap3" | "material" | ...
@@ -98,11 +98,8 @@ Selected = React.createClass
                 display: 'inline-block'
                 textOverflow: "ellipsis"
                 whiteSpace: "nowrap"
-                maxWidth:  0.15*window.innerWidth  #+'px' #'50%' #125
+                maxWidth:  0.15 * window.innerWidth  #+'px' #'50%' #125
               item.label
-
-
-
 
 {createContainer} = require 'meteor/react-meteor-data'
 selectedContainer = createContainer ((props) ->
@@ -199,7 +196,7 @@ FromToSense = React.createClass
           type: 'from'
         k.build TextField,
           style:
-            width: '30%' #(window.innerWidth - (55 + 2 * 150) )+ 'px' #'60%'
+            width: '45%'
             tabIndex: 0
             paddingLeft: 4
             marginRight: 7
