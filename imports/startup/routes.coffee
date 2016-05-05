@@ -1,4 +1,5 @@
-
+# Linking method on server and client..
+require '../api/linking.coffee'
 mount = require('react-mounter').mount
 containerMainLayout = require('../api/MainLayout.coffee').containerMainLayout
 

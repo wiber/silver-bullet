@@ -1,7 +1,5 @@
-ReactDOM = require('react-dom')
 Selected = require('../ui/Selected.coffee').Selected
 {createContainer} = require 'meteor/react-meteor-data'
-
 exports.selectedContainer = createContainer ((props) ->
   {
     from: props.from

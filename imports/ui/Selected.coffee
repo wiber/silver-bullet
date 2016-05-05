@@ -1,7 +1,7 @@
 reactKup = require('react-kup')
 SimpleSelect = require("react-selectize").SimpleSelect
 React = require 'react'
-changeQueryParams = require('../api/changeQueryParams.coffee').changeQueryParams
+{changeQueryParams} = require('../api/changeQueryParams.coffee')
 Selected = React.createClass
   propTypes: (props) ->
     from: React.propTypes.string
