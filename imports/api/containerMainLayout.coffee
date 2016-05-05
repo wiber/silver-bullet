@@ -5,7 +5,6 @@ MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme} = require('../ui/theme.coffee')
 #require('react-select/dist/react-select.css') # 1.3.2 but here just include file
 # require('../ui/cssimport.js') # unexpected token so putting it in root
-#{Selected} = require('../ui/selected.coffee') # not maintained
 MainLayout = React.createClass
   getDefaultProps: ->
     #expandMainCard: true
@@ -35,58 +34,14 @@ CardHeader = require 'material-ui/lib/card/card-header'
 FlatButton = require 'material-ui/lib/flat-button'
 CardText = require 'material-ui/lib/card/card-text'
 Card = require 'material-ui/lib/card/card'
-
-Select = require('react-select')
+ReactDOM = require('react-dom')
+selectedContainer = require('./Selected.coffee').selectedContainer
+changeQueryParams = require('./changeQueryParams.coffee').changeQueryParams
+{createContainer} = require 'meteor/react-meteor-data'
 SimpleSelect = require("react-selectize").SimpleSelect
 #require('node_modules/react-selectize/themes/index.css')
 
-ReactDOM = require('react-dom')
-changeQueryParams = require('./changeQueryParams.coffee').changeQueryParams
-Selected = React.createClass
-  propTypes: (props) ->
-    from: React.propTypes.string
-    to: React.propTypes.string
-    type: React.propTypes.string
-    options: React.propTypes.array
-  queryParamChange: (val) ->
-    if val.value
-      changeQueryParams @props.type, val.value
-  render: ->
-    that = this
-    window[that.props.type] = this
-    reactKup (k) ->
-      k.build SimpleSelect,
-        maxValues: 1
-        style:
-          overflow: 'hidden'
-          display: 'inline-block'
-          #textOverflow: "ellipsis"
-          whiteSpace: "nowrap"
-          maxWidth: '25%' #150
-        theme: "material"# // can be one of "default" | "bootstrap3" | "material" | ...
-        transitionEnter: true
-        onValueChange: that.queryParamChange
-        defaultValue: _.find(that.props.options, (obj) ->
-          obj.value == that.props[that.props.type]
-        )
-        ref: that.props.type
-        id: that.props.type
-        options: that.props.options
-        tabIndex: if that.props.type is 'from' then '2' else '3'
-        tether: !!window #true # else ssr error
-        hideResetButton: true
-        renderValue: (item) ->
-          reactKup (k) ->
-            k.div
-              style:
-                overflow: "hidden"
-                display: 'inline-block'
-                textOverflow: "ellipsis"
-                whiteSpace: "nowrap"
-                maxWidth:  0.15 * window.innerWidth  #+'px' #'50%' #125
-              item.label
-
-{createContainer} = require 'meteor/react-meteor-data'
+Selected = require('../ui/Selected.coffee').Selected
 selectedContainer = createContainer ((props) ->
   {
     from: props.from
@@ -108,7 +63,6 @@ selectedContainer = createContainer ((props) ->
     ]
   }
 ), Selected
-
 containerMainLayout = createContainer ((props) ->
   {
     #from: props.from # one arg?
