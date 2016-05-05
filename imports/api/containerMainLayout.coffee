@@ -34,17 +34,14 @@ CardActions = require 'material-ui/lib/card/card-actions'
 CardHeader = require 'material-ui/lib/card/card-header'
 FlatButton = require 'material-ui/lib/flat-button'
 CardText = require 'material-ui/lib/card/card-text'
+Card = require 'material-ui/lib/card/card'
 
 Select = require('react-select')
 SimpleSelect = require("react-selectize").SimpleSelect
 #require('node_modules/react-selectize/themes/index.css')
-Card = require 'material-ui/lib/card/card'
-ReactDOM = require('react-dom')
-changeQueryParams = (key,value) ->
-  newQueryParams = {}
-  newQueryParams[key] = value
-  FlowRouter.setQueryParams newQueryParams
 
+ReactDOM = require('react-dom')
+changeQueryParams = require('./changeQueryParams.coffee').changeQueryParams
 Selected = React.createClass
   propTypes: (props) ->
     from: React.propTypes.string
@@ -226,3 +223,4 @@ aboutnessHere = React.createClass
               k.build FromToSense,
                 from: that.props.from
                 to: that.props.todo
+exports.containerMainLayout = containerMainLayout
