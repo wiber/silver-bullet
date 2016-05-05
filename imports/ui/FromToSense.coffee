@@ -15,16 +15,23 @@ exports.FromToSense = React.createClass
           from: that.props.from
           to: that.props.to
           type: 'from'
-        k.build TextField,
-          style:
-            width: '45%'
-            tabIndex: 0
-            paddingLeft: 4
-            marginRight: 7
-            bottom: 9
-          floatingLabelText: "is like ... to"
-          hintText: "say something to connect them"
+        k.build TextAbout
         k.build selectedContainer,
           to: that.props.to
           from: that.props.from
           type: 'to'
+
+TextAbout = React.createClass
+  render: ->
+    window.textAbout = this
+    reactKup (k) ->
+      k.build TextField,
+        style:
+          width: '45%'
+          tabIndex: 0
+          paddingLeft: 4
+          marginRight: 7
+          bottom: 9
+        floatingLabelText: "is like ... to"
+        id: 'textAbout'
+        hintText: "say something to connect them"

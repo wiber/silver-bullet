@@ -33,7 +33,7 @@ Selected = React.createClass
         id: that.props.type
         options: that.props.options
         tabIndex: if that.props.type is 'from' then '2' else '3'
-        tether: !!window #true # else ssr error
+        tether: true #!!window #true # else ssr error
         hideResetButton: true
         renderValue: (item) ->
           reactKup (k) ->
