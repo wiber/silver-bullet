@@ -99,59 +99,6 @@ MainCard = React.createClass
                   window.from.refs.from.focus()
 
 TextField = require('material-ui/lib/TextField').default
-FromToSense = React.createClass
-  render: ->
-    that = this
-    reactKup (k) ->
-      k.div ->
-        k.build selectedContainer,
-          from: that.props.from
-          to: that.props.to
-          type: 'from'
-        k.build TextField,
-          style:
-            width: '45%'
-            tabIndex: 0
-            paddingLeft: 4
-            marginRight: 7
-            bottom: 9
-          floatingLabelText: "is like ... to"
-          hintText: "say something to connect them"
-        k.build selectedContainer,
-          to: that.props.to
-          from: that.props.from
-          type: 'to'
+{FromToSense} = require('../ui/FromToSense.coffee')
 
-# distill down how this place fits into the world
-# who and what is behind it pushing or in front of it pulling
-# or the opposite directions, valence and intesity
-aboutnessSubtitle = React.createClass
-  render: ->
-    that = this
-    reactKup(k) ->
-      k.span that.props.from
-aboutnessHere = React.createClass
-  render: ->
-    that = this
-    reactKup(k) ->
-      k.build Card,
-        expanded: that.props.expanded
-        style:
-          height: 'auto'
-        ->
-          k.build CardHeader,
-            title: "About This Place"
-            subtitle: that.props.from
-          k.build CardText,
-            style:
-              height: 'auto'
-            ->
-              k.build Toggle,
-                toggled: that.props.expanded
-                onToggle: that.handleToggle
-                labelPosition: 'left'
-                label: 'old togg'
-              k.build FromToSense,
-                from: that.props.from
-                to: that.props.todo
 exports.containerMainLayout = containerMainLayout
