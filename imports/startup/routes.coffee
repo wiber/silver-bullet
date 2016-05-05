@@ -88,7 +88,7 @@ Selected = React.createClass
         id: that.props.type
         options: that.props.options
         tabIndex: if that.props.type is 'from' then '2' else '3'
-        tether: true
+        tether: !!window #true # else ssr error
         hideResetButton: true
         renderValue: (item) ->
           reactKup (k) ->
@@ -182,8 +182,6 @@ MainCard = React.createClass
                 onFocus: () ->
                   window.from.refs.from.focus()
 
-
-
 TextField = require('material-ui/lib/TextField').default
 FromToSense = React.createClass
   render: ->
@@ -231,14 +229,12 @@ aboutnessHere = React.createClass
           k.build CardText,
             style:
               height: 'auto'
-            -> k.build FromToSense,
-              from: that.props.from
-              to: that.props.todo
-            -> k.build Toggle,
-                style:
-                  float: 'right'
-                ref: 'mainToggler'
+            ->
+              k.build Toggle,
                 toggled: that.props.expanded
                 onToggle: that.handleToggle
                 labelPosition: 'left'
                 label: 'old togg'
+              k.build FromToSense,
+                from: that.props.from
+                to: that.props.todo
