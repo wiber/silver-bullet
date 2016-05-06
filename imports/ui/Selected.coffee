@@ -34,6 +34,12 @@ Selected = React.createClass
         options: that.props.options
         tabIndex: if that.props.type is 'from' then '2' else '3'
         tether: true #!!window #true # else ssr error
+        tetherProps:
+          #offset: '-20% -20%' # does nothing, why?
+          attachment: 'top center'
+          #'target-attachment': 'bottom center'
+          targetAttachment: 'bottom center'
+          #target: -> window.textAbout
         hideResetButton: true
         renderValue: (item) ->
           reactKup (k) ->
