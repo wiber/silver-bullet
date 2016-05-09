@@ -32,6 +32,6 @@ TextAbout = React.createClass
           paddingLeft: 4
           marginRight: 7
           bottom: 9
-        floatingLabelText: "is like ... to"
+        floatingLabelText: "Make it matter!"
         id: 'textAbout'
-        hintText: "say something to connect them"
+        hintText: "Do tell <- this means to that ->"

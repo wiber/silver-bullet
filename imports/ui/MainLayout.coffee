@@ -2,6 +2,7 @@ reactKup = require('react-kup')
 React = require('react')
 ReactDOM = require('react-dom')
 {MainCard} = require './MainCard.coffee'
+{MyCard} = require './MyCard.coffee'
 
 CardActions = require 'material-ui/lib/card/card-actions'
 CardHeader = require 'material-ui/lib/card/card-header'
@@ -30,6 +31,10 @@ exports.Layout = React.createClass
                 className: 'main'
                 ->
                   k.build MainCard, # need comma here because the second arg is prop
+                    expanded: that.props.expandMainCard
+                    to: that.props.to
+                    from: that.props.from
+                  k.build MyCard,
                     expanded: that.props.expandMainCard
                     to: that.props.to
                     from: that.props.from
