@@ -15,7 +15,8 @@ exports.FromToSense = React.createClass
           from: that.props.from
           to: that.props.to
           type: 'from'
-        k.build TextAbout
+        k.build TextAbout,
+          word: that.props.word
         k.build selectedContainer,
           to: that.props.to
           from: that.props.from
@@ -24,6 +25,7 @@ exports.FromToSense = React.createClass
 TextAbout = React.createClass
   render: ->
     window.textAbout = this
+    that = this
     reactKup (k) ->
       k.build TextField,
         style:
@@ -32,6 +34,6 @@ TextAbout = React.createClass
           paddingLeft: 4
           marginRight: 7
           bottom: 9
-        floatingLabelText: "Make it matter!"
+        floatingLabelText: that.props.word.TextAboutfloatingLabelText
         id: 'textAbout'
         hintText: "Do tell <- this means to that ->"

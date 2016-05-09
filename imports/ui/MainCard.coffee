@@ -35,6 +35,7 @@ exports.MainCard = React.createClass
             -> k.build FromToSense,
               from: that.props.from
               to: that.props.to
+              word: that.props.word
           k.build CardText,
             expandable: true
             ->
