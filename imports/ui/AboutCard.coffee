@@ -11,7 +11,7 @@ CardTitle = require('material-ui/lib/card/card-title').default
 FlatButton = require('material-ui/lib/flat-button' ).default
 CardText =  require('material-ui/lib/card/card-text').default
 
-exports.MyCard = React.createClass
+exports.AboutCard = React.createClass
   getDefaultProps: ->
     expanded: false
   handleToggle: (e) ->
@@ -25,8 +25,9 @@ exports.MyCard = React.createClass
           height: 'auto'
         ->
           k.build CardHeader,
-            #title: "URL Avatar"
+            title: "URL Avatar"
             showExpandableButton: true
+            subtitle: "Subtitle"
             onClick: that.handleToggle
           k.build CardText,
             style:

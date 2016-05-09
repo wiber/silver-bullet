@@ -25,9 +25,9 @@ exports.MainCard = React.createClass
           height: 'auto'
         ->
           k.build CardHeader,
-            title: "URL Avatar"
+            title: that.props.word.MainCardTitle
+            subtitle: that.props.word.MainCardSubtitle
             showExpandableButton: true
-            subtitle: "Subtitle"
             onClick: that.handleToggle
           k.build CardText,
             style:

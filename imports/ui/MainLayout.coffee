@@ -3,6 +3,7 @@ React = require('react')
 ReactDOM = require('react-dom')
 {MainCard} = require './MainCard.coffee'
 {MyCard} = require './MyCard.coffee'
+{AboutCard} = require './AboutCard.coffee'
 
 CardActions = require 'material-ui/lib/card/card-actions'
 CardHeader = require 'material-ui/lib/card/card-header'
@@ -34,8 +35,16 @@ exports.Layout = React.createClass
                     expanded: that.props.expandMainCard
                     to: that.props.to
                     from: that.props.from
+                    word: that.props.word
                   k.build MyCard,
                     expanded: that.props.expandMainCard
                     to: that.props.to
                     from: that.props.from
+                    word: that.props.word
+                  k.build AboutCard,
+                    expanded: that.props.expandMainCard
+                    to: that.props.to
+                    from: that.props.from
+                    word: that.props.word
+
               k.div 'footer'
