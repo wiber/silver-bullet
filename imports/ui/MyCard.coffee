@@ -14,7 +14,7 @@ exports.MyCard = React.createClass
   getDefaultProps: ->
     expanded: false
   handleToggle: (e) ->
-    changeQueryParams 'expandMainCard', !@props.expanded
+    changeQueryParams 'expandMyCard', !@props.expanded
   render: ->
     that = this
     reactKup (k) ->
@@ -24,7 +24,7 @@ exports.MyCard = React.createClass
           height: 'auto'
         ->
           k.build CardHeader,
-            #title: "URL Avatar"
+            title: that.props.word.AboutCardTitle
             showExpandableButton: true
             onClick: that.handleToggle
           k.build CardText,

@@ -13,3 +13,5 @@ FlowRouter.route '/about',
       to: queryParams.to
       word: wordLanguages[language]
       expandMainCard: queryParams.expandMainCard == 'true'
+      expandAboutCard: queryParams.expandAboutCard == 'true'
+      expandMyCard: queryParams.expandMyCard == 'true'

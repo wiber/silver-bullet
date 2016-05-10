@@ -38,6 +38,7 @@ exports.AboutCard = React.createClass
               k.span that.props.from, ' '
               k.span that.props.to
           k.build CardActions,
+            expandable: false
             -> # return innerhtml, tags on here before
               k.build FlatButton,
                 style:
