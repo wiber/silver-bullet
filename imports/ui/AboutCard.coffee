@@ -15,7 +15,7 @@ exports.AboutCard = React.createClass
   getDefaultProps: ->
     expanded: false
   handleToggle: (e) ->
-    changeQueryParams 'expandMainCard', !@props.expanded
+    changeQueryParams 'expandAboutCard', !@props.expanded
   render: ->
     that = this
     reactKup (k) ->
@@ -32,10 +32,6 @@ exports.AboutCard = React.createClass
           k.build CardText,
             style:
               height: 'auto'
-            -> k.build FromToSense,
-              from: that.props.from
-              to: that.props.to
-              word: that.props.word
           k.build CardText,
             expandable: true
             ->

@@ -2,7 +2,6 @@ reactKup = require('react-kup')
 React = require('react')
 
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
-{FromToSense} = require('../ui/FromToSense.coffee')
 Card = require('material-ui/lib/card/card').default
 CardActions = require('material-ui/lib/card/card-actions' ).default
 CardHeader = require('material-ui/lib/card/card-header').default
@@ -31,10 +30,6 @@ exports.MyCard = React.createClass
           k.build CardText,
             style:
               height: 'auto'
-            -> k.build FromToSense,
-              from: that.props.from
-              to: that.props.to
-          k.build CardText,
             expandable: true
             ->
               k.span that.props.from, ' '

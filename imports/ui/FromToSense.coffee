@@ -36,4 +36,4 @@ TextAbout = React.createClass
           bottom: 9
         floatingLabelText: that.props.word.TextAboutfloatingLabelText
         id: 'textAbout'
-        hintText: "Do tell <- this means to that ->"
+        hintText: that.props.word.TextAboutHintText
