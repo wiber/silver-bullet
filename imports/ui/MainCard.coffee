@@ -1,6 +1,6 @@
 reactKup = require('react-kup')
 React = require('react')
-
+{style} = require('../ui/style.coffee')
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 {FromToSense} = require('../ui/FromToSense.coffee')
 Card = require('material-ui/lib/card/card').default
@@ -18,11 +18,11 @@ exports.MainCard = React.createClass
     changeQueryParams 'expandMainCard', !@props.expanded
   render: ->
     that = this
+    console.log style.card
     reactKup (k) ->
       k.build Card,
         expanded: that.props.expanded
-        style:
-          height: 'auto'
+        style: _.extend style.card, style.onlyOne
         ->
           k.build CardHeader,
             title: that.props.word.MainCardTitle
@@ -50,3 +50,4 @@ exports.MainCard = React.createClass
                 onFocus: () ->
                   # TODO avoid global here..
                   window.from.refs.from.focus()
+#exports.MainCard = MainCard

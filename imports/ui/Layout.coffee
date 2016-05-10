@@ -26,6 +26,10 @@ exports.Layout = React.createClass
         ->
           k.div
             className: 'onlyOne'
+            style:
+              background: 'rgba(54, 25, 25, .1)'
+              height: '100%'
+              width: '100%'
             ->
               k.div 'header'
               k.div
