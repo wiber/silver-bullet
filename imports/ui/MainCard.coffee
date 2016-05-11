@@ -18,11 +18,10 @@ exports.MainCard = React.createClass
     changeQueryParams 'expandMainCard', !@props.expanded
   render: ->
     that = this
-    console.log style.card
     reactKup (k) ->
       k.build Card,
         expanded: that.props.expanded
-        style: _.extend style.card, style.onlyOne
+        style: style.card
         ->
           k.build CardHeader,
             title: that.props.word.MainCardTitle

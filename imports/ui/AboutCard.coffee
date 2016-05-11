@@ -22,7 +22,7 @@ exports.AboutCard = React.createClass
     reactKup (k) ->
       k.build Card,
         expanded: that.props.expanded
-        style: _.extend style.card, style.onlyOne
+        style: _.extend style.base, style.card
         ->
           k.build CardHeader,
             title: "URL Avatar"
