@@ -1,20 +1,18 @@
 
 styles =
   base:
-    background: 'rgba(54, 99, 25, 0)'
+    background: 'rgba(54, 99, 25, .1)'
+    height: '100%'
+    width: '100%'
+    margin: '2em'
   card:
     background: 'rgba(54, 25, 25, .1)'
     height: 'auto'
     margin: '1em'
+combines =
   mainCard:
-    background: 'rgba(54, 25, 25, .5)'
-    height: '999'
+    -> _.extend styles.card,
+      background: 'rgba(54, 25, 25, .2)'
+      margin: '5em'
 
-exports.style =
-  base:
-    background: 'rgba(54, 99, 25, 0)'
-  card:
-    background: 'rgba(54, 25, 25, .1)'
-    height: 'auto'
-    margin: '1em'
-  mainCard: _.extend styles.base, styles.mainCard
+exports.style = _.extend styles, combines

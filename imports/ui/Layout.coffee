@@ -4,7 +4,7 @@ ReactDOM = require('react-dom')
 {MainCard} = require './MainCard.coffee'
 {MyCard} = require './MyCard.coffee'
 {AboutCard} = require './AboutCard.coffee'
-
+{style} = require '../ui/style.coffee'
 CardActions = require 'material-ui/lib/card/card-actions'
 CardHeader = require 'material-ui/lib/card/card-header'
 FlatButton = require 'material-ui/lib/flat-button'
@@ -26,10 +26,7 @@ exports.Layout = React.createClass
         ->
           k.div
             className: 'onlyOne'
-            style:
-              background: 'rgba(54, 25, 25, .1)'
-              height: '100%'
-              width: '100%'
+            style: style.base
             ->
               k.div 'header'
               k.div
