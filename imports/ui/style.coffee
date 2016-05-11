@@ -11,8 +11,7 @@ styles =
     margin: '1em'
 combines =
   mainCard:
-    -> _.extend styles.card,
-      background: 'rgba(54, 25, 25, .2)'
-      margin: '5em'
-
+    background: 'rgba(54, 25, 25, .6)'
+    height: 'auto'
+    margin: '1em'
 exports.style = _.extend styles, combines
