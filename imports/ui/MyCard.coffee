@@ -1,6 +1,7 @@
 reactKup = require('react-kup')
 React = require('react')
 
+{style} = require('../ui/style.coffee')
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 Card = require('material-ui/lib/card/card').default
 CardActions = require('material-ui/lib/card/card-actions' ).default
@@ -20,8 +21,7 @@ exports.MyCard = React.createClass
     reactKup (k) ->
       k.build Card,
         expanded: that.props.expanded
-        style:
-          height: 'auto'
+        style: _.extend style.card, style.onlyOne
         ->
           k.build CardHeader,
             title: that.props.word.AboutCardTitle
