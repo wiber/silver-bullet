@@ -1,4 +1,4 @@
-{styles} = require 'combined.coffee'
+{style} = require 'style.coffee'
 
 combines =
   mainCard:
