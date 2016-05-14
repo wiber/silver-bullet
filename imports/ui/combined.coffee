@@ -1,8 +1,8 @@
-{style} = require 'style.coffee'
+{style} = require '../ui/style.coffee'
 
-combines =
-  mainCard:
-    background: 'rgba(54, 25, 25, .6)'
+exports.combined =
+  mainCard: _.extend style.base,
+    background: 'rgba(54, 99, 25, .6)'
     height: 'auto'
     margin: '1em'
-exports.combined = _.extend styles, combines
+#exports.combined =
