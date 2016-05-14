@@ -1,7 +1,6 @@
 reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
-{combined} = require('../ui/combined.coffee')
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 {FromToSense} = require('../ui/FromToSense.coffee')
 Card = require('material-ui/lib/card/card').default
@@ -22,7 +21,7 @@ exports.MainCard = React.createClass
     reactKup (k) ->
       k.build Card,
         expanded: that.props.expanded
-        style: combined.mainCard
+        style: style.mCard #combined.mainCard
         ->
           k.build CardHeader,
             title: that.props.word.MainCardTitle

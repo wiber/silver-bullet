@@ -9,3 +9,5 @@ exports.style =
     background: 'rgba(54, 25, 25, .1)'
     height: 'auto'
     margin: '1em'
+  mCard: _.extend {} , @card,
+    background: 'rgba(54, 25, 100, .1)'
