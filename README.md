@@ -14,7 +14,7 @@ git clone https://github.com/wiber/silver-bullet && cd silver-bullet && meteor n
 
 Aims
 - [x] Fast Prototyping
-  - [x] write all code in routes.coffee
+  - [x] write all code in 
   - [x] tidy up stable parts into modules
 - [ ] Code, UI and Styles in Coffeescript.
   - [x] material-ui

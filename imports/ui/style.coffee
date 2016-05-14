@@ -1,11 +1,16 @@
-
 exports.style =
   base:
-    background: 'rgba(54, 99, 25, .1)'
+    background: 'rgba(54, 99, 25, .05)'
     height: '100%'
     width: '100%'
     margin: '2em'
   card:
-    background: 'rgba(54, 25, 25, .1)'
-    height: 'auto'
-    margin: '1em'
+    background: 'rgba(54, 25, 25, .05)'
+    margin: '2em'
+    padding: '2em'
+  mCard:
+    background: 'rgba(199, 25, 25, .05)'
+  yCard:
+    background: 'rgba(54, 25, 199, .05)'
+  aCard:
+    background: 'rgba(54, 125, 25, .05)'
