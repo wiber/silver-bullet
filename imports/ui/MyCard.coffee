@@ -21,7 +21,7 @@ exports.MyCard = React.createClass
     reactKup (k) ->
       k.build Card,
         expanded: that.props.expanded
-        style: style.yCard  
+        style: _.extend {}, style.card, style.mCard  
         ->
           k.build CardHeader,
             title: that.props.word.AboutCardTitle
