@@ -17,7 +17,6 @@ MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 exports.Layout = React.createClass
   getDefaultProps: ->
     expandMainCard: true
-  componentDidMount: ->
   render: ->
     that = this
     reactKup (k) ->
