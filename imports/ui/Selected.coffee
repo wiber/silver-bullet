@@ -49,7 +49,7 @@ Selected = React.createClass
                 display: 'inline-block'
                 textOverflow: "ellipsis"
                 whiteSpace: "nowrap"
-                maxWidth:  0.14 * window.innerWidth  #+'px' #'50%' #125
+                maxWidth:  0.12 * window.innerWidth  #+'px' #'50%' #125
               item.label
 
 exports.Selected = Selected

@@ -7,7 +7,7 @@ exports.style =
   card:
     background: 'rgba(54, 25, 25, .05)'
     margin: '2em'
-    padding: '2em'
+    padding: '1em'
   mCard:
     background: 'rgba(199, 25, 25, .05)'
   yCard:
