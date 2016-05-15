@@ -54,7 +54,6 @@ Selected = React.createClass
                 whiteSpace: 'nowrap'
                 textAling: 'top'
                 maxWidth: '87%'
-                #maxWidth:  0.11 * window.innerWidth  #+'px' #'50%' #125
               item.label
 
 exports.Selected = Selected

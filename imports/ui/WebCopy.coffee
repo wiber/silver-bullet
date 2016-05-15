@@ -5,4 +5,5 @@ exports.wordLanguages =
     TextAboutHintText: "<- this means to that ->"
     TextAboutfloatingLabelText: 'Make it mean!'
     MyCardTitle: "Step confidently out of the past"
-    AboutCardTitle: "What's said around here"
+    AboutCardTitle: "What said about this place"
+    AboutCardSubTitle: "Connections talk"

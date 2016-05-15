@@ -22,12 +22,12 @@ exports.AboutCard = React.createClass
     reactKup (k) ->
       k.build Card,
         expanded: that.props.expanded
-        style: _.extend {}, style.card, style.mAcard 
+        style: _.extend {}, style.card, style.mAcard
         ->
           k.build CardHeader,
-            title: "URL Avatar"
+            title: that.props.word.AboutCardTitle
             showExpandableButton: true
-            subtitle: "Subtitle"
+            subtitle: that.props.word.AboutCardSubTitle
             onClick: that.handleToggle
           k.build CardText,
             style:
