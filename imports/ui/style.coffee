@@ -3,7 +3,6 @@ exports.style =
     background: 'rgba(54, 99, 25, .05)'
     height: '100%'
     width: '100%'
-    margin: '2em'
   card:
     background: 'rgba(54, 25, 25, .05)'
     margin: '2em'
