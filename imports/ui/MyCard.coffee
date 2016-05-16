@@ -21,10 +21,10 @@ exports.MyCard = React.createClass
     reactKup (k) ->
       k.build Card,
         expanded: that.props.expanded
-        style: _.extend {}, style.card, style.mCard  
+        style: _.extend {}, style.card, style.mCard
         ->
           k.build CardHeader,
-            title: that.props.word.AboutCardTitle
+            title: that.props.word.MyCardTitle
             showExpandableButton: true
             onClick: that.handleToggle
           k.build CardText,

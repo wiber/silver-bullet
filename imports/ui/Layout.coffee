@@ -17,7 +17,6 @@ MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 exports.Layout = React.createClass
   getDefaultProps: ->
     expandMainCard: true
-  componentDidMount: ->
   render: ->
     that = this
     reactKup (k) ->
@@ -26,7 +25,9 @@ exports.Layout = React.createClass
         ->
           k.div
             className: 'onlyOne'
-            style: style.base
+            style: _.extend {}, style.base,
+              margin: 0
+              padding: 0
             ->
               k.div 'header'
               k.div

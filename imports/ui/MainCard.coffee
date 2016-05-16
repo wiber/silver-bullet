@@ -19,9 +19,10 @@ exports.MainCard = React.createClass
   render: ->
     that = this
     reactKup (k) ->
-      k.build Card,
-        expanded: that.props.expanded
-        style: _.extend {}, style.card, style.mCard
+      k.build Card, # build the Card component
+        expanded: that.props.expanded # add argument key value pairs
+        style: _.extend {}, style.card,
+          background: 'rgba(150, 25, 25, .05)'
         ->
           k.build CardHeader,
             title: that.props.word.MainCardTitle

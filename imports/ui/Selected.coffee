@@ -1,3 +1,4 @@
+{style} = require '../ui/style.coffee'
 reactKup = require('react-kup')
 SimpleSelect = require("react-selectize").SimpleSelect
 React = require 'react'
@@ -43,13 +44,16 @@ Selected = React.createClass
         hideResetButton: true
         renderValue: (item) ->
           reactKup (k) ->
-            k.div
+            k.span
               style:
-                overflow: "hidden"
-                display: 'inline-block'
                 textOverflow: "ellipsis"
-                whiteSpace: "nowrap"
-                maxWidth:  0.14 * window.innerWidth  #+'px' #'50%' #125
+                position: 'absolute'
+                bottom: '0.4em'
+                display: 'inline-block'
+                overflow: "hidden"
+                whiteSpace: 'nowrap'
+                textAling: 'top'
+                maxWidth: '87%'
               item.label
 
 exports.Selected = Selected
