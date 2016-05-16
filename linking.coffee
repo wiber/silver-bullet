@@ -1,3 +1,7 @@
+#Meteor = require('meteor/meteor')
+Edges = new Mongo.Collection "edges"
+Nodes = new Mongo.Collection "nodes"
+
 Meteor.methods
   Linking: (from, to, META) ->
     unless Meteor.userId()

@@ -1,5 +1,4 @@
 # Linking method on server and client..
-require '../api/linking.coffee'
 {wordLanguages} = require('../ui/WebCopy.coffee')
 language = 'eng'
 mount = require('react-mounter').mount
