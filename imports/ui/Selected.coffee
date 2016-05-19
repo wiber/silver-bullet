@@ -23,7 +23,7 @@ Selected = React.createClass
           display: 'inline-block'
           #textOverflow: "ellipsis"
           whiteSpace: "nowrap"
-          maxWidth: '25%' #150
+          maxWidth: '50%' #150
         theme: "material"# // can be one of "default" | "bootstrap3" | "material" | ...
         transitionEnter: true
         onValueChange: that.queryParamChange

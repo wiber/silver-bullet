@@ -1,4 +1,5 @@
 reactKup = require('react-kup')
+{style} = require '../ui/style.coffee'
 SimpleSelect = require("react-selectize").SimpleSelect
 React = require 'react'
 
@@ -11,16 +12,25 @@ exports.FromToSense = React.createClass
     that = this
     reactKup (k) ->
       k.div ->
-        k.build selectedContainer,
-          from: that.props.from
-          to: that.props.to
-          type: 'from'
         k.build TextAbout,
           word: that.props.word
-        k.build selectedContainer,
-          to: that.props.to
-          from: that.props.from
-          type: 'to'
+        k.div
+          style:
+            maxWidth: '100%'
+            whiteSpace: "nowrap"
+          ->
+            k.build selectedContainer,
+              to: that.props.to
+              from: that.props.from
+              type: 'to'
+            k.span
+              style:
+                verticalAlign: '0.5em'
+              ' and '
+            k.build selectedContainer,
+              from: that.props.from
+              to: that.props.to
+              type: 'from'
 
 TextAbout = React.createClass
   render: ->
@@ -29,7 +39,7 @@ TextAbout = React.createClass
     reactKup (k) ->
       k.build TextField,
         style:
-          width: '45%'
+          width: '100%'
           tabIndex: 0
           paddingLeft: 4
           marginRight: 7

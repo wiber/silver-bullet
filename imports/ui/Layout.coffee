@@ -25,9 +25,7 @@ exports.Layout = React.createClass
         ->
           k.div
             className: 'onlyOne'
-            style: _.extend {}, style.base,
-              margin: 0
-              padding: 0
+            style: _.extend {}, style.base
             ->
               k.div 'header'
               k.div
