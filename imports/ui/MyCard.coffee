@@ -41,5 +41,3 @@ exports.MyCard = React.createClass
                   height: 0
                 label: 'Tab here to go back to "From"'
                 onFocus: () ->
-                  # TODO avoid global here..
-                  window.from.refs.from.focus()

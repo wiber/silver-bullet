@@ -49,5 +49,7 @@ exports.MainCard = React.createClass
                 label: 'Tab here to go back to "From"'
                 onFocus: () ->
                   # TODO avoid global here..
-                  window.from.refs.from.focus()
+                  #window.from.refs.from.focus()
+                  # react element has a ref to the dom element
+                  window.textAbout.refs.MainCardTextInput.focus()
 #exports.MainCard = MainCard

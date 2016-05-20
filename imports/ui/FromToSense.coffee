@@ -14,30 +14,31 @@ exports.FromToSense = React.createClass
       k.div ->
         k.build TextAbout,
           word: that.props.word
+          type: 'MainCardTextInput'
         k.div
           style:
             maxWidth: '100%'
             whiteSpace: "nowrap"
           ->
             k.build selectedContainer,
-              to: that.props.to
-              from: that.props.from
-              type: 'to'
-            k.span
-              style:
-                verticalAlign: '0.5em'
-              ' and '
-            k.build selectedContainer,
               from: that.props.from
               to: that.props.to
               type: 'from'
-
+            k.span
+              style:
+                verticalAlign: '0.5em'
+              ' to '
+            k.build selectedContainer,
+              to: that.props.to
+              from: that.props.from
+              type: 'to'
 TextAbout = React.createClass
   render: ->
     window.textAbout = this
     that = this
     reactKup (k) ->
       k.build TextField,
+        ref: 'MainCardTextInput'
         style:
           width: '100%'
           tabIndex: 0
