@@ -20,6 +20,6 @@ exports.style =
   aCard:
     background: 'rgba(54, 125, 25, .05)'
   h1:
-    fontSize: Math.pow(scalars.goldenRatio(),3) * scalars.fontScale() + 'em'
+    fontSize: Math.pow(scalars.goldenRatio(),2) * scalars.fontScale() + 'em'
   h2:
     fontSize: scalars.goldenRatio() * scalars.fontScale() + 'em'

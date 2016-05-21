@@ -39,7 +39,6 @@ exports.MainCard = React.createClass
           k.build CardText,
             expandable: true
             ->
-              console.log style.h1
               k.h1
                 style: style.h1
                 'this card is about '
