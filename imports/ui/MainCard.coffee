@@ -39,7 +39,14 @@ exports.MainCard = React.createClass
           k.build CardText,
             expandable: true
             ->
+              console.log style.h1
+              k.h1
+                style: style.h1
+                'this card is about '
               k.span that.props.from, ' '
+              k.h2
+                style: style.h2
+                ' and your connections from it such as '
               k.span that.props.to
           k.build CardActions,
             -> # return innerhtml, tags on here before
@@ -49,7 +56,5 @@ exports.MainCard = React.createClass
                 label: 'Tab here to go back to "From"'
                 onFocus: () ->
                   # TODO avoid global here..
-                  #window.from.refs.from.focus()
                   # react element has a ref to the dom element
                   window.textAbout.refs.MainCardTextInput.focus()
-#exports.MainCard = MainCard
