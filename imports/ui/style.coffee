@@ -1,5 +1,4 @@
 # only use these for cascading style for _.extent {}, style.base, style.card ...
-
 scalars =
   fontScale: -> 1
   goldenRatio: -> ((1 + Math.sqrt(5)) / 2)
