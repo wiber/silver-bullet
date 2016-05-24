@@ -19,7 +19,6 @@ exports.Layout = React.createClass
     expandMainCard: true
   render: ->
     that = this
-    console.log @props.from
     reactKup (k) ->
       k.build MuiThemeProvider,
         muiTheme: lightBaseUsTheme

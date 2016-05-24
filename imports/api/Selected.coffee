@@ -20,10 +20,9 @@ exports.selectedContainer = createContainer ((props) ->
   options.push
     value: do store props.from
     label: do see props.from
-  console.log options
   {
-    from: do store props.from #props.from
-    to: props.to
+    from: do store props.from
+    to: do -> store props.to
     type: props.type
     options: options
   }
