@@ -1,6 +1,17 @@
 linkstate = {}
 {check} = require('meteor/check')
+exports.store = (url) ->
+  encodedToDotless = url.replace /\./g, '%2E'
+  plainToEncode = encodeURIComponent url
+  console.log plainToEncode
+  , ' plainToEncode'
+  -> plainToEncode
 
+exports.see = (url) ->
+  encodedToPlain = decodeURIComponent url
+  encodedToDotless = encodedToPlain.replace '%2E' , '.'
+  console.log encodedToDotless, 'encodedToDotless'
+  -> encodedToDotless
 #toggles between storage safe strings and plain urls
 linkstate.urlT = (url) ->
   unless typeof url is 'string'
@@ -16,8 +27,9 @@ linkstate.urlT = (url) ->
     console.log check.dot, check.slash, check.tDot, check.enc, "dot, slash, tDot, enc, "#, url
     newstring = url
     if check.dot and check.slash
+
+      encodedToDotless = url.replace /\./g , '%2E'
       plainToEncode = encodeURIComponent url
-      encodedToDotless = plainToEncode.replace /\./g , '%2E'
       console.log url
       , 'plain url so storage safe it'
       , encodedToDotless
