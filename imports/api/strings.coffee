@@ -11,7 +11,7 @@ exports.see = (url) ->
   encodedToPlain = decodeURIComponent url
   encodedToDotless = encodedToPlain.replace '%2E' , '.'
   console.log encodedToDotless, 'encodedToDotless'
-  -> encodedToDotless
+  -> encodedToDotless.replace('http://','').replace('https://','').replace('www.','')
 #toggles between storage safe strings and plain urls
 linkstate.urlT = (url) ->
   unless typeof url is 'string'

@@ -23,7 +23,7 @@ exports.selectedContainer = createContainer ((props) ->
     label: do see props.from
   console.log options
   {
-    from: props.from
+    from: do store props.from #props.from
     to: props.to
     type: props.type
     options: options
