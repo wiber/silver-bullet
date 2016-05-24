@@ -1,8 +1,7 @@
 Selected = require('../ui/Selected.coffee').Selected
 {createContainer} = require 'meteor/react-meteor-data'
-{linkstate} = require '../api/strings.coffee'
-{see} = require '../api/strings.coffee'
-{store} = require '../api/strings.coffee'
+{see, store} = require '../api/strings.coffee'
+
 exports.selectedContainer = createContainer ((props) ->
   options = [
     {
