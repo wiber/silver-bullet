@@ -29,5 +29,5 @@ Aims
   - [x] Expanded Sections
   - [x] react-selectise defaultValue
   - [ ] Scroll Position on queryparam
-- [ ] chrome addon scaffolds your attention
-  - [ ] newtab is about the last page you were on
+- [x] chrome addon scaffolds your attention
+    - [x] newtab opens app in iframe with last page you were on in queryparam
