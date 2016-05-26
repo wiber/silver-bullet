@@ -6,6 +6,7 @@ mount = require('react-mounter').mount
 FlowRouter.route '/about',
   name: 'home'
   action: (params, queryParams) ->
+    console.log queryParams.from, 'to', queryParams.to
     mount containerLayout,
       from: queryParams.from
       to: queryParams.to
