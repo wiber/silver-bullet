@@ -10,7 +10,7 @@ CardHeader = require 'material-ui/lib/card/card-header'
 FlatButton = require 'material-ui/lib/flat-button'
 CardText = require 'material-ui/lib/card/card-text'
 Card = require 'material-ui/lib/card/card'
-
+{AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 
 MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme} = require('../ui/theme.coffee')
@@ -27,7 +27,9 @@ exports.Layout = React.createClass
             className: 'onlyOne'
             style: _.extend {}, style.base
             ->
-              k.div 'header'
+              k.div 'Hashrepublic. Youiest make the connection.  ',
+                ->
+                  k.build AccountsUIWrapper
               k.div
                 className: 'main'
                 ->

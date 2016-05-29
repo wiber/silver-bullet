@@ -10,18 +10,7 @@ CardTitle = require('material-ui/lib/card/card-title').default
 FlatButton = require('material-ui/lib/flat-button' ).default
 CardText =  require('material-ui/lib/card/card-text').default
 
-AccountsUIWrapper = React.createClass
-  componentDidMount: ->
-    @view = Blaze.render Template.loginButtons, document.getElementById 'loginContainer'
-      #ReactDOM.findDOMNode @this.refs.container
-  componentWillUnmount: ->
-    Blaze.remove @view
-  render: ->
-    that = this
-    reactKup (k) ->
-      k.span
-        ref: 'container'
-        id: 'loginContainer'
+
 
 exports.MyCard = React.createClass
   getDefaultProps: ->
@@ -46,7 +35,6 @@ exports.MyCard = React.createClass
             ->
               k.span that.props.from, ' '
               k.span that.props.to
-              k.build AccountsUIWrapper
           k.build CardActions,
             -> # return innerhtml, tags on here before
               k.build FlatButton,
