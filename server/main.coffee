@@ -1,6 +1,7 @@
 Meteor = require('meteor/meteor')
 #require './imports/api/linking.coffee'
 reactKup = require('react-kup')
+require '../imports/api/serviceconfiguration.js'
 
 require('../imports/startup/routes.coffee') # one way to turn off ssr
 

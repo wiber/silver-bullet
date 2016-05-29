@@ -22,3 +22,6 @@ coffeescript
 kadira:flow-router-ssr
 react-meteor-data
 insecure
+service-configuration
+accounts-ui
+accounts-facebook
