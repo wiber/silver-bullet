@@ -1,4 +1,4 @@
-
+// serviceconfiguration.js
 Meteor.startup(function(){
     ServiceConfiguration.configurations.upsert( {
       service: "facebook"
