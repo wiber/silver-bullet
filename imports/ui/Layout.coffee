@@ -27,7 +27,7 @@ exports.Layout = React.createClass
             className: 'onlyOne'
             style: _.extend {}, style.base
             ->
-              k.div 'Hashrepublic. Youiest make the connection.  ',
+              k.div that.props.word.HeaderTitle,
                 ->
                   k.build AccountsUIWrapper
               k.div
