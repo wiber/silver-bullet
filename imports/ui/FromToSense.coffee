@@ -33,12 +33,17 @@ exports.FromToSense = React.createClass
               from: that.props.from
               type: 'to'
 TextAbout = React.createClass
+  onKeyDown: (e) ->
+    console.log e.keyCode, e.target.value
+    if e.keyCode = 13
+      Meteor.call 'Linking'
   render: ->
     window.textAbout = this
     that = this
     reactKup (k) ->
       k.build TextField,
         ref: 'MainCardTextInput'
+        onKeyDown: that.onKeyDown
         style:
           width: '100%'
           tabIndex: 0

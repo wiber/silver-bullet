@@ -13,7 +13,7 @@ exports.selectedContainer = createContainer ((props) ->
       label: 'There'
     }
     {
-      value: 'therethere  '
+      value: 'therethere'
       label: 'ThereThereThereThereThereThereThereThereThereThereThereThere'
     }
   ]

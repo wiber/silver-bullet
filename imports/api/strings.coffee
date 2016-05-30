@@ -1,5 +1,6 @@
 linkstate = {}
 exports.store = (url) ->
+  console.log 'store is encoded', url == decodeURIComponent url
   unless typeof url == 'string'
     return null
   encodedToDotless = url.replace /\./g, '%2E'
@@ -7,6 +8,7 @@ exports.store = (url) ->
   -> plainToEncode
 
 exports.see = (url) ->
+  console.log 'see is encoded', url == decodeURIComponent url
   unless typeof url == 'string'
     return null
   encodedToPlain = decodeURIComponent url
