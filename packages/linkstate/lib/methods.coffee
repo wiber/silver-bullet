@@ -10,8 +10,8 @@ Meteor.methods
     user = Meteor.user()
     console.log user , 'whole'
     setter =
-      dictTo: user.dictTo
-      dictoFrom: user.dictFrom
+      in: user.in
+      out: user.out
     console.log setter
     Meteor.users.update
       _id: Meteor.userId()
@@ -27,18 +27,17 @@ Meteor.methods
   Linking: (from, to, META) ->
     unless META?
       META = {}
-    unless Meteor.userId()
+    unless typeof Meteor.userId() is 'string'
       throw new Meteor.Error 1, "non-user tries to link"
       return 'nothing'
 
     unless typeof from is 'string' and typeof to is 'string'
-      throw new Meteor.Error 1, "non-user tries to link"
+      throw new Meteor.Error 2, "something wrong with orientation "+from+' '+to
       return 'nothing'
     console.log from, to, arguments
 
-    FROM = from.replace(/\./g,'%2E')
-    #TO = storageEncode to
-    TO = to.replace(/\./g,'%2E')#.split('/').join('.');
+    FROM = do linkstate.store(from) # from.replace(/\./g,'%2E')
+    TO = do linkstate.store(to) #to.replace(/\./g,'%2E')#.split('/').join('.');
     console.log FROM, TO, META
     time = new Date().getTime()
     name = 'Linking'
@@ -48,8 +47,6 @@ Meteor.methods
     edge.meta = META
     edge.author = Meteor.userId()
     edge.createdAt = time
-
-    linked = Edges.insert(edge)
     #  localStorage.setItem( linked, JSON.stringify( edge ) );
     username = Meteor.user().username
     setEdgeIn = {}
@@ -57,14 +54,16 @@ Meteor.methods
     # because these are like votes, you get a say about each link
     setEdgeIn['in.' + FROM + '.' + username] = edge
     edge.title = META.title or TO # because we're in TO this
+    linked = Edges.insert(edge)
     setEdgeIn.title = edge.title
     # expresso dry left margin hugging coffee style
-    # coffee welcomes return characters, offers lots of air
+
     toNodeId = Nodes.upsert
       _id: TO
-    , # second argument to upsert "," is at same leve, returns are free
+    , # second argument to upsert "," is at same level, returns are free
       $set: setEdgeIn # set incoming edge where we're going TO impact
-
+    console.log Nodes.findOne(toNodeId.insertedId)
+    , ' updated node', toNodeId
     edge.title = META.title or FROM # because we're out FROM this
     setEdgeOut['out.' + TO + '.' + username] = edge
     setEdgeOut.title = edge.title
@@ -76,10 +75,10 @@ Meteor.methods
     # this way it's an actual dictionary in the DB
     # we have your last link on your user object
     setIt = {}
-    setIt['dictTo.'+TO] = time
-    setIt['dictFrom.'+FROM] = time
-    setIt['dictF.'+FROM+'.'+TO] = edge
-    setIt['dictT.'+TO+'.'+FROM] = edge
+    setIt['timeTo.'+TO] = time
+    setIt['timeFrom.'+FROM] = time
+    setIt['in.'+FROM+'.'+TO] = edge
+    setIt['out.'+TO+'.'+FROM] = edge
     # by default we want to add it to the 'last used' url/collection /bookmark thing
     #setIt['lastConnectedTo'] = TO
 
@@ -87,7 +86,7 @@ Meteor.methods
       _id: Meteor.userId()
     ,
       $set: setIt
-    console.log Nodes.findOne(fromNodeId)
+    console.log Nodes.findOne(fromNodeId.insrtedId)
 
 
   Here: (URL) ->

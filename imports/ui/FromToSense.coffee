@@ -2,7 +2,7 @@ reactKup = require('react-kup')
 {style} = require '../ui/style.coffee'
 SimpleSelect = require("react-selectize").SimpleSelect
 React = require 'react'
-
+{changeQueryParams} = require '../api/changeQueryParams.coffee'
 # ui object calling a container.. not great?
 selectedContainer = require('../api/Selected.coffee').selectedContainer
 
@@ -15,6 +15,7 @@ exports.FromToSense = React.createClass
         k.build TextAbout,
           word: that.props.word
           type: 'MainCardTextInput'
+          content: that.props.content
         k.div
           style:
             maxWidth: '100%'
@@ -29,21 +30,29 @@ exports.FromToSense = React.createClass
                 verticalAlign: '0.5em'
               ' to '
             k.build selectedContainer,
-              to: that.props.to
               from: that.props.from
+              to: that.props.to
               type: 'to'
+
 TextAbout = React.createClass
-  onKeyDown: (e) ->
+  onKeyUp: (e) ->
     console.log e.keyCode, e.target.value
-    if e.keyCode = 13
+
+    if e.keyCode is 13
       Meteor.call 'Linking'
+      , FlowRouter.getQueryParam('from')
+      , FlowRouter.getQueryParam('to')
+      , FlowRouter.getQueryParam('content')
+    else
+      changeQueryParams 'content', e.target.value
+      console.log FlowRouter.getQueryParam('content')
   render: ->
     window.textAbout = this
     that = this
     reactKup (k) ->
       k.build TextField,
         ref: 'MainCardTextInput'
-        onKeyDown: that.onKeyDown
+        onKeyUp: that.onKeyUp
         style:
           width: '100%'
           tabIndex: 0
@@ -53,3 +62,4 @@ TextAbout = React.createClass
         floatingLabelText: that.props.word.TextAboutfloatingLabelText
         id: 'textAbout'
         hintText: that.props.word.TextAboutHintText
+        defaultValue: that.props.content
