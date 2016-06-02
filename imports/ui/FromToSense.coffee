@@ -36,23 +36,50 @@ exports.FromToSense = React.createClass
 
 TextAbout = React.createClass
   onKeyUp: (e) ->
-    console.log e.keyCode, e.target.value
-
-    if e.keyCode is 13
+    write = () ->
+      content = {}
+      content.body = FlowRouter.getQueryParam('content')
+      content.weight = e.keyCode - 48
       Meteor.call 'Linking'
       , FlowRouter.getQueryParam('from')
       , FlowRouter.getQueryParam('to')
-      , FlowRouter.getQueryParam('content')
+      , content
+    console.log e.keyCode, e.target.value
+    if 48 <= e.keyCode <= 57
+      console.log e.keyCode ,' number!'
+      that.value = FlowRouter.getQueryParam('content').slice 0, -1
+      write()
     else
       changeQueryParams 'content', e.target.value
       console.log FlowRouter.getQueryParam('content')
+    if e.keyCode is 13
+      alert that.props.word.digitAlert
+
   render: ->
     window.textAbout = this
     that = this
     reactKup (k) ->
       k.build TextField,
         ref: 'MainCardTextInput'
-        onKeyUp: that.onKeyUp
+        onKeyUp: (e) ->
+          e.target.value = e.target.value.replace(/\d+/g, '')
+          write = () ->
+            content = {}
+            content.body = FlowRouter.getQueryParam('content')
+            content.weight = e.keyCode - 48
+            Meteor.call 'Linking'
+            , FlowRouter.getQueryParam('from')
+            , FlowRouter.getQueryParam('to')
+            , content
+          console.log e.keyCode, e.target.value
+          if 48 <= e.keyCode <= 57
+            console.log e.keyCode ,' number!', FlowRouter.getQueryParam('content')
+            write()
+          else
+            changeQueryParams 'content', e.target.value
+            console.log FlowRouter.getQueryParam('content')
+          if e.keyCode is 13
+            alert that.props.word.digitAlert
         style:
           width: '100%'
           tabIndex: 0

@@ -86,7 +86,7 @@ Meteor.methods
       _id: Meteor.userId()
     ,
       $set: setIt
-    console.log Nodes.findOne(fromNodeId.insrtedId)
+    console.log Nodes.findOne(fromNodeId.insertedId)
 
 
   Here: (URL) ->
