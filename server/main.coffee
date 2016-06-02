@@ -1,5 +1,4 @@
 Meteor = require('meteor/meteor')
-#require './imports/api/linking.coffee'
 reactKup = require('react-kup')
 require '../imports/startup/configs/serviceconfiguration.js'
 

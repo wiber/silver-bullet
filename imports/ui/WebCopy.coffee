@@ -1,6 +1,6 @@
 exports.wordLanguages =
   eng:
-    HeaderTitle: 'Hashrepublic. Youiest make the connection '
+    HeaderTitle: 'Youiest make the connection '
     MainCardTitle: 'Welcome to the Hashrepublic'
     MainCardSubtitle: 'Where you make the youiest connection'
     TextAboutHintText: "What does the one mean to the next?"

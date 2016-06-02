@@ -4,7 +4,6 @@ accounts-oauth@1.1.12
 accounts-ui@1.1.9
 accounts-ui-unstyled@1.1.12
 allow-deny@1.0.4
-autopublish@1.0.7
 autoupdate@1.2.9
 babel-compiler@6.6.4
 babel-runtime@0.1.8
@@ -91,3 +90,4 @@ underscore@1.0.8
 url@1.0.9
 webapp@1.2.8
 webapp-hashing@1.0.9
+youiest:linkstate@0.0.2

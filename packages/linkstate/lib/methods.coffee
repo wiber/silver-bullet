@@ -1,14 +1,40 @@
-#Meteor = require('meteor/meteor')
-Edges = new Mongo.Collection "edges"
-Nodes = new Mongo.Collection "nodes"
+
+@storageEncode = (url) ->
+  #r = encodeURIComponent url
+  r =  toString(url).replace /\./g , '%2E'
+  console.log r
+  return r
+
+Meteor.methods
+  resetUser: () ->
+    user = Meteor.user()
+    console.log user , 'whole'
+    setter =
+      dictTo: user.dictTo
+      dictoFrom: user.dictFrom
+    console.log setter
+    Meteor.users.update
+      _id: Meteor.userId()
+    ,
+      $set:
+        commit: setter
+      $unset:
+        dictTo: ''
+        dictFrom: ''
+        lastConnectedTo: ''
 
 Meteor.methods
   Linking: (from, to, META) ->
+    unless META?
+      META = {}
     unless Meteor.userId()
-      new Meteor.Error 1, "non-user tries to link"
-      return false
+      throw new Meteor.Error 1, "non-user tries to link"
+      return 'nothing'
 
-    #FROM = storageEncode from
+    unless typeof from is 'string' and typeof to is 'string'
+      throw new Meteor.Error 1, "non-user tries to link"
+      return 'nothing'
+    console.log from, to, arguments
 
     FROM = from.replace(/\./g,'%2E')
     #TO = storageEncode to
@@ -20,7 +46,6 @@ Meteor.methods
     edge.from = FROM
     edge.to = TO
     edge.meta = META
-    edge.content = META.content or 'noContent'
     edge.author = Meteor.userId()
     edge.createdAt = time
 
@@ -62,4 +87,25 @@ Meteor.methods
       _id: Meteor.userId()
     ,
       $set: setIt
-    console.log Nodes.findOne(fromNodeId, Meteor.isServer)
+    console.log Nodes.findOne(fromNodeId)
+
+
+  Here: (URL) ->
+    name = 'Here'
+    #Meteor.subscribe "userData"
+    console.log name, URL, Meteor.isServer, new Date()
+    updateUserLandedWithTime = () ->
+      unless !URL
+        urlSet = {}
+        time = new Date().getTime()
+        urlSet.url = URL
+        urlSet.time = time
+        Meteor.users.update
+          _id: Meteor.userId()
+        ,
+          $push:
+            subscribed: urlSet
+    if !Meteor.userId()
+      new Meteor.Error 1, "Here not authentic"
+    else
+      updateUserLandedWithTime()

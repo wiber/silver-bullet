@@ -7,6 +7,10 @@ FlowRouter.route '/about',
   name: 'home'
   action: (params, queryParams) ->
     console.log queryParams.from, 'to', queryParams.to
+    unless !Meteor.userId()
+      Meteor.call "Linking", queryParams.from, Meteor.userId(), (error, result) ->
+        if error
+          console.log "error", error
     mount containerLayout,
       from: queryParams.from
       to: queryParams.to
