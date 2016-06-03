@@ -5,7 +5,7 @@ React = require 'react'
 {changeQueryParams} = require '../api/changeQueryParams.coffee'
 # ui object calling a container.. not great?
 selectedContainer = require('../api/Selected.coffee').selectedContainer
-
+{see} = require '../api/strings.coffee'
 TextField = require('material-ui/lib/TextField').default
 exports.FromToSense = React.createClass
   render: ->
@@ -61,23 +61,25 @@ TextAbout = React.createClass
     reactKup (k) ->
       k.build TextField,
         ref: 'MainCardTextInput'
-        onKeyUp: (e) ->
-          e.target.value = e.target.value.replace(/\d+/g, '')
+        onKeyDown: (e) ->
           write = () ->
             content = {}
             content.body = FlowRouter.getQueryParam('content')
+            # weight is between 0 and 9
             content.weight = e.keyCode - 48
             Meteor.call 'Linking'
             , FlowRouter.getQueryParam('from')
             , FlowRouter.getQueryParam('to')
             , content
-          console.log e.keyCode, e.target.value
           if 48 <= e.keyCode <= 57
             console.log e.keyCode ,' number!', FlowRouter.getQueryParam('content')
             write()
-          else
-            changeQueryParams 'content', e.target.value
-            console.log FlowRouter.getQueryParam('content')
+            e.target.value = ''
+        onKeyUp: (e) ->
+          e.target.value = e.target.value.replace(/\d+/g, '')
+          console.log e.keyCode, e.target.value
+          changeQueryParams 'content', e.target.value
+          #console.log FlowRouter.getQueryParam('content')
           if e.keyCode is 13
             alert that.props.word.digitAlert
         style:
@@ -89,4 +91,4 @@ TextAbout = React.createClass
         floatingLabelText: that.props.word.TextAboutfloatingLabelText
         id: 'textAbout'
         hintText: that.props.word.TextAboutHintText
-        defaultValue: that.props.content
+        defaultValue: do see that.props.content # don't let react handle queryparam encoding
