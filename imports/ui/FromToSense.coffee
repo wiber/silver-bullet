@@ -76,6 +76,7 @@ TextAbout = React.createClass
             write()
             e.target.value = ''
             e.preventDefault()
+            window.to.refs.to.focus()
         onKeyUp: (e) ->
           e.target.value = e.target.value.replace(/\d+/g, '')
           console.log e.keyCode, e.target.value
