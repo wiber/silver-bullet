@@ -75,6 +75,7 @@ TextAbout = React.createClass
             console.log e.keyCode ,' number!', FlowRouter.getQueryParam('content')
             write()
             e.target.value = ''
+            e.preventDefault()
         onKeyUp: (e) ->
           e.target.value = e.target.value.replace(/\d+/g, '')
           console.log e.keyCode, e.target.value
