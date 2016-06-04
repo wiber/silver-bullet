@@ -77,13 +77,15 @@ TextAbout = React.createClass
             e.target.value = ''
             e.preventDefault()
             window.to.refs.to.focus()
+          if e.keyCode is 13
+            alert that.props.word.digitAlert
+            e.preventDefault()
         onKeyUp: (e) ->
           e.target.value = e.target.value.replace(/\d+/g, '')
           console.log e.keyCode, e.target.value
           changeQueryParams 'content', e.target.value
           #console.log FlowRouter.getQueryParam('content')
-          if e.keyCode is 13
-            alert that.props.word.digitAlert
+
         style:
           width: '100%'
           tabIndex: 0
@@ -91,6 +93,7 @@ TextAbout = React.createClass
           marginRight: 7
           bottom: 9
         floatingLabelText: that.props.word.TextAboutfloatingLabelText
+        multiLine: true
         id: 'textAbout'
         hintText: that.props.word.TextAboutHintText
         defaultValue: do see that.props.content # don't let react handle queryparam encoding

@@ -3,8 +3,8 @@ exports.wordLanguages =
     HeaderTitle: 'Youiest make the connection '
     MainCardTitle: 'Welcome to the Hashrepublic'
     MainCardSubtitle: 'Where you make the youiest connection'
-    TextAboutHintText: "What does the one mean to the next?"
-    TextAboutfloatingLabelText: 'TAB TAB and ENTER to connect'
+    TextAboutfloatingLabelText: 'TAB TAB here to say something and 0-9 link from one to another.'
+    TextAboutHintText: "Send by 9 dead on, 5 neutral, 1 oppose or 0 irrelevant."
     MyCardTitle: "Step confidently out of the past"
     MyCardSubtitle: "See the pattern of your footsteps"
     AboutCardTitle: "What's said about this place"
