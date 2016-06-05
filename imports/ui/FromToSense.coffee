@@ -9,7 +9,6 @@ selectedContainer = require('../api/Selected.coffee').selectedContainer
 TextField = require('material-ui/lib/TextField').default
 exports.FromToSense = React.createClass
   render: ->
-    console.log typeof @props.to
     that = this
     reactKup (k) ->
       k.div ->
@@ -31,7 +30,6 @@ exports.FromToSense = React.createClass
               style:
                 verticalAlign: '0.5em'
               ' to '
-            console.log that.props.to
             k.build selectedContainer,
               from: that.props.from
               to: that.props.to
@@ -47,14 +45,11 @@ TextAbout = React.createClass
       , FlowRouter.getQueryParam('from')
       , FlowRouter.getQueryParam('to')
       , content
-    console.log e.keyCode, e.target.value
     if 48 <= e.keyCode <= 57
-      console.log e.keyCode ,' number!'
       that.value = FlowRouter.getQueryParam('content').slice 0, -1
       write()
     else
       changeQueryParams 'content', e.target.value
-      console.log FlowRouter.getQueryParam('content')
     if e.keyCode is 13
       alert that.props.word.digitAlert
 
@@ -76,7 +71,6 @@ TextAbout = React.createClass
             , FlowRouter.getQueryParam('to')
             , content
           if 48 <= e.keyCode <= 57
-            console.log e.keyCode ,' number!', FlowRouter.getQueryParam('content')
             write()
             e.target.value = ''
             e.preventDefault()
@@ -86,7 +80,6 @@ TextAbout = React.createClass
             e.preventDefault()
         onKeyUp: (e) ->
           e.target.value = e.target.value.replace(/\d+/g, '')
-          console.log e.keyCode, e.target.value
           changeQueryParams 'content', e.target.value
         style:
           width: '100%'

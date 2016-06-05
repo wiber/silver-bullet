@@ -13,15 +13,6 @@ Selected = React.createClass
   render: ->
     that = this
     window[that.props.type] = this
-    if @props.type is 'to'
-      console.log that.props[that.props.type], that.props.type
-      console.log that.props, typeof that.props[that.props.type]
-      console.log typeof @props.to
-      console.log _.find(that.props.options, (obj) ->
-        obj.value is that.props[that.props.type]
-      )
-      , that.props.options
-
     reactKup (k) ->
       k.build SimpleSelect,
         maxValues: 1
