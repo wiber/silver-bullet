@@ -27,9 +27,8 @@ Selected = React.createClass
         onValueChange: (val) ->
           if val.value
             changeQueryParams that.props.type, val.value
-        defaultValue: _.find(that.props.options, (obj) ->
+        defaultValue: _.find that.props.options, (obj) ->
           obj.value == that.props[that.props.type]
-        )
         ref: that.props.type
         id: that.props.type
         options: that.props.options

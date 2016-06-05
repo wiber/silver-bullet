@@ -20,10 +20,16 @@ exports.selectedContainer = createContainer ((props) ->
   options.push
     value: do store props.from
     label: do see props.from
-  {
-    from: do store props.from
-    to: do store props.to
-    type: props.type
-    options: options
-  }
+  newProps = {}
+  if typeof props.from is 'string'
+    newProps.from = do store props.from
+  else
+    newProps.from = options[0].value
+  if typeof props.to is 'string'
+    newProps.to = do store props.to
+  else
+    newProps.to = options[0].value
+  newProps.options = options
+  console.log newProps ,'newProps'
+  newProps
 ), Selected
