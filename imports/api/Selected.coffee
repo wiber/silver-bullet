@@ -29,7 +29,9 @@ exports.selectedContainer = createContainer ((props) ->
     newProps.to = do store props.to
   else
     newProps.to = options[0].value
+  if typeof props.content is 'string'
+    newProps.content = decodeURIComponent props.content
+  else props.content = ''
   newProps.options = options
-  console.log newProps ,'newProps'
   newProps
 ), Selected
