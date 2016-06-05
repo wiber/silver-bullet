@@ -91,5 +91,5 @@ TextAbout = React.createClass
         multiLine: true
         id: 'textAbout'
         hintText: that.props.word.TextAboutHintText
-        defaultValue: that.props.content # don't let react handle queryparam encoding
+        defaultValue: do see that.props.content # don't let react handle queryparam encoding
         # do see that props.content causes error
