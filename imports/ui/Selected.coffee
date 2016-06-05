@@ -10,12 +10,16 @@ Selected = React.createClass
     to: React.propTypes.string
     type: React.propTypes.string
     options: React.propTypes.array
-  queryParamChange: (val) ->
-    if val.value
-      changeQueryParams @props.type, val.value
   render: ->
     that = this
+    console.log that.props[that.props.type], that.props.type
     window[that.props.type] = this
+    if @props.type is 'to'
+      console.log _.find(that.props.options, (obj) ->
+        obj.value == that.props[that.props.type]
+      )
+      , that.props.options
+
     reactKup (k) ->
       k.build SimpleSelect,
         maxValues: 1
@@ -27,7 +31,9 @@ Selected = React.createClass
           maxWidth: '50%' #150
         theme: "material"# // can be one of "default" | "bootstrap3" | "material" | ...
         transitionEnter: true
-        onValueChange: that.queryParamChange
+        onValueChange: (val) ->
+          if val.value
+            changeQueryParams @props.type, val.value
         defaultValue: _.find(that.props.options, (obj) ->
           obj.value == that.props[that.props.type]
         )

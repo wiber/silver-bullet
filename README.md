@@ -15,6 +15,7 @@ git clone https://github.com/wiber/silver-bullet && cd silver-bullet && meteor n
 
 
 #### Todos
+- [ ] one-liner installs dependencies. Does this work for you?
 - [x] chrome addon scaffolds your attention
     - [x] newtab opens app in iframe with last page you were on in queryparam
 - [ ] functional db structure for create and show documents
