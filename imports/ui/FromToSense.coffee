@@ -91,4 +91,4 @@ TextAbout = React.createClass
         multiLine: true
         id: 'textAbout'
         hintText: that.props.word.TextAboutHintText
-        defaultValue: decodeURIComponent that.props.content
+        defaultValue: that.props.content
