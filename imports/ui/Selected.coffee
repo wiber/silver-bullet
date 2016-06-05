@@ -12,11 +12,13 @@ Selected = React.createClass
     options: React.propTypes.array
   render: ->
     that = this
-    console.log that.props[that.props.type], that.props.type
     window[that.props.type] = this
     if @props.type is 'to'
+      console.log that.props[that.props.type], that.props.type
+      console.log that.props, typeof that.props[that.props.type]
+      console.log typeof @props.to
       console.log _.find(that.props.options, (obj) ->
-        obj.value == that.props[that.props.type]
+        obj.value is that.props[that.props.type]
       )
       , that.props.options
 
@@ -33,7 +35,7 @@ Selected = React.createClass
         transitionEnter: true
         onValueChange: (val) ->
           if val.value
-            changeQueryParams @props.type, val.value
+            changeQueryParams that.props.type, val.value
         defaultValue: _.find(that.props.options, (obj) ->
           obj.value == that.props[that.props.type]
         )

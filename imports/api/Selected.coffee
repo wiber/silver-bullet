@@ -22,7 +22,7 @@ exports.selectedContainer = createContainer ((props) ->
     label: do see props.from
   {
     from: do store props.from
-    to: do -> store props.to
+    to: do store props.to
     type: props.type
     options: options
   }

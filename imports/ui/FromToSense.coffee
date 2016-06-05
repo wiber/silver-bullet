@@ -9,6 +9,7 @@ selectedContainer = require('../api/Selected.coffee').selectedContainer
 TextField = require('material-ui/lib/TextField').default
 exports.FromToSense = React.createClass
   render: ->
+    console.log typeof @props.to
     that = this
     reactKup (k) ->
       k.div ->
@@ -21,6 +22,7 @@ exports.FromToSense = React.createClass
             maxWidth: '100%'
             whiteSpace: "nowrap"
           ->
+
             k.build selectedContainer,
               from: that.props.from
               to: that.props.to
@@ -29,6 +31,7 @@ exports.FromToSense = React.createClass
               style:
                 verticalAlign: '0.5em'
               ' to '
+            console.log that.props.to
             k.build selectedContainer,
               from: that.props.from
               to: that.props.to
@@ -63,6 +66,7 @@ TextAbout = React.createClass
         ref: 'MainCardTextInput'
         onKeyDown: (e) ->
           write = () ->
+
             content = {}
             content.body = FlowRouter.getQueryParam('content')
             # weight is between 0 and 9
@@ -84,8 +88,6 @@ TextAbout = React.createClass
           e.target.value = e.target.value.replace(/\d+/g, '')
           console.log e.keyCode, e.target.value
           changeQueryParams 'content', e.target.value
-          #console.log FlowRouter.getQueryParam('content')
-
         style:
           width: '100%'
           tabIndex: 0
@@ -96,4 +98,5 @@ TextAbout = React.createClass
         multiLine: true
         id: 'textAbout'
         hintText: that.props.word.TextAboutHintText
-        defaultValue: do see that.props.content # don't let react handle queryparam encoding
+        defaultValue: that.props.content # don't let react handle queryparam encoding
+        # do see that props.content causes error
