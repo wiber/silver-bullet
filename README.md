@@ -27,7 +27,7 @@ git clone https://github.com/wiber/silver-bullet && cd silver-bullet && meteor n
 - [x] Fast Prototyping
   - [x] write all code in one language.
   - [x] tidy modules independant from meteor.
-  - [ ] one-liner to clone, run and open in vim
+  - [ ] one-liner to clone, instal dependencies and run
 - [ ] Code, UI and Styles in Coffeescript.
   - [x] material-ui
   - [x] react-kup because otherwise this is not that.

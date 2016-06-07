@@ -30,6 +30,7 @@ exports.selectedContainer = createContainer ((props) ->
   else
     newProps.to = options[0].value
   if typeof props.content is 'string'
+    # content always passes through queryparam so decode it
     newProps.content = decodeURIComponent props.content
   else props.content = ''
   newProps.options = options
