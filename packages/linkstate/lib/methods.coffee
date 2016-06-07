@@ -30,11 +30,11 @@ Meteor.methods
     unless typeof Meteor.userId() is 'string'
       throw new Meteor.Error 1, "non-user tries to link"
       return 'nothing'
-
+    console.log from, to, arguments
     unless typeof from is 'string' and typeof to is 'string'
       throw new Meteor.Error 2, "something wrong with orientation "+from+' '+to
       return 'nothing'
-    console.log from, to, arguments
+
 
     FROM = do linkstate.store(from) # from.replace(/\./g,'%2E')
     TO = do linkstate.store(to) #to.replace(/\./g,'%2E')#.split('/').join('.');
@@ -77,6 +77,7 @@ Meteor.methods
     setIt = {}
     setIt['timeTo.'+TO] = time
     setIt['timeFrom.'+FROM] = time
+    # when was the last time this user connected TO x ?
     setIt['in.'+FROM+'.'+TO] = edge
     setIt['out.'+TO+'.'+FROM] = edge
     # by default we want to add it to the 'last used' url/collection /bookmark thing

@@ -1,22 +1,26 @@
 Selected = require('../ui/Selected.coffee').Selected
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store} = require '../api/strings.coffee'
+options = [
+  {
+    value: 'here'
+    label: 'Here'
+  }
+  {
+    value: 'there'
+    label: 'There'
+  }
+  {
+    value: 'therethere'
+    label: 'ThereThereThereThereThereThereThereThereThereThereThereThere'
+  }
+]
+pusher = (dict) ->
+  for i in dict
+    console.log i
 
 exports.selectedContainer = createContainer ((props) ->
-  options = [
-    {
-      value: 'here'
-      label: 'Here'
-    }
-    {
-      value: 'there'
-      label: 'There'
-    }
-    {
-      value: 'therethere'
-      label: 'ThereThereThereThereThereThereThereThereThereThereThereThere'
-    }
-  ]
+  pusher Meteor.user()
   options.push
     value: do store props.from
     label: do see props.from
@@ -28,10 +32,12 @@ exports.selectedContainer = createContainer ((props) ->
   if typeof props.to is 'string'
     newProps.to = do store props.to
   else
-    newProps.to = options[0].value
+    changeQueryParams 'to', options[0].value
+    #newProps.to = options[0].value
   if typeof props.content is 'string'
     newProps.content = decodeURIComponent props.content
   else props.content = ''
   newProps.options = options
+  console.log newProps
   newProps
 ), Selected
