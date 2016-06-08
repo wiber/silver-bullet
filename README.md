@@ -11,7 +11,6 @@ If you haven't already:
  curl https://install.meteor.com/ | sh
 
 git clone https://github.com/wiber/silver-bullet && cd silver-bullet && meteor npm install && meteor
-- [x] means commited, [0-9] is a weight
 
 
 #### Todos
@@ -26,7 +25,7 @@ git clone https://github.com/wiber/silver-bullet && cd silver-bullet && meteor n
 #### Aims
 - [x] Fast Prototyping
   - [x] write all code in one language.
-  - [x] tidy modules independant from meteor.
+  - [x] tidy modules decoupled from meteor.
   - [ ] one-liner to clone, run and open in vim
 - [ ] Code, UI and Styles in Coffeescript.
   - [x] material-ui

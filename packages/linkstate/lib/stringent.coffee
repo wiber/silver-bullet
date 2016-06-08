@@ -1,6 +1,14 @@
-
-
+# these are convenience functions for handling strings
 linkstate = {}
+linkstate.sortByKeys = (dict, many) ->
+  toReturn = Object.keys(dict).sort (a, b) ->
+    dict[b] - (dict[a])
+  toReturn[..many]
+
+linkstate.sortByKeysTime = (dict, many) ->
+  toReturn = Object.keys(dict).sort (a, b) ->
+    dict[b].createdAt - (dict[a].createdAt)
+  toReturn[..many]
 
 linkstate.store = (url) ->
   console.log 'store is encoded', url == decodeURIComponent url

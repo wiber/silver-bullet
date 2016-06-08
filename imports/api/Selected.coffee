@@ -16,6 +16,14 @@ options = [
     label: 'ThereThereThereThereThereThereThereThereThereThereThereThere'
   }
 ]
+# TODO use dictionary here instead to avoid dupes?
+# Make a field on user object that exactly correlates with what should be in selectedContainer
+# goes through a simple loop that builds list of objects from a number of sources.
+# later, would need to have a custom rendering so it gets mini screenshot and a descriptor of why it is here
+# in method pre build the selectedContainer object with all kinds...
+# method to set up 'me' facebook obj, etc as dict
+
+deduperObject = {}
 pusher = (dict) ->
   for i in dict
     console.log i
@@ -33,9 +41,10 @@ exports.selectedContainer = createContainer ((props) ->
   if typeof props.to is 'string'
     newProps.to = do store props.to
   else
+    # TODO understand why this is necessary and solve more elegantly
     Meteor.setTimeout(->
       changeQueryParams 'to', options[0].value
-    50)
+    5)
     newProps.to = options[0].value
   if typeof props.content is 'string'
     newProps.content = decodeURIComponent props.content
