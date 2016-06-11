@@ -21,41 +21,30 @@ deduperObject = {}
 # has a dict like this
 # FROM:
 exports.selectedContainer = createContainer ((props) ->
-  console.log typeof Meteor.user().when
   options = []
-  ###  [{
-      value: 'therethere'
-      label: 'ThereThereThereThereThereThereThereThereThereThereThereThere'
-    }
-  ]###
-  try # to combine data structures into one dropdown
-    fromWhere = {}
-    fromWhere[props[props.type]] =
-      createdAt: new Date().getTime()
-    deChaos = linkstate.sortByKeysTime(_.extend {}, Meteor.user().out, Meteor.user().in, fromWhere)
-    console.log fromWhere, deChaos
-  catch error
+  # to combine data structures into one dropdown
+  propType = {}
+  propType[props[props.type]] =
+    createdAt: new Date().getTime()
+  fromProp = {}
+  fromProp[props.from] =
+    createdAt: new Date().getTime()
+  toProp = {}
+  toProp[props.to] =
+    createdAt: new Date().getTime()
+  deChaos = linkstate.sortByKeysTime( _.extend {}
+  , Meteor.user().out
+  , Meteor.user().in
+  , toProp
+  , fromProp
+  , propType)
+  console.log deChaos
+  for index,value of deChaos
+    options.push
+      label: do see value
+      value: do store value
+  console.log propType, deChaos
 
-
-  arrayFromDict = (D) ->
-    console.log typeof D is 'object'
-    if typeof D is 'object'
-      console.log D, linkstate.sortByKeysTime(D)
-      for index,key of linkstate.sortByKeysTime(D)
-        options.push
-          value: key
-          label: do see key
-  arrayFromDict(Meteor.user().in)
-  ###if typeof Meteor.user().when == 'object'
-    dropList = linkstate.sortByKeysTime Meteor.user().when
-    for i in dropList
-      console.log i
-      options.push
-        value: do store i
-        label: do see i###
-  options.push
-    value: do store props.from
-    label: do see props.from
   newProps = {}
   if typeof props.from is 'string'
     newProps.from = do store props.from
@@ -65,10 +54,12 @@ exports.selectedContainer = createContainer ((props) ->
     newProps.to = do store props.to
   else
     # TODO understand why this is necessary and solve more elegantly
-    Meteor.setTimeout(->
-      changeQueryParams 'to', options[0].value
-    5)
-    newProps.to = options[0].value
+    try
+      Meteor.setTimeout(->
+        changeQueryParams 'to', options[0].value
+      5)
+      newProps.to = options[0].value
+    catch error
   if typeof props.content is 'string'
     newProps.content = decodeURIComponent props.content
   else props.content = ''
