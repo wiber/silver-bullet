@@ -22,29 +22,19 @@ deduperObject = {}
 # FROM:
 exports.selectedContainer = createContainer ((props) ->
   options = []
-  # to combine data structures into one dropdown
-  propType = {}
-  propType[props[props.type]] =
-    createdAt: new Date().getTime()
   fromProp = {}
   fromProp[props.from] =
     createdAt: new Date().getTime()
-  toProp = {}
   toProp[props.to] =
     createdAt: new Date().getTime()
-  deChaos = linkstate.sortByKeysTime( _.extend {}
   , Meteor.user().out
   , Meteor.user().in
   , toProp
   , fromProp
-  , propType)
-  console.log deChaos
   for index,value of deChaos
     options.push
       label: do see value
       value: do store value
-  console.log propType, deChaos
-
   newProps = {}
   if typeof props.from is 'string'
     newProps.from = do store props.from
