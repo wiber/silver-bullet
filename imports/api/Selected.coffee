@@ -22,19 +22,34 @@ deduperObject = {}
 # FROM:
 exports.selectedContainer = createContainer ((props) ->
   options = []
+  fromWhere = {}
   fromProp = {}
-  fromProp[props.from] =
+  toProp = {}
+  timeNow =
     createdAt: new Date().getTime()
-  toProp[props.to] =
-    createdAt: new Date().getTime()
+  if typeof props.to is 'string'
+    toProp[decodeURIComponent props.to] = timeNow
+
+  if typeof props.from is 'string'
+    fromProp[decodeURIComponent props.from] = timeNow
+
+  console.log _.extend {}
+  , Meteor.user().out
+  , Meteor.user().in
+  , toProp
+  , fromProp
+  deChaos = linkstate.sortByKeysTime _.extend {}
   , Meteor.user().out
   , Meteor.user().in
   , toProp
   , fromProp
   for index,value of deChaos
-    options.push
-      label: do see value
-      value: do store value
+    if typeof value is 'string'
+      options.push
+        label: do see value
+        value: do store value
+
+  console.log deChaos
   newProps = {}
   if typeof props.from is 'string'
     newProps.from = do store props.from
@@ -53,7 +68,7 @@ exports.selectedContainer = createContainer ((props) ->
   if typeof props.content is 'string'
     newProps.content = decodeURIComponent props.content
   else props.content = ''
-  newProps.options = _.uniq options
+  newProps.options = options
   console.log newProps, options
   newProps
 ), Selected
