@@ -11,6 +11,7 @@ linkstate.sortByKeysTime = (dict, many) ->
   toReturn[..many]
 
 linkstate.store = (url) ->
+  url = linkstate.see url
   console.log 'store is encoded', url == decodeURIComponent url
   unless typeof url == 'string'
     return null
@@ -19,6 +20,7 @@ linkstate.store = (url) ->
   encodedToDotless
 
 linkstate.see = (url) ->
+  url = linkstate.store url
   console.log 'see is encoded', url == decodeURIComponent url
   unless typeof url == 'string'
     return null
