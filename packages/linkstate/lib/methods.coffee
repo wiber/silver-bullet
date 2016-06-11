@@ -9,7 +9,8 @@ Meteor.methods
   resetUser: () ->
     user = Meteor.user()
     console.log user , 'whole'
-    setter =
+    setter = {}
+    setter[new Date().getTime()] =
       in: user.in
       out: user.out
     console.log setter
@@ -22,6 +23,12 @@ Meteor.methods
         dictTo: ''
         dictFrom: ''
         lastConnectedTo: ''
+        in: ''
+        out: ''
+        timeTo: ''
+        timeFrom: ''
+        when: ''
+
 
 Meteor.methods
   Linking: (from, to, META) ->
@@ -30,14 +37,13 @@ Meteor.methods
     unless typeof Meteor.userId() is 'string'
       throw new Meteor.Error 1, "non-user tries to link"
       return 'nothing'
-    console.log from, to, arguments
+    console.log from, to, arguments, Meteor.user().services.facebook.email,'called Linking'
     unless typeof from is 'string' and typeof to is 'string'
       throw new Meteor.Error 2, "something wrong with orientation "+from+' '+to
       return 'nothing'
-
-
-    FROM = do linkstate.store(from) # from.replace(/\./g,'%2E')
-    TO = do linkstate.store(to) #to.replace(/\./g,'%2E')#.split('/').join('.');
+    console.log typeof linkstate.store
+    FROM = linkstate.store(from) # from.replace(/\./g,'%2E')
+    TO = linkstate.store(to) #to.replace(/\./g,'%2E')#.split('/').join('.');
     console.log FROM, TO, META
     time = new Date().getTime()
     name = 'Linking'
@@ -75,9 +81,14 @@ Meteor.methods
     # this way it's an actual dictionary in the DB
     # we have your last link on your user object
     setIt = {}
+    setIt['when.'+TO] = time
+    setIt['when.'+FROM] = time
     setIt['timeTo.'+TO] = time
     setIt['timeFrom.'+FROM] = time
     # when was the last time this user connected TO x ?
+    setIt['all.'+FROM+'.'+TO] = edge
+    setIt['all.'+TO+'.'+FROM] = edge
+    # last call overwrites which removes dupes
     setIt['in.'+FROM+'.'+TO] = edge
     setIt['out.'+TO+'.'+FROM] = edge
     # by default we want to add it to the 'last used' url/collection /bookmark thing
