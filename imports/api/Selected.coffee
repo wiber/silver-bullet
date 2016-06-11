@@ -21,6 +21,7 @@ deduperObject = {}
 # has a dict like this
 # FROM:
 exports.selectedContainer = createContainer ((props) ->
+  console.log props, 'before stringing'
   options = []
   fromWhere = {}
   fromProp = {}
@@ -28,16 +29,20 @@ exports.selectedContainer = createContainer ((props) ->
   timeNow =
     createdAt: new Date().getTime()
   if typeof props.to is 'string'
-    toProp[decodeURIComponent props.to] = timeNow
+    toProp[props.to] = timeNow
+  else
+    toProp['Meteor.user().services.facebook.email'] = timeNow
 
   if typeof props.from is 'string'
-    fromProp[decodeURIComponent props.from] = timeNow
+    fromProp[props.from] = timeNow
 
   console.log _.extend {}
   , Meteor.user().out
   , Meteor.user().in
   , toProp
   , fromProp
+  # needs use for consistency, make one object
+  # then build props again from same sources
   deChaos = linkstate.sortByKeysTime _.extend {}
   , Meteor.user().out
   , Meteor.user().in
@@ -68,6 +73,6 @@ exports.selectedContainer = createContainer ((props) ->
     newProps.content = decodeURIComponent props.content
   else props.content = ''
   newProps.options = options
-  console.log newProps, options
+  console.log newProps, options, newProps.from is newProps.to
   newProps
 ), Selected
