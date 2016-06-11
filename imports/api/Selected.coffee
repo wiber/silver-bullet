@@ -48,8 +48,7 @@ exports.selectedContainer = createContainer ((props) ->
       options.push
         label: do see value
         value: do store value
-
-  console.log deChaos
+  console.log deChaos, options
   newProps = {}
   if typeof props.from is 'string'
     newProps.from = do store props.from
