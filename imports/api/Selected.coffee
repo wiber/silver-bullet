@@ -21,10 +21,9 @@ deduperObject = {}
 # has a dict like this
 # FROM:
 exports.selectedContainer = createContainer ((props) ->
-
   from = typeof props.from is 'string'
   to =  typeof props.to is 'string'
-  console.log props, from, to,  'before stringing'
+  #console.log props, from, to,  'before stringing'
   # TODO make sure no dupes enter dropdown
   # TODO make sure a standardized approach is used to select from dropdown
   # original url is decodeURIComponent, then to storage, for keys and storage
@@ -34,31 +33,22 @@ exports.selectedContainer = createContainer ((props) ->
   toProp = {}
   newProps = {}
   newProps.options = []
-  timeNow =
-    createdAt: new Date().getTime()
-  fromQueryParams = {}
-  # extreme isomorphism, use db to keep string format consistency, on client, because it's just a function call
-  # on your user() keep state of your queryparam
-  # throttling and double writes can be easily? handled later
-
-    #newProps.to = linkstate.store decodeURIComponent props.from
-    #fromQueryParams[newProps.to] = timeNow
-  #else
-  #  toProp['Meteor.user().services.facebook.email'] = timeNow
-  if typeof Meteor.user().out is 'object'
+  # much isomorphism, use db to keep string format consistency, on client, because it's just a function call
+  if typeof Meteor.user().out is 'object' # supply dumb component with options
     console.log linkstate.sortByKeysTime(Meteor.user().out['Jump-List'])[0]
     deChaos = linkstate.sortByKeysTime _.extend {}
     , Meteor.user().out # from db
     , Meteor.user().in
-    , fromQueryParams # from param
     for index,value of deChaos
-      console.log index, value, linkstate.store value,'from sorted'
+      #console.log index, value, linkstate.store value,'from sorted'
       if typeof value is 'string'
         newProps.options.push
           label: linkstate.see value
-          value: value #linkstate.store value
-  defaultValue = _.find newProps.options, (obj) ->
-    obj.value == props[props.type]
-  console.log newProps, newProps.from is newProps.to, newProps.options is _.uniq newProps.options, defaultValue
+          value: value # from db so don't double encode for storage
+  #unless typeof props.to is 'string'
+  # to insist on same string format get [1] string as a connection is made on the Jump
+  if typeof newProps.options[1] is 'object'
+    newProps.to = newProps.options[1].value
+  console.log newProps, newProps.from is newProps.to, newProps.options is _.uniq newProps.options, typeof newProps.to is 'string'
   newProps
 ), Selected
