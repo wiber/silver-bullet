@@ -21,21 +21,50 @@ deduperObject = {}
 # has a dict like this
 # FROM:
 exports.selectedContainer = createContainer ((props) ->
-  console.log props, 'before stringing'
-  options = []
+
+  from = typeof props.from is 'string'
+  to =  typeof props.to is 'string'
+  console.log props, from, to,  'before stringing'
+  # TODO make sure no dupes enter dropdown
+  # TODO make sure a standardized approach is used to select from dropdown
+  # original url is decodeURIComponent, then to storage, for keys and storage
+  # do store key is used for props
   fromWhere = {}
   fromProp = {}
   toProp = {}
+  newProps = {}
+  newProps.options = []
   timeNow =
     createdAt: new Date().getTime()
-  if typeof props.to is 'string'
-    toProp[props.to] = timeNow
+  fromQueryParams = {}
+  if from
+    newProps.from = linkstate.store decodeURIComponent props.from
+    fromQueryParams[newProps.from] = timeNow
+  if to
+    newProps.to = linkstate.store decodeURIComponent props.from
+    fromQueryParams[newProps.to] = timeNow
+  else
+    toProp['Meteor.user().services.facebook.email'] = timeNow
+
+  deChaos = linkstate.sortByKeysTime _.extend {}
+  , Meteor.user().out # from db
+  , Meteor.user().in
+  , fromQueryParams # from param
+  for index,value of deChaos
+    console.log index, value, linkstate.store value,'from sorted'
+    if typeof value is 'string'
+      newProps.options.push
+        label: linkstate.see value
+        value: linkstate.store value
+  # create a reusable object with props
+  ###if typeof props.to is 'string'
+    toProp[do store decodeURIComponent props.to] = timeNow
   else
     toProp['Meteor.user().services.facebook.email'] = timeNow
 
   if typeof props.from is 'string'
-    fromProp[props.from] = timeNow
-
+    fromProp[do store decodeURIComponent props.from] = timeNow
+  # how do we detect that queryparam object is same ..
   console.log _.extend {}
   , Meteor.user().out
   , Meteor.user().in
@@ -54,7 +83,7 @@ exports.selectedContainer = createContainer ((props) ->
         label: do see value
         value: do store value
   console.log deChaos, options
-  newProps = {}
+
   if typeof props.from is 'string'
     newProps.from = do store props.from
   else
@@ -73,6 +102,7 @@ exports.selectedContainer = createContainer ((props) ->
     newProps.content = decodeURIComponent props.content
   else props.content = ''
   newProps.options = options
-  console.log newProps, options, newProps.from is newProps.to
+  ###
+  console.log newProps, newProps.from is newProps.to, newProps.options is _.uniq newProps.options
   newProps
 ), Selected
