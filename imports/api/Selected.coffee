@@ -40,22 +40,23 @@ exports.selectedContainer = createContainer ((props) ->
   # extreme isomorphism, use db to keep string format consistency, on client, because it's just a function call
   # on your user() keep state of your queryparam
   # throttling and double writes can be easily? handled later
-   
+
     #newProps.to = linkstate.store decodeURIComponent props.from
     #fromQueryParams[newProps.to] = timeNow
   #else
   #  toProp['Meteor.user().services.facebook.email'] = timeNow
-
-  deChaos = linkstate.sortByKeysTime _.extend {}
-  , Meteor.user().out # from db
-  , Meteor.user().in
-  , fromQueryParams # from param
-  for index,value of deChaos
-    console.log index, value, linkstate.store value,'from sorted'
-    if typeof value is 'string'
-      newProps.options.push
-        label: linkstate.see value
-        value: linkstate.store value
+  if typeof Meteor.user().out is 'object'
+    console.log linkstate.sortByKeysTime(Meteor.user().out['Jump-List'])[0]
+    deChaos = linkstate.sortByKeysTime _.extend {}
+    , Meteor.user().out # from db
+    , Meteor.user().in
+    , fromQueryParams # from param
+    for index,value of deChaos
+      console.log index, value, linkstate.store value,'from sorted'
+      if typeof value is 'string'
+        newProps.options.push
+          label: linkstate.see value
+          value: linkstate.store value
   # create a reusable object with props
   ###if typeof props.to is 'string'
     toProp[do store decodeURIComponent props.to] = timeNow
