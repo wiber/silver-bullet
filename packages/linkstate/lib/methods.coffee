@@ -37,7 +37,6 @@ Meteor.methods
     unless typeof Meteor.userId() is 'string'
       throw new Meteor.Error 1, "non-user tries to link"
       return 'nothing'
-    #console.log from, to, arguments, Meteor.user().services.facebook.email,'called Linking'
     unless typeof from is 'string' and typeof to is 'string'
       throw new Meteor.Error 2, "something wrong with orientation "+from+' '+to
       return 'nothing'
@@ -51,10 +50,11 @@ Meteor.methods
     edge.from = FROM
     edge.to = TO
     edge.meta = META
+    edge.meta.link = from
     edge.author = Meteor.userId()
     edge.createdAt = time
     #  localStorage.setItem( linked, JSON.stringify( edge ) );
-    username = Meteor.user().username
+    username = Meteor.user().profile.name
     setEdgeIn = {}
     setEdgeOut = {}
     # because these are like votes, you get a say about each link
