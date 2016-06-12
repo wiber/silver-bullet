@@ -37,14 +37,14 @@ exports.selectedContainer = createContainer ((props) ->
   timeNow =
     createdAt: new Date().getTime()
   fromQueryParams = {}
-  if from
-    newProps.from = linkstate.store decodeURIComponent props.from
-    fromQueryParams[newProps.from] = timeNow
-  if to
-    newProps.to = linkstate.store decodeURIComponent props.from
-    fromQueryParams[newProps.to] = timeNow
-  else
-    toProp['Meteor.user().services.facebook.email'] = timeNow
+  # extreme isomorphism, use db to keep string format consistency, on client, because it's just a function call
+  # on your user() keep state of your queryparam
+  # throttling and double writes can be easily? handled later
+   
+    #newProps.to = linkstate.store decodeURIComponent props.from
+    #fromQueryParams[newProps.to] = timeNow
+  #else
+  #  toProp['Meteor.user().services.facebook.email'] = timeNow
 
   deChaos = linkstate.sortByKeysTime _.extend {}
   , Meteor.user().out # from db

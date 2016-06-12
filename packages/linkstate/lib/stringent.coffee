@@ -8,7 +8,7 @@ linkstate.sortByKeys = (dict, many) ->
 linkstate.sortByKeysTime = (dict, many) ->
   toReturn = Object.keys(dict).sort (a, b) ->
     dict[b].createdAt - (dict[a].createdAt)
-  console.log toReturn.length, _.uniq(toReturn).length
+  #console.log toReturn.length, _.uniq(toReturn).length
   toReturn[..many]
 ###
 linkstate.store = (url) ->
@@ -29,7 +29,7 @@ linkstate.see = (url) ->
 
 ###
 linkstate.store = (url) ->
-  console.log 'store is encoded', url == decodeURIComponent url
+  #console.log 'store is encoded', url == decodeURIComponent url
   unless typeof url == 'string'
     return null
   plainToEncode = encodeURIComponent url
@@ -37,7 +37,7 @@ linkstate.store = (url) ->
   encodedToDotless
 
 linkstate.see = (url) ->
-  console.log 'see is encoded', url == decodeURIComponent url
+  #console.log 'see is encoded', url == decodeURIComponent url
   unless typeof url == 'string'
     return null
   encodedToPlain = decodeURIComponent url
@@ -48,7 +48,7 @@ linkstate.see = (url) ->
 linkstate.storageEncode = (url) ->
   #r = encodeURIComponent url
   r =  toString(url).replace /\./g , '%2E'
-  console.log r
+  #console.log r
   return r
 linkstate.nodeParam = (url) ->
   check stringed, String
