@@ -37,7 +37,7 @@ Meteor.methods
     unless typeof Meteor.userId() is 'string'
       throw new Meteor.Error 1, "non-user tries to link"
       return 'nothing'
-    console.log from, to, arguments, Meteor.user().services.facebook.email,'called Linking'
+    #console.log from, to, arguments, Meteor.user().services.facebook.email,'called Linking'
     unless typeof from is 'string' and typeof to is 'string'
       throw new Meteor.Error 2, "something wrong with orientation "+from+' '+to
       return 'nothing'
