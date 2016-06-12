@@ -99,6 +99,7 @@ Meteor.methods
     ,
       $set: setIt
     console.log Nodes.findOne(fromNodeId.insertedId)
+    return FROM
 
 
   Here: (URL) ->
