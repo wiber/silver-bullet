@@ -56,54 +56,9 @@ exports.selectedContainer = createContainer ((props) ->
       if typeof value is 'string'
         newProps.options.push
           label: linkstate.see value
-          value: linkstate.store value
-  # create a reusable object with props
-  ###if typeof props.to is 'string'
-    toProp[do store decodeURIComponent props.to] = timeNow
-  else
-    toProp['Meteor.user().services.facebook.email'] = timeNow
-
-  if typeof props.from is 'string'
-    fromProp[do store decodeURIComponent props.from] = timeNow
-  # how do we detect that queryparam object is same ..
-  console.log _.extend {}
-  , Meteor.user().out
-  , Meteor.user().in
-  , toProp
-  , fromProp
-  # needs use for consistency, make one object
-  # then build props again from same sources
-  deChaos = linkstate.sortByKeysTime _.extend {}
-  , Meteor.user().out
-  , Meteor.user().in
-  , toProp
-  , fromProp
-  for index,value of deChaos
-    if typeof value is 'string'
-      options.push
-        label: do see value
-        value: do store value
-  console.log deChaos, options
-
-  if typeof props.from is 'string'
-    newProps.from = do store props.from
-  else
-    newProps.from = options[0].value
-  if typeof props.to is 'string'
-    newProps.to = do store props.to
-  else
-    # TODO understand why this is necessary and solve more elegantly
-    try
-      Meteor.setTimeout(->
-        changeQueryParams 'to', options[0].value
-      5)
-      newProps.to = options[0].value
-    catch error
-  if typeof props.content is 'string'
-    newProps.content = decodeURIComponent props.content
-  else props.content = ''
-  newProps.options = options
-  ###
-  console.log newProps, newProps.from is newProps.to, newProps.options is _.uniq newProps.options
+          value: value #linkstate.store value
+  defaultValue = _.find newProps.options, (obj) ->
+    obj.value == props[props.type]
+  console.log newProps, newProps.from is newProps.to, newProps.options is _.uniq newProps.options, defaultValue
   newProps
 ), Selected

@@ -50,7 +50,8 @@ Meteor.methods
     edge.from = FROM
     edge.to = TO
     edge.meta = META
-    edge.meta.link = from
+    edge.meta.FromLink = from
+    edge.meta.ToLink = to
     edge.author = Meteor.userId()
     edge.createdAt = time
     #  localStorage.setItem( linked, JSON.stringify( edge ) );
