@@ -21,7 +21,6 @@ exports.FromToSense = React.createClass
             maxWidth: '100%'
             whiteSpace: "nowrap"
           ->
-
             k.build selectedContainer,
               from: that.props.from
               to: that.props.to
@@ -61,14 +60,13 @@ TextAbout = React.createClass
         ref: 'MainCardTextInput'
         onKeyDown: (e) ->
           write = () ->
-
             content = {}
             content.body = FlowRouter.getQueryParam('content')
             # weight is between 0 and 9
             content.weight = e.keyCode - 48
             Meteor.call 'Linking'
-            , FlowRouter.getQueryParam('from')
-            , FlowRouter.getQueryParam('to')
+            , decodeURIComponent FlowRouter.getQueryParam('from')
+            , decodeURIComponent FlowRouter.getQueryParam('to')
             , content
           if 48 <= e.keyCode <= 57
             write()

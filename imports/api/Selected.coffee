@@ -45,10 +45,13 @@ exports.selectedContainer = createContainer ((props) ->
         newProps.options.push
           label: linkstate.see value
           value: value # from db so don't double encode for storage
-  #unless typeof props.to is 'string'
-  # to insist on same string format get [1] string as a connection is made on the Jump
-  if typeof newProps.options[1] is 'object'
-    newProps.to = newProps.options[1].value
-  console.log newProps, newProps.from is newProps.to, newProps.options is _.uniq newProps.options, typeof newProps.to is 'string'
+  if typeof Meteor.user().out is 'object'
+    console.log linkstate.sortByKeysTime(Meteor.user().out)[0], linkstate.sortByKeysTime(Meteor.user().out,5)
+    newProps.to = linkstate.sortByKeysTime(Meteor.user().out,5)[0]
+  console.log newProps
+  , newProps.from is newProps.to
+  , newProps.options is _.uniq newProps.options
+  , typeof newProps.to is 'string'
+  #, linkstate.sortByKeysTime(Meteor.user().out)[0]
   newProps
 ), Selected

@@ -7,18 +7,13 @@ FlowRouter.route '/about',
   name: 'home'
   action: (params, queryParams) ->
     console.log Meteor.userId() and Meteor.isClient# and typeof Meteor.user().services is 'object'
-    if Meteor.isClient #and typeof Meteor.user().services is 'object'
-      # 'from' is a global db object here with a huge dict of last time each user newtab from a certain url
-      # we do this on the client to enforce the state of strings
-
-      # the most recent newtab item
-      Meteor.call "Linking"
-      , queryParams.from, 'Jump-List', (error, result) ->
-        if error
-          console.log "error", error
-        #if result
-        #console.log linkstate.sortByKeysTime(Meteor.user().out['Jump-List'])[0], queryParams.from, 'Linked From'
-      #fromQueryParams[newProps.from] = timeNow
+    #if Meteor.isClient #and typeof Meteor.user().services is 'object'
+    Meteor.call "Linking"
+    , decodeURIComponent(queryParams.from)
+    , 'Jump-List'
+    , (error, result) ->
+      if error
+        console.log "error", error
 
     console.log queryParams.from, 'to', queryParams.to#, 'whole', queryParams
     mount containerLayout,
