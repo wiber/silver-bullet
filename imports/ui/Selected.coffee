@@ -29,6 +29,8 @@ Selected = React.createClass
             changeQueryParams that.props.type, val.value
         defaultValue: _.find that.props.options, (obj) ->
           obj.value == that.props[that.props.type]
+          # TODO could store entire object here for richer list Layout
+          # obj.value.link = plain url link from props...
         ref: that.props.type
         id: that.props.type
         options: that.props.options

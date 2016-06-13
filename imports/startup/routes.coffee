@@ -8,7 +8,7 @@ FlowRouter.route '/about',
   action: (params, queryParams) ->
     # this is not great for performance when page loads
     # this sort of performance can wait though as we need the consistency
-    # 
+    # if we ensure that this is done optimistically on client there should not be an issue
     if Meteor.isClient and typeof Meteor.userId() is 'string'#.services is 'object'
       Meteor.call "Linking"
       , decodeURIComponent(queryParams.from)
@@ -17,7 +17,7 @@ FlowRouter.route '/about',
         if error
           console.log "error", error
 
-    console.log queryParams.from, 'to', queryParams.to#, 'whole', queryParams
+    console.log linkstate.store(queryParams.from), 'to', linkstate.store(queryParams.to)#, 'whole', queryParams
     mount containerLayout,
       from: linkstate.store queryParams.from
       to: linkstate.store queryParams.to

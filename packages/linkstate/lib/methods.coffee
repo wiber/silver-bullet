@@ -40,7 +40,6 @@ Meteor.methods
     unless typeof from is 'string' and typeof to is 'string'
       throw new Meteor.Error 2, "something wrong with orientation "+from+' '+to
       return 'nothing'
-    console.log typeof linkstate.store
     FROM = linkstate.store(from) # from.replace(/\./g,'%2E')
     TO = linkstate.store(to) #to.replace(/\./g,'%2E')#.split('/').join('.');
     console.log FROM, TO, META
@@ -61,7 +60,8 @@ Meteor.methods
     # because these are like votes, you get a say about each link
     setEdgeIn['in.' + FROM + '.' + username] = edge
     edge.title = META.title or TO # because we're in TO this
-    linked = Edges.insert(edge)
+    if Meteor.isServer
+      linked = Edges.insert(edge)
     setEdgeIn.title = edge.title
     toNodeId = Nodes.upsert
       _id: TO

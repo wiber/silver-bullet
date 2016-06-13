@@ -36,7 +36,9 @@ exports.selectedContainer = createContainer ((props) ->
         newProps.options.push
           label: linkstate.see value
           value: value # from db so don't double encode for storage
-  if typeof Meteor.user().out is 'object'
+  if typeof Meteor.user().out is 'object' and typeof props.to is not 'string'
     newProps.to = linkstate.sortByKeysTime(Meteor.user().out,5)[0]
+  else
+    newProps.to = linkstate.store props.to
   newProps
 ), Selected
