@@ -7,13 +7,13 @@ FlowRouter.route '/about',
   name: 'home'
   action: (params, queryParams) ->
     console.log Meteor.userId() and Meteor.isClient# and typeof Meteor.user().services is 'object'
-    #if Meteor.isClient #and typeof Meteor.user().services is 'object'
-    Meteor.call "Linking"
-    , decodeURIComponent(queryParams.from)
-    , 'Jump-List'
-    , (error, result) ->
-      if error
-        console.log "error", error
+    if Meteor.isClient #and typeof Meteor.user().services is 'object'
+      Meteor.call "Linking"
+      , decodeURIComponent(queryParams.from)
+      , 'Jump-List'
+      , (error, result) ->
+        if error
+          console.log "error", error
 
     console.log queryParams.from, 'to', queryParams.to#, 'whole', queryParams
     mount containerLayout,

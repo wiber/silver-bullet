@@ -23,14 +23,6 @@ deduperObject = {}
 exports.selectedContainer = createContainer ((props) ->
   from = typeof props.from is 'string'
   to =  typeof props.to is 'string'
-  #console.log props, from, to,  'before stringing'
-  # TODO make sure no dupes enter dropdown
-  # TODO make sure a standardized approach is used to select from dropdown
-  # original url is decodeURIComponent, then to storage, for keys and storage
-  # do store key is used for props
-  fromWhere = {}
-  fromProp = {}
-  toProp = {}
   newProps = {}
   newProps.options = []
   # much isomorphism, use db to keep string format consistency, on client, because it's just a function call
@@ -40,18 +32,11 @@ exports.selectedContainer = createContainer ((props) ->
     , Meteor.user().out # from db
     , Meteor.user().in
     for index,value of deChaos
-      #console.log index, value, linkstate.store value,'from sorted'
       if typeof value is 'string'
         newProps.options.push
           label: linkstate.see value
           value: value # from db so don't double encode for storage
   if typeof Meteor.user().out is 'object'
-    console.log linkstate.sortByKeysTime(Meteor.user().out)[0], linkstate.sortByKeysTime(Meteor.user().out,5)
     newProps.to = linkstate.sortByKeysTime(Meteor.user().out,5)[0]
-  console.log newProps
-  , newProps.from is newProps.to
-  , newProps.options is _.uniq newProps.options
-  , typeof newProps.to is 'string'
-  #, linkstate.sortByKeysTime(Meteor.user().out)[0]
   newProps
 ), Selected

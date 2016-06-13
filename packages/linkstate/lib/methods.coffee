@@ -63,8 +63,6 @@ Meteor.methods
     edge.title = META.title or TO # because we're in TO this
     linked = Edges.insert(edge)
     setEdgeIn.title = edge.title
-    # expresso dry left margin hugging coffee style
-
     toNodeId = Nodes.upsert
       _id: TO
     , # second argument to upsert "," is at same level, returns are free
@@ -78,29 +76,22 @@ Meteor.methods
       _id: FROM
     ,
       $set: setEdgeOut
-
-    # this way it's an actual dictionary in the DB
-    # we have your last link on your user object
     setIt = {}
     setIt['when.'+TO] = time
     setIt['when.'+FROM] = time
     setIt['timeTo.'+TO] = time
     setIt['timeFrom.'+FROM] = time
-    # when was the last time this user connected TO x ?
     setIt['all.'+FROM+'.'+TO] = edge
     setIt['all.'+TO+'.'+FROM] = edge
-    # last call overwrites which removes dupes
     setIt['in.'+FROM+'.'+TO] = edge
     setIt['out.'+TO+'.'+FROM] = edge
-    # by default we want to add it to the 'last used' url/collection /bookmark thing
+    # this might be better than Jump-List
     #setIt['lastConnectedTo'] = TO
-
     Meteor.users.update # we need to know what our last connection was
       _id: Meteor.userId()
     ,
       $set: setIt
-    console.log Nodes.findOne(fromNodeId.insertedId)
-
+    #console.log Nodes.findOne(fromNodeId.insertedId)
 
   Here: (URL) ->
     name = 'Here'
