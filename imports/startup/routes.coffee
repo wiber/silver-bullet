@@ -6,8 +6,10 @@ mount = require('react-mounter').mount
 FlowRouter.route '/about',
   name: 'home'
   action: (params, queryParams) ->
-    console.log Meteor.userId() and Meteor.isClient# and typeof Meteor.user().services is 'object'
-    if Meteor.isClient #and typeof Meteor.user().services is 'object'
+    # this is not great for performance when page loads
+    # this sort of performance can wait though as we need the consistency
+    # 
+    if Meteor.isClient and typeof Meteor.userId() is 'string'#.services is 'object'
       Meteor.call "Linking"
       , decodeURIComponent(queryParams.from)
       , 'Jump-List'

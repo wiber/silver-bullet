@@ -27,7 +27,7 @@ exports.selectedContainer = createContainer ((props) ->
   newProps.options = []
   # much isomorphism, use db to keep string format consistency, on client, because it's just a function call
   if typeof Meteor.user().out is 'object' # supply dumb component with options
-    console.log linkstate.sortByKeysTime(Meteor.user().out['Jump-List'])[0]
+    #console.log linkstate.sortByKeysTime(Meteor.user().out['Jump-List'])[0]
     deChaos = linkstate.sortByKeysTime _.extend {}
     , Meteor.user().out # from db
     , Meteor.user().in

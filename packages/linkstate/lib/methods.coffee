@@ -67,8 +67,6 @@ Meteor.methods
       _id: TO
     , # second argument to upsert "," is at same level, returns are free
       $set: setEdgeIn # set incoming edge where we're going TO impact
-    console.log Nodes.findOne(toNodeId.insertedId)
-    , ' updated node', toNodeId
     edge.title = META.title or FROM # because we're out FROM this
     setEdgeOut['out.' + TO + '.' + username] = edge
     setEdgeOut.title = edge.title
