@@ -25,20 +25,23 @@ exports.selectedContainer = createContainer ((props) ->
   to =  typeof props.to is 'string'
   newProps = {}
   newProps.options = []
+
   # much isomorphism, use db to keep string format consistency, on client, because it's just a function call
-  if typeof Meteor.user().out is 'object' # supply dumb component with options
+  if Meteor.userId() and typeof Meteor.user().out is 'object' # supply dumb component with options
     #console.log linkstate.sortByKeysTime(Meteor.user().out['Jump-List'])[0]
     deChaos = linkstate.sortByKeysTime _.extend {}
     , Meteor.user().out # from db
     , Meteor.user().in
+    console.log deChaos, Meteor.user().out, Meteor.user().out['Jump-List']
     for index,value of deChaos
       if typeof value is 'string'
         newProps.options.push
           label: linkstate.see value
           value: value # from db so don't double encode for storage
-  if typeof Meteor.user().out is 'object' and typeof props.to is not 'string'
-    newProps.to = linkstate.sortByKeysTime(Meteor.user().out,5)[0]
-  else
-    newProps.to = linkstate.store props.to
+  if Meteor.userId() and typeof Meteor.user().out is 'object' and typeof props.to is not 'string'
+    toPossibles = linkstate.sortByKeysTime(Meteor.user().out,5)
+    console.log toPossibles
+    newProps.to = toPossibles[1]
+
   newProps
 ), Selected
