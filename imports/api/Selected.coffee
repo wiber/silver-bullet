@@ -32,7 +32,7 @@ exports.selectedContainer = createContainer ((props) ->
     deChaos = linkstate.sortByKeysTime _.extend {}
     , Meteor.user().out # from db
     , Meteor.user().in
-    console.log deChaos, Meteor.user().out, Meteor.user().out['Jump-List']
+    #console.log deChaos, Meteor.user().out, Meteor.user().out['Jump-List']
     for index,value of deChaos
       if typeof value is 'string'
         newProps.options.push

@@ -8,7 +8,6 @@ require('../imports/startup/routes.coffee')
 {Meteor}= require 'meteor/meteor'
 lastLogin = () ->
   user = Meteor.user()
-  console.log typeof user, user.services.facebook.link, 'tracker'
   if user and user.services and user.services.facebook.link #Meteor.user().services.facebook.link
     Meteor.call "Linking"
     , Meteor.user().services.facebook.link
