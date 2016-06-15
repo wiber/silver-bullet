@@ -28,10 +28,11 @@ Selected = React.createClass
         theme: "material"# // can be one of "default" | "bootstrap3" | "material" | ...
         transitionEnter: true
         onValueChange: (val) ->
-          if val.value
-            changeQueryParams that.props.type, val.value
+          console.log val, val.value
+          if val.value.meta.FromLink
+            changeQueryParams that.props.type, val.value.meta.FromLink
         defaultValue: _.find that.props.options, (obj) ->
-          obj.value == that.props[that.props.type]
+          obj.value.FromLink == that.props[that.props.type]
           # TODO could store entire object here for richer list Layout
           # obj.value.link = plain url link from props...
         ref: that.props.type

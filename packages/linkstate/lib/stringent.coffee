@@ -30,7 +30,7 @@ linkstate.see = (url) ->
 ###
 linkstate.store = (url) ->
   #console.log 'store is encoded', url == decodeURIComponent url
-  unless typeof url == 'string'
+  unless typeof url is 'string' or url is not 'undefined'
     return null
   plainToEncode = encodeURIComponent url
   encodedToDotless = plainToEncode.replace /\./g, '%2E'
