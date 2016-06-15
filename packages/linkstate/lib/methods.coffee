@@ -29,7 +29,6 @@ Meteor.methods
         timeFrom: ''
         when: ''
 
-
 Meteor.methods
   Linking: (from, to, META) ->
     unless META?

@@ -14,15 +14,12 @@ Selected = require('../ui/Selected.coffee').Selected
 # in method pre build the selectedContainer object with all kinds...
 # method to set up 'me' facebook obj, etc as dict
 
-deduperObject = {}
-# build the array from the user object in and out ..
 
 # Meteor.user().in
 # has a dict like this
 # FROM:
 exports.selectedContainer = createContainer ((props) ->
-  from = typeof props.from is 'string'
-  to =  typeof props.to is 'string'
+
   newProps = {}
   newProps.options = []
 
@@ -38,10 +35,13 @@ exports.selectedContainer = createContainer ((props) ->
         newProps.options.push
           label: linkstate.see value
           value: value # from db so don't double encode for storage
-  if Meteor.userId() and typeof Meteor.user().out is 'object' and typeof props.to is not 'string'
+  # if we have a props.to it should be shown in the selectbox
+  #
+  if Meteor.userId() and typeof Meteor.user().out is 'object'# and typeof props.to is not 'string'
     toPossibles = linkstate.sortByKeysTime(Meteor.user().out,5)
-    console.log toPossibles
-    newProps.to = toPossibles[1]
-
+    console.log toPossibles, 'toPossibles',props.to
+    props.to = toPossibles[1]
+  #props = _.extend props, newProps
+  console.log newProps.to, props.to
   newProps
 ), Selected

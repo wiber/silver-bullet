@@ -12,6 +12,9 @@ Selected = React.createClass
     options: React.propTypes.array
   render: ->
     that = this
+    defaultValue = _.find that.props.options, (obj) ->
+      obj.value == that.props[that.props.type]
+    console.log defaultValue
     window[that.props.type] = this
     reactKup (k) ->
       k.build SimpleSelect,
