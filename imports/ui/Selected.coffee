@@ -12,9 +12,10 @@ Selected = React.createClass
     options: React.propTypes.array
   render: ->
     that = this
-    defaultValue = _.find that.props.options, (obj) ->
-      obj.value == that.props[that.props.type]
-    console.log defaultValue
+    if @props.type is 'to'
+      defaultValue = _.find that.props.options, (obj) ->
+        obj.value.meta.FromLink == that.props[that.props.type]
+      console.log defaultValue, @props.to,'defaultValue'
     window[that.props.type] = this
     reactKup (k) ->
       k.build SimpleSelect,
@@ -31,7 +32,7 @@ Selected = React.createClass
           console.log val, val.value
           if val.value.meta.FromLink
             changeQueryParams that.props.type, val.value.meta.FromLink
-        defaultValue: _.find that.props.options, (obj) ->
+        value: _.find that.props.options, (obj) ->
           obj.value.meta.FromLink == that.props[that.props.type]
           # TODO could store entire object here for richer list Layout
           # obj.value.link = plain url link from props...
