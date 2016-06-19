@@ -8,7 +8,7 @@ require('../imports/startup/routes.coffee')
 {Meteor}= require 'meteor/meteor'
 lastLogin = () ->
   user = Meteor.user()
-  if user and user.services and user.services.facebook.link #Meteor.user().services.facebook.link
+  if user? and user.services? and user.services.facebook.link? #Meteor.user().services.facebook.link
     Meteor.call "Linking"
     , Meteor.user().services.facebook.link
     , 'Yours-Truly'
@@ -25,7 +25,8 @@ if Meteor.loggingIn()
   console.log 'Meteor.loggingIn() for ', Meteor.userId()
   # link to self so
   # we can add your link to the dropdown
-
+Meteor.startup ->
+	sinceLogin = true
 Tracker.autorun ->
   if Meteor.user() and sinceLogin
     console.log 'tracker started for ', Meteor.userId(), sinceLogin

@@ -1,34 +1,9 @@
-
 @storageEncode = (url) ->
   #r = encodeURIComponent url
   r =  toString(url).replace /\./g , '%2E'
   console.log r
   return r
-
-Meteor.methods
-  resetUser: () ->
-    user = Meteor.user()
-    console.log user , 'whole'
-    setter = {}
-    setter[new Date().getTime()] =
-      in: user.in
-      out: user.out
-    console.log setter
-    Meteor.users.update
-      _id: Meteor.userId()
-    ,
-      $set:
-        commit: setter
-      $unset:
-        dictTo: ''
-        dictFrom: ''
-        lastConnectedTo: ''
-        in: ''
-        out: ''
-        timeTo: ''
-        timeFrom: ''
-        when: ''
-
+  
 Meteor.methods
   Linking: (from, to, META) ->
     unless META?
@@ -109,3 +84,29 @@ Meteor.methods
       new Meteor.Error 1, "Here not authentic"
     else
       updateUserLandedWithTime()
+
+
+
+Meteor.methods
+  resetUser: () ->
+    user = Meteor.user()
+    console.log user , 'whole'
+    setter = {}
+    setter[new Date().getTime()] =
+      in: user.in
+      out: user.out
+    console.log setter
+    Meteor.users.update
+      _id: Meteor.userId()
+    ,
+      $set:
+        commit: setter
+      $unset:
+        dictTo: ''
+        dictFrom: ''
+        lastConnectedTo: ''
+        in: ''
+        out: ''
+        timeTo: ''
+        timeFrom: ''
+        when: ''

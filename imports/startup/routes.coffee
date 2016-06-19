@@ -9,18 +9,17 @@ FlowRouter.route '/about',
     # this is not great for performance when page loads
     # this sort of performance can wait though as we need the consistency
     # if we ensure that this is done optimistically on client there should not be an issue
-    if Meteor.isClient and typeof Meteor.userId() is 'string'#.services is 'object'
+    console.log queryParams.from?
+    if Meteor.isClient and Meteor.userId()? and queryParams.from?
       Meteor.call "Linking"
       , decodeURIComponent(queryParams.from)
       , 'Jump-List'
       , (error, result) ->
         if error
           console.log "error", error
-
-    console.log linkstate.store(queryParams.from), 'to', linkstate.store(queryParams.to)#, 'whole', queryParams
     mount containerLayout,
-      from: linkstate.store queryParams.from
-      to: linkstate.store queryParams.to
+      from: decodeURIComponent queryParams.from
+      to: decodeURIComponent queryParams.to
       content: queryParams.content
       word: wordLanguages[language] # don't prematurely optimize!
       expandMainCard: queryParams.expandMainCard == 'true'
