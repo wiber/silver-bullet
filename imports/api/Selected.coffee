@@ -24,17 +24,20 @@ exports.selectedContainer = createContainer ((props) ->
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
     #console.log deChaos, Meteor.user().out, Meteor.user().out['Jump-List']
     for index,value of deChaos
-      if typeof value is 'string'
-        console.log dictWithCreatedAt[value]
+      if typeof value is 'string' and value != 'undefined'
         newProps.options.push
           label: linkstate.see value # same function as use
           value: dictWithCreatedAt[value] # store whole object here
-  if Meteor.userId() and typeof Meteor.user().out is 'object'# and typeof props.to is not 'string'
-    toPossibles = linkstate.sortByKeysTime(Meteor.user().out,5)
-    console.log toPossibles, 'toPossibles',props.to
-    props.to = toPossibles[1]
+  if Meteor.userId()? and Meteor.user().to?
+    toPossibles = linkstate.sortByKeysTime(Meteor.user().to,5)
+    console.log toPossibles, 'toPossibles',props.to, Meteor.user().to[toPossibles[1]]
+    newProps.to = Meteor.user().to[toPossibles[1]]
+  else
+    console.log Meteor.userId()?, Meteor.user().to?, 'toPossibles not'
+    newProps.to = newProps.options[1]
   props = _.extend {}, props, newProps
   console.log props, newProps
+
   props
   #newProps
 ), Selected

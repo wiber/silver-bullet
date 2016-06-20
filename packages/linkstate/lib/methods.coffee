@@ -1,11 +1,14 @@
+{check} = require 'meteor/check'
 @storageEncode = (url) ->
   #r = encodeURIComponent url
   r =  toString(url).replace /\./g , '%2E'
   console.log r
   return r
-  
+
 Meteor.methods
   Linking: (from, to, META) ->
+    check from, String
+    check to, String
     unless META?
       META = {}
     unless typeof Meteor.userId() is 'string'
@@ -49,12 +52,12 @@ Meteor.methods
     ,
       $set: setEdgeOut
     setIt = {}
-    setIt['when.'+TO] = time
-    setIt['when.'+FROM] = time
+    #setIt['when.'+TO] = time
+    #setIt['when.'+FROM] = time
     setIt['timeTo.'+TO] = time
     setIt['timeFrom.'+FROM] = time
-    setIt['all.'+FROM+'.'+TO] = edge
-    setIt['all.'+TO+'.'+FROM] = edge
+    setIt['from.'+FROM] = edge
+    setIt['to.'+TO] = edge
     setIt['in.'+FROM+'.'+TO] = edge
     setIt['out.'+TO+'.'+FROM] = edge
     # this might be better than Jump-List
