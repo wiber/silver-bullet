@@ -7,8 +7,8 @@
 
 Meteor.methods
   Linking: (from, to, META) ->
-    check from, String
-    check to, String
+    #check from, String
+    #check to, String
     unless META?
       META = {}
     unless typeof Meteor.userId() is 'string'
@@ -19,7 +19,7 @@ Meteor.methods
       return 'nothing'
     FROM = linkstate.store(from) # from.replace(/\./g,'%2E')
     TO = linkstate.store(to) #to.replace(/\./g,'%2E')#.split('/').join('.');
-    #console.log FROM, TO, META
+    console.log FROM, TO, META
     time = new Date().getTime()
     name = 'Linking'
     edge = {}
@@ -66,6 +66,8 @@ Meteor.methods
       _id: Meteor.userId()
     ,
       $set: setIt
+      $inc:
+        'hits': 1
     ##console.log Nodes.findOne(fromNodeId.insertedId)
 
   Here: (URL) ->

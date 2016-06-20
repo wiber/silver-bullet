@@ -12,10 +12,6 @@ Selected = React.createClass
     options: React.propTypes.array
   render: ->
     that = this
-    if @props.type is 'to'
-      defaultValue = _.find that.props.options, (obj) ->
-        obj.value.meta.FromLink == that.props[that.props.type]
-      #console.log defaultValue, @props.to,'defaultValue'
     window[that.props.type] = this
     reactKup (k) ->
       k.build SimpleSelect,

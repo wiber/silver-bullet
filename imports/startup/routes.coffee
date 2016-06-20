@@ -6,6 +6,7 @@ mount = require('react-mounter').mount
 FlowRouter.route '/about',
   name: 'home'
   action: (params, queryParams) ->
+
     # this is not great for performance when page loads
     # this sort of performance can wait though as we need the consistency
     # if we ensure that this is done optimistically on client there should not be an issue
@@ -15,6 +16,7 @@ FlowRouter.route '/about',
       , decodeURIComponent(queryParams.from)
       , 'Jump-List'
       , (error, result) ->
+    
     mount containerLayout,
       from: decodeURIComponent queryParams.from
       to: decodeURIComponent queryParams.to
