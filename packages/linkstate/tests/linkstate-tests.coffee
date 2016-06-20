@@ -16,7 +16,7 @@ runTests = () ->
     TO = 'linkedinProfile' + testNumber
     META = {}
     Meteor.insecureUserLogin 'user' + testNumber, (res, err) ->
-      console.log 'now idenity ','user' + testNumber, Meteor.userId()
+      #console.log 'now idenity ','user' + testNumber, Meteor.userId()
       Meteor.call 'Linking', FROM, TO, META, (res, err) ->
     # recheck when sync'd data arrives, better ideas?
       Tracker.autorun (computation) ->
@@ -35,13 +35,13 @@ runTests = () ->
     META = 'comment body'
     username = 'user' + testNumber
     Meteor.insecureUserLogin username, (res, err) ->
-      console.log 'now identity ','user' + testNumber, Meteor.userId()
+      #console.log 'now identity ','user' + testNumber, Meteor.userId()
       Meteor.call 'Linking', FROM, TO, META, (res, err) ->
         # go the the place we just linked to
         Meteor.call "Here", TO, (error, result) ->
           # now located on linkedinProfileN
           if error
-            console.log "error", error
+            #console.log "error", error
           if result
             # linkedinProfile6.in.article6.user6.from.article6
             # this shows allows the double reference to article6 by design
@@ -59,7 +59,7 @@ runTests = () ->
     TO = 'linkedinProfile' + testNumber
     META = {}
     Meteor.insecureUserLogin 'user' + testNumber, (res, err) ->
-      console.log 'now idenity '
+      #console.log 'now idenity '
       ,'user' + testNumber
       , Meteor.userId()
       , Meteor.users.findOne(Meteor.userId())
@@ -98,7 +98,7 @@ Meteor.methods resetss: () ->
     Edges.remove {}
     Nodes.remove {}
     #l = Nodes.find().fetch().length
-    #console.log(Nodes.find().fetch().length)
+    ##console.log(Nodes.find().fetch().length)
     -> true
 
 # so that logs start clean on each startup, easily see where you are
@@ -106,15 +106,15 @@ truncateLogs = ->
   spawn = Npm.require('child_process').spawn
   grep = spawn('grep')
   grep.on 'close', (code, signal) ->
-    console.log ' child process terminated due to receipt of signal ' + signal
+    #console.log ' child process terminated due to receipt of signal ' + signal
     fs = Npm.require('fs')
     appRoot = process.env.PWD
     logPath = '/logs/all.log'
     firstPartIndex = appRoot.lastIndexOf '/'
     firstPart = appRoot.substring 0, firstPartIndex
-    console.log firstPart , 'linkstate firstPart where logs directory should', firstPart+logPath
+    #console.log firstPart , 'linkstate firstPart where logs directory should', firstPart+logPath
     webl = fs.truncate(appRoot + logPath, 0, ->
-      console.log ' done overwriting the ' + firstPart+logPath
+      #console.log ' done overwriting the ' + firstPart+logPath
       return
     )
     return
@@ -126,7 +126,7 @@ truncateLogs = ->
     packageName = _.find(Object.keys(Package), (p) ->
       p.search(/local-test/) > -1
     ).replace('local-test:', '')
-    console.log packageName,'running next?',packageName.indexOf("linkstate") isnt -1
+    #console.log packageName,'running next?',packageName.indexOf("linkstate") isnt -1
     runningOurselves = packageName.indexOf("linkstate") isnt -1
     if runningOurselves
       runTests()

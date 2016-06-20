@@ -2,7 +2,7 @@
 @storageEncode = (url) ->
   #r = encodeURIComponent url
   r =  toString(url).replace /\./g , '%2E'
-  console.log r
+  #console.log r
   return r
 
 Meteor.methods
@@ -19,7 +19,7 @@ Meteor.methods
       return 'nothing'
     FROM = linkstate.store(from) # from.replace(/\./g,'%2E')
     TO = linkstate.store(to) #to.replace(/\./g,'%2E')#.split('/').join('.');
-    console.log FROM, TO, META
+    #console.log FROM, TO, META
     time = new Date().getTime()
     name = 'Linking'
     edge = {}
@@ -66,12 +66,12 @@ Meteor.methods
       _id: Meteor.userId()
     ,
       $set: setIt
-    #console.log Nodes.findOne(fromNodeId.insertedId)
+    ##console.log Nodes.findOne(fromNodeId.insertedId)
 
   Here: (URL) ->
     name = 'Here'
     #Meteor.subscribe "userData"
-    console.log name, URL, Meteor.isServer, new Date()
+    #console.log name, URL, Meteor.isServer, new Date()
     updateUserLandedWithTime = () ->
       unless !URL
         urlSet = {}
@@ -93,12 +93,12 @@ Meteor.methods
 Meteor.methods
   resetUser: () ->
     user = Meteor.user()
-    console.log user , 'whole'
+    #console.log user , 'whole'
     setter = {}
     setter[new Date().getTime()] =
       in: user.in
       out: user.out
-    console.log setter
+    #console.log setter
     Meteor.users.update
       _id: Meteor.userId()
     ,

@@ -1,7 +1,7 @@
 linkstate = {}
 exports.store = (url) ->
   unless typeof url == 'string'
-    #console.log url,'store is encoded', url == decodeURIComponent url
+    ##console.log url,'store is encoded', url == decodeURIComponent url
     return ''
   encodedToDotless = url.replace /\./g, '%2E'
   plainToEncode = encodeURIComponent url
@@ -10,7 +10,7 @@ exports.store = (url) ->
 exports.see = (url) ->
 
   unless typeof url == 'string'
-    #console.log url,'see is encoded', url == decodeURIComponent url
+    ##console.log url,'see is encoded', url == decodeURIComponent url
     return ''
   encodedToPlain = decodeURIComponent url
   encodedToDotless = encodedToPlain.replace '%2E' , '.'

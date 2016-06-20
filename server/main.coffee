@@ -12,5 +12,5 @@ exports.state =
   window: window
 
 FlowRouter.setPageCacheTimeout exports.state.timeInMillis
-console.log 'ssr', exports.state.ssr, exports.state.timeInMillis, window
+#console.log 'ssr', exports.state.ssr, exports.state.timeInMillis, window
 FlowRouter.setDeferScriptLoading exports.state.ssr

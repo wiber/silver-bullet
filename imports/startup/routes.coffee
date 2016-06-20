@@ -9,14 +9,12 @@ FlowRouter.route '/about',
     # this is not great for performance when page loads
     # this sort of performance can wait though as we need the consistency
     # if we ensure that this is done optimistically on client there should not be an issue
-    console.log queryParams.from?
+    #console.log queryParams.from?
     if Meteor.isClient and Meteor.userId()? and queryParams.from?
       Meteor.call "Linking"
       , decodeURIComponent(queryParams.from)
       , 'Jump-List'
       , (error, result) ->
-        if error
-          console.log "error", error
     mount containerLayout,
       from: decodeURIComponent queryParams.from
       to: decodeURIComponent queryParams.to
@@ -30,5 +28,5 @@ FlowRouter.route '/about',
 unless !Meteor.userId()
   Meteor.call "Linking", queryParams.from, Meteor.userId(), (error, result) ->
     if error
-      console.log "error", error
+      #console.log "error", error
 ###

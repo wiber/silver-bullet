@@ -14,22 +14,20 @@ lastLogin = () ->
     , 'Yours-Truly'
     , (error, result) ->
      if error
-       console.log "error", error
+       #console.log "error", error
        new Meteor.Error 7, "Reply Does the User object have facebook credentials?"
-     if result
-       console.log result
 
 sinceLogin = false
 if Meteor.loggingIn()
   sinceLogin = true
-  console.log 'Meteor.loggingIn() for ', Meteor.userId()
+  #console.log 'Meteor.loggingIn() for ', Meteor.userId()
   # link to self so
   # we can add your link to the dropdown
 Meteor.startup ->
 	sinceLogin = true
 Tracker.autorun ->
   if Meteor.user() and sinceLogin
-    console.log 'tracker started for ', Meteor.userId(), sinceLogin
+    #console.log 'tracker started for ', Meteor.userId(), sinceLogin
     lastLogin()
     sinceLogin = false
 
