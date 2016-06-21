@@ -10,6 +10,12 @@ Selected = React.createClass
     to: React.propTypes.string
     type: React.propTypes.string
     options: React.propTypes.array
+  componentDidUpdate: ->
+    console.log 'focus coming',window.textAbout.refs.MainCardTextInput
+    try
+      window.textAbout.refs.MainCardTextInput.focus()
+    catch error
+      console.error error
   render: ->
     that = this
     window[that.props.type] = this

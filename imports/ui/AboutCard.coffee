@@ -25,9 +25,6 @@ exports.AboutCard = React.createClass
         style: _.extend {}, style.card, style.mAcard
         ->
           k.build CardHeader,
-            onFocus: () ->
-              # TODO avoid global here..
-              window.from.refs.from.focus()
             title: that.props.word.AboutCardTitle
             showExpandableButton: true
             subtitle: that.props.word.AboutCardSubTitle
