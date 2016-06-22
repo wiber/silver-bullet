@@ -35,23 +35,6 @@ exports.FromToSense = React.createClass
               type: 'to'
 
 TextAbout = React.createClass
-  onKeyUp: (e) ->
-    write = () ->
-      content = {}
-      content.body = FlowRouter.getQueryParam('content')
-      content.weight = e.keyCode - 48
-      Meteor.call 'Linking'
-      , FlowRouter.getQueryParam('from')
-      , FlowRouter.getQueryParam('to')
-      , content
-    if 48 <= e.keyCode <= 57
-      that.value = FlowRouter.getQueryParam('content').slice 0, -1
-      write()
-    else
-      changeQueryParams 'content', e.target.value
-    if e.keyCode is 13
-      alert that.props.word.digitAlert
-
   render: ->
     window.textAbout = this
     that = this
@@ -60,14 +43,20 @@ TextAbout = React.createClass
         ref: 'MainCardTextInput'
         onKeyDown: (e) ->
           write = () ->
+            console.log FlowRouter.getQueryParam('from'), FlowRouter.getQueryParam('to'), FlowRouter.getQueryParam('content'), "FlowRouter.getQueryParam('from')"
             content = {}
             content.body = FlowRouter.getQueryParam('content')
             # weight is between 0 and 9
             content.weight = e.keyCode - 48
-            Meteor.call 'Linking'
-            , decodeURIComponent FlowRouter.getQueryParam('from')
-            , decodeURIComponent FlowRouter.getQueryParam('to')
-            , content
+            Meteor.call "Linking",
+              from: FlowRouter.getQueryParam('from')
+              to: FlowRouter.getQueryParam('to')
+              meta: content
+            , (error, result) ->
+              if error
+                console.log "error", error
+              if result
+                console.log result
           if 48 <= e.keyCode <= 57
             write()
             e.target.value = ''

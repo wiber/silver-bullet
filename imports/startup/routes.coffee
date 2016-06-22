@@ -19,10 +19,3 @@ FlowRouter.route '/about',
       expandMainCard: queryParams.expandMainCard == 'true'
       expandAboutCard: queryParams.expandAboutCard == 'true'
       expandMyCard: queryParams.expandMyCard == 'true'
-
-###
-unless !Meteor.userId()
-  Meteor.call "Linking", queryParams.from, Meteor.userId(), (error, result) ->
-    if error
-      #console.log "error", error
-###

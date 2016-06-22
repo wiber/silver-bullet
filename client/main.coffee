@@ -9,9 +9,9 @@ require('../imports/startup/routes.coffee')
 lastLogin = () ->
   user = Meteor.user()
   if user? and user.services? and user.services.facebook.link? #Meteor.user().services.facebook.link
-    Meteor.call "Linking"
-    , Meteor.user().services.facebook.link
-    , 'Yours-Truly'
+    Meteor.call "Linking",
+      from: Meteor.user().services.facebook.link
+      to: 'Yours-Truly'
     , (error, result) ->
      if error
        #console.log "error", error
