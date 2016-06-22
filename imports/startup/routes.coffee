@@ -11,12 +11,6 @@ FlowRouter.route '/about',
     # this sort of performance can wait though as we need the consistency
     # if we ensure that this is done optimistically on client there should not be an issue
     #console.log queryParams.from?
-    if Meteor.isClient and Meteor.userId()? and queryParams.from?
-      Meteor.call "Linking"
-      , decodeURIComponent(queryParams.from)
-      , 'Jump-List'
-      , (error, result) ->
-    
     mount containerLayout,
       from: decodeURIComponent queryParams.from
       to: decodeURIComponent queryParams.to

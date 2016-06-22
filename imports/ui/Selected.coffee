@@ -11,7 +11,6 @@ Selected = React.createClass
     type: React.propTypes.string
     options: React.propTypes.array
   componentDidUpdate: ->
-    console.log 'focus coming',window.textAbout.refs.MainCardTextInput
     try
       window.textAbout.refs.MainCardTextInput.focus()
     catch error
@@ -31,7 +30,7 @@ Selected = React.createClass
         theme: "material"# // can be one of "default" | "bootstrap3" | "material" | ...
         transitionEnter: true
         onValueChange: (val) ->
-          #console.log val, val.value
+          console.log val, val.value?, val.value.meta.FromLink?
           if val.value.meta.FromLink
             changeQueryParams that.props.type, val.value.meta.FromLink
         value: _.find that.props.options, (obj) ->
