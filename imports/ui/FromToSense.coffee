@@ -42,7 +42,8 @@ TextAbout = React.createClass
       k.build TextField,
         ref: 'MainCardTextInput'
         onKeyDown: (e) ->
-          write = () ->
+          if 48 <= e.keyCode <= 57
+            console.log e.keyCode, 'writing onKeyDown'
             console.log FlowRouter.getQueryParam('from'), FlowRouter.getQueryParam('to'), FlowRouter.getQueryParam('content'), "FlowRouter.getQueryParam('from')"
             content = {}
             content.body = FlowRouter.getQueryParam('content')
@@ -57,8 +58,6 @@ TextAbout = React.createClass
                 console.log "error", error
               if result
                 console.log result
-          if 48 <= e.keyCode <= 57
-            write()
             e.target.value = ''
             e.preventDefault()
             window.to.refs.to.focus()
