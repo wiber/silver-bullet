@@ -42,7 +42,7 @@ TextAbout = React.createClass
       k.build TextField,
         ref: 'MainCardTextInput'
         onKeyDown: (e) ->
-          if 48 <= e.keyCode <= 57
+          if 48 <= e.keyCode <= 57 and !e.ctrlKey and !e.shiftKey and !e.altKey
             console.log e.keyCode, 'writing onKeyDown'
             console.log FlowRouter.getQueryParam('from'), FlowRouter.getQueryParam('to'), FlowRouter.getQueryParam('content'), "FlowRouter.getQueryParam('from')"
             content = {}
