@@ -13,6 +13,7 @@ Selected = require('../ui/Selected.coffee').Selected
 exports.selectedContainer = createContainer ((props) ->
   newProps = {}
   newProps.options = []
+  user = Meteor.user()
   # much isomorphism, use db to keep string format consistency, on client, because it's just a function call
   if Meteor.userId()? and Meteor.user().out? # supply dumb component with options
     dictWithCreatedAt = _.extend {}
@@ -36,5 +37,7 @@ exports.selectedContainer = createContainer ((props) ->
   props = _.extend {}, props, newProps
   if props.type is 'to'
     console.log props.to, props, newProps
+  # if we are from a new place, link it to Yours-Truly
+  # fill form from db object
   props
 ), Selected

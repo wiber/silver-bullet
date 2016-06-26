@@ -59,6 +59,8 @@ Meteor.methods
     #setIt['when.'+TO] = time
     #setIt['when.'+FROM] = time
     setIt.edited = time
+    setIt.lastFrom = from
+    setIt.lastTo = to
     setIt['timeTo.'+TO] = time
     setIt['timeFrom.'+FROM] = time
     setIt['from.'+FROM] = edge
@@ -120,3 +122,5 @@ Meteor.methods
         timeTo: ''
         timeFrom: ''
         when: ''
+        lastFrom: ''
+        hits: ''
