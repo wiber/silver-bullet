@@ -1,10 +1,10 @@
 exports.wordLanguages =
   eng:
-    HeaderTitle: 'Youiest make the connection '
-    MainCardTitle: 'Welcome to the Hashrepublic'
-    MainCardSubtitle: 'Where you make the youiest connection'
-    TextAboutfloatingLabelText: 'TAB TAB here to say something and 0-9 link from one to another.'
-    TextAboutHintText: "Send by hitting digit 9 dead on, 5 neutral, 1 oppose or 0 irrelevant."
+    HeaderTitle: 'Hashrepublic Linkstates where Youiest makes the connection '
+    MainCardTitle: 'About '
+    MainCardSubtitle: 'Connections tell you how it fits in'
+    TextAboutfloatingLabelText: 'TAB TAB here to weigh in on this link. Hit 0-9 to link from.'
+    TextAboutHintText: "Weigh in by pressing 9 for dead on, 5 neutral, 1 oppose or 0 irrelevant."
     MyCardTitle: "Step confidently out of the past. Recents + from and to this place here."
     MyCardSubtitle: "See the pattern of your footsteps"
     AboutCardTitle: "What's said about this place"

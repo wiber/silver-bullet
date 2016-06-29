@@ -50,7 +50,8 @@ Meteor.publish "myMarksTo", (URL) ->
         createdAt: -1
 Meteor.publish "Node", (URL) ->
   check URL, String
-  return Nodes.find(URL)
+  Nodes.find
+    FromLink: URL
 # first see related
 ## in lightbox? esc to leave, same as clocks
 # then see votes faces

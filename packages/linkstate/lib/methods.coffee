@@ -6,12 +6,10 @@
   return r
 
 Meteor.methods
-  #Linking: (from, to, META) ->
   Linking: (link) ->
     to = link.to
     from = link.from
     META = link.meta
-    console.log from, to, META, Meteor.user().hits, 'Linking times'
     #check from, String
     #check to, String
     unless META?
@@ -75,7 +73,11 @@ Meteor.methods
       $set: setIt
       $inc:
         'hits': 1
+    console.log from, to, META, Meteor.user().hits, Nodes.find().count(), 'Linking times'
     ##console.log Nodes.findOne(fromNodeId.insertedId)
+    if Meteor.isClient
+      Meteor.subscribe "Node", from
+      Meteor.subscribe "Node", to
 
   Here: (URL) ->
     name = 'Here'

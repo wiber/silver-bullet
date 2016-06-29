@@ -39,5 +39,7 @@ exports.selectedContainer = createContainer ((props) ->
     console.log props.to, props, newProps
   # if we are from a new place, link it to Yours-Truly
   # fill form from db object
+
+  
   props
 ), Selected
