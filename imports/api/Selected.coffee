@@ -33,11 +33,11 @@ exports.selectedContainer = createContainer ((props) ->
       newProps.to = Meteor.user().to[toPossibles[1]].meta.FromLink
       changeQueryParams 'to', newProps.to
     catch error
-      console.log error, 'does local user object exist yet?'
+      #console.log error, 'does local user object exist yet?'
   props = _.extend {}, props, newProps
-  if props.type is 'to'
-    console.log props.to, props, newProps
-  console.log Nodes.find().count(), 'subbed 2', Nodes.find().fetch()
+  #if props.type is 'to'
+  #  console.log props.to, props, newProps
+  #console.log Nodes.find().count(), 'subbed 2', Nodes.find().fetch()
   # if we are from a new place, link it to Yours-Truly
   # fill form from db object
 

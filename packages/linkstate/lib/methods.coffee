@@ -2,7 +2,7 @@
 @storageEncode = (url) ->
   #r = encodeURIComponent url
   r =  toString(url).replace /\./g , '%2E'
-  #console.log r
+  ##console.log r
   return r
 
 Meteor.methods
@@ -73,12 +73,12 @@ Meteor.methods
       $set: setIt
       $inc:
         'hits': 1
-    console.log from, to, META, Meteor.user().hits, Nodes.find().count(), 'Linking times'
+    #console.log from, to, META, Meteor.user().hits, Nodes.find().count(), 'Linking times'
 
   Here: (URL) ->
     name = 'Here'
     #Meteor.subscribe "userData"
-    #console.log name, URL, Meteor.isServer, new Date()
+    ##console.log name, URL, Meteor.isServer, new Date()
     updateUserLandedWithTime = () ->
       unless !URL
         urlSet = {}
@@ -100,12 +100,12 @@ Meteor.methods
 Meteor.methods
   resetUser: () ->
     user = Meteor.user()
-    #console.log user , 'whole'
+    ##console.log user , 'whole'
     setter = {}
     setter[new Date().getTime()] =
       in: user.in
       out: user.out
-    #console.log setter
+    ##console.log setter
     Meteor.users.update
       _id: Meteor.userId()
     ,

@@ -1,7 +1,7 @@
 #@uri = (URL) ->
 #@uri = (URL) ->
 Meteor.publish 'userData', ->
-  #console.log @userId, 'wants user obj'
+  ##console.log @userId, 'wants user obj'
   if @userId
     return Meteor.users.find
       _id: @userId
@@ -11,13 +11,13 @@ Meteor.publish 'userData', ->
         'services.resume': 0
 
 Meteor.publish 'to', (URL) ->
-  #console.log Edges.find().fetch().length, 'just len'
-  #console.log 'one to',URL,Edges.findOne({from:URL})
+  ##console.log Edges.find().fetch().length, 'just len'
+  ##console.log 'one to',URL,Edges.findOne({from:URL})
   return Edges.find
     to: linkstate.toDotless(URL)
 Meteor.publish 'from', (URL) ->
-  #console.log Edges.find().fetch().length, 'just len'
-  #console.log 'one from',URL,Edges.findOne({from:URL})
+  ##console.log Edges.find().fetch().length, 'just len'
+  ##console.log 'one from',URL,Edges.findOne({from:URL})
   return Edges.find
     from: linkstate.toDotless(URL)
 
@@ -56,13 +56,13 @@ Meteor.publish "myMarksTo", (URL) ->
 # because we want to be sure of what we are subscribed to right now
 Meteor.publish 'reactableFrom', (howMany) ->
   @autorun (computation) ->
-    console.log 'reactableFrom userId', @userId
+    #console.log 'reactableFrom userId', @userId
     user = Meteor.users.findOne @userId,
       fields:
         'out.Yours-Truly': 1
     lastFrom = linkstate.sortByKeysTime user.out['Yours-Truly']
-    console.log user, 'reactableFrom users', lastFrom[0]
-    #console.log Nodes.findOne lastFrom[0] #works
+    #console.log user, 'reactableFrom users', lastFrom[0]
+    ##console.log Nodes.findOne lastFrom[0] #works
     return Nodes.find
       _id:
         $in: lastFrom[0..howMany]
@@ -74,10 +74,10 @@ Meteor.publish 'reactableFrom', (howMany) ->
 Meteor.publish 'uri', (URL) ->
   if !@userId
     #new Meteor.Error 2, "non-user tries to access public node" # so let them
-    #console.log Nodes.find(URL), 'uri returns logged out'
+    ##console.log Nodes.find(URL), 'uri returns logged out'
     return Nodes.find(storageEncode(URL))
   else
-    #console.log Nodes.findOne(storageEncode(URL))
+    ##console.log Nodes.findOne(storageEncode(URL))
     return Nodes.find(storageEncode(URL))
     ###
     user = Meteor.users.findOne @userId

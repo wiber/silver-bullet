@@ -14,13 +14,13 @@ lastLogin = () ->
       to: 'Yours-Truly'
     , (error, result) ->
      if error
-       #console.log "error", error
+       ##console.log "error", error
        new Meteor.Error 7, "Reply Does the User object have facebook credentials?"
 
 sinceLogin = false
 if Meteor.loggingIn()
   sinceLogin = true
-  #console.log 'Meteor.loggingIn() for ', Meteor.userId()
+  ##console.log 'Meteor.loggingIn() for ', Meteor.userId()
   # link to self so
   # we can add your link to the dropdown
 Meteor.startup ->
