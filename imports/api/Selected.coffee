@@ -37,7 +37,7 @@ exports.selectedContainer = createContainer ((props) ->
   props = _.extend {}, props, newProps
   if props.type is 'to'
     console.log props.to, props, newProps
-  console.log Nodes.find().count(), 'subscribe 2', Nodes.find().fetch()
+  console.log Nodes.find().count(), 'subbed 2', Nodes.find().fetch()
   # if we are from a new place, link it to Yours-Truly
   # fill form from db object
 

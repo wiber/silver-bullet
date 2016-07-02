@@ -48,29 +48,24 @@ Meteor.publish "myMarksTo", (URL) ->
       limit: 20
       sort:
         createdAt: -1
-
-Meteor.publish 'reactableFrom', ->
+# reactively publishes last 5 nodes you landed on
+# this includes changing dropdown selection because
+# it counts as a new route call, calls linking again
+# if it's the 'from' queryparams.
+# because we want to know the last time you were 'here' ie to Yours-Truly
+# because we want to be sure of what we are subscribed to right now
+Meteor.publish 'reactableFrom', (howMany) ->
   @autorun (computation) ->
     console.log 'reactableFrom userId', @userId
     user = Meteor.users.findOne @userId,
       fields:
-        fromNow: 1
-    console.log user, 'reactableFrom users'
-
-Meteor.publish "NodeFrom", (URL) ->
-  node = Nodes.find
-    'meta.FromLink': URL
-  node
-Meteor.publish "NodeTo", (URL) ->
-  node = Nodes.find
-    'meta.FromLink': URL
-  node
-Meteor.publish "Node", (URL) ->
-  check URL, String
-  node = Nodes.find
-    'meta.FromLink': URL
-  #console.log 'Meteor.publish "Node", (URL) ->',node,Nodes.find().count()
-  node
+        'out.Yours-Truly': 1
+    lastFrom = linkstate.sortByKeysTime user.out['Yours-Truly']
+    console.log user, 'reactableFrom users', lastFrom[0]
+    #console.log Nodes.findOne lastFrom[0] #works
+    return Nodes.find
+      _id:
+        $in: lastFrom[0..howMany]
 # first see related
 ## in lightbox? esc to leave, same as clocks
 # then see votes faces
