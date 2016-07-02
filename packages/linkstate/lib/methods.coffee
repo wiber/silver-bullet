@@ -74,10 +74,11 @@ Meteor.methods
       $inc:
         'hits': 1
     console.log from, to, META, Meteor.user().hits, Nodes.find().count(), 'Linking times'
-    ##console.log Nodes.findOne(fromNodeId.insertedId)
     if Meteor.isClient
-      Meteor.subscribe "Node", from
-      Meteor.subscribe "Node", to
+      console.log 'subscribe',Nodes.find().count(), from
+      Meteor.subscribe "NodeFrom", from
+      #Meteor.subscribe "NodeTo", to
+      console.log Nodes.find().count(), 'subscribe 2'
 
   Here: (URL) ->
     name = 'Here'

@@ -27,7 +27,6 @@ Meteor.startup ->
 	sinceLogin = true
 Tracker.autorun ->
   if Meteor.user() and sinceLogin
-    #console.log 'tracker started for ', Meteor.userId(), sinceLogin
     lastLogin()
     sinceLogin = false
 

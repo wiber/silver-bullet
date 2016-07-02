@@ -48,10 +48,29 @@ Meteor.publish "myMarksTo", (URL) ->
       limit: 20
       sort:
         createdAt: -1
+
+Meteor.publish 'reactableFrom', ->
+  @autorun (computation) ->
+    console.log 'reactableFrom userId', @userId
+    user = Meteor.users.findOne @userId,
+      fields:
+        fromNow: 1
+    console.log user, 'reactableFrom users'
+
+Meteor.publish "NodeFrom", (URL) ->
+  node = Nodes.find
+    'meta.FromLink': URL
+  node
+Meteor.publish "NodeTo", (URL) ->
+  node = Nodes.find
+    'meta.FromLink': URL
+  node
 Meteor.publish "Node", (URL) ->
   check URL, String
-  Nodes.find
-    FromLink: URL
+  node = Nodes.find
+    'meta.FromLink': URL
+  #console.log 'Meteor.publish "Node", (URL) ->',node,Nodes.find().count()
+  node
 # first see related
 ## in lightbox? esc to leave, same as clocks
 # then see votes faces

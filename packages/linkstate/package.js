@@ -16,6 +16,7 @@ Package.onUse( function ( api ) {
   //api.use('ground:db@0.3.14')
   api.use('tracker')
   api.use('underscore')
+  api.use('peerlibrary:reactive-publish')
   api.addFiles(['lib/jsUrl.js'],['client','server']);
   api.addFiles( [ 'lib/collections.coffee', 'lib/methods.coffee' ] ,['client','server']);
   api.addFiles( [ 'lib/publish.coffee' ], [ 'server' ] );

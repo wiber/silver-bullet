@@ -66,6 +66,11 @@ oauth@1.1.10
 oauth2@1.1.9
 observe-sequence@1.0.11
 ordered-dict@1.0.7
+peerlibrary:assert@0.2.5
+peerlibrary:fiber-utils@0.6.0
+peerlibrary:reactive-mongo@0.1.1
+peerlibrary:reactive-publish@0.2.0
+peerlibrary:server-autorun@0.5.2
 promise@0.6.7
 random@1.0.9
 rate-limit@1.0.4

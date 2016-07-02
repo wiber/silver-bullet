@@ -1,7 +1,6 @@
 Meteor = require('meteor/meteor')
 reactKup = require('react-kup')
 require '../imports/startup/configs/serviceconfiguration.js'
-
 require('../imports/startup/routes.coffee') # one way to turn off ssr
 @window = {}
 window.innerWidth = 640

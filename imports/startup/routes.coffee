@@ -10,6 +10,7 @@ FlowRouter.route '/about',
     # this sort of performance can wait though as we need the consistency
     # if we ensure that this is done optimistically on client there should not be an issue
     #console.log queryParams.from?
+    
     if Meteor.userId()?
       console.log Meteor.user().lastFrom, queryParams.from , Meteor.user().lastFrom != queryParams.from
       if Meteor.user().lastFrom != queryParams.from
