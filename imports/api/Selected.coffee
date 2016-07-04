@@ -25,15 +25,21 @@ exports.selectedContainer = createContainer ((props) ->
         newProps.options.push
           label: linkstate.see value # same function as use
           value: dictWithCreatedAt[value] # store whole object here
-  if Meteor.userId()? and Meteor.user().to? and props.to is 'undefined'
+  if Meteor.user()?.to? and props.to is 'undefined'
     toPossibles = linkstate.sortByKeysTime(Meteor.user().to,5)
     #http://stackoverflow.com/questions/2631001/javascript-test-for-existence-of-nested-object-key
     toPossibles = linkstate.sortByKeysTime(Meteor.user().to,5)
+    console.log toPossibles
+    # otherwise it's always your last landed on one
+    if toPossibles.length >= 1
+      ifOnlyOne = 1
+    else
+      ifOnlyOne = 0
     try
-      newProps.to = Meteor.user().to[toPossibles[1]].meta.FromLink
+      newProps.to = Meteor.user().to[toPossibles[ifOnlyOne]].meta.FromLink
       changeQueryParams 'to', newProps.to
     catch error
-      #console.log error, 'does local user object exist yet?'
+      console.log error, 'does local user object exist yet?'
   props = _.extend {}, props, newProps
   #if props.type is 'to'
   #  console.log props.to, props, newProps
