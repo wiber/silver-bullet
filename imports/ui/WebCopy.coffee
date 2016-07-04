@@ -5,7 +5,7 @@ exports.wordLanguages =
     MainCardSubtitle: 'Connections tell you how it fits in'
     TextAboutfloatingLabelText: 'TAB TAB here to weigh in on this link. Hit 0-9 to link from.'
     TextAboutHintText: "Weigh in by pressing 9 for dead on, 5 neutral, 1 oppose or 0 irrelevant."
-    MyCardTitle: "Step confidently out of the past. Recents + from and to this place here."
+    MyCardTitle: "See the steps behind you and step confidently out of the past."
     MyCardSubtitle: "See the pattern of your footsteps"
     AboutCardTitle: "What's said about this place"
     AboutCardSubTitle: "Connections talk"
