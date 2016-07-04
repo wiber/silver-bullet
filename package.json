@@ -1,12 +1,12 @@
 {
   "name": "silver-bullet",
-  "version": "0.1.0"
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "meteor run"
   },
   "dependencies": {
-    "material-ui": "^0.15.0-alpha.2",
+    "material-ui": "0.15.0-beta.1",
     "meteor-node-stubs": "~0.2.0",
     "react-addons-css-transition-group": "^15.0.0",
     "react-addons-pure-render-mixin": "^15.0.0",

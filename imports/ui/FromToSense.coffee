@@ -6,7 +6,7 @@ React = require 'react'
 # ui object calling a container.. not great?
 selectedContainer = require('../api/Selected.coffee').selectedContainer
 {see} = require '../api/strings.coffee'
-TextField = require('material-ui/lib/TextField').default
+TextField = require('material-ui/TextField').default
 exports.FromToSense = React.createClass
   render: ->
     that = this
