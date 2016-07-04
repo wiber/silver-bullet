@@ -1,5 +1,6 @@
 {
   "name": "silver-bullet",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "meteor run"
@@ -9,15 +10,20 @@
     "meteor-node-stubs": "~0.2.0",
     "react-addons-css-transition-group": "^15.0.0",
     "react-addons-pure-render-mixin": "^15.0.0",
+<<<<<<< HEAD
+    "react-addons-shallow-compare": "^15.0.0",
+    "react-dom": "^15.0.0",
+=======
     "react-addons-shallow-compare": "^15.2.0",
     "react-dom": "^15.0.2",
+>>>>>>> master
     "react-kup": "^1.0.0",
     "react-mounter": "^1.2.0",
     "react-select": "^1.0.0-beta12",
     "react-tap-event-plugin": "^1.0.0"
   },
   "peerDependencies": {
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0"
+    "react": "15.0.0",
+    "react-dom": "15.0.0"
   }
 }

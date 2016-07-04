@@ -1,4 +1,5 @@
 exports.changeQueryParams = (key,value) ->
-  newQueryParams = {}
-  newQueryParams[key] = value
-  FlowRouter.setQueryParams newQueryParams
+  if typeof FlowRouter.setQueryParams is 'function'
+    newQueryParams = {}
+    newQueryParams[key] = value
+    FlowRouter.setQueryParams newQueryParams

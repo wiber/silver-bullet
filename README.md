@@ -11,10 +11,10 @@ If you haven't already:
  curl https://install.meteor.com/ | sh
 
 git clone https://github.com/wiber/silver-bullet && cd silver-bullet && meteor npm install && meteor
-- [x] means commited, [0-9] is a weight
 
 
 #### Todos
+- [ ] one-liner installs dependencies. Does this work for you?
 - [x] chrome addon scaffolds your attention
     - [x] newtab opens app in iframe with last page you were on in queryparam
 - [ ] functional db structure for create and show documents
@@ -25,7 +25,7 @@ git clone https://github.com/wiber/silver-bullet && cd silver-bullet && meteor n
 #### Aims
 - [x] Fast Prototyping
   - [x] write all code in one language.
-  - [x] tidy modules independant from meteor.
+  - [x] tidy modules decoupled from meteor.
   - [ ] one-liner to clone, run and open in vim
 - [ ] Code, UI and Styles in Coffeescript.
   - [x] material-ui
@@ -89,3 +89,18 @@ git clone https://github.com/wiber/silver-bullet && cd silver-bullet && meteor n
     - [ ] redux maintainability
     - [ ] wallaby
     - [x] silver-bullet
+
+# imports/startup/configs/serviceconfiguration.js looks like this
+
+// imports/startup/configs/serviceconfiguration.js
+// changes gitignored
+Meteor.startup(function(){
+    ServiceConfiguration.configurations.upsert( {
+      service: "facebook"
+    }, {
+      $set: {
+        appId: "xxxxxx",
+        secret: "xxxxxxx"
+      }
+    } );
+});

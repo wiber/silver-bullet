@@ -10,9 +10,11 @@ Selected = React.createClass
     to: React.propTypes.string
     type: React.propTypes.string
     options: React.propTypes.array
-  queryParamChange: (val) ->
-    if val.value
-      changeQueryParams @props.type, val.value
+  componentDidUpdate: ->
+    try
+      window.textAbout.refs.MainCardTextInput.focus()
+    catch error
+      console.error error
   render: ->
     that = this
     window[that.props.type] = this
@@ -27,10 +29,14 @@ Selected = React.createClass
           maxWidth: '50%' #150
         theme: "material"# // can be one of "default" | "bootstrap3" | "material" | ...
         transitionEnter: true
-        onValueChange: that.queryParamChange
-        defaultValue: _.find(that.props.options, (obj) ->
-          obj.value == that.props[that.props.type]
-        )
+        onValueChange: (val) ->
+          #console.log val, val.value?, val.value.meta.FromLink?
+          if val.value.meta.FromLink
+            changeQueryParams that.props.type, val.value.meta.FromLink
+        value: _.find that.props.options, (obj) ->
+          obj.value.meta.FromLink == that.props[that.props.type]
+          # TODO could store entire object here for richer list Layout
+          # obj.value.link = plain url link from props...
         ref: that.props.type
         id: that.props.type
         options: that.props.options

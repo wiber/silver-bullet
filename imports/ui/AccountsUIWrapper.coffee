@@ -10,5 +10,6 @@ exports.AccountsUIWrapper = React.createClass
     that = this
     reactKup (k) ->
       k.span
+        tabIndex: -1
         ref: 'container'
         id: 'loginContainer'
