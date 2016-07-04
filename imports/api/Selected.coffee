@@ -31,22 +31,16 @@ exports.selectedContainer = createContainer ((props) ->
     toPossibles = linkstate.sortByKeysTime(Meteor.user().to,5)
     console.log toPossibles
     # otherwise it's always your last landed on one
-    if toPossibles.length >= 1
+    if toPossibles.length > 1
       ifOnlyOne = 1
     else
       ifOnlyOne = 0
     try
+      console.log ifOnlyOne,Meteor.user().to[toPossibles[ifOnlyOne]], 'Meteor.user().to[toPossibles[ifOnlyOne]]'
       newProps.to = Meteor.user().to[toPossibles[ifOnlyOne]].meta.FromLink
       changeQueryParams 'to', newProps.to
     catch error
       console.log error, 'does local user object exist yet?'
   props = _.extend {}, props, newProps
-  #if props.type is 'to'
-  #  console.log props.to, props, newProps
-  #console.log Nodes.find().count(), 'subbed 2', Nodes.find().fetch()
-  # if we are from a new place, link it to Yours-Truly
-  # fill form from db object
-
-
   props
 ), Selected
