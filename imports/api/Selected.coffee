@@ -29,14 +29,13 @@ exports.selectedContainer = createContainer ((props) ->
     toPossibles = linkstate.sortByKeysTime(Meteor.user().to,5)
     #http://stackoverflow.com/questions/2631001/javascript-test-for-existence-of-nested-object-key
     toPossibles = linkstate.sortByKeysTime(Meteor.user().to,5)
-    console.log toPossibles
     # otherwise it's always your last landed on one
     if toPossibles.length > 1
       ifOnlyOne = 1
     else
       ifOnlyOne = 0
     try
-      console.log ifOnlyOne,Meteor.user().to[toPossibles[ifOnlyOne]], 'Meteor.user().to[toPossibles[ifOnlyOne]]'
+      #console.log ifOnlyOne,Meteor.user().to[toPossibles[ifOnlyOne]], 'Meteor.user().to[toPossibles[ifOnlyOne]]'
       newProps.to = Meteor.user().to[toPossibles[ifOnlyOne]].meta.FromLink
       changeQueryParams 'to', newProps.to
     catch error

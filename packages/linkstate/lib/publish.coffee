@@ -7,13 +7,10 @@
 
 Meteor.publish 'reactableFrom', (howMany) ->
   @autorun (computation) ->
-    #console.log 'reactableFrom userId', @userId
     user = Meteor.users.findOne @userId,
       fields:
         'out.Yours-Truly': 1
     lastFrom = linkstate.sortByKeysTime user.out['Yours-Truly']
-    #console.log user, 'reactableFrom users', lastFrom[0]
-    ##console.log Nodes.findOne lastFrom[0] #works
     return Nodes.find
       _id:
         $in: lastFrom[0..howMany]
