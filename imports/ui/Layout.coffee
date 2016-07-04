@@ -27,7 +27,7 @@ exports.Layout = React.createClass
             className: 'onlyOne'
             style: _.extend {}, style.base
             ->
-              k.div 'Hashrepublic. Youiest make the connection.  ',
+              k.div that.props.word.HeaderTitle,
                 ->
                   k.build AccountsUIWrapper
               k.div
@@ -38,6 +38,7 @@ exports.Layout = React.createClass
                     to: that.props.to
                     from: that.props.from
                     word: that.props.word
+                    content: that.props.content
                   k.build MyCard,
                     expanded: that.props.expandMyCard
                     to: that.props.to

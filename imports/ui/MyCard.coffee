@@ -26,6 +26,7 @@ exports.MyCard = React.createClass
         ->
           k.build CardHeader,
             title: that.props.word.MyCardTitle
+            subtitle: that.props.word.MyCardSubtitle
             showExpandableButton: true
             onClick: that.handleToggle
           k.build CardText,
@@ -35,10 +36,3 @@ exports.MyCard = React.createClass
             ->
               k.span that.props.from, ' '
               k.span that.props.to
-          k.build CardActions,
-            -> # return innerhtml, tags on here before
-              k.build FlatButton,
-                style:
-                  height: 0
-                label: 'Tab here to go back to "From"'
-                onFocus: () ->

@@ -36,6 +36,7 @@ exports.MainCard = React.createClass
               from: that.props.from
               to: that.props.to
               word: that.props.word
+              content: that.props.content
           k.build CardText,
             expandable: true
             ->

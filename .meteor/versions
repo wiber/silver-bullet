@@ -4,7 +4,6 @@ accounts-oauth@1.1.11
 accounts-ui@1.1.8
 accounts-ui-unstyled@1.1.11
 allow-deny@1.0.3
-autopublish@1.0.6
 autoupdate@1.2.7
 babel-compiler@6.6.1
 babel-runtime@0.1.7
@@ -67,6 +66,11 @@ oauth@1.1.9
 oauth2@1.1.8
 observe-sequence@1.0.10
 ordered-dict@1.0.6
+peerlibrary:assert@0.2.5
+peerlibrary:fiber-utils@0.6.0
+peerlibrary:reactive-mongo@0.1.1
+peerlibrary:reactive-publish@0.2.0
+peerlibrary:server-autorun@0.5.2
 promise@0.6.6
 random@1.0.8
 rate-limit@1.0.3
@@ -91,3 +95,4 @@ underscore@1.0.7
 url@1.0.8
 webapp@1.2.7
 webapp-hashing@1.0.8
+youiest:linkstate@0.0.2
