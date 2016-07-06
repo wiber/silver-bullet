@@ -15,7 +15,7 @@ exports.selectedContainer = createContainer ((props) ->
   newProps.options = []
   user = Meteor.user()
   # much isomorphism, use db to keep string format consistency, on client, because it's just a function call
-  if Meteor.userId()? and Meteor.user().out? # supply dumb component with options
+  if Meteor.user()?.out? # supply dumb component with options
     dictWithCreatedAt = _.extend {}
     , Meteor.user().out['Jump-List'] # from db
     , Meteor.user().out['Yours-Truly']
