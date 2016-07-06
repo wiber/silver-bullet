@@ -7,10 +7,35 @@ It's also an awesome boilerplate for meteor.
 ### Installation:
 
 If you haven't already:
-
+```
  curl https://install.meteor.com/ | sh
 
-git clone https://github.com/wiber/silver-bullet && cd silver-bullet && meteor npm install && meteor
+git clone https://github.com/wiber/silver-bullet
+
+touch imports/startup/configs/serviceconfiguration.js
+```
+
+##### imports/startup/configs/serviceconfiguration.js looks like this
+``` javascript
+// imports/startup/configs/serviceconfiguration.js
+// changes gitignored
+Meteor.startup(function(){
+    ServiceConfiguration.configurations.upsert( {
+      service: "facebook"
+    }, {
+      $set: {
+        appId: "xxxxxx",
+        secret: "xxxxxxx"
+      }
+    } );
+});
+```
+
+Next install missing npm modules like react, react-dom, react-selectize. FIXME.
+
+
+Then load the chrome extension.
+
 
 
 #### Todos
@@ -89,18 +114,3 @@ git clone https://github.com/wiber/silver-bullet && cd silver-bullet && meteor n
     - [ ] redux maintainability
     - [ ] wallaby
     - [x] silver-bullet
-
-# imports/startup/configs/serviceconfiguration.js looks like this
-
-// imports/startup/configs/serviceconfiguration.js
-// changes gitignored
-Meteor.startup(function(){
-    ServiceConfiguration.configurations.upsert( {
-      service: "facebook"
-    }, {
-      $set: {
-        appId: "xxxxxx",
-        secret: "xxxxxxx"
-      }
-    } );
-});

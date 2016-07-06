@@ -6,7 +6,7 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "material-ui": "^0.15.0-alpha.2",
+    "material-ui": "0.15.0-alpha.2",
     "meteor-node-stubs": "~0.2.0",
     "react-addons-css-transition-group": "^15.0.0",
     "react-addons-pure-render-mixin": "^15.0.0",
