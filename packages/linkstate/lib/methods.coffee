@@ -73,7 +73,7 @@ Meteor.methods
       $set: setIt
       $inc:
         'hits': 1
-    #console.log from, to, META, Meteor.user().hits, Nodes.find().count(), 'Linking times'
+    console.log from, to, META, Meteor.user().hits, Nodes.find().count(), 'Linking times'
 
   Here: (URL) ->
     name = 'Here'
