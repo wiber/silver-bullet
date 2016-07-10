@@ -35,6 +35,7 @@ exports.Layout = React.createClass
                 ->
                   k.build MainCard, # need comma here because the second arg is prop
                     expanded: that.props.expandMainCard
+                    # redundant container? already have user obj here
                     to: that.props.to
                     from: that.props.from
                     word: that.props.word
@@ -44,6 +45,7 @@ exports.Layout = React.createClass
                     to: that.props.to
                     from: that.props.from
                     word: that.props.word
+                    user: that.props.user
                   k.build AboutCard,
                     expanded: that.props.expandAboutCard
                     to: that.props.to
