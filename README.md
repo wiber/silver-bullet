@@ -2,7 +2,7 @@
 
 I'm told the silver bullet is a coffee variant engineered with ~4 shots of expresso, butter and coconut oil. It also goes great with cacao and kills wearwolves. I'll understand if it's not your thing.
 
-It's also an awesome boilerplate for meteor.
+It's might also be an awesome boilerplate for meteor on coffee.
 
 ### Installation:
 
@@ -33,19 +33,23 @@ Meteor.startup(function(){
 
 Next install missing npm modules like react, react-dom, react-selectize. FIXME.
 
-
-Then load the chrome extension.
-
-
+Then load the extension tests/chromeextension into chrome.
 
 #### Todos
+
 - [ ] one-liner installs dependencies. Does this work for you?
+- [ ] avoid premature optimization
+- [ ] 20 most recent tabs by time
+- [ ] 20 most recent connections by time
+- [ ] weights are facebook faces in movement
+- [ ]
 - [x] chrome addon scaffolds your attention
     - [x] newtab opens app in iframe with last page you were on in queryparam
 - [ ] functional db structure for create and show documents
 - [ ] see all my bookmarks visualized
-  - [ ] as steps out of the past
+  - [ ] as steps out of the past.
   - [ ] as a map
+- [ ] See others weigh in on this in real time.
 
 #### Aims
 - [x] Fast Prototyping

@@ -18,6 +18,7 @@ exports.Layout = React.createClass
   getDefaultProps: ->
     expandMainCard: true
   render: ->
+    console.log @props.user
     that = this
     reactKup (k) ->
       k.build MuiThemeProvider,
@@ -43,6 +44,7 @@ exports.Layout = React.createClass
                     expanded: that.props.expandMyCard
                     to: that.props.to
                     from: that.props.from
+                    user: that.props.user
                     word: that.props.word
                   k.build AboutCard,
                     expanded: that.props.expandAboutCard

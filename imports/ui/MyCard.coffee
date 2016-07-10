@@ -9,8 +9,8 @@ CardMedia = require('material-ui/lib/card/card-media').default
 CardTitle = require('material-ui/lib/card/card-title').default
 FlatButton = require('material-ui/lib/flat-button' ).default
 CardText =  require('material-ui/lib/card/card-text').default
-
-
+{FromToSense} = require('../ui/FromToSense.coffee')
+{myMarks} = require('../ui/myMarks.coffee')
 
 exports.MyCard = React.createClass
   getDefaultProps: ->
@@ -33,6 +33,10 @@ exports.MyCard = React.createClass
             style:
               height: 'auto'
             expandable: true
-            ->
-              k.span that.props.from, ' '
-              k.span that.props.to
+            # just viz recent creations or 'bookmarks' in the second box
+            #
+            -> k.build FromToSense,
+              from: that.props.from
+              to: that.props.to
+              word: that.props.word
+              content: that.props.content
