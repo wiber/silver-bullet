@@ -59,13 +59,15 @@ exports.MyCard = React.createClass
                     out = that.props.user.fromCreated # is collection of edges..
                     for mark in linkstate.sortByKeysTime out
                       target = out[mark]
+                      m = target.meta
                       #console.log mark, target
                       n = 0
-                      for i of target
+                      ###for i of target
                         n++
-                        console.log i, ' times ' ,n, '   mark   ', mark, '  target   ', target
+                        console.log i, ' times ' ,n, '   mark   ', mark, '  target   ', target###
                       k.build GridTile,
                         key: mark
-                        mark
+                        title: m.FromLink
+                        subtitle: k.span m.ToLink
               k.span that.props.from, ' '
               k.span that.props.to
