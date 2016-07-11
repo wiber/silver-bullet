@@ -51,5 +51,4 @@ exports.Layout = React.createClass
                     to: that.props.to
                     from: that.props.from
                     word: that.props.word
-
               k.div 'footer'

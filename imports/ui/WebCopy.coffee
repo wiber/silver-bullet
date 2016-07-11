@@ -6,6 +6,7 @@ exports.wordLanguages =
     TextAboutfloatingLabelText: 'TAB TAB here to weigh in on this link. Hit 0-9 to link them.'
     TextAboutHintText: "Weigh in by pressing 9 for dead on, 5 neutral, 1 oppose or 0 irrelevant."
     MyCardTitle: "See the steps behind you and step confidently out of the past."
+    MyCardStepsSubheader: "You have connected from here recently"
     MyCardSubtitle: "Just your recent launch pages. See the pattern of your footsteps here."
     AboutCardTitle: "What's the word on this?"
     AboutCardSubTitle: "Connections talk. Their last word stands here. Yours among them."
