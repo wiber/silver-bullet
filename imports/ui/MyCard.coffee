@@ -18,22 +18,7 @@ exports.MyCard = React.createClass
     expanded: false
   handleToggle: (e) ->
     changeQueryParams 'expandMyCard', !@props.expanded
-  mapIt: () ->
-    console.log @props.user
-    if @props?.user?.out?
-      mySteps = []
-      out = @props.user.out
-      arrMarks = linkstate.sortByKeysTime out
-      for mark in arrMarks
-        mySteps.push k.build GridTile,
-          key: out[mark].FromLink
-      console.log mySteps.length
-    else
-      toReturn = 'nothing yet'
-    toReturn
-
   render: ->
-    console.log @props.user
     that = this
     reactKup (k) ->
       k.build Card,
@@ -57,17 +42,15 @@ exports.MyCard = React.createClass
                   if that.props?.user?.out?
                     mySteps = []
                     out = that.props.user.fromCreated # is collection of edges..
+                    n = 0
                     for mark in linkstate.sortByKeysTime out
                       target = out[mark]
                       m = target.meta
-                      #console.log mark, target
-                      n = 0
-                      ###for i of target
-                        n++
-                        console.log i, ' times ' ,n, '   mark   ', mark, '  target   ', target###
-                      k.build GridTile,
-                        key: mark
-                        title: m.FromLink
-                        subtitle: k.span m.ToLink
+                      n++
+                      if n <= 10
+                        k.build GridTile,
+                          key: mark
+                          title: m.FromLink
+                          subtitle: 'to '+ m.ToLink
               k.span that.props.from, ' '
               k.span that.props.to
