@@ -38,16 +38,15 @@ exports.MyCard = React.createClass
               k.build GridList,
                 #cellHeight: 200
                 cols: 1
-                Subheader: that.props.word.MyCardStepsSubheader
                 ->
                   if that.props?.user?.out?
-                    out = that.props.user.fromCreated # is collection of edges..
+                    out = that.props.user[that.props.type] # is collection of edges..
                     n = 0
-                    for mark in linkstate.sortByKeysTime out, 11
+                    for mark in linkstate.sortByKeysTime(out, that.props.howMany)
                       target = out[mark]
                       m = target.meta
                       n++
-                      if n <= 10
+                      if n <= that.props.howMany
                         k.build GridTile,
                           key: mark
                           title: m.FromLink

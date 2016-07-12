@@ -46,6 +46,8 @@ exports.Layout = React.createClass
                     from: that.props.from
                     word: that.props.word
                     user: that.props.user
+                    howMany: 10
+                    type: 'fromCreated'
                   k.build AboutCard,
                     expanded: that.props.expandAboutCard
                     to: that.props.to
