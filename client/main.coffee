@@ -12,7 +12,7 @@ lastLogin = () ->
     console.log 'Meteor.user().services.facebook.link',Meteor.user().services.facebook.link
     Meteor.call "Linking",
       from: Meteor.user().services.facebook.link
-      to: 'Yours-Truly'
+      to: 'Bookmarks'
     , (error, result) ->
      if error
        ##console.log "error", error

@@ -18,7 +18,7 @@ exports.selectedContainer = createContainer ((props) ->
   if Meteor.user()?.out? # supply dumb component with options
     dictWithCreatedAt = _.extend {}
     , Meteor.user().out['Jump-List'] # from db
-    , Meteor.user().out['Yours-Truly']
+    , Meteor.user().out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
     for index,value of deChaos
       if typeof value is 'string' and value != 'undefined'
