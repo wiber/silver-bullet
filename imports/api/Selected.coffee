@@ -11,9 +11,12 @@ Selected = require('../ui/Selected.coffee').Selected
 
 
 exports.selectedContainer = createContainer ((props) ->
+  user = props.user
+  directedTo = typeof props.to is 'string' and props.to.length > 5
+  console.log user.lastTo, directedTo,'console.log user.lastTo, directedTo'
   newProps = {}
   newProps.options = []
-  user = props.user
+
   # much isomorphism, use db to keep string format consistency, on client, because it's just a function call
   if props.user?.out? # supply dumb component with options
     dictWithCreatedAt = _.extend {}
