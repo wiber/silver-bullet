@@ -122,3 +122,5 @@ Meteor.methods
         when: ''
         lastFrom: ''
         hits: ''
+        fromCreated: ''
+        toCreated: ''
