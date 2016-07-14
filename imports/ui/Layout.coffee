@@ -40,6 +40,7 @@ exports.Layout = React.createClass
                     from: that.props.from
                     word: that.props.word
                     content: that.props.content
+                    user: that.props.user
                   k.build MyCard,
                     expanded: that.props.expandMyCard
                     to: that.props.to
