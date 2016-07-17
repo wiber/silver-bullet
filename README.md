@@ -1,8 +1,12 @@
-# Silver-Bullet -> the art of espresso
+# Hashrepublic of linkstates
 
-I'm told the silver bullet is a coffee variant engineered with ~4 shots of expresso, butter and coconut oil. It also goes great with cacao and kills wearwolves. I'll understand if it's not your thing.
+To understand this tool just imagine bookmarks as links between two pages instead of as something you stash in a folder and never look at again. This way when you newtab away from a page we can show you relevant entries and even your recent history. These links are associations with different weights. Think linking a recipy to your friends facebook page as a warm recommendation. Should they perhaps be notified?
 
-It's also an awesome boilerplate for meteor.
+At it's heart Hashrepublic seeks to make you smarter by offering you context. See the path behind you to trust your next step. Just like Morpheus said. Bookmarks related to your google document are right there when you newtab. Magic. You'll love context.
+
+All links are public webpages in the beginning. Privacy is coming as a paid feature. Ads will be done tastefully or not at all. The newtab view has great potential for ad space in an app like this one because of the rich context. Ads can target your last page, your last pages, even predict your next step on the journey. Done right they won't have to fight for your attention like traditional ads. They will feel natural like a possible next step when you're already ready to take a step.
+
+
 
 ### Installation:
 
