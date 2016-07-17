@@ -51,5 +51,6 @@ exports.MyCard = React.createClass
                           key: mark
                           title: m.FromLink
                           subtitle: '=> '+ m.ToLink
-                          k.img
-                            src:  "https://api.thumbalizr.com/?url="+m.FromLink+"&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa"
+                          ->
+                            k.img
+                              src:  "https://api.thumbalizr.com/?url="+m.FromLink+"&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa"
