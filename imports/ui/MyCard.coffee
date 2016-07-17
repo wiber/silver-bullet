@@ -53,4 +53,5 @@ exports.MyCard = React.createClass
                           subtitle: '=> '+ m.ToLink
                           ->
                             k.img
+                              style: _.extend {}, style.webShot
                               src:  "https://api.thumbalizr.com/?url="+m.FromLink+"&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa"
