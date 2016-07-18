@@ -10,10 +10,11 @@ Meteor.publish 'reactableFrom', (howMany) ->
     user = Meteor.users.findOne @userId,
       fields:
         'out.Bookmarks': 1
-    lastFrom = linkstate.sortByKeysTime user.out['Bookmarks']
-    return Nodes.find
-      _id:
-        $in: lastFrom[0..howMany]
+    if user?.to?
+      fromLast = linkstate.sortByKeysTime user.to['Bookmarks']
+      return Nodes.find
+        _id:
+          $in: fromLast[0..howMany]
 
 Meteor.publish 'userData', ->
   ##console.log @userId, 'wants user obj'

@@ -13,7 +13,7 @@ Selected = require('../ui/Selected.coffee').Selected
 exports.selectedContainer = createContainer ((props) ->
   user = props.user
   directedTo = typeof props.to is 'string' and props.to.length > 5
-  console.log user.lastTo, directedTo,'console.log user.lastTo, directedTo'
+  console.log user.toLast, directedTo,'console.log user.toLast, directedTo'
   newProps = {}
   newProps.options = []
 
@@ -21,7 +21,7 @@ exports.selectedContainer = createContainer ((props) ->
   if props.user?.out? # supply dumb component with options
     dictWithCreatedAt = _.extend {}
     , props.user.out['Jump-List'] # from db
-    , props.user.out['Yours-Truly']
+    , props.user.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
     for index,value of deChaos
       if typeof value is 'string' and value != 'undefined'
