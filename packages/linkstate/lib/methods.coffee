@@ -59,10 +59,10 @@ Meteor.methods
     setIt.edited = time
     setIt.fromLast = from
     setIt.toLast = to
-    setIt['timeTo.'+TO] = time
-    setIt['timeFrom.'+FROM] = time
-    setIt['fromCreated.'+FROM] = edge
-    setIt['toCreated.'+TO] = edge
+    #setIt['timeTo.'+TO] = time
+    #setIt['timeFrom.'+FROM] = time
+    #setIt['fromCreated.'+FROM] = edge
+    #setIt['toCreated.'+TO] = edge
     setIt['in.'+FROM+'.'+TO] = edge
     setIt['out.'+TO+'.'+FROM] = edge
     # this might be better than Jump-List
@@ -122,3 +122,9 @@ Meteor.methods
         when: ''
         fromLast: ''
         hits: ''
+        lastTo: ''
+        lastFrom: ''
+        fromLast: ''
+        toLast: ''
+        toCreated: ''
+        fromCreated: ''
