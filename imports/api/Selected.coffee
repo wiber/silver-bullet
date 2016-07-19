@@ -12,10 +12,18 @@ Selected = require('../ui/Selected.coffee').Selected
 
 exports.selectedContainer = createContainer ((props) ->
   user = props.user
+  # paint boxes from user objects
+  # find / set value from either qp or user object.
+  # sync user.toLast with qp
+  # change qp, set toLast with method, redraw box optimist
+
   directedTo = typeof props.to is 'string' and props.to.length > 5
-  console.log user.toLast, directedTo,'console.log user.toLast, directedTo'
+  console.log props.type, user[props.type+'Last'], directedTo,'console.log user.toLast, directedTo',props
   newProps = {}
   newProps.options = []
+  # make dict [type]
+  # make options
+  # make value
 
   # much isomorphism, use db to keep string format consistency, on client, because it's just a function call
   if props.user?.out? # supply dumb component with options
