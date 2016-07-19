@@ -31,10 +31,9 @@ Selected = React.createClass
         transitionEnter: true
         onValueChange: (val) ->
           #console.log val, val.value?, val.value.meta.FromLink?
-          if val.value.meta.FromLink
+          if val?.value?.meta?.FromLink
             changeQueryParams that.props.type, val.value.meta.FromLink
-        value: _.find that.props.options, (obj) ->
-          obj.value.meta.FromLink == that.props[that.props.type]
+        value: that.props.value
           # TODO could store entire object here for richer list Layout
           # obj.value.link = plain url link from props...
         ref: that.props.type
