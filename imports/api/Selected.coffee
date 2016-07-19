@@ -26,7 +26,9 @@ exports.selectedContainer = createContainer ((props) ->
   # make value
   newProps[props.type] = user[props.type+'Last']
   # much isomorphism, use db to keep string format consistency, on client, because it's just a function call
-  if props.user?.out? # supply dumb component with options
+  # supply dumb component with options
+  # because db has loaded user.out
+  if props.user?.out?
     dictWithCreatedAt = _.extend {}
     , props.user.out['Jump-List'] # from db
     , props.user.out['Bookmarks']
@@ -40,7 +42,10 @@ exports.selectedContainer = createContainer ((props) ->
           newProps.value = selectItem
         newProps.options.push selectItem
     unless newProps.value?
-      newProps.value = dictWithCreatedAt[deChaos[0]]
+      console.log user[props.type+'Last'],user.toLast
+      newProps.value =
+        label: user[props.type+'Last']
+        value: dictWithCreatedAt[user[props.type+'Last']]
   if props[props.type] is not newProps[props.type]
     changeQueryParams props.type, newProps[props.type]
   props = _.extend {}, props, newProps
