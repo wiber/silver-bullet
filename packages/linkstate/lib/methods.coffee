@@ -4,14 +4,14 @@
   r =  toString(url).replace /\./g , '%2E'
   ##console.log r
   return r
-
+@categoryTypes = [
+  'Bookmarks'
+]
 Meteor.methods
   Linking: (link) ->
     to = link.to
     from = link.from
     META = link.meta
-    #check from, String
-    #check to, String
     unless META?
       META = {}
     unless typeof Meteor.userId() is 'string'
@@ -57,8 +57,12 @@ Meteor.methods
     #setIt['when.'+TO] = time
     #setIt['when.'+FROM] = time
     setIt.edited = time
-    setIt.fromLast = from
-    setIt.toLast = to
+    if from not in categoryTypes
+      console.log 'not from category', from, categoryTypes
+      setIt.fromLast = from
+    if to not in categoryTypes
+      setIt.toLast = to
+      console.log 'not from category', to, categoryTypes
     #setIt['timeTo.'+TO] = time
     #setIt['timeFrom.'+FROM] = time
     #setIt['fromCreated.'+FROM] = edge
