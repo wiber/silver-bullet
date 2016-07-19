@@ -33,28 +33,16 @@ exports.selectedContainer = createContainer ((props) ->
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
     for index,value of deChaos
       if typeof value is 'string' and value != 'undefined'
-
         selectItem =
           label: linkstate.see value # same function as use
           value: dictWithCreatedAt[value] # store whole object here
         if props[props.type] is dictWithCreatedAt[value].meta.FromLink
           newProps.value = selectItem
         newProps.options.push selectItem
-  if props.user?.to? and props.to is 'undefined'
-    toPossibles = linkstate.sortByKeysTime(props.user.to,5)
-    #http://stackoverflow.com/questions/2631001/javascript-test-for-existence-of-nested-object-key
-    toPossibles = linkstate.sortByKeysTime(props.user.to,5)
-    # otherwise it's always your last landed on one
-    if toPossibles.length > 1
-      ifOnlyOne = 1
-    else
-      ifOnlyOne = 0
-    try
-      #console.log ifOnlyOne,props.user.to[toPossibles[ifOnlyOne]], 'props.user.to[toPossibles[ifOnlyOne]]'
-      newProps.to = props.user.to[toPossibles[ifOnlyOne]].meta.FromLink
-      changeQueryParams 'to', newProps.to
-    catch error
-      console.log error, 'does local user object exist yet?'
+    unless newProps.value?
+      newProps.value = dictWithCreatedAt[deChaos[0]]
+  if props[props.type] is not newProps[props.type]
+    changeQueryParams props.type, newProps[props.type]
   props = _.extend {}, props, newProps
   console.log props.type, user[props.type+'Last'], directedTo,'console.log user.toLast, directedTo',props
   props
