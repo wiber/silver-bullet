@@ -39,8 +39,8 @@ exports.MyCard = React.createClass
                 #cellHeight: 200
                 cols: 1
                 ->
-                  if that.props?.user?.out?[that.props.type]?
-                    out = that.props.user.out[that.props.type] # is collection of edges..
+                  if that.props?.user?.out?.Bookmarks?
+                    out = that.props.user.out.Bookmarks # is collection of edges..
                     console.log out
                     n = 0
                     for mark in linkstate.sortByKeysTime(out, that.props.howMany)
