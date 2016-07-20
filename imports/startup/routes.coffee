@@ -10,7 +10,7 @@ FlowRouter.route '/about',
     # this sort of performance can wait though as we need the consistency
     # if we ensure that this is done optimistically on client there should not be an issue
     samePlace = Meteor.user()?.fromLast != queryParams.from
-    if Meteor.user()?.fromLast and samePlace and Meteor.isClient
+    if Meteor.user() and samePlace and Meteor.isClient
       Meteor.call "Linking",
         from: decodeURIComponent queryParams.from
         to: 'Bookmarks'

@@ -41,11 +41,14 @@ exports.selectedContainer = createContainer ((props) ->
         if props[props.type] is dictWithCreatedAt[value].meta.FromLink
           newProps.value = selectItem
         newProps.options.push selectItem
+    # if we still don't have a defaultValue for select
+    # make it the last used type
     unless newProps.value?
       console.log user[props.type+'Last'],user.toLast
       newProps.value =
         label: user[props.type+'Last']
         value: dictWithCreatedAt[user[props.type+'Last']]
+  # update queryparams unless we're fromt he same place
   if props[props.type] is not newProps[props.type]
     changeQueryParams props.type, newProps[props.type]
   props = _.extend {}, props, newProps
