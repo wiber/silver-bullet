@@ -1,6 +1,5 @@
 websiteURL = "http://localhost:3000/"
 chrome.storage.sync.get("last", function(lastPlace) {
-
   lastPlace =  lastPlace.last
   console.log(lastPlace,lastPlace.url,lastPlace.title);
     encoded = encodeURIComponent(lastPlace.url)

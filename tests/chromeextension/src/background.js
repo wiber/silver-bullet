@@ -5,7 +5,6 @@ oneSteps = function ( url ,title) {
   } else {
     //console.log( url );
     chrome.storage.sync.set( {
-      'lastStep': url,
       'last': {
           'url': url,
           'title': title
