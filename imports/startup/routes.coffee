@@ -22,10 +22,12 @@ FlowRouter.route '/about',
     content = decodeURIComponent queryParams.content
     if content is 'undefined'
       content = ''
+    console.log queryParams
     mount containerLayout,
       from: decodeURIComponent queryParams.from
       to: decodeURIComponent queryParams.to
       content: content
+      fromTitle: decodeURIComponent queryParams.lastTitle
       word: wordLanguages[language] # don't prematurely optimize!
       expandMainCard: queryParams.expandMainCard == 'true'
       expandAboutCard: queryParams.expandAboutCard == 'true'
