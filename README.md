@@ -1,8 +1,8 @@
 # Hashrepublic of linkstates
 
-To understand this tool just imagine bookmarks as links between two pages instead of as something you stash in a folder and never look at again. This way when you newtab away from a page we can show you relevant entries and even your recent history. These links are associations with different weights. Think linking a recipy to your friends facebook page as a warm recommendation. Should they perhaps be notified?
+To understand this tool just imagine bookmarks as links between two pages instead of as something you stash in a folder and never look at again. When you newtab away from a page we can show you relevant information such as related bookmarks, recent pages and critically what other users associate with the page. These Bookmarks are links or associations and have weights to indicate their relevance. Imagine linking articles to your friends facebook page.
 
-At it's heart Hashrepublic seeks to make you smarter by offering you context. See the path behind you to trust your next step. Just like Morpheus said. Bookmarks related to your google document are right there when you newtab. Magic. You'll love context.
+At it's heart Hashrepublic seeks to make your life easier, less scattered and more in the zone by giving you context. Trust the journey by trusting your past. This is easier when you see clearly the path behind you. It's the path behind you just like Morpheus said. Bookmarks related to your google document are right there when you newtab. Magic. You'll love context because it gets you the right things at the right time.
 
 All links are public webpages in the beginning. Privacy is coming as a paid feature. Ads will be done tastefully or not at all. The newtab view has great potential for ad space in an app like this one because of the rich context. Ads can target your last page, your last pages, even predict your next step on the journey. Done right they won't have to fight for your attention like traditional ads. They will feel natural like a possible next step when you're already ready to take a step.
 
@@ -46,8 +46,10 @@ Then load the chrome extension.
 - [ ] one-liner installs dependencies. Does this work for you?
 - [x] chrome addon scaffolds your attention
     - [x] newtab opens app in iframe with last page you were on in queryparam
-- [ ] functional db structure for create and show documents
-- [ ] see all my bookmarks visualized
+    - [ ] faster and thus more reliable remembering of last tab.
+- [ ] see all your bookmarks visualized
+  - [ ] as links from the last tab you were on before newtab
+  - [ ] as last tabs your were on before you made a newtab
   - [ ] as steps out of the past
   - [ ] as a map
 

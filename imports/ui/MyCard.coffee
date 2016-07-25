@@ -12,13 +12,14 @@ CardText =  require('material-ui/lib/card/card-text').default
 {GridList, GridTile} = require 'material-ui/lib/grid-list'
 {Subheader} = require 'material-ui/lib/Subheader'
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
-# TODO
+
 exports.MyCard = React.createClass
   getDefaultProps: ->
     expanded: false
   handleToggle: (e) ->
     changeQueryParams 'expandMyCard', !@props.expanded
   render: ->
+
     that = this
     reactKup (k) ->
       k.build Card,
@@ -55,10 +56,20 @@ exports.MyCard = React.createClass
                             k.img
                               style: _.extend {}, style.webShot
                               src:  "https://api.thumbalizr.com/?url="+m.FromLink+"&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa"
-
+###
+# TODO
 
 {@div, @span, @input, @img, @button} = React.DOM
 #@Transition = React.createFactory(React.addons.CSSTransitionGroup)
 @cond = (a,b,c) -> if a then b() else c?()
 @createView = (spec) ->
   React.createFactory(React.createClass(spec))
+div
+  key: 'view'
+  className: 'event view'
+  span {},'here now'
+  img
+    className: 'cover'
+  div
+    className: 'title row pointer'
+###
