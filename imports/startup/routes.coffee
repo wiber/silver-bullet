@@ -24,6 +24,7 @@ FlowRouter.route '/about',
       content = ''
     console.log queryParams
     mount containerLayout,
+      queryParams: queryParams # to optiomize redraw on changed params
       from: decodeURIComponent queryParams.from
       to: decodeURIComponent queryParams.to
       content: content

@@ -1,3 +1,5 @@
+# MyCard.coffee shows my connections to Bookmarks.
+# Bookmarks are here steps, auto generated when you newtab from a page.
 reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
@@ -51,7 +53,7 @@ exports.MyCard = React.createClass
                         k.build GridTile,
                           key: mark
                           title: m.FromLink
-                          subtitle: '=> '+ m.ToLink
+                          subtitle: ' => '+ m.ToLink
                           ->
                             k.img
                               style: _.extend {}, style.webShot
