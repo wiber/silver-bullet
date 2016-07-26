@@ -1,6 +1,7 @@
 reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
+{LinkList} = require('../ui/LinkList.coffee')
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 {FromToSense} = require('../ui/FromToSense.coffee')
 Card = require('material-ui/lib/card/card').default
@@ -32,15 +33,19 @@ exports.MainCard = React.createClass
           k.build CardText,
             style:
               height: 'auto'
-            -> k.build FromToSense,
-              from: that.props.from
-              to: that.props.to
-              word: that.props.word
-              content: that.props.content
-              user: that.props.user
+            ->
+              k.build FromToSense,
+                from: that.props.from
+                to: that.props.to
+                word: that.props.word
+                content: that.props.content
+                user: that.props.user
           k.build CardText,
             expandable: true
             ->
+              k.build LinkList,
+                type: 'weight'
+                user: that.props.user
               k.h1
                 style: style.h1
                 'this card is about '

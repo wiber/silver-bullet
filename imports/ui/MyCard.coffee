@@ -21,7 +21,6 @@ exports.MyCard = React.createClass
   handleToggle: (e) ->
     changeQueryParams 'expandMyCard', !@props.expanded
   render: ->
-
     that = this
     reactKup (k) ->
       k.build Card,
