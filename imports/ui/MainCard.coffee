@@ -43,9 +43,6 @@ exports.MainCard = React.createClass
           k.build CardText,
             expandable: true
             ->
-              k.build LinkList,
-                type: 'weight'
-                user: that.props.user
               k.h1
                 style: style.h1
                 'this card is about '

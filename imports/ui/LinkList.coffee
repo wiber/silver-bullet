@@ -18,24 +18,29 @@ exports.LinkList = React.createClass
   render: ->
     that = this
     reactKup (k) ->
-      k.build GridList,
-        #cellHeight: 200
-        cols: 1
+      k.build CardText,
+        style:
+          height: 'auto'
+        expandable: true
         ->
-          if that.props?.user?.out?.Bookmarks?
-            console.log that.props
-            out = that.props.user.out.Bookmarks # is collection of edges..
-            n = 0
-            for mark in linkstate.sortByKeysTime(out, that.props.howMany)
-              target = out[mark]
-              m = target.meta
-              n++
-              if n <= that.props.howMany
-                k.build GridTile,
-                  key: mark
-                  title: m.FromLink
-                  subtitle: ' => '+ m.ToLink
-                  ->
-                    k.img
-                      style: _.extend {}, style.webShot
-                      src:  "https://api.thumbalizr.com/?url="+m.FromLink+"&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa"
+          k.build GridList,
+            #cellHeight: 200
+            cols: 1
+            ->
+              if that.props?.user?.out?.Bookmarks?
+                out = that.props.user.out.Bookmarks # is collection of edges..
+                n = 0
+                for mark in linkstate.sortByKeysTime(out, that.props.howMany)
+                  console.log out, mark
+                  target = out[mark]
+                  m = target.meta
+                  n++
+                  if n < that.props.howMany
+                    k.build GridTile,
+                      key: mark
+                      title: m.FromLink
+                      subtitle: ' => '+ m.ToLink
+                      ->
+                        k.img
+                          style: _.extend {}, style.webShot
+                          src:  "https://api.thumbalizr.com/?url="+m.FromLink+"&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa"

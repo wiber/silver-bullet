@@ -6,7 +6,20 @@ At it's heart Hashrepublic seeks to make your life easier, less scattered and mo
 
 All links are public webpages in the beginning. Privacy is coming as a paid feature. Ads will be done tastefully or not at all. The newtab view has great potential for ad space in an app like this one because of the rich context. Ads can target your last page, your last pages, even predict your next step on the journey. Done right they won't have to fight for your attention like traditional ads. They will feel natural like a possible next step when you're already ready to take a step.
 
+# Why you could care
+If this tool is useful for one person because of how it allows one to keep things relevant it's infinitely more useful when working together. When used socially this becomes a whole new thing entirely. Associations tell you about what others think of this place and where it fits in.
 
+# A scenario for you
+Being the learned web researcher that you are you come across some extrordinary claims that just might be the thing to help make a project great. Is it too good to be true? Perhaps. With a simple ctrl T in your browser you jump through time and space to this page. A page about the page you were on. A page just created. A page yet to be. From this place you see that you're not the first person to have thoughts about this place. A previous traveller has connected this place with a scientific paper on the subject. The really interesting thing is how the traveller weighed in on the association. The traveller states in his message that the paper strongly, with weight 2 or that is 5-3=2, argues against the articles on page five and that he finds this point salient. The travellers profile confirms that he's competent in the field. Bummer... Perhaps it was too good to be true. But wait! This wasn't the only user here. Perhaps there is hope yet...
+
+In this scenario a user examines associations to an article. In a simple and structured way arguments are evaluated for and against a thing. When this game is played with known authorities it gets really interesting.
+
+What's really interesting about this link is that
+
+
+This tool is useful for one person as a way to keep things relevant because of
+
+this author has taken the time to think
 
 ### Installation:
 
