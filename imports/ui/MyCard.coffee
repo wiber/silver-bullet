@@ -31,7 +31,8 @@ exports.MyCard = React.createClass
             title: that.props.word.MyCardTitle
             subtitle: that.props.word.MyCardSubtitle
             showExpandableButton: true
-            onClick: that.handleToggle
+            onClick: (e) ->
+              changeQueryParams 'expandMyCard', !that.props.expanded
           k.build CardText,
             style:
               height: 'auto'
