@@ -14,6 +14,8 @@ FlowRouter.route '/about',
       Meteor.call "Linking",
         from: decodeURIComponent queryParams.from
         to: 'Bookmarks'
+        meta:
+          title: queryParams.lastTitle
       , (error, result) ->
         if error
           console.log "error", error
