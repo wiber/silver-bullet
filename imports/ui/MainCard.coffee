@@ -19,6 +19,7 @@ exports.MainCard = React.createClass
     changeQueryParams 'expandMainCard', !@props.expanded
   render: ->
     that = this
+    HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
     reactKup (k) ->
       k.build Card, # build the Card component
         expanded: that.props.expanded # add argument key value pairs
@@ -47,6 +48,11 @@ exports.MainCard = React.createClass
                 style: style.h1
                 'this card is about '
               k.span that.props.from, ' '
+              #console.log that.props.user.out.Bookmarks[ linkstate.store that.props.from].title
+              k.a
+                href: HERE.from
+                target: 'blank'
+                HERE.title
               k.h2
                 style: style.h2
                 ' and your connections from it such as '
