@@ -19,7 +19,9 @@ exports.MainCard = React.createClass
     changeQueryParams 'expandMainCard', !@props.expanded
   render: ->
     that = this
-    HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
+    if that?.props?.user?.out?.Bookmarks
+      HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
+    else HERE = {}
     reactKup (k) ->
       k.build Card, # build the Card component
         expanded: that.props.expanded # add argument key value pairs
