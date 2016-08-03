@@ -15,8 +15,6 @@ CardText =  require('material-ui/lib/card/card-text').default
 exports.MainCard = React.createClass
   getDefaultProps: ->
     expanded: false
-  handleToggle: (e) ->
-    changeQueryParams 'expandMainCard', !@props.expanded
   render: ->
     that = this
     if that?.props?.user?.out?.Bookmarks
