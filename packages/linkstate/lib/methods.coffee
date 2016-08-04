@@ -1,3 +1,4 @@
+
 {check} = require 'meteor/check'
 @storageEncode = (url) ->
   #r = encodeURIComponent url
@@ -7,6 +8,7 @@
 @categoryTypes = [
   'Bookmarks'
 ]
+@tumbalizrKey = "5VmUR42gc4eGdLjBnZH2BRXa"
 Meteor.methods
   Linking: (link) ->
     to = link.to
@@ -30,6 +32,7 @@ Meteor.methods
     edge.meta = META
     edge.meta.FromLink = from
     edge.meta.ToLink = to
+    edge.meta.ScreenshotUrl = "https://api.thumbalizr.com/?url="+from+"&width=250&api_key="+tumbalizrKey
     edge.author = Meteor.userId()
     edge.createdAt = time
     #  localStorage.setItem( linked, JSON.stringify( edge ) );
@@ -77,7 +80,7 @@ Meteor.methods
       $set: setIt
       $inc:
         'hits': 1
-    console.log from, to, META, Meteor.user().hits, Nodes.find().count(), 'Linking times'
+    console.log from, to, META,setIt.fromLast, Meteor.user().hits, Nodes.find().count(), 'Linking times'
 
   Here: (URL) ->
     name = 'Here'
