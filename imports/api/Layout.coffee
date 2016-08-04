@@ -1,16 +1,18 @@
 {createContainer} = require 'meteor/react-meteor-data'
-
+{wordLanguages} = require('../ui/WebCopy.coffee')
+language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
 
 exports.containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
-  #timePoll = (new Date().getTime() - Meteor.user().edited) <= 1000
-  ##console.log timePoll, props.from, 'propsFrom'
-  if Meteor.user().fromLast?
+  content = decodeURIComponent queryParams.content
+  if content is 'undefined'
+    content = ''
+  console.log queryParams
+  if Meteor.user()?.fromLast?
     samePlace = false
     if Meteor.user().fromLast != queryParams.from
       samePlace = true
-  #samePlace = Meteor.user().fromLast != queryParams.from
   console.log samePlace, Meteor.user().fromLast, queryParams.from
   if Meteor.user() and samePlace and Meteor.isClient
     Meteor.call "Linking",
@@ -30,5 +32,13 @@ exports.containerLayout = createContainer ((props) ->
     #to: props.to
     #expandMainCard: props.expandMainCard # all props
     user: Meteor.user()
+    from: decodeURIComponent queryParams.from
+    to: decodeURIComponent queryParams.to
+    content: content
+    fromTitle: decodeURIComponent queryParams.lastTitle
+    word: wordLanguages[language] # don't prematurely optimize!
+    expandMainCard: queryParams.expandMainCard == 'true'
+    expandAboutCard: queryParams.expandAboutCard == 'true'
+    expandMyCard: queryParams.expandMyCard == 'true'
   }
 ), Layout

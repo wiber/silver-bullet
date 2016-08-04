@@ -36,11 +36,3 @@ FlowRouter.route '/about',
     console.log queryParams
     mount containerLayout,
       queryParams: queryParams # to optiomize redraw on changed params
-      from: decodeURIComponent queryParams.from
-      to: decodeURIComponent queryParams.to
-      content: content
-      fromTitle: decodeURIComponent queryParams.lastTitle
-      word: wordLanguages[language] # don't prematurely optimize!
-      expandMainCard: queryParams.expandMainCard == 'true'
-      expandAboutCard: queryParams.expandAboutCard == 'true'
-      expandMyCard: queryParams.expandMyCard == 'true'
