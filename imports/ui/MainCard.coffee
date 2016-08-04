@@ -14,11 +14,13 @@ CardText =  require('material-ui/lib/card/card-text').default
 
 exports.MainCard = React.createClass
   getDefaultProps: ->
-    expanded: false
+    expanded: true
   render: ->
     that = this
     if that?.props?.user?.out?.Bookmarks
       HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
+      ScreenshotUrl = HERE.meta.ScreenshotUrl
+      console.log 'we are from', HERE
     else HERE = {}
     reactKup (k) ->
       k.build Card, # build the Card component
@@ -32,6 +34,16 @@ exports.MainCard = React.createClass
             showExpandableButton: true
             onClick: (e) -> #that.handleToggle
               changeQueryParams 'expandMainCard', !that.props.expanded
+          k.build CardMedia,
+            title: HERE.title
+            style: style.overlayPercentage
+            # it expects a react node, give the member what it wants
+            overlay: k.build CardTitle,
+              title: HERE.title
+              subtitle: "and it's connections"
+            ->
+              k.img
+                src: ScreenshotUrl
           k.build CardText,
             style:
               height: 'auto'
