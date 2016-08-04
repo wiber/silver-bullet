@@ -25,12 +25,7 @@ exports.containerLayout = createContainer ((props) ->
         console.log "error", error
       if result
         console.log 'result', result
-
-
   {
-    #from: props.from # one arg?
-    #to: props.to
-    #expandMainCard: props.expandMainCard # all props
     user: Meteor.user()
     from: decodeURIComponent queryParams.from
     to: decodeURIComponent queryParams.to

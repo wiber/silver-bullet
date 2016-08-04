@@ -45,10 +45,9 @@ exports.MainCard = React.createClass
           k.build CardText,
             expandable: true
             ->
-              #console.log that.props.user.out.Bookmarks[ linkstate.store that.props.from].title
               k.a
                 style: style.h2
-                href: HERE.from
+                href: decodeURIComponent HERE.from
                 target: 'blank'
                 HERE.title
           k.build CardActions,
