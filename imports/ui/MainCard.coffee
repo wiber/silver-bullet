@@ -29,24 +29,22 @@ exports.MainCard = React.createClass
           background: 'rgba(150, 25, 25, .05)'
         ->
           k.build CardHeader,
-            title: that.props.word.MainCardTitle
+            title: HERE.title
+            #subtitle: "connect it to a bookmark and it will be right there when you need it"
+            #title: that.props.word.MainCardTitle
             subtitle: that.props.word.MainCardSubtitle
-            showExpandableButton: true
+            showExpandableButton: false
             onClick: (e) -> #that.handleToggle
               changeQueryParams 'expandMainCard', !that.props.expanded
           k.build CardMedia,
-            title: HERE.title
             style: style.overlayPercentage
-            # it expects a react node, give the member what it wants
-            overlay: k.build CardTitle,
-              title: HERE.title
-              subtitle: "and it's connections"
+            onClick: (e) ->
+              win = window.open(decodeURIComponent HERE.from, '_blank');
+              win.focus();
             ->
               k.img
                 src: ScreenshotUrl
           k.build CardText,
-            style:
-              height: 'auto'
             ->
               k.build FromToSense,
                 from: that.props.from
@@ -54,14 +52,6 @@ exports.MainCard = React.createClass
                 word: that.props.word
                 content: that.props.content
                 user: that.props.user
-          k.build CardText,
-            expandable: true
-            ->
-              k.a
-                style: style.h2
-                href: decodeURIComponent HERE.from
-                target: 'blank'
-                HERE.title
           k.build CardActions,
             -> # return innerhtml, tags on here before
               k.build FlatButton,
