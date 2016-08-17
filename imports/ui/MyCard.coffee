@@ -1,4 +1,6 @@
-# MyCard.coffee shows my connections to Bookmarks.
+# MyCard.coffee shows my connections TO the place you are at
+# because if you go TO bookmarks, you will see your bookmarks
+# this is because bookmarks are links to bookmarks
 # Bookmarks are here steps, auto generated when you newtab from a page.
 reactKup = require('react-kup')
 React = require('react')
@@ -42,7 +44,9 @@ exports.MyCard = React.createClass
                 #cellHeight: 200
                 cols: 1
                 ->
-                  if that.props?.user?.out?.Bookmarks?
+                  console.log that.props?.user?.out?[linkstate.store that.props.from]?
+                  #console.log that.props.user.out[linkstate.store that.props.from]
+                  if that.props?.user?.out?[linkstate.store that.props.from]?
                     out = that.props.user.out.Bookmarks # is collection of edges..
                     n = 0
                     for mark in linkstate.sortByKeysTime(out, that.props.howMany)
@@ -62,10 +66,10 @@ exports.MyCard = React.createClass
 # TODO
 
 {@div, @span, @input, @img, @button} = React.DOM
-#@Transition = React.createFactory(React.addons.CSSTransitionGroup)
 @cond = (a,b,c) -> if a then b() else c?()
 @createView = (spec) ->
   React.createFactory(React.createClass(spec))
+#@Transition = React.createFactory(React.addons.CSSTransitionGroup)
 div
   key: 'view'
   className: 'event view'

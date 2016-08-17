@@ -15,6 +15,8 @@ exports.containerLayout = createContainer ((props) ->
     if Meteor.user()?.fromLast?
       if Meteor.user().fromLast != queryParams.from
         samePlace = true
+    else
+      samePlace = true
     console.log samePlace, Meteor.user().fromLast, queryParams.from
     if Meteor.user() and samePlace and Meteor.isClient
       changeQueryParams('Bookmarked', true)

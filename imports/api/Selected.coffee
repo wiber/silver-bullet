@@ -17,7 +17,7 @@ exports.selectedContainer = createContainer ((props) ->
   # sync user.toLast with qp
   # change qp, set toLast with method, redraw box optimist
 
-  directedTo = typeof props.to is 'string' and props.to.length > 5
+  directedTo = typeof props.to is 'string' and props.to.length >
 
   newProps = {}
   newProps.options = []
@@ -29,9 +29,19 @@ exports.selectedContainer = createContainer ((props) ->
   # supply dumb component with options
   # because db has loaded user.out
   if props.user?.out?
+    # TODO setup script run when user starts up handles these things
+    # default data, populates select lists.. use search source?
+    bookmarkSpacer =
+      Bookmarks:
+        meta:
+          ScreenshotUrl: ''
+          fromLink: '/bookmarks'
+          title: 'Your Bookmarks'
     dictWithCreatedAt = _.extend {}
     , props.user.out['Jump-List'] # from db
     , props.user.out['Bookmarks']
+    # how do we add Bookmarks page to the list?
+    # it could be a / page with a title... from.. etc
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
     for index,value of deChaos
       if typeof value is 'string' and value != 'undefined'
@@ -43,8 +53,17 @@ exports.selectedContainer = createContainer ((props) ->
         newProps.options.push selectItem
     # if we still don't have a defaultValue for select
     # make it the last used type
+    console.log newProps.options
+    newProps.options.push
+      label: 'Your Bookmarks'
+      value:
+        from: '/bookmarks'
+        title: 'Your Bookmarks'
+        meta:
+          ScreenshotUrl: ''
+          FromLink: 'bookmarks'
+          title: 'Your Bookmarks'
     unless newProps.value?
-      #console.log user[props.type+'Last'],user.toLast
       newProps.value =
         label: user[props.type+'Last']
         value: dictWithCreatedAt[user[props.type+'Last']]
