@@ -1,4 +1,5 @@
 # Selected.coffee
+# http://localhost:3000/about?from=http%253A%252F%252Fwww.dailymail.co.uk%252Fhome%252Findex.html&lastTitle=Home%2520%257C%2520Daily%2520Mail%2520Online&content=&to=https%253A%252F%252Fen.wikipedia.org%252Fwiki%252FBiot%252C_Alpes-Maritimes
 # Builds the FROM and TO boxes from user object and props from queryparams
 # from and to are plain decodeURIComponent urls which are then used to select defaultValue in the stateless ui component
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
@@ -35,7 +36,7 @@ exports.selectedContainer = createContainer ((props) ->
       Bookmarks:
         meta:
           ScreenshotUrl: ''
-          fromLink: '/bookmarks'
+          FromLink: '/bookmarks'
           title: 'Your Bookmarks'
     dictWithCreatedAt = _.extend {}
     , props.user.out['Jump-List'] # from db
