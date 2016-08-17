@@ -6,33 +6,6 @@ mount = require('react-mounter').mount
 FlowRouter.route '/about',
   name: 'home'
   action: (params, queryParams) ->
-    ### are FROM a new place, if so Link it to Bookmarks
-    # this is not great for performance when page loads
-    # this sort of performance can wait though as we need the consistency
-    # if we ensure that this is done optimistically on client there should not be an issue
-
-    if Meteor.user()
-      if Meteor.user().fromLast?
-        samePlace = false
-        if Meteor.user().fromLast != queryParams.from
-          samePlace = true
-      #samePlace = Meteor.user().fromLast != queryParams.from
-      console.log samePlace, Meteor.user().fromLast, queryParams.from
-      if Meteor.user() and samePlace and Meteor.isClient
-        Meteor.call "Linking",
-          from: decodeURIComponent queryParams.from
-          to: 'Bookmarks'
-          meta:
-            title: queryParams.lastTitle
-        , (error, result) ->
-          if error
-            console.log "error", error
-          if result
-            console.log 'result', result
-    ###
-    content = decodeURIComponent queryParams.content
-    if content is 'undefined'
-      content = ''
     console.log queryParams
     mount containerLayout,
       queryParams: queryParams # to optiomize redraw on changed params

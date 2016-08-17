@@ -2,29 +2,35 @@
 {wordLanguages} = require('../ui/WebCopy.coffee')
 language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
+{changeQueryParams} = require('../api/changeQueryParams.coffee')
 
 exports.containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   content = decodeURIComponent queryParams.content
   if content is 'undefined'
     content = ''
-  console.log queryParams
-  if Meteor.user()?.fromLast?
+  console.log queryParams, FlowRouter.getQueryParam('Bookmarked')
+  unless FlowRouter.getQueryParam('Bookmarked')
     samePlace = false
-    if Meteor.user().fromLast != queryParams.from
-      samePlace = true
-  console.log samePlace, Meteor.user().fromLast, queryParams.from
-  if Meteor.user() and samePlace and Meteor.isClient
-    Meteor.call "Linking",
-      from: decodeURIComponent queryParams.from
-      to: 'Bookmarks'
-      meta:
-        title: queryParams.lastTitle
-    , (error, result) ->
-      if error
-        console.log "error", error
-      if result
-        console.log 'result', result
+    if Meteor.user()?.fromLast?
+      if Meteor.user().fromLast != queryParams.from
+        samePlace = true
+    console.log samePlace, Meteor.user().fromLast, queryParams.from
+    if Meteor.user() and samePlace and Meteor.isClient
+      changeQueryParams('Bookmarked', true)
+      # otherwise leads to a flip/flop issue when two tabs are open
+      # how do we detect if this was the first time the tab opened?
+      # by using a queryParams... for already called bookmarked
+      Meteor.call "Linking",
+        from: decodeURIComponent queryParams.from
+        to: 'Bookmarks'
+        meta:
+          title: queryParams.lastTitle
+      , (error, result) ->
+        if error
+          console.log "error", error
+        if result
+          console.log 'result', result
   {
     user: Meteor.user()
     from: decodeURIComponent queryParams.from

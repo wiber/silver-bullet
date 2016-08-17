@@ -5,8 +5,8 @@ exports.wordLanguages =
     MainCardSubtitle:  "connect it to a bookmark and it will be right there when you need it"
     TextAboutfloatingLabelText: 'TAB TAB here to weigh in on this link. Hit 0-9 to link them.'
     TextAboutHintText: "Weigh in by pressing 9 for dead on, 5 neutral, 1 oppose or 0 irrelevant."
-    MyCardTitle: "Recent places."
-    MyCardSubtitle: "See a pattern in your history?"
+    MyCardTitle: "Incoming links to this place tell you about " #the title of this place.
+    MyCardSubtitle: "Go to Bookmarks or your project page and your resources appear here"
     MyCardStepsSubheader: "You have connected from here recently"
     AboutCardTitle: "What's the word on this?"
     AboutCardSubTitle: "Connections talk. Their last word stands here. Yours among them."
@@ -14,5 +14,8 @@ exports.wordLanguages =
 ###
 dynamic sections navigatable by these awesome input tools. to grid? from grid? to recent bookmarks? the end result is keyboard navigatable connectable networks..
 only one list at a time? incomming, or outgoing,
-can the dropdown be the list? not really unless we hide your history, or revert to sectiona;//
+can the dropdown be the list? not really unless we hide your history, or revert to sectiona;//ç
+so then agency instead of in your face.. to show things. the bg will be a network?
+what do I want to know about this place? what is default?
+it's buzz. connections.
 ###
