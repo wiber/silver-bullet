@@ -33,9 +33,9 @@ exports.selectedContainer = createContainer ((props) ->
     # TODO setup script run when user starts up handles these things
     # default data, populates select lists.. use search source?
     dictWithCreatedAt = _.extend {}
+    , user.out[ linkstate.store user.services.facebook.link ] # FIXME this prevents wrongful title in dropdown but data is still written wrong here..
     , props.user.out['Jump-List'] # from db
     , props.user.out['Bookmarks']
-    , user.out[ linkstate.store user.services.facebook.link ]
     # how do we add Bookmarks page to the list?
     # it could be a / page with a title... from.. etc
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
@@ -49,16 +49,7 @@ exports.selectedContainer = createContainer ((props) ->
         newProps.options.push selectItem
     # if we still don't have a defaultValue for select
     # make it the last used type
-    console.log newProps.options
-    ###newProps.options.push
-      label: 'Your Bookmarks'
-      value:
-        from: 'bookmarks'
-        title: 'Your Bookmarks'
-        meta:
-          ScreenshotUrl: ''
-          FromLink: 'bookmarks'
-          title: 'Your Bookmarks'###
+    console.log newProps.options # was the options array well formed?
     unless newProps.value?
       newProps.value =
         label: 'Your last project was '+ user[props.type+'Last']
