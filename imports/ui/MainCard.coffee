@@ -17,7 +17,7 @@ exports.MainCard = React.createClass
     expanded: true
   render: ->
     that = this
-    if that?.props?.user?.out?.Bookmarks
+    if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.from]?
       HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
       ScreenshotUrl = HERE.meta.ScreenshotUrl
       console.log 'we are from', HERE
