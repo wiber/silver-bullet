@@ -45,9 +45,10 @@ exports.MyCard = React.createClass
                 cols: 1
                 ->
                   console.log that.props?.user?.out?[linkstate.store that.props.from]?
-                  #console.log that.props.user.out[linkstate.store that.props.from]
                   if that.props?.user?.out?[linkstate.store that.props.from]?
-                    out = that.props.user.out.Bookmarks # is collection of edges..
+                    console.log that.props.user.out[linkstate.store that.props.from]
+                    #out = that.props.user.out.Bookmarks # is collection of edges..
+                    out = that.props.user.out[linkstate.store that.props.from]
                     n = 0
                     for mark in linkstate.sortByKeysTime(out, that.props.howMany)
                       target = out[mark]

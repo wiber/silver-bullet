@@ -27,7 +27,7 @@ setupCalls = () ->
    if error
      ##console.log "error", error
      new Meteor.Error 7, "Reply Does the User object have facebook credentials?"
-window.setupCalls = setupCalls
+#window.setupCalls = setupCalls
 lastLogin = () ->
   user = Meteor.user()
   if user?.services?.facebook?.link# and user.services? and user.services.facebook.link? #Meteor.user().services.facebook.link
