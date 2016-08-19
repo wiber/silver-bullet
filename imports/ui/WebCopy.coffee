@@ -5,7 +5,7 @@ exports.wordLanguages =
     MainCardSubtitle:  "connect it to a bookmark and it will be right there when you need it"
     TextAboutfloatingLabelText: 'TAB TAB here to weigh in on this link. Hit 0-9 to link them.'
     TextAboutHintText: "Weigh in by pressing 9 for dead on, 5 neutral, 1 oppose or 0 irrelevant."
-    MyCardTitle: "Incoming links to this place tell you about " #the title of this place.
+    MyCardTitle: "Your links to " #the title of this place.
     MyCardSubtitle: "Go to Bookmarks or your project page and your resources appear here"
     MyCardStepsSubheader: "You have connected from here recently"
     AboutCardTitle: "What's the word on this?"

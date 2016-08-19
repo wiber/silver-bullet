@@ -10,8 +10,8 @@ require('../imports/startup/routes.coffee')
 setupCalls = () ->
   console.log 'lastLogin Meteor.user().services.facebook.link',Meteor.user().services.facebook.link
   Meteor.call "Linking",
-    from: Meteor.user().services.facebook.link
-    to: 'Bookmarks'
+    from: '/bookmarks'
+    to: 'Bookmarks' # the thing we're defining # Meteor.user().services.facebook.link
     meta:
       title: 'Your Bookmarks' #Meteor.user().services.facebook.name+' on facebook'
   , (error, result) ->

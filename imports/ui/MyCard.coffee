@@ -30,7 +30,7 @@ exports.MyCard = React.createClass
         style: _.extend {}, style.card, style.mCard
         ->
           k.build CardHeader,
-            title: that.props.word.MyCardTitle
+            title: that.props.word.MyCardTitle + that.props.from
             subtitle: that.props.word.MyCardSubtitle
             showExpandableButton: true
             onClick: (e) ->
