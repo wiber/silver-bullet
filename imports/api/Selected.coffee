@@ -34,7 +34,7 @@ exports.selectedContainer = createContainer ((props) ->
     # default data, populates select lists.. use search source?
     dictWithCreatedAt = _.extend {}
     , user.out[ linkstate.store user.services.facebook.link ] # FIXME this prevents wrongful title in dropdown but data is still written wrong here..
-    , props.user.out['Jump-List'] # from db
+    , props.user.out['categoryTypes'] # such as Bookmarks
     , props.user.out['Bookmarks']
     # how do we add Bookmarks page to the list?
     # it could be a / page with a title... from.. etc

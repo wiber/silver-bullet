@@ -81,30 +81,27 @@ Meteor.methods
       $inc:
         'hits': 1
     console.log from, to, META,setIt.fromLast, Meteor.user().hits, Nodes.find().count(), 'Linking times'
+  # defines categoryTypes and ensures they're in the right place
+  setupUser: () ->
+    Meteor.call "Linking",
+      from: 'categoryTypes' # systems types.. need to be from bookmarks if they are to be picked up?
+      to: 'Bookmarks' # the thing we're defining
+      meta:
+        title: 'Your Bookmarks' #Meteor.user().services.facebook.name+' on facebook'
+    , (error, result) ->
+     if error
+       ##console.log "error", error
+       new Meteor.Error 7, "Reply Does the User object have facebook credentials?"
 
-  Here: (URL) ->
-    name = 'Here'
-    #Meteor.subscribe "userData"
-    ##console.log name, URL, Meteor.isServer, new Date()
-    updateUserLandedWithTime = () ->
-      unless !URL
-        urlSet = {}
-        time = new Date().getTime()
-        urlSet.url = URL
-        urlSet.time = time
-        Meteor.users.update
-          _id: Meteor.userId()
-        ,
-          $push:
-            subscribed: urlSet
-    if !Meteor.userId()
-      new Meteor.Error 1, "Here not authentic"
-    else
-      updateUserLandedWithTime()
+    Meteor.call "Linking",
+      from: 'Bookmarks'
+      to: Meteor.user().services.facebook.link
+      meta:
+        title: Meteor.user().services.facebook.name+' on Facebook'
+    , (error, result) ->
+      if error
+        console.log "error", error
 
-
-
-Meteor.methods
   resetUser: () ->
     user = Meteor.user()
     ##console.log user , 'whole'
@@ -135,3 +132,6 @@ Meteor.methods
         toLast: ''
         toCreated: ''
         fromCreated: ''
+    Meteor.call "setupUser"
+
+  #defines naming conventions for categoryTypes

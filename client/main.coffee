@@ -7,31 +7,12 @@ require('../imports/startup/routes.coffee')
 #injectTapEventPlugin();
 
 {Meteor}= require 'meteor/meteor'
-setupCalls = () ->
-  console.log 'lastLogin Meteor.user().services.facebook.link',Meteor.user().services.facebook.link
-  Meteor.call "Linking",
-    from: '/bookmarks'
-    to: 'Bookmarks' # the thing we're defining # Meteor.user().services.facebook.link
-    meta:
-      title: 'Your Bookmarks' #Meteor.user().services.facebook.name+' on facebook'
-  , (error, result) ->
-   if error
-     ##console.log "error", error
-     new Meteor.Error 7, "Reply Does the User object have facebook credentials?"
-  Meteor.call "Linking",
-    from: 'Bookmarks'
-    to: Meteor.user().services.facebook.link
-    meta:
-      title: Meteor.user().services.facebook.name+' on facebook'
-  , (error, result) ->
-   if error
-     ##console.log "error", error
-     new Meteor.Error 7, "Reply Does the User object have facebook credentials?"
-window.setupCalls = setupCalls
+
 lastLogin = () ->
   user = Meteor.user()
   if user?.services?.facebook?.link# and user.services? and user.services.facebook.link? #Meteor.user().services.facebook.link
-    setupCalls()
+    Meteor.call "setupUser"
+
 sinceLogin = false
 if Meteor.loggingIn()
   sinceLogin = true
