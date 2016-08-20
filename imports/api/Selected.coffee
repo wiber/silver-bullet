@@ -51,6 +51,7 @@ exports.selectedContainer = createContainer ((props) ->
     # make it the last used type
     console.log newProps.options # was the options array well formed?
     unless newProps.value?
+      #if props.type is 'to'
       newProps.value =
         label: 'Your last project was '+ user[props.type+'Last']
         value: dictWithCreatedAt[user[props.type+'Last']]

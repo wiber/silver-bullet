@@ -40,8 +40,8 @@ exports.containerLayout = createContainer ((props) ->
     content: content
     fromTitle: decodeURIComponent queryParams.lastTitle
     word: wordLanguages[language] # don't prematurely optimize!
-    expandMainCard: queryParams.expandMainCard == 'true'
-    expandAboutCard: queryParams.expandAboutCard == 'true'
-    expandMyCard: queryParams.expandMyCard == 'true'
+    expandMainCard: queryParams.expandMainCard != 'false'
+    expandAboutCard: queryParams.expandAboutCard != 'false'
+    expandMyCard: queryParams.expandMyCard != 'false'
   }
 ), Layout
