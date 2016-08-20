@@ -84,8 +84,8 @@ Meteor.methods
   # defines categoryTypes and ensures they're in the right place
   setupUser: () ->
     Meteor.call "Linking",
-      from: 'categoryTypes' # systems types.. need to be from bookmarks if they are to be picked up?
-      to: 'Bookmarks' # the thing we're defining
+      from: 'Bookmarks' # systems types.. need to be from bookmarks if they are to be picked up?
+      to: 'categoryTypes' # the thing we're defining
       meta:
         title: 'Your Bookmarks' #Meteor.user().services.facebook.name+' on facebook'
     , (error, result) ->
