@@ -94,8 +94,8 @@ Meteor.methods
        new Meteor.Error 7, "Reply Does the User object have facebook credentials?"
 
     Meteor.call "Linking",
-      from: 'Bookmarks'
-      to: Meteor.user().services.facebook.link
+      from: Meteor.user().services.facebook.link
+      to: 'Bookmarks'
       meta:
         title: Meteor.user().services.facebook.name+' on Facebook'
     , (error, result) ->

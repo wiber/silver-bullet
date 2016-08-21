@@ -33,12 +33,14 @@ exports.selectedContainer = createContainer ((props) ->
     # TODO setup script run when user starts up handles these things
     # default data, populates select lists.. use search source?
     dictWithCreatedAt = _.extend {}
-    , user.out[ linkstate.store user.services.facebook.link ] # FIXME this prevents wrongful title in dropdown but data is still written wrong here..
-    , props.user.out['categoryTypes'] # such as Bookmarks
+    #, user.out[ linkstate.store user.services.facebook.link ] # FIXME this prevents wrongful title in dropdown but data is still written wrong here..
+    #, props.user.out['categoryTypes'] # such as Bookmarks
     , props.user.out['Bookmarks']
+    , props.user.in['Bookmarks']
     # how do we add Bookmarks page to the list?
     # it could be a / page with a title... from.. etc
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
+    console.log deChaos, dictWithCreatedAt
     for index,value of deChaos
       if typeof value is 'string' and value != 'undefined'
         selectItem =
