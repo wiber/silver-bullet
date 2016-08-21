@@ -4,7 +4,7 @@ To understand this tool just imagine bookmarks as links between two pages instea
 
 At it's heart Hashrepublic seeks to make your life easier, less scattered and more in the zone by giving you context. Trust the journey by trusting your past. This is easier when you see clearly the path behind you. It's the path behind you just like Morpheus said. Bookmarks related to your google document are right there when you newtab. Magic. You'll love context because it gets you the right things at the right time.
 
-All links are public webpages in the beginning. Privacy is coming as a paid feature. Ads will be done tastefully or not at all. The newtab view has great potential for ad space in an app like this one because of the rich context. Ads can target your last page, your last pages, even predict your next step on the journey. Done right they won't have to fight for your attention like traditional ads. They will feel natural like a possible next step when you're already ready to take a step.
+All links are public webpages in the beginning. Privacy is coming as a paid feature. Ads will be done tastefully or not at all. The newtab view has great potential for effective ad space in an app such as this one because of the rich context. Ads can target your last page, your last pages, even predict your next step on the journey. Done right they won't have to fight for your attention like traditional ads. They will feel natural like a possible next step when you're already ready to take a step.
 
 # Why you could care
 If this tool is useful for one person because of how it allows one to keep things relevant it's infinitely more useful when working together. When used socially this becomes a whole new thing entirely. Associations tell you about what others think of this place and where it fits in.
@@ -51,7 +51,7 @@ Meteor.startup(function(){
 Next install missing npm modules like react, react-dom, react-selectize. FIXME.
 
 
-Then load the chrome extension.
+Then load the extension into chrome.
 
 
 
@@ -70,7 +70,7 @@ Then load the chrome extension.
 - [x] Fast Prototyping
   - [x] write all code in one language.
   - [x] tidy modules decoupled from meteor.
-  - [ ] one-liner to clone, run and open in vim
+  - [ ] one-liner to clone and run
 - [ ] Code, UI and Styles in Coffeescript.
   - [x] material-ui
   - [x] react-kup because otherwise this is not that.
