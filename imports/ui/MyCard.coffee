@@ -58,8 +58,8 @@ exports.MyCard = React.createClass
                       if n <= that.props.howMany
                         k.build GridTile,
                           key: mark
-                          title: m.FromLink
-                          subtitle: ' => '+ m.ToLink
+                          title: m.body #target.title#FromLink
+                          subtitle: m.FromLink#' => '+ m.ToLink
                           ->
                             k.img
                               style: _.extend {},# style.webShot,
