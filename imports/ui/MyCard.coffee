@@ -24,7 +24,6 @@ exports.MyCard = React.createClass
     console.log @props , 'work on props'
     that = this
     if @props.expanded is 'undefined'
-
       that.props.expanded = true
     reactKup (k) ->
       k.build Card,
@@ -63,7 +62,14 @@ exports.MyCard = React.createClass
                           subtitle: ' => '+ m.ToLink
                           ->
                             k.img
-                              style: _.extend {}, style.webShot
+                              style: _.extend {},# style.webShot,
+                                left: 10 * m.weight + '%'
+                                position: 'absolute'
+                                opacity: 1
+                              src: "http://graph.facebook.com/v2.7/" + that.props.user.services.facebook.id + "/picture?type=square"
+                            k.img
+                              style: _.extend {}, style.webShot,
+                                width: '100%'
                               src:  "https://api.thumbalizr.com/?url="+m.FromLink+"&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa"
 ###
 # TODO
