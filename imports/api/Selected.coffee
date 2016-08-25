@@ -12,6 +12,14 @@ Selected = require('../ui/Selected.coffee').Selected
 
 
 exports.selectedContainer = createContainer ((props) ->
+  newProps = {}
+  newProps.options = []
+  if props.from?
+    Meteor.subscribe "Node", props.from
+  N = Nodes.findOne(linkstate.store props.from)
+  if N?
+    newProps.node = N
+  console.log newProps.node, Nodes.find({}).count()
   user = props.user
   # paint boxes from user objects
   # find / set value from either qp or user object.
@@ -20,8 +28,6 @@ exports.selectedContainer = createContainer ((props) ->
 
   directedTo = typeof props.to is 'string' and props.to.length >
 
-  newProps = {}
-  newProps.options = []
   # make dict [type]
   # make options
   # make value
