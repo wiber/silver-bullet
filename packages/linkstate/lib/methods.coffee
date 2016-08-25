@@ -22,6 +22,8 @@ Meteor.methods
     unless to? and from?
       throw new Meteor.Error 2, "something wrong with orientation "+from+' '+to
       return 'nothing'
+    if Meteor.user()?.services?.facebook?.id?
+      META.face = "http://graph.facebook.com/v2.7/" + Meteor.user().services.facebook.id + "/picture?type=square"
     FROM = linkstate.store(from) # from.replace(/\./g,'%2E')
     TO = linkstate.store(to) #to.replace(/\./g,'%2E')#.split('/').join('.');
     time = new Date().getTime()
