@@ -60,9 +60,14 @@ exports.selectedContainer = createContainer ((props) ->
     console.log newProps.options # was the options array well formed?
     unless newProps.value?
       #if props.type is 'to'
-      newProps.value =
-        label: 'Your last project was '+ user[props.type+'Last']
-        value: dictWithCreatedAt[user[props.type+'Last']]
+      if user[props.type+'Last']?
+        newProps.value =
+          label: 'Your last project was '+ user[props.type+'Last']
+          value: dictWithCreatedAt[user[props.type+'Last']]
+      else
+        newProps.value =
+          label: 'Your last project was your Bookmarks'#+ user[props.type+'Last']
+          value: deChaos['Bookmarks']# dictWithCreatedAt[user[props.type+'Last']]
   # update queryparams unless we're fromt he same place
   if props[props.type] is not newProps[props.type]
     changeQueryParams props.type, newProps[props.type]
