@@ -66,11 +66,15 @@ exports.MyCard = React.createClass
                                 left: 10 * m.weight + '%'
                                 position: 'absolute'
                                 opacity: 1
-                              src: "http://graph.facebook.com/v2.7/" + that.props.user.services.facebook.id + "/picture?type=square"
+                              #src: "http://graph.facebook.com/v2.7/" + that.props.user.services.facebook.id + "/picture?type=square"
+                              src: m.face
                             k.img
                               style: _.extend {}, style.webShot,
                                 width: '100%'
-                              src:  "https://api.thumbalizr.com/?url="+m.FromLink+"&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa"
+                              #src:  "https://api.thumbalizr.com/?url="+m.FromLink+"&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa"
+                              src: m.ScreenshotUrl
+                              onClick: (e) ->
+                                console.log e, m
 ###
 # TODO
 

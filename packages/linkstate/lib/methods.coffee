@@ -7,6 +7,7 @@
   return r
 @categoryTypes = [
   'Bookmarks'
+  'Categories'
 ]
 @tumbalizrKey = "5VmUR42gc4eGdLjBnZH2BRXa"
 Meteor.methods
@@ -87,7 +88,7 @@ Meteor.methods
   setupUser: () ->
     Meteor.call "Linking",
       from: 'Bookmarks' # systems types.. need to be from bookmarks if they are to be picked up?
-      to: 'categoryTypes' # the thing we're defining
+      to: 'Categories' # the thing we're defining
       meta:
         title: 'Your Bookmarks' #Meteor.user().services.facebook.name+' on facebook'
     , (error, result) ->
