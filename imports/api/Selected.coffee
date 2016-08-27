@@ -20,7 +20,7 @@ exports.selectedContainer = createContainer ((props) ->
   if N?
     newProps.node = N
   console.log newProps.node, Nodes.find({}).count()
-  user = props.user
+  user = Meteor.user() #props.user # props are not reactively propagated from layout, apparently
   # paint boxes from user objects
   # find / set value from either qp or user object.
   # sync user.toLast with qp
@@ -57,12 +57,12 @@ exports.selectedContainer = createContainer ((props) ->
         newProps.options.push selectItem
     # if we still don't have a defaultValue for select
     # make it the last used type
-    console.log newProps.options # was the options array well formed?
-    unless newProps.value?
+    console.log 'formed options',newProps.options, newProps.options.length, deChaos.length # was the options array well formed?
+    unless newProps.value? or props.value?
       #if props.type is 'to'
       if user[props.type+'Last']?
         newProps.value =
-          label: 'Your last project was '+ user[props.type+'Last']
+          label: 'Your last project was '+ deChaos[user[props.type+'Last']].title
           value: dictWithCreatedAt[user[props.type+'Last']]
       else
         newProps.value =
