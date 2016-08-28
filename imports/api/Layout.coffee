@@ -30,9 +30,9 @@ exports.containerLayout = createContainer ((props) ->
           title: queryParams.lastTitle
       , (error, result) ->
         if error
-         #console.log "error", error
+         console.log "error", error
         if result
-         #console.log 'result', result
+         console.log 'result', result
   {
     user: Meteor.user()
     from: decodeURIComponent queryParams.from

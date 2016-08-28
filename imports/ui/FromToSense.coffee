@@ -57,9 +57,9 @@ TextAbout = React.createClass
               meta: content
             , (error, result) ->
               if error
-               #console.log "error", error
+               console.log "error", error
               if result
-               #console.log result
+               console.log result
             e.target.value = ''
             e.preventDefault()
             window.to.refs.to.focus()

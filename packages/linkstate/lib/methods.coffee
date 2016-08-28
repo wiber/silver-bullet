@@ -103,7 +103,7 @@ Meteor.methods
         title: Meteor.user().services.facebook.name+' on Facebook'
     , (error, result) ->
       if error
-       #console.log "error", error
+       console.log "error", error
 
   resetUser: () ->
     user = Meteor.user()
