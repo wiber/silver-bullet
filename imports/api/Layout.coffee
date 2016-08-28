@@ -19,6 +19,7 @@ exports.containerLayout = createContainer ((props) ->
       samePlace = true
     console.log samePlace, Meteor.user().fromLast, queryParams.from
     if Meteor.user() and samePlace and Meteor.isClient
+      console.log 'Linking and changeQueryParams'
       changeQueryParams('Bookmarked', true)
       # otherwise leads to a flip/flop issue when two tabs are open
       # how do we detect if this was the first time the tab opened?
@@ -34,7 +35,7 @@ exports.containerLayout = createContainer ((props) ->
         if result
           console.log 'result', result
   {
-    user: Meteor.user()
+    #user: Meteor.user()
     from: decodeURIComponent queryParams.from
     to: decodeURIComponent queryParams.to
     content: content

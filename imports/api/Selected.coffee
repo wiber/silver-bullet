@@ -21,30 +21,24 @@ exports.selectedContainer = createContainer ((props) ->
     newProps.node = N
   console.log newProps.node, Nodes.find({}).count()
   user = Meteor.user() #props.user # props are not reactively propagated from layout, apparently
+  newProps.user = Meteor.user()
   # paint boxes from user objects
   # find / set value from either qp or user object.
   # sync user.toLast with qp
   # change qp, set toLast with method, redraw box optimist
 
-  directedTo = typeof props.to is 'string' and props.to.length >
+  #directedTo = typeof props.to is 'string' and props.to.length >
 
   # make dict [type]
   # make options
   # make value
-  newProps[props.type] = user[props.type+'Last']
+  #newProps[props.type] = user[props.type+'Last']
   # much isomorphism, use db to keep string format consistency, on client, because it's just a function call
   # supply dumb component with options
   # because db has loaded user.out
-  if props.user?.out?
-    # TODO setup script run when user starts up handles these things
-    # default data, populates select lists.. use search source?
-    dictWithCreatedAt = _.extend {}
-    #, user.out[ linkstate.store user.services.facebook.link ] # FIXME this prevents wrongful title in dropdown but data is still written wrong here..
-    #, props.user.out['categoryTypes'] # such as Bookmarks
-    , props.user.out['Bookmarks']
-    , props.user.in['Bookmarks']
-    # how do we add Bookmarks page to the list?
-    # it could be a / page with a title... from.. etc
+  if newProps.user?.out?
+    # all newtabs create bookmarks, search them all
+    dictWithCreatedAt = newProps.user.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
     console.log deChaos, dictWithCreatedAt
     for index,value of deChaos
@@ -57,12 +51,12 @@ exports.selectedContainer = createContainer ((props) ->
         newProps.options.push selectItem
     # if we still don't have a defaultValue for select
     # make it the last used type
-    console.log 'formed options',newProps.options, newProps.options.length, deChaos.length # was the options array well formed?
+    console.log 'formed options'
+    ,newProps.options, newProps.options.length, deChaos.length 
     unless newProps.value? or props.value?
-      #if props.type is 'to'
-      if user[props.type+'Last']?
+      if newProps.user[newProps.type+'Last']?
         newProps.value =
-          label: 'Your last project was '+ deChaos[user[props.type+'Last']].title
+          label: 'Your last project was '+ deChaos[newProps.user[props.type+'Last']].title
           value: dictWithCreatedAt[user[props.type+'Last']]
       else
         newProps.value =

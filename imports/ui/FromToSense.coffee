@@ -3,7 +3,6 @@ reactKup = require('react-kup')
 SimpleSelect = require("react-selectize").SimpleSelect
 React = require 'react'
 {changeQueryParams} = require '../api/changeQueryParams.coffee'
-# ui object calling a container.. not great?
 selectedContainer = require('../api/Selected.coffee').selectedContainer
 {see} = require '../api/strings.coffee'
 TextField = require('material-ui/lib/TextField').default
@@ -45,11 +44,8 @@ TextAbout = React.createClass
         ref: 'MainCardTextInput'
         onKeyDown: (e) ->
           if 48 <= e.keyCode <= 57 and !e.ctrlKey and !e.shiftKey and !e.altKey
-            #console.log e.keyCode, 'writing onKeyDown'
-            #console.log FlowRouter.getQueryParam('from'), FlowRouter.getQueryParam('to'), FlowRouter.getQueryParam('content'), "FlowRouter.getQueryParam('from')"
             content = {}
             content.body = FlowRouter.getQueryParam('content')
-            # weight is between 0 and 9
             content.weight = e.keyCode - 48
             Meteor.call "Linking",
               from: FlowRouter.getQueryParam('from')
