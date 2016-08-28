@@ -20,7 +20,7 @@ exports.selectedContainer = createContainer ((props) ->
   N = Nodes.findOne(linkstate.store props.from)
   if N?
     newProps.node = N
-  console.log newProps.node, Nodes.find({}).count()
+ #console.log newProps.node, Nodes.find({}).count()
   user = props.user
   # paint boxes from user objects
   # find / set value from either qp or user object.
@@ -37,17 +37,9 @@ exports.selectedContainer = createContainer ((props) ->
   # supply dumb component with options
   # because db has loaded user.out
   if props.user?.out?
-    # TODO setup script run when user starts up handles these things
-    # default data, populates select lists.. use search source?
-    dictWithCreatedAt = props.user.out['Bookmarks'] #_.extend {}
-    #, user.out[ linkstate.store user.services.facebook.link ] # FIXME this prevents wrongful title in dropdown but data is still written wrong here..
-    #, props.user.out['categoryTypes'] # such as Bookmarks
-    #, props.user.out['Bookmarks']
-    #, props.user.in['Bookmarks']
-    # how do we add Bookmarks page to the list?
-    # it could be a / page with a title... from.. etc
+    dictWithCreatedAt = props.user.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
-    console.log deChaos, dictWithCreatedAt
+   #console.log deChaos, dictWithCreatedAt
     for index,value of deChaos
       if typeof value is 'string' and value != 'undefined'
         selectItem =
@@ -56,11 +48,8 @@ exports.selectedContainer = createContainer ((props) ->
         if props[props.type] is dictWithCreatedAt[value].meta.FromLink
           newProps.value = selectItem
         newProps.options.push selectItem
-    # if we still don't have a defaultValue for select
-    # make it the last used type
-    console.log newProps.options # was the options array well formed?
+   #console.log newProps.options # was the options array well formed?
     unless newProps.value?
-      #if props.type is 'to'
       if user[props.type+'Last']?
         newProps.value =
           label: 'Your last project was '+ user[props.type+'Last']
@@ -73,6 +62,5 @@ exports.selectedContainer = createContainer ((props) ->
   if props[props.type] is not newProps[props.type]
     changeQueryParams props.type, newProps[props.type]
   props = _.extend {}, props, newProps
-  #console.log props.type, user[props.type+'Last'], directedTo,'console.log user.toLast, directedTo',props
   props
 ), Selected

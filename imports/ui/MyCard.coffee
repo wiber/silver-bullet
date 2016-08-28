@@ -21,7 +21,7 @@ exports.MyCard = React.createClass
   getDefaultProps: ->
     expanded: true
   render: ->
-    console.log @props , 'work on props'
+   #console.log @props , 'work on props'
     that = this
     if @props.expanded is 'undefined'
       that.props.expanded = true
@@ -45,9 +45,9 @@ exports.MyCard = React.createClass
                 #cellHeight: 200
                 cols: 1
                 ->
-                  console.log that.props?.user?.out?[linkstate.store that.props.from]?
+                 #console.log that.props?.user?.out?[linkstate.store that.props.from]?
                   if that.props?.user?.out?[linkstate.store that.props.from]?
-                    console.log that.props.user.out[linkstate.store that.props.from]
+                   #console.log that.props.user.out[linkstate.store that.props.from]
                     #out = that.props.user.out.Bookmarks # is collection of edges..
                     out = that.props.user.out[linkstate.store that.props.from]
                     n = 0
@@ -74,7 +74,7 @@ exports.MyCard = React.createClass
                               #src:  "https://api.thumbalizr.com/?url="+m.FromLink+"&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa"
                               src: m.ScreenshotUrl
                               onClick: (e) ->
-                                console.log e, m
+                               #console.log e, m
 ###
 # TODO
 

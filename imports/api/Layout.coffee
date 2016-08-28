@@ -9,7 +9,7 @@ exports.containerLayout = createContainer ((props) ->
   content = decodeURIComponent queryParams.content
   if content is 'undefined'
     content = ''
-  console.log queryParams, FlowRouter.getQueryParam('Bookmarked')
+ #console.log queryParams, FlowRouter.getQueryParam('Bookmarked')
   unless FlowRouter.getQueryParam('Bookmarked')
     samePlace = false
     if Meteor.user()?.fromLast?
@@ -17,7 +17,7 @@ exports.containerLayout = createContainer ((props) ->
         samePlace = true
     else
       samePlace = true
-    console.log samePlace, Meteor.user().fromLast, queryParams.from
+   #console.log samePlace, Meteor.user().fromLast, queryParams.from
     if Meteor.user() and samePlace and Meteor.isClient
       changeQueryParams('Bookmarked', true)
       # otherwise leads to a flip/flop issue when two tabs are open
@@ -30,9 +30,9 @@ exports.containerLayout = createContainer ((props) ->
           title: queryParams.lastTitle
       , (error, result) ->
         if error
-          console.log "error", error
+         #console.log "error", error
         if result
-          console.log 'result', result
+         #console.log 'result', result
   {
     user: Meteor.user()
     from: decodeURIComponent queryParams.from

@@ -20,7 +20,7 @@ exports.MainCard = React.createClass
     if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.from]?
       HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
       ScreenshotUrl = HERE.meta.ScreenshotUrl
-      console.log 'we are from', HERE
+     #console.log 'we are from', HERE
     else HERE = {}
     reactKup (k) ->
       k.build Card, # build the Card component

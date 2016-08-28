@@ -31,7 +31,7 @@ exports.LinkList = React.createClass
                 out = that.props.user.out.Bookmarks # is collection of edges..
                 n = 0
                 for mark in linkstate.sortByKeysTime(out, that.props.howMany)
-                  console.log out, mark
+                 #console.log out, mark
                   target = out[mark]
                   m = target.meta
                   n++

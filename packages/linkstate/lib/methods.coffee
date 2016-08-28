@@ -64,11 +64,11 @@ Meteor.methods
     #setIt['when.'+FROM] = time
     setIt.edited = time
     if from not in categoryTypes
-      console.log 'not from category', from, categoryTypes
+     #console.log 'not from category', from, categoryTypes
       setIt.fromLast = from
     if to not in categoryTypes
       setIt.toLast = to
-      console.log 'not from category', to, categoryTypes
+     #console.log 'not from category', to, categoryTypes
     #setIt['timeTo.'+TO] = time
     #setIt['timeFrom.'+FROM] = time
     #setIt['fromCreated.'+FROM] = edge
@@ -83,7 +83,7 @@ Meteor.methods
       $set: setIt
       $inc:
         'hits': 1
-    console.log from, to, META,setIt.fromLast, Meteor.user().hits, Nodes.find().count(), 'Linking times'
+   #console.log from, to, META,setIt.fromLast, Meteor.user().hits, Nodes.find().count(), 'Linking times'
   # defines categoryTypes and ensures they're in the right place
   setupUser: () ->
     Meteor.call "Linking",
@@ -103,7 +103,7 @@ Meteor.methods
         title: Meteor.user().services.facebook.name+' on Facebook'
     , (error, result) ->
       if error
-        console.log "error", error
+       #console.log "error", error
 
   resetUser: () ->
     user = Meteor.user()

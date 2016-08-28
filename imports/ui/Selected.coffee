@@ -14,7 +14,7 @@ Selected = React.createClass
     try
       window.textAbout.refs.MainCardTextInput.focus()
     catch error
-      console.error error
+     #console.error error
   render: ->
     that = this
     window[that.props.type] = this
