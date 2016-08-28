@@ -16,6 +16,7 @@ exports.selectedContainer = createContainer ((props) ->
   newProps.options = []
   if props.from?
     Meteor.subscribe "Node", props.from
+  Meteor.subscribe "userData"#, "arg"
   N = Nodes.findOne(linkstate.store props.from)
   if N?
     newProps.node = N
@@ -38,11 +39,11 @@ exports.selectedContainer = createContainer ((props) ->
   if props.user?.out?
     # TODO setup script run when user starts up handles these things
     # default data, populates select lists.. use search source?
-    dictWithCreatedAt = _.extend {}
+    dictWithCreatedAt = props.user.out['Bookmarks'] #_.extend {}
     #, user.out[ linkstate.store user.services.facebook.link ] # FIXME this prevents wrongful title in dropdown but data is still written wrong here..
     #, props.user.out['categoryTypes'] # such as Bookmarks
-    , props.user.out['Bookmarks']
-    , props.user.in['Bookmarks']
+    #, props.user.out['Bookmarks']
+    #, props.user.in['Bookmarks']
     # how do we add Bookmarks page to the list?
     # it could be a / page with a title... from.. etc
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
