@@ -1,6 +1,7 @@
 reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
+{LinkList} = require('../ui/LinkList.coffee')
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 {FromToSense} = require('../ui/FromToSense.coffee')
 Card = require('material-ui/lib/card/card').default
@@ -13,11 +14,14 @@ CardText =  require('material-ui/lib/card/card-text').default
 
 exports.MainCard = React.createClass
   getDefaultProps: ->
-    expanded: false
-  handleToggle: (e) ->
-    changeQueryParams 'expandMainCard', !@props.expanded
+    expanded: true
   render: ->
     that = this
+    if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.from]?
+      HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
+      ScreenshotUrl = HERE.meta.ScreenshotUrl
+     #console.log 'we are from', HERE
+    else HERE = {}
     reactKup (k) ->
       k.build Card, # build the Card component
         expanded: that.props.expanded # add argument key value pairs
@@ -25,29 +29,29 @@ exports.MainCard = React.createClass
           background: 'rgba(150, 25, 25, .05)'
         ->
           k.build CardHeader,
-            title: that.props.word.MainCardTitle
+            title: HERE.title
+            #subtitle: "connect it to a bookmark and it will be right there when you need it"
+            #title: that.props.word.MainCardTitle
             subtitle: that.props.word.MainCardSubtitle
-            showExpandableButton: true
-            onClick: that.handleToggle
-          k.build CardText,
-            style:
-              height: 'auto'
-            -> k.build FromToSense,
-              from: that.props.from
-              to: that.props.to
-              word: that.props.word
-              content: that.props.content
-          k.build CardText,
-            expandable: true
+            showExpandableButton: false
+            onClick: (e) -> #that.handleToggle
+              changeQueryParams 'expandMainCard', !that.props.expanded
+          k.build CardMedia,
+            style: style.overlayPercentage
+            onClick: (e) ->
+              win = window.open(decodeURIComponent HERE.from, '_blank');
+              win.focus();
             ->
-              k.h1
-                style: style.h1
-                'this card is about '
-              k.span that.props.from, ' '
-              k.h2
-                style: style.h2
-                ' and your connections from it such as '
-              k.span that.props.to
+              k.img
+                src: ScreenshotUrl
+          k.build CardText,
+            ->
+              k.build FromToSense,
+                from: that.props.from
+                to: that.props.to
+                word: that.props.word
+                content: that.props.content
+                user: that.props.user
           k.build CardActions,
             -> # return innerhtml, tags on here before
               k.build FlatButton,

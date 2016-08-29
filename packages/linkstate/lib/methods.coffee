@@ -1,17 +1,20 @@
+
 {check} = require 'meteor/check'
 @storageEncode = (url) ->
   #r = encodeURIComponent url
   r =  toString(url).replace /\./g , '%2E'
   ##console.log r
   return r
-
+@categoryTypes = [
+  'Bookmarks'
+  'Categories'
+]
+@tumbalizrKey = "5VmUR42gc4eGdLjBnZH2BRXa"
 Meteor.methods
   Linking: (link) ->
     to = link.to
     from = link.from
     META = link.meta
-    #check from, String
-    #check to, String
     unless META?
       META = {}
     unless typeof Meteor.userId() is 'string'
@@ -20,6 +23,8 @@ Meteor.methods
     unless to? and from?
       throw new Meteor.Error 2, "something wrong with orientation "+from+' '+to
       return 'nothing'
+    if Meteor.user()?.services?.facebook?.id?
+      META.face = "http://graph.facebook.com/v2.7/" + Meteor.user().services.facebook.id + "/picture?type=square"
     FROM = linkstate.store(from) # from.replace(/\./g,'%2E')
     TO = linkstate.store(to) #to.replace(/\./g,'%2E')#.split('/').join('.');
     time = new Date().getTime()
@@ -30,6 +35,7 @@ Meteor.methods
     edge.meta = META
     edge.meta.FromLink = from
     edge.meta.ToLink = to
+    edge.meta.ScreenshotUrl = "https://api.thumbalizr.com/?url="+from+"&width=250&api_key="+tumbalizrKey
     edge.author = Meteor.userId()
     edge.createdAt = time
     #  localStorage.setItem( linked, JSON.stringify( edge ) );
@@ -57,12 +63,16 @@ Meteor.methods
     #setIt['when.'+TO] = time
     #setIt['when.'+FROM] = time
     setIt.edited = time
-    setIt.lastFrom = from
-    setIt.lastTo = to
-    setIt['timeTo.'+TO] = time
-    setIt['timeFrom.'+FROM] = time
-    setIt['from.'+FROM] = edge
-    setIt['to.'+TO] = edge
+    if from not in categoryTypes
+     #console.log 'not from category', from, categoryTypes
+      setIt.fromLast = from
+    if to not in categoryTypes
+      setIt.toLast = to
+     #console.log 'not from category', to, categoryTypes
+    #setIt['timeTo.'+TO] = time
+    #setIt['timeFrom.'+FROM] = time
+    #setIt['fromCreated.'+FROM] = edge
+    #setIt['toCreated.'+TO] = edge
     setIt['in.'+FROM+'.'+TO] = edge
     setIt['out.'+TO+'.'+FROM] = edge
     # this might be better than Jump-List
@@ -73,31 +83,28 @@ Meteor.methods
       $set: setIt
       $inc:
         'hits': 1
-    #console.log from, to, META, Meteor.user().hits, Nodes.find().count(), 'Linking times'
+   #console.log from, to, META,setIt.fromLast, Meteor.user().hits, Nodes.find().count(), 'Linking times'
+  # defines categoryTypes and ensures they're in the right place
+  setupUser: () ->
+    Meteor.call "Linking",
+      from: 'Bookmarks' # systems types.. need to be from bookmarks if they are to be picked up?
+      to: 'Bookmarks' # the thing we're defining
+      meta:
+        title: 'Your Bookmarks' #Meteor.user().services.facebook.name+' on facebook'
+    , (error, result) ->
+     if error
+       ##console.log "error", error
+       new Meteor.Error 7, "Reply Does the User object have facebook credentials?"
 
-  Here: (URL) ->
-    name = 'Here'
-    #Meteor.subscribe "userData"
-    ##console.log name, URL, Meteor.isServer, new Date()
-    updateUserLandedWithTime = () ->
-      unless !URL
-        urlSet = {}
-        time = new Date().getTime()
-        urlSet.url = URL
-        urlSet.time = time
-        Meteor.users.update
-          _id: Meteor.userId()
-        ,
-          $push:
-            subscribed: urlSet
-    if !Meteor.userId()
-      new Meteor.Error 1, "Here not authentic"
-    else
-      updateUserLandedWithTime()
+    Meteor.call "Linking",
+      from: Meteor.user().services.facebook.link
+      to: 'Bookmarks'
+      meta:
+        title: Meteor.user().services.facebook.name+' on Facebook'
+    , (error, result) ->
+      if error
+       console.log "error", error
 
-
-
-Meteor.methods
   resetUser: () ->
     user = Meteor.user()
     ##console.log user , 'whole'
@@ -120,5 +127,14 @@ Meteor.methods
         timeTo: ''
         timeFrom: ''
         when: ''
-        lastFrom: ''
+        fromLast: ''
         hits: ''
+        lastTo: ''
+        lastFrom: ''
+        fromLast: ''
+        toLast: ''
+        toCreated: ''
+        fromCreated: ''
+    Meteor.call "setupUser"
+
+  #defines naming conventions for categoryTypes

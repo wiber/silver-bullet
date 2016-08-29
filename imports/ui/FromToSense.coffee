@@ -24,6 +24,7 @@ exports.FromToSense = React.createClass
             k.build selectedContainer,
               from: that.props.from
               to: that.props.to
+              user: that.props.user
               type: 'from'
             k.span
               style:
@@ -32,6 +33,7 @@ exports.FromToSense = React.createClass
             k.build selectedContainer,
               from: that.props.from
               to: that.props.to
+              user: that.props.user
               type: 'to'
 
 TextAbout = React.createClass
@@ -55,9 +57,9 @@ TextAbout = React.createClass
               meta: content
             , (error, result) ->
               if error
-                console.log "error", error
+               console.log "error", error
               if result
-                console.log result
+               console.log result
             e.target.value = ''
             e.preventDefault()
             window.to.refs.to.focus()

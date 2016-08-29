@@ -1,4 +1,5 @@
 # Selected.coffee
+# http://localhost:3000/about?from=http%253A%252F%252Fwww.dailymail.co.uk%252Fhome%252Findex.html&lastTitle=Home%2520%257C%2520Daily%2520Mail%2520Online&content=&to=https%253A%252F%252Fen.wikipedia.org%252Fwiki%252FBiot%252C_Alpes-Maritimes
 # Builds the FROM and TO boxes from user object and props from queryparams
 # from and to are plain decodeURIComponent urls which are then used to select defaultValue in the stateless ui component
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
@@ -13,33 +14,53 @@ Selected = require('../ui/Selected.coffee').Selected
 exports.selectedContainer = createContainer ((props) ->
   newProps = {}
   newProps.options = []
-  user = Meteor.user()
+  if props.from?
+    Meteor.subscribe "Node", props.from
+  Meteor.subscribe "userData"#, "arg"
+  N = Nodes.findOne(linkstate.store props.from)
+  if N?
+    newProps.node = N
+ #console.log newProps.node, Nodes.find({}).count()
+  user = props.user
+  # paint boxes from user objects
+  # find / set value from either qp or user object.
+  # sync user.toLast with qp
+  # change qp, set toLast with method, redraw box optimist
+
+  directedTo = typeof props.to is 'string' and props.to.length >
+
+  # make dict [type]
+  # make options
+  # make value
+  newProps[props.type] = user[props.type+'Last']
   # much isomorphism, use db to keep string format consistency, on client, because it's just a function call
-  if Meteor.user()?.out? # supply dumb component with options
-    dictWithCreatedAt = _.extend {}
-    , Meteor.user().out['Jump-List'] # from db
-    , Meteor.user().out['Yours-Truly']
+  # supply dumb component with options
+  # because db has loaded user.out
+  if props.user?.out?
+    dictWithCreatedAt = props.user.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
+   #console.log deChaos, dictWithCreatedAt
     for index,value of deChaos
       if typeof value is 'string' and value != 'undefined'
-        newProps.options.push
-          label: linkstate.see value # same function as use
+        selectItem =
+          label: dictWithCreatedAt[value].title #linkstate.see value # same function as use
           value: dictWithCreatedAt[value] # store whole object here
-  if Meteor.user()?.to? and props.to is 'undefined'
-    toPossibles = linkstate.sortByKeysTime(Meteor.user().to,5)
-    #http://stackoverflow.com/questions/2631001/javascript-test-for-existence-of-nested-object-key
-    toPossibles = linkstate.sortByKeysTime(Meteor.user().to,5)
-    # otherwise it's always your last landed on one
-    if toPossibles.length > 1
-      ifOnlyOne = 1
-    else
-      ifOnlyOne = 0
-    try
-      #console.log ifOnlyOne,Meteor.user().to[toPossibles[ifOnlyOne]], 'Meteor.user().to[toPossibles[ifOnlyOne]]'
-      newProps.to = Meteor.user().to[toPossibles[ifOnlyOne]].meta.FromLink
-      changeQueryParams 'to', newProps.to
-    catch error
-      console.log error, 'does local user object exist yet?'
+        if props[props.type] is dictWithCreatedAt[value].meta.FromLink
+          newProps.value = selectItem
+        newProps.options.push selectItem
+   #console.log newProps.options # was the options array well formed?
+    unless newProps.value?
+      if user[props.type+'Last']?
+        newProps.value =
+          label: 'Your last project was '+ user[props.type+'Last']
+          value: dictWithCreatedAt[user[props.type+'Last']]
+      else
+        newProps.value =
+          label: 'Your last project was your Bookmarks'#+ user[props.type+'Last']
+          value: deChaos['Bookmarks']# dictWithCreatedAt[user[props.type+'Last']]
+  # update queryparams unless we're fromt he same place
+  if props[props.type] is not newProps[props.type]
+    changeQueryParams props.type, newProps[props.type]
   props = _.extend {}, props, newProps
   props
 ), Selected

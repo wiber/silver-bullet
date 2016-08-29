@@ -2,6 +2,7 @@
 scalars =
   fontScale: -> 1
   goldenRatio: -> ((1 + Math.sqrt(5)) / 2)
+  screenshotWidth: 250
 
 exports.style =
   base:
@@ -12,8 +13,13 @@ exports.style =
     background: 'rgba(54, 25, 25, .05)'
     margin: '2em'
     padding: '1em'
+  overlayPercentage:
+    maxHeight: 200
+    overflow: 'hidden'
   mCard:
     background: 'rgba(199, 25, 25, .05)'
+  webShot:
+    opacity: .6
   yCard:
     background: 'rgba(54, 25, 199, .05)'
   aCard:
