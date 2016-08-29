@@ -16,26 +16,16 @@ exports.selectedContainer = createContainer ((props) ->
   newProps.options = []
   if props.from?
     Meteor.subscribe "Node", props.from
-  Meteor.subscribe "userData"#, "arg"
-  N = Nodes.findOne(linkstate.store props.from)
-  if N?
-    newProps.node = N
- #console.log newProps.node, Nodes.find({}).count()
-  user = props.user
+  user = Meteor.user()#props.user
   # paint boxes from user objects
   # find / set value from either qp or user object.
   # sync user.toLast with qp
   # change qp, set toLast with method, redraw box optimist
 
   directedTo = typeof props.to is 'string' and props.to.length >
-
-  # make dict [type]
-  # make options
   # make value
-  newProps[props.type] = user[props.type+'Last']
-  # much isomorphism, use db to keep string format consistency, on client, because it's just a function call
-  # supply dumb component with options
-  # because db has loaded user.out
+  if !props[props.type]? and user?[props.type+'Last']?
+    newProps[props.type] = user[props.type+'Last']
   if props.user?.out?
     dictWithCreatedAt = props.user.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt

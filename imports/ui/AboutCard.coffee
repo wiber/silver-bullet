@@ -11,8 +11,16 @@ CardMedia = require('material-ui/lib/card/card-media').default
 CardTitle = require('material-ui/lib/card/card-title').default
 FlatButton = require('material-ui/lib/flat-button' ).default
 CardText =  require('material-ui/lib/card/card-text').default
-
-exports.AboutCard = React.createClass
+###
+Meteor.subscribe "userData"
+N = Nodes.findOne(linkstate.store props.from)
+if N?
+  newProps.node = N
+#console.log newProps.node, Nodes.find({}).count()
+###
+{createContainer} = require 'meteor/react-meteor-data'
+{see, store} = require '../api/strings.coffee'
+AboutCard = React.createClass
   getDefaultProps: ->
     expanded: false
   handleToggle: (e) ->
@@ -47,3 +55,15 @@ exports.AboutCard = React.createClass
                 onFocus: () ->
                   # TODO avoid global here..
                   window.from.refs.from.focus()
+
+exports.AboutCard = createContainer ((props) ->
+  newProps = {}
+  if props.from?
+    Meteor.subscribe "Node", props.from
+  N = Nodes.findOne(linkstate.store props.from)
+  if N?
+    newProps.node = N
+  console.log newProps.node, Nodes.find({}).count()
+  props = _.extend {}, props, newProps
+  props
+), AboutCard
