@@ -88,7 +88,7 @@ Meteor.methods
   setupUser: () ->
     Meteor.call "Linking",
       from: 'Bookmarks' # systems types.. need to be from bookmarks if they are to be picked up?
-      to: 'Categories' # the thing we're defining
+      to: 'Bookmarks' # the thing we're defining
       meta:
         title: 'Your Bookmarks' #Meteor.user().services.facebook.name+' on facebook'
     , (error, result) ->

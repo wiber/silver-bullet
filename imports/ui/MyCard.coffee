@@ -1,4 +1,4 @@
-# MyCard.coffee shows my connections TO the place you are at
+# MyCard.coffee shows my incomming connections TO the place you are at
 # because if you go TO bookmarks, you will see your bookmarks
 # this is because bookmarks are links to bookmarks
 # Bookmarks are here steps, auto generated when you newtab from a page.
@@ -45,10 +45,7 @@ exports.MyCard = React.createClass
                 #cellHeight: 200
                 cols: 1
                 ->
-                 #console.log that.props?.user?.out?[linkstate.store that.props.from]?
                   if that.props?.user?.out?[linkstate.store that.props.from]?
-                   #console.log that.props.user.out[linkstate.store that.props.from]
-                    #out = that.props.user.out.Bookmarks # is collection of edges..
                     out = that.props.user.out[linkstate.store that.props.from]
                     n = 0
                     for mark in linkstate.sortByKeysTime(out, that.props.howMany)
@@ -73,11 +70,14 @@ exports.MyCard = React.createClass
                                 width: '100%'
                               #src:  "https://api.thumbalizr.com/?url="+m.FromLink+"&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa"
                               src: m.ScreenshotUrl
+                              from: m.FromLink
                               onClick: (e) ->
-                               #console.log e, m
+                               console.log e, m, e.target, e.target.getAttribute('from')
+                               window.targ = e.target
+                               changeQueryParams 'from', e.target.getAttribute('from')
 ###
 # TODO
-
+http://localhost:3000/about?lastTitle=Home%2520%257C%2520Daily%2520Mail%2520Online&content=&to=https%253A%252F%252Fwww.facebook.com%252Fapp_scoped_user_id%252F10154232419354595%252F&Bookmarked=true&expandMainCard=true&expandMyCard=true&expandAboutCard=true
 {@div, @span, @input, @img, @button} = React.DOM
 @cond = (a,b,c) -> if a then b() else c?()
 @createView = (spec) ->
