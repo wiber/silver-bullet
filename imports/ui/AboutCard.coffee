@@ -33,8 +33,9 @@ AboutCard = React.createClass
           k.build CardText,
             expandable: true
             ->
-              for key, node of that.props.node.in
-                console.log key, node
+              if that.props.node?.in?
+                for key, node of that.props.node.in
+                  console.log key, node
               k.span that.props.from, ' '
               k.span that.props.to
           k.build CardActions,
