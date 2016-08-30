@@ -1,6 +1,5 @@
 reactKup = require('react-kup')
 React = require('react')
-
 {style} = require('../ui/style.coffee')
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 {FromToSense} = require('../ui/FromToSense.coffee')
@@ -11,18 +10,9 @@ CardMedia = require('material-ui/lib/card/card-media').default
 CardTitle = require('material-ui/lib/card/card-title').default
 FlatButton = require('material-ui/lib/flat-button' ).default
 CardText =  require('material-ui/lib/card/card-text').default
-###
-Meteor.subscribe "userData"
-N = Nodes.findOne(linkstate.store props.from)
-if N?
-  newProps.node = N
-#console.log newProps.node, Nodes.find({}).count()
-###
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store} = require '../api/strings.coffee'
 AboutCard = React.createClass
-  getDefaultProps: ->
-    expanded: false
   handleToggle: (e) ->
     changeQueryParams 'expandAboutCard', !@props.expanded
   render: ->
@@ -43,6 +33,8 @@ AboutCard = React.createClass
           k.build CardText,
             expandable: true
             ->
+              for key, node of that.props.node.in
+                console.log key, node
               k.span that.props.from, ' '
               k.span that.props.to
           k.build CardActions,
