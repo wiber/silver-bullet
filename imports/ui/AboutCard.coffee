@@ -10,6 +10,10 @@ CardMedia = require('material-ui/lib/card/card-media').default
 CardTitle = require('material-ui/lib/card/card-title').default
 FlatButton = require('material-ui/lib/flat-button' ).default
 CardText =  require('material-ui/lib/card/card-text').default
+{GridList, GridTile} = require 'material-ui/lib/grid-list'
+{Subheader} = require 'material-ui/lib/Subheader'
+{StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
+
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store} = require '../api/strings.coffee'
 AboutCard = React.createClass
@@ -33,9 +37,35 @@ AboutCard = React.createClass
           k.build CardText,
             expandable: true
             ->
+              # cycle through in links... render them and related out links
+              # we are interested in what people are linking 'sending' to this place
+              # can we make it less abstract? is the bidirectional association necessary?
+              # how much power do we gain by weight, and direct
               if that.props.node?.in?
+                N = {}
+                N.node = that.props.node
+                inLinks = that.props.node.in
+                outLinks = that.props.node.out
+                N.deChaos = linkstate.sortByKeysTime(that.props.node.in, that.props.howMany)
+                for mark in N.deChaos
+                  if inLinks[mark]?
+                    N.usersConnections = inLinks[mark]
+                    # assume that first element has the correct title
+                    N.currentTitle = N.usersConnections[Object.keys(N.usersConnections)[0]].meta.title
+                    N.deChaosUsers = linkstate.sortByKeysTime(N.usersConnections)
+
+                    N.origin = mark
+                    [N.firstUser, ... , N.lastUser] = N.deChaosUsers
+                    [N.firstLink, ... , N.lastLink] = N.deChaos
+                    console.log N
+                    k.build GridTile,
+                      key: mark+'Node'
+                      title: N.currentTitle #m.body #target.title#FromLink
+                      subtitle: N.firstUser
                 for key, node of that.props.node.in
-                  console.log key, node
+                  #console.log key, node
+                  if that.props.node.out? and that.props.node.out[key]
+                    console.log 'reciprical link', that.props.node.out[key], key
               k.span that.props.from, ' '
               k.span that.props.to
           k.build CardActions,

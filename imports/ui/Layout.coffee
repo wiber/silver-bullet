@@ -20,18 +20,27 @@ exports.Layout = React.createClass
   render: ->
     that = this
     reactKup (k) ->
+      if that.props.user?.out?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
+
+        HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
+        ScreenshotUrl = HERE.meta.ScreenshotUrl
+        console.log 'weeeee down the rabbit hole', ScreenshotUrl, HERE
       k.build MuiThemeProvider,
         muiTheme: lightBaseUsTheme
         ->
           k.div
             className: 'onlyOne'
-            style: _.extend {}, style.base
             ->
               k.div that.props.word.HeaderTitle,
                 ->
                   k.build AccountsUIWrapper
               k.div
                 className: 'main'
+                style: _.extend {}, style.base,
+                  backgroundImage: 'url(' + ScreenshotUrl + ')'
+                  backgroundRepeat: 'repeat-y'
+                  backgroundSize: '100% auto'
+                  opacity: .4
                 ->
                   k.build MainCard, # need comma here because the second arg is prop
                     expanded: that.props.expandMainCard
@@ -54,4 +63,5 @@ exports.Layout = React.createClass
                     to: that.props.to
                     from: that.props.from
                     word: that.props.word
+                    howMany: 15
               k.div 'footer'
