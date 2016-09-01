@@ -20,7 +20,6 @@ exports.MainCard = React.createClass
     if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.from]?
       HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
       ScreenshotUrl = HERE.meta.ScreenshotUrl
-     #console.log 'we are from', HERE
     else HERE = {}
     reactKup (k) ->
       k.build Card, # build the Card component
@@ -30,8 +29,6 @@ exports.MainCard = React.createClass
         ->
           k.build CardHeader,
             title: HERE.title
-            #subtitle: "connect it to a bookmark and it will be right there when you need it"
-            #title: that.props.word.MainCardTitle
             subtitle: that.props.word.MainCardSubtitle
             showExpandableButton: false
             onClick: (e) -> #that.handleToggle
@@ -41,9 +38,9 @@ exports.MainCard = React.createClass
             onClick: (e) ->
               win = window.open(decodeURIComponent HERE.from, '_blank');
               win.focus();
-            ->
+            ###->
               k.img
-                src: ScreenshotUrl
+                src: ScreenshotUrl###
           k.build CardText,
             ->
               k.build FromToSense,

@@ -31,16 +31,22 @@ exports.Layout = React.createClass
           k.div
             className: 'onlyOne'
             ->
+              k.div
+                style: _.extend {}, style.base,
+                  height: '100%'
+                  widht: '100%'
+                  position: 'absolute'
+                  backgroundImage: 'url(' + ScreenshotUrl + ')'
+                  backgroundRepeat: 'no-repeat'
+                  backgroundSize: '100% 110%'#'cover' #'100% auto'
+                  opacity: '.3'
               k.div that.props.word.HeaderTitle,
                 ->
                   k.build AccountsUIWrapper
               k.div
                 className: 'main'
-                style: _.extend {}, style.base,
-                  backgroundImage: 'url(' + ScreenshotUrl + ')'
-                  backgroundRepeat: 'repeat-y'
-                  backgroundSize: '100% auto'
-                  opacity: .4
+                style: _.extend {},
+                  marginTop: '15%'
                 ->
                   k.build MainCard, # need comma here because the second arg is prop
                     expanded: that.props.expandMainCard
