@@ -51,7 +51,9 @@ exports.selectedContainer = createContainer ((props) ->
   # update queryparams unless we're fromt he same place
   if props[props.type] is not newProps[props.type]
     changeQueryParams props.type, newProps[props.type]
-  console.log newProps.options.length, newProps, user
+  if newProps.options.length < 2
+    console.log newProps.options.length, newProps, user
+    new Meteor.Error 12, "something wrong with select options"
   props = _.extend {}, props, newProps
   props
 ), Selected
