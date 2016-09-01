@@ -6,24 +6,24 @@ scalars =
 
 exports.style =
   base:
-    background: 'rgba(54, 99, 25, .05)'
+    #background: 'rgba(54, 99, 25, 0.05)'
     height: '100%'
     width: '100%'
-  card:
-    background: 'rgba(255, 255, 255, .5)'
-    margin: '2em'
-    padding: '1em'
   overlayPercentage:
     maxHeight: 200
     overflow: 'hidden'
+  card:
+    background: 'rgba(255, 255, 255, 0.8)'
+    margin: '2em'
+    padding: '1em'
   mCard:
-    background: 'rgba(255, 255, 255, .5)'
+    background: 'rgba(255, 255, 255, .9)'
   webShot:
-    opacity: .9
+    opacity: 1
   yCard:
-    background: 'rgba(255, 255, 255, .5)'
+    background: 'rgba(255, 255, 255, .9)'
   aCard:
-    background: 'rgba(255, 255, 255, .5)'
+    background: 'rgba(255, 255, 255, .9)'
   h1:
     fontSize: Math.pow(scalars.goldenRatio(),2) * scalars.fontScale() + 'em'
   h2:

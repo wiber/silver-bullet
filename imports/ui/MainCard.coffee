@@ -24,7 +24,7 @@ exports.MainCard = React.createClass
     reactKup (k) ->
       k.build Card, # build the Card component
         expanded: that.props.expanded # add argument key value pairs
-        style: _.extend {}, style.card
+        style: _.extend {}, style.card, style.mCard
         ->
           k.build CardHeader,
             title: HERE.title

@@ -40,6 +40,7 @@ exports.Layout = React.createClass
                   backgroundRepeat: 'no-repeat'
                   backgroundSize: '100% 110%'#'cover' #'100% auto'
                   opacity: '.3'
+                  zIndex: -1
               k.div that.props.word.HeaderTitle,
                 ->
                   k.build AccountsUIWrapper
