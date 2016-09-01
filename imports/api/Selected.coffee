@@ -14,13 +14,13 @@ Selected = require('../ui/Selected.coffee').Selected
 exports.selectedContainer = createContainer ((props) ->
   newProps = {}
   newProps.options = []
-  if props.from?
-    Meteor.subscribe "Node", props.from
-  user = Meteor.user()#props.user
+  #props.user
   # paint boxes from user objects
   # find / set value from either qp or user object.
   # sync user.toLast with qp
   # change qp, set toLast with method, redraw box optimist
+  Meteor.subscribe "userData"
+  user = Meteor.user()
 
   directedTo = typeof props.to is 'string' and props.to.length >
   # make value
@@ -51,6 +51,7 @@ exports.selectedContainer = createContainer ((props) ->
   # update queryparams unless we're fromt he same place
   if props[props.type] is not newProps[props.type]
     changeQueryParams props.type, newProps[props.type]
+  console.log newProps.options.length, newProps, user
   props = _.extend {}, props, newProps
   props
 ), Selected

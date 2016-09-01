@@ -35,7 +35,7 @@ exports.Layout = React.createClass
                 style: _.extend {}, style.base,
                   height: '100%'
                   widht: '100%'
-                  position: 'absolute'
+                  position: 'fixed'
                   backgroundImage: 'url(' + ScreenshotUrl + ')'
                   backgroundRepeat: 'no-repeat'
                   backgroundSize: '100% 110%'#'cover' #'100% auto'
