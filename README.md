@@ -91,7 +91,8 @@ Then load the extension into chrome.
     - [ ] advocate and engage people who sidewiki your stuff
   - [x] pay for privacy
   - [x] relatable ads on my newtab because I'm going places
-  - [ ] beatiful photography on my newtab
+  - [ ] beatiful photography on my newtab vs snapshot of prior tab
+  - [ ] store that odd page as a pdf for later, just in case
 - [ ] usability goals
   - [9] useful
     - [x] bookmarks

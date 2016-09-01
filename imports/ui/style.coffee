@@ -10,20 +10,20 @@ exports.style =
     height: '100%'
     width: '100%'
   card:
-    background: 'rgba(54, 25, 25, .05)'
+    background: 'rgba(255, 255, 255, .5)'
     margin: '2em'
     padding: '1em'
   overlayPercentage:
     maxHeight: 200
     overflow: 'hidden'
   mCard:
-    background: 'rgba(199, 25, 25, .05)'
+    background: 'rgba(255, 255, 255, .5)'
   webShot:
-    opacity: .6
+    opacity: .9
   yCard:
-    background: 'rgba(54, 25, 199, .05)'
+    background: 'rgba(255, 255, 255, .5)'
   aCard:
-    background: 'rgba(54, 125, 25, .05)'
+    background: 'rgba(255, 255, 255, .5)'
   h1:
     fontSize: Math.pow(scalars.goldenRatio(),2) * scalars.fontScale() + 'em'
   h2:
