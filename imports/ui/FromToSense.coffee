@@ -46,7 +46,7 @@ TextAbout = React.createClass
         onKeyDown: (e) ->
           if 48 <= e.keyCode <= 57 and !e.ctrlKey and !e.shiftKey and !e.altKey
             #console.log e.keyCode, 'writing onKeyDown'
-            #console.log FlowRouter.getQueryParam('from'), FlowRouter.getQueryParam('to'), FlowRouter.getQueryParam('content'), "FlowRouter.getQueryParam('from')"
+            console.log FlowRouter.getQueryParam('from'), FlowRouter.getQueryParam('to'), FlowRouter.getQueryParam('content'), "FlowRouter.getQueryParam('from')"
             content = {}
             content.body = FlowRouter.getQueryParam('content')
             # weight is between 0 and 9
