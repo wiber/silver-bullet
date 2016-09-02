@@ -18,6 +18,7 @@ exports.style =
     padding: '1em'
   mCard:
     background: 'rgba(255, 255, 255, .9)'
+    marginTop: '25%'
   webShot:
     opacity: 1
   yCard:

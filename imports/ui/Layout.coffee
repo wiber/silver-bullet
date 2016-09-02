@@ -46,8 +46,6 @@ exports.Layout = React.createClass
                   k.build AccountsUIWrapper
               k.div
                 className: 'main'
-                style: _.extend {},
-                  marginTop: '15%'
                 ->
                   k.build MainCard, # need comma here because the second arg is prop
                     expanded: that.props.expandMainCard

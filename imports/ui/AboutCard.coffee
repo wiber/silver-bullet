@@ -1,3 +1,4 @@
+# renders the aboutness node from here
 reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')

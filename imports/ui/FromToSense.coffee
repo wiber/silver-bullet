@@ -77,6 +77,7 @@ TextAbout = React.createClass
           bottom: 9
         floatingLabelText: that.props.word.TextAboutfloatingLabelText
         multiLine: true
+        rows: 2
         id: 'textAbout'
         hintText: that.props.word.TextAboutHintText
         defaultValue: that.props.content
