@@ -47,10 +47,12 @@ MyCard = React.createClass
                 cols: 1
                 ->
                   if that.props?.user?.out?[linkstate.store that.props.from]?
-                    out = that.props.user.out[linkstate.store that.props.from]
-                    if that.props.user.in?[linkstate.store that.props.from]?
-                      inLinks = that.props.user.out[linkstate.store that.props.from]
-                      out = _.extend {}, out, inLinks
+                    outLinks = that.props.user.out[linkstate.store that.props.from]
+                    #if that.props.user.in?#[linkstate.store that.props.from]?
+                    inLinks = that.props.user.out[linkstate.store that.props.from]
+                    out = _.extend {}, outLinks, inLinks
+                    console.log out is outLinks , 'out is outLinks'
+                    console.log that.props.user.in
                     n = 0
                     for mark in linkstate.sortByKeysTime(out, that.props.howMany)
                       target = out[mark]
@@ -83,5 +85,6 @@ exports.MyCard = createContainer ((props) ->
   newProps.user = Meteor.user()
   console.log newProps.node, Nodes.find({}).count()
   props = _.extend {}, props, newProps
+  console.log props.user is newProps.user , ' props.user is newProps.user , '
   props
 ), MyCard

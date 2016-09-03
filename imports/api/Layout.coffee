@@ -5,6 +5,9 @@ language = 'eng'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 
 exports.containerLayout = createContainer ((props) ->
+  Meteor.subscribe "userData"
+  newProps = {}
+  newProps.user = Meteor.user()
   queryParams = props.queryParams
   content = decodeURIComponent queryParams.content
   if content is 'undefined'
@@ -33,6 +36,7 @@ exports.containerLayout = createContainer ((props) ->
          console.log "error", error
         if result
          console.log 'result', result
+    props = _.extend {}, props, newProps
   {
     user: Meteor.user()
     from: decodeURIComponent queryParams.from
