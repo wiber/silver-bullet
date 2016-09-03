@@ -16,8 +16,9 @@ CardText =  require('material-ui/lib/card/card-text').default
 {GridList, GridTile} = require 'material-ui/lib/grid-list'
 {Subheader} = require 'material-ui/lib/Subheader'
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
+{createContainer} = require 'meteor/react-meteor-data'
 
-exports.MyCard = React.createClass
+MyCard = React.createClass
   getDefaultProps: ->
     expanded: true
   render: ->
@@ -47,6 +48,9 @@ exports.MyCard = React.createClass
                 ->
                   if that.props?.user?.out?[linkstate.store that.props.from]?
                     out = that.props.user.out[linkstate.store that.props.from]
+                    if that.props.user.in?[linkstate.store that.props.from]?
+                      inLinks = that.props.user.out[linkstate.store that.props.from]
+                      out = _.extend {}, out, inLinks
                     n = 0
                     for mark in linkstate.sortByKeysTime(out, that.props.howMany)
                       target = out[mark]
@@ -71,20 +75,13 @@ exports.MyCard = React.createClass
                               from: m.FromLink
                               onClick: (e) ->
                                changeQueryParams 'from', e.target.getAttribute('from')
-###
-# TODO
-http://localhost:3000/about?lastTitle=Home%2520%257C%2520Daily%2520Mail%2520Online&content=&to=https%253A%252F%252Fwww.facebook.com%252Fapp_scoped_user_id%252F10154232419354595%252F&Bookmarked=true&expandMainCard=true&expandMyCard=true&expandAboutCard=true
-{@div, @span, @input, @img, @button} = React.DOM
-@cond = (a,b,c) -> if a then b() else c?()
-@createView = (spec) ->
-  React.createFactory(React.createClass(spec))
-#@Transition = React.createFactory(React.addons.CSSTransitionGroup)
-div
-  key: 'view'
-  className: 'event view'
-  span {},'here now'
-  img
-    className: 'cover'
-  div
-    className: 'title row pointer'
-###
+
+exports.MyCard = createContainer ((props) ->
+  newProps = {}
+  #if Meteor.user()?#props.from?
+  Meteor.subscribe "userData"
+  newProps.user = Meteor.user()
+  console.log newProps.node, Nodes.find({}).count()
+  props = _.extend {}, props, newProps
+  props
+), MyCard

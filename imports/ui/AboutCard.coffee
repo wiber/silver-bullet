@@ -45,6 +45,7 @@ AboutCard = React.createClass
               if that.props.node?.in?
                 k.build GridList,
                   class: 'looplist'
+                  cols: 1
                   ->
                     N = {}
                     N.node = that.props.node
@@ -55,7 +56,8 @@ AboutCard = React.createClass
                       if inLinks[mark]?
                         N.usersConnections = inLinks[mark]
                         # assume that first element has the correct title
-                        N.currentTitle = N.usersConnections[Object.keys(N.usersConnections)[0]].meta.title
+                        N.current = N.usersConnections[Object.keys(N.usersConnections)[0]]
+                        N.currentTitle = N.current.meta.title
                         N.deChaosUsers = linkstate.sortByKeysTime(N.usersConnections)
 
                         N.origin = mark
@@ -65,9 +67,28 @@ AboutCard = React.createClass
                         k.build GridTile,
                           key: mark+'Node'
                           title: N.currentTitle #m.body #target.title#FromLink
-                          subtitle: N.firstUser
+                          #subtitle: N.firstUser
                           ->
-                            k.span N.currentTitle
+                            k.div
+                              style:
+                                overflow: 'hidden'
+                                height: 200
+                              ->
+                                k.img
+                                  style: _.extend {}, style.webShot,
+                                    width: '100%'
+                                  src: N.current.meta.ScreenshotUrl
+                                  from: N.current.meta.FromLink
+                                  onClick: (e) ->
+                                   changeQueryParams 'from', e.target.getAttribute('from')
+                                for user, link of N.usersConnections
+                                  console.log user, link, 'this users link'
+                                  k.div
+                                    style:
+                                      width: '100%'
+                                      position: 'relative'
+                                    ->
+                                      k.span link.meta.face
                         for key, node of that.props.node.in
                           #console.log key, node
                           if that.props.node.out? and that.props.node.out[key]
