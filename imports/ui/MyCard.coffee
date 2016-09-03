@@ -47,9 +47,13 @@ MyCard = React.createClass
                 #cellHeight: 200
                 cols: 1
                 ->
-
-                  if that.props?.user?.out?[linkstate.store that.props.from]?
+                  console.log that.props.user
+                  from = linkstate.store that.props.from
+                  user = that.props.user
+                  if user?.out?[from]? or user?.in?[from]?
                     out = that.props.user.out[linkstate.store that.props.from]
+                    console.log that.props.user.in
+                    console.log that.props.user.in[linkstate.store that.props.from]
                     n = 0
                     for mark in linkstate.sortByKeysTime(out, that.props.howMany)
                       target = out[mark]
