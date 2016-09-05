@@ -47,7 +47,7 @@ MyCard = React.createClass
                 #cellHeight: 200
                 cols: 1
                 ->
-                  console.log that.props, 'props'
+                  #console.log that.props, 'props'
                   from = linkstate.store that.props.from
                   user = that.props.user
                   if user?.out?[from]? or user?.in?[from]?
@@ -55,9 +55,9 @@ MyCard = React.createClass
                     outLinks = user.out[from]
                     inLinks = user.in[from]
                     links = _.extend {}, inLinks, outLinks
-                    console.log 'outLinks, inLinks, links',outLinks, inLinks, links
+                    #console.log 'outLinks, inLinks, links',outLinks, inLinks, links
                     linkArray = linkstate.sortByKeysTime(links, that.props.howMany)
-                    console.log 'linkArray.length',linkArray.length
+                    #console.log 'linkArray.length',linkArray.length
                     n = 0
                     outCount = 0
                     for mark in linkArray
@@ -112,8 +112,8 @@ exports.MyCard = createContainer ((props) ->
 
   if user?
     newProps.user = user
-  console.log newProps.user == props.user
+  #console.log newProps.user == props.user
   props = _.extend {}, props, newProps
-  console.log newProps.user == props.user
+  #console.log newProps.user == props.user
   props
 ), MyCard
