@@ -59,9 +59,10 @@ MyCard = React.createClass
                     linkArray = linkstate.sortByKeysTime(links, that.props.howMany)
                     console.log 'linkArray.length',linkArray.length
                     n = 0
+                    outCount = 0
                     for mark in linkArray
-                      if inLinks?[mark]?
-                        target = inLinks[mark]
+                      if outLinks?[mark]?
+                        target = outLinks[mark]
                         m = target.meta
                         n++
                         if n <= that.props.howMany
@@ -69,6 +70,16 @@ MyCard = React.createClass
                             target: target
                             m: m
                             mark: mark
+                      else # it's an incoming link.. do the first only..
+                        if outCount is 0 and inLinks?[mark]?
+                          outCount++
+                          target = inLinks[mark]
+                          m = target.meta
+                          k.build bookLink,
+                            target: target
+                            m: m
+                            mark: mark
+
 
 bookLink = React.createClass
   render: ->
