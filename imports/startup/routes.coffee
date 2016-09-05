@@ -6,6 +6,6 @@ mount = require('react-mounter').mount
 FlowRouter.route '/about',
   name: 'home'
   action: (params, queryParams) ->
-   #console.log queryParams
+    console.log queryParams, 'console.log queryParams'
     mount containerLayout,
       queryParams: queryParams # to optiomize redraw on changed params
