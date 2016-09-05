@@ -47,37 +47,52 @@ MyCard = React.createClass
                 #cellHeight: 200
                 cols: 1
                 ->
-                  console.log that.props.user
+                  console.log that.props, 'props'
                   from = linkstate.store that.props.from
                   user = that.props.user
                   if user?.out?[from]? or user?.in?[from]?
-                    out = that.props.user.out[linkstate.store that.props.from]
-                    console.log that.props.user.in
-                    console.log that.props.user.in[linkstate.store that.props.from]
+                    # either can be undefined...
+                    outLinks = user.out[from]
+                    inLinks = user.in[from]
+                    links = _.extend {}, inLinks, outLinks
+                    console.log 'outLinks, inLinks, links',outLinks, inLinks, links
+                    linkArray = linkstate.sortByKeysTime(links, that.props.howMany)
+                    console.log 'linkArray.length',linkArray.length
                     n = 0
-                    for mark in linkstate.sortByKeysTime(out, that.props.howMany)
-                      target = out[mark]
-                      m = target.meta
-                      n++
-                      if n <= that.props.howMany
-                        k.build GridTile,
-                          key: mark
-                          title: m.body #target.title#FromLink
-                          subtitle: m.FromLink#' => '+ m.ToLink
-                          ->
-                            k.img
-                              style: _.extend {},# style.webShot,
-                                left: 10 * m.weight + '%'
-                                position: 'absolute'
-                                opacity: 1
-                              src: m.face
-                            k.img
-                              style: _.extend {}, style.webShot,
-                                width: '100%'
-                              src: m.ScreenshotUrl
-                              from: m.FromLink
-                              onClick: (e) ->
-                               changeQueryParams 'from', e.target.getAttribute('from')
+                    for mark in linkArray
+                      if inLinks?[mark]?
+                        target = inLinks[mark]
+                        m = target.meta
+                        n++
+                        if n <= that.props.howMany
+                          k.build bookLink,
+                            target: target
+                            m: m
+                            mark: mark
+
+bookLink = React.createClass
+  render: ->
+    that = this
+    reactKup (k) ->
+      k.build GridTile,
+        key: that.props.mark
+        title: that.props.m.body + ' ' + that.props.m.ToLink #target.title#FromLink
+        subtitle: that.props.m.FromLink #' => '+ m.ToLink
+        ->
+          k.img
+            style: _.extend {},# style.webShot,
+              left: 10 * that.props.m.weight + '%'
+              position: 'absolute'
+              opacity: 1
+            src: that.props.m.face
+          k.img
+            style: _.extend {}, style.webShot,
+              width: '100%'
+            src: that.props.m.ScreenshotUrl
+            from: that.props.m.FromLink
+            onClick: (e) ->
+             changeQueryParams 'from', e.target.getAttribute('from')
+
 exports.MyCard = createContainer ((props) ->
   newProps = {}
   if props.from?
