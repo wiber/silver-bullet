@@ -39,11 +39,13 @@ Meteor.methods
     edge.author = Meteor.userId()
     edge.createdAt = time
     #  localStorage.setItem( linked, JSON.stringify( edge ) );
-    username = Meteor.user().profile.name
+    username = linkstate.store Meteor.user().profile.name
     setEdgeIn = {}
     setEdgeOut = {}
     # because these are like votes, you get a say about each link
-    setEdgeIn['in.' + FROM + '.' + username] = edge
+    console.log 'in.' + FROM + '.' + TO + '.' + username
+    setEdgeIn['in.' + FROM + '.' + TO + '.' + username] = edge
+    setEdgeOut['out.' + TO + '.'+ FROM + '.' + username] = edge
     edge.title = META.title or TO # because we're in TO this
     if Meteor.isServer
       linked = Edges.insert(edge)
@@ -53,8 +55,7 @@ Meteor.methods
     , # second argument to upsert "," is at same level, returns are free
       $set: setEdgeIn # set incoming edge where we're going TO impact
     edge.title = META.title or FROM # because we're out FROM this
-    setEdgeOut['out.' + TO + '.' + username] = edge
-    setEdgeOut.title = edge.title
+    #setEdgeOut.title = edge.title
     fromNodeId = Nodes.upsert
       _id: FROM
     ,

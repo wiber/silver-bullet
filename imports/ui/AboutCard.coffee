@@ -46,14 +46,26 @@ AboutCard = React.createClass
                 k.build GridList,
                   class: 'looplist'
                   ->
+                    H = linkstate.store that.props.from
                     N = {}
                     N.node = that.props.node
-                    inLinks = that.props.node.in
-                    outLinks = that.props.node.out
-                    N.deChaos = linkstate.sortByKeysTime(that.props.node.in, that.props.howMany)
+                    N.inLinks = that.props.node.in
+                    N.outLinks = that.props.node.out
+                    N.outFromHere = N.outLinks[H]
+                    N.inToHere = N.inLinks[H]
+                    # incoming links are important as they define this place
+                    N.links = _.extend {}, N.outFromHe, N.inToHere
+                    N.deChaos = linkstate.sortByKeysTime(N.links, that.props.howMany)
+                    console.log N
+                    # to keep things unique.. it's from.user.to
+                    # we need to make from.to.user.node. to make sense of what is said about each
+                    # this can be done in methods..
+                    # or we can make another field... which has directionality in meta
+                    # which questions? what's said about this assoc
+                    # vs what is my connections from here..
                     for mark in N.deChaos
-                      if inLinks[mark]?
-                        N.usersConnections = inLinks[mark]
+                      if N.inLinks[mark]?
+                        N.usersConnections = N.inLinks[mark]
                         # assume that first element has the correct title
                         N.currentTitle = N.usersConnections[Object.keys(N.usersConnections)[0]].meta.title
                         N.deChaosUsers = linkstate.sortByKeysTime(N.usersConnections)
@@ -62,16 +74,15 @@ AboutCard = React.createClass
                         [N.firstUser, ... , N.lastUser] = N.deChaosUsers
                         [N.firstLink, ... , N.lastLink] = N.deChaos
                         console.log N, 'N node'
+                        if N.outLinks[mark]?
+                          backLink = N.outLinks[mark]
+                          console.log 'reciprical link', mark, N.outLinks[mark]
                         k.build GridTile,
                           key: mark+'Node'
                           title: N.currentTitle #m.body #target.title#FromLink
                           subtitle: N.firstUser
                           ->
                             k.span N.currentTitle
-                        for key, node of that.props.node.in
-                          #console.log key, node
-                          if that.props.node.out? and that.props.node.out[key]
-                            console.log 'reciprical link', that.props.node.out[key], key
               k.span that.props.from, ' '
               k.span that.props.to
           k.build CardActions,
