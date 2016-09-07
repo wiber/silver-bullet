@@ -38,54 +38,45 @@ Meteor.methods
     edge.meta.ScreenshotUrl = "https://api.thumbalizr.com/?url="+from+"&width=250&api_key="+tumbalizrKey
     edge.author = Meteor.userId()
     edge.createdAt = time
+    edge.title = META.title or FROM # because we're out FROM this
     #  localStorage.setItem( linked, JSON.stringify( edge ) );
     username = linkstate.store Meteor.user().profile.name
     setEdgeIn = {}
     setEdgeOut = {}
+    setLinks = {}
     # because these are like votes, you get a say about each link
-    console.log 'in.' + FROM + '.' + TO + '.' + username
-    setEdgeIn['in.' + FROM + '.' + TO + '.' + username] = edge
-    setEdgeOut['out.' + TO + '.'+ FROM + '.' + username] = edge
+    setLinks['links.' + FROM + '.' + TO + '.' + username] = edge
+
+    #setEdgeIn['in.' + FROM + '.' + TO + '.' + username] = edge
+    #setEdgeOut['out.' + TO + '.'+ FROM + '.' + username] = edge
     edge.title = META.title or TO # because we're in TO this
-    if Meteor.isServer
-      linked = Edges.insert(edge)
+
     setEdgeIn.title = edge.title
     toNodeId = Nodes.upsert
       _id: TO
     , # second argument to upsert "," is at same level, returns are free
-      $set: setEdgeIn # set incoming edge where we're going TO impact
-    edge.title = META.title or FROM # because we're out FROM this
-    #setEdgeOut.title = edge.title
+      $set: setLinks # set incoming edge where we're going TO impact
+
     fromNodeId = Nodes.upsert
       _id: FROM
     ,
-      $set: setEdgeOut
+      $set: setLinks
     setIt = {}
-    #setIt['when.'+TO] = time
-    #setIt['when.'+FROM] = time
     setIt.edited = time
     if from not in categoryTypes
-     #console.log 'not from category', from, categoryTypes
       setIt.fromLast = from
     if to not in categoryTypes
       setIt.toLast = to
-     #console.log 'not from category', to, categoryTypes
-    #setIt['timeTo.'+TO] = time
-    #setIt['timeFrom.'+FROM] = time
-    #setIt['fromCreated.'+FROM] = edge
-    #setIt['toCreated.'+TO] = edge
-    setIt['in.'+FROM+'.'+TO] = edge
-    setIt['out.'+TO+'.'+FROM] = edge
-    # this might be better than Jump-List
-    #setIt['lastConnectedTo'] = TO
+    #setIt['in.'+FROM+'.'+TO] = edge
+    #setIt['out.'+TO+'.'+FROM] = edge
     Meteor.users.update # we need to know what our last connection was
       _id: Meteor.userId()
     ,
       $set: setIt
       $inc:
         'hits': 1
-   #console.log from, to, META,setIt.fromLast, Meteor.user().hits, Nodes.find().count(), 'Linking times'
-  # defines categoryTypes and ensures they're in the right place
+    if Meteor.isServer
+      linked = Edges.insert(edge)
   setupUser: () ->
     Meteor.call "Linking",
       from: 'Bookmarks' # systems types.. need to be from bookmarks if they are to be picked up?

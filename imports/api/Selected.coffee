@@ -29,7 +29,7 @@ exports.selectedContainer = createContainer ((props) ->
   if props.user?.out?
     dictWithCreatedAt = props.user.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
-   #console.log deChaos, dictWithCreatedAt
+    console.log deChaos, dictWithCreatedAt,'console.log deChaos, dictWithCreatedAt'
     for index,value of deChaos
       if typeof value is 'string' and value != 'undefined'
         selectItem =

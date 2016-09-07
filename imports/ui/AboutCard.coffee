@@ -46,23 +46,20 @@ AboutCard = React.createClass
                 k.build GridList,
                   class: 'looplist'
                   ->
-                    H = linkstate.store that.props.from
+
                     N = {}
+                    N.here = linkstate.store that.props.from
                     N.node = that.props.node
+
+                    N.links = that.props.node.links or {}
+                    N.fromHere = N.links[N.here]
+
                     N.inLinks = that.props.node.in
                     N.outLinks = that.props.node.out
-                    N.outFromHere = N.outLinks[H]
-                    N.inToHere = N.inLinks[H]
-                    # incoming links are important as they define this place
-                    N.links = _.extend {}, N.outFromHe, N.inToHere
                     N.deChaos = linkstate.sortByKeysTime(N.links, that.props.howMany)
                     console.log N
-                    # to keep things unique.. it's from.user.to
-                    # we need to make from.to.user.node. to make sense of what is said about each
-                    # this can be done in methods..
-                    # or we can make another field... which has directionality in meta
-                    # which questions? what's said about this assoc
-                    # vs what is my connections from here..
+                    for outlink, edge of N.links
+                      console.log outlink, edge, edge[N.here], 'outlink'
                     for mark in N.deChaos
                       if N.inLinks[mark]?
                         N.usersConnections = N.inLinks[mark]
