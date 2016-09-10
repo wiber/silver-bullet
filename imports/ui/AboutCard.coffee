@@ -68,10 +68,12 @@ AboutCard = React.createClass
                           subtitle: N.firstUser
                           ->
                             k.span N.currentTitle
+                        n= 0
                         for key, node of that.props.node.in
                           #console.log key, node
                           if that.props.node.out? and that.props.node.out[key]
-                            console.log 'reciprical link', key # that.props.node.out[key], 
+                            #console.log 'reciprical link', key # that.props.node.out[key],
+                            n++
               k.span that.props.from, ' '
               k.span that.props.to
           k.build CardActions,

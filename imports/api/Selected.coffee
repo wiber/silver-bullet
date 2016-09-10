@@ -41,18 +41,19 @@ exports.selectedContainer = createContainer ((props) ->
    #console.log newProps.options # was the options array well formed?
     unless newProps.value?
       # set defaults if none set already
-      if user[props.type+'Last']?
+      if user[props.type+'Last']? and props.type  is 'to'
         # charming solution that flickers rightly
         # on recompute it goes from 'last project' to just the right title
         newProps.value =
           label: 'Your last project was '+ user[props.type+'Last']
           value: dictWithCreatedAt[user[props.type+'Last']]
+        # so one can link
         changeQueryParams props.type, user[props.type+'Last']
-        newProps[props.type] = user[props.type+'Last']
-        console.log newProps.value, FlowRouter.getQueryParam props.type, props[props.type], newProps[props.type]
+        #newProps[props.type] = user[props.type+'Last']
+        #console.log newProps.value, FlowRouter.getQueryParam props.type, props[props.type], newProps[props.type]
       else
         newProps.value =
-          label: 'Your last project was your Bookmarks'#+ user[props.type+'Last']
+          label: 'You first make Bookmarks'#+ user[props.type+'Last']
           value: deChaos['Bookmarks']# dictWithCreatedAt[user[props.type+'Last']]
   # update queryparams unless we're fromt he same place
   if props[props.type] is not newProps[props.type]
