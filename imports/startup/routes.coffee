@@ -1,4 +1,3 @@
-# Linking method on server and client..
 {wordLanguages} = require('../ui/WebCopy.coffee')
 language = 'eng'
 mount = require('react-mounter').mount
@@ -6,6 +5,6 @@ mount = require('react-mounter').mount
 FlowRouter.route '/about',
   name: 'home'
   action: (params, queryParams) ->
-   #console.log queryParams
+   #console.logqueryParams
     mount containerLayout,
       queryParams: queryParams # to optiomize redraw on changed params

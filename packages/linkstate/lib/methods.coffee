@@ -12,7 +12,7 @@
 @tumbalizrKey = "5VmUR42gc4eGdLjBnZH2BRXa"
 Meteor.methods
   Linking: (link) ->
-    console.log 'Linking', link, Meteor.user().hits
+    console.log 'Linking', link.from, link.meta, Meteor.user().hits
     to = link.to
     from = link.from
     META = link.meta

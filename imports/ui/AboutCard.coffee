@@ -71,7 +71,7 @@ AboutCard = React.createClass
                         for key, node of that.props.node.in
                           #console.log key, node
                           if that.props.node.out? and that.props.node.out[key]
-                            console.log 'reciprical link', that.props.node.out[key], key
+                            console.log 'reciprical link', key # that.props.node.out[key], 
               k.span that.props.from, ' '
               k.span that.props.to
           k.build CardActions,

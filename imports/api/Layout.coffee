@@ -31,11 +31,6 @@ exports.containerLayout = createContainer ((props) ->
         to: 'Bookmarks'
         meta:
           title: queryParams.lastTitle
-      , (error, result) ->
-        if error
-        #console.log"error", error
-        if result
-        #console.log'result', result
   {
     user: user
     from: decodeURIComponent queryParams.from
