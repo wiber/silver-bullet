@@ -23,8 +23,10 @@ Meteor.methods
           console.log "error", error
         if result
           console.log result, Meteor.user().hits, result is Meteor.user().hits, 'because it should be'
+          unless result is Meteor.user().hits
+            new Meteor.Error 16, "sync error? looks like user object not synced"
           localStorage.setItem 'serverHits', result
-    console.log localStorage.getItem( 'serverHits'), Meteor.user().hits
+      #console.log localStorage.getItem( 'serverHits'), Meteor.user().hits
   Linking: (link) ->
     console.log 'Linking', link.from, link.meta, Meteor.user().hits, Meteor.user().services.facebook.name, Meteor.isServer
     to = link.to

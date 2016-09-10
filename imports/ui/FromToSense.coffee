@@ -35,7 +35,6 @@ exports.FromToSense = React.createClass
               to: that.props.to
               user: that.props.user
               type: 'to'
-
 TextAbout = React.createClass
   render: ->
     window.textAbout = this
@@ -60,9 +59,6 @@ TextAbout = React.createClass
             e.target.value = ''
             e.preventDefault()
             window.to.refs.to.focus()
-            Meteor.setTimeout (->
-              Meteor.call "checkHits"
-            50)
           if e.keyCode is 13
             alert that.props.word.digitAlert
             e.preventDefault()

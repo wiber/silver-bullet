@@ -11,6 +11,7 @@ exports.containerLayout = createContainer ((props) ->
     content = ''
  #console.logqueryParams, FlowRouter.getQueryParam('Bookmarked'), Meteor.user().hits
   Meteor.subscribe "userData"
+  Meteor.call "compareHits"
   user = Meteor.user()
   unless FlowRouter.getQueryParam('Bookmarked')
     samePlace = false
