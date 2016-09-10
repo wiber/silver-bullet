@@ -40,10 +40,14 @@ exports.selectedContainer = createContainer ((props) ->
         newProps.options.push selectItem
    #console.log newProps.options # was the options array well formed?
     unless newProps.value?
+      # set defaults if none set already
       if user[props.type+'Last']?
         newProps.value =
           label: 'Your last project was '+ user[props.type+'Last']
           value: dictWithCreatedAt[user[props.type+'Last']]
+        changeQueryParams props.type, user[props.type+'Last']
+        newProps[props.type] = user[props.type+'Last']
+        console.log newProps.value, FlowRouter.getQueryParam props.type, props[props.type], newProps[props.type]
       else
         newProps.value =
           label: 'Your last project was your Bookmarks'#+ user[props.type+'Last']

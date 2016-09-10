@@ -10,9 +10,23 @@
   'Categories'
 ]
 @tumbalizrKey = "5VmUR42gc4eGdLjBnZH2BRXa"
+
 Meteor.methods
+  checkHits: ->
+    if Meteor.isServer
+      console.log 'Meteor.user().hits', Meteor.user().hits
+    	return Meteor.user().hits
+  compareHits: ->
+    if Meteor.isClient
+      Meteor.call "checkHits", (error, result) ->
+        if error
+          console.log "error", error
+        if result
+          console.log result, Meteor.user().hits, result is Meteor.user().hits, 'because it should be'
+          localStorage.setItem 'serverHits', result
+    console.log localStorage.getItem( 'serverHits'), Meteor.user().hits
   Linking: (link) ->
-    console.log 'Linking', link.from, link.meta, Meteor.user().hits
+    console.log 'Linking', link.from, link.meta, Meteor.user().hits, Meteor.user().services.facebook.name, Meteor.isServer
     to = link.to
     from = link.from
     META = link.meta
