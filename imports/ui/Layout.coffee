@@ -21,10 +21,9 @@ exports.Layout = React.createClass
     that = this
     reactKup (k) ->
       if that.props.user?.out?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
-
         HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
         ScreenshotUrl = HERE.meta.ScreenshotUrl
-        console.log 'weeeee down the rabbit hole', ScreenshotUrl, HERE
+        #console.log 'weeeee down the rabbit hole', ScreenshotUrl, HERE
       k.build MuiThemeProvider,
         muiTheme: lightBaseUsTheme
         ->

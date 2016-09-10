@@ -9,8 +9,9 @@ exports.containerLayout = createContainer ((props) ->
   content = decodeURIComponent queryParams.content
   if content is 'undefined'
     content = ''
-  console.log queryParams, FlowRouter.getQueryParam('Bookmarked'), Meteor.user().hits
+ #console.logqueryParams, FlowRouter.getQueryParam('Bookmarked'), Meteor.user().hits
   Meteor.subscribe "userData"
+  user = Meteor.user()
   unless FlowRouter.getQueryParam('Bookmarked')
     samePlace = false
     if Meteor.user()?.fromLast?
@@ -21,22 +22,22 @@ exports.containerLayout = createContainer ((props) ->
    #console.log samePlace, Meteor.user().fromLast, queryParams.from
     if Meteor.user() and samePlace and Meteor.isClient
       changeQueryParams('Bookmarked', true)
-      console.log 'Linking because samePlace', samePlace, queryParams, Meteor.user(), decodeURIComponent queryParams.from
+     #console.log'Linking because samePlace', samePlace, queryParams.from, Meteor.user(), decodeURIComponent queryParams.from
       # otherwise leads to a flip/flop issue when two tabs are open
       # how do we detect if this was the first time the tab opened?
       # by using a queryParams... for already called bookmarked
       Meteor.call "Linking",
-        from: decodeURIComponent queryParams.from
+        from: queryParams.from
         to: 'Bookmarks'
         meta:
           title: queryParams.lastTitle
       , (error, result) ->
         if error
-         console.log "error", error
+        #console.log"error", error
         if result
-         console.log 'result', result
+        #console.log'result', result
   {
-    user: Meteor.user()
+    user: user
     from: decodeURIComponent queryParams.from
     to: decodeURIComponent queryParams.to
     content: content

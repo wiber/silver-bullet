@@ -7,8 +7,8 @@ chrome.storage.sync.get("last", function(lastPlace) {
     lastPlace.url.replace('0','+').replace('#','+')
     encoded = encodeURIComponent(lastPlace.url)
     encodedTitle = lastPlace.title.replace('0','+').replace('#','+').replace('(','+').replace(')','+')
-    console.log("lastPlace transformed", lastPlace,encoded);
-    console.log(encoded, ' is where from ', decodeURIComponent(encoded), ' lastStep', lastPlace.title, encodedTitle);
+console.log("lastPlace transformed", lastPlace,encoded);
+console.log(encoded, ' is where from ', decodeURIComponent(encoded), ' lastStep', lastPlace.title, encodedTitle);
     iFrame = document.getElementById('linkstateframe')
     iFrame.src = websiteURL + "about?from=" + encoded + "&lastTitle=" + encodedTitle
 });
