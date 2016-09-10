@@ -42,6 +42,8 @@ exports.selectedContainer = createContainer ((props) ->
     unless newProps.value?
       # set defaults if none set already
       if user[props.type+'Last']?
+        # charming solution that flickers rightly
+        # on recompute it goes from 'last project' to just the right title
         newProps.value =
           label: 'Your last project was '+ user[props.type+'Last']
           value: dictWithCreatedAt[user[props.type+'Last']]
