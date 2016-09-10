@@ -61,7 +61,7 @@ AboutCard = React.createClass
                         N.origin = mark
                         [N.firstUser, ... , N.lastUser] = N.deChaosUsers
                         [N.firstLink, ... , N.lastLink] = N.deChaos
-                        console.log N, 'N node'
+                        #console.log N, 'N node'
                         k.build GridTile,
                           key: mark+'Node'
                           title: N.currentTitle #m.body #target.title#FromLink
@@ -92,7 +92,7 @@ exports.AboutCard = createContainer ((props) ->
   N = Nodes.findOne(linkstate.store props.from)
   if N?
     newProps.node = N
-  console.log newProps.node, Nodes.find({}).count()
+  #console.log newProps.node, Nodes.find({}).count()
   props = _.extend {}, props, newProps
   props
 ), AboutCard

@@ -56,10 +56,7 @@ TextAbout = React.createClass
               meta: content
            #console.logpayload,'console.log payload'
             content.weight = e.keyCode - 48
-            Meteor.call "Linking",
-              from: FlowRouter.getQueryParam('from')
-              to: FlowRouter.getQueryParam('to')
-              meta: content
+            Meteor.call "Linking", payload
             e.target.value = ''
             e.preventDefault()
             window.to.refs.to.focus()

@@ -12,6 +12,7 @@
 @tumbalizrKey = "5VmUR42gc4eGdLjBnZH2BRXa"
 Meteor.methods
   Linking: (link) ->
+    console.log 'Linking', link, Meteor.user().hits
     to = link.to
     from = link.from
     META = link.meta
@@ -101,9 +102,6 @@ Meteor.methods
       to: 'Bookmarks'
       meta:
         title: Meteor.user().services.facebook.name+' on Facebook'
-    , (error, result) ->
-      if error
-      #console.log"error", error
 
   resetUser: () ->
     user = Meteor.user()
