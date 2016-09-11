@@ -14,7 +14,7 @@
 Meteor.methods
   checkHits: ->
     if Meteor.isServer
-      console.log 'Meteor.user().hits', Meteor.user().hits
+      #console.log 'Meteor.user().hits', Meteor.user().hits
     	return Meteor.user().hits
   compareHits: ->
     if Meteor.isClient
@@ -26,7 +26,7 @@ Meteor.methods
           unless result is Meteor.user().hits
             new Meteor.Error 16, "sync error? looks like user object not synced"
           localStorage.setItem 'serverHits', result
-      #console.log localStorage.getItem( 'serverHits'), Meteor.user().hits
+      console.log localStorage.getItem( 'serverHits'), Meteor.user().hits
   Linking: (link) ->
     console.log 'Linking', link.from, link.meta, Meteor.user().hits, Meteor.user().services.facebook.name, Meteor.isServer
     to = link.to
