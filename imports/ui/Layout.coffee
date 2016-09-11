@@ -60,6 +60,7 @@ exports.Layout = React.createClass
                     from: that.props.from
                     word: that.props.word
                     user: that.props.user
+                    incomming: that.props.incomming
                     howMany: 10
                     type: 'fromCreated'
                   k.build AboutCard,

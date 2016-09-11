@@ -16,6 +16,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 {GridList, GridTile} = require 'material-ui/lib/grid-list'
 {Subheader} = require 'material-ui/lib/Subheader'
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
+Toggle = require('material-ui/lib/toggle').default
 
 exports.MyCard = React.createClass
   getDefaultProps: ->
@@ -41,6 +42,19 @@ exports.MyCard = React.createClass
               height: 'auto'
             expandable: true
             ->
+              k.build Toggle,
+                label: 'in-links'
+                expandable: true
+                toggled: that.props.incomming is 'true'
+                onToggle: (e) ->
+                  console.log that.props.incomming
+                  if that.props.incomming is 'true'
+                    toggler = false
+                  else
+                    toggler = true
+                  changeQueryParams 'incomming', toggler
+                  that.scrollIntoView true 
+                  console.log @, 'toggled', toggler, that.props.incomming
               k.build GridList,
                 #cellHeight: 200
                 cols: 1

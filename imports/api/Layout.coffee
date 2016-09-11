@@ -36,6 +36,7 @@ exports.containerLayout = createContainer ((props) ->
     user: user
     from: decodeURIComponent queryParams.from
     to: decodeURIComponent queryParams.to
+    incomming: queryParams.incomming
     content: content
     fromTitle: decodeURIComponent queryParams.lastTitle
     word: wordLanguages[language] # don't prematurely optimize!
