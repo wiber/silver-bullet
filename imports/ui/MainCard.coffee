@@ -27,11 +27,12 @@ exports.MainCard = React.createClass
         style: _.extend {}, style.card, style.mCard
         ->
           k.build CardHeader,
-            title: HERE.title
+            title: HERE.title,
             subtitle: that.props.word.MainCardSubtitle
             showExpandableButton: false
             onClick: (e) -> #that.handleToggle
-              changeQueryParams 'expandMainCard', !that.props.expanded
+              window.open HERE.meta.FromLink
+              #changeQueryParams 'expandMainCard', !that.props.expanded
           k.build CardMedia,
             style: style.overlayPercentage
             onClick: (e) ->

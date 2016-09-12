@@ -81,6 +81,7 @@ exports.MyCard = React.createClass
                                 left: 10 * m.weight + '%'
                                 position: 'absolute'
                                 opacity: 1
+                                borderRadius: '50%'
                               src: m.face
                             k.img
                               style: _.extend {}, style.webShot,

@@ -23,7 +23,7 @@ Meteor.publish 'reactableFrom', (howMany) ->
           $in: fromLast[0..howMany]
 
 Meteor.publish 'userData', ->
-  console.log @userId, 'wants user obj'
+  #console.log @userId, 'wants user obj'
   #if @userId
   return Meteor.users.find
     _id: @userId
