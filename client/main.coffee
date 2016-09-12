@@ -16,18 +16,12 @@ lastLogin = () ->
 sinceLogin = false
 if Meteor.loggingIn()
   sinceLogin = true
-  ##console.log 'Meteor.loggingIn() for ', Meteor.userId()
-  # link to self so
-  # we can add your link to the dropdown
 Meteor.startup ->
 	sinceLogin = true
 Tracker.autorun ->
   if Meteor.user() and sinceLogin
     lastLogin()
     sinceLogin = false
-
-
-
 
 WebFontConfig = google: families: [ 'Roboto:400,300,500:latin' ]
 do ->

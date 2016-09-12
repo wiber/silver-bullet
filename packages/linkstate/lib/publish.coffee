@@ -23,16 +23,14 @@ Meteor.publish 'reactableFrom', (howMany) ->
           $in: fromLast[0..howMany]
 
 Meteor.publish 'userData', ->
-  ##console.log @userId, 'wants user obj'
-  user = {}
-  if @userId
-    user = Meteor.users.find
-      _id: @userId
-    ,
-      fields:
-        'services.facebook.accessToken': 0
-        'services.resume': 0
-  user
+  console.log @userId, 'wants user obj'
+  #if @userId
+  return Meteor.users.find
+    _id: @userId
+  ,
+    fields:
+      'services.facebook.accessToken': 0
+      'services.resume': 0
 
 Meteor.publish 'to', (URL) ->
   ##console.log Edges.find().fetch().length, 'just len'
