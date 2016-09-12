@@ -55,7 +55,12 @@ TextAbout = React.createClass
               meta: content
            #console.logpayload,'console.log payload'
             content.weight = e.keyCode - 48
-            Meteor.call "Linking", payload
+            Meteor.call "Linking", payload, (error, result) ->
+              if error
+                console.log "error", error
+              if result
+                console.log result, 'returned from linking'
+
             e.target.value = ''
             e.preventDefault()
             window.to.refs.to.focus()

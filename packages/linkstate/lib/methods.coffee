@@ -27,7 +27,7 @@ Meteor.methods
           unless result is Meteor.user().hits
             new Meteor.Error 16, "sync error? looks like user object not synced"
           localStorage.setItem 'serverHits', result
-          console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, 'compareHits withResult'
+          console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, result is Meteor.user().hits,'compareHits withResult'
       #console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, 'compareHits without'
   Linking: (link) ->
     # had strange error of non synced object..
