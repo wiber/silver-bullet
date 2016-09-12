@@ -13,21 +13,28 @@
 
 Meteor.methods
   checkHits: ->
+    hits = Meteor.user().hits
     if Meteor.isServer
-      #console.log 'Meteor.user().hits', Meteor.user().hits
-    	return Meteor.user().hits
+      console.log 'Meteor.user().hits', hits, 'checkHits server'
+  	  return hits
   compareHits: ->
     if Meteor.isClient
       Meteor.call "checkHits", (error, result) ->
         if error
           console.log "error", error
         if result
-          console.log result, Meteor.user().hits, result is Meteor.user().hits, 'because it should be'
+          #console.log result, Meteor.user().hits, result is Meteor.user().hits, 'because it should be'
           unless result is Meteor.user().hits
             new Meteor.Error 16, "sync error? looks like user object not synced"
           localStorage.setItem 'serverHits', result
-      console.log localStorage.getItem( 'serverHits'), Meteor.user().hits
+          console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, 'compareHits withResult'
+      #console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, 'compareHits without'
   Linking: (link) ->
+    # had strange error of non synced object..
+    # when does sub need to be called and how long does it stay ?
+    if Meteor.isClient
+    	Meteor.subscribe "userData"
+    Meteor.call "compareHits"
     console.log 'Linking', link.from, link.meta, Meteor.user().hits, Meteor.user().services.facebook.name, Meteor.isServer
     to = link.to
     from = link.from
