@@ -43,9 +43,10 @@ exports.MyCard = React.createClass
             expandable: true
             ->
               k.build Toggle,
-                label: that.props.incomming
+                label: that.props.incomming or 'see links to or from this place'
                 expandable: true
                 toggled: that.props.incomming is 'incomming'
+                labelPosition: 'right'
                 onToggle: (e) ->
                   console.log that.props.incomming
                   if that.props.incomming is 'incomming'

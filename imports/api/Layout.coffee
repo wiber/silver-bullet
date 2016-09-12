@@ -9,9 +9,9 @@ exports.containerLayout = createContainer ((props) ->
   content = decodeURIComponent queryParams.content
   if content is 'undefined'
     content = ''
- #console.logqueryParams, FlowRouter.getQueryParam('Bookmarked'), Meteor.user().hits
-  Meteor.subscribe "userData"
-  Meteor.call "compareHits"
+  #console.logqueryParams, FlowRouter.getQueryParam('Bookmarked'), Meteor.user().hits
+  #Meteor.subscribe "userData"
+  #Meteor.call "compareHits"
   user = Meteor.user()
   unless FlowRouter.getQueryParam('Bookmarked')
     samePlace = false
