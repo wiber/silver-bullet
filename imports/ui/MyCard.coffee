@@ -43,24 +43,28 @@ exports.MyCard = React.createClass
             expandable: true
             ->
               k.build Toggle,
-                label: 'in-links'
+                label: that.props.incomming
                 expandable: true
-                toggled: that.props.incomming is 'true'
+                toggled: that.props.incomming is 'incomming'
                 onToggle: (e) ->
                   console.log that.props.incomming
-                  if that.props.incomming is 'true'
-                    toggler = false
+                  if that.props.incomming is 'incomming'
+                    toggler = 'outgoing'
                   else
-                    toggler = true
+                    toggler = 'incomming'
                   changeQueryParams 'incomming', toggler
-                  that.scrollIntoView true 
-                  console.log @, 'toggled', toggler, that.props.incomming
+                  e.target.scrollIntoView true
+                  e.target.blur()
+                  console.log 'toggled', toggler, that.props.incomming
               k.build GridList,
                 #cellHeight: 200
                 cols: 1
                 ->
                   if that.props?.user?.out?[linkstate.store that.props.from]?
-                    out = that.props.user.out[linkstate.store that.props.from]
+                    if that.props.incomming is 'outgoing'
+                      out = that.props.user.in[linkstate.store that.props.from]
+                    else
+                      out = that.props.user.out[linkstate.store that.props.from]
                     n = 0
                     for mark in linkstate.sortByKeysTime(out, that.props.howMany)
                       target = out[mark]
