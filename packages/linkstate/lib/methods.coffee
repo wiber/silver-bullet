@@ -32,10 +32,8 @@ Meteor.methods
   Linking: (link) ->
     # had strange error of non synced object..
     # when does sub need to be called and how long does it stay ?
-    if Meteor.isClient
-    	Meteor.subscribe "userData"
-    Meteor.call "compareHits"
-    console.log 'Linking', link.from, link.meta, Meteor.user().hits, Meteor.user().services.facebook.name, Meteor.isServer
+    this.unblock()
+    console.log 'Linking',@isSimulation, link.from, link.meta, Meteor.user().hits, Meteor.user().services.facebook.name, Meteor.isServer
     to = link.to
     from = link.from
     META = link.meta
@@ -62,11 +60,9 @@ Meteor.methods
     edge.meta.ScreenshotUrl = "https://api.thumbalizr.com/?url="+from+"&width=250&api_key="+tumbalizrKey
     edge.author = Meteor.userId()
     edge.createdAt = time
-    #  localStorage.setItem( linked, JSON.stringify( edge ) );
     username = Meteor.user().profile.name
     setEdgeIn = {}
     setEdgeOut = {}
-    # because these are like votes, you get a say about each link
     setEdgeIn['in.' + FROM + '.' + username] = edge
     edge.title = META.title or TO # because we're in TO this
     if Meteor.isServer
@@ -84,29 +80,22 @@ Meteor.methods
     ,
       $set: setEdgeOut
     setIt = {}
-    #setIt['when.'+TO] = time
-    #setIt['when.'+FROM] = time
     setIt.edited = time
     if from not in categoryTypes
-     #console.log 'not from category', from, categoryTypes
       setIt.fromLast = from
     if to not in categoryTypes
       setIt.toLast = to
-     #console.log 'not from category', to, categoryTypes
-    #setIt['timeTo.'+TO] = time
-    #setIt['timeFrom.'+FROM] = time
-    #setIt['fromCreated.'+FROM] = edge
-    #setIt['toCreated.'+TO] = edge
     setIt['in.'+FROM+'.'+TO] = edge
     setIt['out.'+TO+'.'+FROM] = edge
-    # this might be better than Jump-List
-    #setIt['lastConnectedTo'] = TO
     Meteor.users.update # we need to know what our last connection was
       _id: Meteor.userId()
     ,
       $set: setIt
       $inc:
         'hits': 1
+    if Meteor.isClient
+    	Meteor.subscribe "userData"
+    Meteor.call "compareHits"
    #console.log from, to, META,setIt.fromLast, Meteor.user().hits, Nodes.find().count(), 'Linking times'
   # defines categoryTypes and ensures they're in the right place
   setupUser: () ->

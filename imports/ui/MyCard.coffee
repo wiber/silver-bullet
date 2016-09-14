@@ -48,15 +48,11 @@ exports.MyCard = React.createClass
                 toggled: that.props.incomming is 'incomming'
                 labelPosition: 'right'
                 onToggle: (e) ->
-                  console.log that.props.incomming
                   if that.props.incomming is 'incomming'
                     toggler = 'outgoing'
                   else
                     toggler = 'incomming'
                   changeQueryParams 'incomming', toggler
-                  e.target.scrollIntoView true
-                  e.target.blur()
-                  console.log 'toggled', toggler, that.props.incomming
               k.build GridList,
                 #cellHeight: 200
                 cols: 1
