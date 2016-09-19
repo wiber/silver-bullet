@@ -6,7 +6,15 @@ chrome.storage.sync.get("last", function(lastPlace) {
         var parts = [];
         for (var i in obj) {
             if (obj.hasOwnProperty(i)) {
-                parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(obj[i].replace(/\W/g,' ')));
+              // one way to handle router error on () and other unencoded chars
+              //spec = obj[i].replace(/\W/g,' ')
+
+              if (obj[i].indexOf('(') > 0){
+                spec = obj[i].replace(/\W/g,' ')
+              } else {
+                spec = obj[i]
+              }
+                parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(spec));
             }
         }
         return parts.join("&");
