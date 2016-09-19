@@ -6,7 +6,7 @@ chrome.storage.sync.get("last", function(lastPlace) {
         var parts = [];
         for (var i in obj) {
             if (obj.hasOwnProperty(i)) {
-                parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(obj[i].replace(/\W/g,'_')));
+                parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(obj[i].replace(/\W/g,' ')));
             }
         }
         return parts.join("&");

@@ -65,20 +65,23 @@ Meteor.methods
     setEdgeOut = {}
     setEdgeIn['in.' + FROM + '.' + username] = edge
     edge.title = META.title or TO # because we're in TO this
-    if Meteor.isServer
-      linked = Edges.insert(edge)
+
     setEdgeIn.title = edge.title
-    toNodeId = Nodes.upsert
-      _id: TO
-    , # second argument to upsert "," is at same level, returns are free
-      $set: setEdgeIn # set incoming edge where we're going TO impact
+
     edge.title = META.title or FROM # because we're out FROM this
     setEdgeOut['out.' + TO + '.' + username] = edge
     setEdgeOut.title = edge.title
-    fromNodeId = Nodes.upsert
-      _id: FROM
-    ,
-      $set: setEdgeOut
+    unless Meteor.isClient # Meteor.isSimulation
+      fromNodeId = Nodes.upsert
+        _id: FROM
+      ,
+        $set: setEdgeOut
+      toNodeId = Nodes.upsert
+        _id: TO
+      , # second argument to upsert "," is at same level, returns are free
+        $set: setEdgeIn # set incoming edge where we're going TO impact
+      linked = Edges.insert(edge)
+      console.log fromNodeId, toNodeId, linked, 'ids serverside', new Date()
     setIt = {}
     setIt.edited = time
     if from not in categoryTypes
@@ -87,17 +90,19 @@ Meteor.methods
       setIt.toLast = to
     setIt['in.'+FROM+'.'+TO] = edge
     setIt['out.'+TO+'.'+FROM] = edge
-    Meteor.users.update # we need to know what our last connection was
-      _id: Meteor.userId()
-    ,
-      $set: setIt
-      $inc:
-        'hits': 1
+    console.log UserHandle?, UserHandle?.ready(), 'UserHandle?.ready()'
+    # totally kills latency compensation on page load to avoid uncaught error in fast render
+    if Meteor.isServer or UserHandle?.ready()
+      Meteor.users.update # we need to know what our last connection was
+        _id: Meteor.userId()
+      ,
+        $set: setIt
+        $inc:
+          'hits': 1
     if Meteor.isClient
     	Meteor.subscribe "userData"
-    Meteor.call "compareHits"
-   #console.log from, to, META,setIt.fromLast, Meteor.user().hits, Nodes.find().count(), 'Linking times'
-  # defines categoryTypes and ensures they're in the right place
+    if Meteor.isSimulation
+      Meteor.call "compareHits"
   setupUser: () ->
     Meteor.call "Linking",
       from: 'Bookmarks' # systems types.. need to be from bookmarks if they are to be picked up?
