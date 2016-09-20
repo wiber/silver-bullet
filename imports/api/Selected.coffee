@@ -62,5 +62,6 @@ exports.selectedContainer = createContainer ((props) ->
    #console.lognewProps.options.length, newProps, user
     new Meteor.Error 12, "something wrong with select options"
   props = _.extend {}, props, newProps
+  console.log props.type, props.value
   props
 ), Selected

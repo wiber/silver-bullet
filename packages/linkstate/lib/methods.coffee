@@ -30,9 +30,7 @@ Meteor.methods
           console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, result is Meteor.user().hits,'compareHits withResult'
       #console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, 'compareHits without'
   Linking: (link) ->
-    # had strange error of non synced object..
-    # when does sub need to be called and how long does it stay ?
-    this.unblock()
+    this.unblock() # allow next req without wait
     console.log 'Linking',@isSimulation, link.from, link.meta, Meteor.user().hits, Meteor.user().services.facebook.name, Meteor.isServer
     to = link.to
     from = link.from
@@ -43,7 +41,7 @@ Meteor.methods
       throw new Meteor.Error 1, "non-user tries to link"
       return 'nothing'
     unless to? and from?
-      throw new Meteor.Error 2, "something wrong with orientation "+from+' '+to
+      throw new Meteor.Error 2, "to or from is missing "+from+' '+to
       return 'nothing'
     if Meteor.user()?.services?.facebook?.id?
       META.face = "http://graph.facebook.com/v2.7/" + Meteor.user().services.facebook.id + "/picture?type=square"
@@ -63,13 +61,13 @@ Meteor.methods
     username = Meteor.user().profile.name
     setEdgeIn = {}
     setEdgeOut = {}
-    setEdgeIn['in.' + FROM + '.' + username] = edge
+    setEdgeIn['out.' + FROM + '.' + username] = edge
     edge.title = META.title or TO # because we're in TO this
 
     setEdgeIn.title = edge.title
 
     edge.title = META.title or FROM # because we're out FROM this
-    setEdgeOut['out.' + TO + '.' + username] = edge
+    setEdgeOut['in.' + TO + '.' + username] = edge
     setEdgeOut.title = edge.title
     unless Meteor.isClient # Meteor.isSimulation
       fromNodeId = Nodes.upsert
@@ -99,10 +97,11 @@ Meteor.methods
         $set: setIt
         $inc:
           'hits': 1
-    if Meteor.isClient
-    	Meteor.subscribe "userData"
+    #if Meteor.isClient
+    #	Meteor.subscribe "userData"
     if Meteor.isSimulation
       Meteor.call "compareHits"
+    return new Date()
   setupUser: () ->
     Meteor.call "Linking",
       from: 'Bookmarks' # systems types.. need to be from bookmarks if they are to be picked up?

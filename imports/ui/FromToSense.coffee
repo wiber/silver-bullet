@@ -59,9 +59,10 @@ TextAbout = React.createClass
               Meteor.call "Linking", payload, (error, result) ->
                 if error
                   console.log "error", error
-                if result
+                if result?
                   console.log result, 'returned from linking'
-                console.log 'no result?', result
+                else
+                  console.log 'no result?', result
             e.target.value = ''
             e.preventDefault()
             window.to.refs.to.focus()
