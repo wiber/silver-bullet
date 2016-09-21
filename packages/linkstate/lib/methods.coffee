@@ -79,7 +79,6 @@ Meteor.methods
       , # second argument to upsert "," is at same level, returns are free
         $set: setEdgeIn # set incoming edge where we're going TO impact
       linked = Edges.insert(edge)
-      console.log fromNodeId, toNodeId, linked, 'ids serverside', new Date()
     setIt = {}
     setIt.edited = time
     if from not in categoryTypes
