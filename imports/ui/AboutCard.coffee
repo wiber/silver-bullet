@@ -18,8 +18,6 @@ CardText =  require('material-ui/lib/card/card-text').default
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store} = require '../api/strings.coffee'
 AboutCard = React.createClass
-  handleToggle: (e) ->
-    changeQueryParams 'expandAboutCard', !@props.expanded
   render: ->
     that = this
     reactKup (k) ->
@@ -45,29 +43,47 @@ AboutCard = React.createClass
               if that.props.node?.in?
                 k.build GridList,
                   class: 'looplist'
+                  cols: 1
                   ->
                     N = {}
                     N.node = that.props.node
                     inLinks = that.props.node.in
                     outLinks = that.props.node.out
-                    N.deChaos = linkstate.sortByKeysTime(that.props.node.in, that.props.howMany)
-                    for mark in N.deChaos
-                      if inLinks[mark]?
-                        N.usersConnections = inLinks[mark]
+                    N.linksByTime = linkstate.sortByKeysTime(inLinks, that.props.howMany)
+                    console.log N
+                    for link in N.linksByTime
+                      if inLinks[link]?
+                        U = {}
+                        U.usersConnections = inLinks[link]
                         # assume that first element has the correct title
-                        N.currentTitle = N.usersConnections[Object.keys(N.usersConnections)[0]].meta.title
-                        N.deChaosUsers = linkstate.sortByKeysTime(N.usersConnections)
-
-                        N.origin = mark
-                        [N.firstUser, ... , N.lastUser] = N.deChaosUsers
-                        [N.firstLink, ... , N.lastLink] = N.deChaos
-                        #console.log N, 'N node'
+                        U.currentTitle = U.usersConnections[Object.keys(U.usersConnections)[0]].meta.title
+                        U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
+                        U.origin = link
+                        [U.firstUser, ... , U.lastUser] = U.linksByTimeUsers
+                        [U.firstLink, ... , U.lastLink] = N.linksByTime
+                        #console.log U, 'Users node'
                         k.build GridTile,
-                          key: mark+'Node'
-                          title: N.currentTitle #m.body #target.title#FromLink
-                          subtitle: N.firstUser
+                          key: link+'Node'
+                          title: U.currentTitle #m.body #target.title#FromLink
+                          subtitle: U.firstUser
                           ->
-                            k.span N.currentTitle
+                            counted = 0
+                            for user in U.linksByTimeUsers
+                              vote = U.usersConnections[user]
+                              console.log vote#, U.usersConnections
+                              size = style.scalars.screenshotWidth
+                              if vote.meta?
+                                k.img
+                                  style: _.extend {},# style.webShot,
+                                    top: counted *(size / 5)
+                                    width: '10%' #style.scalars.screenshotWidth / 10
+                                    left: 10 * vote.meta.weight + '%'
+                                    position: 'absolute'
+                                    opacity: 1
+                                    borderRadius: '50%'
+                                  src: vote.meta.face
+                                counted++
+                            k.span ''#U.currentTitle
                         n= 0
                         for key, node of that.props.node.in
                           #console.log key, node

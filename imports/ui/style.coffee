@@ -5,6 +5,7 @@ scalars =
   screenshotWidth: 250
 
 exports.style =
+  scalars: scalars
   base:
     #background: 'rgba(54, 99, 25, 0.05)'
     height: '100%'
