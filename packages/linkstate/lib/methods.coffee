@@ -88,7 +88,7 @@ Meteor.methods
       setIt.toLast = to
     setIt['in.'+FROM+'.'+TO] = edge
     setIt['out.'+TO+'.'+FROM] = edge
-    console.log UserHandle?, UserHandle?.ready(), 'UserHandle?.ready()'
+    #console.log UserHandle?, UserHandle?.ready(), 'UserHandle?.ready()'
     # totally kills latency compensation on page load to avoid uncaught error in fast render
     if Meteor.isServer or UserHandle?.ready()
       Meteor.users.update # we need to know what our last connection was
