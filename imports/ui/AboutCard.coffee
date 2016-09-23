@@ -52,7 +52,14 @@ AboutCard = React.createClass
                     N.outLinks = that.props.node.out
                     N.allLinks = _.extend {}, N.inLinks, N.outLinks
                     N.linksByTime = linkstate.sortByKeysTime(N.allLinks, that.props.howMany)
-                    for timeLink in N.linksByTime
+                    N.linkSort = {}
+                    for link in Object.keys(N.allLinks)
+                      N.sorts = linkstate.sortByKeysTime(N.allLinks[link],3)
+                      N.recent = N.sorts[0]
+                      N.linkSort[link] = N.allLinks[link][N.recent]
+                    N.sortedLinks = linkstate.sortByKeysTime N.linkSort, that.props.howMany
+
+                    for timeLink in N.sortedLinks
                       D = {} # this link which has many users votes
                       D.link = timeLink
                       D.users = N.allLinks[timeLink]
@@ -61,7 +68,8 @@ AboutCard = React.createClass
                       console.log D
                       k.build GridTile,
                         key: timeLink+'Node'
-                        title: D.m.FromLink
+                        title: D.m.title
+                        subtitle: D.m.ToLink
                         ->
                           U = {} # users votes loop object
                           U.usersConnections = N.inLinks[D.link]
@@ -89,9 +97,10 @@ AboutCard = React.createClass
                                     width: '10%' #style.scalars.screenshotWidth / 10
                                     left: 10 * V.vote.meta.weight + '%'
                                     position: 'absolute'
-                                    opacity: 1
+                                    opacity: .5
                                     borderRadius: '50%'
                                   src: V.vote.meta.face
+                                  # clicking on one should move to /user on facebook
                               V.counted++
                       #if N.inLinks[timeLink]?
                       #  console.log 'incomming link by', Object.keys(N.inLinks[timeLink]) , D.firstUsersLink
@@ -108,83 +117,3 @@ exports.AboutCard = createContainer ((props) ->
   props = _.extend {}, props, newProps
   props
 ), AboutCard
-
-
-###
-U = {}
-U.usersConnections = N.inLinks[link]
-# assume that first element has the correct title
-# TODO rewrite
-U.currentTitle = U.usersConnections[Object.keys(U.usersConnections)[0]].meta.title
-U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
-U.origin = link
-[U.firstUser, ... , U.lastUser] = U.linksByTimeUsers
-[U.firstLink, ... , U.lastLink] = N.linksByTime
-console.log U, 'Users node'
-vote = U.usersConnections[user]
-console.log vote#, U.usersConnections
-size = style.scalars.screenshotWidth
-if vote.meta?
-  k.span
-    style:
-      top: (counted + 0.25) * (size / 5)
-      position: 'absolute'
-    vote.meta.body
-  k.img
-    style: _.extend {},# style.webShot,
-      top: counted *(size / 5)
-      width: '10%' #style.scalars.screenshotWidth / 10
-      left: 10 * vote.meta.weight + '%'
-      position: 'absolute'
-      opacity: 1
-      borderRadius: '50%'
-    src: vote.meta.face
-  counted++
-  ###
-###
-  for link in N.linksByTime
-    console.log link, N.allLinks[link]
-    if N.inLinks[link]?
-      U = {}
-      U.usersConnections = N.inLinks[link]
-      # assume that first element has the correct title
-      # TODO rewrite
-      U.currentTitle = U.usersConnections[Object.keys(U.usersConnections)[0]].meta.title
-      U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
-      U.origin = link
-      [U.firstUser, ... , U.lastUser] = U.linksByTimeUsers
-      [U.firstLink, ... , U.lastLink] = N.linksByTime
-      console.log U, 'Users node'
-      k.build GridTile,
-        key: link+'Node'
-        title: U.currentTitle #m.body #target.title#FromLink
-        subtitle: U.origin
-        ->
-          counted = 0
-          for user in U.linksByTimeUsers
-            vote = U.usersConnections[user]
-            console.log vote#, U.usersConnections
-            size = style.scalars.screenshotWidth
-            if vote.meta?
-              k.span
-                style:
-                  top: (counted + 0.25) * (size / 5)
-                  position: 'absolute'
-                vote.meta.body
-              k.img
-                style: _.extend {},# style.webShot,
-                  top: counted *(size / 5)
-                  width: '10%' #style.scalars.screenshotWidth / 10
-                  left: 10 * vote.meta.weight + '%'
-                  position: 'absolute'
-                  opacity: 1
-                  borderRadius: '50%'
-                src: vote.meta.face
-              counted++
-          k.span ''#U.currentTitle
-      n= 0
-      for key, node of that.props.node.in
-        #console.log key, node
-        if that.props.node.out? and that.props.node.out[key]
-          #console.log 'reciprical link', key # that.props.node.out[key],
-          n++ ###
