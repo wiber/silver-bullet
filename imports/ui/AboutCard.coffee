@@ -45,63 +45,57 @@ AboutCard = React.createClass
                   class: 'looplist'
                   cols: 1
                   ->
-                    N = {}
+                    N = {} # the node we're on
                     N.node = that.props.node
-                    inLinks = that.props.node.in
-                    outLinks = that.props.node.out
-                    N.linksByTime = linkstate.sortByKeysTime(inLinks, that.props.howMany)
-                    console.log N
-                    for link in N.linksByTime
-                      if inLinks[link]?
-                        U = {}
-                        U.usersConnections = inLinks[link]
-                        # assume that first element has the correct title
-                        U.currentTitle = U.usersConnections[Object.keys(U.usersConnections)[0]].meta.title
-                        U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
-                        U.origin = link
-                        [U.firstUser, ... , U.lastUser] = U.linksByTimeUsers
-                        [U.firstLink, ... , U.lastLink] = N.linksByTime
-                        #console.log U, 'Users node'
-                        k.build GridTile,
-                          key: link+'Node'
-                          title: U.currentTitle #m.body #target.title#FromLink
-                          subtitle: U.firstUser
-                          ->
-                            counted = 0
+
+                    N.inLinks = that.props.node.in
+                    N.outLinks = that.props.node.out
+                    N.allLinks = _.extend {}, N.inLinks, N.outLinks
+                    N.linksByTime = linkstate.sortByKeysTime(N.allLinks, that.props.howMany)
+                    for timeLink in N.linksByTime
+                      D = {} # this link which has many users votes
+                      D.link = timeLink
+                      D.users = N.allLinks[timeLink]
+                      D.firstUsersLink = D.users[Object.keys(D.users)[0]]
+                      D.m = D.firstUsersLink.meta
+                      console.log D
+                      k.build GridTile,
+                        key: timeLink+'Node'
+                        title: D.m.FromLink
+                        ->
+                          U = {} # users votes loop object
+                          U.usersConnections = N.inLinks[D.link]
+
+                          if N.inLinks?[D.link]?
+                            U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
+                            console.log U
+                            V = {}
+                            V.counted = 0
                             for user in U.linksByTimeUsers
-                              vote = U.usersConnections[user]
-                              console.log vote#, U.usersConnections
-                              size = style.scalars.screenshotWidth
-                              if vote.meta?
+                              V.user = user
+
+                              V.vote = D.users[V.user]
+                              V.size = size = style.scalars.screenshotWidth
+                              console.log V
+                              if V.vote.meta?
+                                k.span
+                                  style:
+                                    top: (V.counted + 0.25) * (V.size / 5)
+                                    position: 'absolute'
+                                  V.vote.meta.body
                                 k.img
                                   style: _.extend {},# style.webShot,
-                                    top: counted *(size / 5)
+                                    top: V.counted *(V.size / 5)
                                     width: '10%' #style.scalars.screenshotWidth / 10
-                                    left: 10 * vote.meta.weight + '%'
+                                    left: 10 * V.vote.meta.weight + '%'
                                     position: 'absolute'
                                     opacity: 1
                                     borderRadius: '50%'
-                                  src: vote.meta.face
-                                counted++
-                            k.span ''#U.currentTitle
-                        n= 0
-                        for key, node of that.props.node.in
-                          #console.log key, node
-                          if that.props.node.out? and that.props.node.out[key]
-                            #console.log 'reciprical link', key # that.props.node.out[key],
-                            n++
-              k.span that.props.from, ' '
-              k.span that.props.to
-          k.build CardActions,
-            expandable: false
-            -> # return innerhtml, tags on here before
-              k.build FlatButton,
-                style:
-                  height: 0
-                label: 'Tab here to go back to "From"'
-                onFocus: () ->
-                  # TODO avoid global here..
-                  window.from.refs.from.focus()
+                                  src: V.vote.meta.face
+                              V.counted++
+                      #if N.inLinks[timeLink]?
+                      #  console.log 'incomming link by', Object.keys(N.inLinks[timeLink]) , D.firstUsersLink
+                    console.log N
 
 exports.AboutCard = createContainer ((props) ->
   newProps = {}
@@ -114,3 +108,83 @@ exports.AboutCard = createContainer ((props) ->
   props = _.extend {}, props, newProps
   props
 ), AboutCard
+
+
+###
+U = {}
+U.usersConnections = N.inLinks[link]
+# assume that first element has the correct title
+# TODO rewrite
+U.currentTitle = U.usersConnections[Object.keys(U.usersConnections)[0]].meta.title
+U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
+U.origin = link
+[U.firstUser, ... , U.lastUser] = U.linksByTimeUsers
+[U.firstLink, ... , U.lastLink] = N.linksByTime
+console.log U, 'Users node'
+vote = U.usersConnections[user]
+console.log vote#, U.usersConnections
+size = style.scalars.screenshotWidth
+if vote.meta?
+  k.span
+    style:
+      top: (counted + 0.25) * (size / 5)
+      position: 'absolute'
+    vote.meta.body
+  k.img
+    style: _.extend {},# style.webShot,
+      top: counted *(size / 5)
+      width: '10%' #style.scalars.screenshotWidth / 10
+      left: 10 * vote.meta.weight + '%'
+      position: 'absolute'
+      opacity: 1
+      borderRadius: '50%'
+    src: vote.meta.face
+  counted++
+  ###
+###
+  for link in N.linksByTime
+    console.log link, N.allLinks[link]
+    if N.inLinks[link]?
+      U = {}
+      U.usersConnections = N.inLinks[link]
+      # assume that first element has the correct title
+      # TODO rewrite
+      U.currentTitle = U.usersConnections[Object.keys(U.usersConnections)[0]].meta.title
+      U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
+      U.origin = link
+      [U.firstUser, ... , U.lastUser] = U.linksByTimeUsers
+      [U.firstLink, ... , U.lastLink] = N.linksByTime
+      console.log U, 'Users node'
+      k.build GridTile,
+        key: link+'Node'
+        title: U.currentTitle #m.body #target.title#FromLink
+        subtitle: U.origin
+        ->
+          counted = 0
+          for user in U.linksByTimeUsers
+            vote = U.usersConnections[user]
+            console.log vote#, U.usersConnections
+            size = style.scalars.screenshotWidth
+            if vote.meta?
+              k.span
+                style:
+                  top: (counted + 0.25) * (size / 5)
+                  position: 'absolute'
+                vote.meta.body
+              k.img
+                style: _.extend {},# style.webShot,
+                  top: counted *(size / 5)
+                  width: '10%' #style.scalars.screenshotWidth / 10
+                  left: 10 * vote.meta.weight + '%'
+                  position: 'absolute'
+                  opacity: 1
+                  borderRadius: '50%'
+                src: vote.meta.face
+              counted++
+          k.span ''#U.currentTitle
+      n= 0
+      for key, node of that.props.node.in
+        #console.log key, node
+        if that.props.node.out? and that.props.node.out[key]
+          #console.log 'reciprical link', key # that.props.node.out[key],
+          n++ ###

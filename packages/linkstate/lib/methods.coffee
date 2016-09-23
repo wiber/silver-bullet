@@ -37,6 +37,8 @@ Meteor.methods
     META = link.meta
     unless META?
       META = {}
+    unless META.title?
+      META.title = to
     unless typeof Meteor.userId() is 'string'
       throw new Meteor.Error 1, "non-user tries to link"
       return 'nothing'
@@ -62,10 +64,8 @@ Meteor.methods
     setEdgeIn = {}
     setEdgeOut = {}
     setEdgeIn['out.' + FROM + '.' + username] = edge
-    edge.title = META.title or TO # because we're in TO this
-
+    edge.title = META.title# or TO # because we're in TO this
     setEdgeIn.title = edge.title
-
     edge.title = META.title or FROM # because we're out FROM this
     setEdgeOut['in.' + TO + '.' + username] = edge
     setEdgeOut.title = edge.title
