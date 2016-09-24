@@ -61,6 +61,7 @@ AboutCard = React.createClass
 
                     for timeLink in N.sortedLinks
                       D = {} # this link which has many users votes
+                      D.N = N
                       D.link = timeLink
                       D.users = N.allLinks[timeLink]
                       D.firstUsersLink = D.users[Object.keys(D.users)[0]]
@@ -72,20 +73,22 @@ AboutCard = React.createClass
                         subtitle: D.m.ToLink
                         ->
                           U = {} # users votes loop object
+                          U.D = D
                           U.usersConnections = N.inLinks[D.link]
 
                           if N.inLinks?[D.link]?
                             U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
                             console.log U
                             V = {}
+                            V.U = U
                             V.counted = 0
                             for user in U.linksByTimeUsers
                               V.user = user
-
-                              V.vote = D.users[V.user]
+                              console.log V
+                              V.vote = U.usersConnections[V.user]
                               V.size = size = style.scalars.screenshotWidth
                               console.log V
-                              if V.vote.meta?
+                              if V.vote?.meta?
                                 k.span
                                   style:
                                     top: (V.counted + 0.25) * (V.size / 5)

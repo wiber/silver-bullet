@@ -42,26 +42,12 @@ exports.MyCard = React.createClass
               height: 'auto'
             expandable: true
             ->
-              k.build Toggle,
-                label: that.props.incomming or 'see links to or from this place'
-                expandable: true
-                toggled: that.props.incomming is 'incomming'
-                labelPosition: 'right'
-                onToggle: (e) ->
-                  if that.props.incomming is 'incomming'
-                    toggler = 'outgoing'
-                  else
-                    toggler = 'incomming'
-                  changeQueryParams 'incomming', toggler
               k.build GridList,
                 #cellHeight: 200
                 cols: 1
                 ->
                   if that.props?.user?.out?[linkstate.store that.props.from]?
-                    if that.props.incomming is 'outgoing'
-                      out = that.props.user.in[linkstate.store that.props.from]
-                    else
-                      out = that.props.user.out[linkstate.store that.props.from]
+                    out = that.props.user.out[linkstate.store that.props.from]
                     n = 0
                     for mark in linkstate.sortByKeysTime(out, that.props.howMany)
                       target = out[mark]
@@ -87,20 +73,3 @@ exports.MyCard = React.createClass
                               from: m.FromLink
                               onClick: (e) ->
                                changeQueryParams 'from', e.target.getAttribute('from')
-###
-# TODO
-http://localhost:3000/about?lastTitle=Home%2520%257C%2520Daily%2520Mail%2520Online&content=&to=https%253A%252F%252Fwww.facebook.com%252Fapp_scoped_user_id%252F10154232419354595%252F&Bookmarked=true&expandMainCard=true&expandMyCard=true&expandAboutCard=true
-{@div, @span, @input, @img, @button} = React.DOM
-@cond = (a,b,c) -> if a then b() else c?()
-@createView = (spec) ->
-  React.createFactory(React.createClass(spec))
-#@Transition = React.createFactory(React.addons.CSSTransitionGroup)
-div
-  key: 'view'
-  className: 'event view'
-  span {},'here now'
-  img
-    className: 'cover'
-  div
-    className: 'title row pointer'
-###
