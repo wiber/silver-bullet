@@ -26,3 +26,5 @@ youiest:linkstate
 blaze-html-templates
 peerlibrary:reactive-publish
 modules
+meteorhacks:kadira
+kadira:debug
