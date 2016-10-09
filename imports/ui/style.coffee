@@ -17,7 +17,7 @@ style =
     background: 'rgba(255, 255, 255, 0.8)'
     margin: '2em'
     padding: '1em'
-    maxWidth: '640'
+    maxWidth: 640
   mCard:
     background: 'rgba(255, 255, 255, .9)'
     marginTop: '25%'
