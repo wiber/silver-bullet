@@ -75,7 +75,6 @@ AboutCard = React.createClass
                           U = {} # users votes loop object
                           U.D = D
                           U.usersConnections = N.inLinks[D.link]
-
                           if N.inLinks?[D.link]?
                             U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
                             console.log U
@@ -94,15 +93,18 @@ AboutCard = React.createClass
                                     top: (V.counted + 0.25) * (V.size / 5)
                                     position: 'absolute'
                                   V.vote.meta.body
-                                k.img
-                                  style: _.extend {},# style.webShot,
-                                    top: V.counted *(V.size / 5)
-                                    width: '10%' #style.scalars.screenshotWidth / 10
-                                    left: 10 * V.vote.meta.weight + '%'
-                                    position: 'absolute'
-                                    opacity: .5
-                                    borderRadius: '50%'
-                                  src: V.vote.meta.face
+                                k.a
+                                  href: V.vote.meta.profileLink
+                                  target: '_blank'
+                                  k.img
+                                    style: _.extend {},# style.webShot,
+                                      top: V.counted *(V.size / 5)
+                                      width: '10%' #style.scalars.screenshotWidth / 10
+                                      left: 10 * V.vote.meta.weight + '%'
+                                      position: 'absolute'
+                                      opacity: .5
+                                      borderRadius: '50%'
+                                    src: V.vote.meta.face
                                   # clicking on one should move to /user on facebook
                               V.counted++
                       #if N.inLinks[timeLink]?
