@@ -28,7 +28,7 @@ exports.selectedContainer = createContainer ((props) ->
     if localStorage? and UserHandle.ready()
       writeUser(Meteor.user())
       window.setUserTime = new Date().getTime()
-      console.log 'writeUser',window.getUserTime, window.setUserTime, window.getUserTime - window.getUserTime
+      console.log 'writeUser',window.getUserTime, window.setUserTime, window.getUserTime - window.setUserTime
 
   if UserHandle? and UserHandle.ready()
     user = Meteor.user()
@@ -39,7 +39,7 @@ exports.selectedContainer = createContainer ((props) ->
       if typeof fromStorage is 'string' and fromStorage != ""
         user = JSON.parse(fromStorage)
         window.getUserTime = new Date().getTime()
-        console.log 'getUser',window.getUserTime, window.setUserTime, window.getUserTime - window.getUserTime
+        console.log 'getUser',window.getUserTime, window.setUserTime, window.getUserTime - window.setUserTime
     else
       user = {}
   directedTo = typeof props.to is 'string' and props.to.length >
