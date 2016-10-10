@@ -20,23 +20,17 @@ exports.selectedContainer = createContainer ((props) ->
   # find / set value from either qp or user object.
   # sync user.toLast with qp
   # change qp, set toLast with method, redraw box optimist
-  Meteor.subscribe "userData"
-
+  #Meteor.subscribe "userData"
   saveUser = ->
     if localStorage?
       slowWriteUser = (user)->
-        u1 = localStorage.user
         localStorage.setItem 'user', JSON.stringify(user)
-        u2 = localStorage.user
-        console.log u1 is u2
       writeUser = _.throttle slowWriteUser ,500
       if UserHandle.ready()
         user = Meteor.user()
         writeUser(user)
-        #console.log user, JSON.stringify(user)
         localStorage.setItem 'user', JSON.stringify(user)
       else
-        #console.log localStorage.user
         user = JSON.parse(localStorage.user)
   saveUser()
   if Meteor.isClient
@@ -47,7 +41,6 @@ exports.selectedContainer = createContainer ((props) ->
         user = JSON.parse(localStorage.user)
       else
         user = {}
-  console.log 'user is?',user?
   directedTo = typeof props.to is 'string' and props.to.length >
   # make value
   if !props[props.type]? and user?[props.type+'Last']?
@@ -55,7 +48,6 @@ exports.selectedContainer = createContainer ((props) ->
   if props.user?.out?
     dictWithCreatedAt = props.user.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
-   #console.log deChaos, dictWithCreatedAt
     for index,value of deChaos
       if typeof value is 'string' and value != 'undefined'
         selectItem =
@@ -64,7 +56,6 @@ exports.selectedContainer = createContainer ((props) ->
         if props[props.type] is dictWithCreatedAt[value].meta.FromLink
           newProps.value = selectItem
         newProps.options.push selectItem
-   #console.log newProps.options # was the options array well formed?
     unless newProps.value?
       # set defaults if none set already
       if user[props.type+'Last']? and props.type  is 'to'
@@ -75,21 +66,16 @@ exports.selectedContainer = createContainer ((props) ->
           value: dictWithCreatedAt[user[props.type+'Last']]
         # so one can link
         changeQueryParams props.type, user[props.type+'Last']
-        #newProps[props.type] = user[props.type+'Last']
-        #console.log newProps.value, FlowRouter.getQueryParam props.type, props[props.type], newProps[props.type]
       else
         Bookmarks = dictWithCreatedAt.Bookmarks
-        console.log 'Bookmarks',
         newProps.value =
-          label: Bookmarks.meta.title#'You first make Bookmarks'#+ user[props.type+'Last']
-          value: Bookmarks#deChaos['Bookmarks']# dictWithCreatedAt[user[props.type+'Last']]
+          label: Bookmarks.meta.title
+          value: Bookmarks
   # update queryparams unless we're fromt he same place
   if props[props.type] is not newProps[props.type]
     changeQueryParams props.type, newProps[props.type]
   if newProps.options.length < 2
-   #console.lognewProps.options.length, newProps, user
     new Meteor.Error 12, "something wrong with select options"
   props = _.extend {}, props, newProps
-  console.log props.type, props.value, user?.out?[props.from]?, dictWithCreatedAt,deChaos
   props
 ), Selected
