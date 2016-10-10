@@ -51,7 +51,7 @@ exports.selectedContainer = createContainer ((props) ->
     for index,value of deChaos
       if typeof value is 'string' and value != 'undefined'
         selectItem =
-          label: dictWithCreatedAt[value].title #linkstate.see value # same function as use
+          label: dictWithCreatedAt[value].meta.title #linkstate.see value # same function as use
           value: dictWithCreatedAt[value] # store whole object here
         if props[props.type] is dictWithCreatedAt[value].meta.FromLink
           newProps.value = selectItem
