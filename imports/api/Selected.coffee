@@ -11,6 +11,9 @@ Selected = require('../ui/Selected.coffee').Selected
 
 # goes through a simple loop that builds list of objects from a number of sources.
 
+slowWriteUser = (user)->
+  localStorage.setItem 'user', JSON.stringify(user)
+writeUser = _.throttle slowWriteUser ,500
 
 exports.selectedContainer = createContainer ((props) ->
   newProps = {}
@@ -21,26 +24,24 @@ exports.selectedContainer = createContainer ((props) ->
   # sync user.toLast with qp
   # change qp, set toLast with method, redraw box optimist
   #Meteor.subscribe "userData"
-  saveUser = ->
-    if localStorage?
-      slowWriteUser = (user)->
-        localStorage.setItem 'user', JSON.stringify(user)
-      writeUser = _.throttle slowWriteUser ,500
-      if UserHandle.ready()
-        user = Meteor.user()
-        writeUser(user)
-      else
-        user = JSON.parse(localStorage.user)
-  saveUser()
   if Meteor.isClient
-    if UserHandle.ready()
-      user = Meteor.user()
-    else
+    if localStorage? and UserHandle.ready()
+      writeUser(Meteor.user())
+      window.setUserTime = new Date().getTime()
+      console.log 'writeUser',window.getUserTime, window.setUserTime, window.getUserTime - window.getUserTime
+
+  if UserHandle? and UserHandle.ready()
+    user = Meteor.user()
+  else
+    if localStorage?
       fromStorage = localStorage.user
-      if fromStorage is 'string' and fromStorage.length > 1
-        user = JSON.parse(localStorage.user)
-      else
-        user = {}
+      console.log typeof fromStorage is 'string' , fromStorage.length > 1, fromStorage != ""
+      if typeof fromStorage is 'string' and fromStorage != ""
+        user = JSON.parse(fromStorage)
+        window.getUserTime = new Date().getTime()
+        console.log 'getUser',window.getUserTime, window.setUserTime, window.getUserTime - window.getUserTime
+    else
+      user = {}
   directedTo = typeof props.to is 'string' and props.to.length >
   # make value
   if !props[props.type]? and user?[props.type+'Last']?
