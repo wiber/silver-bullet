@@ -45,10 +45,10 @@ Meteor.methods
     unless to? and from?
       throw new Meteor.Error 2, "to or from is missing "+from+' '+to
       return 'nothing'
-    if Meteor.isServer
-      if Meteor.user()?.services?.facebook?.id?
-        META.face = "http://graph.facebook.com/v2.7/" + Meteor.user().services.facebook.id + "/picture?type=square"
-        META.profileLink = Meteor.user().services.facebook.link
+    #if Meteor.isServer
+    if Meteor.user()?.services?.facebook?.id?
+      META.face = "http://graph.facebook.com/v2.7/" + Meteor.user().services.facebook.id + "/picture?type=square"
+      META.profileLink = Meteor.user().services.facebook.link
     FROM = linkstate.store(from) # from.replace(/\./g,'%2E')
     TO = linkstate.store(to) #to.replace(/\./g,'%2E')#.split('/').join('.');
     time = new Date().getTime()
