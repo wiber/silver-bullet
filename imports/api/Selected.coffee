@@ -14,7 +14,14 @@ Selected = require('../ui/Selected.coffee').Selected
 slowWriteUser = (user)->
   localStorage.setItem 'user', JSON.stringify(user)
 writeUser = _.throttle slowWriteUser ,500
-
+timeTester = (type) ->
+  console.log type
+  , window.getUserTime
+  , window.setUserTime
+  , ' since subscription ready: '
+  , window.getUserTime - window.setUserTime
+  , ' localStorage takes to wake up:'
+  , window.beforeTime - window.getUserTime
 exports.selectedContainer = createContainer ((props) ->
   newProps = {}
   newProps.options = []
@@ -25,10 +32,12 @@ exports.selectedContainer = createContainer ((props) ->
   # change qp, set toLast with method, redraw box optimist
   #Meteor.subscribe "userData"
   if Meteor.isClient
+    unless window.beforeTime?
+      window.beforeTime = new Date().getTime()
     if localStorage? and UserHandle.ready()
       writeUser(Meteor.user())
       window.setUserTime = new Date().getTime()
-      console.log 'writeUser',window.getUserTime, window.setUserTime, window.getUserTime - window.setUserTime
+      timeTester('setUserTime')
 
   if UserHandle? and UserHandle.ready()
     user = Meteor.user()
@@ -39,7 +48,7 @@ exports.selectedContainer = createContainer ((props) ->
       if typeof fromStorage is 'string' and fromStorage != ""
         user = JSON.parse(fromStorage)
         window.getUserTime = new Date().getTime()
-        console.log 'getUser',window.getUserTime, window.setUserTime, window.getUserTime - window.setUserTime
+        timeTester('getUserTime')
     else
       user = {}
   directedTo = typeof props.to is 'string' and props.to.length >
