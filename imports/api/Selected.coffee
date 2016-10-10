@@ -29,7 +29,6 @@ exports.selectedContainer = createContainer ((props) ->
       if UserHandle.ready()
         user = Meteor.user()
         writeUser(user)
-        localStorage.setItem 'user', JSON.stringify(user)
       else
         user = JSON.parse(localStorage.user)
   saveUser()
@@ -37,7 +36,8 @@ exports.selectedContainer = createContainer ((props) ->
     if UserHandle.ready()
       user = Meteor.user()
     else
-      if localStorage?.user?
+      fromStorage = localStorage.user
+      if fromStorage is 'string' and fromStorage.length > 1
         user = JSON.parse(localStorage.user)
       else
         user = {}
