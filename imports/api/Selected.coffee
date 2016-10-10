@@ -21,15 +21,33 @@ exports.selectedContainer = createContainer ((props) ->
   # sync user.toLast with qp
   # change qp, set toLast with method, redraw box optimist
   Meteor.subscribe "userData"
-  if localStorage?
+
+  saveUser = ->
+    if localStorage?
+      slowWriteUser = (user)->
+        u1 = localStorage.user
+        localStorage.setItem 'user', JSON.stringify(user)
+        u2 = localStorage.user
+        console.log u1 is u2
+      writeUser = _.throttle slowWriteUser ,500
+      if UserHandle.ready()
+        user = Meteor.user()
+        writeUser(user)
+        #console.log user, JSON.stringify(user)
+        localStorage.setItem 'user', JSON.stringify(user)
+      else
+        #console.log localStorage.user
+        user = JSON.parse(localStorage.user)
+  saveUser()
+  if Meteor.isClient
     if UserHandle.ready()
       user = Meteor.user()
-      console.log user, JSON.stringify(user)
-      localStorage.setItem 'user', JSON.stringify(user)
     else
-      console.log localStorage.user
-      user = JSON.parse(localStorage.user)
-
+      if localStorage?.user?
+        user = JSON.parse(localStorage.user)
+      else
+        user = {}
+  console.log 'user is?',user?
   directedTo = typeof props.to is 'string' and props.to.length >
   # make value
   if !props[props.type]? and user?[props.type+'Last']?
@@ -60,10 +78,11 @@ exports.selectedContainer = createContainer ((props) ->
         #newProps[props.type] = user[props.type+'Last']
         #console.log newProps.value, FlowRouter.getQueryParam props.type, props[props.type], newProps[props.type]
       else
-        console.log dictWithCreatedAt?.Bookmarks?
+        Bookmarks = dictWithCreatedAt.Bookmarks
+        console.log 'Bookmarks',
         newProps.value =
-          label: 'You first make Bookmarks'#+ user[props.type+'Last']
-          value: deChaos['Bookmarks']# dictWithCreatedAt[user[props.type+'Last']]
+          label: Bookmarks.meta.title#'You first make Bookmarks'#+ user[props.type+'Last']
+          value: Bookmarks#deChaos['Bookmarks']# dictWithCreatedAt[user[props.type+'Last']]
   # update queryparams unless we're fromt he same place
   if props[props.type] is not newProps[props.type]
     changeQueryParams props.type, newProps[props.type]
