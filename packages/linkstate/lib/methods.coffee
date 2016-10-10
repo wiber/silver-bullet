@@ -31,7 +31,7 @@ Meteor.methods
       #console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, 'compareHits without'
   Linking: (link) ->
     this.unblock() # allow next req without wait
-    console.log 'Linking',@isSimulation, link.from, link.meta, Meteor.user().hits, Meteor.user().services.facebook.name, Meteor.isServer
+    console.log 'Linking',@isSimulation, link.from, link.meta, Meteor.user().hits, Meteor.user()?.services?.facebook?.name, Meteor.isServer
     to = link.to
     from = link.from
     META = link.meta
@@ -108,17 +108,19 @@ Meteor.methods
       from: 'Bookmarks' # systems types.. need to be from bookmarks if they are to be picked up?
       to: 'Bookmarks' # the thing we're defining
       meta:
-        title: 'Your Bookmarks' #Meteor.user().services.facebook.name+' on facebook'
+        title: 'Your Bookmarks'
     , (error, result) ->
      if error
        ##console.log "error", error
        new Meteor.Error 7, "Reply Does the User object have facebook credentials?"
-
-    Meteor.call "Linking",
-      from: Meteor.user().services.facebook.link
-      to: 'Bookmarks'
-      meta:
-        title: Meteor.user().services.facebook.name+' on Facebook'
+    if Meteor.user()?.services?.facebook?.link?
+      Meteor.call "Linking",
+        from: Meteor.user().services.facebook.link
+        to: 'Bookmarks'
+        meta:
+          title: Meteor.user().services.facebook.name+' on Facebook'
+    else
+      new Meteor.Error 22, "non facebook user tried to login"
 
   resetUser: () ->
     user = Meteor.user()
