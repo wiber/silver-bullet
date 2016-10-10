@@ -1,4 +1,5 @@
 # Selected.coffee
+# FIXME major weakness of implementation. brittle where it should be a dumb representation of user object
 # http://localhost:3000/about?from=http%253A%252F%252Fwww.dailymail.co.uk%252Fhome%252Findex.html&lastTitle=Home%2520%257C%2520Daily%2520Mail%2520Online&content=&to=https%253A%252F%252Fen.wikipedia.org%252Fwiki%252FBiot%252C_Alpes-Maritimes
 # Builds the FROM and TO boxes from user object and props from queryparams
 # from and to are plain decodeURIComponent urls which are then used to select defaultValue in the stateless ui component
@@ -20,7 +21,14 @@ exports.selectedContainer = createContainer ((props) ->
   # sync user.toLast with qp
   # change qp, set toLast with method, redraw box optimist
   Meteor.subscribe "userData"
-  user = Meteor.user()
+  if localStorage?
+    if UserHandle.ready()
+      user = Meteor.user()
+      console.log user, JSON.stringify(user)
+      localStorage.setItem 'user', JSON.stringify(user)
+    else
+      console.log localStorage.user
+      user = JSON.parse(localStorage.user)
 
   directedTo = typeof props.to is 'string' and props.to.length >
   # make value
@@ -52,6 +60,7 @@ exports.selectedContainer = createContainer ((props) ->
         #newProps[props.type] = user[props.type+'Last']
         #console.log newProps.value, FlowRouter.getQueryParam props.type, props[props.type], newProps[props.type]
       else
+        console.log dictWithCreatedAt?.Bookmarks?
         newProps.value =
           label: 'You first make Bookmarks'#+ user[props.type+'Last']
           value: deChaos['Bookmarks']# dictWithCreatedAt[user[props.type+'Last']]
@@ -62,5 +71,6 @@ exports.selectedContainer = createContainer ((props) ->
    #console.lognewProps.options.length, newProps, user
     new Meteor.Error 12, "something wrong with select options"
   props = _.extend {}, props, newProps
+  console.log props.type, props.value, user?.out?[props.from]?, dictWithCreatedAt,deChaos
   props
 ), Selected
