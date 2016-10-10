@@ -1,3 +1,4 @@
+require('react/package.json')
 {Meteor} = require('meteor/meteor')
 reactKup = require('react-kup')
 require '../imports/startup/configs/serviceconfiguration.js'

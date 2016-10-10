@@ -1,4 +1,5 @@
 #Template = require('meteor/templating')
+require("react/package.json")
 ReactiveVar = require('meteor/reactive-var')
 reactKup = require('react-kup')
 require('../imports/startup/routes.coffee')
