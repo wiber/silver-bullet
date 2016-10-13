@@ -44,7 +44,7 @@ exports.selectedContainer = createContainer ((props) ->
   else
     if localStorage?
       fromStorage = localStorage.user
-      console.log typeof fromStorage is 'string' , fromStorage.length > 1, fromStorage != ""
+      #console.log typeof fromStorage is 'string' , fromStorage.length > 1, fromStorage != ""
       if typeof fromStorage is 'string' and fromStorage != ""
         user = JSON.parse(fromStorage)
         window.getUserTime = new Date().getTime()

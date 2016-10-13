@@ -9,7 +9,12 @@
   'Bookmarks'
   'Categories'
 ]
-@tumbalizrKey = "5VmUR42gc4eGdLjBnZH2BRXa"
+
+
+if Meteor.settings.thumbalizr?
+  @thumbalizr =  Meteor.settings.thumbalizr
+else
+  @thumbalizr= "5VmUR42gc4eGdLjBnZH2BRXa"
 
 Meteor.methods
   checkHits: ->
@@ -59,7 +64,7 @@ Meteor.methods
     edge.meta = META
     edge.meta.FromLink = from
     edge.meta.ToLink = to
-    edge.meta.ScreenshotUrl = "https://api.thumbalizr.com/?url="+from+"&width=250&api_key="+tumbalizrKey
+    edge.meta.ScreenshotUrl = "https://api.thumbalizr.com/?url="+from+"&width=250&api_key="+thumbalizr
     edge.author = Meteor.userId()
     edge.createdAt = time
     username = Meteor.user().profile.name
