@@ -7,12 +7,38 @@ language = 'eng'
 exports.containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   content = decodeURIComponent queryParams.content
-  if content is 'undefined'
-    content = ''
+  user = Meteor.user()
+  ifBodyContentHere = (paramContent)->
+    if paramContent is 'undefined'
+      content = ''
+    if Meteor.isClient and UserHandle.ready()
+      to = linkstate.store queryParams.to
+      from = linkstate.store queryParams.from
+      lastFrom = user.lastFrom
+      switched = lastFrom != queryParams.from
+      #  console.log 'we switched', queryParams, lastFrom
+      console.log user,'userI'
+      cInExists = user.out[to]?[from]?
+      console.log cInExists, 'console.log cInExists'
+      if cInExists
+        cIn = user.out[to][from]
+        console.log 'cIn'
+        , cIn, content, cIn.meta.body
+        , typeof content
+        , content.length
+        , content.length == 0
+        , switched
+        if switched
+          content = cIn.meta.body
+          console.log content, 'cin content'
+          return cIn.meta.body
+    return content
+
+  content = ifBodyContentHere queryParams.content
+  console.log content, 'cin remade'
   #console.logqueryParams, FlowRouter.getQueryParam('Bookmarked'), Meteor.user().hits
   #Meteor.subscribe "userData"
   #Meteor.call "compareHits"
-  user = Meteor.user()
   unless FlowRouter.getQueryParam('Bookmarked')
     samePlace = false
     if Meteor.user()?.fromLast?

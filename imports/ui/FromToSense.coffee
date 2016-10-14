@@ -63,7 +63,8 @@ TextAbout = React.createClass
                   console.log result, 'returned from linking'
                 else
                   console.log 'no result?', result
-            e.target.value = ''
+            #e.target.value = '' # doesn't trigger rerender
+            changeQueryParams 'content', ''
             e.preventDefault()
             window.to.refs.to.focus()
           if e.keyCode is 13
@@ -83,4 +84,4 @@ TextAbout = React.createClass
         rows: 2
         id: 'textAbout'
         hintText: that.props.word.TextAboutHintText
-        defaultValue: that.props.content
+        value: that.props.content
