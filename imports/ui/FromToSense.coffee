@@ -48,8 +48,6 @@ TextAbout = React.createClass
             e.target.value = that.props.content
         onKeyDown: (e) ->
           if 48 <= e.keyCode <= 57 and !e.ctrlKey and !e.shiftKey and !e.altKey
-            #console.log e.keyCode, 'writing onKeyDown'
-           #console.logFlowRouter.getQueryParam('from'), FlowRouter.getQueryParam('to'), FlowRouter.getQueryParam('content'), "FlowRouter.getQueryParam('from')"
             content = {}
             content.body = FlowRouter.getQueryParam('content')
             # weight is between 0 and 9
@@ -67,7 +65,6 @@ TextAbout = React.createClass
                   console.log result, 'returned from linking'
                 else
                   console.log 'no result?', result
-            #e.target.value = '' # doesn't trigger rerender
             changeQueryParams 'content', ''
             e.preventDefault()
             window.to.refs.to.focus()
