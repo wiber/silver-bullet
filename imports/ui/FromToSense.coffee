@@ -42,6 +42,10 @@ TextAbout = React.createClass
     reactKup (k) ->
       k.build TextField,
         ref: 'MainCardTextInput'
+        onSelect: (e) ->
+          if e.target.value.length < 1
+            console.log that.props.content, e.target.value
+            e.target.value = that.props.content
         onKeyDown: (e) ->
           if 48 <= e.keyCode <= 57 and !e.ctrlKey and !e.shiftKey and !e.altKey
             #console.log e.keyCode, 'writing onKeyDown'
@@ -84,4 +88,4 @@ TextAbout = React.createClass
         rows: 2
         id: 'textAbout'
         hintText: that.props.word.TextAboutHintText
-        value: that.props.content
+        defaultValue: that.props.content

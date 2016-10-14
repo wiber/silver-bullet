@@ -20,7 +20,7 @@ exports.containerLayout = createContainer ((props) ->
       console.log user,'userI'
       cInExists = user.out[to]?[from]?
       console.log cInExists, 'console.log cInExists'
-      if cInExists
+      if cInExists and switched
         cIn = user.out[to][from]
         console.log 'cIn'
         , cIn, content, cIn.meta.body
@@ -28,11 +28,12 @@ exports.containerLayout = createContainer ((props) ->
         , content.length
         , content.length == 0
         , switched
-        if switched
-          content = cIn.meta.body
-          console.log content, 'cin content'
-          return cIn.meta.body
-    return content
+        changeQueryParams 'content', cIn, content, cIn.meta.body
+        content = cIn.meta.body
+        console.log content, 'cin content'
+        return content
+      else return ''
+
 
   content = ifBodyContentHere queryParams.content
   console.log content, 'cin remade'
