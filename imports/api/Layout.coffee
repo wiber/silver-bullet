@@ -8,6 +8,7 @@ exports.containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   content = decodeURIComponent queryParams.content
   user = Meteor.user()
+  # when textfield is empty, fill it with your comment on this connection, if exist
   ifBodyContentHere = (paramContent)->
     if paramContent is 'undefined'
       content = ''
@@ -16,13 +17,9 @@ exports.containerLayout = createContainer ((props) ->
       from = linkstate.store queryParams.from
       lastFrom = user.lastFrom
       switched = lastFrom != queryParams.from
-      #  console.log 'we switched', queryParams, lastFrom
-      console.log user,'userI'
       cInExists = user.out[to]?[from]?
-      console.log cInExists, 'console.log cInExists'
       if cInExists and switched
         cIn = user.out[to][from]
-        console.log 'cIn'
         , cIn, content, cIn.meta.body
         , typeof content
         , content.length
@@ -30,11 +27,8 @@ exports.containerLayout = createContainer ((props) ->
         , switched
         changeQueryParams 'content', cIn, content, cIn.meta.body
         content = cIn.meta.body
-        console.log content, 'cin content'
         return content
       else return ''
-
-
   content = ifBodyContentHere queryParams.content
   console.log content, 'cin remade'
   #console.logqueryParams, FlowRouter.getQueryParam('Bookmarked'), Meteor.user().hits

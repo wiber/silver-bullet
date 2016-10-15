@@ -51,7 +51,7 @@ exports.selectedContainer = createContainer ((props) ->
         timeTester('getUserTime')
     else
       user = {}
-  directedTo = typeof props.to is 'string' and props.to.length >
+  directedTo = typeof props.to is 'string' and props.to.length > 1
   # make value
   if !props[props.type]? and user?[props.type+'Last']?
     newProps[props.type] = user[props.type+'Last']
