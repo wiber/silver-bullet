@@ -20,11 +20,6 @@ exports.containerLayout = createContainer ((props) ->
       cInExists = user.out[to]?[from]?
       if cInExists and switched
         cIn = user.out[to][from]
-        , cIn, content, cIn.meta.body
-        , typeof content
-        , content.length
-        , content.length == 0
-        , switched
         changeQueryParams 'content', cIn, content, cIn.meta.body
         content = cIn.meta.body
         return content
