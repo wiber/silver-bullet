@@ -51,6 +51,7 @@ AboutCard = React.createClass
                     N.inLinks = that.props.node.in
                     N.outLinks = that.props.node.out
                     N.allLinks = _.extend {}, N.inLinks, N.outLinks
+
                     N.linksByTime = linkstate.sortByKeysTime(N.allLinks, that.props.howMany)
                     N.linkSort = {}
                     for link in Object.keys(N.allLinks)
@@ -72,6 +73,13 @@ AboutCard = React.createClass
                         title: D.m.title
                         subtitle: D.m.ToLink
                         ->
+                          k.img
+                            style: _.extend {}, style.webShot,
+                              width: '100%'
+                            src: D.m.ScreenshotUrl
+                            from: D.m.FromLink
+                            onClick: (e) ->
+                             changeQueryParams 'from', e.target.getAttribute('from')
                           U = {} # users votes loop object
                           U.D = D
                           U.usersConnections = N.inLinks[D.link]
@@ -110,7 +118,42 @@ AboutCard = React.createClass
                       #if N.inLinks[timeLink]?
                       #  console.log 'incomming link by', Object.keys(N.inLinks[timeLink]) , D.firstUsersLink
                     console.log N
+UrlTile = React.createClass
+  propTypes:
+    node: React.PropTypes.object
+    linkVotes: React.PropTypes.object
+    title: React.PropTypes.string
+  render: ->
+    that = this
+    console.log that.props, 'sent to UrlTile'
+    reactKup (k) ->
+      k.build GridTile,
+        key: timeLink+'Node'
+        title: that.props.node.meta.title
+        ->
+          k.img
+            style: _.extend {}, style.webShot,
+              width: '100%'
+            src: that.props.node.meta.ScreenshotUrl
+            from: that.props.node.meta.FromLink
+            onClick: (e) ->
+             changeQueryParams 'from', e.target.getAttribute('from')
+          _.each that.props.linkVotes, LinkVote
 
+LinkVote = React.createClass
+  propTypes:
+    linkVote: React.PropTypes.object
+  render: ->
+    that = this
+    console.log that.props, 'sent to linkVote'
+    reactKup (k) ->
+      k.img
+        style: _.extend {},# style.webShot,
+          left: 10 * that.props.weight + '%'
+          position: 'absolute'
+          opacity: 1
+          borderRadius: '50%'
+        src: that.props.face
 exports.AboutCard = createContainer ((props) ->
   newProps = {}
   if props.from?

@@ -26,9 +26,6 @@ exports.containerLayout = createContainer ((props) ->
       else return ''
   content = ifBodyContentHere queryParams.content
   console.log content, 'cin remade'
-  #console.logqueryParams, FlowRouter.getQueryParam('Bookmarked'), Meteor.user().hits
-  #Meteor.subscribe "userData"
-  #Meteor.call "compareHits"
   unless FlowRouter.getQueryParam('Bookmarked')
     samePlace = false
     if Meteor.user()?.fromLast?
