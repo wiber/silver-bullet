@@ -36,6 +36,12 @@ AboutCard = React.createClass
           k.build CardText,
             expandable: true
             ->
+              # we need to assemble the data struc
+              # what's needed for a card
+              # url, title
+              # and the votes that go on a link
+              # face, profile, blurb, direction
+              #
               # cycle through in links... render them and related out links
               # we are interested in what people are linking 'sending' to this place
               # can we make it less abstract? is the bidirectional association necessary?
@@ -73,6 +79,10 @@ AboutCard = React.createClass
                         title: D.m.title
                         subtitle: D.m.ToLink
                         ->
+
+                          U = {} # users votes loop object
+                          U.D = D
+                          U.usersConnections = N.inLinks[D.link]
                           k.img
                             style: _.extend {}, style.webShot,
                               width: '100%'
@@ -80,9 +90,6 @@ AboutCard = React.createClass
                             from: D.m.FromLink
                             onClick: (e) ->
                              changeQueryParams 'from', e.target.getAttribute('from')
-                          U = {} # users votes loop object
-                          U.D = D
-                          U.usersConnections = N.inLinks[D.link]
                           if N.inLinks?[D.link]?
                             U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
                             console.log U
@@ -96,6 +103,17 @@ AboutCard = React.createClass
                               V.size = size = style.scalars.screenshotWidth
                               console.log V
                               if V.vote?.meta?
+                                rightBullet = '0 50% 50% 0'
+                                leftBullet = '0 50% 50% 0'
+                                console.log that.props.from == V.vote.meta.FromLink
+                                , that.props.from, V.vote.meta.fromLink
+                                , V.vote
+                                , 'console.log that.props.from, V.vote'
+                                if that.props.from is V.vote.meta.FromLink
+                                  bullet = rightBullet
+                                else
+                                  bullet = leftBullet
+
                                 k.span
                                   style:
                                     top: (V.counted + 0.25) * (V.size / 5)
@@ -107,11 +125,11 @@ AboutCard = React.createClass
                                   k.img
                                     style: _.extend {},# style.webShot,
                                       top: V.counted *(V.size / 5)
-                                      width: '10%' #style.scalars.screenshotWidth / 10
+                                      #width: '10%' #style.scalars.screenshotWidth / 10
                                       left: 10 * V.vote.meta.weight + '%'
                                       position: 'absolute'
                                       opacity: .5
-                                      borderRadius: '50%'
+                                      borderRadius: bullet # '0 50% 50% 0'
                                     src: V.vote.meta.face
                                   # clicking on one should move to /user on facebook
                               V.counted++
@@ -154,6 +172,7 @@ LinkVote = React.createClass
           opacity: 1
           borderRadius: '50%'
         src: that.props.face
+
 exports.AboutCard = createContainer ((props) ->
   newProps = {}
   if props.from?
