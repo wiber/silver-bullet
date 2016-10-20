@@ -54,10 +54,11 @@ TextAbout = React.createClass
             payload =
               from: FlowRouter.getQueryParam('from')
               to: FlowRouter.getQueryParam('to')
-              meta: content
+              meta: e.target.value#content
             content.weight = e.keyCode - 48
+            console.log payload,'console.log payload'
+            , content.body, e, e.target, e.target.value, 'console.log content.body, e.target.value, e.target, '
             Meteor.defer ->
-              console.log payload,'console.log payload'
               Meteor.call "Linking", payload, (error, result) ->
                 if error
                   console.log "error", error
@@ -72,8 +73,8 @@ TextAbout = React.createClass
             alert that.props.word.digitAlert
             e.preventDefault()
         onKeyUp: (e) ->
-          e.target.value = e.target.value.replace(/\d+/g, '')
-          changeQueryParams 'content', e.target.value
+          updatedContent = e.target.value.replace(/\d+/g, '')
+          changeQueryParams 'content', updatedContent
         style:
           width: '100%'
           tabIndex: 0

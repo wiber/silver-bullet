@@ -15,6 +15,7 @@ slowWriteUser = (user)->
   localStorage.setItem 'user', JSON.stringify(user)
 writeUser = _.throttle slowWriteUser ,500
 timeTester = (type) ->
+  window[type] = new Date().getTime()
   console.log type
   , window.getUserTime
   , window.setUserTime
@@ -36,8 +37,8 @@ exports.selectedContainer = createContainer ((props) ->
       window.beforeTime = new Date().getTime()
     if localStorage? and UserHandle.ready()
       writeUser(Meteor.user())
-      window.setUserTime = new Date().getTime()
-      timeTester('setUserTime')
+      #window.setUserTime = new Date().getTime()
+      #timeTester('setUserTime')
 
   if UserHandle? and UserHandle.ready()
     user = Meteor.user()
@@ -47,8 +48,8 @@ exports.selectedContainer = createContainer ((props) ->
       #console.log typeof fromStorage is 'string' , fromStorage.length > 1, fromStorage != ""
       if typeof fromStorage is 'string' and fromStorage != ""
         user = JSON.parse(fromStorage)
-        window.getUserTime = new Date().getTime()
-        timeTester('getUserTime')
+        #window.getUserTime = new Date().getTime()
+        #timeTester('getUserTime')
     else
       user = {}
   directedTo = typeof props.to is 'string' and props.to.length > 1

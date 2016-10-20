@@ -108,12 +108,13 @@ AboutCard = React.createClass
                                 console.log that.props.from == V.vote.meta.FromLink
                                 , that.props.from, V.vote.meta.fromLink
                                 , V.vote
+                                , V.vote.meta.body?
+                                , V.vote.meta.body
                                 , 'console.log that.props.from, V.vote'
                                 if that.props.from is V.vote.meta.FromLink
                                   bullet = rightBullet
                                 else
                                   bullet = leftBullet
-
                                 k.span
                                   style:
                                     top: (V.counted + 0.25) * (V.size / 5)
