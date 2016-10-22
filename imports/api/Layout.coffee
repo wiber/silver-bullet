@@ -18,12 +18,14 @@ exports.containerLayout = createContainer ((props) ->
       lastFrom = user.lastFrom
       switched = lastFrom != queryParams.from
       cInExists = user.out[to]?[from]?
+      console.log paramContent
+      , user.out[to][from]
+      , user.out[to][from].meta.body
       if cInExists and switched
         cIn = user.out[to][from]
-        changeQueryParams 'content', cIn, content, cIn.meta.body
+        changeQueryParams 'content', cIn.meta.body # 'content', cIn,
         content = cIn.meta.body
-        return content
-      else return ''
+    return content
   content = ifBodyContentHere queryParams.content
   console.log content, 'cin remade'
   unless FlowRouter.getQueryParam('Bookmarked')

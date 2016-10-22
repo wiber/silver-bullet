@@ -49,12 +49,12 @@ TextAbout = React.createClass
         onKeyDown: (e) ->
           if 48 <= e.keyCode <= 57 and !e.ctrlKey and !e.shiftKey and !e.altKey
             content = {}
-            content.body = FlowRouter.getQueryParam('content')
+            content.body = e.target.value #FlowRouter.getQueryParam('content')
             # weight is between 0 and 9
             payload =
               from: FlowRouter.getQueryParam('from')
               to: FlowRouter.getQueryParam('to')
-              meta: e.target.value#content
+              meta: content
             content.weight = e.keyCode - 48
             console.log payload,'console.log payload'
             , content.body, e, e.target, e.target.value, 'console.log content.body, e.target.value, e.target, '
