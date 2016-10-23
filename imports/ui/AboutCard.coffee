@@ -118,6 +118,8 @@ AboutCard = React.createClass
                                 k.span
                                   style:
                                     top: (V.counted + 0.25) * (V.size / 5)
+                                    width: '100%'
+                                    left: 0
                                     position: 'absolute'
                                   V.vote.meta.body
                                 k.a
