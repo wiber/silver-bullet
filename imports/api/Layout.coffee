@@ -10,7 +10,7 @@ exports.containerLayout = createContainer ((props) ->
   user = Meteor.user()
   # when textfield is empty, fill it with your comment on this connection, if exist
   ifBodyContentHere = (paramContent)->
-    if paramContent is 'undefined'
+    if paramContent is 'undefined' or typeof paramContent is 'undefined'
       console.log "if paramContent is 'undefined'", queryParams
       content = ''
     if Meteor.isClient and UserHandle.ready()
@@ -28,6 +28,7 @@ exports.containerLayout = createContainer ((props) ->
         cIn = user.out[to][from]
         changeQueryParams 'content', cIn.meta.body # 'content', cIn,
         content = cIn.meta.body
+    console.log paramContent, content, "log paramContent, content"
     return content
   content = ifBodyContentHere queryParams.content
   console.log content, 'cin remade'
