@@ -103,18 +103,20 @@ AboutCard = React.createClass
                               V.size = size = style.scalars.screenshotWidth
                               console.log V
                               if V.vote?.meta?
-                                rightBullet = '0 50% 50% 0'
-                                leftBullet = '0 50% 50% 0'
                                 console.log that.props.from == V.vote.meta.FromLink
-                                , that.props.from, V.vote.meta.fromLink
+                                , that.props.from, ', that.props.from'
+                                , that.props.from is V.vote.meta.ToLink
+                                , V.vote.meta.ToLink,', V.vote.meta.ToLink'
+                                , V.vote.meta.FromLink, ', V.vote.meta.FromLink'
                                 , V.vote
                                 , V.vote.meta.body?
                                 , V.vote.meta.body
                                 , 'console.log that.props.from, V.vote'
+                                , that.props.from == V.vote.meta.ToLink, 'that.props.from == V.vote.meta.ToLink'
                                 if that.props.from is V.vote.meta.FromLink
-                                  bullet = rightBullet
+                                  bullet = '0 50% 50% 0'
                                 else
-                                  bullet = leftBullet
+                                  bullet = '0 50% 50% 0'
                                 k.span
                                   style:
                                     top: (V.counted + 0.25) * (V.size / 5)

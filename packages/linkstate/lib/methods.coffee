@@ -76,16 +76,7 @@ Meteor.methods
     edge.title = META.title or FROM # because we're out FROM this
     setEdgeOut['in.' + TO + '.' + username] = edge
     setEdgeOut.title = edge.title
-    unless Meteor.isClient # Meteor.isSimulation
-      fromNodeId = Nodes.upsert
-        _id: FROM
-      ,
-        $set: setEdgeOut
-      toNodeId = Nodes.upsert
-        _id: TO
-      , # second argument to upsert "," is at same level, returns are free
-        $set: setEdgeIn # set incoming edge where we're going TO impact
-      linked = Edges.insert(edge)
+
     setIt = {}
     setIt.edited = time
     if from not in categoryTypes
@@ -94,7 +85,6 @@ Meteor.methods
       setIt.toLast = to
     setIt['in.'+FROM+'.'+TO] = edge
     setIt['out.'+TO+'.'+FROM] = edge
-    #console.log UserHandle?, UserHandle?.ready(), 'UserHandle?.ready()'
     # totally kills latency compensation on page load to avoid uncaught error in fast render
     if Meteor.isServer or UserHandle?.ready()
       Meteor.users.update # we need to know what our last connection was
@@ -103,11 +93,24 @@ Meteor.methods
         $set: setIt
         $inc:
           'hits': 1
-    #if Meteor.isClient
-    #	Meteor.subscribe "userData"
-    if Meteor.isSimulation
-      Meteor.call "compareHits"
-    return new Date()
+    Meteor.call 'secondaryLinking',
+      FROM: FROM
+      TO: TO
+      edge: edge
+    #if Meteor.isSimulation
+    #  Meteor.call "compareHits"
+    #return new Date()
+  secondaryLinking: (payload) ->
+    unless Meteor.isClient # Meteor.isSimulation
+      fromNodeId = Nodes.upsert
+        _id: payload.FROM
+      ,
+        $set: setEdgeOut
+      toNodeId = Nodes.upsert
+        _id: payload.TO
+      , # second argument to upsert "," is at same level, returns are free
+        $set: setEdgeIn # set incoming edge where we're going TO impact
+      linked = Edges.insert(payload.edge)
   setupUser: () ->
     Meteor.call "Linking",
       from: 'Bookmarks' # systems types.. need to be from bookmarks if they are to be picked up?
