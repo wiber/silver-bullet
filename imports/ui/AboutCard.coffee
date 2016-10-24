@@ -118,11 +118,12 @@ AboutCard = React.createClass
                                 k.span
                                   style:
                                     top: (V.counted + 0.25) * (V.size / 5)
-                                    width: '100%'
+                                    width: '100%' # 'auto'#
                                     left: 10
                                     color: 'rgb(255, 255, 255)'
                                     fontSize: '16px'
                                     position: 'absolute'
+                                    backgroundColor: 'rgba(0, 0, 0, 0.2)'
                                   V.vote.meta.body
                                 k.a
                                   href: V.vote.meta.profileLink
