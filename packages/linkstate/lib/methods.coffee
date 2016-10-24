@@ -97,6 +97,8 @@ Meteor.methods
       FROM: FROM
       TO: TO
       edge: edge
+      setEdgeOut: setEdgeOut
+      setEdgeIn: setEdgeIn
     #if Meteor.isSimulation
     #  Meteor.call "compareHits"
     #return new Date()
@@ -105,11 +107,11 @@ Meteor.methods
       fromNodeId = Nodes.upsert
         _id: payload.FROM
       ,
-        $set: setEdgeOut
+        $set: payload.setEdgeOut
       toNodeId = Nodes.upsert
         _id: payload.TO
       , # second argument to upsert "," is at same level, returns are free
-        $set: setEdgeIn # set incoming edge where we're going TO impact
+        $set: payload.setEdgeIn # set incoming edge where we're going TO impact
       linked = Edges.insert(payload.edge)
   setupUser: () ->
     Meteor.call "Linking",
