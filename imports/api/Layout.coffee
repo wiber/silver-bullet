@@ -11,6 +11,7 @@ exports.containerLayout = createContainer ((props) ->
   # when textfield is empty, fill it with your comment on this connection, if exist
   ifBodyContentHere = (paramContent)->
     if paramContent is 'undefined'
+      console.log "if paramContent is 'undefined'", queryParams
       content = ''
     if Meteor.isClient and UserHandle.ready()
       user = Meteor.user()
