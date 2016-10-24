@@ -13,14 +13,16 @@ exports.containerLayout = createContainer ((props) ->
     if paramContent is 'undefined'
       content = ''
     if Meteor.isClient and UserHandle.ready()
+      user = Meteor.user()
       to = linkstate.store queryParams.to
       from = linkstate.store queryParams.from
       lastFrom = user.lastFrom
       switched = lastFrom != queryParams.from
       cInExists = user.out[to]?[from]?
-      console.log paramContent
-      , user.out[to][from]
-      , user.out[to][from].meta.body
+      if cInExists
+        console.log paramContent
+        , user.out[to][from]
+        , user.out[to][from].meta.body
       if cInExists and switched
         cIn = user.out[to][from]
         changeQueryParams 'content', cIn.meta.body # 'content', cIn,
