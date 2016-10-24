@@ -119,7 +119,9 @@ AboutCard = React.createClass
                                   style:
                                     top: (V.counted + 0.25) * (V.size / 5)
                                     width: '100%'
-                                    left: 0
+                                    left: 10
+                                    color: 'rgb(255, 255, 255)'
+                                    fontSize: '16px'
                                     position: 'absolute'
                                   V.vote.meta.body
                                 k.a
