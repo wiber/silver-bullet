@@ -36,7 +36,8 @@ exports.selectedContainer = createContainer ((props) ->
     unless window.beforeTime?
       window.beforeTime = new Date().getTime()
     if localStorage? and UserHandle.ready()
-      writeUser(Meteor.user())
+      console.log 'not writing user', localStorage? and UserHandle.ready()
+      #writeUser(Meteor.user())
       #window.setUserTime = new Date().getTime()
       #timeTester('setUserTime')
 
@@ -56,6 +57,7 @@ exports.selectedContainer = createContainer ((props) ->
   # make value
   if !props[props.type]? and user?[props.type+'Last']?
     newProps[props.type] = user[props.type+'Last']
+
   if props.user?.out?
     dictWithCreatedAt = props.user.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
@@ -82,6 +84,14 @@ exports.selectedContainer = createContainer ((props) ->
         newProps.value =
           label: Bookmarks.meta.title
           value: Bookmarks
+  if Meteor.isClient
+    unless UserHandle.ready()
+      mockFrom=
+        label: props[props.type]
+        value: props[props.type]
+      newProps.value = mockFrom
+      newProps.options = [mockFrom]
+      console.log props, 'mock that thing', newProps
   # update queryparams unless we're fromt he same place
   if props[props.type] is not newProps[props.type]
     changeQueryParams props.type, newProps[props.type]

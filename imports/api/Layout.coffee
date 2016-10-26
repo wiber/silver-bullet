@@ -32,6 +32,7 @@ exports.containerLayout = createContainer ((props) ->
     return content
   content = ifBodyContentHere queryParams.content
   console.log content, 'cin remade'
+  
   unless FlowRouter.getQueryParam('Bookmarked')
     samePlace = false
     if Meteor.user()?.fromLast?
@@ -40,7 +41,9 @@ exports.containerLayout = createContainer ((props) ->
     else # if we never been anyplace, we're new here
       samePlace = true
    #console.log samePlace, Meteor.user().fromLast, queryParams.from
-    if Meteor.user() and samePlace and Meteor.isClient
+    if samePlace and Meteor.isClient
+      console.log UserHandle.ready(), user,'console.log UserHandle.ready(), user'
+      #if user?
       changeQueryParams('Bookmarked', true)
      #console.log'Linking because samePlace', samePlace, queryParams.from, Meteor.user(), decodeURIComponent queryParams.from
       # otherwise leads to a flip/flop issue when two tabs are open
