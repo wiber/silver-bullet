@@ -1,0 +1,10 @@
+{
+    "facebookAppId": "710055149104819",
+    "facebookSecret": "9ec1defc8144985305fbda0ff66100ed",
+    "thumbalizr": "5VmUR42gc4eGdLjBnZH2BRXa",
+    "MONGO_URL": "mongodb://prod:Youiest2Guidethewibe@ds053926-a0.mlab.com:53926,ds053926-a1.mlab.com:53926/mlinks1?replicaSet=rs-ds053926",
+    "kadira": {
+        "appId": "EpzKPjKCE7GqsMnrg",
+        "appSecret": "3cb66067-c801-4c9d-9e71-f61a4c426de3"
+    }
+}

@@ -84,6 +84,7 @@ exports.selectedContainer = createContainer ((props) ->
         newProps.value =
           label: Bookmarks.meta.title
           value: Bookmarks
+  # instead of waiting, just show the params..
   if Meteor.isClient
     unless UserHandle.ready()
       mockFrom=
@@ -91,7 +92,6 @@ exports.selectedContainer = createContainer ((props) ->
         value: props[props.type]
       newProps.value = mockFrom
       newProps.options = [mockFrom]
-      console.log props, 'mock that thing', newProps
   # update queryparams unless we're fromt he same place
   if props[props.type] is not newProps[props.type]
     changeQueryParams props.type, newProps[props.type]

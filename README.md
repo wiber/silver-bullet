@@ -52,7 +52,9 @@ Next install missing npm modules like react, react-dom, react-selectize. FIXME.
 
 
 Then load the extension into chrome.
+### Run
 
+meteor --settings settings.json
 
 ### Deploy
 

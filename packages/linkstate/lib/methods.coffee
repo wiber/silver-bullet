@@ -36,7 +36,7 @@ Meteor.methods
       #console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, 'compareHits without'
   Linking: (link) ->
     this.unblock() # allow next req without wait
-    console.log 'Linking',@isSimulation, link.from, link.meta, Meteor.user().hits, Meteor.user()?.services?.facebook?.name, Meteor.isServer
+    console.log 'Linking',@isSimulation, link.from, link.meta, Meteor.user().hits, Meteor.user()?.services?.facebook?.name,  Meteor.user().profile.name, Meteor.user().hits
     to = link.to
     from = link.from
     META = link.meta
