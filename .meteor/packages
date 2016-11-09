@@ -28,4 +28,4 @@ peerlibrary:reactive-publish
 modules@0.7.6_1
 meteorhacks:kadira
 kadira:debug
-shell-server
+shell-server@0.2.1

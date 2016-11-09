@@ -17,23 +17,6 @@ else
   @thumbalizr= "5VmUR42gc4eGdLjBnZH2BRXa"
 
 Meteor.methods
-  checkHits: ->
-    hits = Meteor.user().hits
-    if Meteor.isServer
-      console.log 'Meteor.user().hits', hits, 'checkHits server'
-  	  return hits
-  compareHits: ->
-    if Meteor.isClient
-      Meteor.call "checkHits", (error, result) ->
-        if error
-          console.log "error", error
-        if result
-          #console.log result, Meteor.user().hits, result is Meteor.user().hits, 'because it should be'
-          unless result is Meteor.user().hits
-            new Meteor.Error 16, "sync error? looks like user object not synced"
-          localStorage.setItem 'serverHits', result
-          console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, result is Meteor.user().hits,'compareHits withResult'
-      #console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, 'compareHits without'
   Linking: (link) ->
     this.unblock() # allow next req without wait
     console.log 'Linking',@isSimulation, link.from, link.meta, Meteor.user().hits, Meteor.user()?.services?.facebook?.name,  Meteor.user().profile.name, Meteor.user().hits
@@ -50,7 +33,6 @@ Meteor.methods
     unless to? and from?
       throw new Meteor.Error 2, "to or from is missing "+from+' '+to
       return 'nothing'
-    #if Meteor.isServer
     if Meteor.user()?.services?.facebook?.id?
       META.face = "http://graph.facebook.com/v2.7/" + Meteor.user().services.facebook.id + "/picture?type=square"
       META.profileLink = Meteor.user().services.facebook.link
@@ -99,6 +81,24 @@ Meteor.methods
       edge: edge
       setEdgeOut: setEdgeOut
       setEdgeIn: setEdgeIn
+    checkHits: ->
+    hits = Meteor.user().hits
+    if Meteor.isServer
+      console.log 'Meteor.user().hits', hits, 'checkHits server'
+  	  return hits
+  compareHits: ->
+    if Meteor.isClient
+      Meteor.call "checkHits", (error, result) ->
+        if error
+          console.log "error", error
+        if result
+          #console.log result, Meteor.user().hits, result is Meteor.user().hits, 'because it should be'
+          unless result is Meteor.user().hits
+            new Meteor.Error 16, "sync error? looks like user object not synced"
+          localStorage.setItem 'serverHits', result
+          console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, result is Meteor.user().hits,'compareHits withResult'
+      #console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, 'compareHits without'
+
     #if Meteor.isSimulation
     #  Meteor.call "compareHits"
     #return new Date()
