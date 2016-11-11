@@ -21,21 +21,11 @@ exports.FromToSense = React.createClass
           word: that.props.word
           type: 'MainCardTextInput'
           content: that.props.content
-        k.build selectedContainer,
-          from: that.props.from
-          to: that.props.to
-          user: that.props.user
-          type: 'to'
         k.div
           style:
             maxWidth: '100%'
             whiteSpace: "nowrap"
           ->
-            k.build selectedContainer,
-              from: that.props.from
-              to: that.props.to
-              user: that.props.user
-              type: 'from'
             k.span
               style:
                 verticalAlign: '0.5em'
