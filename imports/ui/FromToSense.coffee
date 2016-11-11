@@ -12,20 +12,10 @@ exports.FromToSense = React.createClass
     that = this
     reactKup (k) ->
       k.div ->
-        k.build selectedContainer,
-          from: that.props.from
-          to: that.props.to
-          user: that.props.user
-          type: 'from'
         k.build TextAbout,
           word: that.props.word
           type: 'MainCardTextInput'
           content: that.props.content
-        k.build selectedContainer,
-          from: that.props.from
-          to: that.props.to
-          user: that.props.user
-          type: 'to'
         k.div
           style:
             maxWidth: '100%'
@@ -45,6 +35,29 @@ exports.FromToSense = React.createClass
               to: that.props.to
               user: that.props.user
               type: 'to'
+
+bulletUnit = React.createClass
+  render: ->
+    that = this
+    reactKup (k) ->
+      k.div ->
+        k.a
+          href: that.props.from
+          target: '_blank'
+          style:
+            borderRadius: '0 50% 50% 0'
+            width: '100%'
+          k.img
+            src: that.props.srcFrom
+        k.a
+          href: that.props.to
+          style:
+            position: 'absolute'
+            width: '100%'
+          target: '_blank'
+          k.img
+            src: that.props.srcFrom
+
 TextAbout = React.createClass
   render: ->
     window.textAbout = this

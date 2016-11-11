@@ -7,7 +7,6 @@
 Selected = require('../ui/Selected.coffee').Selected
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store} = require '../api/strings.coffee'
-{changeQueryParams} = require '../api/changeQueryParams.coffee'
 
 # goes through a simple loop that builds list of objects from a number of sources.
 
