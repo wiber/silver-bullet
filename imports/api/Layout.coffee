@@ -29,10 +29,13 @@ exports.containerLayout = createContainer ((props) ->
         changeQueryParams 'content', cIn.meta.body # 'content', cIn,
         content = cIn.meta.body
     console.log paramContent, content, "log paramContent, content"
-    return content
+    if typeof content is 'undefined'
+      return ''
+    else
+      return content
   content = ifBodyContentHere queryParams.content
   console.log content, 'cin remade'
-  
+
   unless FlowRouter.getQueryParam('Bookmarked')
     samePlace = false
     if Meteor.user()?.fromLast?
