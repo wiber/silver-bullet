@@ -6,52 +6,12 @@ language = 'eng'
 
 exports.containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
-  content = decodeURIComponent queryParams.content
   user = Meteor.user()
-  # when textfield is empty, fill it with your comment on this connection, if exist
-  ifBodyContentHere = (paramContent)->
-    if paramContent is 'undefined' or typeof paramContent is 'undefined'
-      console.log "if paramContent is 'undefined'", queryParams
-      content = ''
-    if Meteor.isClient and UserHandle.ready()
-      user = Meteor.user()
-      to = linkstate.store queryParams.to
-      from = linkstate.store queryParams.from
-      lastFrom = user.lastFrom
-      switched = lastFrom != queryParams.from
-      cInExists = user.out[to]?[from]?
-      if cInExists
-        console.log paramContent
-        , user.out[to][from]
-        , user.out[to][from].meta.body
-      if cInExists and switched
-        cIn = user.out[to][from]
-        changeQueryParams 'content', cIn.meta.body # 'content', cIn,
-        content = cIn.meta.body
-    console.log paramContent, content, "log paramContent, content"
-    if typeof content is 'undefined'
-      return ''
-    else
-      return content
-  content = ifBodyContentHere queryParams.content
-  console.log content, 'cin remade'
-
+  content = ifBodyContentHere queryParams.content, queryParams
   unless FlowRouter.getQueryParam('Bookmarked')
-    samePlace = false
-    if Meteor.user()?.fromLast?
-      if Meteor.user().fromLast != queryParams.from
-        samePlace = true
-    else # if we never been anyplace, we're new here
-      samePlace = true
-   #console.log samePlace, Meteor.user().fromLast, queryParams.from
-    if samePlace and Meteor.isClient
+    if samePlace(user, queryParams) and Meteor.isClient
       console.log UserHandle.ready(), user,'console.log UserHandle.ready(), user'
-      #if user?
       changeQueryParams('Bookmarked', true)
-     #console.log'Linking because samePlace', samePlace, queryParams.from, Meteor.user(), decodeURIComponent queryParams.from
-      # otherwise leads to a flip/flop issue when two tabs are open
-      # how do we detect if this was the first time the tab opened?
-      # by using a queryParams... for already called bookmarked
       Meteor.call "Linking",
         from: queryParams.from
         to: 'Bookmarks'
@@ -70,3 +30,36 @@ exports.containerLayout = createContainer ((props) ->
     expandMyCard: queryParams.expandMyCard != 'false'
   }
 ), Layout
+sameplace = (user, queryParams) ->
+  samePlace = false
+  if user.fromLast?
+    if user.fromLast != queryParams.from
+      samePlace = true
+  else # if we never been anyplace, we're new here
+    samePlace = true
+  return sameplace
+# textbox should have your comment in it if empty
+ifBodyContentHere = (paramContent, queryParams)->
+  if paramContent is 'undefined' or typeof paramContent is 'undefined'
+    console.log "if paramContent is 'undefined'", queryParams
+    content = ''
+  if Meteor.isClient and UserHandle.ready()
+    user = Meteor.user()
+    to = linkstate.store queryParams.to
+    from = linkstate.store queryParams.from
+    lastFrom = user.lastFrom
+    switched = lastFrom != queryParams.from
+    cInExists = user.out[to]?[from]?
+    if cInExists
+      console.log paramContent
+      , user.out[to][from]
+      , user.out[to][from].meta.body
+    if cInExists and switched
+      cIn = user.out[to][from]
+      changeQueryParams 'content', cIn.meta.body # 'content', cIn,
+      content = cIn.meta.body
+  console.log paramContent, content, "log paramContent, content"
+  if typeof content is 'undefined'
+    return ''
+  else
+    return content
