@@ -14,6 +14,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 {GridList, GridTile} = require 'material-ui/lib/grid-list'
 {Subheader} = require 'material-ui/lib/Subheader'
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
+{bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
 
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store} = require '../api/strings.coffee'
@@ -51,6 +52,14 @@ AboutCard = React.createClass
                   class: 'looplist'
                   cols: 1
                   ->
+                    # conditionals are ok, but we should move out data processing into pure functions with wallaby tests
+                    # end result is a modular and clean way to render urls and votes
+                    # from to header, list of comments with face votes..
+                    # TODO reduce size of loops,
+                    # for each url, paint header, paint each vote
+                    # how much do we gain by pre forming object in this composer?
+                    # can we rethink this as seeing one kind at a time from dropdown or will that break that aboutness feel we want?
+                    #
                     N = {} # the node we're on
                     N.node = that.props.node
 
@@ -73,7 +82,6 @@ AboutCard = React.createClass
                       D.users = N.allLinks[timeLink]
                       D.firstUsersLink = D.users[Object.keys(D.users)[0]]
                       D.m = D.firstUsersLink.meta
-                      console.log D
                       k.build GridTile,
                         key: timeLink+'Node'
                         title: D.m.title
@@ -113,33 +121,10 @@ AboutCard = React.createClass
                                 , V.vote.meta.body
                                 , 'console.log that.props.from, V.vote'
                                 , that.props.from == V.vote.meta.ToLink, 'that.props.from == V.vote.meta.ToLink'
-                                if that.props.from is V.vote.meta.FromLink
-                                  bullet = '0 50% 50% 0'
-                                else
-                                  bullet = '0 50% 50% 0'
-                                k.span
-                                  style:
-                                    top: (V.counted + 0.25) * (V.size / 5)
-                                    width: '100%' # 'auto'#
-                                    left: 10
-                                    color: 'rgb(255, 255, 255)'
-                                    fontSize: '16px'
-                                    position: 'absolute'
-                                    backgroundColor: 'rgba(0, 0, 0, 0.2)'
-                                  V.vote.meta.body
-                                k.a
-                                  href: V.vote.meta.profileLink
-                                  target: '_blank'
-                                  k.img
-                                    style: _.extend {},# style.webShot,
-                                      top: V.counted *(V.size / 5)
-                                      #width: '10%' #style.scalars.screenshotWidth / 10
-                                      left: 10 * V.vote.meta.weight + '%'
-                                      position: 'absolute'
-                                      opacity: .5
-                                      borderRadius: bullet # '0 50% 50% 0'
-                                    src: V.vote.meta.face
-                                  # clicking on one should move to /user on facebook
+                                if V.vote?
+                                  k.build LinkVote,
+                                    from: that.props.from
+                                    V: V
                               V.counted++
                       #if N.inLinks[timeLink]?
                       #  console.log 'incomming link by', Object.keys(N.inLinks[timeLink]) , D.firstUsersLink
@@ -169,17 +154,42 @@ UrlTile = React.createClass
 LinkVote = React.createClass
   propTypes:
     linkVote: React.PropTypes.object
+    V: React.PropTypes.object
   render: ->
     that = this
     console.log that.props, 'sent to linkVote'
     reactKup (k) ->
-      k.img
-        style: _.extend {},# style.webShot,
-          left: 10 * that.props.weight + '%'
+      V = that.V
+      if that.props.from is V.vote.meta.FromLink
+        bullet = '0 50% 50% 0'
+      else
+        bullet = '0 50% 50% 0'
+      k.span
+        style:
+          top: (V.counted + 0.25) * (V.size / 5)
+          width: '100%' # 'auto'#
+          left: 10
+          color: 'rgb(255, 255, 255)'
+          fontSize: '16px'
           position: 'absolute'
-          opacity: 1
-          borderRadius: '50%'
-        src: that.props.face
+          backgroundColor: 'rgba(0, 0, 0, 0.2)'
+        V.vote.meta.body
+      k.a
+        href: V.vote.meta.profileLink
+        target: '_blank'
+        k.img
+          style: _.extend {},# style.webShot,
+            top: V.counted *(V.size / 5)
+            #width: '10%' #style.scalars.screenshotWidth / 10
+            left: 10 * V.vote.meta.weight + '%'
+            position: 'absolute'
+            opacity: .5
+            borderRadius: bullet # '0 50% 50% 0'
+          src: V.vote.meta.face
+
+preParseNode = (N) ->
+  console.log N
+
 
 exports.AboutCard = createContainer ((props) ->
   newProps = {}
@@ -188,6 +198,7 @@ exports.AboutCard = createContainer ((props) ->
   N = Nodes.findOne(linkstate.store props.from)
   if N?
     newProps.node = N
+    newProps.P = preParseNode N
   #console.log newProps.node, Nodes.find({}).count()
   props = _.extend {}, props, newProps
   props
