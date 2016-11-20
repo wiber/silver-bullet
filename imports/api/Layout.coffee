@@ -4,7 +4,7 @@ language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 
-exports.containerLayout = createContainer ((props) ->
+containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   user = Meteor.user()
   content = ifBodyContentHere queryParams.content, queryParams
@@ -63,3 +63,4 @@ ifBodyContentHere = (paramContent, queryParams)->
     return ''
   else
     return content
+exports.containerLayout = containerLayout

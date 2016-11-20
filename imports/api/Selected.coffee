@@ -9,19 +9,6 @@ Selected = require('../ui/Selected.coffee').Selected
 {see, store} = require '../api/strings.coffee'
 
 # goes through a simple loop that builds list of objects from a number of sources.
-
-slowWriteUser = (user)->
-  localStorage.setItem 'user', JSON.stringify(user)
-writeUser = _.throttle slowWriteUser ,500
-timeTester = (type) ->
-  window[type] = new Date().getTime()
-  console.log type
-  , window.getUserTime
-  , window.setUserTime
-  , ' since subscription ready: '
-  , window.getUserTime - window.setUserTime
-  , ' localStorage takes to wake up:'
-  , window.beforeTime - window.getUserTime
 exports.selectedContainer = createContainer ((props) ->
   newProps = {}
   newProps.options = []
@@ -99,3 +86,16 @@ exports.selectedContainer = createContainer ((props) ->
   props = _.extend {}, props, newProps
   props
 ), Selected
+
+slowWriteUser = (user)->
+  localStorage.setItem 'user', JSON.stringify(user)
+writeUser = _.throttle slowWriteUser ,500
+timeTester = (type) ->
+  window[type] = new Date().getTime()
+  console.log type
+  , window.getUserTime
+  , window.setUserTime
+  , ' since subscription ready: '
+  , window.getUserTime - window.setUserTime
+  , ' localStorage takes to wake up:'
+  , window.beforeTime - window.getUserTime
