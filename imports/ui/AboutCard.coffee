@@ -159,33 +159,34 @@ LinkVote = React.createClass
     that = this
     console.log that.props, 'sent to linkVote'
     reactKup (k) ->
-      V = that.V
+      V = that.props.V
       if that.props.from is V.vote.meta.FromLink
         bullet = '0 50% 50% 0'
       else
         bullet = '0 50% 50% 0'
-      k.span
-        style:
-          top: (V.counted + 0.25) * (V.size / 5)
-          width: '100%' # 'auto'#
-          left: 10
-          color: 'rgb(255, 255, 255)'
-          fontSize: '16px'
-          position: 'absolute'
-          backgroundColor: 'rgba(0, 0, 0, 0.2)'
-        V.vote.meta.body
-      k.a
-        href: V.vote.meta.profileLink
-        target: '_blank'
-        k.img
-          style: _.extend {},# style.webShot,
-            top: V.counted *(V.size / 5)
-            #width: '10%' #style.scalars.screenshotWidth / 10
-            left: 10 * V.vote.meta.weight + '%'
+      k.div ->
+        k.span
+          style:
+            top: (V.counted + 0.25) * (V.size / 5)
+            width: '100%' # 'auto'#
+            left: 10
+            color: 'rgb(255, 255, 255)'
+            fontSize: '16px'
             position: 'absolute'
-            opacity: .5
-            borderRadius: bullet # '0 50% 50% 0'
-          src: V.vote.meta.face
+            backgroundColor: 'rgba(0, 0, 0, 0.2)'
+          V.vote.meta.body
+        k.a
+          href: V.vote.meta.profileLink
+          target: '_blank'
+          k.img
+            style: _.extend {},# style.webShot,
+              top: V.counted *(V.size / 5)
+              #width: '10%' #style.scalars.screenshotWidth / 10
+              left: 10 * V.vote.meta.weight + '%'
+              position: 'absolute'
+              opacity: .5
+              borderRadius: bullet # '0 50% 50% 0'
+            src: V.vote.meta.face
 
 preParseNode = (N) ->
   console.log N
