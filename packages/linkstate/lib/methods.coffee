@@ -18,8 +18,9 @@ else
 
 Meteor.methods
   Linking: (link) ->
-    this.unblock() # allow next req without wait
-    console.log 'Linking',@isSimulation, link.from, link.meta, Meteor.user().hits, Meteor.user()?.services?.facebook?.name,  Meteor.user().profile.name, Meteor.user().hits
+    #this.unblock() # allow next req without wait
+
+    #check(link.from,'string')
     to = link.to
     from = link.from
     META = link.meta
@@ -30,6 +31,9 @@ Meteor.methods
     unless typeof Meteor.userId() is 'string'
       throw new Meteor.Error 1, "non-user tries to link"
       return 'nothing'
+    else
+      console.log 'Linking',@isSimulation, link.from, link.meta, Meteor.user().hits, Meteor.user()?.services?.facebook?.name,  Meteor.user().profile.name, Meteor.user().hits
+
     unless to? and from?
       throw new Meteor.Error 2, "to or from is missing "+from+' '+to
       return 'nothing'

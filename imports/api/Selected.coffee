@@ -57,7 +57,7 @@ exports.selectedContainer = createContainer ((props) ->
         newProps.options.push selectItem
     unless newProps.value?
       # set defaults if none set already
-      if user[props.type+'Last']? and props.type  is 'to'
+      if user?[props.type+'Last']? and props.type  is 'to'
         # charming solution that flickers rightly
         # on recompute it goes from 'last project' to just the right title
         newProps.value =

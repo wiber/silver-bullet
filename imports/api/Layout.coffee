@@ -37,7 +37,7 @@ ifBodyContentHere = (paramContent, queryParams)->
   if paramContent is 'undefined' or typeof paramContent is 'undefined'
     console.log "if paramContent is 'undefined'", queryParams
     content = ''
-  if Meteor.isClient and UserHandle.ready()
+  if Meteor.isClient and UserHandle.ready() and Meteor.user()?.lastFrom?
     user = Meteor.user()
     to = linkstate.store queryParams.to
     from = linkstate.store queryParams.from
