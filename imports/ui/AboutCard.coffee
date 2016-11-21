@@ -101,13 +101,6 @@ AboutCard = React.createClass
                         to: that.props.to
                         props: that.props
                         ->
-                          k.img
-                            style: _.extend {}, style.webShot,
-                              width: '100%'
-                            src: D.m.ScreenshotUrl
-                            from: D.m.FromLink
-                            onClick: (e) ->
-                             changeQueryParams 'from', e.target.getAttribute('from')
                           if N.inLinks?[D.link]?
                             U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
                             console.log U
