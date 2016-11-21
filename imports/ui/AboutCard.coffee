@@ -210,6 +210,8 @@ LinkVote = React.createClass
   propTypes:
     linkVote: React.PropTypes.object
     V: React.PropTypes.object
+    from: React.PropTypes.string
+    to: React.PropTypes.string
   render: ->
     that = this
     console.log that.props, 'sent to linkVote'
@@ -218,7 +220,7 @@ LinkVote = React.createClass
       if that.props.from is V.vote.meta.FromLink
         bullet = '0 50% 50% 0'
       else
-        bullet = '0 50% 50% 0'
+        bullet = '50% 0 0 50%'
       k.div ->
         k.span
           style:

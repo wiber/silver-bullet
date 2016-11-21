@@ -4,6 +4,7 @@ language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 
+
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   user = Meteor.user()
@@ -30,14 +31,7 @@ containerLayout = createContainer ((props) ->
     expandMyCard: queryParams.expandMyCard != 'false'
   }
 ), Layout
-sameplace = (user, queryParams) ->
-  samePlace = false
-  if user.fromLast?
-    if user.fromLast != queryParams.from
-      samePlace = true
-  else # if we never been anyplace, we're new here
-    samePlace = true
-  return sameplace
+
 # textbox should have your comment in it if empty
 ifBodyContentHere = (paramContent, queryParams)->
   if paramContent is 'undefined' or typeof paramContent is 'undefined'
@@ -63,4 +57,14 @@ ifBodyContentHere = (paramContent, queryParams)->
     return ''
   else
     return content
+
+samePlace = (user, queryParams) ->
+  flag = false
+  if user?.fromLast?
+    if user.fromLast != queryParams.from
+      flag = true
+  else # if we never been anyplace, we're new here
+    flag = true
+  flag
+
 exports.containerLayout = containerLayout
