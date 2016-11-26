@@ -10,7 +10,6 @@
   'Categories'
 ]
 
-
 if Meteor.settings.thumbalizr?
   @thumbalizr =  Meteor.settings.thumbalizr
 else
@@ -19,7 +18,6 @@ else
 Meteor.methods
   Linking: (link) ->
     #this.unblock() # allow next req without wait
-
     #check(link.from,'string')
     to = link.to
     from = link.from
@@ -32,8 +30,7 @@ Meteor.methods
       throw new Meteor.Error 1, "non-user tries to link"
       return 'nothing'
     else
-      console.log 'Linking',@isSimulation, link.from, link.meta, Meteor.user().hits, Meteor.user()?.services?.facebook?.name,  Meteor.user().profile.name, Meteor.user().hits
-
+      console.log 'Linking',@isSimulation, link.from, link.meta, link.to, Meteor.user().hits, Meteor.user()?.services?.facebook?.name,  Meteor.user().profile.name, Meteor.user().hits
     unless to? and from?
       throw new Meteor.Error 2, "to or from is missing "+from+' '+to
       return 'nothing'
@@ -51,6 +48,7 @@ Meteor.methods
     edge.meta.FromLink = from
     edge.meta.ToLink = to
     edge.meta.ScreenshotUrl = "https://api.thumbalizr.com/?url="+from+"&width=250&api_key="+thumbalizr
+    edge.meta.ScreenshotUrlTo = "https://api.thumbalizr.com/?url="+to+"&width=250&api_key="+thumbalizr
     edge.author = Meteor.userId()
     edge.createdAt = time
     username = Meteor.user().profile.name
@@ -118,6 +116,12 @@ Meteor.methods
         $set: payload.setEdgeIn # set incoming edge where we're going TO impact
       linked = Edges.insert(payload.edge)
   setupUser: () ->
+    Meteor.users.update
+      _id: Meteor.userId()
+    ,
+      $set:
+        'services.thumbalizr': Meteor.settings.thumbalizr
+
     Meteor.call "Linking",
       from: 'Bookmarks' # systems types.. need to be from bookmarks if they are to be picked up?
       to: 'Bookmarks' # the thing we're defining
@@ -140,15 +144,14 @@ Meteor.methods
     user = Meteor.user()
     ##console.log user , 'whole'
     setter = {}
-    setter[new Date().getTime()] =
+    setter['commit.'+new Date().getTime()] =
       in: user.in
       out: user.out
-    ##console.log setter
+    setter['services.thumbalizr'] = Meteor.settings.thumbalizr
     Meteor.users.update
       _id: Meteor.userId()
     ,
-      $set:
-        commit: setter
+      $set: setter
       $unset:
         dictTo: ''
         dictFrom: ''
@@ -166,6 +169,7 @@ Meteor.methods
         toLast: ''
         toCreated: ''
         fromCreated: ''
+        thumbalizr: ''
     Meteor.call "setupUser"
 
   #defines naming conventions for categoryTypes

@@ -85,14 +85,6 @@ AboutCard = React.createClass
                       U = {} # users votes loop object
                       U.D = D
                       U.usersConnections = N.inLinks[D.link]
-                      k.build UrlTile,
-                        keyD: timeLink+'Node'
-                        title: D.m.title
-                        subtitle: D.m.ToLink
-                        node: that.props.node
-                        ScreenshotUrl: D.m.ScreenshotUrl
-                        ScreenshotUrlTo: D.m.ScreenshotUrlTo
-                        FromLink: D.m.FromLink
                       k.build UrlBox,
                         D: D
                         N: N
