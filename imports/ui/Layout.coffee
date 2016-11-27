@@ -69,5 +69,6 @@ exports.Layout = React.createClass
                     to: that.props.to
                     from: that.props.from
                     word: that.props.word
+                    thumbalizr: that.props.thumbalizr
                     howMany: 15
               k.div 'footer'

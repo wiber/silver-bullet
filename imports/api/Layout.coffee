@@ -18,8 +18,13 @@ containerLayout = createContainer ((props) ->
         to: 'Bookmarks'
         meta:
           title: queryParams.lastTitle
+  if Meteor?.settings?.public?.thumbalizr? # user?.services?.thumbalizr?
+    thumbalizr = Meteor.settings.public.thumbalizr
+  else
+    thumbalizr = undefined
   {
     user: user
+    thumbalizr: thumbalizr
     from: decodeURIComponent queryParams.from
     to: decodeURIComponent queryParams.to
     incomming: queryParams.incomming

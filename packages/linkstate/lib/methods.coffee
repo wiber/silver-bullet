@@ -10,8 +10,8 @@
   'Categories'
 ]
 
-if Meteor.settings.thumbalizr?
-  @thumbalizr =  Meteor.settings.thumbalizr
+if Meteor.settings?.public?.thumbalizr?
+  @thumbalizr =  Meteor.settings.public.thumbalizr
 else
   @thumbalizr= "5VmUR42gc4eGdLjBnZH2BRXa"
 

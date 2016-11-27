@@ -92,34 +92,8 @@ AboutCard = React.createClass
                         from: that.props.from
                         to: that.props.to
                         props: that.props
-                        ->
-                          if N.inLinks?[D.link]?
-                            U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
-                            console.log U
-                            V = {}
-                            V.U = U
-                            V.counted = 0
-                            for user in U.linksByTimeUsers
-                              V.user = user
-                              console.log V
-                              V.vote = U.usersConnections[V.user]
-                              V.size = size = style.scalars.screenshotWidth
-                              console.log V
-                              if V.vote?.meta?
-                                console.log that.props.from == V.vote.meta.FromLink
-                                , that.props.from, ', that.props.from'
-                                , that.props.from is V.vote.meta.ToLink
-                                , V.vote.meta.ToLink,', V.vote.meta.ToLink'
-                                , V.vote.meta.FromLink, ', V.vote.meta.FromLink'
-                                , V.vote
-                                , V.vote.meta.body?
-                                , V.vote.meta.body
-                                , 'console.log that.props.from, V.vote'
-                                , that.props.from == V.vote.meta.ToLink, 'that.props.from == V.vote.meta.ToLink'
-                                k.build LinkVote,
-                                  from: that.props.from
-                                  V: V
-                              V.counted++
+                        thumbalizr: that.props.thumbalizr
+                        word: that.props.word
                       #if N.inLinks[timeLink]?
                       #  console.log 'incomming link by', Object.keys(N.inLinks[timeLink]) , D.firstUsersLink
                     console.log N
@@ -134,18 +108,33 @@ UrlBox = React.createClass
       D = that.props.D
       N = that.props.N
       U = that.props.U
+      thumbalizr = that.props.thumbalizr
       k.build GridTile,
         key: D.link+'Node'
         title: D.m.title
-        subtitle: D.m.ToLink
+        subtitle: that.props.word.to + D.m.ToLink
         ->
-          k.img
-            style: _.extend {}, style.webShot,
-              width: '100%'
-            src: D.m.ScreenshotUrl
-            from: D.m.FromLink
-            onClick: (e) ->
-             changeQueryParams 'from', e.target.getAttribute('from')
+          k.div ->
+            k.img
+              style: _.extend {}, style.webShot,
+                borderRadius: '0 50% 50% 0'
+                border: '1px solid blue'
+                marginLeft: '-30%'
+                opacity: .7
+              src: linkstate.thumbalizrPic D.m.FromLink
+              from: D.m.FromLink
+              zIndex: 2
+              onClick: (e) ->
+               changeQueryParams 'from', e.target.getAttribute('from')
+            k.img
+              style: _.extend {}, style.webShot,
+                position: 'absolute'
+                left: 0
+                zIndex: -1
+              src:linkstate.thumbalizrPic D.m.ToLink
+              to: D.m.ToLink
+              onClick: (e) ->
+               changeQueryParams 'to', e.target.getAttribute('to')
           if N.inLinks?[D.link]?
             U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
             console.log U
@@ -172,31 +161,6 @@ UrlBox = React.createClass
                 k.build LinkVote,
                   from: that.props.from
                   V: V
-UrlTile = React.createClass
-  propTypes:
-    keyD: React.PropTypes.string
-    title: React.PropTypes.string
-    subtitle: React.PropTypes.string
-    #ScreenshotUrl: React.propTypes.string
-    #FromLink: React.propTypes.string
-  render: ->
-    that = this
-    console.log that.props, 'sent to UrlTile'
-    reactKup (k) ->
-      key = that.props.keyD
-      title = that.props.title
-      subtitle = that.props.subtitle
-      k.build GridTile,
-        key: key
-        title: title #that.props.node.meta.title
-        ->
-          k.img
-            style: _.extend {}, style.webShot,
-              width: '100%'
-            src: that.props.ScreenshotUrl
-            from: that.props.FromLink
-            onClick: (e) ->
-             changeQueryParams 'from', e.target.getAttribute('from')
 
 LinkVote = React.createClass
   propTypes:
@@ -253,3 +217,33 @@ exports.AboutCard = createContainer ((props) ->
   props = _.extend {}, props, newProps
   props
 ), AboutCard
+
+
+UrlTile = React.createClass
+  propTypes:
+    from: React.PropTypes.string
+    to: React.PropTypes.string
+    thumbalizr: React.PropTypes.string
+    keyD: React.PropTypes.string
+    title: React.PropTypes.string
+    subtitle: React.PropTypes.string
+    #ScreenshotUrl: React.propTypes.string
+    #FromLink: React.propTypes.string
+  render: ->
+    that = this
+    console.log that.props, 'sent to UrlTile'
+    reactKup (k) ->
+      key = that.props.keyD
+      title = that.props.title
+      subtitle = that.props.subtitle
+      k.build GridTile,
+        key: key
+        title: title #that.props.node.meta.title
+        ->
+          k.img
+            style: _.extend {}, style.webShot,
+              width: '100%'
+            src: that.props.ScreenshotUrl
+            from: that.props.FromLink
+            onClick: (e) ->
+             changeQueryParams 'from', e.target.getAttribute('from')

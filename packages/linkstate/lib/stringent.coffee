@@ -28,6 +28,9 @@ linkstate.see = (url) ->
   -> encodedToDotless.replace('http://','').replace('https://','').replace('www.','')
 
 ###
+linkstate.thumbalizrPic = (url) ->
+  newUrl = "https://api.thumbalizr.com/?url="+url+"&width=250&api_key="+Meteor.settings.public.thumbalizr
+  return newUrl
 linkstate.store = (url) ->
   ##console.log 'store is encoded', url == decodeURIComponent url
   unless typeof url is 'string' or url is not 'undefined'

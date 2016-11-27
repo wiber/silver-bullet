@@ -11,6 +11,7 @@ exports.wordLanguages =
     AboutCardTitle: "What's the word on this?"
     AboutCardSubTitle: "Connections talk. Their last word stands here. Yours among them."
     digitAlert: "You send by entering a digit from 0 to 9 where 9 means dead on, 5 neutral and 1 opposite. The 0 means irrelevant."
+    to: "to "
 ###
 dynamic sections navigatable by these awesome input tools. to grid? from grid? to recent bookmarks? the end result is keyboard navigatable connectable networks..
 only one list at a time? incomming, or outgoing,

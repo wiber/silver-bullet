@@ -23,6 +23,7 @@ style =
     marginTop: '25%'
   webShot:
     opacity: 1
+    width: '100%'
   yCard:
     background: 'rgba(255, 255, 255, .9)'
   aCard:
