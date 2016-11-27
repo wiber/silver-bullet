@@ -12,7 +12,8 @@ Meteor.startup ->
     console.log Meteor.settings, Meteor.settings?.MONGO_URL?
   catch error
     console.log error
-
+if Meteor.loggingIn()
+  Meteor.call "setupUser"
 exports.state =
   ssr: true
   timeInMillis: 1000 * 15

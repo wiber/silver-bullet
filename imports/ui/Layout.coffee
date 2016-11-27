@@ -46,23 +46,24 @@ exports.Layout = React.createClass
               k.div
                 className: 'main'
                 ->
-                  k.build MainCard, # need comma here because the second arg is prop
-                    expanded: that.props.expandMainCard
-                    # redundant container? already have user obj here
-                    to: that.props.to
-                    from: that.props.from
-                    word: that.props.word
-                    content: that.props.content
-                    user: that.props.user
-                  k.build MyCard,
-                    expanded: that.props.expandMyCard
-                    to: that.props.to
-                    from: that.props.from
-                    word: that.props.word
-                    user: that.props.user
-                    incomming: that.props.incomming
-                    howMany: 10
-                    type: 'fromCreated'
+                  if that.props.user?.services?.facebook?
+                    k.build MainCard, # need comma here because the second arg is prop
+                      expanded: that.props.expandMainCard
+                      # redundant container? already have user obj here
+                      to: that.props.to
+                      from: that.props.from
+                      word: that.props.word
+                      content: that.props.content
+                      user: that.props.user
+                    k.build MyCard,
+                      expanded: that.props.expandMyCard
+                      to: that.props.to
+                      from: that.props.from
+                      word: that.props.word
+                      user: that.props.user
+                      incomming: that.props.incomming
+                      howMany: 10
+                      type: 'fromCreated'
                   k.build AboutCard,
                     expanded: that.props.expandAboutCard
                     to: that.props.to
