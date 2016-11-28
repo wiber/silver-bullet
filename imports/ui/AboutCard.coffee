@@ -115,17 +115,17 @@ UrlBox = React.createClass
         subtitle: that.props.word.to + D.m.ToLink
         ->
           k.div ->
-            k.img
-              style: _.extend {}, style.webShot,
-                borderRadius: '0 50% 50% 0'
-                border: '1px solid blue'
-                marginLeft: '-30%'
-                opacity: .7
-              src: linkstate.thumbalizrPic D.m.FromLink
-              from: D.m.FromLink
-              zIndex: 2
-              onClick: (e) ->
-               changeQueryParams 'from', e.target.getAttribute('from')
+            k.div
+              style: Object.assign {}, style.fromBullet
+              ->
+                k.img
+                  style: _.extend {}, style.webShot,
+                    opacity: .7
+                  src: linkstate.thumbalizrPic D.m.FromLink
+                  from: D.m.FromLink
+                  zIndex: 2
+                  onClick: (e) ->
+                   changeQueryParams 'from', e.target.getAttribute('from')
             k.img
               style: _.extend {}, style.webShot,
                 position: 'absolute'

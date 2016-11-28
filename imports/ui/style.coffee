@@ -24,6 +24,17 @@ style =
   webShot:
     opacity: 1
     width: '100%'
+  fromBullet:
+    width: '100%'
+    height: '100%'
+    borderRadius: '0 50% 50% 0'
+    border: '1px solid blue'
+    backgroundColor: 'white'
+    position: 'absolute'
+    marginLeft: '-30%'
+    top: 0
+    zIndex: 0
+    overflow: 'hidden'
   yCard:
     background: 'rgba(255, 255, 255, .9)'
   aCard:
