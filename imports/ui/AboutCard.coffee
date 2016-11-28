@@ -116,7 +116,7 @@ UrlBox = React.createClass
         ->
           k.div ->
             k.div
-              style: Object.assign {}, style.fromBullet
+              style: style.fromBullet
               ->
                 k.img
                   style: _.extend {}, style.webShot,
@@ -129,7 +129,7 @@ UrlBox = React.createClass
             k.img
               style: _.extend {}, style.webShot,
                 position: 'absolute'
-                left: 0
+                left: '30%'
                 zIndex: -1
               src:linkstate.thumbalizrPic D.m.ToLink
               to: D.m.ToLink

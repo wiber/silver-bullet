@@ -27,7 +27,7 @@ style =
   fromBullet:
     width: '100%'
     height: '100%'
-    borderRadius: '0 50% 50% 0'
+    borderRadius: '0 70% 70% 0'
     border: '1px solid blue'
     backgroundColor: 'white'
     position: 'absolute'
