@@ -15,6 +15,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 {Subheader} = require 'material-ui/lib/Subheader'
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 {bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
+{UrlBox} = require '../../imports/ui/UrlBox.coffee'
 
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store} = require '../api/strings.coffee'
@@ -98,108 +99,9 @@ AboutCard = React.createClass
                       #  console.log 'incomming link by', Object.keys(N.inLinks[timeLink]) , D.firstUsersLink
                     console.log N
 
-UrlBox = React.createClass
-  propTypes:
-    D: React.PropTypes.object
-  render: ->
-    that = this
-    console.log that.props, 'sent to UrlBox'
-    reactKup (k) ->
-      D = that.props.D
-      N = that.props.N
-      U = that.props.U
-      thumbalizr = that.props.thumbalizr
-      k.build GridTile,
-        key: D.link+'Node'
-        title: D.m.title
-        subtitle: that.props.word.to + D.m.ToLink
-        ->
-          k.div ->
-            k.div
-              style: style.fromBullet
-              ->
-                k.img
-                  style: _.extend {}, style.webShot,
-                    opacity: .7
-                  src: linkstate.thumbalizrPic D.m.FromLink
-                  from: D.m.FromLink
-                  zIndex: 2
-                  onClick: (e) ->
-                   changeQueryParams 'from', e.target.getAttribute('from')
-            k.img
-              style: _.extend {}, style.webShot,
-                position: 'absolute'
-                left: '30%'
-                zIndex: -1
-              src:linkstate.thumbalizrPic D.m.ToLink
-              to: D.m.ToLink
-              onClick: (e) ->
-               changeQueryParams 'to', e.target.getAttribute('to')
-          if N.inLinks?[D.link]?
-            U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
-            console.log U
-            V = {}
-            V.U = U
-            V.counted = 0
-            for user in U.linksByTimeUsers
-              V.user = user
-              console.log V
-              V.vote = U.usersConnections[V.user]
-              V.size = size = style.scalars.screenshotWidth
-              console.log V
-              if V.vote?.meta?
-                console.log that.props.from == V.vote.meta.FromLink
-                , that.props.from, ', that.props.from'
-                , that.props.from is V.vote.meta.ToLink
-                , V.vote.meta.ToLink,', V.vote.meta.ToLink'
-                , V.vote.meta.FromLink, ', V.vote.meta.FromLink'
-                , V.vote
-                , V.vote.meta.body?
-                , V.vote.meta.body
-                , 'console.log that.props.from, V.vote'
-                , that.props.from == V.vote.meta.ToLink, 'that.props.from == V.vote.meta.ToLink'
-                k.build LinkVote,
-                  from: that.props.from
-                  V: V
+preParseNode = (N) ->
+  console.log N
 
-LinkVote = React.createClass
-  propTypes:
-    linkVote: React.PropTypes.object
-    V: React.PropTypes.object
-    from: React.PropTypes.string
-    to: React.PropTypes.string
-  render: ->
-    that = this
-    console.log that.props, 'sent to linkVote'
-    reactKup (k) ->
-      V = that.props.V
-      if that.props.from is V.vote.meta.FromLink
-        bullet = '0 50% 50% 0'
-      else
-        bullet = '50% 0 0 50%'
-      k.div ->
-        k.span
-          style:
-            top: (V.counted + 0.25) * (V.size / 5)
-            width: '100%' # 'auto'#
-            left: 10
-            color: 'rgb(255, 255, 255)'
-            fontSize: '16px'
-            position: 'absolute'
-            backgroundColor: 'rgba(0, 0, 0, 0.2)'
-          V.vote.meta.body
-        k.a
-          href: V.vote.meta.profileLink
-          target: '_blank'
-          k.img
-            style: _.extend {},# style.webShot,
-              top: V.counted *(V.size / 5)
-              #width: '10%' #style.scalars.screenshotWidth / 10
-              left: 10 * V.vote.meta.weight + '%'
-              position: 'absolute'
-              opacity: .5
-              borderRadius: bullet # '0 50% 50% 0'
-            src: V.vote.meta.face
 
 exports.AboutCard = createContainer ((props) ->
   newProps = {}

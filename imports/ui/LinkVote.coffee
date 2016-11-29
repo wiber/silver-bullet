@@ -54,3 +54,4 @@ LinkVote = React.createClass
               opacity: .5
               borderRadius: bullet # '0 50% 50% 0'
             src: V.vote.meta.face
+exports.LinkVote = LinkVote

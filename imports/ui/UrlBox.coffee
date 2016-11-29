@@ -14,6 +14,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 {Subheader} = require 'material-ui/lib/Subheader'
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 {bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
+{LinkVote} = require '../../imports/ui/LinkVote.coffee'
 
 UrlBox = React.createClass
   propTypes:
