@@ -201,10 +201,6 @@ LinkVote = React.createClass
               borderRadius: bullet # '0 50% 50% 0'
             src: V.vote.meta.face
 
-preParseNode = (N) ->
-  console.log N
-
-
 exports.AboutCard = createContainer ((props) ->
   newProps = {}
   if props.from?
