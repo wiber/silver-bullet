@@ -66,16 +66,6 @@ UrlBox = React.createClass
               V.size = size = style.scalars.screenshotWidth
               console.log V
               if V.vote?.meta?
-                console.log that.props.from == V.vote.meta.FromLink
-                , that.props.from, ', that.props.from'
-                , that.props.from is V.vote.meta.ToLink
-                , V.vote.meta.ToLink,', V.vote.meta.ToLink'
-                , V.vote.meta.FromLink, ', V.vote.meta.FromLink'
-                , V.vote
-                , V.vote.meta.body?
-                , V.vote.meta.body
-                , 'console.log that.props.from, V.vote'
-                , that.props.from == V.vote.meta.ToLink, 'that.props.from == V.vote.meta.ToLink'
                 k.build LinkVote,
                   from: that.props.from
                   V: V

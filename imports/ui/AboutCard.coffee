@@ -115,33 +115,3 @@ exports.AboutCard = createContainer ((props) ->
   props = _.extend {}, props, newProps
   props
 ), AboutCard
-
-
-UrlTile = React.createClass
-  propTypes:
-    from: React.PropTypes.string
-    to: React.PropTypes.string
-    thumbalizr: React.PropTypes.string
-    keyD: React.PropTypes.string
-    title: React.PropTypes.string
-    subtitle: React.PropTypes.string
-    #ScreenshotUrl: React.propTypes.string
-    #FromLink: React.propTypes.string
-  render: ->
-    that = this
-    console.log that.props, 'sent to UrlTile'
-    reactKup (k) ->
-      key = that.props.keyD
-      title = that.props.title
-      subtitle = that.props.subtitle
-      k.build GridTile,
-        key: key
-        title: title #that.props.node.meta.title
-        ->
-          k.img
-            style: _.extend {}, style.webShot,
-              width: '100%'
-            src: that.props.ScreenshotUrl
-            from: that.props.FromLink
-            onClick: (e) ->
-             changeQueryParams 'from', e.target.getAttribute('from')
