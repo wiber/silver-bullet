@@ -10,6 +10,11 @@ linkstate.sortByKeysTime = (dict, many) ->
     dict[b].createdAt - (dict[a].createdAt)
   ##console.log toReturn.length, _.uniq(toReturn).length
   toReturn[..many]
+linkstate.sortByWeight = (dict, many) ->
+  toReturn = Object.keys(dict).sort (a, b) ->
+    dict[b].meta.weight - (dict[a].meta.weight)
+  ##console.log toReturn.length, _.uniq(toReturn).length
+  toReturn[..many]
 ###
 linkstate.store = (url) ->
   unless typeof url == 'string'

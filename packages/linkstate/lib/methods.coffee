@@ -84,9 +84,11 @@ Meteor.methods
       setEdgeOut: setEdgeOut
       setEdgeIn: setEdgeIn
     checkHits: ->
-    hits = Meteor.user().hits
+
     if Meteor.isServer
-      console.log 'Meteor.user().hits', hits, 'checkHits server'
+      hits = Meteor.user().hits
+      name = Meteor.user().services.facebook.name if Meteor.user()?.services?.facebook?.name? # Meteor.user()?.services?.facebook?.name? ?  #: 'no user'
+      console.log 'Meteor.user().hits', hits, 'checkHits server', name
   	  return hits
   compareHits: ->
     if Meteor.isClient
