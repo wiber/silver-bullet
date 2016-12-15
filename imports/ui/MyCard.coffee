@@ -49,7 +49,7 @@ exports.MyCard = React.createClass
                   if that.props?.user?.out?[linkstate.store that.props.from]?
                     out = that.props.user.out[linkstate.store that.props.from]
                     n = 0
-                    for mark in linkstate.sortByKeysTime(out, that.props.howMany)
+                    for mark in linkstate.sortByWeight(out, that.props.howMany)
                       target = out[mark]
                       m = target.meta
                       n++

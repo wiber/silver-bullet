@@ -9,7 +9,7 @@ exports.wordLanguages =
     MyCardSubtitle: "Go to Bookmarks or your project page and your resources appear here"
     MyCardStepsSubheader: "You have connected from here recently"
     AboutCardTitle: "What's the word on this?"
-    AboutCardSubTitle: "Connections talk. Their last word stands here. Yours among them."
+    AboutCardSubTitle: "Connections talk. Yay sayers weigh in on the right."
     digitAlert: "You send by entering a digit from 0 to 9 where 9 means dead on, 5 neutral and 1 opposite. The 0 means irrelevant."
     to: "to "
 ###

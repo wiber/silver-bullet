@@ -65,3 +65,33 @@ Selected = React.createClass
               item.label
 
 exports.Selected = Selected
+###
+.createClass(
+  displayName: 'Form'
+  render: ->
+    self = this
+    React.createElement SimpleSelect,
+      options: @state.options
+      createFromSearch: (options, search) ->
+        # only create an option from search if the length of the search string is > 0 and
+        # it does no match the label property of an existing option
+        if search.length == 0 or options.map(((option) ->
+            option.label
+          )).indexOf(search) > -1
+          null
+        else
+          {
+            label: search
+            value: search
+          }
+      onValueChange: (item) ->
+        # here, we add the selected item to the options array, the "new-option"
+        # property, added to items created by the "create-from-search" function above,
+        # helps us ensure that the item doesn't already exist in the options array
+        if ! !item and ! !item.newOption
+          self.state.options.unshift
+            label: item.label
+            value: item.value
+          self.setState options: self.state.options
+        return
+###
