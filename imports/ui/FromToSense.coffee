@@ -36,6 +36,28 @@ exports.FromToSense = React.createClass
               user: that.props.user
               type: 'to'
 
+bulletUnit = React.createClass
+  render: ->
+    that = this
+    reactKup (k) ->
+      k.div ->
+        k.a
+          href: that.props.from
+          target: '_blank'
+          style:
+            borderRadius: '0 50% 50% 0'
+            width: '100%'
+          k.img
+            src: that.props.srcFrom
+        k.a
+          href: that.props.to
+          style:
+            position: 'absolute'
+            width: '100%'
+          target: '_blank'
+          k.img
+            src: that.props.srcFrom
+
 TextAbout = React.createClass
   render: ->
     window.textAbout = this
@@ -43,32 +65,39 @@ TextAbout = React.createClass
     reactKup (k) ->
       k.build TextField,
         ref: 'MainCardTextInput'
+        onSelect: (e) ->
+          if e.target.value.length < 1
+            console.log that.props.content, e.target.value
+            e.target.value = that.props.content
         onKeyDown: (e) ->
           if 48 <= e.keyCode <= 57 and !e.ctrlKey and !e.shiftKey and !e.altKey
-            #console.log e.keyCode, 'writing onKeyDown'
-            #console.log FlowRouter.getQueryParam('from'), FlowRouter.getQueryParam('to'), FlowRouter.getQueryParam('content'), "FlowRouter.getQueryParam('from')"
             content = {}
-            content.body = FlowRouter.getQueryParam('content')
+            content.body = e.target.value #FlowRouter.getQueryParam('content')
             # weight is between 0 and 9
-            content.weight = e.keyCode - 48
-            Meteor.call "Linking",
+            payload =
               from: FlowRouter.getQueryParam('from')
               to: FlowRouter.getQueryParam('to')
               meta: content
-            , (error, result) ->
-              if error
-               console.log "error", error
-              if result
-               console.log result
-            e.target.value = ''
+            content.weight = e.keyCode - 48
+            console.log payload,'console.log payload'
+            , content.body, e, e.target, e.target.value, 'console.log content.body, e.target.value, e.target, '
+            Meteor.defer ->
+              Meteor.call "Linking", payload, (error, result) ->
+                if error
+                  console.log "error", error
+                if result?
+                  console.log result, 'returned from linking'
+                else
+                  console.log 'no result?', result
+            changeQueryParams 'content', ''
             e.preventDefault()
             window.to.refs.to.focus()
           if e.keyCode is 13
             alert that.props.word.digitAlert
             e.preventDefault()
         onKeyUp: (e) ->
-          e.target.value = e.target.value.replace(/\d+/g, '')
-          changeQueryParams 'content', e.target.value
+          updatedContent = e.target.value.replace(/\d+/g, '')
+          changeQueryParams 'content', updatedContent
         style:
           width: '100%'
           tabIndex: 0
@@ -77,6 +106,7 @@ TextAbout = React.createClass
           bottom: 9
         floatingLabelText: that.props.word.TextAboutfloatingLabelText
         multiLine: true
+        rows: 2
         id: 'textAbout'
         hintText: that.props.word.TextAboutHintText
         defaultValue: that.props.content

@@ -1,3 +1,3 @@
-Meteor.subscribe "userData"
+@UserHandle = Meteor.subscribe "userData"
 # subscribe to the last n places you've been on
-Meteor.subscribe "reactableFrom",5
+# Meteor.subscribe "reactableFrom",5

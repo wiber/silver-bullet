@@ -6,6 +6,8 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "fbjs": "^0.8.5",
+    "invariant": "^2.2.1",
     "material-ui": "0.15.0-alpha.2",
     "meteor-node-stubs": "~0.2.0",
     "react-addons-css-transition-group": "^15.0.0",
@@ -15,7 +17,8 @@
     "react-kup": "^1.0.0",
     "react-mounter": "^1.2.0",
     "react-select": "^1.0.0-beta12",
-    "react-tap-event-plugin": "^1.0.0"
+    "react-tap-event-plugin": "^1.0.0",
+    "reify": "^0.3.8"
   },
   "peerDependencies": {
     "react": "15.0.0",

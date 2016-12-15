@@ -52,9 +52,14 @@ Next install missing npm modules like react, react-dom, react-selectize. FIXME.
 
 
 Then load the extension into chrome.
+### Run
 
+meteor --settings settings.json
 
+### Deploy
 
+DEPLOY_HOSTNAME=us-east-1.galaxy-deploy
+.meteor.com meteor deploy linkstate.youiest.com --settings Gsettings.json
 #### Todos
 - [ ] one-liner installs dependencies. Does this work for you?
 - [x] chrome addon scaffolds your attention

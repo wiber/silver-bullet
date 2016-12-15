@@ -1,0 +1,11 @@
+{
+    "facebookAppId": "710055149104819",
+    "facebookSecret": "9ec1defc8144985305fbda0ff66100ed",
+    "public": {
+        "thumbalizr": "5VmUR42gc4eGdLjBnZH2BRXa"
+    },
+    "kadira": {
+        "appId": "EpzKPjKCE7GqsMnrg",
+        "appSecret": "3cb66067-c801-4c9d-9e71-f61a4c426de3"
+    }
+}

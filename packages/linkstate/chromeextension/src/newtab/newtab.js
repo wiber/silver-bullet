@@ -1,4 +1,4 @@
-websiteURL = "http://localhost:3000/"
+websiteURL = "http://linkstate.youiest.com/"
 chrome.storage.sync.get("last", function(lastPlace) {
     lastPlace = lastPlace.last
     console.log("before", lastPlace);

@@ -24,14 +24,15 @@ exports.MainCard = React.createClass
     reactKup (k) ->
       k.build Card, # build the Card component
         expanded: that.props.expanded # add argument key value pairs
-        style: _.extend {}, style.card
+        style: _.extend {}, style.card, style.mCard
         ->
           k.build CardHeader,
-            title: HERE.title
+            title: HERE.title,
             subtitle: that.props.word.MainCardSubtitle
             showExpandableButton: false
             onClick: (e) -> #that.handleToggle
-              changeQueryParams 'expandMainCard', !that.props.expanded
+              window.open HERE.meta.FromLink
+              #changeQueryParams 'expandMainCard', !that.props.expanded
           k.build CardMedia,
             style: style.overlayPercentage
             onClick: (e) ->

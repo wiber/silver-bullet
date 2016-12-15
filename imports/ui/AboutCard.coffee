@@ -1,3 +1,4 @@
+# renders the aboutness node from here
 reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
@@ -13,12 +14,12 @@ CardText =  require('material-ui/lib/card/card-text').default
 {GridList, GridTile} = require 'material-ui/lib/grid-list'
 {Subheader} = require 'material-ui/lib/Subheader'
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
+{bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
+{UrlBox} = require '../../imports/ui/UrlBox.coffee'
 
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store} = require '../api/strings.coffee'
 AboutCard = React.createClass
-  handleToggle: (e) ->
-    changeQueryParams 'expandAboutCard', !@props.expanded
   render: ->
     that = this
     reactKup (k) ->
@@ -37,47 +38,70 @@ AboutCard = React.createClass
           k.build CardText,
             expandable: true
             ->
+              # we need to assemble the data struc
+              # what's needed for a card
+              # url, title
+              # and the votes that go on a link
+              # face, profile, blurb, direction
+              #
               # cycle through in links... render them and related out links
               # we are interested in what people are linking 'sending' to this place
               # can we make it less abstract? is the bidirectional association necessary?
               # how much power do we gain by weight, and direct
               if that.props.node?.in?
-                N = {}
-                N.node = that.props.node
-                inLinks = that.props.node.in
-                outLinks = that.props.node.out
-                N.deChaos = linkstate.sortByKeysTime(that.props.node.in, that.props.howMany)
-                for mark in N.deChaos
-                  if inLinks[mark]?
-                    N.usersConnections = inLinks[mark]
-                    # assume that first element has the correct title
-                    N.currentTitle = N.usersConnections[Object.keys(N.usersConnections)[0]].meta.title
-                    N.deChaosUsers = linkstate.sortByKeysTime(N.usersConnections)
+                k.build GridList,
+                  class: 'looplist'
+                  cols: 1
+                  ->
+                    # conditionals are ok, but we should move out data processing into pure functions with wallaby tests
+                    # end result is a modular and clean way to render urls and votes
+                    # from to header, list of comments with face votes..
+                    # TODO reduce size of loops,
+                    # for each url, paint header, paint each vote
+                    # how much do we gain by pre forming object in this composer?
+                    # can we rethink this as seeing one kind at a time from dropdown or will that break that aboutness feel we want?
+                    #
+                    N = {} # the node we're on
+                    N.node = that.props.node
 
-                    N.origin = mark
-                    [N.firstUser, ... , N.lastUser] = N.deChaosUsers
-                    [N.firstLink, ... , N.lastLink] = N.deChaos
+                    N.inLinks = that.props.node.in
+                    N.outLinks = that.props.node.out
+                    N.allLinks = _.extend {}, N.inLinks, N.outLinks
+
+                    N.linksByTime = linkstate.sortByKeysTime(N.allLinks, that.props.howMany)
+                    N.linkSort = {}
+                    for link in Object.keys(N.allLinks)
+                      N.sorts = linkstate.sortByKeysTime(N.allLinks[link],3)
+                      N.recent = N.sorts[0]
+                      N.linkSort[link] = N.allLinks[link][N.recent]
+                    N.sortedLinks = linkstate.sortByKeysTime N.linkSort, that.props.howMany
+
+                    for timeLink in N.sortedLinks
+                      D = {} # this link which has many users votes
+                      D.N = N
+                      D.link = timeLink
+                      D.users = N.allLinks[timeLink]
+                      D.firstUsersLink = D.users[Object.keys(D.users)[0]]
+                      D.m = D.firstUsersLink.meta
+                      U = {} # users votes loop object
+                      U.D = D
+                      U.usersConnections = N.inLinks[D.link]
+                      k.build UrlBox,
+                        D: D
+                        N: N
+                        U: U
+                        from: that.props.from
+                        to: that.props.to
+                        props: that.props
+                        thumbalizr: that.props.thumbalizr
+                        word: that.props.word
+                      #if N.inLinks[timeLink]?
+                      #  console.log 'incomming link by', Object.keys(N.inLinks[timeLink]) , D.firstUsersLink
                     console.log N
-                    k.build GridTile,
-                      key: mark+'Node'
-                      title: N.currentTitle #m.body #target.title#FromLink
-                      subtitle: N.firstUser
-                for key, node of that.props.node.in
-                  #console.log key, node
-                  if that.props.node.out? and that.props.node.out[key]
-                    console.log 'reciprical link', that.props.node.out[key], key
-              k.span that.props.from, ' '
-              k.span that.props.to
-          k.build CardActions,
-            expandable: false
-            -> # return innerhtml, tags on here before
-              k.build FlatButton,
-                style:
-                  height: 0
-                label: 'Tab here to go back to "From"'
-                onFocus: () ->
-                  # TODO avoid global here..
-                  window.from.refs.from.focus()
+
+preParseNode = (N) ->
+  console.log N
+
 
 exports.AboutCard = createContainer ((props) ->
   newProps = {}
@@ -86,7 +110,8 @@ exports.AboutCard = createContainer ((props) ->
   N = Nodes.findOne(linkstate.store props.from)
   if N?
     newProps.node = N
-  console.log newProps.node, Nodes.find({}).count()
+    newProps.P = preParseNode N
+  #console.log newProps.node, Nodes.find({}).count()
   props = _.extend {}, props, newProps
   props
 ), AboutCard

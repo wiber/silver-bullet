@@ -1,4 +1,5 @@
 #Template = require('meteor/templating')
+require("react/package.json")
 ReactiveVar = require('meteor/reactive-var')
 reactKup = require('react-kup')
 require('../imports/startup/routes.coffee')
@@ -7,7 +8,6 @@ require('../imports/startup/routes.coffee')
 #injectTapEventPlugin();
 
 {Meteor}= require 'meteor/meteor'
-
 lastLogin = () ->
   user = Meteor.user()
   if user?.services?.facebook?.link# and user.services? and user.services.facebook.link? #Meteor.user().services.facebook.link
@@ -16,18 +16,12 @@ lastLogin = () ->
 sinceLogin = false
 if Meteor.loggingIn()
   sinceLogin = true
-  ##console.log 'Meteor.loggingIn() for ', Meteor.userId()
-  # link to self so
-  # we can add your link to the dropdown
 Meteor.startup ->
 	sinceLogin = true
 Tracker.autorun ->
   if Meteor.user() and sinceLogin
     lastLogin()
     sinceLogin = false
-
-
-
 
 WebFontConfig = google: families: [ 'Roboto:400,300,500:latin' ]
 do ->

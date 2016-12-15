@@ -4,39 +4,30 @@ language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 
-exports.containerLayout = createContainer ((props) ->
+
+containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
-  content = decodeURIComponent queryParams.content
-  if content is 'undefined'
-    content = ''
- #console.log queryParams, FlowRouter.getQueryParam('Bookmarked')
+  user = Meteor.user()
+  content = ifBodyContentHere queryParams.content, queryParams
   unless FlowRouter.getQueryParam('Bookmarked')
-    samePlace = false
-    if Meteor.user()?.fromLast?
-      if Meteor.user().fromLast != queryParams.from
-        samePlace = true
-    else
-      samePlace = true
-   #console.log samePlace, Meteor.user().fromLast, queryParams.from
-    if Meteor.user() and samePlace and Meteor.isClient
+    if samePlace(user, queryParams) and Meteor.isClient
+      console.log UserHandle.ready(), user,'console.log UserHandle.ready(), user'
       changeQueryParams('Bookmarked', true)
-      # otherwise leads to a flip/flop issue when two tabs are open
-      # how do we detect if this was the first time the tab opened?
-      # by using a queryParams... for already called bookmarked
       Meteor.call "Linking",
-        from: decodeURIComponent queryParams.from
+        from: queryParams.from
         to: 'Bookmarks'
         meta:
           title: queryParams.lastTitle
-      , (error, result) ->
-        if error
-         console.log "error", error
-        if result
-         console.log 'result', result
+  if Meteor?.settings?.public?.thumbalizr? # user?.services?.thumbalizr?
+    thumbalizr = Meteor.settings.public.thumbalizr
+  else
+    thumbalizr = undefined
   {
-    user: Meteor.user()
+    user: user
+    thumbalizr: thumbalizr
     from: decodeURIComponent queryParams.from
     to: decodeURIComponent queryParams.to
+    incomming: queryParams.incomming
     content: content
     fromTitle: decodeURIComponent queryParams.lastTitle
     word: wordLanguages[language] # don't prematurely optimize!
@@ -45,3 +36,40 @@ exports.containerLayout = createContainer ((props) ->
     expandMyCard: queryParams.expandMyCard != 'false'
   }
 ), Layout
+
+# textbox should have your comment in it if empty
+ifBodyContentHere = (paramContent, queryParams)->
+  if paramContent is 'undefined' or typeof paramContent is 'undefined'
+    console.log "if paramContent is 'undefined'", queryParams
+    content = ''
+  if Meteor.isClient and UserHandle.ready() and Meteor.user()?.lastFrom?
+    user = Meteor.user()
+    to = linkstate.store queryParams.to
+    from = linkstate.store queryParams.from
+    lastFrom = user.lastFrom
+    switched = lastFrom != queryParams.from
+    cInExists = user.out[to]?[from]?
+    if cInExists
+      console.log paramContent
+      , user.out[to][from]
+      , user.out[to][from].meta.body
+    if cInExists and switched
+      cIn = user.out[to][from]
+      changeQueryParams 'content', cIn.meta.body # 'content', cIn,
+      content = cIn.meta.body
+  console.log paramContent, content, "log paramContent, content"
+  if typeof content is 'undefined'
+    return ''
+  else
+    return content
+
+samePlace = (user, queryParams) ->
+  flag = false
+  if user?.fromLast?
+    if user.fromLast != queryParams.from
+      flag = true
+  else # if we never been anyplace, we're new here
+    flag = true
+  flag
+
+exports.containerLayout = containerLayout
