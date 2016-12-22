@@ -1,4 +1,4 @@
-# LinkList.coffee renders a list of links ordered by weight
+# imports/ui/mexplain.coffee shows a slideshow untill a user makes two connections
 reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
@@ -13,8 +13,9 @@ CardText =  require('material-ui/lib/card/card-text').default
 {GridList, GridTile} = require 'material-ui/lib/grid-list'
 {Subheader} = require 'material-ui/lib/Subheader'
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
+Slider = require('react-slick')
 
-exports.LinkList = React.createClass
+exports.Mexplain = React.createClass
   render: ->
     that = this
     reactKup (k) ->
