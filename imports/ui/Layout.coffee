@@ -11,6 +11,7 @@ FlatButton = require 'material-ui/lib/flat-button'
 CardText = require 'material-ui/lib/card/card-text'
 Card = require 'material-ui/lib/card/card'
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
+{Mexplain} = require '../api/MexplainContainer.coffee'
 
 MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme} = require('../ui/theme.coffee')
@@ -46,6 +47,7 @@ exports.Layout = React.createClass
               k.div
                 className: 'main'
                 ->
+                  k.build Mexplain
                   if that.props.user?.services?.facebook?
                     k.build MainCard, # need comma here because the second arg is prop
                       expanded: that.props.expandMainCard
