@@ -21,16 +21,25 @@ exports.Mexplain = React.createClass
     reactKup (k) ->
       unless that.props.hide
         k.build Card,
-          style:
+          style: _.extend {}, style.card, style.yCard,
             height: 'auto'
           expandable: true
           mixins: [Slider.ControllerMixin]
           ->
-
             k.build Slider,
+              ref: 'nuka-carousel'
               style: Object.assign {},
-                width: '100%'
+                height: 'auto'
+              autoplay: true
+              autoplayInterval: 2000
+              initialSlideHeight: 350
+              framePadding: 25
+              wrapAround: true
+              dragging: true
               ->
-                k.div 'inside'
-                k.img
-                  src: "http://placehold.it/1000x400/ffffff/c0392b/&text=slide1"
+                k.div ->
+                  k.img
+                    src: '/carousel/cherryround.gif'
+                    style:
+                      marginLeft: '15%'
+                k.div 'inside 2'
