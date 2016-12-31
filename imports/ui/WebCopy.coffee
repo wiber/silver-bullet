@@ -3,8 +3,8 @@ exports.wordLanguages =
     HeaderTitle: 'Hashrepublic Linkstates where Youiest makes the connection '
     MainCardTitle: 'About '
     MainCardSubtitle:  "connect it to a bookmark and it will be right there when you need it"
-    TextAboutfloatingLabelText: 'TAB here, describe the link and weigh it with a 0-9.'
-    TextAboutHintText: "Weigh in by hitting the 9 for dead on, 5 neutral, 1 oppose or 0 irrelevant."
+    TextAboutfloatingLabelText: 'TAB here, describe the link and weigh in on a scale 0-9.'
+    TextAboutHintText: "Send your thought with 9 for dead on, 5 neutral, 1 oppose or 0 irrelevant."
     MyCardTitle: "Your links to " #the title of this place.
     MyCardSubtitle: "Go to Bookmarks or your project page and your resources appear here"
     MyCardStepsSubheader: "You have connected from here recently"
