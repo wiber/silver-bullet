@@ -39,9 +39,9 @@ UrlBox = React.createClass
                 k.img
                   style: _.extend {}, style.webShot,
                     opacity: .7
+                    zIndex: 2
                   src: linkstate.thumbalizrPic D.m.FromLink
                   from: D.m.FromLink
-                  zIndex: 2
                   onClick: (e) ->
                    changeQueryParams 'from', e.target.getAttribute('from')
             k.img

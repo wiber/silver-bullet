@@ -9,7 +9,9 @@ exports.bulletUnit = React.createClass
   render: ->
     that = this
     reactKup (k) ->
-      k.div ->
+      k.div
+        style: {}
+      ->
         k.a
           href: that.props.from
           target: '_blank'

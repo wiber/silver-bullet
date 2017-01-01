@@ -28,49 +28,50 @@ exports.Layout = React.createClass
       k.build MuiThemeProvider,
         muiTheme: lightBaseUsTheme
         ->
-          k.div
-            className: 'onlyOne'
-            ->
-              k.div
-                style: _.extend {}, style.base,
-                  height: '100%'
-                  widht: '100%'
-                  position: 'fixed'
-                  backgroundImage: 'url(' + ScreenshotUrl + ')'
-                  backgroundRepeat: 'no-repeat'
-                  backgroundSize: '100% 110%'#'cover' #'100% auto'
-                  opacity: '.3'
-                  zIndex: -1
-              k.div that.props.word.HeaderTitle,
-                ->
-                  k.build AccountsUIWrapper
-              k.div
-                className: 'main'
-                ->
-                  k.build Mexplain
-                  if that.props.user?.services?.facebook?
-                    k.build MainCard, # need comma here because the second arg is prop
-                      expanded: that.props.expandMainCard
-                      # redundant container? already have user obj here
-                      to: that.props.to
-                      from: that.props.from
-                      word: that.props.word
-                      content: that.props.content
-                      user: that.props.user
-                    k.build MyCard,
-                      expanded: that.props.expandMyCard
-                      to: that.props.to
-                      from: that.props.from
-                      word: that.props.word
-                      user: that.props.user
-                      incomming: that.props.incomming
-                      howMany: 10
-                      type: 'fromCreated'
-                  k.build AboutCard,
-                    expanded: that.props.expandAboutCard
+          k.div ->
+            #className: 'onlyOne'
+            #->
+            k.div
+              style: _.extend {}, style.base,
+                height: '100%'
+                widht: '100%'
+                position: 'fixed'
+                backgroundImage: 'url(' + ScreenshotUrl + ')'
+                backgroundRepeat: 'no-repeat'
+                backgroundSize: '100% 110%'#'cover' #'100% auto'
+                opacity: '.3'
+                zIndex: -1
+            k.div ->
+                k.span that.props.word.HeaderTitle
+                k.build AccountsUIWrapper
+            k.div
+              style: {}
+              #className: 'main'
+              ->
+                k.build Mexplain
+                if that.props.user?.services?.facebook?
+                  k.build MainCard, # need comma here because the second arg is prop
+                    expanded: that.props.expandMainCard
+                    # redundant container? already have user obj here
                     to: that.props.to
                     from: that.props.from
                     word: that.props.word
-                    thumbalizr: that.props.thumbalizr
-                    howMany: 15
-              k.div 'footer'
+                    content: that.props.content
+                    user: that.props.user
+                  k.build MyCard,
+                    expanded: that.props.expandMyCard
+                    to: that.props.to
+                    from: that.props.from
+                    word: that.props.word
+                    user: that.props.user
+                    incomming: that.props.incomming
+                    howMany: 10
+                    type: 'fromCreated'
+                k.build AboutCard,
+                  expanded: that.props.expandAboutCard
+                  to: that.props.to
+                  from: that.props.from
+                  word: that.props.word
+                  thumbalizr: that.props.thumbalizr
+                  howMany: 15
+            k.div 'footer'

@@ -32,7 +32,7 @@ exports.Mexplain = React.createClass
                 height: 'auto'
               autoplay: true
               autoplayInterval: 2000
-              initialSlideHeight: 350
+              initialSlideHeight: 351
               framePadding: 25
               wrapAround: true
               dragging: true
@@ -42,4 +42,5 @@ exports.Mexplain = React.createClass
                     src: '/carousel/cherryround.gif'
                     style:
                       marginLeft: '15%'
-                k.div 'inside 2'
+                k.div ->
+                  k.span 'lots of instr'
