@@ -1,6 +1,5 @@
 // imports/startup/configs/serviceconfiguration.js
 
-// changes gitignored
 Meteor.startup(function(){
     ServiceConfiguration.configurations.upsert( {
       service: "facebook"

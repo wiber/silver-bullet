@@ -75,6 +75,7 @@ AboutCard = React.createClass
                       N.recent = N.sorts[0]
                       N.linkSort[link] = N.allLinks[link][N.recent]
                     N.sortedLinks = linkstate.sortByKeysTime N.linkSort, that.props.howMany
+                    N.sortedMomentumLinks = linkstate.sortByMomentum N.linkSort, that.props.howMany
 
                     for timeLink in N.sortedLinks
                       D = {} # this link which has many users votes
