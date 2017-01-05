@@ -28,8 +28,8 @@ exports.Mexplain = React.createClass
               style: Object.assign {},
                 height: 'auto'
                 width: 610
-              autoplay: false
-              autoplayInterval: 3000
+              autoplay: true
+              autoplayInterval: 5000
               initialSlideHeight: 480
               framePadding: 0
               wrapAround: true
@@ -41,10 +41,26 @@ exports.Mexplain = React.createClass
               ->
                 k.div ->
                   k.img
-                    src: '/carousel/bdeadtrue.gif'
+                    src: '/carousel/s1short.gif'
                     style:
-                      marginLeft: '0%'
+                      width: '100%'
+                      height: 'auto'
                 k.div ->
-                  k.h1 'Yes. Bookmarks are dead.'
-                  k.br
-                  k.h2 'But you still need somewhere to organize stuff. Feel me?'
+                  k.img
+                    src: '/carousel/s2commentshort.gif'
+                    style:
+                      width: '100%'
+                      height: 'auto'
+                k.div ->
+                  k.img
+                    src: '/carousel/slide3c.gif'
+                    style:
+                      width: '100%'
+                      height: 'auto'
+                k.div
+                  style:
+                    padding: 35
+                  ->
+                    k.h1 'Making connections is '
+                    k.br
+                    k.h2 'But you still need somewhere to organize stuff. Feel me?'
