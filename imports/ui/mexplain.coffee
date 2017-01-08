@@ -12,6 +12,20 @@ CardTitle = require('material-ui/lib/card/card-title').default
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 Slider = require('nuka-carousel')
 
+gifSlide = React.createClass
+  render: ->
+    that = this
+    reactKup (k) ->
+      k.div ->
+        k.img
+          id: 'Nuka'+that.props.slideNumber
+          style:
+            width: '100%'
+            height: 'auto'
+          src: that.props.src
+          ref: 'Nuka'+that.props.slideNumber
+        console.log $('#Nuka'+that.props.slideNumber)
+
 exports.Mexplain = React.createClass
   render: ->
     that = this
@@ -35,28 +49,24 @@ exports.Mexplain = React.createClass
               wrapAround: true
               dragging: true
               slideIndex: that.props.slideIndex or 0
-              #data: -> this.setCarouselData.bind(this, 'carousel')
               afterSlide: ->
-                console.log this, this.slideIndex, this.state
+                # restart the gif animation when slide is brought into view
+                slide = that.refs['nuka-carousel'].state.currentSlide
+                if slide?
+                  slideElement = $('#Nuka'+slide)
+                  src = slideElement.attr 'src'
+                  slideElement.attr 'src', 'null'
+                  slideElement.attr 'src', src
               ->
-                k.div ->
-                  k.img
-                    src: '/carousel/s1short.gif'
-                    style:
-                      width: '100%'
-                      height: 'auto'
-                k.div ->
-                  k.img
-                    src: '/carousel/s2commentshort.gif'
-                    style:
-                      width: '100%'
-                      height: 'auto'
-                k.div ->
-                  k.img
-                    src: '/carousel/slide3c.gif'
-                    style:
-                      width: '100%'
-                      height: 'auto'
+                k.build gifSlide,
+                  src: '/carousel/s1short.gif'
+                  slideNumber: 1
+                k.build gifSlide,
+                  src: '/carousel/s2commentshort.gif'
+                  slideNumber: 2
+                k.build gifSlide,
+                  src: '/carousel/slide3c.gif'
+                  slideNumber: 3
                 k.div
                   style:
                     padding: 35

@@ -1,7 +1,25 @@
 # Design - Implement - Maintain
 
-Linkstates is an ultra simple cure for bookmarking.
+Imagine an activity where your everyday searching and researching habit created a beautiful tapestry of connections. Projects, resources and people supporting each other in meaningful lasting ways.
 
+Like a splinter in your mind, driving you mad... Because there's something missing in the web. We all know it. We all feel it. The promise is there but instead we get so many great but fragmenting forces.
+
+
+Linkstates starts as an ultra simple cure for bookmarking. Where it ends is largely up to you.
+
+- [ ] Will it accelerate your research?
+- [ ] Will it be on your side when you master you data?
+- [ ] Will it put you in a flow state when you use it? Will you feel mastery as you move on by?
+- [ ] Will it make planning activites for a trip that much easier?
+
+# Belief, the why
+
+- [ ] your bookmarks should be right there on your newtab
+- [ ] bookmarks should be relevant to the last page you were on
+- [ ] bookmarks should be weighted so the important ones are at the top
+- [ ]
+
+# the what
 With Linkstates you:
 
 * link resources to your web things.
