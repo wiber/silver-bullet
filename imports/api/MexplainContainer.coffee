@@ -8,6 +8,7 @@ exports.Mexplain = createContainer ((props) ->
     outlinks = Object.keys(Meteor.user().out)
     if outlinks.length > 4
       newprops.hide = true
-  console.log 'Mexplain newprops', newprops
+  if Meteor.isServer
+    newprops.hide = true
   newprops
 ), Mexplain
