@@ -35,42 +35,37 @@ exports.Mexplain = React.createClass
     else
       that = this
       reactKup (k) ->
-        unless that.props.hide
-          k.build Card,
-            style: _.extend {}, style.card, style.yCard,
-              height: '380'
-            expandable: true
-            mixins: [Slider.ControllerMixin]
-            ->
-              k.build Slider,
-                ref: 'nuka-carousel'
-                style: Object.assign {},
-                  height: 'auto'
-                  width: 610
-                autoplay: true
-                autoplayInterval: 5000
-                initialSlideHeight: 480
-                framePadding: 0
-                wrapAround: true
-                dragging: true
-                slideIndex: that.props.slideIndex or 0
-                #beforeSlide: -> $('.gifSlide').attr 'src', 'null'
-                afterSlide: ->
-                  # restart the gif animation when slide is brought into view
-                  slide = that.refs['nuka-carousel'].state.currentSlide
-                  if slide?
-                    slideElement = $('#Nuka'+slide)
-                    src = slideElement.attr 'href'
-                    #$('.gifSlide').attr 'src', 'null'
-                    slideElement.attr 'src', null
-                    slideElement.attr 'src', src
-                ->
-                  k.build gifSlide,
-                    src: '/carousel/s1 bookmarks dead.gif'
-                    slideNumber: 1
-                  k.build gifSlide,
-                    src: '/carousel/s2commentshort.gif'
-                    slideNumber: 2
-                  k.build gifSlide,
-                    src: '/carousel/slide3c.gif'
-                    slideNumber: 3
+        k.build Card,
+          style: _.extend {}, style.card, style.yCard,
+            height: '380'
+          expandable: true
+          mixins: [Slider.ControllerMixin]
+          ->
+            k.build Slider,
+              ref: 'nuka-carousel'
+              style: Object.assign {},
+                height: 'auto'
+                width: 610
+              autoplay: true
+              autoplayInterval: 5000
+              initialSlideHeight: 480
+              framePadding: 0
+              wrapAround: true
+              dragging: true
+              slideIndex: that.props.slideIndex or 0
+              beforeSlide: ->
+                # restart all the gifs
+                for e in $('.gifSlide')
+                  el = $(e)
+                  el.attr 'src', null
+                  el.attr 'src', el.attr 'href'
+              ->
+                k.build gifSlide,
+                  src: '/carousel/s1 bookmarks dead.gif'
+                  slideNumber: 0
+                k.build gifSlide,
+                  src: '/carousel/s2commentshort.gif'
+                  slideNumber: 1
+                k.build gifSlide,
+                  src: '/carousel/slide3c.gif'
+                  slideNumber: 2
