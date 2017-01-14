@@ -46,7 +46,7 @@ exports.Mexplain = React.createClass
               style: Object.assign {},
                 height: 'auto'
                 width: 610
-              autoplay: true
+              autoplay: false
               autoplayInterval: 5000
               initialSlideHeight: 480
               framePadding: 0
@@ -61,10 +61,10 @@ exports.Mexplain = React.createClass
                   el.attr 'src', el.attr 'href'
               ->
                 k.build gifSlide,
-                  src: '/carousel/s1 bookmarks dead.gif'
+                  src: '/carousel/s1whysense.gif'
                   slideNumber: 0
                 k.build gifSlide,
-                  src: '/carousel/s2commentshort.gif'
+                  src: '/carousel/s2duo.gif'
                   slideNumber: 1
                 k.build gifSlide,
                   src: '/carousel/slide3c.gif'
