@@ -90,24 +90,10 @@ Meteor.methods
       name = Meteor.user().services.facebook.name if Meteor.user()?.services?.facebook?.name? # Meteor.user()?.services?.facebook?.name? ?  #: 'no user'
       console.log 'Meteor.user().hits', hits, 'checkHits server', name
   	  return hits
-  compareHits: ->
-    if Meteor.isClient
-      Meteor.call "checkHits", (error, result) ->
-        if error
-          console.log "error", error
-        if result
-          #console.log result, Meteor.user().hits, result is Meteor.user().hits, 'because it should be'
-          unless result is Meteor.user().hits
-            new Meteor.Error 16, "sync error? looks like user object not synced"
-          localStorage.setItem 'serverHits', result
-          console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, result is Meteor.user().hits,'compareHits withResult'
-      #console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, 'compareHits without'
 
-    #if Meteor.isSimulation
-    #  Meteor.call "compareHits"
-    #return new Date()
   secondaryLinking: (payload) ->
     unless Meteor.isClient # Meteor.isSimulation
+      console.log Nodes.findOne payload.TO, 'console.log Nodes.findOne payload.TO'
       fromNodeId = Nodes.upsert
         _id: payload.FROM
       ,
@@ -116,6 +102,7 @@ Meteor.methods
         _id: payload.TO
       , # second argument to upsert "," is at same level, returns are free
         $set: payload.setEdgeIn # set incoming edge where we're going TO impact
+        #$inc:
       linked = Edges.insert(payload.edge)
   setupUser: () ->
     Meteor.users.update
@@ -144,7 +131,22 @@ Meteor.methods
           title: Meteor.user().services.facebook.name+' on Facebook'
     else
       new Meteor.Error 22, "non facebook user tried to login"
+  compareHits: ->
+    if Meteor.isClient
+      Meteor.call "checkHits", (error, result) ->
+        if error
+          console.log "error", error
+        if result
+          #console.log result, Meteor.user().hits, result is Meteor.user().hits, 'because it should be'
+          unless result is Meteor.user().hits
+            new Meteor.Error 16, "sync error? looks like user object not synced"
+          localStorage.setItem 'serverHits', result
+          console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, result is Meteor.user().hits,'compareHits withResult'
+      #console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, 'compareHits without'
 
+    #if Meteor.isSimulation
+    #  Meteor.call "compareHits"
+    #return new Date()
   resetUser: () ->
     user = Meteor.user()
     ##console.log user , 'whole'

@@ -21,7 +21,6 @@ UrlBox = React.createClass
     D: React.PropTypes.object
   render: ->
     that = this
-    console.log that.props, 'sent to UrlBox'
     reactKup (k) ->
       D = that.props.D
       N = that.props.N
@@ -55,16 +54,13 @@ UrlBox = React.createClass
                changeQueryParams 'to', e.target.getAttribute('to')
           if N.inLinks?[D.link]?
             U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
-            console.log U
             V = {}
             V.U = U
             V.counted = 0
             for user in U.linksByTimeUsers
               V.user = user
-              console.log V
               V.vote = U.usersConnections[V.user]
               V.size = size = style.scalars.screenshotWidth
-              console.log V
               if V.vote?.meta?
                 k.build LinkVote,
                   from: that.props.from

@@ -57,7 +57,7 @@ exports.Mexplain = React.createClass
                 # restart all the gifs
                 for e in $('.gifSlide')
                   el = $(e)
-                  el.attr 'src', null
+                  el.attr 'src', 'empty'
                   el.attr 'src', el.attr 'href'
               ->
                 k.build gifSlide,

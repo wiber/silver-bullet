@@ -16,7 +16,13 @@ linkstate.sortByWeight = (dict, many) ->
   ##console.log toReturn.length, _.uniq(toReturn).length
   toReturn[..many]
 linkstate.sortByMomentum = (dictDict, many) ->
-  console.log dictDict, 'dictDict'
+  keys = Object.keys(dictDict)
+  momentum = {}
+  for link in dictDict
+    console.log link, 'links in dictDict'
+  toReturn = Object.keys(dictDict).sort (a, b) ->
+    console.log dictDict, 'dictDict'
+    dictDict[b].meta.weight - (dictDict[a].meta.weight)
 ###
 linkstate.store = (url) ->
   unless typeof url == 'string'

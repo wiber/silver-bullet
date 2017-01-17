@@ -74,10 +74,28 @@ AboutCard = React.createClass
                       N.sorts = linkstate.sortByKeysTime(N.allLinks[link],3)
                       N.recent = N.sorts[0]
                       N.linkSort[link] = N.allLinks[link][N.recent]
-                    N.sortedLinks = linkstate.sortByKeysTime N.linkSort, that.props.howMany
-                    N.sortedMomentumLinks = linkstate.sortByMomentum N.linkSort, that.props.howMany
+                    # calculate momentum of a url by walking through voters on it
+                    N.momentum = {}
+                    N.vectors = {}
+                    for link in Object.keys N.allLinks
+                      console.log link, N.allLinks[link], 'link keys', Object.keys N.allLinks[link]
+                      for voter of N.allLinks[link]
+                        console.log voter, 'voter', N.allLinks[link][voter].meta.weight
+                        if N.allLinks[link][voter].meta?.weight?
+                          unless typeof N.momentum[link] is 'number' or N.momentum[link] is 0
+                            N.momentum[link] = 0
+                          N.momentum[link] = N.momentum[link] + N.allLinks[link][voter].meta.weight - 5
+                          # apply momentum calculation to object.. should be db level...
+                          N.allLinks[link].momentum = N.momentum[link]
+                        console.log N.momentum, 'N.momentum', N.momentum[link]
 
+                    for vector of N.momentum
+                      console.log vector, 'vector'
+                    N.sortedLinks = linkstate.sortByMomentum N.linkSort, that.props.howMany
+                    N.sortByWeight = linkstate.sortByWeight N.linkSort, that.props.howMany
+                    console.log 'sorts', N.linkSort, N.sortByWeight
                     for timeLink in N.sortedLinks
+                      console.log N.sortedLinks[timeLink]
                       D = {} # this link which has many users votes
                       D.N = N
                       D.link = timeLink
