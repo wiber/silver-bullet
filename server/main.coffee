@@ -8,8 +8,8 @@ window.innerWidth = 640
 #process.env.MONGO_URL = Meteor.settings.MONGO_URL
 Meteor.startup ->
   try
-    console.log process.env.MONGO_URL
-    console.log Meteor.settings, Meteor.settings?.MONGO_URL?
+    #console.log process.env.MONGO_URL
+    #console.log Meteor.settings, Meteor.settings?.MONGO_URL?
   catch error
     console.log error
 if Meteor.loggingIn()

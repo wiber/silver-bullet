@@ -11,7 +11,7 @@ containerLayout = createContainer ((props) ->
   content = ifBodyContentHere queryParams.content, queryParams
   unless FlowRouter.getQueryParam('Bookmarked')
     if samePlace(user, queryParams) and Meteor.isClient
-      console.log UserHandle.ready(), user,'console.log UserHandle.ready(), user'
+      #console.log UserHandle.ready(), user,'console.log UserHandle.ready(), user'
       changeQueryParams('Bookmarked', true)
       Meteor.call "Linking",
         from: queryParams.from

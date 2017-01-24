@@ -1,7 +1,6 @@
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 {createContainer} = require 'meteor/react-meteor-data'
 {Mexplain} = require '../ui/mexplain.coffee'
-console.log Mexplain
 exports.Mexplain = createContainer ((props) ->
   newprops = Object.assign {}, props
   if Meteor.user()?.out?

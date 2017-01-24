@@ -45,7 +45,7 @@ TextAbout = React.createClass
         ref: 'MainCardTextInput'
         onSelect: (e) ->
           if e.target.value.length < 1
-            console.log that.props.content, e.target.value
+            #console.log that.props.content, e.target.value
             e.target.value = that.props.content
         onKeyDown: (e) ->
           if 48 <= e.keyCode <= 57 and !e.ctrlKey and !e.shiftKey and !e.altKey
@@ -57,8 +57,7 @@ TextAbout = React.createClass
               to: FlowRouter.getQueryParam('to')
               meta: content
             content.weight = e.keyCode - 48
-            console.log payload,'console.log payload'
-            , content.body, e, e.target, e.target.value, 'console.log content.body, e.target.value, e.target, '
+            #console.log payload,'console.log payload' , content.body, e, e.target, e.target.value, 'console.log content.body, e.target.value, e.target, '
             Meteor.defer ->
               Meteor.call "Linking", payload, (error, result) ->
                 if error

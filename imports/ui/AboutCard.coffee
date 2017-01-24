@@ -77,6 +77,7 @@ AboutCard = React.createClass
                     # calculate momentum of a url by walking through voters on it
                     N.momentum = {}
                     N.vectors = {}
+                    ###
                     for link in Object.keys N.allLinks
                       console.log link, N.allLinks[link], 'link keys', Object.keys N.allLinks[link]
                       for voter of N.allLinks[link]
@@ -91,9 +92,10 @@ AboutCard = React.createClass
 
                     for vector of N.momentum
                       console.log vector, 'vector'
+                    ###
                     N.sortedLinks = linkstate.sortByMomentum N.linkSort, that.props.howMany
                     N.sortByWeight = linkstate.sortByWeight N.linkSort, that.props.howMany
-                    console.log 'sorts', N.linkSort, N.sortByWeight
+                    #console.log 'sorts', N.linkSort, N.sortByWeight
                     for timeLink in N.sortedLinks
                       console.log N.sortedLinks[timeLink]
                       D = {} # this link which has many users votes

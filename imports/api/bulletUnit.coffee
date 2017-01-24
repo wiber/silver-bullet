@@ -5,6 +5,6 @@ bulletUnit = require('../ui/bulletUnit.coffee').bulletUnit
 exports.bulletUnitContainer = createContainer ((props) ->
 
   newprops = Object.assign {}, props
-  console.log 'bulletUnitContainer', newprops
+  #console.log 'bulletUnitContainer', newprops
   newprops
 ), bulletUnit

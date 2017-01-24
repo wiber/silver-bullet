@@ -92,8 +92,6 @@ Meteor.methods
   	  return hits
 
   secondaryLinking: (payload) ->
-    unless Meteor.isClient # Meteor.isSimulation
-      console.log Nodes.findOne payload.TO, 'console.log Nodes.findOne payload.TO'
       fromNodeId = Nodes.upsert
         _id: payload.FROM
       ,
@@ -102,7 +100,8 @@ Meteor.methods
         _id: payload.TO
       , # second argument to upsert "," is at same level, returns are free
         $set: payload.setEdgeIn # set incoming edge where we're going TO impact
-        #$inc:
+      #console.log toNodeId, Nodes.findOne(payload.TO).out, 'console.log Nodes.findOne payload.TO'
+
       linked = Edges.insert(payload.edge)
   setupUser: () ->
     Meteor.users.update
