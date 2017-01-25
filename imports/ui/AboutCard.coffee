@@ -97,7 +97,7 @@ AboutCard = React.createClass
                     N.sortByWeight = linkstate.sortByWeight N.linkSort, that.props.howMany
                     #console.log 'sorts', N.linkSort, N.sortByWeight
                     for timeLink in N.sortedLinks
-                      console.log N.sortedLinks[timeLink]
+                      #console.log N.sortedLinks[timeLink]
                       D = {} # this link which has many users votes
                       D.N = N
                       D.link = timeLink
@@ -118,7 +118,7 @@ AboutCard = React.createClass
                         word: that.props.word
                       #if N.inLinks[timeLink]?
                       #  console.log 'incomming link by', Object.keys(N.inLinks[timeLink]) , D.firstUsersLink
-                    console.log N
+                    #console.log N
 
 preParseNode = (N) ->
   console.log N
