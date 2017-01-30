@@ -7,6 +7,7 @@ exports.AccountsUIWrapper = React.createClass
   #componentWillUnmount: ->
   #  Blaze.remove @view
   render: ->
+    console.log 'rendered AccountsUIWrapper', @
     that = this
     reactKup (k) ->
       k.span
