@@ -6,6 +6,7 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "chai": "^3.5.0",
     "fbjs": "^0.8.5",
     "invariant": "^2.2.1",
     "material-ui": "0.15.0-alpha.2",

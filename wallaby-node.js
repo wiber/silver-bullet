@@ -6,8 +6,9 @@ module.exports = function (w) {
     ],
 
     tests: [
-      'linkstate/test/*NodeSpec.coffee'
+      'linkstate/tests/*NodeSpec.coffee'
     ],
+
 
     env: {
       type: 'node'
