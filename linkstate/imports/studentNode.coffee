@@ -11,5 +11,4 @@ class Student
       else
         'A'
 
-module.exports = Student
 exports.Student = Student
