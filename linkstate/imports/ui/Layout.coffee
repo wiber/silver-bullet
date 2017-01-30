@@ -42,7 +42,7 @@ exports.Layout = React.createClass
                 opacity: '.3'
                 zIndex: -1
             k.div ->
-                #k.span that.props.word.HeaderTitle
+                k.span that.props.word.HeaderTitle
                 k.build AccountsUIWrapper
             k.div
               style: {}
