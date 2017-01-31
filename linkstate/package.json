@@ -1,0 +1,30 @@
+{
+  "name": "silver-bullet",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "chai": "^3.5.0",
+    "fbjs": "^0.8.5",
+    "invariant": "^2.2.1",
+    "material-ui": "0.15.0-alpha.2",
+    "meteor-node-stubs": "~0.2.0",
+    "nuka-carousel": "^2.0.3",
+    "react": "^15.4.1",
+    "react-addons-css-transition-group": "^15.0.0",
+    "react-addons-pure-render-mixin": "^15.0.0",
+    "react-addons-shallow-compare": "^15.0.0",
+    "react-dom": "^15.4.1",
+    "react-kup": "^1.0.0",
+    "react-mounter": "^1.2.0",
+    "react-selectize": "2.1.0",
+    "react-tap-event-plugin": "^1.0.0",
+    "reify": "^0.3.8"
+  },
+  "peerDependencies": {
+    "react": "15.0.0",
+    "react-dom": "15.0.0"
+  }
+}
