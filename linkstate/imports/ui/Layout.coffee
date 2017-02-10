@@ -46,7 +46,7 @@ exports.Layout = React.createClass
             k.div ->
             k.build AppBar,
               title: that.props.word.HeaderTitle
-              iconElementRight: -> AccountsUIWrapper
+              iconElementRight: -> k.build AccountsUIWrapper
             k.div
               style: {}
               #className: 'main'
