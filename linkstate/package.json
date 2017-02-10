@@ -9,7 +9,7 @@
     "chai": "^3.5.0",
     "fbjs": "^0.8.5",
     "invariant": "^2.2.1",
-    "material-ui": "0.15.0-alpha.2",
+    "material-ui": "^0.15.0-alpha.2",
     "meteor-node-stubs": "~0.2.0",
     "nuka-carousel": "^2.0.3",
     "react": "^15.4.1",

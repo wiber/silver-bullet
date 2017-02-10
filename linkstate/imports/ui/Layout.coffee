@@ -9,9 +9,11 @@ CardActions = require 'material-ui/lib/card/card-actions'
 CardHeader = require 'material-ui/lib/card/card-header'
 FlatButton = require 'material-ui/lib/flat-button'
 CardText = require 'material-ui/lib/card/card-text'
+AppBar =  require('material-ui/lib/app-bar').default
 Card = require 'material-ui/lib/card/card'
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 {Mexplain} = require '../api/MexplainContainer.coffee'
+
 
 MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme} = require('../ui/theme.coffee')
@@ -42,8 +44,9 @@ exports.Layout = React.createClass
                 opacity: '.3'
                 zIndex: -1
             k.div ->
-                k.span that.props.word.HeaderTitle
-                k.build AccountsUIWrapper
+            k.build AppBar,
+              title: that.props.word.HeaderTitle
+              iconElementRight: -> AccountsUIWrapper
             k.div
               style: {}
               #className: 'main'
