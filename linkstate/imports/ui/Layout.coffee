@@ -43,10 +43,11 @@ exports.Layout = React.createClass
                 backgroundSize: '100% 110%'#'cover' #'100% auto'
                 opacity: '.3'
                 zIndex: -1
-            k.div ->
             k.build AppBar,
-              title: that.props.word.HeaderTitle
-              iconElementRight: -> k.build AccountsUIWrapper
+              title: 'Linkstate'
+            k.div ->
+              k.span that.props.word.HeaderTitle
+              k.build AccountsUIWrapper
             k.div
               style: {}
               #className: 'main'
