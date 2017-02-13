@@ -44,12 +44,14 @@ exports.Layout = React.createClass
                 opacity: '.3'
                 zIndex: -1
             k.build AppBar,
-              title: 'Linkstate'
-            k.div ->
-              k.span that.props.word.HeaderTitle
-              k.build AccountsUIWrapper
+              title: that.props.word.HeaderTitle + that.props.from
+              iconElementLeft: k.span ''
+              style:
+                position: 'fixed'
+            k.span 'g',-> # because... just because
             k.div
-              style: {}
+              style:
+                marginTop: 150
               #className: 'main'
               ->
                 k.build Mexplain
@@ -78,4 +80,5 @@ exports.Layout = React.createClass
                   word: that.props.word
                   thumbalizr: that.props.thumbalizr
                   howMany: 15
-            k.div 'footer'
+            k.div ->
+              k.build AccountsUIWrapper
