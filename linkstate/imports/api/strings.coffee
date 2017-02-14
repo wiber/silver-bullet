@@ -1,4 +1,4 @@
-_ = require ('ramda').default
+_ = require('ramda')
 linkstate = {}
 exports.store = (url) ->
   unless typeof url == 'string'
