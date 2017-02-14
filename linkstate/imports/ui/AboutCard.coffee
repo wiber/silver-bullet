@@ -18,7 +18,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 {UrlBox} = require '../../imports/ui/UrlBox.coffee'
 
 {createContainer} = require 'meteor/react-meteor-data'
-{see, store} = require '../api/strings.coffee'
+{see, store, AByMomentum} = require '../api/strings.coffee'
 AboutCard = React.createClass
   render: ->
     that = this
