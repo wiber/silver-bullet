@@ -27,9 +27,19 @@ exports.AByMomentum = (dictDict, many) ->
   console.log A(dictDict)
   keys = Object.keys(dictDict)
   momentum = {}
-  for link of dictDict
-    console.log link, dictDict[link], 'links in dictDict'
-
-  toReturn = Object.keys(dictDict).sort (a, b) ->
-    console.log dictDict, 'dictDict'
-    dictDict[b].meta.weight - (dictDict[a].meta.weight)
+  for url of dictDict
+    console.log url, dictDict[url]
+    for user of dictDict[url]
+      console.log user, dictDict[url][user].meta.weight
+      if dictDict[url][user].meta?.weight?
+        energy = dictDict[url][user].meta.weight - 5
+        if typeof momentum[url] is 'number'
+          momentum[url] = energy + momentum[url]
+        else
+          momentum[url] = energy
+        console.log energy, momentum[url]
+  toReturn = Object.keys(momentum).sort (a, b) ->
+    console.log momentum,Object.keys(momentum), 'momentum'
+    momentum[b] - momentum[a]
+  console.log toReturn
+  toReturn
