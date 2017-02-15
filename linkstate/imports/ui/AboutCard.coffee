@@ -16,7 +16,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 {bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
 {UrlBox} = require '../../imports/ui/UrlBox.coffee'
-
+R = require 'ramda'
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store, AByMomentum} = require '../api/strings.coffee'
 AboutCard = React.createClass
@@ -53,6 +53,16 @@ AboutCard = React.createClass
                   class: 'looplist'
                   cols: 1
                   ->
+                    F = R.prop('node')(that.props)
+                    #F.in = R.prop('in')(F)
+                    #F.out = R.prop('out')(F)
+                    F.IO = R.uniq R.concat(R.keys(R.prop 'in', F)
+                    , R.keys(R.prop 'out', F)) 
+                    #momentum = -> R.map R.compose
+                    #,
+
+
+                    console.log F
                     # conditionals are ok, but we should move out data processing into pure functions with wallaby tests
                     # end result is a modular and clean way to render urls and votes
                     # from to header, list of comments with face votes..

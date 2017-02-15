@@ -2,7 +2,8 @@ module.exports = function (w) {
 
   return {
     files: [
-      'linkstate/imports/*Node.coffee'
+      'linkstate/imports/*Node.coffee',
+      'linkstate/imports/api/strings.coffee'
     ],
 
     tests: [
