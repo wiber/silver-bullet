@@ -18,7 +18,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 {UrlBox} = require '../../imports/ui/UrlBox.coffee'
 R = require 'ramda'
 {createContainer} = require 'meteor/react-meteor-data'
-{see, store, AByMomentum} = require '../api/strings.coffee'
+{see, store, AByMomentum, listByMomentum} = require '../api/strings.coffee'
 AboutCard = React.createClass
   render: ->
     that = this
@@ -57,7 +57,7 @@ AboutCard = React.createClass
                     #F.in = R.prop('in')(F)
                     #F.out = R.prop('out')(F)
                     F.IO = R.uniq R.concat(R.keys(R.prop 'in', F)
-                    , R.keys(R.prop 'out', F)) 
+                    , R.keys(R.prop 'out', F))
                     #momentum = -> R.map R.compose
                     #,
 
@@ -87,26 +87,13 @@ AboutCard = React.createClass
                     # calculate momentum of a url by walking through voters on it
                     N.momentum = {}
                     N.vectors = {}
-                    ###
-                    for link in Object.keys N.allLinks
-                      console.log link, N.allLinks[link], 'link keys', Object.keys N.allLinks[link]
-                      for voter of N.allLinks[link]
-                        console.log voter, 'voter', N.allLinks[link][voter].meta.weight
-                        if N.allLinks[link][voter].meta?.weight?
-                          unless typeof N.momentum[link] is 'number' or N.momentum[link] is 0
-                            N.momentum[link] = 0
-                          N.momentum[link] = N.momentum[link] + N.allLinks[link][voter].meta.weight - 5
-                          # apply momentum calculation to object.. should be db level...
-                          N.allLinks[link].momentum = N.momentum[link]
-                        console.log N.momentum, 'N.momentum', N.momentum[link]
-
-                    for vector of N.momentum
-                      console.log vector, 'vector'
-                    ###
                     N.sortedLinks = linkstate.sortByMomentum N.linkSort, that.props.howMany
-                    N.sortByWeight = linkstate.sortByWeight N.linkSort, that.props.howMany
-                    #console.log 'sorts', N.linkSort, N.sortByWeight
-                    for timeLink in N.sortedLinks
+
+                    N.sortByWeight = AByMomentum N.inLinks
+                    N.sortOutByWeight = AByMomentum N.outLinks
+                    N.sortAllMomentum = R.concat
+                    console.log 'sorts', N.sortedLinks, N.linkSort, N.sortByWeight, N
+                    for timeLink in N.sortByWeight
                       #console.log N.sortedLinks[timeLink]
                       D = {} # this link which has many users votes
                       D.N = N

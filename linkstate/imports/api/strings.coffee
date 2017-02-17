@@ -1,4 +1,4 @@
-_ = require('ramda')
+R = require('ramda')
 linkstate = {}
 exports.store = (url) ->
   unless typeof url == 'string'
@@ -17,15 +17,13 @@ exports.see = (url) ->
   encodedToDotless = encodedToPlain.replace '%2E' , '.'
   -> encodedToDotless.replace('http://','').replace('https://','').replace('www.','')
 
-trace = _.curry((tag, x) ->
+trace = R.curry((tag, x) ->
   console.log tag, x
   x
 )
 
+linkMomentum = R.map(R.map(R.compose( R.prop 'meta' )))
 exports.AByMomentum = (dictDict, many) ->
-  A = _.compose _.map(trace,_.prop 'weight')
-  console.log A(dictDict)
-  keys = Object.keys(dictDict)
   momentum = {}
   for url of dictDict
     console.log url, dictDict[url]
@@ -37,9 +35,22 @@ exports.AByMomentum = (dictDict, many) ->
           momentum[url] = energy + momentum[url]
         else
           momentum[url] = energy
+      if ! dictDict[url][user].meta?.weight?
         console.log energy, momentum[url]
+        # how to deal with zeroes and undefined
+        if typeof momentum[url] is 'undefined'
+          momentum[url] = -5
+        else
+          momentum[url] =- 5
   toReturn = Object.keys(momentum).sort (a, b) ->
     console.log momentum,Object.keys(momentum), 'momentum'
     momentum[b] - momentum[a]
   console.log toReturn
   toReturn
+
+
+exports.listByMomentum = (listOne, listTwo, many) ->
+  console.log arguments[0]
+  console.log listTwo
+
+  return R.uniq(R.concat(listOne, listTwo))
