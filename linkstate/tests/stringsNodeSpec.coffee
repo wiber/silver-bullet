@@ -8,10 +8,10 @@ urlData =
   url1:
     userOne:
       meta:
-        weight: undefined
+        weight: 2
     userTwo:
       meta:
-        weight: undefined
+        weight: 3
   url2:
     userOne:
       meta:
@@ -79,7 +79,7 @@ realData =
       'from': 'http%3A%2F%2Fwww%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0%2F%23%2F'
       'to': 'Bookmarks'
       'meta':
-        weight: 3
+        #weight: 3 # bookmarks don't always have weight so we deal with it..
         'title': 'Material-UI'
         'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
         'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
@@ -100,7 +100,7 @@ describe 'Momentum', ->
     expect(Momentum).to.deep.equal(['url3','url2','url1'])
 
 describe 'listMomentum', ->
-  inOutMomentum = listByMomentum(AByMomentum(realData), AByMomentum(urlData))
+  inOutMomentum = listByMomentum(AByMomentum(urlData),AByMomentum(realData))
   it 'should return an array of 5 length', ->
     expect(inOutMomentum.length).to.equal(5)
   it 'should return correct array', ->
