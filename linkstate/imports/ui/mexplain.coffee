@@ -30,41 +30,41 @@ gifSlide = React.createClass
 
 exports.Mexplain = React.createClass
   render: ->
-    else
-      that = this
-      reactKup (k) ->
-        k.build Card,
-          expanded: that.props.hide
-          style: _.extend {}, style.card, style.yCard,
-            height: '380'
-          expandable: true
-          mixins: [Slider.ControllerMixin]
-          ->
-            k.build Slider,
-              ref: 'nuka-carousel'
-              style: Object.assign {},
-                height: 'auto'
-                width: 610
-              autoplay: false
-              autoplayInterval: 5000
-              initialSlideHeight: 480
-              framePadding: 0
-              wrapAround: true
-              dragging: true
-              slideIndex: that.props.slideIndex or 0
-              beforeSlide: ->
-                # restart all the gifs
-                for e in $('.gifSlide')
-                  el = $(e)
-                  el.attr 'src', 'empty'
-                  el.attr 'src', el.attr 'href'
-              ->
-                k.build gifSlide,
-                  src: '/carousel/s1whysense.gif'
-                  slideNumber: 0
-                k.build gifSlide,
-                  src: '/carousel/s2duo.gif'
-                  slideNumber: 1
-                k.build gifSlide,
-                  src: '/carousel/slide3c.gif'
-                  slideNumber: 2
+
+    that = this
+    reactKup (k) ->
+      k.build Card,
+        expanded: that.props.hide
+        style: _.extend {}, style.card, style.yCard,
+          height: '380'
+        expandable: true
+        mixins: [Slider.ControllerMixin]
+        ->
+          k.build Slider,
+            ref: 'nuka-carousel'
+            style: Object.assign {},
+              height: 'auto'
+              width: 610
+            autoplay: false
+            autoplayInterval: 5000
+            initialSlideHeight: 480
+            framePadding: 0
+            wrapAround: true
+            dragging: true
+            slideIndex: that.props.slideIndex or 0
+            beforeSlide: ->
+              # restart all the gifs
+              for e in $('.gifSlide')
+                el = $(e)
+                el.attr 'src', 'empty'
+                el.attr 'src', el.attr 'href'
+            ->
+              k.build gifSlide,
+                src: '/carousel/s1whysense.gif'
+                slideNumber: 0
+              k.build gifSlide,
+                src: '/carousel/s2duo.gif'
+                slideNumber: 1
+              k.build gifSlide,
+                src: '/carousel/slide3c.gif'
+                slideNumber: 2
