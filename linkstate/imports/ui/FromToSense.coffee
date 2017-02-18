@@ -43,6 +43,7 @@ TextAbout = React.createClass
     reactKup (k) ->
       k.build TextField,
         ref: 'MainCardTextInput'
+        autoFocus: true
         onSelect: (e) ->
           if e.target.value.length < 1
             #console.log that.props.content, e.target.value
