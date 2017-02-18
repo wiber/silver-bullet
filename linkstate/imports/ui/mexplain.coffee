@@ -11,6 +11,7 @@ CardTitle = require('material-ui/lib/card/card-title').default
 {Subheader} = require 'material-ui/lib/Subheader'
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 Slider = require('nuka-carousel')
+CardText =  require('material-ui/lib/card/card-text').default
 # set the attr to a still on all, then, swap in the live one.. else flicker
 
 gifSlide = React.createClass
@@ -33,18 +34,20 @@ exports.Mexplain = React.createClass
 
     that = this
     reactKup (k) ->
-      k.build Card,
+      k.build CardText,
         expanded: that.props.hide
-        style: _.extend {}, style.card, style.yCard,
+        style: _.extend {},# style.card, style.yCard,
           height: '380'
         expandable: true
         mixins: [Slider.ControllerMixin]
         ->
           k.build Slider,
+            #tabIndex: -1
             ref: 'nuka-carousel'
             style: Object.assign {},
-              height: 'auto'
-              width: 610
+              height: 300
+              width: 'auto'
+              #width: 610
             autoplay: false
             autoplayInterval: 5000
             initialSlideHeight: 480

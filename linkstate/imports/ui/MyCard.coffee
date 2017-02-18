@@ -17,6 +17,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 {Subheader} = require 'material-ui/lib/Subheader'
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 Toggle = require('material-ui/lib/toggle').default
+{Mexplain} = require '../api/MexplainContainer.coffee'
 
 exports.MyCard = React.createClass
   getDefaultProps: ->
@@ -41,6 +42,12 @@ exports.MyCard = React.createClass
             style:
               height: 'auto'
             expandable: true
+            ->
+              k.build Mexplain
+          k.build CardText,
+            style:
+              height: 'auto'
+            expandable: false
             ->
               k.build GridList,
                 #cellHeight: 200

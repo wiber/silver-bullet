@@ -10,7 +10,6 @@ CardMedia = require('material-ui/lib/card/card-media').default
 CardTitle = require('material-ui/lib/card/card-title').default
 FlatButton = require('material-ui/lib/flat-button' ).default
 CardText =  require('material-ui/lib/card/card-text').default
-
 exports.MainCard = React.createClass
   getDefaultProps: ->
     expanded: true
