@@ -14,7 +14,14 @@ Slider = require('nuka-carousel')
 CardText =  require('material-ui/lib/card/card-text').default
 # set the attr to a still on all, then, swap in the live one.. else flicker
 
+resetSlides = () ->
+  for e in $('.gifSlide')
+    el = $(e)
+    el.attr 'src', 'empty'
+    el.attr 'src', el.attr 'href'
 gifSlide = React.createClass
+  # sounds costly, but only predictable way to do it
+  componentDidMount: resetSlides
   render: ->
     that = this
     reactKup (k) ->
@@ -24,10 +31,11 @@ gifSlide = React.createClass
           className: 'gifSlide'
           style:
             width: '100%'
-            height: 'auto'
+            height: 300
           src: that.props.src
           href: that.props.src
           ref: 'Nuka'+that.props.slideNumber
+
 
 exports.Mexplain = React.createClass
   render: ->
@@ -55,12 +63,8 @@ exports.Mexplain = React.createClass
             wrapAround: true
             dragging: true
             slideIndex: that.props.slideIndex or 0
-            beforeSlide: ->
-              # restart all the gifs
-              for e in $('.gifSlide')
-                el = $(e)
-                el.attr 'src', 'empty'
-                el.attr 'src', el.attr 'href'
+            beforeSlide: resetSlides
+            #componentDidMount: resetSlides # problematic
             ->
               k.build gifSlide,
                 src: '/carousel/s1whysense.gif'
