@@ -90,6 +90,206 @@ realData =
       'author': 'cqWYJrZCGeWoPc68T'
       'createdAt': 1486799850384
       'title': 'Material-UI'
+realNode =
+  '_id': 'Bookmarks'
+  'in': 'Bookmarks': 'Elias Moosman':
+    'from': 'Bookmarks'
+    'to': 'Bookmarks'
+    'meta':
+      'title': 'Your Bookmarks'
+      'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+      'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+      'FromLink': 'Bookmarks'
+      'ToLink': 'Bookmarks'
+      'ScreenshotUrl': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+    'author': 'cqWYJrZCGeWoPc68T'
+    'createdAt': 1487405461886
+    'title': 'Your Bookmarks'
+  'title': 'Elias Moosman on Facebook'
+  'out':
+    'Bookmarks': 'Elias Moosman':
+      'from': 'Bookmarks'
+      'to': 'Bookmarks'
+      'meta':
+        'title': 'Your Bookmarks'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'Bookmarks'
+        'ToLink': 'Bookmarks'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487405461886
+      'title': 'Your Bookmarks'
+    'https%3A%2F%2Fwww%2Efacebook%2Ecom%2Fapp_scoped_user_id%2F10154232419354595%2F': 'Elias Moosman':
+      'from': 'https%3A%2F%2Fwww%2Efacebook%2Ecom%2Fapp_scoped_user_id%2F10154232419354595%2F'
+      'to': 'Bookmarks'
+      'meta':
+        'title': 'Elias Moosman on Facebook'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'ToLink': 'Bookmarks'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=https://www.facebook.com/app_scoped_user_id/10154232419354595/&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487405461985
+      'title': 'Elias Moosman on Facebook'
+    'http%3A%2F%2Fwww%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0%2F%23%2F': 'Elias Moosman':
+      'from': 'http%3A%2F%2Fwww%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0%2F%23%2F'
+      'to': 'Bookmarks'
+      'meta':
+        'title': 'Material-UI'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'http://www.material-ui.com/v0.15.0/#/'
+        'ToLink': 'Bookmarks'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=http://www.material-ui.com/v0.15.0/#/&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1486799850384
+      'title': 'Material-UI'
+    'http%3A%2F%2Fwww%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0-alpha%2E2%2F%23%2F': 'Elias Moosman':
+      'from': 'http%3A%2F%2Fwww%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0-alpha%2E2%2F%23%2F'
+      'to': 'Bookmarks'
+      'meta':
+        'title': 'Material-UI'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'http://www.material-ui.com/v0.15.0-alpha.2/#/'
+        'ToLink': 'Bookmarks'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=http://www.material-ui.com/v0.15.0-alpha.2/#/&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1486799938150
+      'title': 'Material-UI'
+    'http%3A%2F%2Fwww%2Espeedtest%2Enet%2F': 'Elias Moosman':
+      'from': 'http%3A%2F%2Fwww%2Espeedtest%2Enet%2F'
+      'to': 'Bookmarks'
+      'meta':
+        'title': 'Speedtest.net by Ookla - The Global Broadband Speed Test'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'http://www.speedtest.net/'
+        'ToLink': 'Bookmarks'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=http://www.speedtest.net/&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1486992184075
+      'title': 'Speedtest.net by Ookla - The Global Broadband Speed Test'
+    'https%3A%2F%2Fforums%2Emeteor%2Ecom%2Ft%2Freact-accounts-ui-user-login-components%2F14078%2F5': 'Elias Moosman':
+      'from': 'https%3A%2F%2Fforums%2Emeteor%2Ecom%2Ft%2Freact-accounts-ui-user-login-components%2F14078%2F5'
+      'to': 'Bookmarks'
+      'meta':
+        'title': 'React accounts-ui / user / login components? - react - Meteor forums'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'https://forums.meteor.com/t/react-accounts-ui-user-login-components/14078/5'
+        'ToLink': 'Bookmarks'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=https://forums.meteor.com/t/react-accounts-ui-user-login-components/14078/5&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1486992195023
+      'title': 'React accounts-ui / user / login components? - react - Meteor forums'
+    'http%3A%2F%2Flocalhost%3A3000%2Fabout%3FBookmarked%3Dtrue%26content%3D%26to%3Dhttps%253A%252F%252Fwww%2Efacebook%2Ecom%252Fapp_scoped_user_id%252F10154232419354595%252F%26from%3Dhttp%253A%252F%252Fwww%2Ematerial-ui%2Ecom%252Fv0%2E15%2E0-alpha%2E2%252F%2523%252F': 'Elias Moosman':
+      'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3FBookmarked%3Dtrue%26content%3D%26to%3Dhttps%253A%252F%252Fwww%2Efacebook%2Ecom%252Fapp_scoped_user_id%252F10154232419354595%252F%26from%3Dhttp%253A%252F%252Fwww%2Ematerial-ui%2Ecom%252Fv0%2E15%2E0-alpha%2E2%252F%2523%252F'
+      'to': 'Bookmarks'
+      'meta':
+        'title': 'localhost:3000/about?Bookmarked=true&content=&to=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&from=http%3A%2F%2Fwww.material-ui.com%2Fv0.15.0-alpha.2%2F%23%2F'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'http://localhost:3000/about?Bookmarked=true&content=&to=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&from=http%3A%2F%2Fwww.material-ui.com%2Fv0.15.0-alpha.2%2F%23%2F'
+        'ToLink': 'Bookmarks'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=http://localhost:3000/about?Bookmarked=true&content=&to=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&from=http%3A%2F%2Fwww.material-ui.com%2Fv0.15.0-alpha.2%2F%23%2F&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487164253429
+      'title': 'localhost:3000/about?Bookmarked=true&content=&to=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&from=http%3A%2F%2Fwww.material-ui.com%2Fv0.15.0-alpha.2%2F%23%2F'
+    'http%3A%2F%2Fxixixao%2Egithub%2Eio%2Fprelude-ls%2F%23f-compose': 'Elias Moosman':
+      'from': 'http%3A%2F%2Fxixixao%2Egithub%2Eio%2Fprelude-ls%2F%23f-compose'
+      'to': 'Bookmarks'
+      'meta':
+        'title': 'prelude.coffee - a JavaScript functional programming library - for and in CoffeeScript'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'http://xixixao.github.io/prelude-ls/#f-compose'
+        'ToLink': 'Bookmarks'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=http://xixixao.github.io/prelude-ls/#f-compose&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487067079661
+      'title': 'prelude.coffee - a JavaScript functional programming library - for and in CoffeeScript'
+    'http%3A%2F%2Fwww%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0-alpha%2E2%2F%23%2Fcomponents%2Ftoolbar': 'Elias Moosman':
+      'from': 'http%3A%2F%2Fwww%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0-alpha%2E2%2F%23%2Fcomponents%2Ftoolbar'
+      'to': 'Bookmarks'
+      'meta':
+        'title': 'Toolbar - Material-UI'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'http://www.material-ui.com/v0.15.0-alpha.2/#/components/toolbar'
+        'ToLink': 'Bookmarks'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=http://www.material-ui.com/v0.15.0-alpha.2/#/components/toolbar&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487084924408
+      'title': 'Toolbar - Material-UI'
+    'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Ffzf': 'Elias Moosman':
+      'from': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Ffzf'
+      'to': 'Bookmarks'
+      'meta':
+        'title': 'junegunn/fzf: A command-line fuzzy finder written in Go'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'https://github.com/junegunn/fzf'
+        'ToLink': 'Bookmarks'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=https://github.com/junegunn/fzf&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487085296033
+      'title': 'junegunn/fzf: A command-line fuzzy finder written in Go'
+    'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug': 'Elias Moosman':
+      'from': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug'
+      'to': 'Bookmarks'
+      'meta':
+        'title': 'junegunn/vim-plug: Minimalist Vim Plugin Manager'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'https://github.com/junegunn/vim-plug'
+        'ToLink': 'Bookmarks'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=https://github.com/junegunn/vim-plug&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487158465591
+      'title': 'junegunn/vim-plug: Minimalist Vim Plugin Manager'
+    'http%3A%2F%2Flocalhost%3A3000%2Fabout%3FBookmarked%3Dtrue%26content%3D%26to%3Dhttps%253A%252F%252Fwww%2Efacebook%2Ecom%252Fapp_scoped_user_id%252F10154232419354595%252F%26from%3DBookmarks': 'Elias Moosman':
+      'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3FBookmarked%3Dtrue%26content%3D%26to%3Dhttps%253A%252F%252Fwww%2Efacebook%2Ecom%252Fapp_scoped_user_id%252F10154232419354595%252F%26from%3DBookmarks'
+      'to': 'Bookmarks'
+      'meta':
+        'title': 'localhost:3000/about?Bookmarked=true&content=&to=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&from=Bookmarks'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'http://localhost:3000/about?Bookmarked=true&content=&to=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&from=Bookmarks'
+        'ToLink': 'Bookmarks'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=http://localhost:3000/about?Bookmarked=true&content=&to=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&from=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487172340036
+      'title': 'localhost:3000/about?Bookmarked=true&content=&to=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&from=Bookmarks'
+    'https%3A%2F%2Fwww%2Enpmjs%2Ecom%2Fpackage%2Framda': 'Elias Moosman':
+      'from': 'https%3A%2F%2Fwww%2Enpmjs%2Ecom%2Fpackage%2Framda'
+      'to': 'Bookmarks'
+      'meta':
+        'title': 'ramda'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'https://www.npmjs.com/package/ramda'
+        'ToLink': 'Bookmarks'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=https://www.npmjs.com/package/ramda&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487402699730
+      'title': 'ramda'
 
 describe 'Momentum', ->
   it 'should return an array of two length', ->
@@ -115,3 +315,5 @@ describe 'listMomentum', ->
       ]
   it 'should return even if a list is undefined', ->
     expect(listByMomentum(undefined,AByMomentum(realData)).length).to.equal(3)
+  it 'should even if no momentum', ->
+    expect(listByMomentum(AByMomentum(realNode.in),AByMomentum(realNode.out)).length).to.equal(13)
