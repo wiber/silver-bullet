@@ -30,12 +30,11 @@ gifSlide = React.createClass
 
 exports.Mexplain = React.createClass
   render: ->
-    if @props.hide
-      return null
     else
       that = this
       reactKup (k) ->
         k.build Card,
+          expanded: that.props.hide
           style: _.extend {}, style.card, style.yCard,
             height: '380'
           expandable: true

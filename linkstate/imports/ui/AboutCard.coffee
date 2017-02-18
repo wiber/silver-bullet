@@ -31,7 +31,8 @@ AboutCard = React.createClass
             title: that.props.word.AboutCardTitle
             showExpandableButton: true
             subtitle: that.props.word.AboutCardSubTitle
-            onClick: that.handleToggle
+            onClick: (e) ->
+              changeQueryParams 'expandAboutCard', !that.props.expande
           k.build CardText,
             style:
               height: 'auto'

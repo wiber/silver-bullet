@@ -54,7 +54,8 @@ exports.Layout = React.createClass
                 marginTop: 150
               #className: 'main'
               ->
-                k.build Mexplain
+                k.build Mexplain,
+                  expanded: that.props.expandMexplain
                 if that.props.user?.services?.facebook?
                   k.build MainCard, # need comma here because the second arg is prop
                     expanded: that.props.expandMainCard
