@@ -55,9 +55,7 @@ AboutCard = React.createClass
                   ->
                     F = R.prop('node')(that.props)
                     #F.in = R.prop('in')(F)
-                    #F.out = R.prop('out')(F)
-                    F.IO = R.uniq R.concat(R.keys(R.prop 'in', F)
-                    , R.keys(R.prop 'out', F))
+                    #F.out = R.prop('out')(F))
                     #momentum = -> R.map R.compose
                     #,
 
@@ -91,9 +89,9 @@ AboutCard = React.createClass
 
                     N.sortByWeight = AByMomentum N.inLinks
                     N.sortOutByWeight = AByMomentum N.outLinks
-                    N.sortAllMomentum = R.concat
+                    N.sortAllMomentum = listByMomentum(AByMomentum N.inLinks,AByMomentum N.outLinks)
                     console.log 'sorts', N.sortedLinks, N.linkSort, N.sortByWeight, N
-                    for timeLink in N.sortByWeight
+                    for timeLink in N.sortAllMomentum
                       #console.log N.sortedLinks[timeLink]
                       D = {} # this link which has many users votes
                       D.N = N
@@ -122,6 +120,7 @@ preParseNode = (N) ->
 
 
 exports.AboutCard = createContainer ((props) ->
+
   newProps = {}
   if props.from?
     Meteor.subscribe "Node", props.from

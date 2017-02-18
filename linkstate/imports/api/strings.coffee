@@ -1,4 +1,5 @@
 R = require('ramda')
+_ = require('ramda')
 linkstate = {}
 exports.store = (url) ->
   unless typeof url == 'string'
@@ -22,7 +23,7 @@ trace = R.curry((tag, x) ->
   x
 )
 
-linkMomentum = R.map(R.map(R.compose( R.prop 'meta' )))
+
 exports.AByMomentum = (dictDict, many) ->
   momentum = {}
   for url of dictDict
@@ -49,8 +50,14 @@ exports.AByMomentum = (dictDict, many) ->
   toReturn
 
 
-exports.listByMomentum = (listOne, listTwo, many) ->
+exports.listByMomentum = (listOne, listTwo) ->
   console.log arguments[0]
   console.log listTwo
-
-  return R.uniq(R.concat(listOne, listTwo))
+  console.log R, R.concat, listTwo?, listOne?
+  returner = []
+  for list in arguments
+    console.log list
+    if list?.length?
+      returner = R.concat(returner, list)
+      console.log returner
+  R.uniq returner

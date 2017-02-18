@@ -6,7 +6,7 @@ require('../imports/startup/routes.coffee')
 #require('../imports/api/MainLayoutContainer.coffee')
 #injectTapEventPlugin = require('react-tap-event-plugin')
 #injectTapEventPlugin();
-
+@R = require('ramda')
 {Meteor}= require 'meteor/meteor'
 lastLogin = () ->
   user = Meteor.user()
