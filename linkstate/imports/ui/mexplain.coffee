@@ -42,36 +42,38 @@ exports.Mexplain = React.createClass
 
     that = this
     reactKup (k) ->
-      k.build CardText,
+      k.build Card,
+        style: _.extend {}, style.card, style.yCard,
+          height: '370'
         expanded: that.props.hide
-        style: _.extend {},# style.card, style.yCard,
-          height: '380'
         expandable: true
         mixins: [Slider.ControllerMixin]
         ->
-          k.build Slider,
-            #tabIndex: -1
-            ref: 'nuka-carousel'
-            style: Object.assign {},
-              height: 300
-              width: 'auto'
-              #width: 610
-            autoplay: false
-            autoplayInterval: 5000
-            initialSlideHeight: 480
-            framePadding: 0
-            wrapAround: true
-            dragging: true
-            slideIndex: that.props.slideIndex or 0
-            beforeSlide: resetSlides
-            #componentDidMount: resetSlides # problematic
+          k.build CardText,
             ->
-              k.build gifSlide,
-                src: '/carousel/s1whysense.gif'
-                slideNumber: 0
-              k.build gifSlide,
-                src: '/carousel/s2duo.gif'
-                slideNumber: 1
-              k.build gifSlide,
-                src: '/carousel/slide3c.gif'
-                slideNumber: 2
+              k.build Slider,
+                #tabIndex: -1
+                ref: 'nuka-carousel'
+                style: Object.assign {},
+                  height: 300
+                  width: 'auto'
+                  #width: 610
+                autoplay: false
+                autoplayInterval: 5000
+                initialSlideHeight: 480
+                framePadding: 0
+                wrapAround: true
+                dragging: true
+                slideIndex: that.props.slideIndex or 0
+                beforeSlide: resetSlides
+                #componentDidMount: resetSlides # problematic
+                ->
+                  k.build gifSlide,
+                    src: '/carousel/s1whysense.gif'
+                    slideNumber: 0
+                  k.build gifSlide,
+                    src: '/carousel/s2duo.gif'
+                    slideNumber: 1
+                  k.build gifSlide,
+                    src: '/carousel/slide3c.gif'
+                    slideNumber: 2

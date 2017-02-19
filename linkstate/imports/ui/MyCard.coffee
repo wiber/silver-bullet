@@ -42,8 +42,6 @@ exports.MyCard = React.createClass
             style:
               height: 'auto'
             expandable: true
-            ->
-              k.build Mexplain
           k.build CardText,
             style:
               height: 'auto'

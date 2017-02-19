@@ -57,7 +57,6 @@ ifBodyContentHere = (paramContent, queryParams)->
       cIn = user.out[to][from]
       changeQueryParams 'content', cIn.meta.body # 'content', cIn,
       content = cIn.meta.body
-  console.log paramContent, content, "log paramContent, content"
   if typeof content is 'undefined'
     return ''
   else

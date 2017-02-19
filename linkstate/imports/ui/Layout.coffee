@@ -12,7 +12,7 @@ CardText = require 'material-ui/lib/card/card-text'
 AppBar =  require('material-ui/lib/app-bar').default
 Card = require 'material-ui/lib/card/card'
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
-
+{Mexplain} = require '../api/MexplainContainer.coffee'
 
 MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme} = require('../ui/theme.coffee')
@@ -71,6 +71,8 @@ exports.Layout = React.createClass
                     incomming: that.props.incomming
                     howMany: 10
                     type: 'fromCreated'
+                else
+                  k.build Mexplain
                 k.build AboutCard,
                   expanded: that.props.expandAboutCard
                   to: that.props.to
