@@ -39,14 +39,13 @@ gifSlide = React.createClass
 
 exports.Mexplain = React.createClass
   render: ->
-
     that = this
     reactKup (k) ->
       k.build Card,
         style: _.extend {}, style.card, style.yCard,
           height: '370'
-        expanded: that.props.hide
-        expandable: true
+        #expanded: that.props.hide
+        #expandable: true
         mixins: [Slider.ControllerMixin]
         ->
           k.build CardText,

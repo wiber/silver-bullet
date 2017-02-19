@@ -61,7 +61,6 @@ AboutCard = React.createClass
                     #,
 
 
-                    console.log F
                     # conditionals are ok, but we should move out data processing into pure functions with wallaby tests
                     # end result is a modular and clean way to render urls and votes
                     # from to header, list of comments with face votes..
@@ -86,12 +85,12 @@ AboutCard = React.createClass
                     # calculate momentum of a url by walking through voters on it
                     N.momentum = {}
                     N.vectors = {}
-                    N.sortedLinks = linkstate.sortByMomentum N.linkSort, that.props.howMany
+                    #N.sortedLinks = linkstate.sortByMomentum N.linkSort, that.props.howMany
 
                     N.sortByWeight = AByMomentum N.inLinks
                     N.sortOutByWeight = AByMomentum N.outLinks
                     N.sortAllMomentum = listByMomentum(AByMomentum N.inLinks,AByMomentum N.outLinks)
-                    console.log 'sorts', N.sortedLinks, N.linkSort, N.sortByWeight, N
+                    #console.log 'sorts', N.sortedLinks, N.linkSort, N.sortByWeight, N
                     for timeLink in N.sortAllMomentum
                       #console.log N.sortedLinks[timeLink]
                       D = {} # this link which has many users votes
