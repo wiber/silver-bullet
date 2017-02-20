@@ -1,15 +1,26 @@
+page = {}
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+    if (request.greeting == "hello")
+      sendResponse({farewell: page});
+  });
+
 oneSteps = function ( url ,title) {
   // we simply need to know what page we were on when ctrl t or ctrl n was pressed
   if ( url == "chrome://newtab/" ) {
     //console.log( "chrome://newtab/" );
   } else {
-    //console.log( url );
-    chrome.storage.sync.set( {
+    console.log( url );
+    page = {
       'last': {
           'url': url,
           'title': title
       }
-    } )
+    }
+    chrome.storage.sync.set( page )
   }
 }
 

@@ -4,7 +4,6 @@ chrome.runtime.onMessage.addListener(
     console.log(sender.tab ?
                 "from a content script:" + sender.tab.url :
                 "from the extension");
-    console.log(window.url);
     if (request.greeting == "hello")
       sendResponse({farewell: page});
   });

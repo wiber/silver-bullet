@@ -1,10 +1,5 @@
 websiteURL = "http://linkstate.youiest.com/"
-
 console.log(websiteURL);
-chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
-  //console.log(response.farewell);
-  frameit(response.farewell)
-});
 frameit = function(lastPlace) {
     lastPlace = lastPlace.last
     console.log("before", lastPlace);
@@ -29,4 +24,13 @@ frameit = function(lastPlace) {
     iFrame = document.getElementById('linkstateframe')
     iFrame.src = src
 }
-//chrome.storage.sync.get("last", frameit);
+
+chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
+  console.log(response.farewell);
+  if(response.farewell){
+    frameit(response.farewell)
+  } else {
+    chrome.storage.sync.get("last", frameit);
+  }
+
+});
