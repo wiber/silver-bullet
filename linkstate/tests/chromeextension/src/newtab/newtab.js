@@ -1,8 +1,12 @@
 websiteURL = "http://localhost:3000/"
-chrome.storage.sync.get("last", function(lastPlace) {
+console.log(websiteURL);
+chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
+  console.log(response.farewell);
+  //frameit(response.farewell)
+});
+frameit = function(lastPlace) {
     lastPlace = lastPlace.last
     console.log("before", lastPlace);
-
     function toQueryString(obj) {
         var parts = [];
         for (var i in obj) {
@@ -23,4 +27,5 @@ chrome.storage.sync.get("last", function(lastPlace) {
     console.log("queryParams", queryParams, src);
     iFrame = document.getElementById('linkstateframe')
     iFrame.src = src
-});
+}
+//chrome.storage.sync.get("last", frameit);

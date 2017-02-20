@@ -83,8 +83,8 @@ Meteor.methods
       edge: edge
       setEdgeOut: setEdgeOut
       setEdgeIn: setEdgeIn
-    checkHits: ->
 
+  checkHits: ->
     if Meteor.isServer
       hits = Meteor.user().hits
       name = Meteor.user().services.facebook.name if Meteor.user()?.services?.facebook?.name? # Meteor.user()?.services?.facebook?.name? ?  #: 'no user'
@@ -92,6 +92,7 @@ Meteor.methods
   	  return hits
 
   secondaryLinking: (payload) ->
+    if payload?.setEdgeOut?.meta?.weight?
       fromNodeId = Nodes.upsert
         _id: payload.FROM
       ,
@@ -101,8 +102,9 @@ Meteor.methods
       , # second argument to upsert "," is at same level, returns are free
         $set: payload.setEdgeIn # set incoming edge where we're going TO impact
       #console.log toNodeId, Nodes.findOne(payload.TO).out, 'console.log Nodes.findOne payload.TO'
-
-      linked = Edges.insert(payload.edge)
+    else
+      console.log 'must be a bookmark ', payload.FROM, payload.TO
+    linked = Edges.insert(payload.edge)
   setupUser: () ->
     Meteor.users.update
       _id: Meteor.userId()
