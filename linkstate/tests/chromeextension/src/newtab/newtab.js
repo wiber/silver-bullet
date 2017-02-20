@@ -1,9 +1,6 @@
 websiteURL = "http://localhost:3000/"
+
 console.log(websiteURL);
-chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
-  console.log(response.farewell);
-  frameit(response.farewell)
-});
 frameit = function(lastPlace) {
     lastPlace = lastPlace.last
     console.log("before", lastPlace);
@@ -28,4 +25,15 @@ frameit = function(lastPlace) {
     iFrame = document.getElementById('linkstateframe')
     iFrame.src = src
 }
-//chrome.storage.sync.get("last", frameit);
+
+chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
+  console.log(response.farewell);
+  if(response.farewell){
+    console.log('got response', response.farewell);
+    frameit(response.farewell)
+  } else {
+    console.log('no response, from storage instead');
+    chrome.storage.sync.get("last", frameit);
+  }
+
+});

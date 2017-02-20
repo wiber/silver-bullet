@@ -1,4 +1,5 @@
 websiteURL = "http://linkstate.youiest.com/"
+
 console.log(websiteURL);
 frameit = function(lastPlace) {
     lastPlace = lastPlace.last
@@ -28,8 +29,10 @@ frameit = function(lastPlace) {
 chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
   console.log(response.farewell);
   if(response.farewell){
+    console.log('got response', response.farewell);
     frameit(response.farewell)
   } else {
+    console.log('no response, from storage instead');
     chrome.storage.sync.get("last", frameit);
   }
 
