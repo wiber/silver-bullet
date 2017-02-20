@@ -2,7 +2,7 @@ websiteURL = "http://localhost:3000/"
 console.log(websiteURL);
 chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
   console.log(response.farewell);
-  //frameit(response.farewell)
+  frameit(response.farewell)
 });
 frameit = function(lastPlace) {
     lastPlace = lastPlace.last
