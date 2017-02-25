@@ -53,19 +53,38 @@ UrlBox = React.createClass
               onClick: (e) ->
                changeQueryParams 'to', e.target.getAttribute('to')
 
+          # are there user votes here?
           inlink = N.inLinks?[D.link]?
           outlink = N.outLinks?[D.link]?
           # what links (in and out) do we have? (by momentum)
           # on each link, which votes exist x to y
           # on each link which backlinks exist y to x
           # return sorted arrays of above
-          console.log  inlink, outlink
+          #console.log  inlink, outlink
+          U.directionUserMeta = {}
           if outlink
-            OUTLINK = N.outLinks[D.link]
-            console.log OUTLINK
+            U.directionUserMeta.OUTLINKS = N.outLinks[D.link]
+            console.log U.directionUserMeta.OUTLINKS
+          if inlink
+            U.directionUserMeta.INLINKS = N.inLinks[D.link]
+            console.log U.directionUserMeta.INLINKS
+          console.log U.directionUserMeta
+          counted = 0
+
+          for directedBunch of U.directionUserMeta
+            console.log directedBunch, U.directionUserMeta[directedBunch]
+            for userVectorName of U.directionUserMeta[directedBunch]
+              console.log userVectorName, U.directionUserMeta[directedBunch][userVectorName], directedBunch
+              counted++
+              k.build LinkVote,
+                counted: counted
+                size: style.scalars.screenshotWidth
+                meta: U.directionUserMeta[directedBunch][userVectorName].meta
+                direction: directedBunch
+###
           if inlink
             OUTLINK = N.inLinks[D.link]
-            console.log OUTLINK
+            #console.log OUTLINK
             U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
             V = {}
             V.U = U
@@ -78,5 +97,5 @@ UrlBox = React.createClass
                 k.build LinkVote,
                   from: that.props.from
                   V: V
-
+###
 exports.UrlBox = UrlBox

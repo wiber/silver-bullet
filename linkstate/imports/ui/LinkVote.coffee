@@ -22,37 +22,40 @@ LinkVote = React.createClass
     V: React.PropTypes.object
     from: React.PropTypes.string
     to: React.PropTypes.string
+    meta: React.PropTypes.object
+    direction: React.PropTypes.boolean
   render: ->
     that = this
     reactKup (k) ->
-      V = that.props.V
-      unless !V.vote?.meta?.weight? and V.vote.meta.weight < 1
-        console.log that.props.from is V.vote.meta.FromLink, that.props.from, V.vote.meta.FromLink,'console.log that.props.from is V.vote.meta.FromLink, that.props.from, V.vote.meta.FromLink'
-        if that.props.from is V.vote.meta.FromLink
+      console.log that.props
+      #unless !V.vote?.meta?.weight? and V.vote.meta.weight < 1
+      if that.props.meta?.weight?
+
+        if that.props.direction is 'INLINKS'
           bullet = '0 50% 50% 0'
         else
           bullet = '50% 0 0 50%'
         k.div ->
           k.span
             style:
-              top: (V.counted + 0.25) * (V.size / 5)
+              top: (that.props.counted + 0.25) * (that.props.size / 5)
               width: '100%' # 'auto'#
               left: 10
               color: 'rgb(255, 255, 255)'
               fontSize: '16px'
               position: 'absolute'
               backgroundColor: 'rgba(0, 0, 0, 0.2)'
-            V.vote.meta.body
+            that.props.meta.body
           k.a
-            href: V.vote.meta.profileLink
+            href: that.props.meta.profileLink
             target: '_blank'
             k.img
               style: _.extend {},# style.webShot,
-                top: V.counted *(V.size / 5)
+                top: that.props.counted *(that.props.size / 5)
                 #width: '10%' #style.scalars.screenshotWidth / 10
-                left: 10 * V.vote.meta.weight + '%'
+                left: 10 * that.props.meta.weight + '%'
                 position: 'absolute'
                 opacity: .5
                 borderRadius: bullet # '0 50% 50% 0'
-              src: V.vote.meta.face
+              src: that.props.meta.face
 exports.LinkVote = LinkVote
