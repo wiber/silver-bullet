@@ -45,7 +45,7 @@ exports.MyCard = React.createClass
           k.build CardText,
             style:
               height: 'auto'
-            expandable: false
+            expandable: true
             ->
               k.build GridList,
                 #cellHeight: 200

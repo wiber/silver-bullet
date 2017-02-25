@@ -27,7 +27,6 @@ LinkVote = React.createClass
   render: ->
     that = this
     reactKup (k) ->
-      console.log that.props
       #unless !V.vote?.meta?.weight? and V.vote.meta.weight < 1
       if that.props.meta?.weight?
 
@@ -51,7 +50,7 @@ LinkVote = React.createClass
             target: '_blank'
             k.img
               style: _.extend {},# style.webShot,
-                top: that.props.counted *(that.props.size / 5)
+                top: (-50+that.props.counted * (that.props.size / 5))
                 #width: '10%' #style.scalars.screenshotWidth / 10
                 left: 10 * that.props.meta.weight + '%'
                 position: 'absolute'
