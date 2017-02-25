@@ -15,7 +15,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 {bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
 {LinkVote} = require '../../imports/ui/LinkVote.coffee'
-
+R = require 'ramda'
 UrlBox = React.createClass
   propTypes:
     D: React.PropTypes.object
@@ -52,7 +52,20 @@ UrlBox = React.createClass
               to: D.m.ToLink
               onClick: (e) ->
                changeQueryParams 'to', e.target.getAttribute('to')
-          if N.inLinks?[D.link]?
+
+          inlink = N.inLinks?[D.link]?
+          outlink = N.outLinks?[D.link]?
+          # what links (in and out) do we have? (by momentum)
+          # on each link, which votes exist x to y
+          # on each link which backlinks exist y to x
+          # return sorted arrays of above
+          console.log  inlink, outlink
+          if outlink
+            OUTLINK = N.outLinks[D.link]
+            console.log OUTLINK
+          if inlink
+            OUTLINK = N.inLinks[D.link]
+            console.log OUTLINK
             U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
             V = {}
             V.U = U

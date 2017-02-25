@@ -291,6 +291,138 @@ realNode =
       'createdAt': 1487402699730
       'title': 'ramda'
 
+inout =
+  '_id': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug'
+  'in':
+    'Bookmarks': 'Elias Moosman':
+      'from': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug'
+      'to': 'Bookmarks'
+      'meta':
+        'title': 'junegunn/vim-plug: Minimalist Vim Plugin Manager'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'https://github.com/junegunn/vim-plug'
+        'ToLink': 'Bookmarks'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=https://github.com/junegunn/vim-plug&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487158465591
+      'title': 'junegunn/vim-plug: Minimalist Vim Plugin Manager'
+    'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Ffzf': 'Elias Moosman':
+      'from': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug'
+      'to': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Ffzf'
+      'meta':
+        'body': ''
+        'weight': 1
+        'title': 'https://github.com/junegunn/fzf'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'https://github.com/junegunn/vim-plug'
+        'ToLink': 'https://github.com/junegunn/fzf'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=https://github.com/junegunn/vim-plug&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=https://github.com/junegunn/fzf&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487158466911
+      'title': 'https://github.com/junegunn/fzf'
+    'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug': 'Elias Moosman':
+      'from': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug'
+      'to': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug'
+      'meta':
+        'body': ''
+        'weight': 8
+        'title': 'https://github.com/junegunn/vim-plug'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'https://github.com/junegunn/vim-plug'
+        'ToLink': 'https://github.com/junegunn/vim-plug'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=https://github.com/junegunn/vim-plug&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=https://github.com/junegunn/vim-plug&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487172207151
+      'title': 'https://github.com/junegunn/vim-plug'
+  'title': 'https://github.com/junegunn/vim-plug'
+  'out':
+    'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug': 'Elias Moosman':
+      'from': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug'
+      'to': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug'
+      'meta':
+        'body': ''
+        'weight': 8
+        'title': 'https://github.com/junegunn/vim-plug'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'https://github.com/junegunn/vim-plug'
+        'ToLink': 'https://github.com/junegunn/vim-plug'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=https://github.com/junegunn/vim-plug&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=https://github.com/junegunn/vim-plug&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487172207151
+      'title': 'https://github.com/junegunn/vim-plug'
+    'http%3A%2F%2Flocalhost%3A3000%2Fabout%3FBookmarked%3Dtrue%26content%3D%26to%3Dhttps%253A%252F%252Fwww%2Efacebook%2Ecom%252Fapp_scoped_user_id%252F10154232419354595%252F%26from%3DBookmarks': 'Elias Moosman':
+      'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3FBookmarked%3Dtrue%26content%3D%26to%3Dhttps%253A%252F%252Fwww%2Efacebook%2Ecom%252Fapp_scoped_user_id%252F10154232419354595%252F%26from%3DBookmarks'
+      'to': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug'
+      'meta':
+        'body': ''
+        'weight': 8
+        'title': 'https://github.com/junegunn/vim-plug'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'http://localhost:3000/about?Bookmarked=true&content=&to=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&from=Bookmarks'
+        'ToLink': 'https://github.com/junegunn/vim-plug'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=http://localhost:3000/about?Bookmarked=true&content=&to=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&from=Bookmarks&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=https://github.com/junegunn/vim-plug&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487172709833
+      'title': 'https://github.com/junegunn/vim-plug'
+    'http%3A%2F%2Flocalhost%3A3000%2Fabout%3FBookmarked%3Dtrue%26content%3D%26to%3Dhttps%253A%252F%252Fwww%2Efacebook%2Ecom%252Fapp_scoped_user_id%252F10154232419354595%252F%26from%3Dhttp%253A%252F%252Fwww%2Ematerial-ui%2Ecom%252Fv0%2E15%2E0-alpha%2E2%252F%2523%252F': 'Elias Moosman':
+      'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3FBookmarked%3Dtrue%26content%3D%26to%3Dhttps%253A%252F%252Fwww%2Efacebook%2Ecom%252Fapp_scoped_user_id%252F10154232419354595%252F%26from%3Dhttp%253A%252F%252Fwww%2Ematerial-ui%2Ecom%252Fv0%2E15%2E0-alpha%2E2%252F%2523%252F'
+      'to': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug'
+      'meta':
+        'body': 'asdaf'
+        'weight': 9
+        'title': 'https://github.com/junegunn/vim-plug'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'http://localhost:3000/about?Bookmarked=true&content=&to=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&from=http%3A%2F%2Fwww.material-ui.com%2Fv0.15.0-alpha.2%2F%23%2F'
+        'ToLink': 'https://github.com/junegunn/vim-plug'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=http://localhost:3000/about?Bookmarked=true&content=&to=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&from=http%3A%2F%2Fwww.material-ui.com%2Fv0.15.0-alpha.2%2F%23%2F&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=https://github.com/junegunn/vim-plug&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487172726166
+      'title': 'https://github.com/junegunn/vim-plug'
+    'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Ffzf': 'Elias Moosman':
+      'from': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Ffzf'
+      'to': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug'
+      'meta':
+        'body': 'asdasdasd'
+        'weight': 2
+        'title': 'https://github.com/junegunn/vim-plug'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'https://github.com/junegunn/fzf'
+        'ToLink': 'https://github.com/junegunn/vim-plug'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=https://github.com/junegunn/fzf&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=https://github.com/junegunn/vim-plug&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1487424357010
+      'title': 'https://github.com/junegunn/vim-plug'
+    'http%3A%2F%2Fwww%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0-alpha%2E2%2F%23%2Fcomponents%2Ftoolbar': 'Elias Moosman':
+      'from': 'http%3A%2F%2Fwww%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0-alpha%2E2%2F%23%2Fcomponents%2Ftoolbar'
+      'to': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug'
+      'meta':
+        'body': 'in from j'
+        'weight': 7
+        'title': 'https://github.com/junegunn/vim-plug'
+        'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+        'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'FromLink': 'http://www.material-ui.com/v0.15.0-alpha.2/#/components/toolbar'
+        'ToLink': 'https://github.com/junegunn/vim-plug'
+        'ScreenshotUrl': 'https://api.thumbalizr.com/?url=http://www.material-ui.com/v0.15.0-alpha.2/#/components/toolbar&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+        'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=https://github.com/junegunn/vim-plug&width=250&api_key=5VmUR42gc4eGdLjBnZH2BRXa'
+      'author': 'cqWYJrZCGeWoPc68T'
+      'createdAt': 1488001354915
+      'title': 'https://github.com/junegunn/vim-plug'
+
 describe 'Momentum', ->
   it 'should return an array of two length', ->
     Momentum = AByMomentum realData
@@ -317,3 +449,11 @@ describe 'listMomentum', ->
     expect(listByMomentum(undefined,AByMomentum(realData)).length).to.equal(3)
   it 'should even if no momentum', ->
     expect(listByMomentum(AByMomentum(realNode.in),AByMomentum(realNode.out)).length).to.equal(13)
+
+describe 'backlinks algebra', ->
+  it 'should return 6', ->
+    expect(listByMomentum(AByMomentum(inout.in), AByMomentum(inout.out)).length).to.equal(6)
+  it 'order should affect length', ->
+    expect(listByMomentum(AByMomentum(inout.in), AByMomentum(inout.out)).length)
+    .to
+    .equal(listByMomentum(AByMomentum(inout.out),AByMomentum(inout.in)).length)

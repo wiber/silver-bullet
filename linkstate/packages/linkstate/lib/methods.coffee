@@ -30,7 +30,14 @@ Meteor.methods
       throw new Meteor.Error 1, "non-user tries to link"
       return 'nothing'
     else
-      console.log 'Linking',@isSimulation, link.from, link.meta, link.to, Meteor.user().hits, Meteor.user()?.services?.facebook?.name,  Meteor.user().profile.name, Meteor.user().hits
+      console.log 'Linking'
+      ,@isSimulation
+      , link.from
+      , link.meta.weight
+      , link.to
+      , Meteor.user().hits
+      , Meteor.user()?.services?.facebook?.name #,  Meteor.user().profile.name
+      , Meteor.user().hits
     unless to? and from?
       throw new Meteor.Error 2, "to or from is missing "+from+' '+to
       return 'nothing'
@@ -92,18 +99,14 @@ Meteor.methods
   	  return hits
 
   secondaryLinking: (payload) ->
-    if payload?.setEdgeOut?.meta?.weight?
-      fromNodeId = Nodes.upsert
-        _id: payload.FROM
-      ,
-        $set: payload.setEdgeOut
-      toNodeId = Nodes.upsert
-        _id: payload.TO
-      , # second argument to upsert "," is at same level, returns are free
-        $set: payload.setEdgeIn # set incoming edge where we're going TO impact
-      #console.log toNodeId, Nodes.findOne(payload.TO).out, 'console.log Nodes.findOne payload.TO'
-    else
-      console.log 'must be a bookmark ', payload.FROM, payload.TO
+    fromNodeId = Nodes.upsert
+      _id: payload.FROM
+    ,
+      $set: payload.setEdgeOut
+    toNodeId = Nodes.upsert
+      _id: payload.TO
+    ,
+      $set: payload.setEdgeIn # set incoming edge where we're going TO impact
     linked = Edges.insert(payload.edge)
   setupUser: () ->
     Meteor.users.update

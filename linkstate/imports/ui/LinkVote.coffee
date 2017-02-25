@@ -27,6 +27,7 @@ LinkVote = React.createClass
     reactKup (k) ->
       V = that.props.V
       unless !V.vote?.meta?.weight? and V.vote.meta.weight < 1
+        console.log that.props.from is V.vote.meta.FromLink, that.props.from, V.vote.meta.FromLink,'console.log that.props.from is V.vote.meta.FromLink, that.props.from, V.vote.meta.FromLink'
         if that.props.from is V.vote.meta.FromLink
           bullet = '0 50% 50% 0'
         else

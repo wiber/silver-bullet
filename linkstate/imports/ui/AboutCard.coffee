@@ -91,7 +91,9 @@ AboutCard = React.createClass
                     N.sortOutByWeight = AByMomentum N.outLinks
                     N.sortAllMomentum = listByMomentum(AByMomentum N.inLinks,AByMomentum N.outLinks)
                     #console.log 'sorts', N.sortedLinks, N.linkSort, N.sortByWeight, N
-                    for timeLink in N.sortAllMomentum
+                    console.log listByMomentum(AByMomentum that.props.node.out,AByMomentum that.props.node.in),that.props.node.out
+                    for timeLink in listByMomentum(AByMomentum N.outLinks,AByMomentum N.inLinks)
+                      console.log timeLink
                       #console.log N.sortedLinks[timeLink]
                       D = {} # this link which has many users votes
                       D.N = N
@@ -122,13 +124,14 @@ preParseNode = (N) ->
 exports.AboutCard = createContainer ((props) ->
 
   newProps = {}
-  if props.from?
-    Meteor.subscribe "Node", props.from
-  N = Nodes.findOne(linkstate.store props.from)
-  if N?
-    newProps.node = N
-    newProps.P = preParseNode N
-  #console.log newProps.node, Nodes.find({}).count()
+  #if props.from?
+  nodeHandle = Meteor.subscribe "Node", props.from
+  if nodeHandle.ready()
+    N = Nodes.findOne(linkstate.store props.from)
+    if N?
+      newProps.node = N
+    #newProps.P = preParseNode N
+  console.log newProps.node, Nodes.find({}).count()
   props = _.extend {}, props, newProps
   props
 ), AboutCard

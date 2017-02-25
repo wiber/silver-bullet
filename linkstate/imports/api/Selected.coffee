@@ -22,9 +22,9 @@ exports.selectedContainer = createContainer ((props) ->
     unless window.beforeTime?
       window.beforeTime = new Date().getTime()
     if localStorage? and UserHandle.ready()
-      console.log 'not writing user', localStorage? and UserHandle.ready()
+      #console.log 'not writing user', localStorage? and UserHandle.ready()
       #writeUser(Meteor.user())
-      #window.setUserTime = new Date().getTime()
+      window.setUserTime = new Date().getTime()
       #timeTester('setUserTime')
 
   if UserHandle? and UserHandle.ready()
