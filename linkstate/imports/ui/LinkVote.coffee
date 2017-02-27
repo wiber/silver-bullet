@@ -27,9 +27,19 @@ LinkVote = React.createClass
   render: ->
     that = this
     reactKup (k) ->
-      #unless !V.vote?.meta?.weight? and V.vote.meta.weight < 1
       if that.props.meta?.weight?
+        positionOffset = -50
+        imgHeightFunc = (c) -> 50*(1/Math.pow(1.66,c-1))
+        imgHeight = imgHeightFunc(that.props.counted)
+        diffHeight = 0
+        # while making them smaller and smaller... their position needs to be adjusted..
+        for i in [1..that.props.counted]
+          if i > 1
+            diffHeight = diffHeight + (imgHeightFunc(i-2) - imgHeightFunc(i-1))
+        spanTop = (positionOffset+(that.props.counted + 0.25) * (that.props.size / 5)) - diffHeight/2
+        imgTop = (positionOffset+that.props.counted * (that.props.size / 5)) - diffHeight/2 
 
+        #console.log imgHeight, that.props.counted
         if that.props.direction is 'INLINKS'
           bullet = '0 50% 50% 0'
         else
@@ -37,7 +47,7 @@ LinkVote = React.createClass
         k.div ->
           k.span
             style:
-              top: (that.props.counted + 0.25) * (that.props.size / 5)
+              top: spanTop
               width: '100%' # 'auto'#
               left: 10
               color: 'rgb(255, 255, 255)'
@@ -50,11 +60,13 @@ LinkVote = React.createClass
             target: '_blank'
             k.img
               style: _.extend {},# style.webShot,
-                top: (-50+that.props.counted * (that.props.size / 5))
+                top: imgTop
+                width: 'auto'
+                height: imgHeight
                 #width: '10%' #style.scalars.screenshotWidth / 10
                 left: 10 * that.props.meta.weight + '%'
                 position: 'absolute'
                 opacity: .5
-                borderRadius: bullet # '0 50% 50% 0'
+                borderRadius: bullet
               src: that.props.meta.face
 exports.LinkVote = LinkVote

@@ -90,9 +90,7 @@ AboutCard = React.createClass
                     N.sortByWeight = AByMomentum N.inLinks
                     N.sortOutByWeight = AByMomentum N.outLinks
                     N.sortAllMomentum = listByMomentum(AByMomentum N.inLinks,AByMomentum N.outLinks)
-                    #console.log 'sorts', N.sortedLinks, N.linkSort, N.sortByWeight, N
                     for timeLink in listByMomentum(AByMomentum N.outLinks,AByMomentum N.inLinks)
-                      #console.log N.sortedLinks[timeLink]
                       D = {} # this link which has many users votes
                       D.N = N
                       D.link = timeLink
@@ -111,9 +109,6 @@ AboutCard = React.createClass
                         props: that.props
                         thumbalizr: that.props.thumbalizr
                         word: that.props.word
-                      #if N.inLinks[timeLink]?
-                      #  console.log 'incomming link by', Object.keys(N.inLinks[timeLink]) , D.firstUsersLink
-                    #console.log N
 
 preParseNode = (N) ->
   console.log N
