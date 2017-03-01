@@ -1,4 +1,4 @@
-websiteURL = "http://linkstate.youiest.com/"
+websiteURL = "http://linkstate.youiest.com/about?"
 
 console.log(websiteURL);
 frameit = function(lastPlace) {
@@ -20,10 +20,11 @@ frameit = function(lastPlace) {
     queryParams.from = lastPlace.url
     queryParams.lastTitle = lastPlace.title
     qp = toQueryString(queryParams)
-    src = websiteURL + 'about?' + qp
+    src = websiteURL + qp
     console.log("queryParams", queryParams, src);
     iFrame = document.getElementById('linkstateframe')
     iFrame.src = src
+    console.log(document.getElementById('linkstateframe').src, 'set src');
 }
 
 chrome.runtime.sendMessage({greeting: "hello"}, function(response) {

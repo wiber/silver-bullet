@@ -24,6 +24,7 @@ frameit = function(lastPlace) {
     console.log("queryParams", queryParams, src);
     iFrame = document.getElementById('linkstateframe')
     iFrame.src = src
+    
 }
 
 chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
