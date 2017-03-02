@@ -28,8 +28,8 @@ frameit = function(lastPlace) {
 }
 
 chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
-  console.log(response.farewell);
-  if(response.farewell){
+  console.log(response.farewell && response.farewell.last, response.farewell, response.farewell.last);
+  if(response.farewell && response.farewell.last){
     console.log('got response', response.farewell);
     frameit(response.farewell)
   } else {
