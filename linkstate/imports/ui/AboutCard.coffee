@@ -54,7 +54,7 @@ AboutCard = React.createClass
                   class: 'looplist'
                   cols: 1
                   ->
-                    F = R.prop('node')(that.props)
+                    #F = R.prop('node')(that.props)
                     #F.in = R.prop('in')(F)
                     #F.out = R.prop('out')(F))
                     #momentum = -> R.map R.compose
@@ -90,7 +90,9 @@ AboutCard = React.createClass
                     N.sortByWeight = AByMomentum N.inLinks
                     N.sortOutByWeight = AByMomentum N.outLinks
                     N.sortAllMomentum = listByMomentum(AByMomentum N.inLinks,AByMomentum N.outLinks)
-                    for timeLink in listByMomentum(AByMomentum N.outLinks,AByMomentum N.inLinks)
+                    console.log listByMomentum(AByMomentum N.outLinks,AByMomentum N.inLinks), N
+
+                    for timeLink in N.sortAllMomentum#listByMomentum(AByMomentum N.outLinks,AByMomentum N.inLinks)
                       D = {} # this link which has many users votes
                       D.N = N
                       D.link = timeLink
