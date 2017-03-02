@@ -28,7 +28,7 @@ UrlBox = React.createClass
       thumbalizr = that.props.thumbalizr
       k.build GridTile,
         key: D.link+'Node'
-        title: D.m.title
+        title: D.m.FromLink
         subtitle: that.props.word.to + D.m.ToLink
         ->
           k.div ->

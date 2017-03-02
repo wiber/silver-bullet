@@ -90,7 +90,6 @@ AboutCard = React.createClass
                     N.sortByWeight = AByMomentum N.inLinks
                     N.sortOutByWeight = AByMomentum N.outLinks
                     N.sortAllMomentum = listByMomentum(AByMomentum N.inLinks,AByMomentum N.outLinks)
-                    console.log listByMomentum(AByMomentum N.outLinks,AByMomentum N.inLinks), N
 
                     for timeLink in N.sortAllMomentum#listByMomentum(AByMomentum N.outLinks,AByMomentum N.inLinks)
                       D = {} # this link which has many users votes
