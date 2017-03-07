@@ -49,5 +49,4 @@ exports.listByMomentum = (listOne, listTwo) ->
   for list in arguments
     if list?.length?
       returner = R.concat(returner, list)
-  console.log returner
-  return R.uniq returner
+  R.uniq returner
