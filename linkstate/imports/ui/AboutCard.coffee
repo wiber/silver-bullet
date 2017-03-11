@@ -90,10 +90,12 @@ AboutCard = React.createClass
                     N.sortByWeight = AByMomentum N.inLinks
                     N.sortOutByWeight = AByMomentum N.outLinks
                     # does not seem to register inLinks unless there's an outlink from here..
-                    N.sortAllMomentum = listByMomentum(AByMomentum N.inLinks,AByMomentum N.outLinks)
+                    N.rankedinLinks = AByMomentum( N.inLinks)
+                    N.rankedOutlinks = AByMomentum(N.outLinks)
+                    N.sortAllMomentum = listByMomentum(N.rankedinLinks, N.rankedOutlinks)
 
-                    for timeLink in N.sortAllMomentum#listByMomentum(AByMomentum N.outLinks,AByMomentum N.inLinks)
-                      D = {} # this link which has many users votes
+                    for timeLink in N.sortAllMomentum
+                      D = {}
                       D.N = N
                       D.link = timeLink
                       D.users = N.allLinks[timeLink]

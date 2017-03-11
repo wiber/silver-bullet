@@ -68,6 +68,6 @@ UrlBox = React.createClass
                 counted: counted
                 size: style.scalars.screenshotWidth
                 meta: U.directionUserMeta[directedBunch][userVectorName].meta
-                direction: directedBunch
+                directed: directedBunch
 
 exports.UrlBox = UrlBox
