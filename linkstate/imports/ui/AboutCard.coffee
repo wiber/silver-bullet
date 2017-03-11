@@ -89,6 +89,7 @@ AboutCard = React.createClass
 
                     N.sortByWeight = AByMomentum N.inLinks
                     N.sortOutByWeight = AByMomentum N.outLinks
+                    # does not seem to register inLinks unless there's an outlink from here..
                     N.sortAllMomentum = listByMomentum(AByMomentum N.inLinks,AByMomentum N.outLinks)
 
                     for timeLink in N.sortAllMomentum#listByMomentum(AByMomentum N.outLinks,AByMomentum N.inLinks)
