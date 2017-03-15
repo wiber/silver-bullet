@@ -99,16 +99,16 @@ Meteor.methods
   	  return hits
 
   secondaryLinking: (payload) ->
-    if Meteor.isServer
-      fromNodeId = Nodes.upsert
-        _id: payload.FROM
-      ,
-        $set: payload.setEdgeOut
-      toNodeId = Nodes.upsert
-        _id: payload.TO
-      ,
-        $set: payload.setEdgeIn # set incoming edge where we're going TO impact
-      linked = Edges.insert(payload.edge)
+    #if Meteor.isServer
+    fromNodeId = Nodes.upsert
+      _id: payload.FROM
+    ,
+      $set: payload.setEdgeOut
+    toNodeId = Nodes.upsert
+      _id: payload.TO
+    ,
+      $set: payload.setEdgeIn # set incoming edge where we're going TO impact
+    linked = Edges.insert(payload.edge)
   setupUser: () ->
     Meteor.users.update
       _id: Meteor.userId()
