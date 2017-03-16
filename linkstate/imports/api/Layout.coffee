@@ -7,17 +7,18 @@ language = 'eng'
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   user = {}
-  if !Meteor.user()? and Meteor.isClient
+  if !Meteor.user()?.services?.facebook? and Meteor.isClient
     u = JSON.parse(localStorage.getItem 'latest')
     window.saved = new Date().getTime()
     if u?
       user = u
   else
-    if !window?.sub?
+    if !window?.sub? and Meteor.isClient
       window.sub = new Date().getTime()
       time = (window.sub - window.saved)
-      console.log time, 'saved on load time by using localStorage'
+      console.log time, 'ms of your load time saved by using localStorage'
     user = Meteor.user()
+  console.log user?.in?, user
   content = ifBodyContentHere queryParams.content, queryParams
   unless FlowRouter.getQueryParam('Bookmarked')
     if samePlace(user, queryParams) and Meteor.isClient

@@ -33,14 +33,14 @@ Meteor.methods
       throw new Meteor.Error 1, "non-user tries to link"
       return 'nothing'
     else
-      console.log 'Linking'
-      ,@isSimulation
-      , link.from
-      , link.meta.weight
-      , link.to
-      , Meteor.user().hits
-      , Meteor.user()?.services?.facebook?.name #,  Meteor.user().profile.name
-      , Meteor.user().hits
+      if Meteor.user()?.hits?
+        console.log 'Linking'
+        , @isSimulation
+        , link.from
+        , link.meta.weight
+        , link.to
+        , Meteor.user()?.services?.facebook?.name #,  Meteor.user().profile.name
+        , Meteor.user().hits
     unless to? and from?
       throw new Meteor.Error 2, "to or from is missing "+from+' '+to
       return 'nothing'
