@@ -18,32 +18,11 @@ exports.selectedContainer = createContainer ((props) ->
   # sync user.toLast with qp
   # change qp, set toLast with method, redraw box optimist
   #Meteor.subscribe "userData"
-  if Meteor.isClient
-    unless window.beforeTime?
-      window.beforeTime = new Date().getTime()
-    if localStorage? and UserHandle.ready()
-      #console.log 'not writing user', localStorage? and UserHandle.ready()
-      #writeUser(Meteor.user())
-      window.setUserTime = new Date().getTime()
-      #timeTester('setUserTime')
-
-  if UserHandle? and UserHandle.ready()
-    user = Meteor.user()
-  else
-    if localStorage?
-      fromStorage = localStorage.user
-      #console.log typeof fromStorage is 'string' , fromStorage.length > 1, fromStorage != ""
-      if typeof fromStorage is 'string' and fromStorage != ""
-        user = JSON.parse(fromStorage)
-        #window.getUserTime = new Date().getTime()
-        #timeTester('getUserTime')
-    else
-      user = {}
   directedTo = typeof props.to is 'string' and props.to.length > 1
   # make value
   if !props[props.type]? and user?[props.type+'Last']?
     newProps[props.type] = user[props.type+'Last']
-
+  console.log props.user
   if props.user?.out?
     dictWithCreatedAt = props.user.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
