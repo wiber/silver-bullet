@@ -15,7 +15,13 @@ if Meteor.settings?.public?.thumbalizr?
 else
   @thumbalizr= "5VmUR42gc4eGdLjBnZH2BRXa"
 
+#if Meteor.isClient
+GroundedUser = new Ground.Collection('GroundedUser')
+
 Meteor.methods
+  GroundedUserInsert: ->
+    if Meteor.isClient and Meteor.user()
+      localStorage.setItem 'latest', JSON.stringify(Meteor.user())
   Linking: (link) ->
     #this.unblock() # allow next req without wait
     #check(link.from,'string')
@@ -84,6 +90,8 @@ Meteor.methods
         $set: setIt
         $inc:
           'hits': 1
+    if Meteor.isClient
+      Meteor.call 'GroundedUserInsert'
     Meteor.call 'secondaryLinking',
       FROM: FROM
       TO: TO

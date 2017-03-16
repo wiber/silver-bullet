@@ -3,11 +3,17 @@
 language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
-
+#GroundedUser = new Ground.Collection('GroundedUser')
+#GroundedUser.observeSource Meteor.user()
 
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
-  user = Meteor.user()
+  if Meteor.user()? and Meteor.isClient #!user?
+    u = JSON.parse(localStorage.getItem 'latest')
+    if u?
+      user = u
+  else
+    user = Meteor.user()
   content = ifBodyContentHere queryParams.content, queryParams
   unless FlowRouter.getQueryParam('Bookmarked')
     if samePlace(user, queryParams) and Meteor.isClient
