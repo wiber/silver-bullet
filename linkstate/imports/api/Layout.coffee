@@ -6,6 +6,7 @@ language = 'eng'
 
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
+  user = {}
   if !Meteor.user()? and Meteor.isClient
     u = JSON.parse(localStorage.getItem 'latest')
     window.saved = new Date().getTime()
