@@ -22,7 +22,6 @@ exports.selectedContainer = createContainer ((props) ->
   # make value
   if !props[props.type]? and user?[props.type+'Last']?
     newProps[props.type] = user[props.type+'Last']
-  console.log props.user
   if props.user?.out?
     dictWithCreatedAt = props.user.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
