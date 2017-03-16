@@ -15,9 +15,6 @@ if Meteor.settings?.public?.thumbalizr?
 else
   @thumbalizr= "5VmUR42gc4eGdLjBnZH2BRXa"
 
-#if Meteor.isClient
-GroundedUser = new Ground.Collection('GroundedUser')
-
 Meteor.methods
   GroundedUserInsert: ->
     if Meteor.isClient and Meteor.user()

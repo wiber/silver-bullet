@@ -3,26 +3,29 @@
 language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
-#GroundedUser = new Ground.Collection('GroundedUser')
-#GroundedUser.observeSource Meteor.user()
 
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
-  if Meteor.user()? and Meteor.isClient #!user?
+  if !Meteor.user()? and Meteor.isClient
     u = JSON.parse(localStorage.getItem 'latest')
+    window.saved = new Date().getTime()
     if u?
       user = u
   else
+    if !window?.sub?
+      window.sub = new Date().getTime()
+      time = (window.sub - window.saved)
+      console.log time, 'saved on load time by using localStorage'
     user = Meteor.user()
   content = ifBodyContentHere queryParams.content, queryParams
   unless FlowRouter.getQueryParam('Bookmarked')
     if samePlace(user, queryParams) and Meteor.isClient
-      #console.log UserHandle.ready(), user,'console.log UserHandle.ready(), user'
       changeQueryParams('Bookmarked', true)
       Meteor.call "Linking",
         from: queryParams.from
         to: 'Bookmarks'
         meta:
+          weight: 5
           title: queryParams.lastTitle
   if Meteor?.settings?.public?.thumbalizr? # user?.services?.thumbalizr?
     thumbalizr = Meteor.settings.public.thumbalizr
