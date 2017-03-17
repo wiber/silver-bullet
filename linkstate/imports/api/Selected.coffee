@@ -48,7 +48,7 @@ exports.selectedContainer = createContainer ((props) ->
         newProps.value =
           label: Bookmarks.meta.title
           value: Bookmarks
-  
+
   # update queryparams unless we're fromt he same place
   if props[props.type] is not newProps[props.type]
     changeQueryParams props.type, newProps[props.type]
@@ -57,16 +57,3 @@ exports.selectedContainer = createContainer ((props) ->
   props = _.extend {}, props, newProps
   props
 ), Selected
-
-slowWriteUser = (user)->
-  localStorage.setItem 'user', JSON.stringify(user)
-writeUser = _.throttle slowWriteUser ,500
-timeTester = (type) ->
-  window[type] = new Date().getTime()
-  console.log type
-  , window.getUserTime
-  , window.setUserTime
-  , ' since subscription ready: '
-  , window.getUserTime - window.setUserTime
-  , ' localStorage takes to wake up:'
-  , window.beforeTime - window.getUserTime

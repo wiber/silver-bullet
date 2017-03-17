@@ -61,7 +61,10 @@ Meteor.methods
     edge.meta.ScreenshotUrlTo = "https://api.thumbalizr.com/?url="+to+"&width=250&api_key="+thumbalizr
     edge.author = Meteor.userId()
     edge.createdAt = time
-    username = Meteor.user().profile.name
+    if Meteor.user()?.profile?.name?
+      username = Meteor.user().profile.name
+    else
+      username = 'EarlyBird'
     setEdgeIn = {}
     setEdgeOut = {}
     setEdgeIn['out.' + FROM + '.' + username] = edge
