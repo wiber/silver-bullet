@@ -20,8 +20,8 @@ exports.selectedContainer = createContainer ((props) ->
   #Meteor.subscribe "userData"
   directedTo = typeof props.to is 'string' and props.to.length > 1
   # make value
-  if !props[props.type]? and user?[props.type+'Last']?
-    newProps[props.type] = user[props.type+'Last']
+  if !props[props.type]? and props.user?[props.type+'Last']?
+    newProps[props.type] = props.user[props.type+'Last']
   if props.user?.out?
     dictWithCreatedAt = props.user.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
@@ -35,14 +35,14 @@ exports.selectedContainer = createContainer ((props) ->
         newProps.options.push selectItem
     unless newProps.value?
       # set defaults if none set already
-      if user?[props.type+'Last']? and props.type  is 'to'
+      if props.user?[props.type+'Last']? and props.type  is 'to'
         # charming solution that flickers rightly
         # on recompute it goes from 'last project' to just the right title
         newProps.value =
-          label: 'Your last project was '+ user[props.type+'Last']
-          value: dictWithCreatedAt[user[props.type+'Last']]
+          label: 'Your last project was '+ props.user[props.type+'Last']
+          value: dictWithCreatedAt[props.user[props.type+'Last']]
         # so one can link
-        changeQueryParams props.type, user[props.type+'Last']
+        changeQueryParams props.type, props.user[props.type+'Last']
       else
         Bookmarks = dictWithCreatedAt.Bookmarks
         newProps.value =
