@@ -19,9 +19,13 @@ exports.selectedContainer = createContainer ((props) ->
   # change qp, set toLast with method, redraw box optimist
   #Meteor.subscribe "userData"
   directedTo = typeof props.to is 'string' and props.to.length > 1
-  # make value
-  if !props[props.type]? and props.user?[props.type+'Last']?
-    newProps[props.type] = props.user[props.type+'Last']
+  # make value if no queryParams
+  if !props[props.type]?
+    console.log props, props.type
+    if props.user?[props.type+'Last']?
+      console.log 'should default this thing', props.user[props.type+'Last']
+      newProps[props.type] = props.user[props.type+'Last']
+
   if props.user?.out?
     dictWithCreatedAt = props.user.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
@@ -55,5 +59,6 @@ exports.selectedContainer = createContainer ((props) ->
   if newProps.options.length < 2
     new Meteor.Error 12, "something wrong with select options"
   props = _.extend {}, props, newProps
+  #console.log props
   props
 ), Selected
