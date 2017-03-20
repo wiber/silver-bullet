@@ -23,7 +23,7 @@ LinkVote = React.createClass
     from: React.PropTypes.string
     to: React.PropTypes.string
     meta: React.PropTypes.object
-    directed: React.PropTypes.boolean
+    directed: React.PropTypes.bool
   render: ->
     that = this
     reactKup (k) ->
@@ -40,7 +40,7 @@ LinkVote = React.createClass
         imgTop = (positionOffset+that.props.counted * (that.props.size / 5)) - diffHeight/2
 
         #console.log imgHeight, that.props.counted
-        if that.props.directed is 'INLINKS'
+        if that.props.direction is 'INLINKS'
           bullet = '0 50% 50% 0'
         else
           bullet = '50% 0 0 50%'

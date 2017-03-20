@@ -21,7 +21,7 @@ exports.selectedContainer = createContainer ((props) ->
   directedTo = typeof props.to is 'string' and props.to.length > 1
   # make value if no queryParams
   if !props[props.type]?
-    console.log props, props.type
+    console.log props.type, 'is missing in', props
     if props.user?[props.type+'Last']?
       console.log 'should default this thing', props.user[props.type+'Last']
       newProps[props.type] = props.user[props.type+'Last']
