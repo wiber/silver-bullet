@@ -28,12 +28,12 @@ containerLayout = createContainer ((props) ->
         meta:
           weight: 5
           title: queryParams.lastTitle
-  if Meteor?.settings?.public?.thumbalizr? # user?.services?.thumbalizr?
+  if Meteor?.settings?.public?.thumbalizr?
     thumbalizr = Meteor.settings.public.thumbalizr
   else
     thumbalizr = undefined
   for type in ['from', 'to']
-    if queryParams[type] is undefined
+    if queryParams[type] is undefined and Meteor.isClient
       # double set them to avoid double render
       queryParams[type] = user[type+'Last']
       changeQueryParams(type, user[type+'Last'])
