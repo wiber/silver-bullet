@@ -26,6 +26,7 @@ exports.FromToSense = React.createClass
               to: that.props.to
               user: that.props.user
               type: 'from'
+              word: that.props.word
             k.span
               style:
                 verticalAlign: '0.5em'
@@ -34,6 +35,7 @@ exports.FromToSense = React.createClass
               from: that.props.from
               to: that.props.to
               user: that.props.user
+              word: that.props.word
               type: 'to'
 
 TextAbout = React.createClass

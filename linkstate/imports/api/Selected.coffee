@@ -20,11 +20,6 @@ exports.selectedContainer = createContainer ((props) ->
   #Meteor.subscribe "userData"
   directedTo = typeof props.to is 'string' and props.to.length > 1
   # make value if no queryParams
-  if !props[props.type]?
-    console.log props.type, 'is missing in', props
-    if props.user?[props.type+'Last']?
-      console.log 'should default this thing', props.user[props.type+'Last']
-      newProps[props.type] = props.user[props.type+'Last']
 
   if props.user?.out?
     dictWithCreatedAt = props.user.out['Bookmarks']
@@ -39,11 +34,13 @@ exports.selectedContainer = createContainer ((props) ->
         newProps.options.push selectItem
     unless newProps.value?
       # set defaults if none set already
-      if props.user?[props.type+'Last']? and props.type  is 'to'
-        # charming solution that flickers rightly
-        # on recompute it goes from 'last project' to just the right title
+      if props.user?[props.type+'Last']? and props.type is 'to'
+        if props.type is 'to'
+          message = props.word.defaultProject
+        if props.type is 'from'
+          message = defaultStart
         newProps.value =
-          label: 'Your last project was '+ props.user[props.type+'Last']
+          label: message + props.user[props.type+'Last']
           value: dictWithCreatedAt[props.user[props.type+'Last']]
         # so one can link
         changeQueryParams props.type, props.user[props.type+'Last']

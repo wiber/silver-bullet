@@ -32,6 +32,10 @@ containerLayout = createContainer ((props) ->
     thumbalizr = Meteor.settings.public.thumbalizr
   else
     thumbalizr = undefined
+  for type in ['from', 'to']
+    if queryParams[type] is undefined
+      queryParams[type] = user[type+'Last']
+      changeQueryParams(type, user[type+'Last'])
   {
     user: user
     thumbalizr: thumbalizr
