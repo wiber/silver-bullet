@@ -34,6 +34,7 @@ containerLayout = createContainer ((props) ->
     thumbalizr = undefined
   for type in ['from', 'to']
     if queryParams[type] is undefined
+      # double set them to avoid double render
       queryParams[type] = user[type+'Last']
       changeQueryParams(type, user[type+'Last'])
   {
