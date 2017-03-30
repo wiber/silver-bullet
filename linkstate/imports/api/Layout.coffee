@@ -37,7 +37,6 @@ containerLayout = createContainer ((props) ->
       # double set them to avoid double render
       queryParams[type] = user[type+'Last']
       changeQueryParams(type, user[type+'Last'])
-  console.log decodeURIComponent queryParams.lastTitle
   {
     user: user
     thumbalizr: thumbalizr
