@@ -27,6 +27,7 @@ exports.FromToSense = React.createClass
               user: that.props.user
               type: 'from'
               word: that.props.word
+              lastTitle: that.props.lastTitle
             k.span
               style:
                 verticalAlign: '0.5em'

@@ -20,10 +20,11 @@ exports.selectedContainer = createContainer ((props) ->
   #Meteor.subscribe "userData"
   directedTo = typeof props.to is 'string' and props.to.length > 1
   # make value if no queryParams
+  # unsightly empty from while loading..
   unless Meteor.user()?.services?.facebook? and Meteor.isClient
     if props.type is 'from'
       if typeof props.from is 'string' and props.from.length > 1
-        console.log 'not ready, from,', props.from
+        console.log 'not ready, from,', props.from, props.lastTitle
         newProps.value =
           label: props.lastTitle
           value:

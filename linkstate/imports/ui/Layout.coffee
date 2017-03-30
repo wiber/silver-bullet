@@ -62,6 +62,7 @@ exports.Layout = React.createClass
                     word: that.props.word
                     content: that.props.content
                     user: that.props.user
+                    lastTitle: that.props.lastTitle
                   k.build MyCard,
                     expanded: that.props.expandMyCard
                     to: that.props.to

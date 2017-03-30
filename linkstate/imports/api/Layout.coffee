@@ -37,6 +37,7 @@ containerLayout = createContainer ((props) ->
       # double set them to avoid double render
       queryParams[type] = user[type+'Last']
       changeQueryParams(type, user[type+'Last'])
+  console.log decodeURIComponent queryParams.lastTitle
   {
     user: user
     thumbalizr: thumbalizr
@@ -44,7 +45,7 @@ containerLayout = createContainer ((props) ->
     to: decodeURIComponent queryParams.to
     incomming: queryParams.incomming
     content: content
-    fromTitle: decodeURIComponent queryParams.lastTitle
+    lastTitle: decodeURIComponent queryParams.lastTitle
     word: wordLanguages[language] # don't prematurely optimize!
     expandMainCard: queryParams.expandMainCard != 'false'
     expandAboutCard: queryParams.expandAboutCard != 'false'

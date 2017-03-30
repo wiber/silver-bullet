@@ -47,6 +47,7 @@ exports.MainCard = React.createClass
                 word: that.props.word
                 content: that.props.content
                 user: that.props.user
+                lastTitle: that.props.lastTitle
           k.build CardActions,
             -> # return innerhtml, tags on here before
               k.build FlatButton,
