@@ -20,7 +20,15 @@ exports.selectedContainer = createContainer ((props) ->
   #Meteor.subscribe "userData"
   directedTo = typeof props.to is 'string' and props.to.length > 1
   # make value if no queryParams
-
+  unless Meteor.user()?.services?.facebook? and Meteor.isClient
+    if props.type is 'from'
+      if typeof props.from is 'string' and props.from.length > 1
+        console.log 'not ready, from,', props.from
+        newProps.value =
+          label: props.lastTitle
+          value:
+            meta:
+              FromLink: props.from
   if props.user?.out?
     dictWithCreatedAt = props.user.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
@@ -37,8 +45,8 @@ exports.selectedContainer = createContainer ((props) ->
       if props.user?[props.type+'Last']? and props.type is 'to'
         if props.type is 'to'
           message = props.word.defaultProject
-        if props.type is 'from'
-          message = defaultStart
+        #if props.type is 'from'
+        #  message = defaultStart
         newProps.value =
           label: message + props.user[props.type+'Last']
           value: dictWithCreatedAt[props.user[props.type+'Last']]
