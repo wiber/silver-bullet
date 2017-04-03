@@ -9,7 +9,7 @@ frameit = function(lastPlace) {
         for (var i in obj) {
             if (obj.hasOwnProperty(i)) {
                 // flowrouter-ssr cannot handle '()' which often appears in titles
-                spec = obj[i].replace('(', '+').replace(')', '+')
+                spec = obj[i]//.replace('(', '+').replace(')', '+')
                 console.log(spec);
                 parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(spec));
             }
@@ -18,7 +18,7 @@ frameit = function(lastPlace) {
     }
     queryParams = {}
     queryParams.from = lastPlace.url
-    queryParams.lastTitle = lastPlace.title.replace(/[^a-zA-Z0-9\-_.!~*'()]/g,"+")
+    queryParams.lastTitle = lastPlace.title.replace(/[^a-zA-Z0-9\s\-_.!~*'()]/g,"_")
     qp = toQueryString(queryParams)
     src = websiteURL + 'about?' + qp
     console.log("queryParams", queryParams, src);
@@ -28,11 +28,8 @@ frameit = function(lastPlace) {
 }
 
 chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
-  console.log(response.farewell && response.farewell.last, response.farewell
-    , response.farewell.last
-  , response.farewell.last.url
-, response.farewell.last.url.length);
-  if(response.farewell && response.farewell.last && response.farewell.last.url && response.farewell.last.url.lenth > 2){
+  console.log(response.farewell && response.farewell.last, response.farewell, response.farewell.last);
+  if(response.farewell && response.farewell.last){
     console.log('got response', response.farewell);
     frameit(response.farewell)
   } else {
