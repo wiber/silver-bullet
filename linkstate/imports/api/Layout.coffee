@@ -44,7 +44,7 @@ containerLayout = createContainer ((props) ->
     to: decodeURIComponent queryParams.to
     incomming: queryParams.incomming
     content: content
-    lastTitle: decodeURIComponent queryParams.lastTitle
+    lastTitle: queryParams.lastTitle
     word: wordLanguages[language] # don't prematurely optimize!
     expandMainCard: queryParams.expandMainCard != 'false'
     expandAboutCard: queryParams.expandAboutCard != 'false'
