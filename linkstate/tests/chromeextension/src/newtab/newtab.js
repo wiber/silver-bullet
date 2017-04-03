@@ -18,7 +18,7 @@ frameit = function(lastPlace) {
     }
     queryParams = {}
     queryParams.from = lastPlace.url
-    queryParams.lastTitle = lastPlace.title
+    queryParams.lastTitle = lastPlace.title.replace(/[^a-zA-Z0-9\-_.!~*'()]/g,"+")
     qp = toQueryString(queryParams)
     src = websiteURL + 'about?' + qp
     console.log("queryParams", queryParams, src);
