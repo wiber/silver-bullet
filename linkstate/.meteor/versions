@@ -1,5 +1,5 @@
 accounts-base@1.2.14
-accounts-facebook@1.0.11
+accounts-facebook@1.0.12
 accounts-oauth@1.1.15
 accounts-ui@1.1.9
 accounts-ui-unstyled@1.1.13
@@ -31,7 +31,7 @@ ecmascript-runtime@0.3.15
 ejson@1.0.13
 email@1.1.18
 es5-shim@4.6.15
-facebook@1.2.10
+facebook@1.2.11
 fastclick@1.0.13
 geojson-utils@1.0.10
 hot-code-push@1.0.4
