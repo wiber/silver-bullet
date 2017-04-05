@@ -3,7 +3,6 @@
 language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
-
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   user = {}

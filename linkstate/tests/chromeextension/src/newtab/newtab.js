@@ -1,5 +1,10 @@
-websiteURL = "http://localhost:3000/"
-
+websiteURL = "http://localhost:3000/about?"
+var utf8_to_latin1 = function (s) {
+    return unescape(encodeURIComponent(s));
+};
+var latin1_to_utf8 = function (s) {
+    return decodeURIComponent(escape(s));
+};
 console.log(websiteURL);
 frameit = function(lastPlace) {
     lastPlace = lastPlace.last
@@ -9,9 +14,9 @@ frameit = function(lastPlace) {
         for (var i in obj) {
             if (obj.hasOwnProperty(i)) {
                 // flowrouter-ssr cannot handle '()' which often appears in titles
-                spec = obj[i].replace(/[\-_.!~*'()]/g,"_")//.replace('(', '+').replace(')', '+')
+                spec = obj[i]//.replace('(', '\x28').replace(')', '\x29')//.replace(/[\-_.!~*'()]/g,"_")//
                 console.log(spec);
-                parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(spec));
+                parts.push(escape(encodeURIComponent(i)) + "=" + escape(encodeURIComponent(spec)));
             }
         }
         return parts.join("&");
@@ -20,11 +25,11 @@ frameit = function(lastPlace) {
     queryParams.from = lastPlace.url
     queryParams.lastTitle = lastPlace.title//.replace(/[\-_.!~*'()]/g,"_")
     qp = toQueryString(queryParams)
-    src = websiteURL + 'about?' + qp
+    src = websiteURL + qp
     console.log("queryParams", queryParams, src);
     iFrame = document.getElementById('linkstateframe')
     iFrame.src = src
-
+    console.log(document.getElementById('linkstateframe').src, 'set src');
 }
 
 chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
