@@ -18,7 +18,6 @@ linkstate.sortByWeight = (dict, many) ->
 linkstate.sortByMomentum = (dictDict, many) ->
   keys = Object.keys(dictDict)
   momentum = {}
-  for link of dictDict
   toReturn = Object.keys(dictDict).sort (a, b) ->
     dictDict[b].meta.weight - (dictDict[a].meta.weight)
 
