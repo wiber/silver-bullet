@@ -23,7 +23,6 @@ exports.MyCard = React.createClass
   getDefaultProps: ->
     expanded: true
   render: ->
-   #console.log @props , 'work on props'
     that = this
     if @props.expanded is 'undefined'
       that.props.expanded = true

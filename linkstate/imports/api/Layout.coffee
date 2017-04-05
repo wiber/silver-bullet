@@ -54,7 +54,6 @@ containerLayout = createContainer ((props) ->
 # textbox should have your comment in it if empty
 ifBodyContentHere = (paramContent, queryParams)->
   if paramContent is 'undefined' or typeof paramContent is 'undefined'
-    #console.log "if paramContent is 'undefined'", queryParams
     content = ''
   if Meteor.isClient and UserHandle.ready() and Meteor.user()?.lastFrom?
     user = Meteor.user()

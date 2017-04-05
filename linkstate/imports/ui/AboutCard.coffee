@@ -114,9 +114,6 @@ AboutCard = React.createClass
                         thumbalizr: that.props.thumbalizr
                         word: that.props.word
 
-preParseNode = (N) ->
-  console.log N
-
 
 exports.AboutCard = createContainer ((props) ->
 

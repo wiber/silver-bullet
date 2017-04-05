@@ -8,7 +8,6 @@ Meteor.publish "Node", (from) ->
   one = Nodes.find
     _id: linkstate.store from
   all = Nodes.find {}
- #console.log linkstate.store from, from, one, all.count(), 'NNN'
   return one
 
 Meteor.publish 'reactableFrom', (howMany) ->
@@ -23,8 +22,6 @@ Meteor.publish 'reactableFrom', (howMany) ->
           $in: fromLast[0..howMany]
 
 Meteor.publish 'userData', ->
-  #console.log @userId, 'wants user obj'
-  #if @userId
   return Meteor.users.find
     _id: @userId
   ,
@@ -33,13 +30,9 @@ Meteor.publish 'userData', ->
       'services.resume': 0
 
 Meteor.publish 'to', (URL) ->
-  ##console.log Edges.find().fetch().length, 'just len'
-  ##console.log 'one to',URL,Edges.findOne({from:URL})
   return Edges.find
     to: linkstate.toDotless(URL)
 Meteor.publish 'from', (URL) ->
-  ##console.log Edges.find().fetch().length, 'just len'
-  ##console.log 'one from',URL,Edges.findOne({from:URL})
   return Edges.find
     from: linkstate.toDotless(URL)
 
