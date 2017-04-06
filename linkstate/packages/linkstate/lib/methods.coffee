@@ -125,7 +125,7 @@ Meteor.methods
         'services.thumbalizr': Meteor.settings.thumbalizr
         #'fromLast': Meteor.user().services.facebook.link
         #'toLast': 'Bookmarks'
-    console.log 'Just setupUser', Meteor.user()
+    console.log 'Just setupUser', Meteor.user().hits, Meteor.user()._id
 
     Meteor.call "Linking",
       from: 'Bookmarks' # systems types.. need to be from bookmarks if they are to be picked up?

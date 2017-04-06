@@ -67,17 +67,17 @@ ifBodyContentHere = (paramContent, queryParams, user)->
   from = linkstate.store queryParams.from
   lastFrom = user.lastFrom
   switched = lastFrom != queryParams.from
-  cInExists = user.out[to]?[from]?
+  cInExists = user?.out?[to]?[from]?
 
   if cInExists
     console.log paramContent
-    , user.out[to][from]
     , user.out[to][from].meta.body
+    , 'edit your previous statement'
   if cInExists and switched
     cIn = user.out[to][from]
     #changeQueryParams 'content', cIn.meta.body # 'content', cIn,
     content = cIn.meta.body
-  console.log from, to, lastFrom, switched, cInExists, cIn, content
+  #console.log from, to, lastFrom, switched, cInExists, cIn, content
   if typeof content is 'undefined'
     return ''
   else
