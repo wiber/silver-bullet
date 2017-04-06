@@ -68,9 +68,11 @@ TextAbout = React.createClass
                   console.log result, 'returned from linking'
                 else
                   console.log 'no result?', result
-            changeQueryParams 'content', ''
+            #changeQueryParams 'content', ''
             e.preventDefault()
             window.to.refs.to.focus()
+          else
+            changeQueryParams 'content', e.target.value
           if e.keyCode is 13
             alert that.props.word.digitAlert
             e.preventDefault()
