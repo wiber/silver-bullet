@@ -6,18 +6,7 @@ language = 'eng'
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   user = {}
-  if !Meteor.user()?.services?.facebook? and Meteor.isClient
-    u = JSON.parse(localStorage.getItem('latest'))
-    window.saved = new Date().getTime()
-    if u?
-      user = u
-  else
-    if !window?.sub? and Meteor.isClient
-      window.sub = new Date().getTime()
-      time = (window.sub - window.saved)
-      console.log time, 'ms of your load time saved by using localStorage'
-    user = Meteor.user()
-
+  
   unless FlowRouter.getQueryParam('Bookmarked')
     if samePlace(user, queryParams) and Meteor.isClient
       changeQueryParams('Bookmarked', true)
@@ -38,7 +27,7 @@ containerLayout = createContainer ((props) ->
       changeQueryParams(type, user[type+'Last'])
   #content = ifBodyContentHere queryParams.content, queryParams, user
   newProps = {
-    user: user
+    user: userSaved(Meteor.user())
     thumbalizr: thumbalizr
     from: decodeURIComponent queryParams.from
     to: decodeURIComponent queryParams.to
@@ -54,6 +43,21 @@ containerLayout = createContainer ((props) ->
   newProps
 ), Layout
 
+userSaved = (userE) ->
+  if !userE?.services?.facebook? and Meteor.isClient
+    u = JSON.parse(localStorage.getItem('latest'))
+    window.saved = new Date().getTime()
+    if u?
+      user = u
+    else
+      user = {}
+  else
+    if !window?.sub? and Meteor.isClient
+      window.sub = new Date().getTime()
+      time = (window.sub - window.saved)
+      console.log time, 'ms of your load time saved by using localStorage'
+    user = userE
+  user
 # textbox should have your comment in it if empty
 ifBodyContentHere = (paramContent, queryParams, user)->
   # we wish to dig up old content and fill in the box.. when a flag says we have changed FROM location
@@ -72,7 +76,8 @@ ifBodyContentHere = (paramContent, queryParams, user)->
   if cInExists
     console.log paramContent
     , user.out[to][from].meta.body
-    , 'edit your previous statement'
+    , 'edit your previous statement if'
+    , switched
   if cInExists and switched
     cIn = user.out[to][from]
     #changeQueryParams 'content', cIn.meta.body # 'content', cIn,
