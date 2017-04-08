@@ -3,14 +3,14 @@ exports.wordLanguages =
     HeaderTitle: 'Youiest Linkstates for '
     MainCardTitle: 'About '
     MainCardSubtitle:  "connect it to a bookmark and it will be right there when you need it"
-    TextAboutfloatingLabelText: 'TAB here, describe the link and weigh in on a scale 0-9.'
-    TextAboutHintText: "Send your thought with 9 for dead on, 5 neutral, 1 oppose or 0 irrelevant."
+    TextAboutfloatingLabelText: 'TAB here to describe the link and weigh in on a scale 0-9.'
+    TextAboutHintText: "Send with a 9 for dead on, 5 neutral, 1 oppose or 0 irrelevant."
+    digitAlert: "You send by entering a digit from 0 to 9 where 9 means dead on, 5 neutral and 1 opposite. The 0 means irrelevant."
     MyCardTitle: "Your links to " #the title of this place.
     MyCardSubtitle: "Go to Bookmarks or your project page and your resources appear here"
     MyCardStepsSubheader: "You have connected from here recently"
     AboutCardTitle: "What's the word on this?"
     AboutCardSubTitle: "Connections talk. Yay sayers weigh in on the right."
-    digitAlert: "You send by entering a digit from 0 to 9 where 9 means dead on, 5 neutral and 1 opposite. The 0 means irrelevant."
     to: "to "
     defaultProject: "Your last project was "
     defaultStart: "Last on "
