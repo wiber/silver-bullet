@@ -6,7 +6,7 @@ language = 'eng'
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   user = {}
-  
+
   unless FlowRouter.getQueryParam('Bookmarked')
     if samePlace(user, queryParams) and Meteor.isClient
       changeQueryParams('Bookmarked', true)
@@ -32,7 +32,7 @@ containerLayout = createContainer ((props) ->
     from: decodeURIComponent queryParams.from
     to: decodeURIComponent queryParams.to
     incomming: queryParams.incomming
-    content: ifBodyContentHere(queryParams.content, queryParams, user) #content
+    content: ifBodyContentHere(queryParams, user) #content
     lastTitle: queryParams.lastTitle
     word: wordLanguages[language] # don't prematurely optimize!
     expandMainCard: queryParams.expandMainCard != 'false'
@@ -59,7 +59,8 @@ userSaved = (userE) ->
     user = userE
   user
 # textbox should have your comment in it if empty
-ifBodyContentHere = (paramContent, queryParams, user)->
+ifBodyContentHere = (queryParams, user)->
+  paramContent = queryParams.content
   # we wish to dig up old content and fill in the box.. when a flag says we have changed FROM location
   # and we have old content on user object.
   # have we checked if there's content here?
