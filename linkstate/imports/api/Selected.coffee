@@ -42,28 +42,31 @@ exports.selectedContainer = createContainer ((props) ->
           newProps.value = selectItem
         newProps.options.push selectItem
     unless newProps.value?
-      # set defaults if none set already
-      if props.user?[props.type+'Last']? and props.type is 'to'
+      # it's not in the array, so it's not on user yet
+      if props.user?[props.type+'Last']?
         if props.type is 'to'
           message = props.word.defaultProject
-        #if props.type is 'from'
-        #  message = defaultStart
-        newProps.value =
-          label: message + props.user[props.type+'Last']
-          value: dictWithCreatedAt[props.user[props.type+'Last']]
+          newProps.value =
+            label: message + props.user[props.type+'Last']
+            value: dictWithCreatedAt[props.user[props.type+'Last']]
         # so one can link
+        if props.type is 'from' and props[props.type]?
+          newProps.value =
+            label: props.lastTitle
+            value:
+              meta:
+                FromLink: props.from
+
         changeQueryParams props.type, props.user[props.type+'Last']
-      else
-        Bookmarks = dictWithCreatedAt.Bookmarks
-        newProps.value =
-          label: Bookmarks.meta.title
-          value: Bookmarks
+
 
   # update queryparams unless we're fromt he same place
   if props[props.type] is not newProps[props.type]
     changeQueryParams props.type, newProps[props.type]
   if newProps.options.length < 2
     new Meteor.Error 12, "something wrong with select options"
-  props = _.extend {}, props, newProps
-  props
+  newProps = _.extend {}, props, newProps
+  if props.type is 'from'
+    console.log newProps
+  newProps
 ), Selected

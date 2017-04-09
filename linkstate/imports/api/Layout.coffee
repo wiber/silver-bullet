@@ -35,7 +35,7 @@ containerLayout = createContainer ((props) ->
     expandAboutCard: queryParams.expandAboutCard != 'false'
     expandMyCard: queryParams.expandMyCard != 'false'
   }
-  #console.log 'newProps',newProps, newProps.content.length, FlowRouter.getQueryParam('content').length
+  console.log 'newProps',newProps, newProps?.content?.length?, FlowRouter.getQueryParam('content')?.length?
   newProps
 ), Layout
 
