@@ -20,14 +20,10 @@ containerLayout = createContainer ((props) ->
     thumbalizr = Meteor.settings.public.thumbalizr
   else
     thumbalizr = undefined
-  for type in ['from', 'to']
-    if queryParams[type] is undefined and Meteor.isClient
-      # double set them to avoid double render
-      queryParams[type] = user[type+'Last']
-      changeQueryParams(type, user[type+'Last'])
+
   #content = ifBodyContentHere queryParams.content, queryParams, user
   newProps = {
-    user: userSaved(Meteor.user())
+    user: userSaved(Meteor.user(),queryParams)
     thumbalizr: thumbalizr
     from: decodeURIComponent queryParams.from
     to: decodeURIComponent queryParams.to
@@ -43,7 +39,7 @@ containerLayout = createContainer ((props) ->
   newProps
 ), Layout
 
-userSaved = (userE) ->
+userSaved = (userE,queryParams) ->
   if !userE?.services?.facebook? and Meteor.isClient
     u = JSON.parse(localStorage.getItem('latest'))
     window.saved = new Date().getTime()
@@ -57,6 +53,12 @@ userSaved = (userE) ->
       time = (window.sub - window.saved)
       console.log time, 'ms of your load time saved by using localStorage'
     user = userE
+  # sideffect but a good place to make sure we're not without direction
+  for type in ['from', 'to']
+    if queryParams[type] is undefined and Meteor.isClient
+      # double set them to avoid double render
+      queryParams[type] = user[type+'Last']
+      changeQueryParams(type, user[type+'Last'])
   user
 # textbox should have your comment in it if empty
 ifBodyContentHere = (queryParams, user)->
