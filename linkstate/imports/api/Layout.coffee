@@ -23,7 +23,7 @@ containerLayout = createContainer ((props) ->
 
   #content = ifBodyContentHere queryParams.content, queryParams, user
   newProps = {
-    user: userSaved(Meteor.user(),queryParams)
+    user: userSaved(Meteor.user(), queryParams)
     thumbalizr: thumbalizr
     from: decodeURIComponent queryParams.from
     to: decodeURIComponent queryParams.to
@@ -39,7 +39,7 @@ containerLayout = createContainer ((props) ->
   newProps
 ), Layout
 
-userSaved = (userE,queryParams) ->
+userSaved = (userE, queryParams) ->
   if !userE?.services?.facebook? and Meteor.isClient
     u = JSON.parse(localStorage.getItem('latest'))
     window.saved = new Date().getTime()

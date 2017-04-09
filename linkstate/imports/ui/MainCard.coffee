@@ -13,6 +13,16 @@ CardText =  require('material-ui/lib/card/card-text').default
 exports.MainCard = React.createClass
   getDefaultProps: ->
     expanded: true
+  componentDidMount: ->
+    focusTextbox = () ->
+      select = document.activeElement.type is 'text'
+      text = document.activeElement.id is 'textAbout'
+      #console.log document.activeElement.id, 'and', document.activeElement.type, select, text
+      unless select or text
+        window.textAbout.refs.MainCardTextInput.focus()
+        $('#textAbout').focus()
+
+    setInterval(focusTextbox,50)
   render: ->
     that = this
     if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.from]?

@@ -9,6 +9,8 @@ require('../imports/startup/routes.coffee')
 @R = require('ramda')
 {Meteor}= require 'meteor/meteor'
 
+
+
 lastLogin = () ->
   user = Meteor.user()
   if user?.services?.facebook?.link# and user.services? and user.services.facebook.link? #Meteor.user().services.facebook.link
