@@ -8,7 +8,7 @@ containerLayout = createContainer ((props) ->
   user = userSaved(Meteor.user(), queryParams)
   #console.log !FlowRouter.getQueryParam('Bookmarked'), !newPlace(user, queryParams)
 
-  if newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked')) and Meteor.isClient# and Meteor.user()
+  if newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked')) and Meteor.isClient and UserHandle.ready()
     Meteor.call "Linking",
       from: queryParams.from
       to: 'Bookmarks'
