@@ -48,7 +48,7 @@ setValue = (props, options) ->
   typeValue = props[props.type]
   dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
   dictValueExists = dictValue?.meta?.title?
-  console.log props, options, directedTo, clientReady,gotFrom,bookmarked, typeValue, dictValue, dictValueExists
+  #console.log props, options, directedTo, clientReady,gotFrom,bookmarked, typeValue, dictValue, dictValueExists
   if dictValueExists and clientReady
     value =
       label: dictValue.meta.title

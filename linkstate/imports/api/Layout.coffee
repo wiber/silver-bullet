@@ -5,17 +5,16 @@ language = 'eng'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
-  user = {}
+  user = userSaved(Meteor.user(), queryParams)
+  #console.log !FlowRouter.getQueryParam('Bookmarked'), !newPlace(user, queryParams)
 
-  unless FlowRouter.getQueryParam('Bookmarked')
-    if samePlace(user, queryParams) and Meteor.isClient
-      changeQueryParams('Bookmarked', true)
-      Meteor.call "Linking",
-        from: queryParams.from
-        to: 'Bookmarks'
-        meta:
-          weight: 5
-          title: queryParams.lastTitle
+  if newPlace(user, queryParams) and Meteor.isClient# and Meteor.user()
+    Meteor.call "Linking",
+      from: queryParams.from
+      to: 'Bookmarks'
+      meta:
+        weight: 5
+        title: queryParams.lastTitle
   if Meteor?.settings?.public?.thumbalizr?
     thumbalizr = Meteor.settings.public.thumbalizr
   else
@@ -23,7 +22,7 @@ containerLayout = createContainer ((props) ->
 
   #content = ifBodyContentHere queryParams.content, queryParams, user
   newProps = {
-    user: userSaved(Meteor.user(), queryParams)
+    user: user
     thumbalizr: thumbalizr
     from: decodeURIComponent queryParams.from
     to: decodeURIComponent queryParams.to
@@ -38,6 +37,20 @@ containerLayout = createContainer ((props) ->
   #console.log 'newProps',newProps, newProps?.content?.length?, FlowRouter.getQueryParam('content')?.length?
   newProps
 ), Layout
+
+newPlace = (user, queryParams) ->
+  flag = false
+  inBookmarks = user.out?.Bookmarks?[linkstate.store(queryParams.from)]?
+  bookmarked = FlowRouter.getQueryParam('Bookmarked') != true
+  if !bookmarked and Meteor.isClient
+    if !inBookmarks
+      flag = true
+      console.log 'inBookmarks'
+  if flag
+    changeQueryParams('Bookmarked', true)
+  console.log 'sameplace',flag ,queryParams.from, inBookmarks, bookmarked
+  flag != false
+
 
 userSaved = (userE, queryParams) ->
   if !userE?.services?.facebook? and Meteor.isClient
@@ -91,13 +104,6 @@ ifBodyContentHere = (queryParams, user)->
   else
     return content
 
-samePlace = (user, queryParams) ->
-  flag = false
-  if user?.fromLast?
-    if user.fromLast != queryParams.from
-      flag = true
-  else # if we never been anyplace, we're new here
-    flag = true
-  flag
+
 
 exports.containerLayout = containerLayout
