@@ -8,7 +8,7 @@ containerLayout = createContainer ((props) ->
   user = userSaved(Meteor.user(), queryParams)
   #console.log !FlowRouter.getQueryParam('Bookmarked'), !newPlace(user, queryParams)
 
-  if newPlace(user, queryParams) and Meteor.isClient# and Meteor.user()
+  if newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked')) and Meteor.isClient# and Meteor.user()
     Meteor.call "Linking",
       from: queryParams.from
       to: 'Bookmarks'
@@ -38,18 +38,17 @@ containerLayout = createContainer ((props) ->
   newProps
 ), Layout
 
-newPlace = (user, queryParams) ->
-  flag = false
-  inBookmarks = user.out?.Bookmarks?[linkstate.store(queryParams.from)]?
-  bookmarked = FlowRouter.getQueryParam('Bookmarked') != true
-  if !bookmarked and Meteor.isClient
-    if !inBookmarks
-      flag = true
+newPlace = (user, queryParams, bookmarked) ->
+  newHere = false
+  inBookmarks = user.out?.Bookmarks?[linkstate.store(queryParams.from)]
+  markExists = inBookmarks?.meta?
+  if bookmarked
+    unless inBookmarks?.meta?
+      newHere = true
       console.log 'inBookmarks'
-  if flag
+  if newHere
     changeQueryParams('Bookmarked', true)
-  console.log 'sameplace',flag ,queryParams.from, inBookmarks, bookmarked
-  flag != false
+  newHere
 
 
 userSaved = (userE, queryParams) ->
