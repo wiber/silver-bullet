@@ -24,6 +24,7 @@ exports.FromToSense = React.createClass
             k.build selectedContainer,
               from: that.props.from
               to: that.props.to
+              lastTitle: that.props.lastTitle
               user: that.props.user
               type: 'from'
               word: that.props.word
@@ -35,6 +36,7 @@ exports.FromToSense = React.createClass
             k.build selectedContainer,
               from: that.props.from
               to: that.props.to
+              lastTitle: that.props.lastTitle
               user: that.props.user
               word: that.props.word
               type: 'to'

@@ -54,6 +54,7 @@ exports.MainCard = React.createClass
               k.build FromToSense,
                 from: that.props.from
                 to: that.props.to
+                lastTitle: that.props.lastTitle
                 word: that.props.word
                 content: that.props.content
                 user: that.props.user

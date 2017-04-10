@@ -10,26 +10,17 @@ Selected = require('../ui/Selected.coffee').Selected
 
 # goes through a simple loop that builds list of objects from a number of sources.
 exports.selectedContainer = createContainer ((props) ->
-  newProps = {}
-  newProps.options = []
-  #props.user
-  # paint boxes from user objects
-  # find / set value from either qp or user object.
-  # sync user.toLast with qp
-  # change qp, set toLast with method, redraw box optimist
-  #Meteor.subscribe "userData"
-  directedTo = typeof props.to is 'string' and props.to.length > 1
-  # make value if no queryParams
-  # unsightly empty from while loading..
-  unless Meteor.user()?.services?.facebook? and Meteor.isClient
-    if props.type is 'from'
-      if typeof props.from is 'string' and props.from.length > 1
-        console.log 'not ready, from,', props.from, props.lastTitle
-        newProps.value =
-          label: props.lastTitle
-          value:
-            meta:
-              FromLink: props.from
+  # update queryparams unless we're fromt he same place
+
+  nProps = _.extend {}, props,
+    value: setValue(props,setOptions(props))
+    options: setOptions(props)
+  nProps
+), Selected
+
+
+setOptions = (props) ->
+  options = []
   if props.user?.out?
     dictWithCreatedAt = props.user.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
@@ -38,35 +29,131 @@ exports.selectedContainer = createContainer ((props) ->
         selectItem =
           label: dictWithCreatedAt[value].meta.title #linkstate.see value # same function as use
           value: dictWithCreatedAt[value] # store whole object here
-        if props[props.type] is dictWithCreatedAt[value].meta.FromLink
-          newProps.value = selectItem
-        newProps.options.push selectItem
-    unless newProps.value?
-      # it's not in the array, so it's not on user yet
-      if props.user?[props.type+'Last']?
-        if props.type is 'to'
-          message = props.word.defaultProject
-          newProps.value =
-            label: message + props.user[props.type+'Last']
-            value: dictWithCreatedAt[props.user[props.type+'Last']]
-        # so one can link
-        if props.type is 'from' and props[props.type]?
-          newProps.value =
-            label: props.lastTitle
-            value:
-              meta:
-                FromLink: props.from
+        options.push selectItem
+  options
+setValue = (props, options) ->
+  ###
+  if props[props.type] is dictWithCreatedAt[value].meta.FromLink
+    newProps.value = selectItem
+  ###
 
-        changeQueryParams props.type, props.user[props.type+'Last']
+  newProps = {}
+  newProps.options = []
+  value = {}
+  directedTo = typeof props.to is 'string' and props.to.length > 1
+  clientReady = props.user?.services?.facebook? and Meteor.isClient
+  gotFrom = typeof props.from is 'string' and props.from.length > 1
+  bookmarked = props.user?.out?.Bookmarks?
+  dictWithCreatedAt = props.user.out['Bookmarks']
+  typeValue = props[props.type]
+  dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
+  dictValueExists = dictValue?.meta?.title?
+  console.log props, options, directedTo, clientReady,gotFrom,bookmarked, typeValue, dictValue, dictValueExists
+  if dictValueExists and clientReady
+    value =
+      label: dictValue.meta.title
+      value: dictValue
+  else
+    value =
+      label: props.lastTitle
+      value:
+        meta:
+          FromLink: props.from
+  value
+###
 
-
-  # update queryparams unless we're fromt he same place
-  if props[props.type] is not newProps[props.type]
-    changeQueryParams props.type, newProps[props.type]
-  if newProps.options.length < 2
-    new Meteor.Error 12, "something wrong with select options"
-  newProps = _.extend {}, props, newProps
+# make value if no queryParams
+# unsightly empty from while loading..
+unless Meteor.user()?.services?.facebook? and Meteor.isClient
   if props.type is 'from'
-    console.log newProps
-  newProps
-), Selected
+    if typeof props.from is 'string' and props.from.length > 1
+      console.log 'not ready, from,', props.from, props.lastTitle
+      newProps.value =
+        label: props.lastTitle
+        value:
+          meta:
+            FromLink: props.from
+if props.user?.out?
+  dictWithCreatedAt = props.user.out['Bookmarks']
+  deChaos = linkstate.sortByKeysTime dictWithCreatedAt
+  for index,value of deChaos
+    if typeof value is 'string' and value != 'undefined'
+      selectItem =
+        label: dictWithCreatedAt[value].meta.title #linkstate.see value # same function as use
+        value: dictWithCreatedAt[value] # store whole object here
+      if props[props.type] is dictWithCreatedAt[value].meta.FromLink
+        newProps.value = selectItem
+      newProps.options.push selectItem
+  unless newProps.value?
+    # it's not in the array, so it's not on user yet
+    if props.user?[props.type+'Last']?
+      if props.type is 'to'
+        message = props.word.defaultProject
+        newProps.value =
+          label: message + props.user[props.type+'Last']
+          value: dictWithCreatedAt[props.user[props.type+'Last']]
+      # so one can link
+      if props.type is 'from' and props[props.type]?
+        newProps.value =
+          label: props.lastTitle
+          value:
+            meta:
+              FromLink: props.from
+
+      changeQueryParams props.type, props.user[props.type+'Last']
+
+if props[props.type] is not newProps[props.type]
+  changeQueryParams props.type, newProps[props.type]
+if newProps.options.length < 2
+  new Meteor.Error 12, "something wrong with select options"
+
+if props.user?.out?
+  dictWithCreatedAt = props.user.out['Bookmarks']
+  deChaos = linkstate.sortByKeysTime dictWithCreatedAt
+  for index,value of deChaos
+    if typeof value is 'string' and value != 'undefined'
+      selectItem =
+        label: dictWithCreatedAt[value].meta.title #linkstate.see value # same function as use
+        value: dictWithCreatedAt[value] # store whole object here
+      if props[props.type] is dictWithCreatedAt[value].meta.FromLink
+        newProps.value = selectItem
+      newProps.options.push selectItem
+  unless newProps.value?
+    # it's not in the array, so it's not on user yet
+    if props.user?[props.type+'Last']?
+      if props.type is 'to'
+        message = props.word.defaultProject
+        newProps.value =
+          label: message + props.user[props.type+'Last']
+          value: dictWithCreatedAt[props.user[props.type+'Last']]
+      # so one can link
+      if props.type is 'from' and props[props.type]?
+        newProps.value =
+          label: props.lastTitle
+          value:
+            meta:
+              FromLink: props.from
+
+      changeQueryParams props.type, props.user[props.type+'Last']
+
+newProps = {}
+newProps.options = []
+#props.user
+# paint boxes from user objects
+# find / set value from either qp or user object.
+# sync user.toLast with qp
+# change qp, set toLast with method, redraw box optimist
+#Meteor.subscribe "userData"
+directedTo = typeof props.to is 'string' and props.to.length > 1
+# make value if no queryParams
+# unsightly empty from while loading..
+unless Meteor.user()?.services?.facebook? and Meteor.isClient
+  if props.type is 'from'
+    if typeof props.from is 'string' and props.from.length > 1
+      console.log 'not ready, from,', props.from, props.lastTitle
+      newProps.value =
+        label: props.lastTitle
+        value:
+          meta:
+            FromLink: props.from
+###
