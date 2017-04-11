@@ -44,6 +44,7 @@ newPlace = (user, queryParams, bookmarked) ->
   inBookmarks = user.out?.Bookmarks?[linkstate.store(queryParams.from)]
   markExists = inBookmarks?.meta?
   if bookmarked != 'true' and !markExists
+    # must changeQueryParams here else it gets run multiple times
     changeQueryParams('Bookmarked', true)
     console.log 'From a new place! Bookmark it!', FlowRouter.getQueryParam('Bookmarked')
     return true
