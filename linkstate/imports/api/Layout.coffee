@@ -10,6 +10,7 @@ containerLayout = createContainer ((props) ->
 
   if newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked')) and Meteor.isClient
     # and UserHandle.ready()
+    changeQueryParams('Bookmarked', true)
     Meteor.call "Linking",
       from: queryParams.from
       to: 'Bookmarks'
@@ -43,11 +44,10 @@ newPlace = (user, queryParams, bookmarked) ->
   inBookmarks = user.out?.Bookmarks?[linkstate.store(queryParams.from)]
   markExists = inBookmarks?.meta?
   if bookmarked != 'true' and !markExists
-    changeQueryParams('Bookmarked', true)
-    console.log 'newPlace', FlowRouter.getQueryParam('Bookmarked')
+    console.log 'From a new place! Bookmark it!', FlowRouter.getQueryParam('Bookmarked')
     return true
   else
-    console.log 'not newPlace', !bookmarked, !markExists
+    console.log 'Been here before.. !bookmarked, !markExists', !bookmarked, !markExists
     return false
 
 
