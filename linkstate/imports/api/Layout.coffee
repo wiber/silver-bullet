@@ -5,8 +5,8 @@ language = 'eng'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
+  # store and use localStorage user untill user() received from server
   user = userSaved(Meteor.user(), queryParams, Meteor.isClient)
-  #console.log !FlowRouter.getQueryParam('Bookmarked'), !newPlace(user, queryParams)
 
   if newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked')) and Meteor.isClient
     # and UserHandle.ready()
@@ -46,10 +46,10 @@ newPlace = (user, queryParams, bookmarked) ->
   if bookmarked != 'true' and !markExists
     # must changeQueryParams here else it gets run multiple times
     changeQueryParams('Bookmarked', true)
-    console.log 'From a new place! Bookmark it!', FlowRouter.getQueryParam('Bookmarked')
+    #console.log 'From a new place! Bookmark it!', FlowRouter.getQueryParam('Bookmarked')
     return true
   else
-    console.log 'Been here before.. !bookmarked, !markExists', !bookmarked, !markExists
+    #console.log 'Been here before.. !bookmarked, !markExists', !bookmarked, !markExists
     return false
 
 
@@ -90,11 +90,6 @@ ifBodyContentHere = (queryParams, user)->
   switched = lastFrom != queryParams.from
   cInExists = user?.out?[to]?[from]?
 
-  if cInExists
-    console.log paramContent
-    , user.out[to][from].meta.body
-    , 'edit your previous statement if'
-    , switched
   if cInExists and switched
     cIn = user.out[to][from]
     #changeQueryParams 'content', cIn.meta.body # 'content', cIn,
