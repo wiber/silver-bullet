@@ -45,7 +45,6 @@ UrlBox = React.createClass
                   onClick: (e) ->
                    changeQueryParams 'from', e.target.getAttribute('from')
                    changeQueryParams 'to', e.target.getAttribute('to')
-                   console.log e.target.getAttribute('from')
             k.img
               style: _.extend {}, style.webShot,
                 position: 'absolute'
@@ -57,7 +56,6 @@ UrlBox = React.createClass
               onClick: (e) ->
                changeQueryParams 'to', e.target.getAttribute('to')
                changeQueryParams 'from', e.target.getAttribute('from')
-               console.log e.target.getAttribute('from')
           # are there user votes here?
           inlink = N.inLinks?[D.link]?
           outlink = N.outLinks?[D.link]?
@@ -68,6 +66,7 @@ UrlBox = React.createClass
             U.directionUserMeta.INLINKS = N.inLinks[D.link]
           counted = 0
           for directedBunch of U.directionUserMeta
+            #console.log directedBunch
             for userVectorName of U.directionUserMeta[directedBunch]
               counted++
               k.build LinkVote,

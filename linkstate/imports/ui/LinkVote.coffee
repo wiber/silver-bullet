@@ -38,7 +38,7 @@ LinkVote = React.createClass
             diffHeight = diffHeight + (imgHeightFunc(i-2) - imgHeightFunc(i-1))
         spanTop = (positionOffset+(that.props.counted + 0.25) * (that.props.size / 5)) - diffHeight/2
         imgTop = (positionOffset+that.props.counted * (that.props.size / 5)) - diffHeight/2
-        if that.props.direction is 'INLINKS'
+        if that.props.directed is 'INLINKS'
           bullet = '0 50% 50% 0'
         else
           bullet = '50% 0 0 50%'
