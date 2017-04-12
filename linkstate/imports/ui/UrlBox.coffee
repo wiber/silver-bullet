@@ -41,8 +41,11 @@ UrlBox = React.createClass
                     zIndex: 2
                   src: linkstate.thumbalizrPic D.m.FromLink
                   from: D.m.FromLink
+                  to: D.m.ToLink
                   onClick: (e) ->
                    changeQueryParams 'from', e.target.getAttribute('from')
+                   changeQueryParams 'to', e.target.getAttribute('to')
+                   console.log e.target.getAttribute('from')
             k.img
               style: _.extend {}, style.webShot,
                 position: 'absolute'
@@ -50,8 +53,11 @@ UrlBox = React.createClass
                 zIndex: -1
               src:linkstate.thumbalizrPic D.m.ToLink
               to: D.m.ToLink
+              from: D.m.FromLink
               onClick: (e) ->
                changeQueryParams 'to', e.target.getAttribute('to')
+               changeQueryParams 'from', e.target.getAttribute('from')
+               console.log e.target.getAttribute('from')
           # are there user votes here?
           inlink = N.inLinks?[D.link]?
           outlink = N.outLinks?[D.link]?

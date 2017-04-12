@@ -5,7 +5,7 @@ language = 'eng'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
-  user = userSaved(Meteor.user(), queryParams)
+  user = userSaved(Meteor.user(), queryParams, Meteor.isClient)
   #console.log !FlowRouter.getQueryParam('Bookmarked'), !newPlace(user, queryParams)
 
   if newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked')) and Meteor.isClient
@@ -53,8 +53,8 @@ newPlace = (user, queryParams, bookmarked) ->
     return false
 
 
-userSaved = (userE, queryParams) ->
-  if !userE?.services?.facebook? and Meteor.isClient
+userSaved = (userE, queryParams, client) ->
+  if !userE?.services?.facebook? and client
     u = JSON.parse(localStorage.getItem('latest'))
     window.saved = new Date().getTime()
     if u?
@@ -69,7 +69,7 @@ userSaved = (userE, queryParams) ->
     user = userE
   # sideffect but a good place to make sure we're not without direction
   for type in ['from', 'to']
-    if queryParams[type] is undefined and Meteor.isClient
+    if queryParams[type] is undefined and client
       # double set them to avoid double render
       queryParams[type] = user[type+'Last']
       changeQueryParams(type, user[type+'Last'])
