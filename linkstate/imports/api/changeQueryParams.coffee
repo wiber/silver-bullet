@@ -2,8 +2,10 @@ exports.changeQueryParams = (key,value) ->
   if typeof FlowRouter.setQueryParams is 'function'
     newQueryParams = {}
     newQueryParams[key] = value
-    if key is 'from'
-      if FlowRouter.getQueryParam('from') != value
+    from = key is 'from'
+    to = key is 'to'
+    if key is 'from' or key is 'to'
+      if FlowRouter.getQueryParam(key) != value
         exports.changeQueryParams('switched','true')
     if FlowRouter.getQueryParam(key) is value
       # else we break back button with non moves
