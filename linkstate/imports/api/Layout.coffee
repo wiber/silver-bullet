@@ -89,8 +89,8 @@ ifBodyContentHere = (queryParams, user)->
   lastFrom = user.lastFrom
   switched = lastFrom != queryParams.from
   cInExists = user?.out?[to]?[from]?
-
-  if cInExists and switched
+  switchedPlace = FlowRouter.getQueryParam('switched') is 'true'
+  if cInExists and switchedPlace
     cIn = user.out[to][from]
     #changeQueryParams 'content', cIn.meta.body # 'content', cIn,
     content = cIn.meta.body

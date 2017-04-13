@@ -42,8 +42,10 @@ exports.FromToSense = React.createClass
               type: 'to'
 
 TextAbout = React.createClass
-  componentDidMount: ->
-    console.log @props.content, 'mounted'
+  componentWillReceiveProps: ->
+    if FlowRouter.getQueryParam('switched') is 'true'
+      @refs.MainCardTextInput.input.setValue(@props.content)
+      changeQueryParams('switched','')
   render: ->
     window.textAbout = this
     that = this
