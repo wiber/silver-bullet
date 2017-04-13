@@ -24,6 +24,7 @@ style =
   webShot:
     opacity: 1
     width: '100%'
+    height: '100%'
   fromBullet:
     width: '100%'
     height: '100%'

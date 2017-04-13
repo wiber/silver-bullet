@@ -30,6 +30,11 @@ UrlBox = React.createClass
         key: D.link+'Node'
         title: D.m.FromLink
         subtitle: that.props.word.to + D.m.ToLink
+        from: D.m.FromLink
+        to: D.m.ToLink
+        onClick: (e) ->
+         changeQueryParams 'from', e.target.getAttribute('from')
+         changeQueryParams 'to', e.target.getAttribute('to')
         ->
           k.div ->
             k.div
