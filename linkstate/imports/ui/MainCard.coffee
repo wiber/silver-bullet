@@ -22,7 +22,7 @@ exports.MainCard = React.createClass
         window.textAbout.refs.MainCardTextInput.focus()
         $('#textAbout').focus()
 
-    setInterval(focusTextbox,50)
+    setInterval(focusTextbox,150)
   render: ->
     that = this
     if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.from]?

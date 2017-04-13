@@ -94,7 +94,6 @@ ifBodyContentHere = (queryParams, user)->
     cIn = user.out[to][from]
     #changeQueryParams 'content', cIn.meta.body # 'content', cIn,
     content = cIn.meta.body
-  #console.log from, to, lastFrom, switched, cInExists, cIn, content
   if typeof content is 'undefined'
     return ''
   else
