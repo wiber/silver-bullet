@@ -4,7 +4,7 @@ exports.changeQueryParams = (key,value) ->
     newQueryParams[key] = value
     from = key is 'from'
     to = key is 'to'
-    if key is 'from' or key is 'to'
+    if key is 'from' #or key is 'to'
       if FlowRouter.getQueryParam(key) != value
         exports.changeQueryParams('switched','true')
     if FlowRouter.getQueryParam(key) is value

@@ -18,8 +18,9 @@ exports.MainCard = React.createClass
       select = document.activeElement.type is 'text'
       text = document.activeElement.id is 'textAbout'
       unless select or text
-        window.textAbout.refs.MainCardTextInput.focus()
-        $('#textAbout').focus()
+        if window?.textAbout?.refs?.MainCardTextInput?.focus()
+          window.textAbout.refs.MainCardTextInput.focus()
+          #$('#textAbout').focus()
     setInterval(focusTextbox,150)
   render: ->
     that = this

@@ -6,8 +6,13 @@ language = 'eng'
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   # store and use localStorage user untill user() received from server
+  if Meteor.isClient
+    Tracker.autorun ->
+      userId = Meteor.userId()
+      if !userId and UserHandle.ready() and localStorage
+        localStorage.removeItem('latest')
+      return
   user = userSaved(Meteor.user(), queryParams, Meteor.isClient)
-
   if newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked')) and Meteor.isClient
     # and UserHandle.ready()
 
@@ -41,7 +46,7 @@ containerLayout = createContainer ((props) ->
 ), Layout
 
 newPlace = (user, queryParams, bookmarked) ->
-  inBookmarks = user.out?.Bookmarks?[linkstate.store(queryParams.from)]
+  inBookmarks = user?.out?.Bookmarks?[linkstate.store(queryParams.from)]
   markExists = inBookmarks?.meta?
   if bookmarked != 'true' and !markExists
     # must changeQueryParams here else it gets run multiple times
@@ -54,13 +59,12 @@ newPlace = (user, queryParams, bookmarked) ->
 
 
 userSaved = (userE, queryParams, client) ->
+  user = {}
   if !userE?.services?.facebook? and client
     u = JSON.parse(localStorage.getItem('latest'))
     window.saved = new Date().getTime()
     if u?
       user = u
-    else
-      user = {}
   else
     if !window?.sub? and Meteor.isClient
       window.sub = new Date().getTime()
@@ -86,7 +90,7 @@ ifBodyContentHere = (queryParams, user)->
     content = ''
   to = linkstate.store queryParams.to
   from = linkstate.store queryParams.from
-  lastFrom = user.lastFrom
+  lastFrom = user?.lastFrom
   switched = lastFrom != queryParams.from
   cInExists = user?.out?[to]?[from]?
   switchedPlace = FlowRouter.getQueryParam('switched') is 'true'
