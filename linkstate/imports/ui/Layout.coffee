@@ -82,5 +82,6 @@ exports.Layout = React.createClass
                   word: that.props.word
                   thumbalizr: that.props.thumbalizr
                   howMany: 15
+                  user: that.props.user
             k.div ->
               k.build AccountsUIWrapper

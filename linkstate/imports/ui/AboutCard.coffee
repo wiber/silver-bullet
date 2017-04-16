@@ -113,6 +113,7 @@ AboutCard = React.createClass
                         props: that.props
                         thumbalizr: that.props.thumbalizr
                         word: that.props.word
+                        user: that.props.user
 
 
 exports.AboutCard = createContainer ((props) ->

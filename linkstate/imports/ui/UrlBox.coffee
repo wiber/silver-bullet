@@ -15,6 +15,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 {bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
 {LinkVote} = require '../../imports/ui/LinkVote.coffee'
+{GoMark} = require '../../imports/api/nav/GoMark.coffee'
 R = require 'ramda'
 UrlBox = React.createClass
   propTypes:
@@ -30,11 +31,13 @@ UrlBox = React.createClass
         key: D.link+'Node'
         title: D.m.FromLink
         subtitle: that.props.word.to + D.m.ToLink
-        from: D.m.FromLink
-        to: D.m.ToLink
         onClick: (e) ->
-         changeQueryParams 'from', e.target.getAttribute('from')
-         changeQueryParams 'to', e.target.getAttribute('to')
+          GoMark
+            type:
+              from: D.m.FromLink
+              to: D.m.ToLink
+            N: N.node
+            user: that.props.user
         ->
           k.div ->
             k.div
@@ -45,23 +48,12 @@ UrlBox = React.createClass
                     opacity: .7
                     zIndex: 2
                   src: linkstate.thumbalizrPic D.m.FromLink
-                  from: D.m.FromLink
-                  to: D.m.ToLink
-                  onClick: (e) ->
-                   changeQueryParams 'from', e.target.getAttribute('from')
-                   changeQueryParams 'to', e.target.getAttribute('to')
             k.img
               style: _.extend {}, style.webShot,
                 position: 'absolute'
                 left: '30%'
                 zIndex: -1
               src:linkstate.thumbalizrPic D.m.ToLink
-              to: D.m.ToLink
-              from: D.m.FromLink
-              onClick: (e) ->
-               changeQueryParams 'to', e.target.getAttribute('to')
-               changeQueryParams 'from', e.target.getAttribute('from')
-          # are there user votes here?
           inlink = N.inLinks?[D.link]?
           outlink = N.outLinks?[D.link]?
           U.directionUserMeta = {}
@@ -71,7 +63,6 @@ UrlBox = React.createClass
             U.directionUserMeta.INLINKS = N.inLinks[D.link]
           counted = 0
           for directedBunch of U.directionUserMeta
-            #console.log directedBunch
             for userVectorName of U.directionUserMeta[directedBunch]
               counted++
               k.build LinkVote,
