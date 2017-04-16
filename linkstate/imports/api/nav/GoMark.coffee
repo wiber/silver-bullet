@@ -8,20 +8,31 @@ GoMark = (place) ->
   for type, url of place.type
     # is from or to url bookmarked?
     notBookmarked = !place.user?.out?.Bookmarks?[linkstate.store url]?
-    if notBookmarked and url?
+    if !notBookmarked
+      console.log 'got url in bookmarks', url
+      changeQueryParams type, url
+    else
+      # best we can do is show user the article they don't have.. and go through the marking
+      # to do it properly, to just change qp and enable user to weigh in right away requires a slight refactor or data model
+      window.open(url,'_blank')
+###
       title = place.N.in.Bookmarks[linkstate.sortByKeysTime(place.N.in.Bookmarks)[0]].meta.title
-      console.log url, place.user.out.Bookmarks, linkstate.store(url), title, type, place, place.user.out.Bookmarks[linkstate.store(url)]
-      for direction in ['in','out']
-        console.log direction, place.N[direction+'.'+linkstate.store(url)], place.N[direction]
+      key =
+        from: 'out'
+        to: 'in'
+      Ndir = place.N[key[type]]
+      NdirUrl = Ndir[linkstate.store url]
+      console.log 'not have url in bookmarks', url, type, title, Ndir, NdirUrl,
       payload =
         from: linkstate.store url
         to: 'Bookmarks'
         meta:
           weight: 5
           title: title
-      Meteor.call 'Linking', payload
+      #Meteor.call 'Linking', payload
       #console.log payload, place.user.out.Bookmarks[linkstate.store url]
       changeQueryParams type, url
-      console.log FlowRouter.getQueryParam type
+      #console.log payload, FlowRouter.getQueryParam type
 
 exports.GoMark = GoMark
+###

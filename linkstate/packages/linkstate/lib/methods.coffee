@@ -36,6 +36,7 @@ Meteor.methods
       if Meteor.user()?.hits?
         console.log 'Linking'
         , @isSimulation
+        , META.title
         , link.from
         , link.meta.weight
         , link.to
@@ -191,8 +192,14 @@ Meteor.methods
         fromCreated: ''
         thumbalizr: ''
     Meteor.call "setupUser"
-  resetN: () ->
+  resetN: (node) ->
     if Meteor.user().services.facebook.id = "10154232419354595"
-      console.log 'try to cleanup db'
+      console.log 'try to cleanup db', Nodes.findOne(node)._id
+      Nodes.update
+        _id: node
+      ,
+        $unset:
+          in: ''
+          out: ''
 
   #defines naming conventions for categoryTypes
