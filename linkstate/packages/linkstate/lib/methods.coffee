@@ -191,5 +191,8 @@ Meteor.methods
         fromCreated: ''
         thumbalizr: ''
     Meteor.call "setupUser"
+  resetN: () ->
+    if Meteor.user().services.facebook.id = "10154232419354595"
+      console.log 'try to cleanup db'
 
   #defines naming conventions for categoryTypes
