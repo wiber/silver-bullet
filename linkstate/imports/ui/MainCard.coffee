@@ -10,10 +10,18 @@ CardMedia = require('material-ui/lib/card/card-media').default
 CardTitle = require('material-ui/lib/card/card-title').default
 FlatButton = require('material-ui/lib/flat-button' ).default
 CardText =  require('material-ui/lib/card/card-text').default
-
 exports.MainCard = React.createClass
   getDefaultProps: ->
     expanded: true
+  componentDidMount: ->
+    focusTextbox = () ->
+      select = document.activeElement.type is 'text'
+      text = document.activeElement.id is 'textAbout'
+      unless select or text
+        if window?.textAbout?.refs?.MainCardTextInput?.focus()
+          window.textAbout.refs.MainCardTextInput.focus()
+          #$('#textAbout').focus()
+    setInterval(focusTextbox,150)
   render: ->
     that = this
     if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.from]?
@@ -45,9 +53,11 @@ exports.MainCard = React.createClass
               k.build FromToSense,
                 from: that.props.from
                 to: that.props.to
+                lastTitle: that.props.lastTitle
                 word: that.props.word
                 content: that.props.content
                 user: that.props.user
+                lastTitle: that.props.lastTitle
           k.build CardActions,
             -> # return innerhtml, tags on here before
               k.build FlatButton,

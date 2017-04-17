@@ -1,15 +1,26 @@
+page = {}
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+    if (request.greeting == "hello")
+      sendResponse({farewell: page});
+  });
+
 oneSteps = function ( url ,title) {
   // we simply need to know what page we were on when ctrl t or ctrl n was pressed
   if ( url == "chrome://newtab/" ) {
     //console.log( "chrome://newtab/" );
   } else {
-    //console.log( url );
-    chrome.storage.sync.set( {
+    console.log( url );
+    page = {
       'last': {
           'url': url,
           'title': title
       }
-    } )
+    }
+    chrome.storage.sync.set( page )
   }
 }
 
@@ -22,9 +33,21 @@ chrome.tabs.onHighlighted.addListener( function ( highlightInfo ) {
   } )
 } );
 
+chrome.tabs.onUpdated.addListener( function ( tabId, changeInfo, tab ) {
+  console.log('onUpdated background',this,tab.url , tab.title)
+  oneSteps( tab.url , tab.title);
+} );
+
+// not used
 chrome.windows.onFocusChanged.addListener( function ( windowId ) {
   if ( windowId == 'WINDOW_ID_NONE' ) {
     //console.log( windowId, 'WINDOW_ID_NONE' );
+    getTitle = function(tabId){
+      chrome.tabs.executeScript(tabId,
+        {code: "window.interval=setInterval(alert(document.title),'500');"}
+      );
+    };
+    interval = setInterval(getTitle(tab.id),500)
   } else {
     //console.log( windowId );
   }

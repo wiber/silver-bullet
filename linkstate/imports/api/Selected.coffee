@@ -10,40 +10,17 @@ Selected = require('../ui/Selected.coffee').Selected
 
 # goes through a simple loop that builds list of objects from a number of sources.
 exports.selectedContainer = createContainer ((props) ->
-  newProps = {}
-  newProps.options = []
-  #props.user
-  # paint boxes from user objects
-  # find / set value from either qp or user object.
-  # sync user.toLast with qp
-  # change qp, set toLast with method, redraw box optimist
-  #Meteor.subscribe "userData"
-  if Meteor.isClient
-    unless window.beforeTime?
-      window.beforeTime = new Date().getTime()
-    if localStorage? and UserHandle.ready()
-      console.log 'not writing user', localStorage? and UserHandle.ready()
-      #writeUser(Meteor.user())
-      #window.setUserTime = new Date().getTime()
-      #timeTester('setUserTime')
+  # update queryparams unless we're fromt he same place
 
-  if UserHandle? and UserHandle.ready()
-    user = Meteor.user()
-  else
-    if localStorage?
-      fromStorage = localStorage.user
-      #console.log typeof fromStorage is 'string' , fromStorage.length > 1, fromStorage != ""
-      if typeof fromStorage is 'string' and fromStorage != ""
-        user = JSON.parse(fromStorage)
-        #window.getUserTime = new Date().getTime()
-        #timeTester('getUserTime')
-    else
-      user = {}
-  directedTo = typeof props.to is 'string' and props.to.length > 1
-  # make value
-  if !props[props.type]? and user?[props.type+'Last']?
-    newProps[props.type] = user[props.type+'Last']
+  nProps = _.extend {}, props,
+    value: setValue(props,setOptions(props))
+    options: setOptions(props)
+  nProps
+), Selected
 
+
+setOptions = (props) ->
+  options = []
   if props.user?.out?
     dictWithCreatedAt = props.user.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
@@ -52,50 +29,44 @@ exports.selectedContainer = createContainer ((props) ->
         selectItem =
           label: dictWithCreatedAt[value].meta.title #linkstate.see value # same function as use
           value: dictWithCreatedAt[value] # store whole object here
-        if props[props.type] is dictWithCreatedAt[value].meta.FromLink
-          newProps.value = selectItem
-        newProps.options.push selectItem
-    unless newProps.value?
-      # set defaults if none set already
-      if user?[props.type+'Last']? and props.type  is 'to'
-        # charming solution that flickers rightly
-        # on recompute it goes from 'last project' to just the right title
-        newProps.value =
-          label: 'Your last project was '+ user[props.type+'Last']
-          value: dictWithCreatedAt[user[props.type+'Last']]
-        # so one can link
-        changeQueryParams props.type, user[props.type+'Last']
+        options.push selectItem
+    # questionable ..
+    ###
+    for type in ['from','to']
+      typeUrl = FlowRouter.getQueryParam type
+      typeUrlDict = dictWithCreatedAt[linkstate.store typeUrl]
+      if !typeUrlDict?.meta?
+        console.log 'not already in there'
+        options.push
+          label: props[props.type]
+          value:
+            meta:
+              FromLink: props[props.type]
       else
-        Bookmarks = dictWithCreatedAt.Bookmarks
-        newProps.value =
-          label: Bookmarks.meta.title
-          value: Bookmarks
-  # instead of waiting, just show the params..
-  if Meteor.isClient
-    unless UserHandle.ready()
-      mockFrom=
-        label: props[props.type]
-        value: props[props.type]
-      newProps.value = mockFrom
-      newProps.options = [mockFrom]
-  # update queryparams unless we're fromt he same place
-  if props[props.type] is not newProps[props.type]
-    changeQueryParams props.type, newProps[props.type]
-  if newProps.options.length < 2
-    new Meteor.Error 12, "something wrong with select options"
-  props = _.extend {}, props, newProps
-  props
-), Selected
-
-slowWriteUser = (user)->
-  localStorage.setItem 'user', JSON.stringify(user)
-writeUser = _.throttle slowWriteUser ,500
-timeTester = (type) ->
-  window[type] = new Date().getTime()
-  console.log type
-  , window.getUserTime
-  , window.setUserTime
-  , ' since subscription ready: '
-  , window.getUserTime - window.setUserTime
-  , ' localStorage takes to wake up:'
-  , window.beforeTime - window.getUserTime
+        console.log 'do nothing'
+      console.log typeUrl, typeUrlDict
+    ###
+  options
+setValue = (props, options) ->
+  newProps = {}
+  newProps.options = []
+  value = {}
+  directedTo = typeof props.to is 'string' and props.to.length > 1
+  clientReady = props.user?.services?.facebook? and Meteor.isClient
+  gotFrom = typeof props.from is 'string' and props.from.length > 1
+  bookmarked = props.user?.out?.Bookmarks?
+  dictWithCreatedAt = props.user.out['Bookmarks']
+  typeValue = props[props.type]
+  dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
+  dictValueExists = dictValue?.meta?.title?
+  if dictValueExists and clientReady
+    value =
+      label: dictValue.meta.title
+      value: dictValue
+  else
+    value =
+      label: props.lastTitle
+      value:
+        meta:
+          FromLink: props.from
+  value

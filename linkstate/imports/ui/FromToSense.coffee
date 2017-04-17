@@ -24,8 +24,11 @@ exports.FromToSense = React.createClass
             k.build selectedContainer,
               from: that.props.from
               to: that.props.to
+              lastTitle: that.props.lastTitle
               user: that.props.user
               type: 'from'
+              word: that.props.word
+              lastTitle: that.props.lastTitle
             k.span
               style:
                 verticalAlign: '0.5em'
@@ -33,19 +36,25 @@ exports.FromToSense = React.createClass
             k.build selectedContainer,
               from: that.props.from
               to: that.props.to
+              lastTitle: that.props.lastTitle
               user: that.props.user
+              word: that.props.word
               type: 'to'
 
 TextAbout = React.createClass
+  componentWillReceiveProps: ->
+    if FlowRouter.getQueryParam('switched') is 'true'
+      @refs.MainCardTextInput.input.setValue(@props.content)
+      changeQueryParams('switched','')
   render: ->
     window.textAbout = this
     that = this
     reactKup (k) ->
       k.build TextField,
         ref: 'MainCardTextInput'
+        autoFocus: true
         onSelect: (e) ->
           if e.target.value.length < 1
-            #console.log that.props.content, e.target.value
             e.target.value = that.props.content
         onKeyDown: (e) ->
           if 48 <= e.keyCode <= 57 and !e.ctrlKey and !e.shiftKey and !e.altKey
@@ -57,7 +66,6 @@ TextAbout = React.createClass
               to: FlowRouter.getQueryParam('to')
               meta: content
             content.weight = e.keyCode - 48
-            #console.log payload,'console.log payload' , content.body, e, e.target, e.target.value, 'console.log content.body, e.target.value, e.target, '
             Meteor.defer ->
               Meteor.call "Linking", payload, (error, result) ->
                 if error
@@ -66,9 +74,11 @@ TextAbout = React.createClass
                   console.log result, 'returned from linking'
                 else
                   console.log 'no result?', result
-            changeQueryParams 'content', ''
+            #changeQueryParams 'content', ''
             e.preventDefault()
             window.to.refs.to.focus()
+          else
+            changeQueryParams 'content', e.target.value
           if e.keyCode is 13
             alert that.props.word.digitAlert
             e.preventDefault()

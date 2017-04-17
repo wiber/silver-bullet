@@ -97,8 +97,6 @@ Meteor.methods resetss: () ->
     Meteor.users.remove {}
     Edges.remove {}
     Nodes.remove {}
-    #l = Nodes.find().fetch().length
-    ##console.log(Nodes.find().fetch().length)
     -> true
 
 # so that logs start clean on each startup, easily see where you are
@@ -106,15 +104,12 @@ truncateLogs = ->
   spawn = Npm.require('child_process').spawn
   grep = spawn('grep')
   grep.on 'close', (code, signal) ->
-    ##console.log ' child process terminated due to receipt of signal ' + signal
     fs = Npm.require('fs')
     appRoot = process.env.PWD
     logPath = '/logs/all.log'
     firstPartIndex = appRoot.lastIndexOf '/'
     firstPart = appRoot.substring 0, firstPartIndex
-    ##console.log firstPart , 'linkstate firstPart where logs directory should', firstPart+logPath
     webl = fs.truncate(appRoot + logPath, 0, ->
-      ##console.log ' done overwriting the ' + firstPart+logPath
       return
     )
     return
@@ -126,7 +121,6 @@ truncateLogs = ->
     packageName = _.find(Object.keys(Package), (p) ->
       p.search(/local-test/) > -1
     ).replace('local-test:', '')
-    ##console.log packageName,'running next?',packageName.indexOf("linkstate") isnt -1
     runningOurselves = packageName.indexOf("linkstate") isnt -1
     if runningOurselves
       runTests()

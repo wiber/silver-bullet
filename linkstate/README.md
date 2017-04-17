@@ -1,5 +1,11 @@
 # Hashrepublic of linkstates
 
+What if ... making sense of the world got you in the zone. Youiest believes that the right kind of context makes the difference. 
+
+Imagine all those loose ends in your fragmented world articles, videos, white papers and factiods were collaboratively combined. This idea isn't new but linkstates goes all in on a new angle. Call it texture. What to pay attention to is easier when a known face weighs in or suggests other points of interest. If something looks too good to be true a newtab from that page may have a better informed user referencing a credible opposing view.
+
+A student collects organizes sources and quotes while doing online research. An organisation brands itself by endorsing articles, press releases or other things that share it's values. That same organisation tells the world what it's not about by distancing itself from an aspect of an event, organisation or article. As others weigh in on these sources or stories context emerges.
+
 To understand this tool just imagine bookmarks as links between two pages instead of as something you stash in a folder and never look at again. When you newtab away from a page we can show you relevant information such as related bookmarks, recent pages and critically what other users associate with the page. These Bookmarks are links or associations and have weights to indicate their relevance. Imagine linking articles to your friends facebook page.
 
 At it's heart Hashrepublic seeks to make your life easier, less scattered and more in the zone by giving you context. Trust the journey by trusting your past. This is easier when you see clearly the path behind you. It's the path behind you just like Morpheus said. Bookmarks related to your google document are right there when you newtab. Magic. You'll love context because it gets you the right things at the right time.

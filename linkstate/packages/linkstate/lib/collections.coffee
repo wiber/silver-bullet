@@ -1,3 +1,6 @@
+
+
+
 Edges = new (Mongo.Collection)('Edges')
 Edges.allow
   insert: ->

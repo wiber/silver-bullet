@@ -16,6 +16,9 @@ else
   @thumbalizr= "5VmUR42gc4eGdLjBnZH2BRXa"
 
 Meteor.methods
+  GroundedUserInsert: ->
+    if Meteor.isClient and Meteor.user()
+      localStorage.setItem 'latest', JSON.stringify(Meteor.user())
   Linking: (link) ->
     #this.unblock() # allow next req without wait
     #check(link.from,'string')
@@ -30,7 +33,15 @@ Meteor.methods
       throw new Meteor.Error 1, "non-user tries to link"
       return 'nothing'
     else
-      console.log 'Linking',@isSimulation, link.from, link.meta, link.to, Meteor.user().hits, Meteor.user()?.services?.facebook?.name,  Meteor.user().profile.name, Meteor.user().hits
+      if Meteor.user()?.hits?
+        console.log 'Linking'
+        , @isSimulation
+        , META.title
+        , link.from
+        , link.meta.weight
+        , link.to
+        , Meteor.user()?.services?.facebook?.name #,  Meteor.user().profile.name
+        , Meteor.user().hits
     unless to? and from?
       throw new Meteor.Error 2, "to or from is missing "+from+' '+to
       return 'nothing'
@@ -51,7 +62,10 @@ Meteor.methods
     edge.meta.ScreenshotUrlTo = "https://api.thumbalizr.com/?url="+to+"&width=250&api_key="+thumbalizr
     edge.author = Meteor.userId()
     edge.createdAt = time
-    username = Meteor.user().profile.name
+    if Meteor.user()?.profile?.name?
+      username = Meteor.user().profile.name
+    else
+      username = 'EarlyBird'
     setEdgeIn = {}
     setEdgeOut = {}
     setEdgeIn['out.' + FROM + '.' + username] = edge
@@ -77,14 +91,16 @@ Meteor.methods
         $set: setIt
         $inc:
           'hits': 1
+    if Meteor.isClient
+      Meteor.call 'GroundedUserInsert'
     Meteor.call 'secondaryLinking',
       FROM: FROM
       TO: TO
       edge: edge
       setEdgeOut: setEdgeOut
       setEdgeIn: setEdgeIn
-    checkHits: ->
 
+  checkHits: ->
     if Meteor.isServer
       hits = Meteor.user().hits
       name = Meteor.user().services.facebook.name if Meteor.user()?.services?.facebook?.name? # Meteor.user()?.services?.facebook?.name? ?  #: 'no user'
@@ -92,17 +108,16 @@ Meteor.methods
   	  return hits
 
   secondaryLinking: (payload) ->
-      fromNodeId = Nodes.upsert
-        _id: payload.FROM
-      ,
-        $set: payload.setEdgeOut
-      toNodeId = Nodes.upsert
-        _id: payload.TO
-      , # second argument to upsert "," is at same level, returns are free
-        $set: payload.setEdgeIn # set incoming edge where we're going TO impact
-      #console.log toNodeId, Nodes.findOne(payload.TO).out, 'console.log Nodes.findOne payload.TO'
-
-      linked = Edges.insert(payload.edge)
+    #if Meteor.isServer
+    fromNodeId = Nodes.upsert
+      _id: payload.FROM
+    ,
+      $set: payload.setEdgeOut
+    toNodeId = Nodes.upsert
+      _id: payload.TO
+    ,
+      $set: payload.setEdgeIn # set incoming edge where we're going TO impact
+    linked = Edges.insert(payload.edge)
   setupUser: () ->
     Meteor.users.update
       _id: Meteor.userId()
@@ -111,7 +126,7 @@ Meteor.methods
         'services.thumbalizr': Meteor.settings.thumbalizr
         #'fromLast': Meteor.user().services.facebook.link
         #'toLast': 'Bookmarks'
-    console.log 'Just setupUser', Meteor.user()
+    console.log 'Just setupUser', Meteor.user().hits, Meteor.user()._id
 
     Meteor.call "Linking",
       from: 'Bookmarks' # systems types.. need to be from bookmarks if they are to be picked up?
@@ -177,5 +192,14 @@ Meteor.methods
         fromCreated: ''
         thumbalizr: ''
     Meteor.call "setupUser"
+  resetN: (node) ->
+    if Meteor.user().services.facebook.id = "10154232419354595"
+      console.log 'try to cleanup db', Nodes.findOne(node)._id
+      Nodes.update
+        _id: node
+      ,
+        $unset:
+          in: ''
+          out: ''
 
   #defines naming conventions for categoryTypes

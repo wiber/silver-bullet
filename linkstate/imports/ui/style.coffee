@@ -20,10 +20,11 @@ style =
     maxWidth: 640
   mCard:
     background: 'rgba(255, 255, 255, .9)'
-    marginTop: '25%'
+    marginTop: '15%'
   webShot:
     opacity: 1
     width: '100%'
+    height: '100%'
   fromBullet:
     width: '100%'
     height: '100%'

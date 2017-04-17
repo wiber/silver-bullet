@@ -5,7 +5,7 @@ require '../imports/startup/configs/serviceconfiguration.js'
 require('../imports/startup/routes.coffee') # one way to turn off ssr
 @window = {}
 window.innerWidth = 640
-#process.env.MONGO_URL = Meteor.settings.MONGO_URL
+
 Meteor.startup ->
   try
     #console.log process.env.MONGO_URL

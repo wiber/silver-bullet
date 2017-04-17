@@ -14,7 +14,6 @@ Card = require 'material-ui/lib/card/card'
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 {Mexplain} = require '../api/MexplainContainer.coffee'
 
-
 MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme} = require('../ui/theme.coffee')
 exports.Layout = React.createClass
@@ -43,15 +42,17 @@ exports.Layout = React.createClass
                 backgroundSize: '100% 110%'#'cover' #'100% auto'
                 opacity: '.3'
                 zIndex: -1
-            k.div ->
             k.build AppBar,
-              title: that.props.word.HeaderTitle
-              iconElementRight: -> AccountsUIWrapper
+              title: that.props.word.HeaderTitle + that.props.from
+              iconElementLeft: k.span ''
+              style:
+                position: 'fixed'
+            k.span 'g',-> # because... just because
             k.div
-              style: {}
+              style:
+                marginTop: 150
               #className: 'main'
               ->
-                k.build Mexplain
                 if that.props.user?.services?.facebook?
                   k.build MainCard, # need comma here because the second arg is prop
                     expanded: that.props.expandMainCard
@@ -61,15 +62,19 @@ exports.Layout = React.createClass
                     word: that.props.word
                     content: that.props.content
                     user: that.props.user
+                    lastTitle: that.props.lastTitle
                   k.build MyCard,
                     expanded: that.props.expandMyCard
                     to: that.props.to
+                    lastTitle: that.props.lastTitle
                     from: that.props.from
                     word: that.props.word
                     user: that.props.user
                     incomming: that.props.incomming
                     howMany: 10
                     type: 'fromCreated'
+                else
+                  k.build Mexplain
                 k.build AboutCard,
                   expanded: that.props.expandAboutCard
                   to: that.props.to
@@ -77,4 +82,6 @@ exports.Layout = React.createClass
                   word: that.props.word
                   thumbalizr: that.props.thumbalizr
                   howMany: 15
-            k.div 'footer'
+                  user: that.props.user
+            k.div ->
+              k.build AccountsUIWrapper

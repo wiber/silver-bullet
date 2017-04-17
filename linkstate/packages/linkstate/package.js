@@ -13,7 +13,6 @@ Package.describe({
 Package.onUse( function ( api ) {
   api.versionsFrom( '1.2.1' );
   api.use( [ 'ecmascript', 'mongo', 'accounts-base', 'coffeescript'] );
-  //api.use('ground:db@0.3.14')
   api.use('tracker')
   api.use('underscore')
   api.use('peerlibrary:reactive-publish')

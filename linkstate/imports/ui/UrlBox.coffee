@@ -15,7 +15,8 @@ CardText =  require('material-ui/lib/card/card-text').default
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 {bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
 {LinkVote} = require '../../imports/ui/LinkVote.coffee'
-
+{GoMark} = require '../../imports/api/nav/GoMark.coffee'
+R = require 'ramda'
 UrlBox = React.createClass
   propTypes:
     D: React.PropTypes.object
@@ -28,8 +29,15 @@ UrlBox = React.createClass
       thumbalizr = that.props.thumbalizr
       k.build GridTile,
         key: D.link+'Node'
-        title: D.m.title
+        title: D.m.FromLink
         subtitle: that.props.word.to + D.m.ToLink
+        onClick: (e) ->
+          GoMark
+            type:
+              from: D.m.FromLink
+              to: D.m.ToLink
+            N: N.node
+            user: that.props.user
         ->
           k.div ->
             k.div
@@ -40,30 +48,27 @@ UrlBox = React.createClass
                     opacity: .7
                     zIndex: 2
                   src: linkstate.thumbalizrPic D.m.FromLink
-                  from: D.m.FromLink
-                  onClick: (e) ->
-                   changeQueryParams 'from', e.target.getAttribute('from')
             k.img
               style: _.extend {}, style.webShot,
                 position: 'absolute'
                 left: '30%'
                 zIndex: -1
               src:linkstate.thumbalizrPic D.m.ToLink
-              to: D.m.ToLink
-              onClick: (e) ->
-               changeQueryParams 'to', e.target.getAttribute('to')
-          if N.inLinks?[D.link]?
-            U.linksByTimeUsers = linkstate.sortByKeysTime(U.usersConnections)
-            V = {}
-            V.U = U
-            V.counted = 0
-            for user in U.linksByTimeUsers
-              V.user = user
-              V.vote = U.usersConnections[V.user]
-              V.size = size = style.scalars.screenshotWidth
-              if V.vote?.meta?
-                k.build LinkVote,
-                  from: that.props.from
-                  V: V
+          inlink = N.inLinks?[D.link]?
+          outlink = N.outLinks?[D.link]?
+          U.directionUserMeta = {}
+          if outlink
+            U.directionUserMeta.OUTLINKS = N.outLinks[D.link]
+          if inlink
+            U.directionUserMeta.INLINKS = N.inLinks[D.link]
+          counted = 0
+          for directedBunch of U.directionUserMeta
+            for userVectorName of U.directionUserMeta[directedBunch]
+              counted++
+              k.build LinkVote,
+                counted: counted
+                size: style.scalars.screenshotWidth
+                meta: U.directionUserMeta[directedBunch][userVectorName].meta
+                directed: directedBunch
 
 exports.UrlBox = UrlBox

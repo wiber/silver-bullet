@@ -17,12 +17,12 @@ CardText =  require('material-ui/lib/card/card-text').default
 {Subheader} = require 'material-ui/lib/Subheader'
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 Toggle = require('material-ui/lib/toggle').default
+{Mexplain} = require '../api/MexplainContainer.coffee'
 
 exports.MyCard = React.createClass
   getDefaultProps: ->
     expanded: true
   render: ->
-   #console.log @props , 'work on props'
     that = this
     if @props.expanded is 'undefined'
       that.props.expanded = true
@@ -37,6 +37,10 @@ exports.MyCard = React.createClass
             showExpandableButton: true
             onClick: (e) ->
               changeQueryParams 'expandMyCard', !that.props.expanded
+          k.build CardText,
+            style:
+              height: 'auto'
+            expandable: true
           k.build CardText,
             style:
               height: 'auto'

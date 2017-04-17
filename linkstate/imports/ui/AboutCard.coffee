@@ -16,9 +16,9 @@ CardText =  require('material-ui/lib/card/card-text').default
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 {bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
 {UrlBox} = require '../../imports/ui/UrlBox.coffee'
-
+R = require 'ramda'
 {createContainer} = require 'meteor/react-meteor-data'
-{see, store} = require '../api/strings.coffee'
+{see, store, AByMomentum, listByMomentum} = require '../api/strings.coffee'
 AboutCard = React.createClass
   render: ->
     that = this
@@ -31,7 +31,8 @@ AboutCard = React.createClass
             title: that.props.word.AboutCardTitle
             showExpandableButton: true
             subtitle: that.props.word.AboutCardSubTitle
-            onClick: that.handleToggle
+            onClick: (e) ->
+              changeQueryParams 'expandAboutCard', !that.props.expande
           k.build CardText,
             style:
               height: 'auto'
@@ -53,6 +54,13 @@ AboutCard = React.createClass
                   class: 'looplist'
                   cols: 1
                   ->
+                    #F = R.prop('node')(that.props)
+                    #F.in = R.prop('in')(F)
+                    #F.out = R.prop('out')(F))
+                    #momentum = -> R.map R.compose
+                    #,
+
+
                     # conditionals are ok, but we should move out data processing into pure functions with wallaby tests
                     # end result is a modular and clean way to render urls and votes
                     # from to header, list of comments with face votes..
@@ -77,28 +85,17 @@ AboutCard = React.createClass
                     # calculate momentum of a url by walking through voters on it
                     N.momentum = {}
                     N.vectors = {}
-                    ###
-                    for link in Object.keys N.allLinks
-                      console.log link, N.allLinks[link], 'link keys', Object.keys N.allLinks[link]
-                      for voter of N.allLinks[link]
-                        console.log voter, 'voter', N.allLinks[link][voter].meta.weight
-                        if N.allLinks[link][voter].meta?.weight?
-                          unless typeof N.momentum[link] is 'number' or N.momentum[link] is 0
-                            N.momentum[link] = 0
-                          N.momentum[link] = N.momentum[link] + N.allLinks[link][voter].meta.weight - 5
-                          # apply momentum calculation to object.. should be db level...
-                          N.allLinks[link].momentum = N.momentum[link]
-                        console.log N.momentum, 'N.momentum', N.momentum[link]
+                    #N.sortedLinks = linkstate.sortByMomentum N.linkSort, that.props.howMany
 
-                    for vector of N.momentum
-                      console.log vector, 'vector'
-                    ###
-                    N.sortedLinks = linkstate.sortByMomentum N.linkSort, that.props.howMany
-                    N.sortByWeight = linkstate.sortByWeight N.linkSort, that.props.howMany
-                    #console.log 'sorts', N.linkSort, N.sortByWeight
-                    for timeLink in N.sortedLinks
-                      #console.log N.sortedLinks[timeLink]
-                      D = {} # this link which has many users votes
+                    N.sortByWeight = AByMomentum N.inLinks
+                    N.sortOutByWeight = AByMomentum N.outLinks
+                    # does not seem to register inLinks unless there's an outlink from here..
+                    N.rankedinLinks = AByMomentum( N.inLinks)
+                    N.rankedOutlinks = AByMomentum(N.outLinks)
+                    N.sortAllMomentum = listByMomentum(N.rankedinLinks, N.rankedOutlinks)
+
+                    for timeLink in N.sortAllMomentum
+                      D = {}
                       D.N = N
                       D.link = timeLink
                       D.users = N.allLinks[timeLink]
@@ -116,23 +113,17 @@ AboutCard = React.createClass
                         props: that.props
                         thumbalizr: that.props.thumbalizr
                         word: that.props.word
-                      #if N.inLinks[timeLink]?
-                      #  console.log 'incomming link by', Object.keys(N.inLinks[timeLink]) , D.firstUsersLink
-                    #console.log N
-
-preParseNode = (N) ->
-  console.log N
+                        user: that.props.user
 
 
 exports.AboutCard = createContainer ((props) ->
+
   newProps = {}
-  if props.from?
-    Meteor.subscribe "Node", props.from
-  N = Nodes.findOne(linkstate.store props.from)
-  if N?
-    newProps.node = N
-    newProps.P = preParseNode N
-  #console.log newProps.node, Nodes.find({}).count()
+  nodeHandle = Meteor.subscribe "Node", props.from
+  if nodeHandle.ready()
+    N = Nodes.findOne(linkstate.store props.from)
+    if N?
+      newProps.node = N
   props = _.extend {}, props, newProps
   props
 ), AboutCard
