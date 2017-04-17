@@ -14,24 +14,24 @@ GoMark = (place) ->
     else
       # best we can do is show user the article they don't have.. and go through the marking
       # to do it properly, to just change qp and enable user to weigh in right away requires a slight refactor or data model
-      window.open(url,'_blank')
-###
+
       title = place.N.in.Bookmarks[linkstate.sortByKeysTime(place.N.in.Bookmarks)[0]].meta.title
       key =
         from: 'out'
         to: 'in'
       Ndir = place.N[key[type]]
       NdirUrl = Ndir[linkstate.store url]
-      console.log 'not have url in bookmarks', url, type, title, Ndir, NdirUrl,
       payload =
         from: linkstate.store url
         to: 'Bookmarks'
         meta:
           weight: 5
           title: title
+      console.log 'not have url in bookmarks', url, type, title, Ndir, NdirUrl, payload
+      window.open(url,'_blank')
       #Meteor.call 'Linking', payload
       #console.log payload, place.user.out.Bookmarks[linkstate.store url]
-      changeQueryParams type, url
+      #changeQueryParams type, url
       #console.log payload, FlowRouter.getQueryParam type
 
 exports.GoMark = GoMark
