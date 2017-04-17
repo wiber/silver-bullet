@@ -34,7 +34,6 @@ chrome.tabs.onHighlighted.addListener( function ( highlightInfo ) {
 } );
 
 chrome.tabs.onUpdated.addListener( function ( tabId, changeInfo, tab ) {
-  console.log('onUpdated background',this,tab.url , tab.title)
   oneSteps( tab.url , tab.title);
 } );
 
