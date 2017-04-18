@@ -13,7 +13,7 @@ exports.selectedContainer = createContainer ((props) ->
   # update queryparams unless we're fromt he same place
 
   nProps = _.extend {}, props,
-    value: setValue(props,setOptions(props))
+    value: setValue(props,setOptions(props),props.user)
     options: setOptions(props)
   nProps
 ), Selected
@@ -47,7 +47,7 @@ setOptions = (props) ->
       console.log typeUrl, typeUrlDict
     ###
   options
-setValue = (props, options) ->
+setValue = (props, options, user) ->
   newProps = {}
   newProps.options = []
   value = {}
@@ -59,11 +59,23 @@ setValue = (props, options) ->
   typeValue = props[props.type]
   dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
   dictValueExists = dictValue?.meta?.title?
+  lastDictValue = dictWithCreatedAt[linkstate.store(user[props.type+'Last'])]
+  #console.log dictValueExists, clientReady, props.to, typeValue?, typeValue.length,lastDictValue
+  # what if ... you don't have a 'to' or from?  use
+  # use if we don't have a to, we need to change queryParams to last to project
+  if !typeValue? and lastDictValue?
+    value=
+      label: lastDictValue.meta.title
+      value: lastDictValue
+  else
+    console.log 'edgeC'
   if dictValueExists and clientReady
+    #console.log typeValue
     value =
       label: dictValue.meta.title
       value: dictValue
   else
+    #
     value =
       label: props.lastTitle
       value:

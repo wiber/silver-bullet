@@ -26,7 +26,6 @@ containerLayout = createContainer ((props) ->
     thumbalizr = Meteor.settings.public.thumbalizr
   else
     thumbalizr = undefined
-
   #content = ifBodyContentHere queryParams.content, queryParams, user
   newProps = {
     user: user
@@ -44,7 +43,6 @@ containerLayout = createContainer ((props) ->
   #console.log 'newProps',newProps, newProps?.content?.length?, FlowRouter.getQueryParam('content')?.length?
   newProps
 ), Layout
-
 newPlace = (user, queryParams, bookmarked) ->
   inBookmarks = user?.out?.Bookmarks?[linkstate.store(queryParams.from)]
   markExists = inBookmarks?.meta?
@@ -75,8 +73,11 @@ userSaved = (userE, queryParams, client) ->
   for type in ['from', 'to']
     if queryParams[type] is undefined and client
       # double set them to avoid double render
-      queryParams[type] = user[type+'Last']
-      changeQueryParams(type, user[type+'Last'])
+      if user[type+'Last']?
+        queryParams[type] = user[type+'Last']
+        changeQueryParams(type, user[type+'Last'])
+      else
+        console.log " haven't connected to anything? how is that possible?"
   user
 # textbox should have your comment in it if empty
 ifBodyContentHere = (queryParams, user)->

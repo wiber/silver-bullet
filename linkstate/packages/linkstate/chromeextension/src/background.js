@@ -36,18 +36,3 @@ chrome.tabs.onHighlighted.addListener( function ( highlightInfo ) {
 chrome.tabs.onUpdated.addListener( function ( tabId, changeInfo, tab ) {
   oneSteps( tab.url , tab.title);
 } );
-
-// not used
-chrome.windows.onFocusChanged.addListener( function ( windowId ) {
-  if ( windowId == 'WINDOW_ID_NONE' ) {
-    //console.log( windowId, 'WINDOW_ID_NONE' );
-    getTitle = function(tabId){
-      chrome.tabs.executeScript(tabId,
-        {code: "window.interval=setInterval(alert(document.title),'500');"}
-      );
-    };
-    interval = setInterval(getTitle(tab.id),500)
-  } else {
-    //console.log( windowId );
-  }
-} )
