@@ -18,10 +18,11 @@ exports.MainCard = React.createClass
       select = document.activeElement.type is 'text'
       text = document.activeElement.id is 'textAbout'
       unless select or text
+        console.log document.activeElement.id, document.activeElement.type
         if window?.textAbout?.refs?.MainCardTextInput?.focus()
           window.textAbout.refs.MainCardTextInput.focus()
           #$('#textAbout').focus()
-    setInterval(focusTextbox,150)
+    setInterval(focusTextbox,650)
   render: ->
     that = this
     if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.from]?
