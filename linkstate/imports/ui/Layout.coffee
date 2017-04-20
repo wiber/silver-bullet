@@ -47,6 +47,9 @@ exports.Layout = React.createClass
               iconElementLeft: k.span ''
               style:
                 position: 'fixed'
+              onClick: () ->
+                console.log that.props.from
+                window.open that.props.from, "_blank"
             k.span 'g',-> # because... just because
             k.div
               style:
