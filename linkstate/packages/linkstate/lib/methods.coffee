@@ -137,6 +137,15 @@ Meteor.methods
      if error
        ##console.log "error", error
        new Meteor.Error 7, "Reply Does the User object have facebook credentials?"
+    Meteor.call "Linking",
+      from: Linkstates.store('Linkstates.youiest.com') # systems types.. need to be from bookmarks if they are to be picked up?
+      to: 'Bookmarks' # the thing we're defining
+      meta:
+        title: 'Linkstates - Connecting is seeing'
+    , (error, result) ->
+     if error
+       ##console.log "error", error
+       new Meteor.Error 7, "Reply Does the User object have facebook credentials?"
     if Meteor.user()?.services?.facebook?.link?
       Meteor.call "Linking",
         from: Meteor.user().services.facebook.link
