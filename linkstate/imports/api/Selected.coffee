@@ -29,7 +29,10 @@ setOptions = (props) ->
         selectItem =
           label: dictWithCreatedAt[value].meta.title #linkstate.see value # same function as use
           value: dictWithCreatedAt[value] # store whole object here
-        options.push selectItem
+        if dictWithCreatedAt[value]?.meta?.weight? and dictWithCreatedAt[value].meta.weight > 0
+          options.push selectItem
+        else
+          console.log 'irrelevant entry', dictWithCreatedAt[value]
     # questionable ..
     ###
     for type in ['from','to']

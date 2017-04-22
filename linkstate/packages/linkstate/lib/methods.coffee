@@ -85,12 +85,21 @@ Meteor.methods
     setIt['out.'+TO+'.'+FROM] = edge
     # totally kills latency compensation on page load to avoid uncaught error in fast render
     if Meteor.isServer or UserHandle?.ready()
-      Meteor.users.update # we need to know what our last connection was
-        _id: Meteor.userId()
-      ,
-        $set: setIt
-        $inc:
-          'hits': 1
+      if META.weight > 0
+        Meteor.users.update # we need to know what our last connection was
+          _id: Meteor.userId()
+        ,
+          $set: setIt
+          $inc:
+            'hits': 1
+      else
+        setIt['out.Bookmarks.'+FROM+'.meta.weight'] = 0
+        Meteor.users.update # we need to know what our last connection was
+          _id: Meteor.userId()
+        ,
+          $set: setIt
+          $inc:
+            'hits': 1
     if Meteor.isClient
       Meteor.call 'GroundedUserInsert'
     Meteor.call 'secondaryLinking',
@@ -133,6 +142,7 @@ Meteor.methods
       to: 'Bookmarks' # the thing we're defining
       meta:
         title: 'Your Bookmarks'
+        weight: 9
     , (error, result) ->
      if error
        ##console.log "error", error
@@ -152,6 +162,7 @@ Meteor.methods
         to: 'Bookmarks'
         meta:
           title: Meteor.user().services.facebook.name+' on Facebook'
+          weight: 7
     else
       new Meteor.Error 22, "non facebook user tried to login"
   compareHits: ->
