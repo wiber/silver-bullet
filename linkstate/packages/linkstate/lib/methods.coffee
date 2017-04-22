@@ -93,6 +93,9 @@ Meteor.methods
           $inc:
             'hits': 1
       else
+        # if it's irrelevant, show this in the Bookmarks
+        # so that the ui doesn't add them to the dropdown
+        # TODO how can it be possible to have duplicate entries in dropdown? are we sure they are unioque urls?
         setIt['out.Bookmarks.'+FROM+'.meta.weight'] = 0
         Meteor.users.update # we need to know what our last connection was
           _id: Meteor.userId()
