@@ -1,6 +1,12 @@
 # Hashrepublic of linkstates
 
-What if ... making sense of the world got you in the zone. Youiest believes that the right kind of context makes the difference. 
+Think of linkstates as your superpower. Like the alien language in the movie arrival but instead of seeing the future it grants another ability. We call this ability wibing and it's both a very simple activity and hard to define. It addresses the intersection of information overload, many-to-many communication and why you never return to look through your bookmarks. Think the structure that makes catching up on a reply-all chain a pain.
+
+So what do you do with this visual-language-superpower? Well it's really up to you. Linkstates is an activity primarily for students, research teams and project managers. Since nobody uses bookmarking anymore Linkstates makes it easy to organizes web things in the context related to other web things.
+
+once you learn it reshapes the way you and your group make sense.
+
+What if ... making sense of the world got you in the zone. Youiest believes that the right kind of context makes the difference.
 
 Imagine all those loose ends in your fragmented world articles, videos, white papers and factiods were collaboratively combined. This idea isn't new but linkstates goes all in on a new angle. Call it texture. What to pay attention to is easier when a known face weighs in or suggests other points of interest. If something looks too good to be true a newtab from that page may have a better informed user referencing a credible opposing view.
 
