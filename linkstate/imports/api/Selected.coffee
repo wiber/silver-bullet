@@ -26,13 +26,13 @@ setOptions = (props) ->
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
     for index,value of deChaos
       if typeof value is 'string' and value != 'undefined'
-        selectItem =
-          label: dictWithCreatedAt[value].meta.title #linkstate.see value # same function as use
-          value: dictWithCreatedAt[value] # store whole object here
         if dictWithCreatedAt[value]?.meta?.weight? and dictWithCreatedAt[value].meta.weight > 0
+          selectItem =
+            label: dictWithCreatedAt[value].meta.title #linkstate.see value # same function as use
+            value: dictWithCreatedAt[value] # store whole object here
           options.push selectItem
         else
-          console.log 'irrelevant entry', dictWithCreatedAt[value]
+          console.log 'irrelevant entry', dictWithCreatedAt[value].meta.title
     # questionable ..
     ###
     for type in ['from','to']

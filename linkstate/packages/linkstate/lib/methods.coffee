@@ -96,6 +96,8 @@ Meteor.methods
         # if it's irrelevant, show this in the Bookmarks
         # so that the ui doesn't add them to the dropdown
         # TODO how can it be possible to have duplicate entries in dropdown? are we sure they are unioque urls?
+        # TODO break out model operations into tested functions
+        # get my bookmarka, get a title for this place, etc
         setIt['out.Bookmarks.'+FROM+'.meta.weight'] = 0
         Meteor.users.update # we need to know what our last connection was
           _id: Meteor.userId()
@@ -144,7 +146,7 @@ Meteor.methods
       from: 'Bookmarks' # systems types.. need to be from bookmarks if they are to be picked up?
       to: 'Bookmarks' # the thing we're defining
       meta:
-        title: 'Your Bookmarks'
+        title: 'Bookmarks'
         weight: 9
     , (error, result) ->
      if error
@@ -185,36 +187,40 @@ Meteor.methods
     #  Meteor.call "compareHits"
     #return new Date()
   resetUser: () ->
-    user = Meteor.user()
-    ##console.log user , 'whole'
-    setter = {}
-    setter['commit.'+new Date().getTime()] =
-      in: user.in
-      out: user.out
-    setter['services.thumbalizr'] = Meteor.settings.thumbalizr
-    Meteor.users.update
-      _id: Meteor.userId()
-    ,
-      $set: setter
-      $unset:
-        dictTo: ''
-        dictFrom: ''
-        lastConnectedTo: ''
-        in: ''
-        out: ''
-        timeTo: ''
-        timeFrom: ''
-        when: ''
-        fromLast: ''
-        hits: ''
-        lastTo: ''
-        lastFrom: ''
-        fromLast: ''
-        toLast: ''
-        toCreated: ''
-        fromCreated: ''
-        thumbalizr: ''
-    Meteor.call "setupUser"
+    if Meteor.isClient
+      console.log 'remove localStorage'
+      localStorage.removeItem('latest')
+    else
+      user = Meteor.user()
+      ##console.log user , 'whole'
+      setter = {}
+      setter['commit.'+new Date().getTime()] =
+        in: user.in
+        out: user.out
+      setter['services.thumbalizr'] = Meteor.settings.thumbalizr
+      Meteor.users.update
+        _id: Meteor.userId()
+      ,
+        $set: setter
+        $unset:
+          dictTo: ''
+          dictFrom: ''
+          lastConnectedTo: ''
+          in: ''
+          out: ''
+          timeTo: ''
+          timeFrom: ''
+          when: ''
+          fromLast: ''
+          hits: ''
+          lastTo: ''
+          lastFrom: ''
+          fromLast: ''
+          toLast: ''
+          toCreated: ''
+          fromCreated: ''
+          thumbalizr: ''
+      Meteor.call "setupUser"
   resetN: (node) ->
     if Meteor.user().services.facebook.id = "10154232419354595"
       console.log 'try to cleanup db', Nodes.findOne(node)._id

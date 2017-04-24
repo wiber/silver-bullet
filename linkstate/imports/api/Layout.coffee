@@ -15,13 +15,13 @@ containerLayout = createContainer ((props) ->
   user = userSaved(Meteor.user(), queryParams, Meteor.isClient)
   if newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked')) and Meteor.isClient
     # and UserHandle.ready()
-
+    console.log queryParams.lastTitle, FlowRouter.getQueryParam('lastTitle')
     Meteor.call "Linking",
       from: queryParams.from
       to: 'Bookmarks'
       meta:
         weight: 5
-        title: queryParams.lastTitle
+        title: queryParams.lastTitle #FlowRouter.getQueryParam('lastTitle')
   if Meteor?.settings?.public?.thumbalizr?
     thumbalizr = Meteor.settings.public.thumbalizr
   else
