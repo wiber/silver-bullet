@@ -13,15 +13,15 @@ containerLayout = createContainer ((props) ->
         localStorage.removeItem('latest')
       return
   user = userSaved(Meteor.user(), queryParams, Meteor.isClient)
-  if newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked')) and Meteor.isClient
-    # and UserHandle.ready()
+  newHere = newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked'))
+  if newHere and Meteor.isClient
     console.log queryParams.lastTitle, FlowRouter.getQueryParam('lastTitle')
     Meteor.call "Linking",
       from: queryParams.from
       to: 'Bookmarks'
       meta:
         weight: 5
-        title: queryParams.lastTitle #FlowRouter.getQueryParam('lastTitle')
+        title: queryParams.lastTitle#FlowRouter.getQueryParam('lastTitle')
   if Meteor?.settings?.public?.thumbalizr?
     thumbalizr = Meteor.settings.public.thumbalizr
   else
@@ -40,7 +40,6 @@ containerLayout = createContainer ((props) ->
     expandAboutCard: queryParams.expandAboutCard != 'false'
     expandMyCard: queryParams.expandMyCard != 'false'
   }
-  #console.log 'newProps',newProps, newProps?.content?.length?, FlowRouter.getQueryParam('content')?.length?
   newProps
 ), Layout
 newPlace = (user, queryParams, bookmarked) ->
@@ -49,10 +48,8 @@ newPlace = (user, queryParams, bookmarked) ->
   if bookmarked != 'true' and !markExists
     # must changeQueryParams here else it gets run multiple times
     changeQueryParams('Bookmarked', true)
-    #console.log 'From a new place! Bookmark it!', FlowRouter.getQueryParam('Bookmarked')
     return true
   else
-    #console.log 'Been here before.. !bookmarked, !markExists', !bookmarked, !markExists
     return false
 
 
@@ -82,7 +79,8 @@ userSaved = (userE, queryParams, client) ->
 # textbox should have your comment in it if empty
 ifBodyContentHere = (queryParams, user)->
   paramContent = queryParams.content
-  # we wish to dig up old content and fill in the box.. when a flag says we have changed FROM location
+  # we wish to dig up old content and fill in the box..
+  #when a flag says we have changed FROM location
   # and we have old content on user object.
   # have we checked if there's content here?
   # last checked.. if last checked is.. then swap and do. on user object?

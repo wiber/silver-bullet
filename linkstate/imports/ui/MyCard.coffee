@@ -76,4 +76,5 @@ exports.MyCard = React.createClass
                               src: m.ScreenshotUrl
                               from: m.FromLink
                               onClick: (e) ->
-                               changeQueryParams 'from', e.target.getAttribute('from')
+                                changeQueryParams 'from'
+                                , e.target.getAttribute('from')

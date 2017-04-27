@@ -18,7 +18,7 @@ exports.MainCard = React.createClass
       select = document.activeElement.type is 'text'
       text = document.activeElement.id is 'textAbout'
       unless select or text
-        if window?.textAbout?.refs?.MainCardTextInput?.focus()
+        if false and window?.textAbout?.refs?.MainCardTextInput?.focus()
           window.textAbout.refs.MainCardTextInput.focus()
           #$('#textAbout').focus()
         console.log document.activeElement.id, document.activeElement.type
@@ -44,8 +44,8 @@ exports.MainCard = React.createClass
           k.build CardMedia,
             style: style.overlayPercentage
             onClick: (e) ->
-              win = window.open(decodeURIComponent HERE.from, '_blank');
-              win.focus();
+              win = window.open(decodeURIComponent HERE.from, '_blank')
+              win.focus()
             ###->
               k.img
                 src: ScreenshotUrl###
@@ -58,7 +58,6 @@ exports.MainCard = React.createClass
                 word: that.props.word
                 content: that.props.content
                 user: that.props.user
-                lastTitle: that.props.lastTitle
           k.build CardActions,
             -> # return innerhtml, tags on here before
               k.build FlatButton,
@@ -66,6 +65,4 @@ exports.MainCard = React.createClass
                   height: 0
                 label: 'Tab here to go back to "From"'
                 onFocus: () ->
-                  # TODO avoid global here..
-                  # react element has a ref to the dom element
                   window.textAbout.refs.MainCardTextInput.focus()

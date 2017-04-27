@@ -46,7 +46,10 @@ Meteor.methods
       throw new Meteor.Error 2, "to or from is missing "+from+' '+to
       return 'nothing'
     if Meteor.user()?.services?.facebook?.id?
-      META.face = "http://graph.facebook.com/v2.7/" + Meteor.user().services.facebook.id + "/picture?type=square"
+      p1 = "http://graph.facebook.com/v2.7/"
+      facebookId = Meteor.user().services.facebook.id
+      p2 = "/picture?type=square"
+      META.face = p1 + facebookId + p2
       META.profileLink = Meteor.user().services.facebook.link
     FROM = linkstate.store(from) # from.replace(/\./g,'%2E')
     TO = linkstate.store(to) #to.replace(/\./g,'%2E')#.split('/').join('.');
@@ -58,8 +61,10 @@ Meteor.methods
     edge.meta = META
     edge.meta.FromLink = from
     edge.meta.ToLink = to
-    edge.meta.ScreenshotUrl = "https://api.thumbalizr.com/?url="+from+"&width=250&api_key="+thumbalizr
-    edge.meta.ScreenshotUrlTo = "https://api.thumbalizr.com/?url="+to+"&width=250&api_key="+thumbalizr
+    thumbU1 = "https://api.thumbalizr.com/?url="
+    thumbU2 = "&width=250&api_key="
+    edge.meta.ScreenshotUrl = thumbU1+from+thumbU2+thumbalizr
+    edge.meta.ScreenshotUrlTo = thumbU1+to+thumbU2+thumbalizr
     edge.author = Meteor.userId()
     edge.createdAt = time
     if Meteor.user()?.profile?.name?
@@ -83,7 +88,8 @@ Meteor.methods
       setIt.toLast = to
     setIt['in.'+FROM+'.'+TO] = edge
     setIt['out.'+TO+'.'+FROM] = edge
-    # totally kills latency compensation on page load to avoid uncaught error in fast render
+    # totally kills latency compensation on page
+    # load to avoid uncaught error in fast render
     if Meteor.isServer or UserHandle?.ready()
       if META.weight > 0
         Meteor.users.update # we need to know what our last connection was
@@ -95,7 +101,8 @@ Meteor.methods
       else
         # if it's irrelevant, show this in the Bookmarks
         # so that the ui doesn't add them to the dropdown
-        # TODO how can it be possible to have duplicate entries in dropdown? are we sure they are unioque urls?
+        # TODO how can it be possible to have duplicate entries
+        # in dropdown? are we sure they are unioque urls?
         # TODO break out model operations into tested functions
         # get my bookmarka, get a title for this place, etc
         setIt['out.Bookmarks.'+FROM+'.meta.weight'] = 0
@@ -117,9 +124,11 @@ Meteor.methods
   checkHits: ->
     if Meteor.isServer
       hits = Meteor.user().hits
-      name = Meteor.user().services.facebook.name if Meteor.user()?.services?.facebook?.name? # Meteor.user()?.services?.facebook?.name? ?  #: 'no user'
+      fbnameExists = Meteor.user()?.services?.facebook?.name?
+      if fbnameExists
+        name = Meteor.user().services.facebook.name
       console.log 'Meteor.user().hits', hits, 'checkHits server', name
-  	  return hits
+      return hits
 
   secondaryLinking: (payload) ->
     #if Meteor.isServer
@@ -143,24 +152,24 @@ Meteor.methods
     console.log 'Just setupUser', Meteor.user().hits, Meteor.user()._id
 
     Meteor.call "Linking",
-      from: 'Bookmarks' # systems types.. need to be from bookmarks if they are to be picked up?
+      from: 'Bookmarks'
       to: 'Bookmarks' # the thing we're defining
       meta:
         title: 'Bookmarks'
         weight: 9
     , (error, result) ->
-     if error
-       ##console.log "error", error
-       new Meteor.Error 7, "Reply Does the User object have facebook credentials?"
+      if error
+        new Meteor.Error 7
+        , "Reply Does the User object have facebook credentials?"
     Meteor.call "Linking",
-      from: Linkstates.store('Linkstates.youiest.com') # systems types.. need to be from bookmarks if they are to be picked up?
+      from: Linkstates.store('Linkstates.youiest.com')
       to: 'Bookmarks' # the thing we're defining
       meta:
         title: 'Linkstates - Connecting is seeing'
     , (error, result) ->
-     if error
-       ##console.log "error", error
-       new Meteor.Error 7, "Reply Does the User object have facebook credentials?"
+      if error
+        new Meteor.Error 7
+        , "Reply Does the User object have facebook credentials?"
     if Meteor.user()?.services?.facebook?.link?
       Meteor.call "Linking",
         from: Meteor.user().services.facebook.link
@@ -176,16 +185,9 @@ Meteor.methods
         if error
           console.log "error", error
         if result
-          #console.log result, Meteor.user().hits, result is Meteor.user().hits, 'because it should be'
           unless result is Meteor.user().hits
             new Meteor.Error 16, "sync error? looks like user object not synced"
           localStorage.setItem 'serverHits', result
-          console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, result is Meteor.user().hits,'compareHits withResult'
-      #console.log localStorage.getItem( 'serverHits'), Meteor.user().hits, 'compareHits without'
-
-    #if Meteor.isSimulation
-    #  Meteor.call "compareHits"
-    #return new Date()
   resetUser: () ->
     if Meteor.isClient
       console.log 'remove localStorage'
@@ -215,7 +217,6 @@ Meteor.methods
           hits: ''
           lastTo: ''
           lastFrom: ''
-          fromLast: ''
           toLast: ''
           toCreated: ''
           fromCreated: ''

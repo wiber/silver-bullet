@@ -27,7 +27,8 @@ Selected = React.createClass
           #textOverflow: "ellipsis"
           whiteSpace: "nowrap"
           width: '50%' #150
-        theme: "material"# // can be one of "default" | "bootstrap3" | "material" | ...
+        theme: "material"
+        # // can be one of "default" | "bootstrap3" | "material" | ...
         transitionEnter: true
         onValueChange: (val) ->
           if val.value.meta.FromLink

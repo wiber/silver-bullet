@@ -39,36 +39,11 @@ AboutCard = React.createClass
           k.build CardText,
             expandable: true
             ->
-              # we need to assemble the data struc
-              # what's needed for a card
-              # url, title
-              # and the votes that go on a link
-              # face, profile, blurb, direction
-              #
-              # cycle through in links... render them and related out links
-              # we are interested in what people are linking 'sending' to this place
-              # can we make it less abstract? is the bidirectional association necessary?
-              # how much power do we gain by weight, and direct
               if that.props.node?.in?
                 k.build GridList,
                   class: 'looplist'
                   cols: 1
                   ->
-                    #F = R.prop('node')(that.props)
-                    #F.in = R.prop('in')(F)
-                    #F.out = R.prop('out')(F))
-                    #momentum = -> R.map R.compose
-                    #,
-
-
-                    # conditionals are ok, but we should move out data processing into pure functions with wallaby tests
-                    # end result is a modular and clean way to render urls and votes
-                    # from to header, list of comments with face votes..
-                    # TODO reduce size of loops,
-                    # for each url, paint header, paint each vote
-                    # how much do we gain by pre forming object in this composer?
-                    # can we rethink this as seeing one kind at a time from dropdown or will that break that aboutness feel we want?
-                    #
                     N = {} # the node we're on
                     N.node = that.props.node
 
@@ -76,23 +51,22 @@ AboutCard = React.createClass
                     N.outLinks = that.props.node.out
                     N.allLinks = _.extend {}, N.inLinks, N.outLinks
 
-                    N.linksByTime = linkstate.sortByKeysTime(N.allLinks, that.props.howMany)
+                    N.linksByTime = linkstate.sortByKeysTime(N.allLinks
+                    , that.props.howMany)
                     N.linkSort = {}
                     for link in Object.keys(N.allLinks)
                       N.sorts = linkstate.sortByKeysTime(N.allLinks[link],3)
                       N.recent = N.sorts[0]
                       N.linkSort[link] = N.allLinks[link][N.recent]
-                    # calculate momentum of a url by walking through voters on it
+                    #calculate momentum of a url by walking through voters on it
                     N.momentum = {}
                     N.vectors = {}
-                    #N.sortedLinks = linkstate.sortByMomentum N.linkSort, that.props.howMany
-
                     N.sortByWeight = AByMomentum N.inLinks
                     N.sortOutByWeight = AByMomentum N.outLinks
-                    # does not seem to register inLinks unless there's an outlink from here..
                     N.rankedinLinks = AByMomentum( N.inLinks)
                     N.rankedOutlinks = AByMomentum(N.outLinks)
-                    N.sortAllMomentum = listByMomentum(N.rankedinLinks, N.rankedOutlinks)
+                    N.sortAllMomentum = listByMomentum(N.rankedinLinks
+                    , N.rankedOutlinks)
 
                     for timeLink in N.sortAllMomentum
                       D = {}

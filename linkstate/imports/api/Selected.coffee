@@ -1,14 +1,16 @@
 # Selected.coffee
-# FIXME major weakness of implementation. brittle where it should be a dumb representation of user object
-# http://localhost:3000/about?from=http%253A%252F%252Fwww.dailymail.co.uk%252Fhome%252Findex.html&lastTitle=Home%2520%257C%2520Daily%2520Mail%2520Online&content=&to=https%253A%252F%252Fen.wikipedia.org%252Fwiki%252FBiot%252C_Alpes-Maritimes
+# FIXME major weakness of implementation.
+# brittle where it should be a dumb representation of user object
 # Builds the FROM and TO boxes from user object and props from queryparams
-# from and to are plain decodeURIComponent urls which are then used to select defaultValue in the stateless ui component
+# from and to are plain decodeURIComponent urls
+# which are then used to select defaultValue in the stateless ui component
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 Selected = require('../ui/Selected.coffee').Selected
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store} = require '../api/strings.coffee'
 
-# goes through a simple loop that builds list of objects from a number of sources.
+# goes through a simple loop
+#that builds list of objects from a number of sources.
 exports.selectedContainer = createContainer ((props) ->
   # update queryparams unless we're fromt he same place
 
@@ -26,29 +28,15 @@ setOptions = (props) ->
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
     for index,value of deChaos
       if typeof value is 'string' and value != 'undefined'
-        if dictWithCreatedAt[value]?.meta?.weight? and dictWithCreatedAt[value].meta.weight > 0
+        entryWeightExists = dictWithCreatedAt[value]?.meta?.weight?
+        entryWeightHigh = dictWithCreatedAt[value].meta.weight > 0
+        if entryWeightExists and entryWeightHigh
           selectItem =
-            label: dictWithCreatedAt[value].meta.title #linkstate.see value # same function as use
-            value: dictWithCreatedAt[value] # store whole object here
+            label: dictWithCreatedAt[value].meta.title
+            value: dictWithCreatedAt[value]
           options.push selectItem
         else
           console.log 'irrelevant entry', dictWithCreatedAt[value].meta.title
-    # questionable ..
-    ###
-    for type in ['from','to']
-      typeUrl = FlowRouter.getQueryParam type
-      typeUrlDict = dictWithCreatedAt[linkstate.store typeUrl]
-      if !typeUrlDict?.meta?
-        console.log 'not already in there'
-        options.push
-          label: props[props.type]
-          value:
-            meta:
-              FromLink: props[props.type]
-      else
-        console.log 'do nothing'
-      console.log typeUrl, typeUrlDict
-    ###
   options
 setValue = (props, options, user) ->
   newProps = {}
@@ -63,7 +51,6 @@ setValue = (props, options, user) ->
   dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
   dictValueExists = dictValue?.meta?.title?
   lastDictValue = dictWithCreatedAt[linkstate.store(user[props.type+'Last'])]
-  #console.log dictValueExists, clientReady, props.to, typeValue?, typeValue.length,lastDictValue
   # what if ... you don't have a 'to' or from?  use
   # use if we don't have a to, we need to change queryParams to last to project
   if !typeValue? and lastDictValue?
