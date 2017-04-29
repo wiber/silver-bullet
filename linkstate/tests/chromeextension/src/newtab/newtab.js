@@ -35,3 +35,18 @@ chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
   }
 
 });
+/*
+chrome.runtime.sendMessage({greeting: "tab"}, function(response) {
+  if(response.tab && response.tab.title){
+    console.log('got response', response.farewell);
+    frameit({
+      from: response.tab.url,
+      lastTitle: response.tab.title
+    })
+  } else {
+    console.log('no response, from storage instead');
+    chrome.storage.sync.get("last", frameit);
+  }
+
+});
+*/

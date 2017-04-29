@@ -29,10 +29,12 @@ chrome.tabs.onHighlighted.addListener( function ( highlightInfo ) {
     //var title = document.getElementsByTagName("title")[0].innerHTML;
     //console.log(title);
     //console.log(tab.title);
+    console.log('onHighlighted',tab.title);
     oneSteps( tab.url , tab.title)
   } )
 } );
 
 chrome.tabs.onUpdated.addListener( function ( tabId, changeInfo, tab ) {
+  console.log('onUpdated',tab.title);
   oneSteps( tab.url , tab.title);
 } );
