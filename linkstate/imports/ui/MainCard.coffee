@@ -18,7 +18,7 @@ exports.MainCard = React.createClass
       select = document.activeElement.type is 'text'
       text = document.activeElement.id is 'textAbout'
       unless select or text
-        if false and window?.textAbout?.refs?.MainCardTextInput?.focus()
+        if false is true and window?.textAbout?.refs?.MainCardTextInput?.focus()
           window.textAbout.refs.MainCardTextInput.focus()
           #$('#textAbout').focus()
         console.log document.activeElement.id, document.activeElement.type

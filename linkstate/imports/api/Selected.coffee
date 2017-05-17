@@ -35,8 +35,11 @@ setOptions = (props) ->
             label: dictWithCreatedAt[value].meta.title
             value: dictWithCreatedAt[value]
           options.push selectItem
-        else
-          console.log 'irrelevant entry', dictWithCreatedAt[value].meta.title
+        #else
+        # console.log 'irrelevant entry', dictWithCreatedAt[value].meta.title
+        # this needs cleaning up..? should we remove totally when 0
+        # or should we filter the list every time we build the select...
+        # this is executed a lot;.... so
   options
 setValue = (props, options, user) ->
   newProps = {}
@@ -57,8 +60,6 @@ setValue = (props, options, user) ->
     value=
       label: lastDictValue.meta.title
       value: lastDictValue
-  else
-    console.log 'edgeC'
   if dictValueExists and clientReady
     #console.log typeValue
     value =
