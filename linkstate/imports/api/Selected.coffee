@@ -41,6 +41,8 @@ setOptions = (props) ->
         # or should we filter the list every time we build the select...
         # this is executed a lot;.... so
   options
+
+#FIXME does not select value when from a place
 setValue = (props, options, user) ->
   newProps = {}
   newProps.options = []
@@ -60,11 +62,21 @@ setValue = (props, options, user) ->
     value=
       label: lastDictValue.meta.title
       value: lastDictValue
+  #console.log dictValueExists, dictValue, props.type#, dictWithCreatedAt
+  if props.type is 'from'
+    if dictValueExists
+
+      title = 'Linkstates for ' + props.from
+      DocHead.setTitle(title)
+      console.log typeof DocHead, typeValue, dictValueExists, dictValue.title, document.title
+
   if dictValueExists and clientReady
     #console.log typeValue
     value =
       label: dictValue.meta.title
       value: dictValue
+
+
   else
     #
     value =

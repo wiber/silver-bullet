@@ -14,8 +14,11 @@ containerLayout = createContainer ((props) ->
       return
   user = userSaved(Meteor.user(), queryParams, Meteor.isClient)
   newHere = newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked'))
+  lastTitle =  FlowRouter.getQueryParam('lastTitle')
+  console.log newHere
+  , lastTitle
+  , props
   if newHere and Meteor.isClient
-    console.log queryParams.lastTitle, FlowRouter.getQueryParam('lastTitle')
     Meteor.call "Linking",
       from: queryParams.from
       to: 'Bookmarks'
@@ -77,6 +80,7 @@ userSaved = (userE, queryParams, client) ->
         console.log " haven't connected to anything? how is that possible?"
   user
 # textbox should have your comment in it if empty
+# TODO write test for this
 ifBodyContentHere = (queryParams, user)->
   paramContent = queryParams.content
   # we wish to dig up old content and fill in the box..
