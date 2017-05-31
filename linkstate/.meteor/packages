@@ -26,7 +26,6 @@ youiest:linkstate
 blaze-html-templates@1.0.4
 peerlibrary:reactive-publish
 modules@0.7.7
-kadira:debug
 shell-server@0.2.1
 bozhao:link-accounts
 kadira:dochead

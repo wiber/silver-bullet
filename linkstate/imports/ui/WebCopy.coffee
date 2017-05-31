@@ -1,6 +1,6 @@
 exports.wordLanguages =
   eng:
-    HeaderTitle: 'Linkstates for '
+    HeaderTitle: 'Linkstates about '
     MainCardTitle: 'About '
     MainCardSubtitle:  "connect it to a bookmark and it will be right there when you need it"
     TextAboutfloatingLabelText: 'TAB here to describe the link and weigh in on a scale 0-9.'

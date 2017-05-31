@@ -65,10 +65,9 @@ setValue = (props, options, user) ->
   #console.log dictValueExists, dictValue, props.type#, dictWithCreatedAt
   if props.type is 'from'
     if dictValueExists
-
-      title = 'Linkstates for ' + props.from
+      title = 'Linkstates for ' + dictValue.title + ' - ' + props.from
+      #props.from
       DocHead.setTitle(title)
-      console.log typeof DocHead, typeValue, dictValueExists, dictValue.title, document.title
 
   if dictValueExists and clientReady
     #console.log typeValue

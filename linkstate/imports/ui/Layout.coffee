@@ -25,7 +25,13 @@ exports.Layout = React.createClass
       if that.props.user?.out?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
         HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
         ScreenshotUrl = HERE.meta.ScreenshotUrl
+        console.log HERE.title
         #console.log 'weeeee down the rabbit hole', ScreenshotUrl, HERE
+      if HERE?.title?
+        title = HERE.title
+      else
+        title = that.props.from
+      console.log title, that.props.word.HeaderTitle + title
       k.build MuiThemeProvider,
         muiTheme: lightBaseUsTheme
         ->
@@ -43,7 +49,7 @@ exports.Layout = React.createClass
                 opacity: '.3'
                 zIndex: -1
             k.build AppBar,
-              title: that.props.word.HeaderTitle + that.props.from
+              title: that.props.word.HeaderTitle + title # that.props.from
               iconElementLeft: k.span ''
               style:
                 position: 'fixed'
