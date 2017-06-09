@@ -23,6 +23,7 @@
     "react-selectize": "2.1.0",
     "react-tap-event-plugin": "^1.0.0",
     "reify": "^0.3.8",
+    "uri-js": "^3.0.2",
     "urijs": "^1.18.10"
   },
   "peerDependencies": {

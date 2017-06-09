@@ -13,7 +13,7 @@ AppBar =  require('material-ui/lib/app-bar').default
 Card = require 'material-ui/lib/card/card'
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 {Mexplain} = require '../api/MexplainContainer.coffee'
-{URI} = require 'urijs'
+URI = require 'uri-js'
 MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme} = require('../ui/theme.coffee')
 exports.Layout = React.createClass
@@ -25,14 +25,15 @@ exports.Layout = React.createClass
       if that.props.user?.out?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
         HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
         ScreenshotUrl = HERE.meta.ScreenshotUrl
+      console.log URI.parse(that.props.from).host
       if HERE?.title?
-        title = HERE.title
+        titleHere = HERE.title
+        host = URI.parse(that.props.from).host
+        console.log titleHere, typeof titleHere, HERE
+        title = R.concat R.concat( host, ' / '), titleHere
+
       else
         title = that.props.from
-      console.log typeof URI
-      console.log URI
-      #fromDomain = new URI(that.props.from)
-      #console.log title, that.props.word.HeaderTitle + title, fromDomain.domain(), #url.domain(that.props.from)
       k.build MuiThemeProvider,
         muiTheme: lightBaseUsTheme
         ->
