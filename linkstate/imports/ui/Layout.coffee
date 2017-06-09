@@ -25,13 +25,10 @@ exports.Layout = React.createClass
       if that.props.user?.out?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
         HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
         ScreenshotUrl = HERE.meta.ScreenshotUrl
-      console.log URI.parse(that.props.from).host
       if HERE?.title?
         titleHere = HERE.title
         host = URI.parse(that.props.from).host
-        console.log titleHere, typeof titleHere, HERE
         title = R.concat R.concat( host, ' / '), titleHere
-
       else
         title = that.props.from
       k.build MuiThemeProvider,

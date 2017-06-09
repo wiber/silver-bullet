@@ -17,9 +17,6 @@ containerLayout = createContainer ((props) ->
   user = userSaved(Meteor.user(), queryParams, Meteor.isClient)
   newHere = newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked'))
   lastTitle =  FlowRouter.getQueryParam('lastTitle')
-  if Meteor.isClient
-    console.log Meteor.user()?.queryParams?.from, props.from
-    #Meteor.call 'NewQueryParams', props
   if newHere and Meteor.isClient
     Meteor.call "Linking",
       from: queryParams.from
