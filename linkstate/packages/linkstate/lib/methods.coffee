@@ -16,6 +16,17 @@ else
   @thumbalizr= "5VmUR42gc4eGdLjBnZH2BRXa"
 
 Meteor.methods
+  NewQueryParams: (queryParams) ->
+    if Meteor.isClient
+      console.log Meteor.user(), queryParams
+    queryParamsState = queryParams
+    Meteor.users.update
+      _id: Meteor.userId()
+    ,
+      $set: queryParamsState
+      $inc:
+        'qpUpdates': 1
+
   GroundedUserInsert: ->
     if Meteor.isClient and Meteor.user()
       localStorage.setItem 'latest', JSON.stringify(Meteor.user())

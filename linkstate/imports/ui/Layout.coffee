@@ -13,7 +13,7 @@ AppBar =  require('material-ui/lib/app-bar').default
 Card = require 'material-ui/lib/card/card'
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 {Mexplain} = require '../api/MexplainContainer.coffee'
-
+{URI} = require 'urijs'
 MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme} = require('../ui/theme.coffee')
 exports.Layout = React.createClass
@@ -25,13 +25,14 @@ exports.Layout = React.createClass
       if that.props.user?.out?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
         HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
         ScreenshotUrl = HERE.meta.ScreenshotUrl
-        console.log HERE.title
-        #console.log 'weeeee down the rabbit hole', ScreenshotUrl, HERE
       if HERE?.title?
         title = HERE.title
       else
         title = that.props.from
-      console.log title, that.props.word.HeaderTitle + title
+      console.log typeof URI
+      console.log URI
+      #fromDomain = new URI(that.props.from)
+      #console.log title, that.props.word.HeaderTitle + title, fromDomain.domain(), #url.domain(that.props.from)
       k.build MuiThemeProvider,
         muiTheme: lightBaseUsTheme
         ->
@@ -54,7 +55,6 @@ exports.Layout = React.createClass
               style:
                 position: 'fixed'
               onClick: () ->
-                console.log that.props.from
                 window.open that.props.from, "_blank"
             k.span 'g',-> # because... just because
             k.div

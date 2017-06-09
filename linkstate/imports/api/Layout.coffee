@@ -3,6 +3,8 @@
 language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
+#{URI} = require 'urijs'
+
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   # store and use localStorage user untill user() received from server
@@ -15,9 +17,9 @@ containerLayout = createContainer ((props) ->
   user = userSaved(Meteor.user(), queryParams, Meteor.isClient)
   newHere = newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked'))
   lastTitle =  FlowRouter.getQueryParam('lastTitle')
-  console.log newHere
-  , lastTitle
-  , props
+  if Meteor.isClient
+    console.log Meteor.user()?.queryParams?.from, props.from
+    #Meteor.call 'NewQueryParams', props
   if newHere and Meteor.isClient
     Meteor.call "Linking",
       from: queryParams.from
