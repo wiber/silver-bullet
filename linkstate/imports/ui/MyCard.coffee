@@ -18,7 +18,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 Toggle = require('material-ui/lib/toggle').default
 {Mexplain} = require '../api/MexplainContainer.coffee'
-
+{selectedContainer} = require '../api/Selected.coffee'
 exports.MyCard = React.createClass
   getDefaultProps: ->
     expanded: true
@@ -40,7 +40,18 @@ exports.MyCard = React.createClass
           k.build CardText,
             style:
               height: 'auto'
-            expandable: true
+            expandable: false
+            ->
+              k.build selectedContainer,
+                from: that.props.from
+                to: that.props.to
+                lastTitle: that.props.lastTitle
+                user: that.props.user
+                type: 'from'
+                word: that.props.word
+                lastTitle: that.props.lastTitle
+                style:
+                  width: '100%'
           k.build CardText,
             style:
               height: 'auto'
