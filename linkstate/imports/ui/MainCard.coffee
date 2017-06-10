@@ -1,7 +1,7 @@
 reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
-{changeQueryParams} = require('../api/changeQueryParams.coffee')
+{changeQueryParams, changeQueryParamsObject} = require('../api/changeQueryParams.coffee')
 {FromToSense} = require('../ui/FromToSense.coffee')
 Card = require('material-ui/lib/card/card').default
 CardActions = require('material-ui/lib/card/card-actions' ).default
@@ -61,8 +61,17 @@ exports.MainCard = React.createClass
           k.build CardActions,
             -> # return innerhtml, tags on here before
               k.build FlatButton,
-                style:
-                  height: 0
-                label: 'Tab here to go back to "From"'
+                #style:
+                #  height: 0
+                label: 'Switch'
+                refs: 'blurer'
                 onFocus: () ->
                   window.textAbout.refs.MainCardTextInput.focus()
+                onClick: () ->
+                  console.log FlowRouter.getQueryParam 'from', that.props.to
+                  changeQueryParamsObject
+                    from: that.props.to
+                  changeQueryParamsObject
+                    to: that.props.from
+                  #console.log FlowRouter.getQueryParam 'from'
+                  #console.log @, @.refs#,@.refs.blurer.blur()

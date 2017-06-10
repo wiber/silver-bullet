@@ -12,3 +12,8 @@ exports.changeQueryParams = (key,value) ->
       return
     else
       FlowRouter.setQueryParams newQueryParams
+
+exports.changeQueryParamsObject = (changes) ->
+  for key of changes
+    console.log key, changes[key]
+    exports.changeQueryParams key, changes[key]
