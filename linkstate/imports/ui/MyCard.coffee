@@ -32,8 +32,8 @@ exports.MyCard = React.createClass
         style: _.extend {}, style.card, style.yCard
         ->
           k.build CardHeader,
-            title: that.props.word.MyCardTitle + that.props.from
-            subtitle: that.props.word.MyCardSubtitle
+            title: that.props.word.MyCardTitle# + that.props.from
+            #subtitle: that.props.word.MyCardSubtitle
             showExpandableButton: true
             onClick: (e) ->
               changeQueryParams 'expandMyCard', !that.props.expanded

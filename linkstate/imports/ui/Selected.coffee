@@ -26,7 +26,7 @@ Selected = React.createClass
           display: 'inline-block'
           #textOverflow: "ellipsis"
           whiteSpace: "nowrap"
-          width: '100%' #150
+          width: '102%' #150
         theme: "material"
         # // can be one of "default" | "bootstrap3" | "material" | ...
         transitionEnter: true
