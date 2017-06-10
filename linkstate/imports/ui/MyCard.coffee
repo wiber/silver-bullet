@@ -58,8 +58,6 @@ exports.MyCard = React.createClass
               k.build GridList,
                 #cellHeight: 200
                 cols: 1
-                console.log that.props?.user?.in?[linkstate.store that.props.from]?
-                console.log that.props.user.in, that.props.from
                 ->
                   if that.props?.user?.out?[linkstate.store that.props.from]?
                     out = that.props.user.out[linkstate.store that.props.from]
