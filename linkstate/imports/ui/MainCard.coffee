@@ -38,17 +38,13 @@ exports.MainCard = React.createClass
             title: HERE.title,
             subtitle: that.props.word.MainCardSubtitle
             showExpandableButton: false
-            onClick: (e) -> #that.handleToggle
+            onClick: (e) ->
               window.open HERE.meta.FromLink
-              #changeQueryParams 'expandMainCard', !that.props.expanded
           k.build CardMedia,
             style: style.overlayPercentage
             onClick: (e) ->
               win = window.open(decodeURIComponent HERE.from, '_blank')
               win.focus()
-            ###->
-              k.img
-                src: ScreenshotUrl###
           k.build CardText,
             ->
               k.build FromToSense,
@@ -73,5 +69,18 @@ exports.MainCard = React.createClass
                     from: that.props.to
                   changeQueryParamsObject
                     to: that.props.from
-                  #console.log FlowRouter.getQueryParam 'from'
-                  #console.log @, @.refs#,@.refs.blurer.blur()
+              if that.props.user.in[linkstate.store that.props.from]?
+                console.log that.props.user.in[linkstate.store that.props.from]
+                k.build FlatButton,
+                  #style:
+                  #  height: 0
+                  label: 'old Text'
+                  refs: 'blurer'
+                  onFocus: () ->
+                    window.textAbout.refs.MainCardTextInput.focus()
+                  onClick: () ->
+                    console.log FlowRouter.getQueryParam 'from', that.props.to
+                    changeQueryParamsObject
+                      from: that.props.to
+                    changeQueryParamsObject
+                      to: that.props.from

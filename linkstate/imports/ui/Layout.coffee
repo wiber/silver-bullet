@@ -28,7 +28,13 @@ exports.Layout = React.createClass
       if HERE?.title?
         titleHere = HERE.title
         host = URI.parse(that.props.from).host
-        title = R.concat R.concat( host, ' / '), titleHere
+        if host?
+          slash = R.concat host, ' / '
+        else
+          slash = R.concat that.props.from, ' / '
+        console.log slash
+        title = R.concat slash, titleHere
+        console.log title
       else
         title = that.props.from
       k.build MuiThemeProvider,
