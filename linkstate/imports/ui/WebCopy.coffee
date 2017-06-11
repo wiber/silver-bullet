@@ -3,7 +3,7 @@ exports.wordLanguages =
     HeaderTitle: 'Linkstates for '
     MainCardTitle: 'About '
     MainCardSubtitle:  "Link it to something, find it there later"
-    TextAboutfloatingLabelText: 'TAB here to and say something memorable. '
+    TextAboutfloatingLabelText: 'TAB here to say something memorable. '
     TextAboutHintText: "Send with a 9 for dead on, 5 neutral, 1 oppose or 0 irrelevant."
     digitAlert: "You send by entering a digit from 0 to 9 where 9 means dead on, 5 neutral and 1 opposite. The 0 means irrelevant."
     MyCardTitle: "Your links to: " #the title of this place.

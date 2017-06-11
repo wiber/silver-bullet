@@ -61,7 +61,7 @@ Selected = React.createClass
                 overflow: "hidden"
                 whiteSpace: 'nowrap'
                 textAling: 'top'
-                maxWidth: '87%'
+                #maxWidth: '87%'
               item.label
 
 exports.Selected = Selected
