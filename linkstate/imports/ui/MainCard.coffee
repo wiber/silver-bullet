@@ -70,17 +70,26 @@ exports.MainCard = React.createClass
                   changeQueryParamsObject
                     to: that.props.from
               if that.props.user.in[linkstate.store that.props.from]?
-                console.log that.props.user.in[linkstate.store that.props.from]
+                #console.log that.props.user.in[linkstate.store that.props.from][linkstate.store that.props.to].meta
+                infrom = R.prop linkstate.store(that.props.from), that.props.user.in
+                if infrom
+                  origin  = R.prop linkstate.store(that.props.to), infrom
+                  if origin
+                    originalMeta = R.prop 'meta', origin
+                    if originalMeta
+                      console.log  origin, originalMeta
+                      if originalMeta
+                        orgininalText = R.prop 'body', originalMeta
+                        console.log orgininalText
                 k.build FlatButton,
                   #style:
                   #  height: 0
-                  label: 'old Text'
+                  label: 'revert'
                   refs: 'blurer'
                   onFocus: () ->
                     window.textAbout.refs.MainCardTextInput.focus()
                   onClick: () ->
-                    console.log FlowRouter.getQueryParam 'from', that.props.to
+                    console.log FlowRouter.getQueryParam 'content', that.props.to
                     changeQueryParamsObject
-                      from: that.props.to
-                    changeQueryParamsObject
-                      to: that.props.from
+                      content: orgininalText
+                    console.log window.textAbout.refs.MainCardTextInput.value
