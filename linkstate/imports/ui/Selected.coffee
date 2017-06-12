@@ -34,10 +34,6 @@ Selected = React.createClass
           if val.value.meta.FromLink
             changeQueryParams that.props.type, val.value.meta.FromLink
         value: that.props.value
-        ###_.find that.props.options, (obj) ->
-          obj.value.meta.FromLink == that.props[that.props.type]
-          # TODO could store entire object here for richer list Layout
-          # obj.value.link = plain url link from props...###
         ref: that.props.type
         id: that.props.type
         options: that.props.options

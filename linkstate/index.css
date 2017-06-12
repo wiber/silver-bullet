@@ -140,7 +140,7 @@
   position: absolute;
 }
 .react-selectize.dropdown-menu-wrapper.tethered {
-  min-width: 300px;
+  min-width: 3000px;
 }
 .react-selectize.dropdown-menu-wrapper:not(.tethered) {
   width: 100%;

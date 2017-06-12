@@ -59,7 +59,7 @@ exports.MainCard = React.createClass
               k.build FlatButton,
                 #style:
                 #  height: 0
-                label: 'Switch'
+                label: 'Flip'
                 refs: 'blurer'
                 onFocus: () ->
                   window.textAbout.refs.MainCardTextInput.focus()
