@@ -10,6 +10,10 @@ CardMedia = require('material-ui/lib/card/card-media').default
 CardTitle = require('material-ui/lib/card/card-title').default
 FlatButton = require('material-ui/lib/flat-button' ).default
 CardText =  require('material-ui/lib/card/card-text').default
+IconButton = require('material-ui/lib/icon-button').default
+Flip =  require('material-ui/lib/svg-icons/communication/swap-calls').default
+ExitToPage =  require('material-ui/lib/svg-icons/action/exit-to-app').default
+
 exports.MainCard = React.createClass
   getDefaultProps: ->
     expanded: true
@@ -56,10 +60,12 @@ exports.MainCard = React.createClass
                 user: that.props.user
           k.build CardActions,
             -> # return innerhtml, tags on here before
-              k.build FlatButton,
+              k.build IconButton,
                 #style:
                 #  height: 0
-                label: 'Flip'
+                #label: 'Flip'
+                tooltip: "Reverse - Point TO what you're now pointing FROM"
+                tooltipPosition: 'bottom-right'
                 refs: 'blurer'
                 onFocus: () ->
                   window.textAbout.refs.MainCardTextInput.focus()
@@ -69,12 +75,19 @@ exports.MainCard = React.createClass
                     from: that.props.to
                   changeQueryParamsObject
                     to: that.props.from
-              k.build FlatButton,
+                ->
+                  k.build Flip
+                  #k.build FlatButton,
+                  #label: 'flip'
+              k.build IconButton,
                 #style:
                 #  height: 0
-                label: 'visit'
-                refs: 'blurer'
+                tooltip: "Visit the page you're connecting TO"
+                tooltipPosition: 'bottom-right'
+                refs: 'blurer2'
                 onFocus: () ->
                   window.textAbout.refs.MainCardTextInput.focus()
                 onClick: () ->
                   window.open that.props.to
+                ->
+                  k.build ExitToPage
