@@ -14,6 +14,8 @@ exports.wordLanguages =
     to: "to "
     defaultProject: "Your last project was "
     defaultStart: "Last on "
+    ToTooltipText: "Pointing TO there, the place we're saying something about."
+    FromTooltipText: "Pointing FROM here, where you are now."
 ###
 dynamic sections navigatable by these awesome input tools. to grid? from grid? to recent bookmarks? the end result is keyboard navigatable connectable networks..
 only one list at a time? incomming, or outgoing,
