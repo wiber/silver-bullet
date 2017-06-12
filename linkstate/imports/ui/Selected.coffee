@@ -46,9 +46,7 @@ Selected = React.createClass
               left: '11%'
             theme: "material"
             onBlur: () ->
-              console.log window.textAbout.refs.MainCardTextInput
               window.textAbout.refs.MainCardTextInput.focus()
-            # // can be one of "default" | "bootstrap3" | "material" | ...
             transitionEnter: true
             onValueChange: (val) ->
               if val.value.meta.FromLink
@@ -88,12 +86,10 @@ Selected = React.createClass
               marginTop: '-35px'
             onFocus: () ->
               window.textAbout.refs.MainCardTextInput.focus()
-              console.log that.refs.blurer.refs.tooltip.props
               that.refs.blurer.refs.tooltip.setState
                 show: false
                 # .hide()#props.style.visibility = 'hidden'
             onClick: () ->
-              console.log FlowRouter.getQueryParam 'from', that.props.to
               changeQueryParamsObject
                 from: that.props.to
               changeQueryParamsObject

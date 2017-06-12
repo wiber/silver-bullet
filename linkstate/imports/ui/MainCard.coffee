@@ -13,6 +13,8 @@ CardText =  require('material-ui/lib/card/card-text').default
 IconButton = require('material-ui/lib/icon-button').default
 Flip =  require('material-ui/lib/svg-icons/communication/swap-calls').default
 ExitToPage =  require('material-ui/lib/svg-icons/action/exit-to-app').default
+Print =  require('material-ui/lib/svg-icons/action/print').default
+Edit =  require('material-ui/lib/svg-icons/editor/mode-edit').default
 
 exports.MainCard = React.createClass
   getDefaultProps: ->
@@ -26,7 +28,7 @@ exports.MainCard = React.createClass
           window.textAbout.refs.MainCardTextInput.focus()
           #$('#textAbout').focus()
         console.log document.activeElement.id, document.activeElement.type
-    setInterval(focusTextbox,650)
+    #setInterval(focusTextbox,650)
   render: ->
     that = this
     if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.from]?
@@ -59,11 +61,8 @@ exports.MainCard = React.createClass
                 content: that.props.content
                 user: that.props.user
           k.build CardActions,
-            -> # return innerhtml, tags on here before
+            ->
               k.build IconButton,
-                #style:
-                #  height: 0
-                #label: 'Flip'
                 tooltip: "Reverse - Point TO what you're now pointing FROM"
                 tooltipPosition: 'bottom-right'
                 refs: 'blurer'
@@ -77,17 +76,19 @@ exports.MainCard = React.createClass
                     to: that.props.from
                 ->
                   k.build Flip
-                  #k.build FlatButton,
-                  #label: 'flip'
               k.build IconButton,
-                #style:
-                #  height: 0
                 tooltip: "Visit the page you're connecting TO"
                 tooltipPosition: 'bottom-right'
-                refs: 'blurer2'
-                onFocus: () ->
-                  window.textAbout.refs.MainCardTextInput.focus()
                 onClick: () ->
                   window.open that.props.to
                 ->
                   k.build ExitToPage
+              k.build IconButton,
+                tooltip: "Rich editing and markup of the page. Quote it for your notes. Screenshot a part perhaps?"
+                tooltipPosition: 'bottom-right'
+                style:
+                  opacity: .4
+                onClick: () ->
+                  window.open that.props.to
+                ->
+                  k.build Edit

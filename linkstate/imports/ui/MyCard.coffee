@@ -19,6 +19,8 @@ CardText =  require('material-ui/lib/card/card-text').default
 Toggle = require('material-ui/lib/toggle').default
 {Mexplain} = require '../api/MexplainContainer.coffee'
 {selectedContainer} = require '../api/Selected.coffee'
+Print =  require('material-ui/lib/svg-icons/action/print').default
+IconButton = require('material-ui/lib/icon-button').default
 exports.MyCard = React.createClass
   getDefaultProps: ->
     expanded: true
@@ -31,12 +33,12 @@ exports.MyCard = React.createClass
         expanded: that.props.expanded
         style: _.extend {}, style.card, style.yCard
         ->
-          k.build CardHeader,
+          ###k.build CardHeader,
             title: that.props.word.MyCardTitle# + that.props.from
             #subtitle: that.props.word.MyCardSubtitle
             showExpandableButton: true
             onClick: (e) ->
-              changeQueryParams 'expandMyCard', !that.props.expanded
+              changeQueryParams 'expandMyCard', !that.props.expanded###
           k.build CardText,
             style:
               height: 'auto'
@@ -50,10 +52,24 @@ exports.MyCard = React.createClass
                 type: 'from'
                 word: that.props.word
                 lastTitle: that.props.lastTitle
+              k.build IconButton,
+                #style:
+                #  height: 0
+                tooltip: "Archive the whole page for me. Request this or other features if you need it."
+                tooltipPosition: 'bottom-right'
+                refs: 'blurer4'
+                style:
+                  opacity: .4
+                onFocus: () ->
+                  window.textAbout.refs.MainCardTextInput.focus()
+                onClick: () ->
+                  window.open that.props.to
+                ->
+                  k.build Print
           k.build CardText,
             style:
               height: 'auto'
-            expandable: true
+            expandable: false
             ->
               k.build GridList,
                 #cellHeight: 200
