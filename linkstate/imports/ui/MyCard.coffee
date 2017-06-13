@@ -52,20 +52,6 @@ exports.MyCard = React.createClass
                 type: 'from'
                 word: that.props.word
                 lastTitle: that.props.lastTitle
-              k.build IconButton,
-                #style:
-                #  height: 0
-                tooltip: "Archive the whole page for me. Request this or other features if you need it."
-                tooltipPosition: 'bottom-right'
-                refs: 'blurer4'
-                style:
-                  opacity: .4
-                onFocus: () ->
-                  window.textAbout.refs.MainCardTextInput.focus()
-                onClick: () ->
-                  window.open that.props.to
-                ->
-                  k.build Print
           k.build CardText,
             style:
               height: 'auto'
