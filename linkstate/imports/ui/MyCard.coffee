@@ -21,6 +21,9 @@ Toggle = require('material-ui/lib/toggle').default
 {selectedContainer} = require '../api/Selected.coffee'
 Print =  require('material-ui/lib/svg-icons/action/print').default
 IconButton = require('material-ui/lib/icon-button').default
+Paper = require('material-ui/lib/paper').default
+Avatar = require('material-ui/lib/avatar').default
+
 exports.MyCard = React.createClass
   getDefaultProps: ->
     expanded: true
@@ -42,6 +45,8 @@ exports.MyCard = React.createClass
           k.build CardText,
             style:
               height: 'auto'
+              minHeight: 500
+              overflow: 'hidden'
             expandable: false
             ->
               k.build selectedContainer,
@@ -52,6 +57,31 @@ exports.MyCard = React.createClass
                 type: 'from'
                 word: that.props.word
                 lastTitle: that.props.lastTitle
+              k.build Paper,
+                circle: true
+                style:
+                  width: 400
+                  height: 400
+                  marginRight: -200
+                  marginTop: 150
+                  marginBottom: 150
+                  float: 'right'
+                  display: 'inline'
+                zDepth: 5
+                overflow: 'hiddens'
+                #children:
+                ->
+                  k.build Avatar,
+                    style:
+                      width: 400
+                      height: 400
+                      marginRight: 0
+                      marginTop: 0
+                      marginBottom: 0
+                      float: 'right'
+                      display: 'inline'
+                    size: 200
+                    src: that.props.ScreenshotUrl
           k.build CardText,
             style:
               height: 'auto'

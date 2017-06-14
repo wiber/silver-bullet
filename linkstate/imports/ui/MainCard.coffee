@@ -65,7 +65,7 @@ exports.MainCard = React.createClass
               k.build IconButton,
                 tooltip: "Reverse - Point TO what you're now pointing FROM"
                 tooltipPosition: 'bottom-right'
-                refs: 'blurer'
+                ref: 'blurer'
                 onFocus: () ->
                   window.textAbout.refs.MainCardTextInput.focus()
                 onClick: () ->
@@ -97,7 +97,7 @@ exports.MainCard = React.createClass
                 #  height: 0
                 tooltip: "Archive the whole page for me. Request this or other features if you need it."
                 tooltipPosition: 'bottom-right'
-                refs: 'blurer4'
+                ref: 'blurer4'
                 style:
                   opacity: .4
                 onFocus: () ->

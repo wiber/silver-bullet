@@ -84,6 +84,7 @@ exports.Layout = React.createClass
                     incomming: that.props.incomming
                     howMany: 10
                     type: 'fromCreated'
+                    ScreenshotUrl: ScreenshotUrl
                 else
                   k.build Mexplain
                 k.build AboutCard,
