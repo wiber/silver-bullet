@@ -69,10 +69,8 @@ exports.MainCard = React.createClass
                 onFocus: () ->
                   window.textAbout.refs.MainCardTextInput.focus()
                 onClick: () ->
-                  console.log FlowRouter.getQueryParam 'from', that.props.to
                   changeQueryParamsObject
                     from: that.props.to
-                  changeQueryParamsObject
                     to: that.props.from
                 ->
                   k.build Flip

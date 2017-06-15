@@ -42,7 +42,6 @@ yourMark = React.createClass
           tooltip: that.props.target.meta.body
           tooltipPosition: 'bottom'
           onClick: (e) ->
-            console.log that.props
             changeQueryParamsObject
               from: that.props.target.from
               to: that.props.target.to
