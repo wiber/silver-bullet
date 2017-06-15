@@ -5,7 +5,7 @@
 reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
-{changeQueryParams} = require('../api/changeQueryParams.coffee')
+{changeQueryParams, changeQueryParamsObject} = require('../api/changeQueryParams.coffee')
 Card = require('material-ui/lib/card/card').default
 CardActions = require('material-ui/lib/card/card-actions' ).default
 CardHeader = require('material-ui/lib/card/card-header').default
@@ -32,7 +32,7 @@ yourMark = React.createClass
         k.build IconButton,
           style:
             position: 'absolute'
-            marginTop: 400-(that.props.weight*(400/9))
+            marginTop: 450-(that.props.weight*(400/9))
             # 9 -> 0
             # 0 -> 9
             right: 50+(that.props.n * 60)
@@ -41,6 +41,11 @@ yourMark = React.createClass
             height: 80
           tooltip: that.props.target.meta.body
           tooltipPosition: 'bottom'
+          onClick: (e) ->
+            console.log that.props
+            changeQueryParamsObject
+              from: that.props.target.from
+              to: that.props.target.to
           ->
             k.build Avatar,
               style:
@@ -90,7 +95,6 @@ VisualCue = React.createClass
             target = out[mark]
             m = target.meta
             n++
-            console.log target, n
             k.build yourMark,
               user: that.props.user
               ScreenshotUrl: that.props.ScreenshotUrl
@@ -134,6 +138,7 @@ exports.MyCard = React.createClass
                 ScreenshotUrl: that.props.ScreenshotUrl
                 user: that.props.user
                 from: that.props.from
+###
           k.build CardText,
             style:
               height: 'auto'
@@ -171,3 +176,4 @@ exports.MyCard = React.createClass
                               onClick: (e) ->
                                 changeQueryParams 'from'
                                 , e.target.getAttribute('from')
+###
