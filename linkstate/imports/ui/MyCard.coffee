@@ -24,6 +24,79 @@ IconButton = require('material-ui/lib/icon-button').default
 Paper = require('material-ui/lib/paper').default
 Avatar = require('material-ui/lib/avatar').default
 
+yourMark = React.createClass
+  render: ->
+    that = this
+    reactKup (k) ->
+      k.div ->
+        k.build IconButton,
+          style:
+            position: 'absolute'
+            marginTop: 400-(that.props.weight*(400/9))
+            # 9 -> 0
+            # 0 -> 9
+            right: 50+(that.props.n * 60)
+            display: 'inline'
+            width: 80
+            height: 80
+          tooltip: that.props.target.meta.body
+          tooltipPosition: 'bottom'
+          ->
+            k.build Avatar,
+              style:
+                width: 80
+                height: 80
+                marginRight: 0
+                marginTop: 0
+                marginBottom: 0
+                float: 'right'
+                display: 'inline'
+              size: 80
+              src: that.props.target.meta.ScreenshotUrl#that.props.ScreenshotUrl
+
+VisualCue = React.createClass
+  render: ->
+    that = this
+    reactKup (k) ->
+      k.div ->
+        k.build Paper,
+          circle: true
+          style:
+            width: 400
+            height: 400
+            marginRight: -200
+            marginTop: 150
+            marginBottom: 150
+            float: 'right'
+            display: 'inline'
+          zDepth: 5
+          overflow: 'hidden'
+          ->
+            k.build Avatar,
+              style:
+                width: 400
+                height: 400
+                marginRight: 0
+                marginTop: 0
+                marginBottom: 0
+                float: 'right'
+                display: 'inline'
+              size: 200
+              src: that.props.ScreenshotUrl
+        if that.props?.user?.out?[linkstate.store that.props.from]?
+          out = that.props.user.out[linkstate.store that.props.from]
+          n = 0
+          for mark in linkstate.sortByWeight(out, that.props.howMany)
+            target = out[mark]
+            m = target.meta
+            n++
+            console.log target, n
+            k.build yourMark,
+              user: that.props.user
+              ScreenshotUrl: that.props.ScreenshotUrl
+              n: n
+              target: target
+              weight: target.meta.weight
 exports.MyCard = React.createClass
   getDefaultProps: ->
     expanded: true
@@ -57,31 +130,10 @@ exports.MyCard = React.createClass
                 type: 'from'
                 word: that.props.word
                 lastTitle: that.props.lastTitle
-              k.build Paper,
-                circle: true
-                style:
-                  width: 400
-                  height: 400
-                  marginRight: -200
-                  marginTop: 150
-                  marginBottom: 150
-                  float: 'right'
-                  display: 'inline'
-                zDepth: 5
-                overflow: 'hiddens'
-                #children:
-                ->
-                  k.build Avatar,
-                    style:
-                      width: 400
-                      height: 400
-                      marginRight: 0
-                      marginTop: 0
-                      marginBottom: 0
-                      float: 'right'
-                      display: 'inline'
-                    size: 200
-                    src: that.props.ScreenshotUrl
+              k.build VisualCue,
+                ScreenshotUrl: that.props.ScreenshotUrl
+                user: that.props.user
+                from: that.props.from
           k.build CardText,
             style:
               height: 'auto'
