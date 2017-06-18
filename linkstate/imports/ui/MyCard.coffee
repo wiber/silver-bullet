@@ -23,40 +23,59 @@ Print =  require('material-ui/lib/svg-icons/action/print').default
 IconButton = require('material-ui/lib/icon-button').default
 Paper = require('material-ui/lib/paper').default
 Avatar = require('material-ui/lib/avatar').default
-
+{shadowFloor, upMargin, rightMargin} = require '../api/strings'
+# TODO functional testable convenience functions, like strings, for math and attribute getting
 yourMark = React.createClass
   render: ->
     that = this
+    body = that.props.target.meta.body
+    L = body.length
+    floor = 5
+    top = 50
+    shadow = floor-Math.round(floor/Math.round(.5+L*(floor/top)))
+    # > 45 -> 5
+    # 25 -> 3
+    # 15 -> 2
+    # 10 -> 1
+    # < 5 -> 0
+    # 400 / 9 ~ 43
+
     reactKup (k) ->
-      k.div ->
-        k.build IconButton,
-          style:
-            position: 'absolute'
-            marginTop: 450-(that.props.weight*(400/9))
-            # 9 -> 0
-            # 0 -> 9
-            right: 50+(that.props.n * 60)
-            display: 'inline'
-            width: 80
-            height: 80
-          tooltip: that.props.target.meta.body
-          tooltipPosition: 'bottom'
-          onClick: (e) ->
-            changeQueryParamsObject
-              from: that.props.target.from
-              to: that.props.target.to
-          ->
-            k.build Avatar,
+      k.build Paper,
+        circle: true
+        style:
+          position: 'absolute'
+          marginTop: upMargin that.props.weight, 400, 150, that.props.n
+          # 9 -> 0
+          # 0 -> 9
+          right: rightMargin that.props.weight, 400, that.props.n
+          #200+(that.props.n*75)#50+(that.props.n * 60)
+          width: 80
+          height: 80
+        zDepth: shadowFloor that.props.target.meta.body, 5 , 50
+        overflow: 'hidden'
+        ->
+          k.div ->
+            k.build IconButton,
               style:
+                padding: 0
                 width: 80
                 height: 80
-                marginRight: 0
-                marginTop: 0
-                marginBottom: 0
-                float: 'right'
-                display: 'inline'
-              size: 80
-              src: that.props.target.meta.ScreenshotUrl#that.props.ScreenshotUrl
+              tooltip: that.props.target.meta.body
+              tooltipPosition: 'bottom'
+              className: 'YourMarks'
+              onClick: (e) ->
+                changeQueryParamsObject
+                  from: that.props.target.from
+                  to: that.props.target.to
+              ->
+                k.build Avatar,
+                  style:
+                    width: 80
+                    height: 80
+                    float: 'left'
+                  size: 80
+                  src: that.props.target.meta.ScreenshotUrl
 
 VisualCue = React.createClass
   render: ->
@@ -90,10 +109,31 @@ VisualCue = React.createClass
         if that.props?.user?.out?[linkstate.store that.props.from]?
           out = that.props.user.out[linkstate.store that.props.from]
           n = 0
-          for mark in linkstate.sortByWeight(out, that.props.howMany)
+          outArrayByWeight = linkstate.sortByWeight(out, that.props.howMany)
+          for key, mark of outArrayByWeight
             target = out[mark]
+            arrayValue = outArrayByWeight[key]
+            dictWeight = out[arrayValue].meta.weight
+            lastKey = outArrayByWeight[key-1]
+            if lastKey?
+              #console.log out[lastKey].meta.weight , out[mark].meta.weight
+              if out[lastKey].meta.weight is out[mark].meta.weight
+                n++
+              else
+                n = 0
+            console.log lastKey
             m = target.meta
-            n++
+            console.log key, mark, out[mark].meta.weight
+            , out[outArrayByWeight[key]].meta.weight
+            try
+              thisWeight = out[mark].meta.weight
+              lastWeight = (out[mark].meta.weight -1)
+
+              #console.log sameLine
+            catch error
+            #sameLine = out[mark].meta.weight is (out[mark].meta.weight -1)
+            #console.log sameLine
+            #n++
             k.build yourMark,
               user: that.props.user
               ScreenshotUrl: that.props.ScreenshotUrl
