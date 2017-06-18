@@ -54,8 +54,7 @@ exports.shadowFloor = (L,floor,top) ->
   floor-Math.round(floor/Math.round(.5+L.length*(floor/top)))
 
 exports.upMargin = (weight, size, margin, n) ->
-  # 150 + 200
-  # between  0 and 150+400+150
+  # between  0 and 150+400+150 margin size margin
   position = 1.3*margin+size-(((weight-4)/5)*(size+margin))
   console.log position, weight
   position
@@ -65,7 +64,8 @@ exports.rightMargin = (weight, size, n) ->
   rad = size/2
   x = rad*Math.cos(deg)
   console.log deg, rad, x, weight
-  200+(n*65)
+  200+(n*65)+x
+  # wierd.. but now almost heart shaped.. stick..
 ###
 exports.markCoordinate = ({size, weight, n}) ->
   console.log size, weight, n
