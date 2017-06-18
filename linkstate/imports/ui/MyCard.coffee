@@ -116,23 +116,16 @@ VisualCue = React.createClass
             dictWeight = out[arrayValue].meta.weight
             lastKey = outArrayByWeight[key-1]
             if lastKey?
-              #console.log out[lastKey].meta.weight , out[mark].meta.weight
               if out[lastKey].meta.weight is out[mark].meta.weight
                 n++
               else
                 n = 0
-            console.log lastKey
             m = target.meta
-            console.log key, mark, out[mark].meta.weight
-            , out[outArrayByWeight[key]].meta.weight
             try
               thisWeight = out[mark].meta.weight
               lastWeight = (out[mark].meta.weight -1)
-
-              #console.log sameLine
             catch error
             #sameLine = out[mark].meta.weight is (out[mark].meta.weight -1)
-            #console.log sameLine
             #n++
             k.build yourMark,
               user: that.props.user
