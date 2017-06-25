@@ -83,31 +83,32 @@ yourMark = React.createClass
 VisualCue = React.createClass
   render: ->
     {D, d, M} = @props.measurements
+    console.log @props.measurements
     that = this
     reactKup (k) ->
       k.div ->
         k.build Paper,
           circle: true
           style:
-            width: 400
-            height: 400
-            marginRight: -200
-            marginTop: 150
-            marginBottom: 150
+            width: D
+            height: D
+            marginRight: -D/2
+            marginTop: M
+            marginBottom: M
             float: 'right'
             display: 'inline'
           zDepth: 5
           ->
             k.build Avatar,
               style:
-                width: 400
-                height: 400
+                width: D
+                height: D
                 marginRight: 0
                 marginTop: 0
                 marginBottom: 0
                 float: 'right'
                 display: 'inline'
-              size: 200
+              size: D/2
               src: that.props.ScreenshotUrl
         if that.props?.user?.out?[linkstate.store that.props.from]?
           out = that.props.user.out[linkstate.store that.props.from]
@@ -128,8 +129,6 @@ VisualCue = React.createClass
               thisWeight = out[mark].meta.weight
               lastWeight = (out[mark].meta.weight -1)
             catch error
-            #sameLine = out[mark].meta.weight is (out[mark].meta.weight -1)
-            #n++
             k.build yourMark,
               user: that.props.user
               ScreenshotUrl: that.props.ScreenshotUrl
@@ -153,12 +152,6 @@ exports.MyCard = React.createClass
         expanded: that.props.expanded
         style: _.extend {}, style.card, style.yCard
         ->
-          ###k.build CardHeader,
-            title: that.props.word.MyCardTitle# + that.props.from
-            #subtitle: that.props.word.MyCardSubtitle
-            showExpandableButton: true
-            onClick: (e) ->
-              changeQueryParams 'expandMyCard', !that.props.expanded###
           k.build CardText,
             style:
               height: 'auto'
@@ -179,42 +172,3 @@ exports.MyCard = React.createClass
                 user: that.props.user
                 from: that.props.from
                 measurements: measurements
-###
-          k.build CardText,
-            style:
-              height: 'auto'
-            expandable: false
-            ->
-              k.build GridList,
-                #cellHeight: 200
-                cols: 1
-                ->
-                  if that.props?.user?.out?[linkstate.store that.props.from]?
-                    out = that.props.user.out[linkstate.store that.props.from]
-                    n = 0
-                    for mark in linkstate.sortByWeight(out, that.props.howMany)
-                      target = out[mark]
-                      m = target.meta
-                      n++
-                      if n <= that.props.howMany
-                        k.build GridTile,
-                          key: mark
-                          title: m.body #target.title#FromLink
-                          subtitle: m.FromLink#' => '+ m.ToLink
-                          ->
-                            k.img
-                              style: _.extend {},# style.webShot,
-                                left: 10 * m.weight + '%'
-                                position: 'absolute'
-                                opacity: 1
-                                borderRadius: '50%'
-                              src: m.face
-                            k.img
-                              style: _.extend {}, style.webShot,
-                                width: '100%'
-                              src: m.ScreenshotUrl
-                              from: m.FromLink
-                              onClick: (e) ->
-                                changeQueryParams 'from'
-                                , e.target.getAttribute('from')
-###

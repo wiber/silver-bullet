@@ -68,7 +68,7 @@ exports.rightMargin = ({D,d,M},weight,n) ->
   sin = Math.sin deg
   cos = Math.cos deg
   right = d+(n*d*.66)+sin*rad-cos*rad
-  console.log 'margin', weight, deg, sin, right
+  #console.log 'margin', weight, deg, sin, right
   right
   rightPosition = .5*D+d+(n*d*.66)
   if weight is 0
