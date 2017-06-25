@@ -39,7 +39,6 @@ yourMark = React.createClass
     # 10 -> 1
     # < 5 -> 0
     # 400 / 9 ~ 43
-    console.log that.props.measurements, that.props
     reactKup (k) ->
       k.build Paper,
         circle: true
@@ -49,7 +48,7 @@ yourMark = React.createClass
           , that.props.weight
           # 9 -> 0
           # 0 -> 9
-          right: rightMargin that.props.measurements
+          marginLeft: rightMargin that.props.measurements
           , that.props.weight
           , that.props.n#that.props.weight, 400, that.props.n
           #200+(that.props.n*75)#50+(that.props.n * 60)
@@ -79,11 +78,41 @@ yourMark = React.createClass
                     float: 'left'
                   size: 80
                   src: that.props.target.meta.ScreenshotUrl
+exports.shadowMoon = React.createClass
+  render: ->
+    {D, d, M} = @props.measurements
+    that = this
+    reactKup (k) ->
+      k.div
+        style: that.props.styler
+        ->
+          k.build Paper,
+            circle: true
+            style:
+              width: D
+              height: D
+              marginRight: -D/2
+              marginTop: M
+              marginBottom: M
+              float: 'right'
+              display: 'inline'
+            zDepth: 5
+            ->
+              k.build Avatar,
+                style:
+                  width: D
+                  height: D
+                  marginRight: 0
+                  marginTop: 0
+                  marginBottom: 0
+                  float: 'right'
+                  display: 'inline'
+                size: D/2
+                src: that.props.ScreenshotUrl
 
 VisualCue = React.createClass
   render: ->
     {D, d, M} = @props.measurements
-    console.log @props.measurements
     that = this
     reactKup (k) ->
       k.div ->

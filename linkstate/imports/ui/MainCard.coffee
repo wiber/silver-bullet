@@ -15,7 +15,7 @@ Flip =  require('material-ui/lib/svg-icons/communication/swap-calls').default
 ExitToPage =  require('material-ui/lib/svg-icons/action/exit-to-app').default
 Print =  require('material-ui/lib/svg-icons/action/print').default
 Edit =  require('material-ui/lib/svg-icons/editor/mode-edit').default
-
+{shadowMoon} = require '../ui/MyCard'
 exports.MainCard = React.createClass
   getDefaultProps: ->
     expanded: true
@@ -34,11 +34,16 @@ exports.MainCard = React.createClass
     if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.from]?
       HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
       ScreenshotUrl = HERE.meta.ScreenshotUrl
+    if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.to]?
+      THERE = that.props.user.out.Bookmarks[ linkstate.store that.props.to]
+      ThereScreenshotUrl = THERE.meta.ScreenshotUrl
+      console.log ThereScreenshotUrl
     else HERE = {}
     reactKup (k) ->
       k.build Card, # build the Card component
         expanded: that.props.expanded # add argument key value pairs
-        style: _.extend {}, style.card, style.mCard
+        style: _.extend {}, style.card, style.mCard,
+          overflow: 'hidden'
         ->
           k.build CardHeader,
             title: HERE.title,
@@ -52,6 +57,8 @@ exports.MainCard = React.createClass
               win = window.open(decodeURIComponent HERE.from, '_blank')
               win.focus()
           k.build CardText,
+            style:
+              overflow: 'hidden'
             ->
               k.build FromToSense,
                 from: that.props.from
@@ -60,6 +67,18 @@ exports.MainCard = React.createClass
                 word: that.props.word
                 content: that.props.content
                 user: that.props.user
+              k.build shadowMoon,
+                measurements:
+                  D: 80
+                  d: 80
+                  M: 150
+                ScreenshotUrl: ThereScreenshotUrl
+                styler:
+                  marginLeft: -20# -100
+                  marginTop: -200
+                  #display: 'block'
+                  opacity: .5
+                  position: 'absolute'
           k.build CardActions,
             ->
               k.build IconButton,
