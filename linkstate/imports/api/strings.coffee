@@ -53,18 +53,24 @@ exports.listByMomentum = (listOne, listTwo) ->
 exports.shadowFloor = (L,floor,top) ->
   floor-Math.round(floor/Math.round(.5+L.length*(floor/top)))
 
-exports.upMargin = (weight, size, margin, n) ->
+exports.upMargin = ({D,d,M},weight) ->
+  console.log arguments
   # between  0 and 150+400+150 margin size margin
-  position = 1.3*margin+size-(((weight-4)/5)*(size+margin))
-  console.log position, weight
-  position
-exports.rightMargin = (weight, size, n) ->
+  scalar = (weight-5)/5
+  upper = D + M
+  upm = upper - scalar*upper
+  position = 1.3*M+d-(((weight-4)/5)*(D+M))
+  console.log 'position',position, scalar, upper
+  upm
+exports.rightMargin = ({D,d,M},weight,n) ->
   # 150 + 200
+  console.log arguments
   deg = -90+(180/9)*weight
-  rad = size/2
+  rad = D/2
   x = rad*Math.cos(deg)
-  console.log deg, rad, x, weight
-  200+(n*65)+x
+  margin = 200+(n*65)+x
+  console.log 'margin', M, weight, deg, x
+  margin
   # wierd.. but now almost heart shaped.. stick..
 ###
 exports.markCoordinate = ({size, weight, n}) ->

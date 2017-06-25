@@ -39,16 +39,19 @@ yourMark = React.createClass
     # 10 -> 1
     # < 5 -> 0
     # 400 / 9 ~ 43
-
+    console.log that.props.measurements, that.props
     reactKup (k) ->
       k.build Paper,
         circle: true
         style:
           position: 'absolute'
-          marginTop: upMargin that.props.weight, 400, 150, that.props.n
+          marginTop: upMargin that.props.measurements
+          , that.props.weight
           # 9 -> 0
           # 0 -> 9
-          right: rightMargin that.props.weight, 400, that.props.n
+          right: rightMargin that.props.measurements
+          , that.props.weight
+          , that.props.n#that.props.weight, 400, that.props.n
           #200+(that.props.n*75)#50+(that.props.n * 60)
           width: 80
           height: 80
@@ -133,6 +136,7 @@ VisualCue = React.createClass
               n: n
               target: target
               weight: target.meta.weight
+              measurements: that.props.measurements
 exports.MyCard = React.createClass
   getDefaultProps: ->
     expanded: true
@@ -141,6 +145,10 @@ exports.MyCard = React.createClass
     if @props.expanded is 'undefined'
       that.props.expanded = true
     reactKup (k) ->
+      D = 400
+      d = 80
+      M = 150
+      measurements = {D, d, M}
       k.build Card,
         expanded: that.props.expanded
         style: _.extend {}, style.card, style.yCard
@@ -170,6 +178,7 @@ exports.MyCard = React.createClass
                 ScreenshotUrl: that.props.ScreenshotUrl
                 user: that.props.user
                 from: that.props.from
+                measurements: measurements
 ###
           k.build CardText,
             style:
