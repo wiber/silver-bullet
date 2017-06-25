@@ -82,6 +82,7 @@ yourMark = React.createClass
 
 VisualCue = React.createClass
   render: ->
+    {D, d, M} = @props.measurements
     that = this
     reactKup (k) ->
       k.div ->
@@ -96,7 +97,6 @@ VisualCue = React.createClass
             float: 'right'
             display: 'inline'
           zDepth: 5
-          overflow: 'hidden'
           ->
             k.build Avatar,
               style:
