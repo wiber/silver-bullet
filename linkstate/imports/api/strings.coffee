@@ -70,9 +70,9 @@ exports.rightMargin = ({D,d,M},weight,n) ->
   right = d+(n*d*.66)+sin*rad-cos*rad
   #console.log 'margin', weight, deg, sin, right
   right
-  rightPosition = .5*D+d+(n*d*.66)
+  rightPosition = .5*D+d+(-n*d*.66)
   if weight is 0
-    rightPosition = d
+    rightPosition = rightPosition+D/2
   rightPosition
   # wierd.. but now almost heart shaped.. stick..
 ###

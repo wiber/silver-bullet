@@ -37,8 +37,11 @@ exports.MainCard = React.createClass
     if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.to]?
       THERE = that.props.user.out.Bookmarks[ linkstate.store that.props.to]
       ThereScreenshotUrl = THERE.meta.ScreenshotUrl
-      console.log ThereScreenshotUrl
-    else HERE = {}
+      # if not not known.. we're in an edge case and should use qp
+    else HERE =
+      title: that.props.lastTitle
+      from: that.props.from
+
     reactKup (k) ->
       k.build Card, # build the Card component
         expanded: that.props.expanded # add argument key value pairs

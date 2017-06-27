@@ -64,7 +64,7 @@ yourMark = React.createClass
                 width: 80
                 height: 80
               tooltip: that.props.target.meta.body
-              tooltipPosition: 'bottom'
+              tooltipPosition: 'top-right'
               className: 'YourMarks'
               onClick: (e) ->
                 changeQueryParamsObject
@@ -78,7 +78,7 @@ yourMark = React.createClass
                     float: 'left'
                   size: 80
                   src: that.props.target.meta.ScreenshotUrl
-exports.shadowMoon = React.createClass
+shadowMoon = React.createClass
   render: ->
     {D, d, M} = @props.measurements
     that = this
@@ -201,3 +201,5 @@ exports.MyCard = React.createClass
                 user: that.props.user
                 from: that.props.from
                 measurements: measurements
+exports.yourMark = yourMark
+exports.shadowMoon = shadowMoon
