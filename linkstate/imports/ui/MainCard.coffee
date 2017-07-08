@@ -34,13 +34,14 @@ exports.MainCard = React.createClass
     if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.from]?
       HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
       ScreenshotUrl = HERE.meta.ScreenshotUrl
+    else HERE =
+      title: that.props.lastTitle
+      from: that.props.from
     if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.to]?
       THERE = that.props.user.out.Bookmarks[ linkstate.store that.props.to]
       ThereScreenshotUrl = THERE.meta.ScreenshotUrl
       # if not not known.. we're in an edge case and should use qp
-    else HERE =
-      title: that.props.lastTitle
-      from: that.props.from
+
 
     reactKup (k) ->
       k.build Card, # build the Card component

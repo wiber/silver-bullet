@@ -33,12 +33,6 @@ yourMark = React.createClass
     floor = 5
     top = 50
     shadow = floor-Math.round(floor/Math.round(.5+L*(floor/top)))
-    # > 45 -> 5
-    # 25 -> 3
-    # 15 -> 2
-    # 10 -> 1
-    # < 5 -> 0
-    # 400 / 9 ~ 43
     reactKup (k) ->
       k.build Paper,
         circle: true
@@ -46,12 +40,9 @@ yourMark = React.createClass
           position: 'absolute'
           marginTop: upMargin that.props.measurements
           , that.props.weight
-          # 9 -> 0
-          # 0 -> 9
           marginLeft: rightMargin that.props.measurements
           , that.props.weight
-          , that.props.n#that.props.weight, 400, that.props.n
-          #200+(that.props.n*75)#50+(that.props.n * 60)
+          , that.props.n
           width: 80
           height: 80
         zDepth: shadowFloor that.props.target.meta.body, 5 , 50
