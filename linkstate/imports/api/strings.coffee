@@ -63,16 +63,19 @@ exports.upMargin = ({D,d,M},weight) ->
   upm
 exports.rightMargin = ({D,d,M},weight,n) ->
   # 150 + 200
+  P = weight-5
+  G = Math.abs(P)
+  scalar = Math.cos(Math.PI*G/8)
+  console.log P, G, scalar
   deg = Math.PI-Math.PI*(weight/9)
   rad = D/2
   sin = Math.sin deg
   cos = Math.cos deg
   right = d+(n*d*.66)+sin*rad-cos*rad
-  #console.log 'margin', weight, deg, sin, right
-  right
-  rightPosition = .5*D+d+(-n*d*.66)
+  #console.log 'margin', weight, deg, sin, right, right
+  rightPosition = .7*D+d+(-n*d*.66) - scalar*.5*D+d
   if weight is 0
-    rightPosition = rightPosition+D/2
+    rightPosition = rightPosition+d/2
   rightPosition
   # wierd.. but now almost heart shaped.. stick..
 ###
