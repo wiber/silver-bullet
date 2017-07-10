@@ -65,7 +65,7 @@ exports.rightMargin = ({D,d,M},weight,n) ->
   # 150 + 200
   P = weight-5
   G = Math.abs(P)
-  scalar = Math.cos(Math.PI*G/8)
+  scalar = Math.cos(Math.PI*G/7)
   deg = Math.PI-Math.PI*(weight/9)
   rad = D/2
   sin = Math.sin deg
@@ -74,7 +74,7 @@ exports.rightMargin = ({D,d,M},weight,n) ->
   #console.log 'margin', weight, deg, sin, right, right
   rightPosition = .7*D+d+(-n*d*.66) - scalar*.5*D+d
   if weight is 0
-    rightPosition = rightPosition+d/2
+    rightPosition = rightPosition+d/8
   rightPosition
   # wierd.. but now almost heart shaped.. stick..
 ###
@@ -85,4 +85,12 @@ exports.markCoordinate = ({size, weight, n}) ->
   ->
     x: X
     y: Y
+
+items = 4
+i = 0
+while i < items
+  x = x0 + r * Math.cos(2 * Math.PI * i / items)
+  y = y0 + r * Math.sin(2 * Math.PI * i / items)
+  $('#center').append '<div class=\'point\' style=\'left:' + x + 'px;top:' + y + 'px\'></div>'
+  i++
 ###
