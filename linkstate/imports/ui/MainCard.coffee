@@ -15,7 +15,10 @@ Flip =  require('material-ui/lib/svg-icons/communication/swap-calls').default
 ExitToPage =  require('material-ui/lib/svg-icons/action/exit-to-app').default
 Print =  require('material-ui/lib/svg-icons/action/print').default
 Edit =  require('material-ui/lib/svg-icons/editor/mode-edit').default
-{shadowMoon} = require '../ui/MyCard'
+FromIcon =  require('material-ui/lib/svg-icons/communication/call-received').default
+ToIcon =  require('material-ui/lib/svg-icons/communication/call-made').default
+
+{shadowMoon} = require '../ui/ShadowMoon'
 exports.MainCard = React.createClass
   getDefaultProps: ->
     expanded: true
@@ -98,12 +101,19 @@ exports.MainCard = React.createClass
                 ->
                   k.build Flip
               k.build IconButton,
-                tooltip: "Visit the page you're connecting TO"
+                tooltip: "TO - Visit the page you're connecting TO " + that.props.to
                 tooltipPosition: 'bottom-right'
                 onClick: () ->
                   window.open that.props.to
                 ->
-                  k.build ExitToPage
+                  k.build ToIcon
+              k.build IconButton,
+                tooltip: "FROM - Visit the page you're looking FROM "+that.props.from
+                tooltipPosition: 'bottom-right'
+                onClick: () ->
+                  window.open that.props.from
+                ->
+                  k.build FromIcon
               k.build IconButton,
                 tooltip: "Rich editing and markup of the page. Quote it for your notes. Screenshot a part perhaps?"
                 tooltipPosition: 'bottom-right'
@@ -125,5 +135,27 @@ exports.MainCard = React.createClass
                   window.textAbout.refs.MainCardTextInput.focus()
                 onClick: () ->
                   window.open that.props.to
+                ->
+                  k.build Print
+              k.build IconButton,
+                #style:
+                #  height: 0
+                tooltip: "What are people tweeting about this?"
+                tooltipPosition: 'bottom-right'
+                ref: 'blurerTweet'
+                style:
+                  opacity: .4
+                onFocus: () ->
+                  window.textAbout.refs.MainCardTextInput.focus()
+                onClick: () ->
+                  # request feature by connecting to it....
+                  ###
+                  payload =
+                    from: that.props.user.services.facebook.link
+                    to: "http://youiest.com/features/socialStats"
+                  console.log payload
+                  changeQueryParamsObject payload
+                  ###
+                  window.open 'linkstate.youiest.com'
                 ->
                   k.build Print

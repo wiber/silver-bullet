@@ -66,7 +66,6 @@ exports.rightMargin = ({D,d,M},weight,n) ->
   P = weight-5
   G = Math.abs(P)
   scalar = Math.cos(Math.PI*G/8)
-  console.log P, G, scalar
   deg = Math.PI-Math.PI*(weight/9)
   rad = D/2
   sin = Math.sin deg

@@ -89,11 +89,6 @@ Selected = React.createClass
               that.refs.blurer.refs.tooltip.setState
                 show: false
                 # .hide()#props.style.visibility = 'hidden'
-            onClick: () ->
-              changeQueryParamsObject
-                from: that.props.to
-              changeQueryParamsObject
-                to: that.props.from
             ->
               if that.props.type is 'to'
                 k.build ToIcon
