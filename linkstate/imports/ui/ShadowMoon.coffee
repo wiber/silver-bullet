@@ -154,6 +154,77 @@ VisualCue = React.createClass
               weight: target.meta.weight
               measurements: that.props.measurements
 
+Winged = React.createClass
+  render: ->
+    that = this
+    {user,from,ScreenshotUrl,M,N,U,D, measurements} = that.props
+    reactKup (k) ->
+      k.div ->
+        k.build Paper,
+          circle: true
+          style:
+            width: D
+            height: D
+            marginRight: -D/2
+            marginTop: M
+            marginBottom: M
+            float: 'right'
+            display: 'inline'
+          zDepth: 5
+          ->
+            k.build Avatar,
+              style:
+                width: D
+                height: D
+                marginRight: 0
+                marginTop: 0
+                marginBottom: 0
+                float: 'right'
+                display: 'inline'
+              size: D/2
+              src: that.props.ScreenshotUrl
+        inlink = N?.inLinks?[D.link]?
+        outlink = N?.outLinks?[D.link]?
+        U = {}
+        U.directionUserMeta = {}
+        if outlink
+          U.directionUserMeta.OUTLINKS = N.outLinks[D.link]
+        if inlink
+          U.directionUserMeta.INLINKS = N.inLinks[D.link]
+        counted = 0
+        console.log inlink, outlink, U, that.props, D, N
+        for directedBunch of U.directionUserMeta
+          for userVectorName of U.directionUserMeta[directedBunch]
+            counted++
+            console.log counted, userVectorName, U.directionUserMeta[directedBunch]
+        if that.props?.user?.out?[linkstate.store that.props.from]?
+          out = that.props.user.out[linkstate.store that.props.from]
+          n = 0
+          outArrayByWeight = linkstate.sortByWeight(out, that.props.howMany)
+          for key, mark of outArrayByWeight
+            target = out[mark]
+            arrayValue = outArrayByWeight[key]
+            dictWeight = out[arrayValue].meta.weight
+            lastKey = outArrayByWeight[key-1]
+            if lastKey?
+              if out[lastKey].meta.weight is out[mark].meta.weight
+                n++
+              else
+                n = 0
+            m = target.meta
+            try
+              thisWeight = out[mark].meta.weight
+              lastWeight = (out[mark].meta.weight -1)
+            catch error
+            k.build yourMark,
+              user: that.props.user
+              ScreenshotUrl: that.props.ScreenshotUrl
+              n: n
+              target: target
+              weight: target.meta.weight
+              measurements: that.props.measurements
+
 exports.VisualCue = VisualCue
 exports.yourMark = yourMark
 exports.shadowMoon = shadowMoon
+exports.Winged = Winged
