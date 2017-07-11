@@ -182,7 +182,7 @@ Winged = React.createClass
                 float: 'right'
                 display: 'inline'
               size: D/2
-              src: that.props.ScreenshotUrl
+              src: D.m.ScreenshotUrl#that.props.ScreenshotUrl
         inlink = N?.inLinks?[D.link]?
         outlink = N?.outLinks?[D.link]?
         U = {}
@@ -192,11 +192,10 @@ Winged = React.createClass
         if inlink
           U.directionUserMeta.INLINKS = N.inLinks[D.link]
         counted = 0
-        console.log inlink, outlink, U, that.props, D, N
         for directedBunch of U.directionUserMeta
           for userVectorName of U.directionUserMeta[directedBunch]
             counted++
-            console.log counted, userVectorName, U.directionUserMeta[directedBunch]
+            console.log counted, userVectorName, U.directionUserMeta[directedBunch], ScreenshotUrl
         if that.props?.user?.out?[linkstate.store that.props.from]?
           out = that.props.user.out[linkstate.store that.props.from]
           n = 0
