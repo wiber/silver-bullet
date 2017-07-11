@@ -56,7 +56,7 @@ linkstate.toDotless = (stringed) ->
   stringed.replace /\./g, '%2E'
 
 linkstate.fromDotless = (stringed) ->
-  check stringed, String
+  #check stringed, String
   stringed.replace /%2E/g, '.'
 linkstate.noProtocoll = (stringed) ->
   check stringed, String

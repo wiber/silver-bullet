@@ -51,7 +51,7 @@ yourMark = React.createClass
                 padding: 0
                 width: 80
                 height: 80
-              tooltip: that.props.target.meta.body
+              tooltip: that.props.target.meta.body + ' - ' + linkstate.see that.props.target.from
               tooltipPosition: 'top-right'
               className: 'YourMarks'
               onClick: (e) ->
@@ -153,6 +153,10 @@ VisualCue = React.createClass
               target: target
               weight: target.meta.weight
               measurements: that.props.measurements
+#one one onlyOne
+# a react that paints center and outside
+# a react that defines what to put into places
+# a rect that sets sizes and coordinates? no containers are supposed to be preprocessors
 
 Winged = React.createClass
   render: ->
@@ -195,7 +199,7 @@ Winged = React.createClass
         for directedBunch of U.directionUserMeta
           for userVectorName of U.directionUserMeta[directedBunch]
             counted++
-            console.log counted, userVectorName, U.directionUserMeta[directedBunch], ScreenshotUrl
+            console.log counted, userVectorName, U.directionUserMeta[directedBunch], ScreenshotUrl, D.link, D
         if that.props?.user?.out?[linkstate.store that.props.from]?
           out = that.props.user.out[linkstate.store that.props.from]
           n = 0
@@ -217,7 +221,7 @@ Winged = React.createClass
             catch error
             k.build yourMark,
               user: that.props.user
-              ScreenshotUrl: that.props.ScreenshotUrl
+              ScreenshotUrl: D.m.ScreenshotUrl#that.props.ScreenshotUrl
               n: n
               target: target
               weight: target.meta.weight
