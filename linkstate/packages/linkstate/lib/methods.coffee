@@ -43,9 +43,9 @@ Meteor.methods
         console.log 'Linking'
         , @isSimulation
         , META.title
-        , link.from
-        , link.meta.weight
-        , link.to
+        , from
+        , meta.weight
+        , to
         , Meteor.user()?.services?.facebook?.name #,  Meteor.user().profile.name
         , Meteor.user().hits
     unless to? and from?

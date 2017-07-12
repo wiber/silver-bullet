@@ -109,6 +109,17 @@ oldBullet = React.createClass
             directed: directedBunch
 exports.UrlBox = UrlBox
 ###
+something broken with these queryParams
+http://localhost:3000/about?Bookmarked=true&content=asdasd&from=http%253A%252F%252Fwww.material-ui.com%252Fv0.15.0%252F%2523%252Fcomponents%252Fgrid-list&expandMyCard=true&expandMexplain=true&expandAboutCard=true&to=http%253A%252F%252Fwww.material-ui.com%252Fv0.15.0%252F%2523%252Fcomponents%252Fgrid-list&switched=
+http://localhost:3000/about?
+Bookmarked=true
+&content=asdasd
+&from=http%253A%252F%252Fwww.material-ui.com%252Fv0.15.0%252F%2523%252Fcomponents%252Fgrid-list
+&expandMyCard=true&
+expandMexplain=true
+&expandAboutCard=true
+&to=http%253A%252F%252Fwww.material-ui.com%252Fv0.15.0%252F%2523%252Fcomponents%252Fgrid-list
+&switched=
 
 # inLinks / url / user / wibe
 if timeLink? and timeLink is that.props.from and N.allLinks[timeLink]? # !D.users?
