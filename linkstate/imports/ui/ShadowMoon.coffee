@@ -161,7 +161,7 @@ VisualCue = React.createClass
 Winged = React.createClass
   render: ->
     that = this
-    {user,from,ScreenshotUrl,M,N,U,D, measurements} = that.props
+    {user,from,ScreenshotUrl,M,N,U,D, measurements,firstWibeHere} = that.props
     reactKup (k) ->
       k.div ->
         k.build Paper,
@@ -186,9 +186,9 @@ Winged = React.createClass
                 float: 'right'
                 display: 'inline'
               size: D/2
-              src: D.m.ScreenshotUrl#that.props.ScreenshotUrl
-        inlink = N?.inLinks?[D.link]?
-        outlink = N?.outLinks?[D.link]?
+              src: firstWibeHere.meta.ScreenshotUrl#that.props.ScreenshotUrl
+        inlink = N?.inLinks?[firstWibeHere.subtitle]?
+        outlink = N?.outLinks?[firstWibeHere.subtitle]?
         U = {}
         U.directionUserMeta = {}
         if outlink
@@ -221,7 +221,7 @@ Winged = React.createClass
             catch error
             k.build yourMark,
               user: that.props.user
-              ScreenshotUrl: D.m.ScreenshotUrl#that.props.ScreenshotUrl
+              ScreenshotUrl: target.meta.ScreenshotUrl#that.props.ScreenshotUrl
               n: n
               target: target
               weight: target.meta.weight

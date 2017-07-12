@@ -80,10 +80,12 @@ Meteor.methods
     setEdgeIn = {}
     setEdgeOut = {}
     setEdgeIn['out.' + FROM + '.' + username] = edge
+    setEdgeIn['links.out.' + FROM + '.' + username] = edge
     edge.title = META.title# or TO # because we're in TO this
     setEdgeIn.title = edge.title
     edge.title = META.title or FROM # because we're out FROM this
     setEdgeOut['in.' + TO + '.' + username] = edge
+    setEdgeOut['links.in.' + TO + '.' + username] = edge
     setEdgeOut.title = edge.title
 
     setIt = {}

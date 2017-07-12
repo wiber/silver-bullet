@@ -24,40 +24,53 @@ UrlBox = React.createClass
   render: ->
     that = this
     reactKup (k) ->
-      {N,dotlessLink,thumbalizr,user,word,from,to} = that.props
+      {N,dotlessLink,thumbalizr,user,word,from,to,ScreenshotUrl} = that.props
       usersLinks = N.allLinks[dotlessLink]
       # more correct to sort by date.. but why..
       firstUserHere = Object.keys(usersLinks)[0]
-      #  at least one of the node ends points to here. we don't want to draw two if there's a self reference
-      
-      console.log N.inLinks[dotlessLink]?, N.outLinks[dotlessLink]?
-      firstWibeHere = usersLinks[firstUserHere]
+      #  at least one of the node ends points to here.
+      if N.node.in[dotlessLink]? and N.node.out[dotlessLink]?
+        firstWibeHere = usersLinks[firstUserHere]
+        console.log "# we don't want to draw two if there's a self reference",firstWibeHere
+        type = 3
+      else
+        if N.node.in[dotlessLink]?
+          firstWibeHere = N.node.in[dotlessLink][Object.keys(N.node.in[dotlessLink])[0]]
+          firstWibeHere.subtitle = firstWibeHere.meta.FromLink
+          type = 2
+        else
+          if N.node.out[dotlessLink]?
+            firstWibeHere = N.node.out[dotlessLink][Object.keys(N.node.out[dotlessLink])[0]]
+            firstWibeHere.subtitle = firstWibeHere.meta.ToLink
+            type = 1
+          else
+            type = 0
+            firstWibeHeresubtitle = ''
+            console.error 'very strange not to have either in or out. is the link in a bad format?'
       # are we looking at this because it points to or from this place?
       # we have to cycle through both to and fros.. but we only show the other end
-
-      console.log that.props, firstUserHere
+      #console.log  firstUserHere, firstWibeHere, firstWibeHere.meta.title, type
       k.build GridTile,
         title: firstWibeHere.meta.title
-        subtitle: D.m.FromLink#[that.props.type]#that.props.word.to + D.m.ToLink
+        subtitle: firstWibeHere.subtitle #D.m.FromLink#[that.props.type]#that.props.word.to + D.m.ToLink
         onClick: (e) ->
           GoMark
             type:
-              from: D.m.FromLink
-              to: D.m.ToLink
+              from: firstWibeHere.meta.FromLink
+              to: firstWibeHere.meta.ToLink
             N: N.node
             user: that.props.user
         ->
           k.build Winged,
-            ScreenshotUrl: that.props.ScreenshotUrl
+            ScreenshotUrl: firstWibeHere.meta.ScreenshotUrl # because.. it's picked
             user: that.props.user
-            from: D.m.FromLink#that.props.from
+            from: that.props.from #firstWibeHere.meta.FromLink#
+            firstWibeHere: firstWibeHere
             measurements:
               D: 300
               d: 60
               M: 50
             N: N
-            U: U
-            D: D
 
 oldBullet = React.createClass
   render: ->
