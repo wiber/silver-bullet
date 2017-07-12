@@ -16,7 +16,9 @@ CardText =  require('material-ui/lib/card/card-text').default
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 {bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
 {UrlBox} = require '../../imports/ui/UrlBox.coffee'
+{see,store} = require '../../imports/api/strings.coffee'
 R = require 'ramda'
+
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store, AByMomentum, listByMomentum} = require '../api/strings.coffee'
 AboutCard = React.createClass
@@ -66,31 +68,21 @@ AboutCard = React.createClass
                   N.vectors = {}
                   N.sortByWeight = AByMomentum N.inLinks
                   N.sortOutByWeight = AByMomentum N.outLinks
-                  N.rankedinLinks = AByMomentum( N.inLinks)
-                  N.rankedOutlinks = AByMomentum(N.outLinks)
-                  N.sortAllMomentum = listByMomentum(N.rankedinLinks
-                  , N.rankedOutlinks)
-
-                  for timeLink in N.sortAllMomentum
-                    D = {}
-                    D.N = N
-                    D.link = timeLink
-                    D.users = N.allLinks[timeLink]
-                    D.firstUsersLink = D.users[Object.keys(D.users)[0]]
-                    D.m = D.firstUsersLink.meta
-                    U = {} # users votes loop object
-                    U.D = D
-                    U.usersConnections = N.inLinks[D.link]
+                  N.dir = {}
+                  N.dir.rankedinLinks = AByMomentum( N.inLinks)
+                  N.dir.rankedOutlinks = AByMomentum(N.outLinks)
+                  N.sortAllMomentum = listByMomentum(N.dir.rankedinLinks
+                  , N.dir.rankedOutlinks)
+                  for dotlessLink in N.sortAllMomentum
                     k.build UrlBox,
-                      D: D
                       N: N
-                      U: U
                       from: that.props.from
                       to: that.props.to
                       props: that.props
                       thumbalizr: that.props.thumbalizr
                       word: that.props.word
                       user: that.props.user
+                      dotlessLink: dotlessLink
 
 
 exports.AboutCard = createContainer ((props) ->

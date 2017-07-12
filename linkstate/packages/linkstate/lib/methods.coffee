@@ -30,12 +30,7 @@ Meteor.methods
   GroundedUserInsert: ->
     if Meteor.isClient and Meteor.user()
       localStorage.setItem 'latest', JSON.stringify(Meteor.user())
-  Linking: (link) ->
-    #this.unblock() # allow next req without wait
-    #check(link.from,'string')
-    to = link.to
-    from = link.from
-    META = link.meta
+  Linking: ({from, to, META}) ->
     unless META?
       META = {}
     unless META.title?

@@ -24,10 +24,20 @@ UrlBox = React.createClass
   render: ->
     that = this
     reactKup (k) ->
-      {D,N,U,thumbalizr,user,word,from,to} = that.props
+      {N,dotlessLink,thumbalizr,user,word,from,to} = that.props
+      usersLinks = N.allLinks[dotlessLink]
+      # more correct to sort by date.. but why..
+      firstUserHere = Object.keys(usersLinks)[0]
+      #  at least one of the node ends points to here. we don't want to draw two if there's a self reference
+      
+      console.log N.inLinks[dotlessLink]?, N.outLinks[dotlessLink]?
+      firstWibeHere = usersLinks[firstUserHere]
+      # are we looking at this because it points to or from this place?
+      # we have to cycle through both to and fros.. but we only show the other end
+
+      console.log that.props, firstUserHere
       k.build GridTile,
-        key: D.link+'Node'
-        title: D.m.title#m.FromLink
+        title: firstWibeHere.meta.title
         subtitle: D.m.FromLink#[that.props.type]#that.props.word.to + D.m.ToLink
         onClick: (e) ->
           GoMark
@@ -85,3 +95,30 @@ oldBullet = React.createClass
             meta: U.directionUserMeta[directedBunch][userVectorName].meta
             directed: directedBunch
 exports.UrlBox = UrlBox
+###
+
+# inLinks / url / user / wibe
+if timeLink? and timeLink is that.props.from and N.allLinks[timeLink]? # !D.users?
+# we are interested in the one that is not where we are now,
+# but has connections to or from it.
+D = {}
+D.N = N
+D.link = timeLink
+D.users = N.allLinks[timeLink]
+console.log
+console.log Object.keys(D.users),Object.keys(D.users)[0]
+D.firstUsersLink = D.users[Object.keys(D.users)[0]]
+D.m = D.firstUsersLink.meta
+#console.log typeof D.users
+console.log  D.users,Object.keys(D.users)[0], timeLink
+U = {} # users votes loop object
+U.D = D
+console.log D, D.link
+U.usersConnections = N.inLinks[D.link]
+# needs to know this url in the loop, and what page we're on so it can avoid drawing... two?
+# needs the node object
+# needs to draw the big circle and the small circles
+
+else
+console.log 'not interested in links here, only who linked it to other places'
+###
