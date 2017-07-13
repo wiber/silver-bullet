@@ -19,6 +19,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 R = require 'ramda'
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store, AByMomentum, listByMomentum} = require '../api/strings.coffee'
+n = 0
 AboutCard = React.createClass
   render: ->
     that = this
@@ -72,15 +73,29 @@ AboutCard = React.createClass
                   , N.rankedOutlinks)
 
                   for timeLink in N.sortAllMomentum
-                    D = {}
-                    D.N = N
-                    D.link = timeLink
-                    D.users = N.allLinks[timeLink]
+                    D =
+                      N: N
+                      link: timeLink
+                      users: N.allLinks[timeLink]
+
+
                     D.firstUsersLink = D.users[Object.keys(D.users)[0]]
-                    D.m = D.firstUsersLink.meta
-                    U = {} # users votes loop object
-                    U.D = D
-                    U.usersConnections = N.inLinks[D.link]
+                    D.state =
+                      params:
+                        from: linkstate.store(that.props.from)
+                        to: linkstate.store(that.props.to)
+                      connections:
+                        from: D.firstUsersLink.from
+                        to: D.firstUsersLink.to
+                    D.m= D.firstUsersLink.meta
+                    U = # {} # users votes loop object
+                      D: D
+                      usersConnections: N.inLinks[D.link]
+                    #for type, tuple of D.state
+
+                    for param, paramLink of D.state.params
+                      for here, nodeLink of D.state.connections
+                        drawTheOther param, paramLink, here, nodeLink, D.firstUsersLink
                     k.build UrlBox,
                       D: D
                       N: N
@@ -92,6 +107,19 @@ AboutCard = React.createClass
                       word: that.props.word
                       user: that.props.user
 
+drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
+  # if the link.. is the place we are now...
+  # that should NOT be the ScreenshotUrl
+  # because it's assumed we're talking about the other
+  # does it matter if we point to a place? not just from? we could
+  #.. put it in the first position since it's of special interest
+  if paramLink == nodeLink and param == 'from'
+    n++
+    console.log param, here
+    if param is 'from' and here == 'to'
+      # we're point to the place we are, use the other link for ScreenshotUrl
+      console.log linkstate.thumbalizrPic(hereNode.from)
+  console.log n #  if self reference exists, will be two more than links here
 
 exports.AboutCard = createContainer ((props) ->
 
