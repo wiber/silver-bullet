@@ -5,7 +5,7 @@
 # from and to are plain decodeURIComponent urls
 # which are then used to select defaultValue in the stateless ui component
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
-Selected = require('../ui/Selected.coffee').Selected
+Selected = require('../ui/SelectedUI.coffee').Selected
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store} = require '../api/strings.coffee'
 
@@ -23,8 +23,8 @@ exports.selectedContainer = createContainer ((props) ->
 
 setOptions = (props) ->
   options = []
-  if props.user?.out?
-    dictWithCreatedAt = props.user.out['Bookmarks']
+  if props.user?.links?.out?
+    dictWithCreatedAt = props.user.links.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
     for index,value of deChaos
       if typeof value is 'string' and value != 'undefined'
@@ -50,8 +50,8 @@ setValue = (props, options, user) ->
   directedTo = typeof props.to is 'string' and props.to.length > 1
   clientReady = props.user?.services?.facebook? and Meteor.isClient
   gotFrom = typeof props.from is 'string' and props.from.length > 1
-  bookmarked = props.user?.out?.Bookmarks?
-  dictWithCreatedAt = props.user.out['Bookmarks']
+  bookmarked = props.user?.links?.out?.Bookmarks?
+  dictWithCreatedAt = props.user.links.out['Bookmarks']
   typeValue = props[props.type]
   dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
   dictValueExists = dictValue?.meta?.title?

@@ -22,8 +22,8 @@ exports.Layout = React.createClass
   render: ->
     that = this
     reactKup (k) ->
-      if that.props.user?.out?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
-        HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
+      if that.props.user?.links?.out?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
+        HERE = that.props.user.links.out.Bookmarks[ linkstate.store that.props.from]
         ScreenshotUrl = HERE.meta.ScreenshotUrl
       if HERE?.title?
         titleHere = HERE.title

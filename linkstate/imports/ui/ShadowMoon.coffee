@@ -128,7 +128,7 @@ VisualCue = React.createClass
               size: D/2
               src: that.props.ScreenshotUrl
         if that.props?.user?.out?[linkstate.store that.props.from]?
-          out = that.props.user.out[linkstate.store that.props.from]
+          out = that.props.user.links.out[linkstate.store that.props.from]
           n = 0
           outArrayByWeight = linkstate.sortByWeight(out, that.props.howMany)
           for key, mark of outArrayByWeight
@@ -201,7 +201,7 @@ Winged = React.createClass
             counted++
             console.log counted, userVectorName, U.directionUserMeta[directedBunch], ScreenshotUrl, D.link, D
         if that.props?.user?.out?[linkstate.store that.props.from]?
-          out = that.props.user.out[linkstate.store that.props.from]
+          out = that.props.user.links.out[linkstate.store that.props.from]
           n = 0
           outArrayByWeight = linkstate.sortByWeight(out, that.props.howMany)
           for key, mark of outArrayByWeight

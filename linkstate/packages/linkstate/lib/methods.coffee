@@ -29,7 +29,7 @@ Meteor.methods
 
   GroundedUserInsert: ->
     if Meteor.isClient and Meteor.user()
-      localStorage.setItem 'latest', JSON.stringify(Meteor.user())
+      localStorage.userUpdateObjectem 'latest', JSON.stringify(Meteor.user())
   Linking: ({from, to, META}) ->
     unless META?
       META = {}
@@ -44,7 +44,7 @@ Meteor.methods
         , @isSimulation
         , META.title
         , from
-        , meta.weight
+        , META.weight
         , to
         , Meteor.user()?.services?.facebook?.name #,  Meteor.user().profile.name
         , Meteor.user().hits
@@ -79,23 +79,23 @@ Meteor.methods
       username = 'EarlyBird'
     setEdgeIn = {}
     setEdgeOut = {}
-    setEdgeIn['out.' + FROM + '.' + username] = edge
+    #setEdgeIn['out.' + FROM + '.' + username] = edge
     setEdgeIn['links.out.' + FROM + '.' + username] = edge
     edge.title = META.title# or TO # because we're in TO this
     setEdgeIn.title = edge.title
     edge.title = META.title or FROM # because we're out FROM this
-    setEdgeOut['in.' + TO + '.' + username] = edge
+    #setEdgeOut['in.' + TO + '.' + username] = edge
     setEdgeOut['links.in.' + TO + '.' + username] = edge
     setEdgeOut.title = edge.title
 
-    setIt = {}
-    setIt.edited = time
+    userUpdateObject = {}
+    userUpdateObject.edited = time
     if from not in categoryTypes
-      setIt.fromLast = from
+      userUpdateObject.fromLast = from
     if to not in categoryTypes
-      setIt.toLast = to
-    setIt['in.'+FROM+'.'+TO] = edge
-    setIt['out.'+TO+'.'+FROM] = edge
+      userUpdateObject.toLast = to
+    userUpdateObject['links.in.'+FROM+'.'+TO] = edge
+    userUpdateObject['links.out.'+TO+'.'+FROM] = edge
     # totally kills latency compensation on page
     # load to avoid uncaught error in fast render
     if Meteor.isServer or UserHandle?.ready()
@@ -103,7 +103,7 @@ Meteor.methods
         Meteor.users.update # we need to know what our last connection was
           _id: Meteor.userId()
         ,
-          $set: setIt
+          $set: userUpdateObject
           $inc:
             'hits': 1
       else
@@ -113,11 +113,11 @@ Meteor.methods
         # in dropdown? are we sure they are unioque urls?
         # TODO break out model operations into tested functions
         # get my bookmarka, get a title for this place, etc
-        setIt['out.Bookmarks.'+FROM+'.meta.weight'] = 0
+        userUpdateObject['out.Bookmarks.'+FROM+'.meta.weight'] = 0
         Meteor.users.update # we need to know what our last connection was
           _id: Meteor.userId()
         ,
-          $set: setIt
+          $set: userUpdateObject
           $inc:
             'hits': 1
     if Meteor.isClient
@@ -170,7 +170,7 @@ Meteor.methods
         new Meteor.Error 7
         , "Reply Does the User object have facebook credentials?"
     Meteor.call "Linking",
-      from: Linkstates.store('Linkstates.youiest.com')
+      from: linkstate.store('Linkstates.youiest.com')
       to: 'Bookmarks' # the thing we're defining
       meta:
         title: 'Linkstates - Connecting is seeing'
@@ -195,7 +195,7 @@ Meteor.methods
         if result
           unless result is Meteor.user().hits
             new Meteor.Error 16, "sync error? looks like user object not synced"
-          localStorage.setItem 'serverHits', result
+          localStorage.userUpdateObjectem 'serverHits', result
   resetUser: () ->
     if Meteor.isClient
       console.log 'remove localStorage'
