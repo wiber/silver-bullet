@@ -173,7 +173,7 @@ Meteor.methods
         new Meteor.Error 7
         , "Reply Does the User object have facebook credentials?"
     Meteor.call "Linking",
-      from: Linkstates.store('Linkstates.youiest.com')
+      from: linkstate.store('Linkstates.youiest.com')
       to: 'Bookmarks' # the thing we're defining
       meta:
         title: 'Linkstates - Connecting is seeing'
