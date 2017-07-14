@@ -128,32 +128,6 @@ Winged =React.createClass
               size: D/2
               src: that.props.ScreenshotUrl
         # draw the bullets.. as wings.. ed faces
-        if that.props?.user?.out?[linkstate.store that.props.from]?
-          out = that.props.user.out[linkstate.store that.props.from]
-          n = 0
-          outArrayByWeight = linkstate.sortByWeight(out, that.props.howMany)
-          for key, mark of outArrayByWeight
-            target = out[mark]
-            arrayValue = outArrayByWeight[key]
-            dictWeight = out[arrayValue].meta.weight
-            lastKey = outArrayByWeight[key-1]
-            if lastKey?
-              if out[lastKey].meta.weight is out[mark].meta.weight
-                n++
-              else
-                n = 0
-            m = target.meta
-            try
-              thisWeight = out[mark].meta.weight
-              lastWeight = (out[mark].meta.weight -1)
-            catch error
-            k.build yourMark,
-              user: that.props.user
-              ScreenshotUrl: that.props.ScreenshotUrl
-              n: n
-              target: target
-              weight: target.meta.weight
-              measurements: that.props.measurements
 
 VisualCue = React.createClass
   render: ->
@@ -254,7 +228,7 @@ wingMark = React.createClass
                     height: 80
                     float: 'left'
                   size: 80
-                  src: that.props.meta.ScreenshotUrl
+                  src: that.props.meta.face
 
 exports.VisualCue = VisualCue
 exports.yourMark = yourMark

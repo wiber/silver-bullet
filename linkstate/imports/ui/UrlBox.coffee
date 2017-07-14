@@ -55,13 +55,25 @@ UrlBox = React.createClass
           if inlink
             U.directionUserMeta.INLINKS = N.inLinks[D.link]
           counted = 0
+          loopi =
+            lastWeight: false
+            offsetSequence: 0
+
           for directedBunch of U.directionUserMeta
             for userVectorName of U.directionUserMeta[directedBunch]
               counted++
+              meta = U.directionUserMeta[directedBunch][userVectorName].meta
+              if loopi.lastWeight == meta.weight
+                loopi.offsetSequence++
+              else
+                loopi.offsetSequence = 0
               k.build wingMark,
+                loopi: loopi
+                weight: meta.weight
+                n: loopi.offsetSequence
                 counted: counted
                 size: style.scalars.screenshotWidth
-                meta: U.directionUserMeta[directedBunch][userVectorName].meta
+                meta: meta
                 directed: directedBunch
                 measurements:
                   D: 300
