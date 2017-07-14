@@ -16,6 +16,8 @@ CardText =  require('material-ui/lib/card/card-text').default
 {bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
 {LinkVote} = require '../../imports/ui/LinkVote.coffee'
 {GoMark} = require '../../imports/api/nav/GoMark.coffee'
+{VisualCue} = require '../ui/ShadowMoon.coffee'
+
 R = require 'ramda'
 UrlBox = React.createClass
   propTypes:
@@ -38,21 +40,14 @@ UrlBox = React.createClass
             N: N.node
             user: that.props.user
         ->
-          k.div ->
-            k.div
-              style: style.fromBullet
-              ->
-                k.img
-                  style: _.extend {}, style.webShot,
-                    opacity: .7
-                    zIndex: 2
-                  src: D.drawTheOther.ScreenshotUrl #linkstate.thumbalizrPic D.m.FromLink
-            k.img
-              style: _.extend {}, style.webShot,
-                position: 'absolute'
-                left: '30%'
-                zIndex: -1
-              src: D.drawTheOther.ScreenshotUrl  # linkstate.thumbalizrPic D.m.ToLink
+          k.build VisualCue,
+            ScreenshotUrl: D.drawTheOther.ScreenshotUrl
+            user: that.props.user
+            from: that.props.from
+            measurements:
+              D: 300
+              d: 50
+              M: 100
           inlink = N.inLinks?[D.link]?
           outlink = N.outLinks?[D.link]?
           U.directionUserMeta = {}
