@@ -122,6 +122,7 @@ drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
       # we're point to the place we are, use the other link for ScreenshotUrl
       returner =
         ScreenshotUrl: linkstate.thumbalizrPic(hereNode.from)
+        otherUrl: hereNode.from
     if param == 'from' and here == 'from'
       # self ref
       returner = false

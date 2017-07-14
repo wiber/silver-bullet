@@ -102,60 +102,58 @@ Winged =React.createClass
     {D, d, M} = @props.measurements
     that = this
     reactKup (k) ->
-      k.div
-        style:
-          textAlign: 'center'
-        ->
-          k.build Paper,
-            circle: true
-            style:
-              width: D
-              height: D
-              #marginLeft: '25%' #'auto' #Right: D/2
-              #marginRight: '25%'
-              marginTop: M
-              marginBottom: M
-              #float: 'right'
-              display: 'inline-block'
-            zDepth: 5
-            ->
-              k.build Avatar,
-                style:
-                  width: D
-                  height: D
-                  marginRight: 0
-                  marginTop: 0
-                  marginBottom: 0
-                  float: 'right'
-                  display: 'inline'
-                size: D/2
-                src: that.props.ScreenshotUrl
-          if that.props?.user?.out?[linkstate.store that.props.from]?
-            out = that.props.user.out[linkstate.store that.props.from]
-            n = 0
-            outArrayByWeight = linkstate.sortByWeight(out, that.props.howMany)
-            for key, mark of outArrayByWeight
-              target = out[mark]
-              arrayValue = outArrayByWeight[key]
-              dictWeight = out[arrayValue].meta.weight
-              lastKey = outArrayByWeight[key-1]
-              if lastKey?
-                if out[lastKey].meta.weight is out[mark].meta.weight
-                  n++
-                else
-                  n = 0
-              m = target.meta
-              try
-                thisWeight = out[mark].meta.weight
-                lastWeight = (out[mark].meta.weight -1)
-              catch error
-              k.build yourMark,
-                user: that.props.user
-                ScreenshotUrl: that.props.ScreenshotUrl
-                n: n
-                target: target
-                weight: target.meta.weight
-                measurements: that.props.measurements
+      k.div ->
+        k.build Paper,
+          circle: true
+          style:
+            width: D
+            height: D
+            marginRight: style.scalars.boxWidth/2-.75*D#'25%' #'auto' #Right: D/2
+            #marginRight: '25%'
+            marginTop: M
+            marginBottom: M
+            float: 'right'
+            display: 'inline'
+          zDepth: 5
+          ->
+            k.build Avatar,
+              style:
+                width: D
+                height: D
+                marginRight: 0
+                marginTop: 0
+                marginBottom: 0
+                float: 'right'
+                display: 'inline'
+              size: D/2
+              src: that.props.ScreenshotUrl
+        # draw the bullets.. as wings.. ed faces
+        if that.props?.user?.out?[linkstate.store that.props.from]?
+          out = that.props.user.out[linkstate.store that.props.from]
+          n = 0
+          outArrayByWeight = linkstate.sortByWeight(out, that.props.howMany)
+          for key, mark of outArrayByWeight
+            target = out[mark]
+            arrayValue = outArrayByWeight[key]
+            dictWeight = out[arrayValue].meta.weight
+            lastKey = outArrayByWeight[key-1]
+            if lastKey?
+              if out[lastKey].meta.weight is out[mark].meta.weight
+                n++
+              else
+                n = 0
+            m = target.meta
+            try
+              thisWeight = out[mark].meta.weight
+              lastWeight = (out[mark].meta.weight -1)
+            catch error
+            k.build yourMark,
+              user: that.props.user
+              ScreenshotUrl: that.props.ScreenshotUrl
+              n: n
+              target: target
+              weight: target.meta.weight
+              measurements: that.props.measurements
 
 VisualCue = React.createClass
   render: ->
@@ -213,7 +211,53 @@ VisualCue = React.createClass
               weight: target.meta.weight
               measurements: that.props.measurements
 
+wingMark = React.createClass
+  render: ->
+    that = this
+    body = that.props.meta.body
+    L = body.length
+    floor = 5
+    top = 50
+    shadow = floor-Math.round(floor/Math.round(.5+L*(floor/top)))
+    reactKup (k) ->
+      k.build Paper,
+        circle: true
+        style:
+          position: 'absolute'
+          marginTop: upMargin that.props.measurements
+          , that.props.weight
+          marginLeft: rightMargin that.props.measurements
+          , that.props.weight
+          , that.props.n
+          width: 80
+          height: 80
+        zDepth: shadowFloor that.props.meta.body, 5 , 50
+        overflow: 'hidden'
+        ->
+          k.div ->
+            k.build IconButton,
+              style:
+                padding: 0
+                width: 80
+                height: 80
+              tooltip: that.props.meta.body
+              tooltipPosition: 'top-right'
+              className: 'YourMarks'
+              onClick: (e) ->
+                changeQueryParamsObject
+                  from: that.props.FromLink
+                  to: that.props.meta.FromLink
+              ->
+                k.build Avatar,
+                  style:
+                    width: 80
+                    height: 80
+                    float: 'left'
+                  size: 80
+                  src: that.props.meta.ScreenshotUrl
+
 exports.VisualCue = VisualCue
 exports.yourMark = yourMark
 exports.shadowMoon = shadowMoon
 exports.Winged = Winged
+exports.wingMark = wingMark

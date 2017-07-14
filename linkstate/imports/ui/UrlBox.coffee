@@ -16,7 +16,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 {bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
 {LinkVote} = require '../../imports/ui/LinkVote.coffee'
 {GoMark} = require '../../imports/api/nav/GoMark.coffee'
-{Winged, VisualCue} = require '../ui/ShadowMoon.coffee'
+{Winged, VisualCue, wingMark} = require '../ui/ShadowMoon.coffee'
 
 R = require 'ramda'
 UrlBox = React.createClass
@@ -58,10 +58,14 @@ UrlBox = React.createClass
           for directedBunch of U.directionUserMeta
             for userVectorName of U.directionUserMeta[directedBunch]
               counted++
-              k.build LinkVote,
+              k.build wingMark,
                 counted: counted
                 size: style.scalars.screenshotWidth
                 meta: U.directionUserMeta[directedBunch][userVectorName].meta
                 directed: directedBunch
+                measurements:
+                  D: 300
+                  d: 50
+                  M: 100
 
 exports.UrlBox = UrlBox
