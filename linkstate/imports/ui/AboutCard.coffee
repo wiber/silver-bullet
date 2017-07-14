@@ -118,7 +118,6 @@ drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
   #.. put it in the first position since it's of special interest
   if paramLink == nodeLink and param == 'from'
     n++
-    console.log param, here
     if param is 'from' and here == 'to'
       # we're point to the place we are, use the other link for ScreenshotUrl
       returner =

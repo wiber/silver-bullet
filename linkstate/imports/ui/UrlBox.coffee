@@ -16,7 +16,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 {bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
 {LinkVote} = require '../../imports/ui/LinkVote.coffee'
 {GoMark} = require '../../imports/api/nav/GoMark.coffee'
-{VisualCue} = require '../ui/ShadowMoon.coffee'
+{Winged, VisualCue} = require '../ui/ShadowMoon.coffee'
 
 R = require 'ramda'
 UrlBox = React.createClass
@@ -26,7 +26,6 @@ UrlBox = React.createClass
     that = this
     reactKup (k) ->
       {D,N,U} = that.props
-      console.log D.drawTheOther.ScreenshotUrl
       thumbalizr = that.props.thumbalizr
       k.build GridTile,
         key: D.link+'Node'
@@ -40,7 +39,7 @@ UrlBox = React.createClass
             N: N.node
             user: that.props.user
         ->
-          k.build VisualCue,
+          k.build Winged,
             ScreenshotUrl: D.drawTheOther.ScreenshotUrl
             user: that.props.user
             from: that.props.from

@@ -97,6 +97,65 @@ shadowMoon = React.createClass
                   display: 'inline'
                 size: D/2
                 src: that.props.ScreenshotUrl
+Winged =React.createClass
+  render: ->
+    {D, d, M} = @props.measurements
+    that = this
+    reactKup (k) ->
+      k.div
+        style:
+          textAlign: 'center'
+        ->
+          k.build Paper,
+            circle: true
+            style:
+              width: D
+              height: D
+              #marginLeft: '25%' #'auto' #Right: D/2
+              #marginRight: '25%'
+              marginTop: M
+              marginBottom: M
+              #float: 'right'
+              display: 'inline-block'
+            zDepth: 5
+            ->
+              k.build Avatar,
+                style:
+                  width: D
+                  height: D
+                  marginRight: 0
+                  marginTop: 0
+                  marginBottom: 0
+                  float: 'right'
+                  display: 'inline'
+                size: D/2
+                src: that.props.ScreenshotUrl
+          if that.props?.user?.out?[linkstate.store that.props.from]?
+            out = that.props.user.out[linkstate.store that.props.from]
+            n = 0
+            outArrayByWeight = linkstate.sortByWeight(out, that.props.howMany)
+            for key, mark of outArrayByWeight
+              target = out[mark]
+              arrayValue = outArrayByWeight[key]
+              dictWeight = out[arrayValue].meta.weight
+              lastKey = outArrayByWeight[key-1]
+              if lastKey?
+                if out[lastKey].meta.weight is out[mark].meta.weight
+                  n++
+                else
+                  n = 0
+              m = target.meta
+              try
+                thisWeight = out[mark].meta.weight
+                lastWeight = (out[mark].meta.weight -1)
+              catch error
+              k.build yourMark,
+                user: that.props.user
+                ScreenshotUrl: that.props.ScreenshotUrl
+                n: n
+                target: target
+                weight: target.meta.weight
+                measurements: that.props.measurements
 
 VisualCue = React.createClass
   render: ->
@@ -157,3 +216,4 @@ VisualCue = React.createClass
 exports.VisualCue = VisualCue
 exports.yourMark = yourMark
 exports.shadowMoon = shadowMoon
+exports.Winged = Winged
