@@ -23,9 +23,8 @@ UrlBox = React.createClass
   render: ->
     that = this
     reactKup (k) ->
-      D = that.props.D
-      N = that.props.N
-      U = that.props.U
+      {D,N,U} = that.props
+      console.log D.drawTheOther.ScreenshotUrl
       thumbalizr = that.props.thumbalizr
       k.build GridTile,
         key: D.link+'Node'
@@ -47,13 +46,13 @@ UrlBox = React.createClass
                   style: _.extend {}, style.webShot,
                     opacity: .7
                     zIndex: 2
-                  src: linkstate.thumbalizrPic D.m.FromLink
+                  src: D.drawTheOther.ScreenshotUrl #linkstate.thumbalizrPic D.m.FromLink
             k.img
               style: _.extend {}, style.webShot,
                 position: 'absolute'
                 left: '30%'
                 zIndex: -1
-              src:linkstate.thumbalizrPic D.m.ToLink
+              src: D.drawTheOther.ScreenshotUrl  # linkstate.thumbalizrPic D.m.ToLink
           inlink = N.inLinks?[D.link]?
           outlink = N.outLinks?[D.link]?
           U.directionUserMeta = {}

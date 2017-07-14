@@ -92,20 +92,23 @@ AboutCard = React.createClass
                       D: D
                       usersConnections: N.inLinks[D.link]
                     #for type, tuple of D.state
-
                     for param, paramLink of D.state.params
                       for here, nodeLink of D.state.connections
-                        drawTheOther param, paramLink, here, nodeLink, D.firstUsersLink
-                    k.build UrlBox,
-                      D: D
-                      N: N
-                      U: U
-                      from: that.props.from
-                      to: that.props.to
-                      props: that.props
-                      thumbalizr: that.props.thumbalizr
-                      word: that.props.word
-                      user: that.props.user
+                        R = drawTheOther param, paramLink, here, nodeLink, D.firstUsersLink
+                        if R?
+                          D.drawTheOther = R
+                    console.log D.drawTheOther.ScreenshotUrl
+                    if D.drawTheOther.ScreenshotUrl?
+                      k.build UrlBox,
+                        D: D
+                        N: N
+                        U: U
+                        from: that.props.from
+                        to: that.props.to
+                        props: that.props
+                        thumbalizr: that.props.thumbalizr
+                        word: that.props.word
+                        user: that.props.user
 
 drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
   # if the link.. is the place we are now...
@@ -118,8 +121,15 @@ drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
     console.log param, here
     if param is 'from' and here == 'to'
       # we're point to the place we are, use the other link for ScreenshotUrl
-      console.log linkstate.thumbalizrPic(hereNode.from)
-  console.log n #  if self reference exists, will be two more than links here
+      returner =
+        ScreenshotUrl: linkstate.thumbalizrPic(hereNode.from)
+    if param == 'from' and here == 'from'
+      # self ref
+      returner = false
+    # how do we detect same orientation as queryParams?
+  console.log returner,n
+  returner
+  #console.log n #  if self reference exists, will be two more than links here
 
 exports.AboutCard = createContainer ((props) ->
 
