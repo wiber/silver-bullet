@@ -20,7 +20,7 @@ Print =  require('material-ui/lib/svg-icons/action/print').default
 IconButton = require('material-ui/lib/icon-button').default
 Paper = require('material-ui/lib/paper').default
 Avatar = require('material-ui/lib/avatar').default
-{shadowFloor, upMargin, rightMargin} = require '../api/strings'
+{shadowFloor, upMargin, rightMargin,Position} = require '../api/strings'
 
 yourMark = React.createClass
   render: ->
@@ -97,37 +97,7 @@ shadowMoon = React.createClass
                   display: 'inline'
                 size: D/2
                 src: that.props.ScreenshotUrl
-Winged =React.createClass
-  render: ->
-    {D, d, M} = @props.measurements
-    that = this
-    reactKup (k) ->
-      k.div ->
-        k.build Paper,
-          circle: true
-          style:
-            width: D
-            height: D
-            marginRight: style.scalars.boxWidth/2-.75*D#'25%' #'auto' #Right: D/2
-            #marginRight: '25%'
-            marginTop: M
-            marginBottom: M
-            float: 'right'
-            display: 'inline'
-          zDepth: 5
-          ->
-            k.build Avatar,
-              style:
-                width: D
-                height: D
-                marginRight: 0
-                marginTop: 0
-                marginBottom: 0
-                float: 'right'
-                display: 'inline'
-              size: D/2
-              src: that.props.ScreenshotUrl
-        # draw the bullets.. as wings.. ed faces
+
 
 VisualCue = React.createClass
   render: ->
@@ -185,6 +155,40 @@ VisualCue = React.createClass
               weight: target.meta.weight
               measurements: that.props.measurements
 
+Winged =React.createClass
+  render: ->
+    {D, d, M} = @props.measurements
+    that = this
+    reactKup (k) ->
+      k.div ->
+        k.build Paper,
+          circle: true
+          style:
+            width: D
+            height: D
+            #marginRight: style.scalars.boxWidth/2-.75*D#'25%' #'auto' #Right: D/2
+            left: M#D/2
+            #marginRight: '25%'
+            top: M
+            marginBottom: M
+            #float: 'left'
+            #display: 'block'
+            position: 'absolute'
+          zDepth: 5
+          ->
+            k.build Avatar,
+              style:
+                width: D
+                height: D
+                marginRight: 0
+                marginTop: 0
+                marginBottom: 0
+                float: 'right'
+                display: 'inline'
+              size: D/2
+              src: that.props.ScreenshotUrl
+        # draw the bullets.. as wings.. ed faces
+
 wingMark = React.createClass
   render: ->
     that = this
@@ -194,17 +198,25 @@ wingMark = React.createClass
     top = 50
     shadow = floor-Math.round(floor/Math.round(.5+L*(floor/top)))
     reactKup (k) ->
+      {measurements,n,weight,meta,FromLink,ToLink,loopi,directed} = that.props
       k.build Paper,
         circle: true
         style:
           position: 'absolute'
-          marginTop: upMargin that.props.measurements
-          , that.props.weight
-          marginLeft: rightMargin that.props.measurements
-          , that.props.weight
-          , that.props.n
-          width: 80
-          height: 80
+          top: Position
+            measurements: measurements
+            weight: weight
+            n: n
+            directed: directed
+            axis: 'y'
+          left: Position
+            measurements: measurements
+            weight: weight
+            n: n
+            directed: directed
+            axis: 'x'
+          width: measurements.d
+          height: measurements.d
         zDepth: shadowFloor that.props.meta.body, 5 , 50
         overflow: 'hidden'
         ->
@@ -212,8 +224,8 @@ wingMark = React.createClass
             k.build IconButton,
               style:
                 padding: 0
-                width: 80
-                height: 80
+                width: measurements.d
+                height: measurements.d
               tooltip: that.props.meta.body
               tooltipPosition: 'top-right'
               className: 'YourMarks'
@@ -224,10 +236,10 @@ wingMark = React.createClass
               ->
                 k.build Avatar,
                   style:
-                    width: 80
-                    height: 80
+                    width: measurements.d
+                    height: measurements.d
                     float: 'left'
-                  size: 80
+                  size: measurements.d
                   src: that.props.meta.face
 
 exports.VisualCue = VisualCue

@@ -26,6 +26,10 @@ UrlBox = React.createClass
     that = this
     reactKup (k) ->
       {D,N,U} = that.props
+      measurements =
+        D: 300
+        d: 80
+        M: 100
       thumbalizr = that.props.thumbalizr
       k.build GridTile,
         key: D.link+'Node'
@@ -43,10 +47,7 @@ UrlBox = React.createClass
             ScreenshotUrl: D.drawTheOther.ScreenshotUrl
             user: that.props.user
             from: that.props.from
-            measurements:
-              D: 300
-              d: 50
-              M: 100
+            measurements: measurements
           inlink = N.inLinks?[D.link]?
           outlink = N.outLinks?[D.link]?
           U.directionUserMeta = {}
@@ -58,7 +59,6 @@ UrlBox = React.createClass
           loopi =
             lastWeight: false
             offsetSequence: 0
-
           for directedBunch of U.directionUserMeta
             for userVectorName of U.directionUserMeta[directedBunch]
               counted++
@@ -75,9 +75,25 @@ UrlBox = React.createClass
                 size: style.scalars.screenshotWidth
                 meta: meta
                 directed: directedBunch
-                measurements:
-                  D: 300
-                  d: 50
-                  M: 100
+                measurements: measurements
+###
+              weights = [0..9]
+              for directioned in ['INLINKS','OUTLINKS']
+                for weighted in [0..9]
+                  if loopi.lastWeight == meta.weight
+                    loopi.offsetSequence++
+                  else
+                    loopi.offsetSequence = 0
+                  k.build wingMark,
+                    weight: weighted
+                    n: 1
+                    counted: 1
+                    size: style.scalars.screenshotWidth
+                    meta: meta
+                    directed: directioned
+                    measurements: measurements
+###
+
+
 
 exports.UrlBox = UrlBox
