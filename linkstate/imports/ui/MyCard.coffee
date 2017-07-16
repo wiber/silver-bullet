@@ -23,7 +23,7 @@ Print =  require('material-ui/lib/svg-icons/action/print').default
 IconButton = require('material-ui/lib/icon-button').default
 Paper = require('material-ui/lib/paper').default
 Avatar = require('material-ui/lib/avatar').default
-{shadowFloor, upMargin, rightMargin} = require '../api/strings'
+{shadowFloor, upMargin, rightMargin, Position} = require '../api/strings'
 {VisualCue} = require '../ui/ShadowMoon.coffee'
 # TODO functional testable convenience functions, like strings, for math and attribute getting
 

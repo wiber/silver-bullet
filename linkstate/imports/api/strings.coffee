@@ -93,16 +93,15 @@ exports.Position = ({measurements,weight,n,directed,axis}) ->
 
   x0 = M+D/2-d/2
   if directed == 'OUTLINKS'
-    direction = .5
-  else
     direction = -.5
-  Coordinate.y = x0 - D*.5 * Math.cos(Math.PI * P/4)
-  Coordinate.x = x0 + D*direction * Math.sin(Math.PI * P/4)
+  else
+    direction = .5
+  Coordinate.y = x0 + D*.5 * Math.cos(Math.PI * weight/10)
+  Coordinate.x = x0 - D*direction * Math.sin(Math.PI * weight/10)
   if weight is 0
     Coordinate.x = Coordinate.x+d/8
     Coordinate.y = Coordinate.y+d/8
   if 0 <= weight <= 9
-    console.log directed, weight,Coordinate
     return Coordinate[axis]
   else return 0
   # wierd.. but now almost heart shaped.. stick..
