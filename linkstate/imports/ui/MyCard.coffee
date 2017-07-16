@@ -35,10 +35,11 @@ exports.MyCard = React.createClass
     if @props.expanded is 'undefined'
       that.props.expanded = true
     reactKup (k) ->
-      D = 400
-      d = 80
-      M = 150
-      measurements = {D, d, M}
+
+      measurements =
+        D: 400
+        d: 80
+        M: 150
       k.build Card,
         expanded: that.props.expanded
         style: _.extend {}, style.card, style.yCard

@@ -85,19 +85,13 @@ exports.Position = ({measurements,weight,n,directed,axis}) ->
   G = Math.abs(P)
   scalar = Math.cos(Math.PI*G/7)
   deg = Math.PI-Math.PI*(weight/9)
-  rad = D/2
-  sin = Math.sin deg
-  cos = Math.cos deg
-  right = d+(n*d*.66)+sin*rad-cos*rad
-  #console.log 'margin', weight, deg, sin, right, right
-
   x0 = M+D/2-d/2
   if directed == 'OUTLINKS'
-    direction = -.5
+    direction = -1
   else
-    direction = .5
+    direction = 1
   Coordinate.y = x0 + D*.5 * Math.cos(Math.PI * weight/10)
-  Coordinate.x = x0 - D*direction * Math.sin(Math.PI * weight/10)
+  Coordinate.x = x0 - D*direction*.5 * Math.sin(Math.PI * weight/10) - direction * d *.4 * n
   if weight is 0
     Coordinate.x = Coordinate.x+d/8
     Coordinate.y = Coordinate.y+d/8
