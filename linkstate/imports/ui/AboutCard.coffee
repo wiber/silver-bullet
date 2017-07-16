@@ -42,7 +42,8 @@ AboutCard = React.createClass
               display: 'inline'
               #flexWrap: 'wrap'
             -># CardText,
-              if that.props.node?.in?
+              # build in and out links.. so that we see our out connection right away
+              if that.props.node?.in? or that.props.node?.out?
                 k.build GridList,
                   class: 'looplist'
                   cellHeight: 500
