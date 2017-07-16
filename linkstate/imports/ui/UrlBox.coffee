@@ -29,8 +29,8 @@ UrlBox = React.createClass
       thumbalizr = that.props.thumbalizr
       k.build GridTile,
         key: D.link+'Node'
-        title: D.m.FromLink
-        subtitle: that.props.word.to + D.m.ToLink
+        title: linkstate.see D.drawTheOther.otherUrl#m.FromLink
+        #subtitle: D.drawTheOther.otherTitle#that.props.word.to + D.m.ToLink
         onClick: (e) ->
           GoMark
             type:

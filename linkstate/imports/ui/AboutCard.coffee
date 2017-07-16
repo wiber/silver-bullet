@@ -131,6 +131,7 @@ drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
       returner =
         ScreenshotUrl: linkstate.thumbalizrPic(hereNode.from)
         otherUrl: hereNode.from
+        otherTitle: hereNode.meta.title
     if param == 'from' and here == 'from'
       # self ref
       returner = false
