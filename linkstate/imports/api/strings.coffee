@@ -90,7 +90,12 @@ exports.Position = ({measurements,weight,n,directed,axis}) ->
     direction = -1
   else
     direction = 1
-  Coordinate.y = x0 + D*.5 * Math.cos(Math.PI * weight/9)
+  spreaderY = (we) ->
+    deviation = Math.abs(we-5)/13 # max 4
+    #we/9 + S/50
+  for we in [0..9]
+    console.log spreaderY(we)
+  Coordinate.y = x0 + D*.5 * Math.cos(Math.PI * weight/9)*(1+spreaderY(weight))
   Coordinate.x = x0 - D*direction*.5 * Math.sin(Math.PI * weight/9) - direction * d *.6 * n
   if weight is 0
     Coordinate.x = Coordinate.x-d/2
