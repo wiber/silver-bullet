@@ -24,6 +24,7 @@ AboutCard = React.createClass
   render: ->
     that = this
     reactKup (k) ->
+      {N,U,D,user,from,to} = that.props
       k.build Card,
         expanded: that.props.expanded
         style: _.extend {}, style.card, style.mAcard
@@ -39,7 +40,7 @@ AboutCard = React.createClass
               height: 'auto'
           k.div
             style:
-              display: 'inline'
+              display: 'block'
               #flexWrap: 'wrap'
             -># CardText,
             if that.props.node?.in?
@@ -48,67 +49,17 @@ AboutCard = React.createClass
                 cellHeight: 500
                 cols: 1
                 ->
-                  N = {} # the node we're on
-                  N.node = that.props.node
-
-                  N.inLinks = that.props.node.in
-                  N.outLinks = that.props.node.out
-                  N.allLinks = _.extend {}, N.inLinks, N.outLinks
-
-                  N.linksByTime = linkstate.sortByKeysTime(N.allLinks
-                  , that.props.howMany)
-                  N.linkSort = {}
-                  for link in Object.keys(N.allLinks)
-                    N.sorts = linkstate.sortByKeysTime(N.allLinks[link],3)
-                    N.recent = N.sorts[0]
-                    N.linkSort[link] = N.allLinks[link][N.recent]
-                  #calculate momentum of a url by walking through voters on it
-                  N.momentum = {}
-                  N.vectors = {}
-                  N.sortByWeight = AByMomentum N.inLinks
-                  N.sortOutByWeight = AByMomentum N.outLinks
-                  N.rankedinLinks = AByMomentum( N.inLinks)
-                  N.rankedOutlinks = AByMomentum(N.outLinks)
-                  N.sortAllMomentum = listByMomentum(N.rankedinLinks
-                  , N.rankedOutlinks)
-
-                  for timeLink in N.sortAllMomentum
-                    D =
-                      N: N
-                      link: timeLink
-                      users: N.allLinks[timeLink]
-
-
-                    D.firstUsersLink = D.users[Object.keys(D.users)[0]]
-                    D.state =
-                      params:
-                        from: linkstate.store(that.props.from)
-                        to: linkstate.store(that.props.to)
-                      connections:
-                        from: D.firstUsersLink.from
-                        to: D.firstUsersLink.to
-                    D.m= D.firstUsersLink.meta
-                    U = # {} # users votes loop object
-                      D: D
-                      usersConnections: N.inLinks[D.link]
-                    #for type, tuple of D.state
-                    for param, paramLink of D.state.params
-                      for here, nodeLink of D.state.connections
-                        R = drawTheOther param, paramLink, here, nodeLink, D.firstUsersLink
-                        if R?
-                          D.drawTheOther = R
-                    console.log D.drawTheOther.ScreenshotUrl
-                    if D.drawTheOther.ScreenshotUrl?
-                      k.build UrlBox,
-                        D: D
-                        N: N
-                        U: U
-                        from: that.props.from
-                        to: that.props.to
-                        props: that.props
-                        thumbalizr: that.props.thumbalizr
-                        word: that.props.word
-                        user: that.props.user
+                  #if D.drawTheOther.ScreenshotUrl?
+                  k.build UrlBox,
+                    D: D
+                    N: N
+                    U: U
+                    from: that.props.from
+                    to: that.props.to
+                    props: that.props
+                    thumbalizr: that.props.thumbalizr
+                    word: that.props.word
+                    user: that.props.user
 
 drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
   # if the link.. is the place we are now...
@@ -127,18 +78,64 @@ drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
       # self ref
       returner = false
     # how do we detect same orientation as queryParams?
-  console.log returner,n
+  #console.log returner,n
   returner
   #console.log n #  if self reference exists, will be two more than links here
 
 exports.AboutCard = createContainer ((props) ->
-
+  N = {} # the node we're on
   newProps = {}
   nodeHandle = Meteor.subscribe "Node", props.from
   if nodeHandle.ready()
-    N = Nodes.findOne(linkstate.store props.from)
+    N.node = Nodes.findOne(linkstate.store props.from)
     if N?
       newProps.node = N
+      N.inLinks = N.node.in
+      N.outLinks = N.node.out
+      N.allLinks = _.extend {}, N.inLinks, N.outLinks
+
+      N.linksByTime = linkstate.sortByKeysTime(N.allLinks
+      , props.howMany)
+      N.linkSort = {}
+      for link in Object.keys(N.allLinks)
+        N.sorts = linkstate.sortByKeysTime(N.allLinks[link],3)
+        N.recent = N.sorts[0]
+        N.linkSort[link] = N.allLinks[link][N.recent]
+      #calculate momentum of a url by walking through voters on it
+      N.momentum = {}
+      N.vectors = {}
+      N.sortByWeight = AByMomentum N.inLinks
+      N.sortOutByWeight = AByMomentum N.outLinks
+      N.rankedinLinks = AByMomentum( N.inLinks)
+      N.rankedOutlinks = AByMomentum(N.outLinks)
+      N.sortAllMomentum = listByMomentum(N.rankedinLinks
+      , N.rankedOutlinks)
+
+      for timeLink in N.sortAllMomentum
+        D =
+          N: N
+          link: timeLink
+          users: N.allLinks[timeLink]
+        D.firstUsersLink = D.users[Object.keys(D.users)[0]]
+        D.state =
+          params:
+            from: linkstate.store(props.from)
+            to: linkstate.store(props.to)
+          connections:
+            from: D.firstUsersLink.from
+            to: D.firstUsersLink.to
+        D.m= D.firstUsersLink.meta
+        U = # {} # users votes loop object
+          D: D
+          usersConnections: N.inLinks[D.link]
+        #for type, tuple of D.state
+        for param, paramLink of D.state.params
+          for here, nodeLink of D.state.connections
+            R = drawTheOther param, paramLink, here, nodeLink, D.firstUsersLink
+            if R?
+              D.drawTheOther = R
+  newProps = {N,U,D}
   props = _.extend {}, props, newProps
+  console.log props
   props
 ), AboutCard
