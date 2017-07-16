@@ -90,11 +90,11 @@ exports.Position = ({measurements,weight,n,directed,axis}) ->
     direction = -1
   else
     direction = 1
-  Coordinate.y = x0 + D*.5 * Math.cos(Math.PI * weight/10)
-  Coordinate.x = x0 - D*direction*.5 * Math.sin(Math.PI * weight/10) - direction * d *.4 * n
+  Coordinate.y = x0 + D*.5 * Math.cos(Math.PI * weight/9)
+  Coordinate.x = x0 - D*direction*.5 * Math.sin(Math.PI * weight/9) - direction * d *.6 * n
   if weight is 0
-    Coordinate.x = Coordinate.x+d/8
-    Coordinate.y = Coordinate.y+d/8
+    Coordinate.x = Coordinate.x-d/2
+    Coordinate.y = Coordinate.y+d
   if 0 <= weight <= 9
     return Coordinate[axis]
   else return 0

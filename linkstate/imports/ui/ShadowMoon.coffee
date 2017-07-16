@@ -69,7 +69,7 @@ VisualCue = React.createClass
             style:
               width: D
               height: D
-              marginRight: -D/2
+              left: D/2+M
               marginTop: M
               marginBottom: M
               float: 'right'
