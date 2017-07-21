@@ -124,6 +124,8 @@ yourMark = React.createClass
     top = 50
     shadow = floor-Math.round(floor/Math.round(.5+L*(floor/top)))
     {measurements,weight,n} = that.props
+    {D,d,M} = measurements
+    r = D/d
     reactKup (k) ->
       k.build Paper,
         circle: true
@@ -141,8 +143,8 @@ yourMark = React.createClass
             n: n
             directed: 'INLINKS'
             axis: 'x'
-          width: 80
-          height: 80
+          width: r
+          height: r
         zDepth: shadowFloor that.props.target.meta.body, 5 , 50
         overflow: 'hidden'
         ->
@@ -150,8 +152,8 @@ yourMark = React.createClass
             k.build IconButton,
               style:
                 padding: 0
-                width: 80
-                height: 80
+                width: r
+                height: r
               tooltip: that.props.target.meta.body
               tooltipPosition: 'top-right'
               className: 'YourMarks'
@@ -162,10 +164,10 @@ yourMark = React.createClass
               ->
                 k.build Avatar,
                   style:
-                    width: 80
-                    height: 80
+                    width: r
+                    height: r
                     float: 'left'
-                  size: 80
+                  size: r
                   src: that.props.target.meta.ScreenshotUrl
 
 Winged = React.createClass
