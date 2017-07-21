@@ -79,24 +79,38 @@ exports.rightMargin = ({D,d,M},weight,n) ->
   rightPosition
 exports.Position = ({measurements,weight,n,directed,axis}) ->
   # 150 + 200
-  Coordinate = {}
-  {D,d,M} = measurements
-  P = weight-5
-  G = Math.abs(P)
-  scalar = Math.cos(Math.PI*G/7)
-  deg = Math.PI-Math.PI*(weight/9)
-  x0 = M+D/2-d/2
   if directed == 'OUTLINKS'
     direction = -1
+    xDir = -1
   else
     direction = 1
-  spreaderY = 1-Math.sin(Math.PI*Math.abs(weight)/9)/9#/15 # max 4
+    xDir = 1
+  Coordinate = {}
+  {D,d,M} = measurements
+  r = D/2
+  center = M+r
+  weightDev = (weight-5)/4 # %
+  yDir =  -1*weightDev/Math.abs(weightDev)
+  ty = (weightDev)*r
+  #ty = weight*D/9
+  tx = (r^2-ty^2)^.5
+
+  x0 = M+D/2-D/d#/2
+  angleX = Math.cos(Math.PI*weightDev)
+  console.log weight, ty, tx
+  spreaderY = 1-Math.sin(Math.PI*Math.abs(weight)/9)/9#/15
   spreaderX =  4.5*d*direction*Math.sin(Math.PI*Math.abs(weight)/9)/9
-  Coordinate.y = x0 + D*.5 * Math.cos(Math.PI * (weight/9)*spreaderY)
-  Coordinate.x = x0 - D*direction*.5 * Math.sin(Math.PI * weight/9) - (direction * d *.6 * n) - spreaderX
+  Coordinate.y = x0 + D*.5 * Math.cos(Math.PI * (weight/9)) + D/d
+  Coordinate.x = x0 - D*direction*.5 * Math.sin(Math.PI * weight/9) - (direction * (D/d) *.6 * n)
+  ###
+  Coordinate =
+    y: center+yDir*(ty+D/d)
+    x: center+xDir*(tx+D/d)
+  ###
   if weight is 0
-    Coordinate.x = Coordinate.x-d/2
+    Coordinate.x = Coordinate.x+ d
     Coordinate.y = Coordinate.y+d
+  #console.log Coordinate.y
   if 0 <= weight <= 9
     return Coordinate[axis]
   else return 0

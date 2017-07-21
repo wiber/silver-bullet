@@ -99,11 +99,9 @@ AboutCard = React.createClass
                           R = drawTheOther param, paramLink, here, nodeLink, D.firstUsersLink
                           if R?
                             D.drawTheOther = R
-                      console.log D.drawTheOther.ScreenshotUrl, N.sortAllMomentum.length
                       if D.drawTheOther.ScreenshotUrl?
                         N.UrlBoxDraw[timeLink] = {D,U}
                         draw++
-                        console.log draw, N.UrlBoxDraw
                     for key, object of N.UrlBoxDraw
                       k.build UrlBox,
                         D: object.D
@@ -136,9 +134,7 @@ drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
       # self ref
       returner = false
     # how do we detect same orientation as queryParams?
-    #console.log returner,n
     returner
-  #console.log n #  if self reference exists, will be two more than links here
 
 exports.AboutCard = createContainer ((props) ->
 

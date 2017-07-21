@@ -123,9 +123,7 @@ yourMark = React.createClass
     floor = 5
     top = 50
     shadow = floor-Math.round(floor/Math.round(.5+L*(floor/top)))
-    console.log that.props
     {measurements,weight,n} = that.props
-    console.log measurements
     reactKup (k) ->
       k.build Paper,
         circle: true
@@ -214,6 +212,7 @@ wingMark = React.createClass
     shadow = floor-Math.round(floor/Math.round(.5+L*(floor/top)))
     reactKup (k) ->
       {measurements,n,weight,meta,FromLink,ToLink,loopi,directed,from,to} = that.props
+      {D,d,M} = measurements
       k.build Paper,
         circle: true
         style:
@@ -231,8 +230,8 @@ wingMark = React.createClass
             n: n
             directed: directed
             axis: 'x'
-          width: measurements.d
-          height: measurements.d
+          width: D/d
+          height: D/d
         zDepth: shadowFloor that.props.meta.body, 5 , 50
         overflow: 'hidden'
         ->
@@ -240,8 +239,8 @@ wingMark = React.createClass
             k.build IconButton,
               style:
                 padding: 0
-                width: measurements.d
-                height: measurements.d
+                width: D/d
+                height: D/d
               tooltip: that.props.meta.body
               tooltipPosition: 'top-right'
               className: 'YourMarks'
@@ -252,10 +251,10 @@ wingMark = React.createClass
               ->
                 k.build Avatar,
                   style:
-                    width: measurements.d
-                    height: measurements.d
+                    width: D/d
+                    height: D/d
                     float: 'left'
-                  size: measurements.d
+                  size: D/d
                   src: that.props.meta.face
 
 exports.VisualCue = VisualCue

@@ -28,7 +28,7 @@ UrlBox = React.createClass
       {D,N,U} = that.props
       measurements =
         D: 300
-        d: 80
+        d: 5
         M: 100
       thumbalizr = that.props.thumbalizr
       k.build GridTile,
