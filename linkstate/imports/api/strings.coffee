@@ -95,14 +95,15 @@ exports.Position = ({measurements,weight,n,directed,axis}) ->
   ty = (weightDev)*r
   x0 = M + r - .5*D/d  #D/2-.5*D/d#/2
   y0 = M + r - .5*D/d
-  angle = Math.PI*(weight/10)
-  #spreaderY = 1-Math.sin(Math.PI*Math.abs(weight)/9)/9#/15
-  #spreaderX =  4.5*d*direction*Math.sin(Math.PI*Math.abs(weight)/9)/9
+  # angles from PI to 2*PI?
+  angle = Math.PI*(1+weightDev)/2
+  if weight is 0
+    #Coordinate.x = Coordinate.x+ d
+    #Coordinate.y = Coordinate.y#+D/d
+    angle = 0
   Coordinate.y = y0 + Ra * Math.cos(angle)# + .25*D/d
   Coordinate.x = x0 - Ra *direction * Math.sin(angle)# -*D/d
-  if weight is 0
-    Coordinate.x = Coordinate.x+ d
-    Coordinate.y = Coordinate.y+d
+
   if 0 <= weight <= 9
     return Coordinate[axis]
   else return 0
