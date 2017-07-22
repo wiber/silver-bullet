@@ -100,9 +100,13 @@ exports.Position = ({measurements,weight,n,directed,axis}) ->
   if weight is 0
     #Coordinate.x = Coordinate.x+ d
     #Coordinate.y = Coordinate.y#+D/d
+    # not entirely correct. 1 should be opposite 9 and 0 off the grid.
     angle = 0
-  Coordinate.y = y0 + Ra * Math.cos(angle)# + .25*D/d
-  Coordinate.x = x0 - Ra *direction * Math.sin(angle)# -*D/d
+    Coordinate.y = y0 + Ra * Math.cos(angle)-((1+n)*D/d)# + .25*D/d
+    Coordinate.x = x0 - Ra *direction * Math.sin(angle)# -*D/d
+  else
+    Coordinate.y = y0 + Ra * Math.cos(angle)# + .25*D/d
+    Coordinate.x = x0 - Ra *direction * Math.sin(angle)# -*D/d
 
   if 0 <= weight <= 9
     return Coordinate[axis]
