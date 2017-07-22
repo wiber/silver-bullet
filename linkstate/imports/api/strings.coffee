@@ -87,21 +87,22 @@ exports.Position = ({measurements,weight,n,directed,axis}) ->
     xDir = 1
   Coordinate = {}
   {D,d,M} = measurements
+
   r = D/2
+  Ra = r+(n+.55)*(D/d)
   center = M+r
   weightDev = (weight-5)/4 # %
   yDir =  -1*weightDev/Math.abs(weightDev)
   ty = (weightDev)*r
-  #ty = weight*D/9
-  tx = (r^2-ty^2)^.5
-
-  x0 = M+D/2-D/d#/2
-  angleX = Math.cos(Math.PI*weightDev)
-  console.log weight, ty, tx
-  spreaderY = 1-Math.sin(Math.PI*Math.abs(weight)/9)/9#/15
-  spreaderX =  4.5*d*direction*Math.sin(Math.PI*Math.abs(weight)/9)/9
-  Coordinate.y = x0 + D*.5 * Math.cos(Math.PI * (weight/9)) + D/d
-  Coordinate.x = x0 - D*direction*.5 * Math.sin(Math.PI * weight/9) - (direction * (D/d) *.6 * n)
+  x0 = M + r - .8*D/d  #D/2-.5*D/d#/2
+  y0 = M + r - .5*D/d
+  angleX = Math.cos(Math.PI/weight)
+  angle = Math.PI*weightDev
+  console.log weight, direction
+  #spreaderY = 1-Math.sin(Math.PI*Math.abs(weight)/9)/9#/15
+  #spreaderX =  4.5*d*direction*Math.sin(Math.PI*Math.abs(weight)/9)/9
+  Coordinate.y = y0 + Ra * Math.cos(angle)# + .25*D/d
+  Coordinate.x = x0 - Ra *direction * Math.sin(angle)# -*D/d
   ###
   Coordinate =
     y: center+yDir*(ty+D/d)

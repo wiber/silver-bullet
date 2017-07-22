@@ -38,7 +38,7 @@ exports.MyCard = React.createClass
 
       measurements =
         D: 400
-        d: 6
+        d: 5
         M: 150
       k.build Card,
         expanded: that.props.expanded
