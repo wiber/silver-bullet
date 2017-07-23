@@ -155,7 +155,7 @@ yourMark = React.createClass
                 width: r
                 height: r
               tooltip: that.props.target.meta.body
-              tooltipPosition: 'top-right'
+              tooltipPosition: 'bottom-right'
               className: 'YourMarks'
               onClick: (e) ->
                 changeQueryParamsObject
@@ -244,7 +244,7 @@ wingMark = React.createClass
                 width: D/d
                 height: D/d
               tooltip: that.props.meta.body
-              tooltipPosition: 'top-right'
+              tooltipPosition: 'bottom-right'
               className: 'YourMarks'
               onClick: (e) ->
                 changeQueryParamsObject
