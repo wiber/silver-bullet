@@ -1,19 +1,21 @@
 # Selected.coffee
-# FIXME major weakness of implementation. brittle where it should be a dumb representation of user object
-# http://localhost:3000/about?from=http%253A%252F%252Fwww.dailymail.co.uk%252Fhome%252Findex.html&lastTitle=Home%2520%257C%2520Daily%2520Mail%2520Online&content=&to=https%253A%252F%252Fen.wikipedia.org%252Fwiki%252FBiot%252C_Alpes-Maritimes
+# FIXME major weakness of implementation.
+# brittle where it should be a dumb representation of user object
 # Builds the FROM and TO boxes from user object and props from queryparams
-# from and to are plain decodeURIComponent urls which are then used to select defaultValue in the stateless ui component
+# from and to are plain decodeURIComponent urls
+# which are then used to select defaultValue in the stateless ui component
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 Selected = require('../ui/Selected.coffee').Selected
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store} = require '../api/strings.coffee'
 
-# goes through a simple loop that builds list of objects from a number of sources.
+# goes through a simple loop
+#that builds list of objects from a number of sources.
 exports.selectedContainer = createContainer ((props) ->
   # update queryparams unless we're fromt he same place
 
   nProps = _.extend {}, props,
-    value: setValue(props,setOptions(props))
+    value: setValue(props,setOptions(props),props.user)
     options: setOptions(props)
   nProps
 ), Selected
@@ -26,28 +28,22 @@ setOptions = (props) ->
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
     for index,value of deChaos
       if typeof value is 'string' and value != 'undefined'
-        selectItem =
-          label: dictWithCreatedAt[value].meta.title #linkstate.see value # same function as use
-          value: dictWithCreatedAt[value] # store whole object here
-        options.push selectItem
-    # questionable ..
-    ###
-    for type in ['from','to']
-      typeUrl = FlowRouter.getQueryParam type
-      typeUrlDict = dictWithCreatedAt[linkstate.store typeUrl]
-      if !typeUrlDict?.meta?
-        console.log 'not already in there'
-        options.push
-          label: props[props.type]
-          value:
-            meta:
-              FromLink: props[props.type]
-      else
-        console.log 'do nothing'
-      console.log typeUrl, typeUrlDict
-    ###
+        entryWeightExists = dictWithCreatedAt[value]?.meta?.weight?
+        entryWeightHigh = dictWithCreatedAt[value].meta.weight > 0
+        if entryWeightExists and entryWeightHigh
+          selectItem =
+            label: dictWithCreatedAt[value].meta.title
+            value: dictWithCreatedAt[value]
+          options.push selectItem
+        #else
+        # console.log 'irrelevant entry', dictWithCreatedAt[value].meta.title
+        # this needs cleaning up..? should we remove totally when 0
+        # or should we filter the list every time we build the select...
+        # this is executed a lot;.... so
   options
-setValue = (props, options) ->
+
+#FIXME does not select value when from a place
+setValue = (props, options, user) ->
   newProps = {}
   newProps.options = []
   value = {}
@@ -59,11 +55,29 @@ setValue = (props, options) ->
   typeValue = props[props.type]
   dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
   dictValueExists = dictValue?.meta?.title?
+  lastDictValue = dictWithCreatedAt[linkstate.store(user[props.type+'Last'])]
+  # what if ... you don't have a 'to' or from?  use
+  # use if we don't have a to, we need to change queryParams to last to project
+  if !typeValue? and lastDictValue?
+    value=
+      label: lastDictValue.meta.title
+      value: lastDictValue
+  #console.log dictValueExists, dictValue, props.type#, dictWithCreatedAt
+  if props.type is 'from'
+    if dictValueExists
+      title = 'Linkstates for ' + dictValue.title + ' - ' + props.from
+      #props.from
+      DocHead.setTitle(title)
+
   if dictValueExists and clientReady
+    #console.log typeValue
     value =
       label: dictValue.meta.title
       value: dictValue
+
+
   else
+    #
     value =
       label: props.lastTitle
       value:

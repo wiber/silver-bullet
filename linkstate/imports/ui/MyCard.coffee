@@ -5,7 +5,7 @@
 reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
-{changeQueryParams} = require('../api/changeQueryParams.coffee')
+{changeQueryParams, changeQueryParamsObject} = require('../api/changeQueryParams.coffee')
 Card = require('material-ui/lib/card/card').default
 CardActions = require('material-ui/lib/card/card-actions' ).default
 CardHeader = require('material-ui/lib/card/card-header').default
@@ -18,6 +18,14 @@ CardText =  require('material-ui/lib/card/card-text').default
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 Toggle = require('material-ui/lib/toggle').default
 {Mexplain} = require '../api/MexplainContainer.coffee'
+{selectedContainer} = require '../api/Selected.coffee'
+Print =  require('material-ui/lib/svg-icons/action/print').default
+IconButton = require('material-ui/lib/icon-button').default
+Paper = require('material-ui/lib/paper').default
+Avatar = require('material-ui/lib/avatar').default
+{shadowFloor, upMargin, rightMargin, Position} = require '../api/strings'
+{VisualCue} = require '../ui/ShadowMoon.coffee'
+# TODO functional testable convenience functions, like strings, for math and attribute getting
 
 exports.MyCard = React.createClass
   getDefaultProps: ->
@@ -27,53 +35,34 @@ exports.MyCard = React.createClass
     if @props.expanded is 'undefined'
       that.props.expanded = true
     reactKup (k) ->
+
+      measurements =
+        D: 400
+        d: 5
+        M: 150
       k.build Card,
         expanded: that.props.expanded
         style: _.extend {}, style.card, style.yCard
         ->
-          k.build CardHeader,
-            title: that.props.word.MyCardTitle + that.props.from
-            subtitle: that.props.word.MyCardSubtitle
-            showExpandableButton: true
-            onClick: (e) ->
-              changeQueryParams 'expandMyCard', !that.props.expanded
           k.build CardText,
             style:
               height: 'auto'
-            expandable: true
-          k.build CardText,
-            style:
-              height: 'auto'
-            expandable: true
+              minHeight: 500
+              overflow: 'hidden'
+            expandable: false
             ->
-              k.build GridList,
-                #cellHeight: 200
-                cols: 1
-                ->
-                  if that.props?.user?.out?[linkstate.store that.props.from]?
-                    out = that.props.user.out[linkstate.store that.props.from]
-                    n = 0
-                    for mark in linkstate.sortByWeight(out, that.props.howMany)
-                      target = out[mark]
-                      m = target.meta
-                      n++
-                      if n <= that.props.howMany
-                        k.build GridTile,
-                          key: mark
-                          title: m.body #target.title#FromLink
-                          subtitle: m.FromLink#' => '+ m.ToLink
-                          ->
-                            k.img
-                              style: _.extend {},# style.webShot,
-                                left: 10 * m.weight + '%'
-                                position: 'absolute'
-                                opacity: 1
-                                borderRadius: '50%'
-                              src: m.face
-                            k.img
-                              style: _.extend {}, style.webShot,
-                                width: '100%'
-                              src: m.ScreenshotUrl
-                              from: m.FromLink
-                              onClick: (e) ->
-                               changeQueryParams 'from', e.target.getAttribute('from')
+              k.build selectedContainer,
+                from: that.props.from
+                to: that.props.to
+                lastTitle: that.props.lastTitle
+                user: that.props.user
+                type: 'from'
+                word: that.props.word
+                lastTitle: that.props.lastTitle
+              k.build VisualCue,
+                ScreenshotUrl: that.props.ScreenshotUrl
+                user: that.props.user
+                from: that.props.from
+                measurements: measurements
+#exports.yourMark = yourMark
+#exports.shadowMoon = shadowMoon

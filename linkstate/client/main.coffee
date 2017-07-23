@@ -13,14 +13,14 @@ require('../imports/startup/routes.coffee')
 
 lastLogin = () ->
   user = Meteor.user()
-  if user?.services?.facebook?.link# and user.services? and user.services.facebook.link? #Meteor.user().services.facebook.link
+  if user?.services?.facebook?.link
     Meteor.call "setupUser"
 
 sinceLogin = false
 if Meteor.loggingIn()
   sinceLogin = true
 Meteor.startup ->
-	sinceLogin = true
+  sinceLogin = true
 Tracker.autorun ->
   if Meteor.user() and sinceLogin
     lastLogin()

@@ -16,6 +16,8 @@ CardText =  require('material-ui/lib/card/card-text').default
 {bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
 {LinkVote} = require '../../imports/ui/LinkVote.coffee'
 {GoMark} = require '../../imports/api/nav/GoMark.coffee'
+{Winged, VisualCue, wingMark} = require '../ui/ShadowMoon.coffee'
+
 R = require 'ramda'
 UrlBox = React.createClass
   propTypes:
@@ -23,14 +25,16 @@ UrlBox = React.createClass
   render: ->
     that = this
     reactKup (k) ->
-      D = that.props.D
-      N = that.props.N
-      U = that.props.U
+      {D,N,U} = that.props
+      measurements =
+        D: 300
+        d: 4
+        M: 100
       thumbalizr = that.props.thumbalizr
       k.build GridTile,
         key: D.link+'Node'
-        title: D.m.FromLink
-        subtitle: that.props.word.to + D.m.ToLink
+        title: linkstate.see D.drawTheOther.otherUrl#m.FromLink
+        #subtitle: D.drawTheOther.otherTitle#that.props.word.to + D.m.ToLink
         onClick: (e) ->
           GoMark
             type:
@@ -39,21 +43,11 @@ UrlBox = React.createClass
             N: N.node
             user: that.props.user
         ->
-          k.div ->
-            k.div
-              style: style.fromBullet
-              ->
-                k.img
-                  style: _.extend {}, style.webShot,
-                    opacity: .7
-                    zIndex: 2
-                  src: linkstate.thumbalizrPic D.m.FromLink
-            k.img
-              style: _.extend {}, style.webShot,
-                position: 'absolute'
-                left: '30%'
-                zIndex: -1
-              src:linkstate.thumbalizrPic D.m.ToLink
+          k.build Winged,
+            ScreenshotUrl: D.drawTheOther.ScreenshotUrl
+            user: that.props.user
+            from: that.props.from
+            measurements: measurements
           inlink = N.inLinks?[D.link]?
           outlink = N.outLinks?[D.link]?
           U.directionUserMeta = {}
@@ -62,13 +56,44 @@ UrlBox = React.createClass
           if inlink
             U.directionUserMeta.INLINKS = N.inLinks[D.link]
           counted = 0
+          loopi =
+            lastWeight: false
+            offsetSequence: 0
           for directedBunch of U.directionUserMeta
             for userVectorName of U.directionUserMeta[directedBunch]
               counted++
-              k.build LinkVote,
+              meta = U.directionUserMeta[directedBunch][userVectorName].meta
+              if loopi.lastWeight == meta.weight
+                loopi.offsetSequence++
+              else
+                loopi.offsetSequence = 0
+              k.build wingMark,
+                loopi: loopi
+                weight: meta.weight
+                n: loopi.offsetSequence
                 counted: counted
                 size: style.scalars.screenshotWidth
-                meta: U.directionUserMeta[directedBunch][userVectorName].meta
+                meta: meta
                 directed: directedBunch
+                measurements: measurements
+###
+              weights = [0..9]
+              for directioned in ['INLINKS','OUTLINKS']
+                for weighted in [0..9]
+                  if loopi.lastWeight == meta.weight
+                    loopi.offsetSequence++
+                  else
+                    loopi.offsetSequence = 0
+                  k.build wingMark,
+                    weight: weighted
+                    n: 1
+                    counted: 1
+                    size: style.scalars.screenshotWidth
+                    meta: meta
+                    directed: directioned
+                    measurements: measurements
+###
+
+
 
 exports.UrlBox = UrlBox

@@ -19,6 +19,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 R = require 'ramda'
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store, AByMomentum, listByMomentum} = require '../api/strings.coffee'
+n = 0
 AboutCard = React.createClass
   render: ->
     that = this
@@ -36,39 +37,18 @@ AboutCard = React.createClass
           k.build CardText,
             style:
               height: 'auto'
-          k.build CardText,
-            expandable: true
-            ->
-              # we need to assemble the data struc
-              # what's needed for a card
-              # url, title
-              # and the votes that go on a link
-              # face, profile, blurb, direction
-              #
-              # cycle through in links... render them and related out links
-              # we are interested in what people are linking 'sending' to this place
-              # can we make it less abstract? is the bidirectional association necessary?
-              # how much power do we gain by weight, and direct
-              if that.props.node?.in?
+          k.div
+            style:
+              display: 'inline'
+              #flexWrap: 'wrap'
+            -># CardText,
+              # build in and out links.. so that we see our out connection right away
+              if that.props.node?.in? or that.props.node?.out?
                 k.build GridList,
                   class: 'looplist'
+                  cellHeight: 500
                   cols: 1
                   ->
-                    #F = R.prop('node')(that.props)
-                    #F.in = R.prop('in')(F)
-                    #F.out = R.prop('out')(F))
-                    #momentum = -> R.map R.compose
-                    #,
-
-
-                    # conditionals are ok, but we should move out data processing into pure functions with wallaby tests
-                    # end result is a modular and clean way to render urls and votes
-                    # from to header, list of comments with face votes..
-                    # TODO reduce size of loops,
-                    # for each url, paint header, paint each vote
-                    # how much do we gain by pre forming object in this composer?
-                    # can we rethink this as seeing one kind at a time from dropdown or will that break that aboutness feel we want?
-                    #
                     N = {} # the node we're on
                     N.node = that.props.node
 
@@ -76,38 +56,57 @@ AboutCard = React.createClass
                     N.outLinks = that.props.node.out
                     N.allLinks = _.extend {}, N.inLinks, N.outLinks
 
-                    N.linksByTime = linkstate.sortByKeysTime(N.allLinks, that.props.howMany)
+                    N.linksByTime = linkstate.sortByKeysTime(N.allLinks
+                    , that.props.howMany)
                     N.linkSort = {}
                     for link in Object.keys(N.allLinks)
                       N.sorts = linkstate.sortByKeysTime(N.allLinks[link],3)
                       N.recent = N.sorts[0]
                       N.linkSort[link] = N.allLinks[link][N.recent]
-                    # calculate momentum of a url by walking through voters on it
+                    #calculate momentum of a url by walking through voters on it
                     N.momentum = {}
                     N.vectors = {}
-                    #N.sortedLinks = linkstate.sortByMomentum N.linkSort, that.props.howMany
-
                     N.sortByWeight = AByMomentum N.inLinks
                     N.sortOutByWeight = AByMomentum N.outLinks
-                    # does not seem to register inLinks unless there's an outlink from here..
                     N.rankedinLinks = AByMomentum( N.inLinks)
                     N.rankedOutlinks = AByMomentum(N.outLinks)
-                    N.sortAllMomentum = listByMomentum(N.rankedinLinks, N.rankedOutlinks)
-
+                    N.sortAllMomentum = listByMomentum(N.rankedinLinks
+                    , N.rankedOutlinks)
+                    draw = 0
+                    N.UrlBoxDraw = {}
                     for timeLink in N.sortAllMomentum
-                      D = {}
-                      D.N = N
-                      D.link = timeLink
-                      D.users = N.allLinks[timeLink]
-                      D.firstUsersLink = D.users[Object.keys(D.users)[0]]
-                      D.m = D.firstUsersLink.meta
-                      U = {} # users votes loop object
-                      U.D = D
-                      U.usersConnections = N.inLinks[D.link]
-                      k.build UrlBox,
-                        D: D
+                      D =
                         N: N
-                        U: U
+                        link: timeLink
+                        users: N.allLinks[timeLink]
+
+
+                      D.firstUsersLink = D.users[Object.keys(D.users)[0]]
+                      D.state =
+                        params:
+                          from: linkstate.store(that.props.from)
+                          to: linkstate.store(that.props.to)
+                        connections:
+                          from: D.firstUsersLink.from
+                          to: D.firstUsersLink.to
+                      D.m= D.firstUsersLink.meta
+                      U = # {} # users votes loop object
+                        D: D
+                        usersConnections: N.inLinks[D.link]
+                      #for type, tuple of D.state
+                      for param, paramLink of D.state.params
+                        for here, nodeLink of D.state.connections
+                          R = drawTheOther param, paramLink, here, nodeLink, D.firstUsersLink
+                          if R?
+                            D.drawTheOther = R
+                      if D.drawTheOther.ScreenshotUrl?
+                        N.UrlBoxDraw[timeLink] = {D,U}
+                        draw++
+                    for key, object of N.UrlBoxDraw
+                      k.build UrlBox,
+                        D: object.D
+                        N: N
+                        U: object.U
                         from: that.props.from
                         to: that.props.to
                         props: that.props
@@ -115,6 +114,27 @@ AboutCard = React.createClass
                         word: that.props.word
                         user: that.props.user
 
+
+
+drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
+  # if the link.. is the place we are now...
+  # that should NOT be the ScreenshotUrl
+  # because it's assumed we're talking about the other
+  # does it matter if we point to a place? not just from? we could
+  #.. put it in the first position since it's of special interest
+  if paramLink == nodeLink and param == 'from'
+    n++
+    if param is 'from' and here == 'to'
+      # we're point to the place we are, use the other link for ScreenshotUrl
+      returner =
+        ScreenshotUrl: linkstate.thumbalizrPic(hereNode.from)
+        otherUrl: hereNode.from
+        otherTitle: hereNode.meta.title
+    if param == 'from' and here == 'from'
+      # self ref
+      returner = false
+    # how do we detect same orientation as queryParams?
+    returner
 
 exports.AboutCard = createContainer ((props) ->
 

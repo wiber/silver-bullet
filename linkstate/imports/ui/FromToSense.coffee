@@ -26,18 +26,6 @@ exports.FromToSense = React.createClass
               to: that.props.to
               lastTitle: that.props.lastTitle
               user: that.props.user
-              type: 'from'
-              word: that.props.word
-              lastTitle: that.props.lastTitle
-            k.span
-              style:
-                verticalAlign: '0.5em'
-              ' to '
-            k.build selectedContainer,
-              from: that.props.from
-              to: that.props.to
-              lastTitle: that.props.lastTitle
-              user: that.props.user
               word: that.props.word
               type: 'to'
 

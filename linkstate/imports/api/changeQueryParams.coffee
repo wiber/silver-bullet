@@ -12,3 +12,10 @@ exports.changeQueryParams = (key,value) ->
       return
     else
       FlowRouter.setQueryParams newQueryParams
+
+exports.changeQueryParamsObject = (changes) ->
+  #changeFunc = (value,key, obj) ->
+  #  exports.changeQueryParams key, value
+  #R.mapObjIndexed changeFunc, changes
+  for key, value of changes
+    exports.changeQueryParams key, value

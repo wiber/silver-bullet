@@ -13,7 +13,7 @@ AppBar =  require('material-ui/lib/app-bar').default
 Card = require 'material-ui/lib/card/card'
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 {Mexplain} = require '../api/MexplainContainer.coffee'
-
+URI = require 'uri-js'
 MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme} = require('../ui/theme.coffee')
 exports.Layout = React.createClass
@@ -25,7 +25,16 @@ exports.Layout = React.createClass
       if that.props.user?.out?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
         HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
         ScreenshotUrl = HERE.meta.ScreenshotUrl
-        #console.log 'weeeee down the rabbit hole', ScreenshotUrl, HERE
+      if HERE?.title?
+        titleHere = HERE.title
+        host = URI.parse(that.props.from).host
+        if host?
+          slash = R.concat host, ' / '
+        else
+          slash = R.concat that.props.from, ' / '
+        title = R.concat slash, titleHere
+      else
+        title = that.props.from
       k.build MuiThemeProvider,
         muiTheme: lightBaseUsTheme
         ->
@@ -43,10 +52,12 @@ exports.Layout = React.createClass
                 opacity: '.3'
                 zIndex: -1
             k.build AppBar,
-              title: that.props.word.HeaderTitle + that.props.from
+              title: that.props.word.HeaderTitle + title # that.props.from
               iconElementLeft: k.span ''
               style:
                 position: 'fixed'
+              onClick: () ->
+                window.open that.props.from, "_blank"
             k.span 'g',-> # because... just because
             k.div
               style:
@@ -73,6 +84,7 @@ exports.Layout = React.createClass
                     incomming: that.props.incomming
                     howMany: 10
                     type: 'fromCreated'
+                    ScreenshotUrl: ScreenshotUrl
                 else
                   k.build Mexplain
                 k.build AboutCard,

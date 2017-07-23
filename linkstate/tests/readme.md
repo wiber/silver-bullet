@@ -36,7 +36,7 @@ Next, log in with Facebook and start sharing resources. Premium accounts are in 
 
 ## Developer Resources
 
-* Announcement list: sign up at http://www.meteor.com/
+* Announcement list: sign up at http://www.linkstates.youiest.com/
 * Having problems? Ask for help at: http://stackoverflow.com/questions/tagged/linkstates
 
 Interested in contributing to Linkstates?
@@ -46,3 +46,43 @@ Interested in contributing to Linkstates?
 
 We are hiring!  email elias@youiest.com to
 learn more about working full-time on the Linkstates project.
+
+## Rationale and fly-through
+
+The app needs to be ever present to remind you. Trigger serendipity by juxtaposing past finds with your last tab.
+
+Linkstates shows you what a thing is by to what and by who it's connected. More than discovery it's a truth engine for humans. It extends your ability to organize information you're working on. It seeks to expand your expertise and make it visible. Take a stand and also weigh in on this thing.
+
+[ ] It needs to know the last tab you were on when you ctrl+t newtab
+[ ] It needs to know the last thing you connected to and default it if not pointing anywhere
+[ ] It needs to be able to jump to a connection between two points if exists, with title there already in dropdowns
+
+[ ] It needs to visually show how last tab is connected
+
+[ ] It needs to host a authoritative discussion about it's relevance to truth and other sources
+[ ] It needs to allow fast, keyboard only staching of interesting things
+
+[ ] It needs to extend your mind by reminding you of the path behind you (like Morpheus)
+
+[ ] It needs to define itself on the front page and thus market itself
+
+The front page shows incoming links from a number of articles, wiki pages, and other services. Faces, sizes and positions jolts you..
+
+--- show talk only on this from / to. facebook comments? two kinds of comments? no. justify your position. array of changes visible. fb talk about the what that article says about this place.
+[ ] It shows weighted comments on this from - to space.
+.. but only these. click the from to to see the talk, otherwise only see globes and faces.
+
+What does this say about that?
+
+The method can return.. the meta data of from and to.. Titles etc. Should we call the method even when not logged in to
+
+It is open for free users and has a freemium privacy feature.
+
+Let's think through the priorities for a system such as this.
+It needs to be a visual language and as such self explanatory on the first page.
+It needs to be fast and responsive since it runs on the newtab.
+It needs to do seo and therefore ssr enabled. Helps with fast?
+
+how can we handle
+
+It inserts new dynamics to how we move information around. The apps i useful for one, game changing when a group applies it to a purpose.

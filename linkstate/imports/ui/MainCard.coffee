@@ -1,7 +1,7 @@
 reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
-{changeQueryParams} = require('../api/changeQueryParams.coffee')
+{changeQueryParams, changeQueryParamsObject} = require('../api/changeQueryParams.coffee')
 {FromToSense} = require('../ui/FromToSense.coffee')
 Card = require('material-ui/lib/card/card').default
 CardActions = require('material-ui/lib/card/card-actions' ).default
@@ -10,6 +10,15 @@ CardMedia = require('material-ui/lib/card/card-media').default
 CardTitle = require('material-ui/lib/card/card-title').default
 FlatButton = require('material-ui/lib/flat-button' ).default
 CardText =  require('material-ui/lib/card/card-text').default
+IconButton = require('material-ui/lib/icon-button').default
+Flip =  require('material-ui/lib/svg-icons/communication/swap-calls').default
+ExitToPage =  require('material-ui/lib/svg-icons/action/exit-to-app').default
+Print =  require('material-ui/lib/svg-icons/action/print').default
+Edit =  require('material-ui/lib/svg-icons/editor/mode-edit').default
+FromIcon =  require('material-ui/lib/svg-icons/communication/call-received').default
+ToIcon =  require('material-ui/lib/svg-icons/communication/call-made').default
+
+{shadowMoon} = require '../ui/ShadowMoon'
 exports.MainCard = React.createClass
   getDefaultProps: ->
     expanded: true
@@ -18,37 +27,45 @@ exports.MainCard = React.createClass
       select = document.activeElement.type is 'text'
       text = document.activeElement.id is 'textAbout'
       unless select or text
-        if window?.textAbout?.refs?.MainCardTextInput?.focus()
+        if false is true and window?.textAbout?.refs?.MainCardTextInput?.focus()
           window.textAbout.refs.MainCardTextInput.focus()
           #$('#textAbout').focus()
-    setInterval(focusTextbox,150)
+        console.log document.activeElement.id, document.activeElement.type
+    #setInterval(focusTextbox,650)
   render: ->
     that = this
     if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.from]?
       HERE = that.props.user.out.Bookmarks[ linkstate.store that.props.from]
       ScreenshotUrl = HERE.meta.ScreenshotUrl
-    else HERE = {}
+    else HERE =
+      title: that.props.lastTitle
+      from: that.props.from
+    if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.to]?
+      THERE = that.props.user.out.Bookmarks[ linkstate.store that.props.to]
+      ThereScreenshotUrl = THERE.meta.ScreenshotUrl
+      # if not not known.. we're in an edge case and should use qp
+
+
     reactKup (k) ->
       k.build Card, # build the Card component
         expanded: that.props.expanded # add argument key value pairs
-        style: _.extend {}, style.card, style.mCard
+        style: _.extend {}, style.card, style.mCard,
+          overflow: 'hidden'
         ->
           k.build CardHeader,
             title: HERE.title,
             subtitle: that.props.word.MainCardSubtitle
             showExpandableButton: false
-            onClick: (e) -> #that.handleToggle
+            onClick: (e) ->
               window.open HERE.meta.FromLink
-              #changeQueryParams 'expandMainCard', !that.props.expanded
           k.build CardMedia,
             style: style.overlayPercentage
             onClick: (e) ->
-              win = window.open(decodeURIComponent HERE.from, '_blank');
-              win.focus();
-            ###->
-              k.img
-                src: ScreenshotUrl###
+              win = window.open(decodeURIComponent HERE.from, '_blank')
+              win.focus()
           k.build CardText,
+            style:
+              overflow: 'hidden'
             ->
               k.build FromToSense,
                 from: that.props.from
@@ -57,14 +74,88 @@ exports.MainCard = React.createClass
                 word: that.props.word
                 content: that.props.content
                 user: that.props.user
-                lastTitle: that.props.lastTitle
+              k.build shadowMoon,
+                measurements:
+                  D: 80
+                  d: 80
+                  M: 150
+                ScreenshotUrl: ThereScreenshotUrl
+                styler:
+                  marginLeft: -20# -100
+                  marginTop: -200
+                  #display: 'block'
+                  opacity: .5
+                  position: 'absolute'
           k.build CardActions,
-            -> # return innerhtml, tags on here before
-              k.build FlatButton,
-                style:
-                  height: 0
-                label: 'Tab here to go back to "From"'
+            ->
+              k.build IconButton,
+                tooltip: "Reverse - Point TO what you're now pointing FROM"
+                tooltipPosition: 'bottom-right'
+                ref: 'blurer'
                 onFocus: () ->
-                  # TODO avoid global here..
-                  # react element has a ref to the dom element
                   window.textAbout.refs.MainCardTextInput.focus()
+                onClick: () ->
+                  changeQueryParamsObject
+                    from: that.props.to
+                    to: that.props.from
+                ->
+                  k.build Flip
+              k.build IconButton,
+                tooltip: "TO - Visit the page you're connecting TO " + that.props.to
+                tooltipPosition: 'bottom-right'
+                onClick: () ->
+                  window.open that.props.to
+                ->
+                  k.build ToIcon
+              k.build IconButton,
+                tooltip: "FROM - Visit the page you're looking FROM "+that.props.from
+                tooltipPosition: 'bottom-right'
+                onClick: () ->
+                  window.open that.props.from
+                ->
+                  k.build FromIcon
+              k.build IconButton,
+                tooltip: "Rich editing and markup of the page. Quote it for your notes. Screenshot a part perhaps?"
+                tooltipPosition: 'bottom-right'
+                style:
+                  opacity: .4
+                onClick: () ->
+                  window.open that.props.to
+                ->
+                  k.build Edit
+              k.build IconButton,
+                #style:
+                #  height: 0
+                tooltip: "Archive the whole page for me. Request this or other features if you need it."
+                tooltipPosition: 'bottom-right'
+                ref: 'blurer4'
+                style:
+                  opacity: .4
+                onFocus: () ->
+                  window.textAbout.refs.MainCardTextInput.focus()
+                onClick: () ->
+                  window.open that.props.to
+                ->
+                  k.build Print
+              k.build IconButton,
+                #style:
+                #  height: 0
+                tooltip: "What are people tweeting about this?"
+                tooltipPosition: 'bottom-right'
+                ref: 'blurerTweet'
+                style:
+                  opacity: .4
+                onFocus: () ->
+                  window.textAbout.refs.MainCardTextInput.focus()
+                onClick: () ->
+                  # request feature by connecting to it....
+                  ###
+                  payload =
+                    from: that.props.user.services.facebook.link
+                    to: "http://youiest.com/features/socialStats"
+                  console.log payload
+                  changeQueryParamsObject payload
+                  ###
+                  window.open 'linkstate.youiest.com'
+                ->
+                  k.build Print
