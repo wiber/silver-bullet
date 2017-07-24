@@ -59,10 +59,14 @@ exports.MyCard = React.createClass
                 type: 'from'
                 word: that.props.word
                 lastTitle: that.props.lastTitle
-              k.build VisualCue,
-                ScreenshotUrl: that.props.ScreenshotUrl
-                user: that.props.user
-                from: that.props.from
-                measurements: measurements
+              k.div
+                style:
+                  marginRight: -measurements.D/2
+                ->
+                  k.build VisualCue,
+                    ScreenshotUrl: that.props.ScreenshotUrl
+                    user: that.props.user
+                    from: that.props.from
+                    measurements: measurements
 #exports.yourMark = yourMark
 #exports.shadowMoon = shadowMoon

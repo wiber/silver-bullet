@@ -137,7 +137,7 @@ yourMark = React.createClass
             n: n
             directed: 'INLINKS'
             axis: 'y'
-          left: Position
+          left: D/2+Position
             measurements: measurements
             weight: weight
             n: n
