@@ -70,7 +70,7 @@ VisualCue = React.createClass
               width: D
               height: D
               left: D/2+M
-              marginTop: M
+              marginTop: 2*M
               marginBottom: M
               float: 'right'
               display: 'inline'
@@ -131,7 +131,7 @@ yourMark = React.createClass
         circle: true
         style:
           position: 'absolute'
-          top: Position
+          top: M+Position
             measurements: measurements
             weight: weight
             n: n
