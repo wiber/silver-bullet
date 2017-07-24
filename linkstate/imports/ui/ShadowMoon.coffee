@@ -154,7 +154,7 @@ yourMark = React.createClass
                 padding: 0
                 width: r
                 height: r
-              tooltip: that.props.target.meta.body
+              tooltip: that.props.target.meta.body + ' - ' + linkstate.see(that.props.target.meta.FromLink) + ' to ' + linkstate.see(that.props.target.meta.ToLink)
               tooltipPosition: 'top-right'
               className: 'YourMarks'
               onClick: (e) ->

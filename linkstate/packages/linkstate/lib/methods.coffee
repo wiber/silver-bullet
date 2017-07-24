@@ -88,10 +88,12 @@ Meteor.methods
     setEdgeIn = {}
     setEdgeOut = {}
     setEdgeIn['out.' + FROM + '.' + username] = edge
+    setEdgeIn['link.from.' + FROM + '.' + username] = edge
     edge.title = META.title# or TO # because we're in TO this
     setEdgeIn.title = edge.title
     edge.title = META.title or FROM # because we're out FROM this
     setEdgeOut['in.' + TO + '.' + username] = edge
+    setEdgeOut['link.to.' + TO + '.' + username] = edge
     setEdgeOut.title = edge.title
 
     setIt = {}
@@ -101,11 +103,12 @@ Meteor.methods
     if to not in categoryTypes
       setIt.toLast = to
     setIt['in.'+FROM+'.'+TO] = edge
-    setIt['out.'+TO+'.'+FROM] = edge
+    setIt['link.from.'+FROM+'.'+TO] = edge
+    setIt['link.from.'+TO+'.'+FROM] = edge
     # totally kills latency compensation on page
     # load to avoid uncaught error in fast render
     if Meteor.isServer or UserHandle?.ready()
-      if META.weight > 0
+      if META.weight > -1
         Meteor.users.update # we need to know what our last connection was
           _id: Meteor.userId()
         ,
