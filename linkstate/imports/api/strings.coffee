@@ -97,7 +97,7 @@ exports.Position = ({measurements,weight,n,directed,axis}) ->
   y0 = M + r - .5*D/d
   # angles from PI to 2*PI?
   angleO = Math.PI*(1+weightDev)/2
-  speed = 6
+  speed = 15
   angle = ((n)*(.5*Math.PI*direction)+(speed*angleO))/(n+speed)
   if weight is 0
     #Coordinate.x = Coordinate.x+ d
