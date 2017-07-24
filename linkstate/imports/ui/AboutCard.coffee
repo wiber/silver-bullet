@@ -148,15 +148,14 @@ exports.AboutCard = createContainer ((props) ->
     if N?
       newProps.node = N
       gotNodeNow = new Date().getTime()
-      console.log 'node timing',  gotNodeNow - noNodeYet
+      console.log 'node timing',  gotNodeNow - noNodeYet, gotNodeNow - noNodeFirst
       Meteor.call 'GroundedNodeInsert', N
   else
     if Meteor.isClient
       node = localStorage.getItem 'latestNode'
       if node?
         N = node
-        noNodeYet = new Date().getTime()
+      noNodeYet = new Date().getTime()
   props = _.extend {}, props, newProps
-  console.log gotNodeNow, noNodeYet, noNodeFirst
   props
 ), AboutCard
