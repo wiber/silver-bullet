@@ -30,6 +30,9 @@ Meteor.methods
   GroundedUserInsert: ->
     if Meteor.isClient and Meteor.user()
       localStorage.setItem 'latest', JSON.stringify(Meteor.user())
+  GroundedNodeInsert: ->
+    if Meteor.isClient and Meteor.user()
+      localStorage.setItem 'latestNode', JSON.stringify(Nodes.findOne())
   Linking: (link) ->
     #this.unblock() # allow next req without wait
     #check(link.from,'string')

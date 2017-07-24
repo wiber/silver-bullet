@@ -135,6 +135,9 @@ drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
       returner = false
     # how do we detect same orientation as queryParams?
     returner
+noNodeFirst = new Date().getTime()
+noNodeYet = 0
+gotNodeNow = 0
 
 exports.AboutCard = createContainer ((props) ->
 
@@ -144,6 +147,16 @@ exports.AboutCard = createContainer ((props) ->
     N = Nodes.findOne(linkstate.store props.from)
     if N?
       newProps.node = N
+      gotNodeNow = new Date().getTime()
+      console.log 'node timing',  gotNodeNow - noNodeYet
+      Meteor.call 'GroundedNodeInsert', N
+  else
+    if Meteor.isClient
+      node = localStorage.getItem 'latestNode'
+      if node?
+        N = node
+        noNodeYet = new Date().getTime()
   props = _.extend {}, props, newProps
+  console.log gotNodeNow, noNodeYet, noNodeFirst
   props
 ), AboutCard
