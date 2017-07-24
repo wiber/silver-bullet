@@ -17,14 +17,15 @@ exports.selectedContainer = createContainer ((props) ->
   nProps = _.extend {}, props,
     value: setValue(props,setOptions(props),props.user)
     options: setOptions(props)
+  console.log nProps
   nProps
 ), Selected
 
 
 setOptions = (props) ->
   options = []
-  if props.user?.out?
-    dictWithCreatedAt = props.user.out['Bookmarks']
+  if props.user?.link?
+    dictWithCreatedAt = props.user.link.to.Bookmarks
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
     for index,value of deChaos
       if typeof value is 'string' and value != 'undefined'
@@ -51,7 +52,8 @@ setValue = (props, options, user) ->
   clientReady = props.user?.services?.facebook? and Meteor.isClient
   gotFrom = typeof props.from is 'string' and props.from.length > 1
   bookmarked = props.user?.out?.Bookmarks?
-  dictWithCreatedAt = props.user.out['Bookmarks']
+  dictWithCreatedAt = props.user.link.to.Bookmarks
+  console.log dictWithCreatedAt
   typeValue = props[props.type]
   dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
   dictValueExists = dictValue?.meta?.title?

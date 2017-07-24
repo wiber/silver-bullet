@@ -104,7 +104,7 @@ Meteor.methods
       setIt.toLast = to
     setIt['in.'+FROM+'.'+TO] = edge
     setIt['link.from.'+FROM+'.'+TO] = edge
-    setIt['link.from.'+TO+'.'+FROM] = edge
+    setIt['link.to.'+TO+'.'+FROM] = edge
     # totally kills latency compensation on page
     # load to avoid uncaught error in fast render
     if Meteor.isServer or UserHandle?.ready()
@@ -137,6 +137,33 @@ Meteor.methods
       edge: edge
       setEdgeOut: setEdgeOut
       setEdgeIn: setEdgeIn
+  migrateLinks: ->
+    user = Meteor.user()
+    old =
+      in: user.in
+      out: user.out
+    levelOne = (direction,bundle) ->
+      levelTwo(direction, bundle, url, urlBundle) for url, urlBundle of bundle
+    levelTwo = (direction,bundle, url, urlBundle) ->
+      levelThree(direction,bundle, url, urlBundle,urlBundleKey,urlBundleObject) for urlBundleKey, urlBundleObject of urlBundle
+    levelThree = (direction,bundle, url, urlBundle,urlBundleKey,urlBundleObject) ->
+      console.log direction
+      , Object.keys(bundle).length
+      #, url
+      , Object.keys(urlBundle).length
+      #, urlBundleKey
+      #, urlBundleObject
+      , urlBundleObject.meta.title
+      if Meteor.isServer
+        Meteor.call 'Linking',
+          from: urlBundleObject.meta.FromLink
+          to: urlBundleObject.meta.ToLink
+          meta:
+            body: urlBundleObject.meta.body
+            weight: urlBundleObject.meta.weight
+            title: urlBundleObject.meta.title
+    levelOne(direction,bundle) for direction, bundle of old
+
 
   checkHits: ->
     if Meteor.isServer
@@ -238,6 +265,7 @@ Meteor.methods
           toCreated: ''
           fromCreated: ''
           thumbalizr: ''
+          link: ''
       Meteor.call "setupUser"
   resetN: (node) ->
     if Meteor.user().services.facebook.id = "10154232419354595"
