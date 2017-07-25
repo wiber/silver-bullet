@@ -107,7 +107,13 @@ Meteor.methods
     setIt['link.to.'+TO+'.'+FROM] = edge
     # totally kills latency compensation on page
     # load to avoid uncaught error in fast render
-    if Meteor.isServer or UserHandle?.ready()
+    #if Meteor.isClient
+    if UserHandle?
+      if UserHandle.ready()
+        subReady = true
+    else subReady = false
+    console.log subReady
+    if Meteor.isServer or subReady
       if META.weight > -1
         Meteor.users.update # we need to know what our last connection was
           _id: Meteor.userId()

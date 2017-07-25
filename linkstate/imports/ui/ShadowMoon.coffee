@@ -96,7 +96,6 @@ VisualCue = React.createClass
               arrayValue = outArrayByWeight[key]
               dictWeight = out[arrayValue].meta.weight
               lastKey = outArrayByWeight[key-1]
-              console.log out, outArrayByWeight, mark, target, lastKey
               if lastKey?
                 if out[lastKey].meta.weight is out[mark].meta.weight
                   n++

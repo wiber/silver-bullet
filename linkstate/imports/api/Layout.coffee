@@ -4,6 +4,7 @@ language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 #{URI} = require 'urijs'
+BookmarkTry = {}
 
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
@@ -18,12 +19,16 @@ containerLayout = createContainer ((props) ->
   newHere = newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked'))
   lastTitle =  FlowRouter.getQueryParam('lastTitle')
   if newHere and Meteor.isClient
-    Meteor.call "Linking",
+    payload =
       from: queryParams.from
       to: 'Bookmarks'
       meta:
         weight: 5
         title: queryParams.lastTitle#FlowRouter.getQueryParam('lastTitle')
+    unless BookmarkTry.from is queryParams.from
+      Meteor.call "Linking", payload
+      BookmarkTry = payload
+
   if Meteor?.settings?.public?.thumbalizr?
     thumbalizr = Meteor.settings.public.thumbalizr
   else
@@ -45,8 +50,9 @@ containerLayout = createContainer ((props) ->
   newProps
 ), Layout
 newPlace = (user, queryParams, bookmarked) ->
-  inBookmarks = user?.out?.Bookmarks?[linkstate.store(queryParams.from)]
+  inBookmarks = user?.link?.to?.Bookmarks?[linkstate.store(queryParams.from)]?
   markExists = inBookmarks?.meta?
+  console.log inBookmarks, markExists # false false..
   if bookmarked != 'true' and !markExists
     # must changeQueryParams here else it gets run multiple times
     changeQueryParams('Bookmarked', true)
@@ -54,7 +60,7 @@ newPlace = (user, queryParams, bookmarked) ->
   else
     return false
 
-
+# does it not update on local
 userSaved = (userE, queryParams, client) ->
   user = {}
   if !userE?.services?.facebook? and client
