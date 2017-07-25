@@ -87,8 +87,8 @@ VisualCue = React.createClass
                   display: 'inline'
                 size: D/2
                 src: that.props.ScreenshotUrl
-          if that.props?.user?.out?[linkstate.store that.props.from]?
-            out = that.props.user.out[linkstate.store that.props.from]
+          if that.props?.user?.link?.from?[linkstate.store that.props.from]?
+            out = that.props.user.link.from[linkstate.store that.props.from]
             n = 0
             outArrayByWeight = linkstate.sortByWeight(out, that.props.howMany)
             for key, mark of outArrayByWeight
@@ -96,6 +96,7 @@ VisualCue = React.createClass
               arrayValue = outArrayByWeight[key]
               dictWeight = out[arrayValue].meta.weight
               lastKey = outArrayByWeight[key-1]
+              console.log out, outArrayByWeight, mark, target, lastKey
               if lastKey?
                 if out[lastKey].meta.weight is out[mark].meta.weight
                   n++
@@ -119,7 +120,11 @@ yourMark = React.createClass
   render: ->
     that = this
     body = that.props.target.meta.body
-    L = body.length
+    if body?
+      L = body.length
+    else
+      L = 0
+      body = ''
     floor = 5
     top = 50
     shadow = floor-Math.round(floor/Math.round(.5+L*(floor/top)))
@@ -145,7 +150,7 @@ yourMark = React.createClass
             axis: 'x'
           width: r
           height: r
-        zDepth: shadowFloor that.props.target.meta.body, 5 , 50
+        zDepth: shadowFloor body, 5 , 50
         overflow: 'hidden'
         ->
           k.div ->
