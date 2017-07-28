@@ -51,9 +51,10 @@ AboutCard = React.createClass
                   ->
                     N = {} # the node we're on
                     N.node = that.props.node
-
                     N.inLinks = that.props.node.in
                     N.outLinks = that.props.node.out
+                    N.link = N.node.link
+                    console.log that.props.node
                     N.allLinks = _.extend {}, N.inLinks, N.outLinks
 
                     N.linksByTime = linkstate.sortByKeysTime(N.allLinks
@@ -74,11 +75,14 @@ AboutCard = React.createClass
                     , N.rankedOutlinks)
                     draw = 0
                     N.UrlBoxDraw = {}
-                    for timeLink in N.sortAllMomentum
+                    console.log N
+                    for linkByMomentum in listByMomentum(AByMomentum(N.node.link.to), AByMomentum(N.node.link.from))
+                    #N.sortAllMomentum
+                      console.log linkByMomentum
                       D =
                         N: N
-                        link: timeLink
-                        users: N.allLinks[timeLink]
+                        link: linkByMomentum
+                        users: N.allLinks[linkByMomentum]
 
 
                       D.firstUsersLink = D.users[Object.keys(D.users)[0]]
@@ -94,15 +98,25 @@ AboutCard = React.createClass
                         D: D
                         usersConnections: N.inLinks[D.link]
                       #for type, tuple of D.state
+                      #console.log D
                       for param, paramLink of D.state.params
                         for here, nodeLink of D.state.connections
-                          R = drawTheOther param, paramLink, here, nodeLink, D.firstUsersLink
-                          if R?
-                            D.drawTheOther = R
-                      if D.drawTheOther.ScreenshotUrl?
-                        N.UrlBoxDraw[timeLink] = {D,U}
-                        draw++
+                          # we want the one that is not params from
+                          notSameLink = paramLink != nodeLink
+                          notFrom = D.state.params.from != D.state.connections.from
+                          notTo = D.state.params.from != D.state.connections.to
+                          if notFrom
+                            D.drawTheOther = D.firstUsersLink.from
+                          if notTo
+                            D.drawTheOther = D.firstUsersLink.to
+                          console.log D.drawTheOther
+                          if here is 'from' and param is 'to'
+                            D.drawTheOther = drawTheOther param, paramLink, here, nodeLink, D.firstUsersLink
+                            if D.drawTheOther?.ScreenshotUrl?
+                              N.UrlBoxDraw[linkByMomentum] = {D,U}
+                              draw++
                     for key, object of N.UrlBoxDraw
+                      console.log key, object
                       k.build UrlBox,
                         D: object.D
                         N: N
@@ -122,19 +136,24 @@ drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
   # because it's assumed we're talking about the other
   # does it matter if we point to a place? not just from? we could
   #.. put it in the first position since it's of special interest
+  # how do we find ' the other?'
+  console.log here, paramLink == nodeLink
   if paramLink == nodeLink and param == 'from'
     n++
-    if param is 'from' and here == 'to'
+    if here is 'to'
+      console.log paramLink, param, nodeLink, paramLink == nodeLink, here
       # we're point to the place we are, use the other link for ScreenshotUrl
       returner =
         ScreenshotUrl: linkstate.thumbalizrPic(hereNode.from)
         otherUrl: hereNode.from
         otherTitle: hereNode.meta.title
-    if param == 'from' and here == 'from'
+      console.log returner
+    if here == 'from'
       # self ref
       returner = false
     # how do we detect same orientation as queryParams?
-    returner
+    console.log returner
+    return returner
 noNodeFirst = new Date().getTime()
 noNodeYet = 0
 gotNodeNow = 0
@@ -155,7 +174,7 @@ exports.AboutCard = createContainer ((props) ->
       node = localStorage.getItem 'latestNode'
       if node?
         N = node
-      noNodeYet = new Date().getTime()
+        noNodeYet = new Date().getTime()
   props = _.extend {}, props, newProps
   props
 ), AboutCard

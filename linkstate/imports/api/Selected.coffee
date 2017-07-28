@@ -17,7 +17,6 @@ exports.selectedContainer = createContainer ((props) ->
   nProps = _.extend {}, props,
     value: setValue(props,setOptions(props),props.user)
     options: setOptions(props)
-  console.log nProps
   nProps
 ), Selected
 
@@ -53,7 +52,6 @@ setValue = (props, options, user) ->
   gotFrom = typeof props.from is 'string' and props.from.length > 1
   bookmarked = props.user?.out?.Bookmarks?
   dictWithCreatedAt = props.user.link.to.Bookmarks
-  console.log dictWithCreatedAt
   typeValue = props[props.type]
   dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
   dictValueExists = dictValue?.meta?.title?

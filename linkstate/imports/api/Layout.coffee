@@ -3,6 +3,7 @@
 language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
+{userSaved, newPlace,ifBodyContentHere} = require '../api/modelOps'
 #{URI} = require 'urijs'
 BookmarkTry = {}
 
@@ -52,7 +53,6 @@ containerLayout = createContainer ((props) ->
 newPlace = (user, queryParams, bookmarked) ->
   inBookmarks = user?.link?.to?.Bookmarks?[linkstate.store(queryParams.from)]?
   markExists = inBookmarks?.meta?
-  console.log inBookmarks, markExists # false false..
   if bookmarked != 'true' and !markExists
     # must changeQueryParams here else it gets run multiple times
     changeQueryParams('Bookmarked', true)
@@ -100,10 +100,10 @@ ifBodyContentHere = (queryParams, user)->
   from = linkstate.store queryParams.from
   lastFrom = user?.lastFrom
   switched = lastFrom != queryParams.from
-  cInExists = user?.out?[to]?[from]?
+  cInExists = user?.link?.to?[to]?[from]?
   switchedPlace = FlowRouter.getQueryParam('switched') is 'true'
   if cInExists and switchedPlace
-    cIn = user.out[to][from]
+    cIn = user.link.from[to][from]
     #changeQueryParams 'content', cIn.meta.body # 'content', cIn,
     content = cIn.meta.body
   if typeof content is 'undefined'
