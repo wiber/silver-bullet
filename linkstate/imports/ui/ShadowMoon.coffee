@@ -87,24 +87,31 @@ VisualCue = React.createClass
                   display: 'inline'
                 size: D/2
                 src: that.props.ScreenshotUrl
-          if that.props?.user?.link?.from?[linkstate.store that.props.from]?
-            out = that.props.user.link.from[linkstate.store that.props.from]
+          # TODO mismatched queryparam with lastTitle, why?
+          # selectize needs to read the user object only..
+          # remove direct reliance on qp and harden localstore management of user model
+          console.log that.props?.user?.link?.to
+          console.log FlowRouter.getQueryParam('from'), FlowRouter.getQueryParam('lastTitle')
+          console.log that.props?.user?.link?.to?[linkstate.store that.props.from]?
+          if that.props?.user?.link?.to?[linkstate.store that.props.from]?
+            inLinks = that.props.user.link.to[linkstate.store that.props.from]
             n = 0
-            outArrayByWeight = linkstate.sortByWeight(out, that.props.howMany)
-            for key, mark of outArrayByWeight
-              target = out[mark]
-              arrayValue = outArrayByWeight[key]
-              dictWeight = out[arrayValue].meta.weight
-              lastKey = outArrayByWeight[key-1]
+            inLinksArrayByWeight = linkstate.sortByWeight(inLinks, that.props.howMany)
+            for key, mark of inLinksArrayByWeight
+              console.log key, mark
+              target = inLinks[mark]
+              arrayValue = inLinksArrayByWeight[key]
+              dictWeight = inLinks[arrayValue].meta.weight
+              lastKey = inLinksArrayByWeight[key-1]
               if lastKey?
-                if out[lastKey].meta.weight is out[mark].meta.weight
+                if inLinks[lastKey].meta.weight is inLinks[mark].meta.weight
                   n++
                 else
                   n = 0
               m = target.meta
               try
-                thisWeight = out[mark].meta.weight
-                lastWeight = (out[mark].meta.weight -1)
+                thisWeight = inLinks[mark].meta.weight
+                lastWeight = (inLinks[mark].meta.weight -1)
               catch error
               k.build yourMark,
                 user: that.props.user
