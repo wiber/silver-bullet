@@ -107,9 +107,19 @@ AboutCard = React.createClass
                           notTo = D.state.params.from != D.state.connections.to
                           if notFrom
                             D.drawTheOther = D.firstUsersLink.from
-                          if notTo
+                            console.log N.allLinks[D.firstUsersLink.from]
+                          else
                             D.drawTheOther = D.firstUsersLink.to
-                          console.log D.drawTheOther
+                            console.log N.allLinks[D.firstUsersLink.to]
+                            , notFrom
+                          #console.log D.drawTheOther # is the other, always. because one of them is.
+                          console.log  N.allLinks[D.drawTheOther]
+                          N.UrlBoxDraw[D.drawTheOther] =
+                            #obj: D.allLinks[D.drawTheOther]
+                            U: U
+                            D: D
+                          draw++
+                          console.log draw, N.UrlBoxDraw
                           if here is 'from' and param is 'to'
                             D.drawTheOther = drawTheOther param, paramLink, here, nodeLink, D.firstUsersLink
                             if D.drawTheOther?.ScreenshotUrl?

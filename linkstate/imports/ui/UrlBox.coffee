@@ -62,7 +62,13 @@ UrlBox = React.createClass
           for directedBunch of U.directionUserMeta
             for userVectorName of U.directionUserMeta[directedBunch]
               counted++
+
               meta = U.directionUserMeta[directedBunch][userVectorName].meta
+              console.log meta
+              console.log meta.body?.length, undefined?.length
+              # sometimes meta does not have a body
+              unless meta.body?
+                meta.body = ''
               if loopi.lastWeight == meta.weight
                 loopi.offsetSequence++
               else

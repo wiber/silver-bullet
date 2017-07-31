@@ -211,13 +211,19 @@ Winged = React.createClass
 wingMark = React.createClass
   render: ->
     that = this
-    body = that.props.meta.body
-    L = body.length
+    {loopi, meta, weight, counted, size, meta, directed, measurements, from, to, thumbalizr, word, user, n} = that.props
+    body = meta.body
+    console.log body
+    try
+      L = body.length
+    catch error
+      console.error 'this body does not have length', meta
+
     floor = 5
     top = 50
     shadow = floor-Math.round(floor/Math.round(.5+L*(floor/top)))
     reactKup (k) ->
-      {measurements,n,weight,meta,FromLink,ToLink,loopi,directed,from,to} = that.props
+      #{measurements,n,weight,meta,FromLink,ToLink,loopi,directed,from,to} = that.props
       {D,d,M} = measurements
       k.build Paper,
         circle: true
