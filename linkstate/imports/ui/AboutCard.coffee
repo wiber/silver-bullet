@@ -54,7 +54,6 @@ AboutCard = React.createClass
                     N.inLinks = that.props.node.in
                     N.outLinks = that.props.node.out
                     N.link = N.node.link
-                    console.log that.props.node
                     N.allLinks = _.extend {}, N.inLinks, N.outLinks
 
                     N.linksByTime = linkstate.sortByKeysTime(N.allLinks
@@ -75,10 +74,7 @@ AboutCard = React.createClass
                     , N.rankedOutlinks)
                     draw = 0
                     N.UrlBoxDraw = {}
-                    console.log N
                     for linkByMomentum in listByMomentum(AByMomentum(N.node.link.to), AByMomentum(N.node.link.from))
-                    #N.sortAllMomentum
-                      console.log linkByMomentum
                       D =
                         N: N
                         link: linkByMomentum
@@ -110,23 +106,17 @@ AboutCard = React.createClass
                             console.log N.allLinks[D.firstUsersLink.from]
                           else
                             D.drawTheOther = D.firstUsersLink.to
-                            console.log N.allLinks[D.firstUsersLink.to]
-                            , notFrom
-                          #console.log D.drawTheOther # is the other, always. because one of them is.
-                          console.log  N.allLinks[D.drawTheOther]
                           N.UrlBoxDraw[D.drawTheOther] =
                             #obj: D.allLinks[D.drawTheOther]
                             U: U
                             D: D
                           draw++
-                          console.log draw, N.UrlBoxDraw
                           if here is 'from' and param is 'to'
                             D.drawTheOther = drawTheOther param, paramLink, here, nodeLink, D.firstUsersLink
                             if D.drawTheOther?.ScreenshotUrl?
                               N.UrlBoxDraw[linkByMomentum] = {D,U}
                               draw++
                     for key, object of N.UrlBoxDraw
-                      console.log key, object
                       k.build UrlBox,
                         D: object.D
                         N: N
@@ -138,8 +128,6 @@ AboutCard = React.createClass
                         word: that.props.word
                         user: that.props.user
 
-
-
 drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
   # if the link.. is the place we are now...
   # that should NOT be the ScreenshotUrl
@@ -147,11 +135,9 @@ drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
   # does it matter if we point to a place? not just from? we could
   #.. put it in the first position since it's of special interest
   # how do we find ' the other?'
-  console.log here, paramLink == nodeLink
   if paramLink == nodeLink and param == 'from'
     n++
     if here is 'to'
-      console.log paramLink, param, nodeLink, paramLink == nodeLink, here
       # we're point to the place we are, use the other link for ScreenshotUrl
       returner =
         ScreenshotUrl: linkstate.thumbalizrPic(hereNode.from)
@@ -169,7 +155,6 @@ noNodeYet = 0
 gotNodeNow = 0
 
 exports.AboutCard = createContainer ((props) ->
-
   newProps = {}
   nodeHandle = Meteor.subscribe "Node", props.from
   if nodeHandle.ready()
