@@ -17,15 +17,19 @@ else
 
 Meteor.methods
   NewQueryParams: (queryParams) ->
-    if Meteor.isClient
+    if Meteor.isClient and Meteor.user()?.link?
       console.log Meteor.user(), queryParams
-    queryParamsState = queryParams
+      console.log Meteor.user()?.queryParamsState?
+    payload =
+      queryParamsState: queryParams
     Meteor.users.update
       _id: Meteor.userId()
     ,
-      $set: queryParamsState
+      $set: payload
       $inc:
         'qpUpdates': 1
+    if Meteor.isClient
+      console.log Meteor.user()?.queryParamsState?
 
   GroundedUserInsert: ->
     if Meteor.isClient and Meteor.user()

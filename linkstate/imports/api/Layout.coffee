@@ -19,6 +19,8 @@ containerLayout = createContainer ((props) ->
   user = userSaved(Meteor.user(), queryParams, Meteor.isClient)
   newHere = newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked'))
   lastTitle =  FlowRouter.getQueryParam('lastTitle')
+  console.log typeof user
+  queryParams = NewQueryParams props.queryParams, user
   if newHere and Meteor.isClient
     payload =
       from: queryParams.from
@@ -50,6 +52,24 @@ containerLayout = createContainer ((props) ->
   }
   newProps
 ), Layout
+
+newQflagy =  true
+sentQP = {}
+#will saving queryparams on user help us avoid title issues?
+# what will sanitize model vs query params?
+NewQueryParams = (queryParams, user) ->
+  console.log 'stage 0 no conditionss'
+  if newQflag
+    console.log 'stage 1 not as last was'
+    if user? and queryParams != user.queryParamsState
+      console.log 'stage 2 not notUpdated'
+      if sentQP != queryParams
+        console.log 'stage 3, not same as earlier'
+        console.log user?.queryParamsState?, queryParams, sentQP
+        newQflag = false
+        sentQP = queryParams
+        Meteor.call 'NewQueryParams', queryParams
+  return queryParams
 newPlace = (user, queryParams, bookmarked) ->
   inBookmarks = user?.link?.to?.Bookmarks?[linkstate.store(queryParams.from)]?
   markExists = inBookmarks?.meta?
@@ -98,14 +118,24 @@ ifBodyContentHere = (queryParams, user)->
     content = ''
   to = linkstate.store queryParams.to
   from = linkstate.store queryParams.from
-  lastFrom = user?.lastFrom
+  lastFrom = user.toLast
   switched = lastFrom != queryParams.from
-  cInExists = user?.link?.to?[to]?[from]?
+  cInExists = user?.link?.to?[from]?[to]?.meta?
   switchedPlace = FlowRouter.getQueryParam('switched') is 'true'
+  if cInExists
+    # the place we are now is 'from' to here, from the place we're pointing to...
+    console.log cInExists
+    yourLinkHere = user.link.to[from][to]
+    if switchedPlace
+      content = yourLinkHere.meta.body
+      console.log yourLinkHere.meta.body
+  console.log cInExists, lastFrom, switched, from, queryParams.from, content#, user.link.to[to][from].meta
+  ###
   if cInExists and switchedPlace
-    cIn = user.link.from[to][from]
+    cIn = user.link.to[from][to]
     #changeQueryParams 'content', cIn.meta.body # 'content', cIn,
     content = cIn.meta.body
+  ###
   if typeof content is 'undefined'
     return ''
   else
