@@ -158,7 +158,8 @@ exports.AboutCard = createContainer ((props) ->
   newProps = {}
   nodeHandle = Meteor.subscribe "Node", props.from
   if nodeHandle.ready()
-    N = Nodes.findOne(linkstate.store props.from)
+    nodeId =linkstate.store props.from
+    N = Nodes.findOne(nodeId)
     if N?
       newProps.node = N
       gotNodeNow = new Date().getTime()
@@ -166,9 +167,9 @@ exports.AboutCard = createContainer ((props) ->
       Meteor.call 'GroundedNodeInsert', N
   else
     if Meteor.isClient
-      node = localStorage.getItem 'latestNode'
+      node = localStorage.getItem nodeId
       if node?
-        N = node
+        N = JSON.parse node
         noNodeYet = new Date().getTime()
   props = _.extend {}, props, newProps
   props

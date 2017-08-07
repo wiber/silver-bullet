@@ -35,8 +35,9 @@ Meteor.methods
     if Meteor.isClient and Meteor.user().services?.facebook?
       localStorage.setItem 'latest', JSON.stringify(Meteor.user())
   GroundedNodeInsert: ->
-    if Meteor.isClient and Meteor.user()
-      localStorage.setItem 'latestNode', JSON.stringify(Nodes.findOne())
+    if Meteor.isClient and Meteor.user().services?.facebook?
+      console.log Nodes.findOne()
+      localStorage.setItem Nodes.findOne()._id, JSON.stringify(Nodes.findOne())
   Linking: (link) ->
     #this.unblock() # allow next req without wait
     #check(link.from,'string')
