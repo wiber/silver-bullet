@@ -6,7 +6,7 @@ language = 'eng'
 {userSaved, newPlace,ifBodyContentHere} = require '../api/modelOps'
 #{URI} = require 'urijs'
 BookmarkTry = {}
-
+L = require 'lodash'
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   # store and use localStorage user untill user() received from server
@@ -19,7 +19,6 @@ containerLayout = createContainer ((props) ->
   user = userSaved(Meteor.user(), queryParams, Meteor.isClient)
   newHere = newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked'))
   lastTitle =  FlowRouter.getQueryParam('lastTitle')
-  console.log typeof user
   queryParams = NewQueryParams props.queryParams, user
   if newHere and Meteor.isClient
     payload =
@@ -71,15 +70,15 @@ NewQueryParams = (queryParams, user) ->
         Meteor.call 'NewQueryParams', queryParams
   return queryParams
 newPlace = (user, queryParams, bookmarked) ->
-  inBookmarks = user?.link?.to?.Bookmarks?[linkstate.store(queryParams.from)]?
-  markExists = inBookmarks?.meta?
-  if bookmarked != 'true' and !markExists
+  stringWay = 'link.to.Bookmarks.'+ linkstate.store(queryParams.from)
+  loWay =  L.get user, stringWay
+  #console.log loWay, bookmarked
+  if bookmarked != 'true' and !loWay
     # must changeQueryParams here else it gets run multiple times
     changeQueryParams('Bookmarked', true)
     return true
   else
     return false
-
 # does it not update on local
 userSaved = (userE, queryParams, client) ->
   user = {}
@@ -124,18 +123,10 @@ ifBodyContentHere = (queryParams, user)->
   switchedPlace = FlowRouter.getQueryParam('switched') is 'true'
   if cInExists
     # the place we are now is 'from' to here, from the place we're pointing to...
-    console.log cInExists
     yourLinkHere = user.link.to[from][to]
     if switchedPlace
       content = yourLinkHere.meta.body
       console.log yourLinkHere.meta.body
-  console.log cInExists, lastFrom, switched, from, queryParams.from, content#, user.link.to[to][from].meta
-  ###
-  if cInExists and switchedPlace
-    cIn = user.link.to[from][to]
-    #changeQueryParams 'content', cIn.meta.body # 'content', cIn,
-    content = cIn.meta.body
-  ###
   if typeof content is 'undefined'
     return ''
   else
