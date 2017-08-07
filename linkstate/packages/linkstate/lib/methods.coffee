@@ -32,7 +32,7 @@ Meteor.methods
       console.log Meteor.user()?.queryParamsState?
 
   GroundedUserInsert: ->
-    if Meteor.isClient and Meteor.user()
+    if Meteor.isClient and Meteor.user().services?.facebook?
       localStorage.setItem 'latest', JSON.stringify(Meteor.user())
   GroundedNodeInsert: ->
     if Meteor.isClient and Meteor.user()
