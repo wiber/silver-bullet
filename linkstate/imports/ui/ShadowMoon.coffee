@@ -21,6 +21,7 @@ IconButton = require('material-ui/lib/icon-button').default
 Paper = require('material-ui/lib/paper').default
 Avatar = require('material-ui/lib/avatar').default
 {shadowFloor, upMargin, rightMargin,Position} = require '../api/strings'
+Lo = require 'lodash'
 
 shadowMoon = React.createClass
   render: ->
@@ -98,7 +99,6 @@ VisualCue = React.createClass
             n = 0
             inLinksArrayByWeight = linkstate.sortByWeight(inLinks, that.props.howMany)
             for key, mark of inLinksArrayByWeight
-              console.log key, mark
               target = inLinks[mark]
               arrayValue = inLinksArrayByWeight[key]
               dictWeight = inLinks[arrayValue].meta.weight
@@ -159,13 +159,16 @@ yourMark = React.createClass
         zDepth: shadowFloor body, 5 , 50
         overflow: 'hidden'
         ->
+          text = Lo.get that.props, 'target.meta.body'
+          if !text
+            text = ''
           k.div ->
             k.build IconButton,
               style:
                 padding: 0
                 width: r
                 height: r
-              tooltip: that.props.target.meta.body + ' - ' + linkstate.see(that.props.target.meta.FromLink) + ' to ' + linkstate.see(that.props.target.meta.ToLink)
+              tooltip: text + ' - ' + linkstate.see(that.props.target.meta.FromLink) + ' to ' + linkstate.see(that.props.target.meta.ToLink)
               tooltipPosition: 'top-right'
               className: 'YourMarks'
               onClick: (e) ->
@@ -220,15 +223,14 @@ wingMark = React.createClass
     that = this
     {loopi, meta, weight, counted, size, meta, directed, measurements, from, to, thumbalizr, word, user, n} = that.props
     body = meta.body
-    console.log body
     try
-      L = body.length
+      bodyLen =  body.length
     catch error
       console.error 'this body does not have length', meta
 
     floor = 5
     top = 50
-    shadow = floor-Math.round(floor/Math.round(.5+L*(floor/top)))
+    shadow = floor-Math.round(floor/Math.round(.5+bodyLen*(floor/top)))
     reactKup (k) ->
       #{measurements,n,weight,meta,FromLink,ToLink,loopi,directed,from,to} = that.props
       {D,d,M} = measurements

@@ -103,7 +103,6 @@ AboutCard = React.createClass
                           notTo = D.state.params.from != D.state.connections.to
                           if notFrom
                             D.drawTheOther = D.firstUsersLink.from
-                            console.log N.allLinks[D.firstUsersLink.from]
                           else
                             D.drawTheOther = D.firstUsersLink.to
                           N.UrlBoxDraw[D.drawTheOther] =

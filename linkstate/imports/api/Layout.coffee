@@ -121,9 +121,12 @@ ifBodyContentHere = (queryParams, user)->
   switched = lastFrom != queryParams.from
   cInExists = user?.link?.to?[from]?[to]?.meta?
   switchedPlace = FlowRouter.getQueryParam('switched') is 'true'
+  yourLinkHereL = L.get user, 'link'#.to.'+from#+'.'+to+'.'+'.meta'
+  console.log yourLinkHereL, cInExists
   if cInExists
     # the place we are now is 'from' to here, from the place we're pointing to...
     yourLinkHere = user.link.to[from][to]
+
     if switchedPlace
       content = yourLinkHere.meta.body
       console.log yourLinkHere.meta.body
