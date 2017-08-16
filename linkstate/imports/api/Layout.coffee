@@ -57,7 +57,7 @@ sentQP = {}
 #will saving queryparams on user help us avoid title issues?
 # what will sanitize model vs query params?
 NewQueryParams = (queryParams, user) ->
-  console.log 'stage 0 no conditionss'
+  #console.log 'stage 0 no conditionss'
   if newQflag
     console.log 'stage 1 not as last was'
     if user? and queryParams != user.queryParamsState
@@ -122,7 +122,8 @@ ifBodyContentHere = (queryParams, user)->
   cInExists = user?.link?.to?[from]?[to]?.meta?
   switchedPlace = FlowRouter.getQueryParam('switched') is 'true'
   yourLinkHereL = L.get user, 'link'#.to.'+from#+'.'+to+'.'+'.meta'
-  console.log yourLinkHereL, cInExists
+  # TODO param handling as model ops... reimplement wheel?
+  #console.log yourLinkHereL, cInExists
   if cInExists
     # the place we are now is 'from' to here, from the place we're pointing to...
     yourLinkHere = user.link.to[from][to]
