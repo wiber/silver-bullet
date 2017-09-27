@@ -36,7 +36,7 @@ containerLayout = createContainer ((props) ->
   else
     thumbalizr = undefined
   #content = ifBodyContentHere queryParams.content, queryParams, user
-  newProps = {
+  newProps =
     user: user
     thumbalizr: thumbalizr
     from: decodeURIComponent queryParams.from
@@ -48,7 +48,6 @@ containerLayout = createContainer ((props) ->
     expandMainCard: queryParams.expandMainCard != 'false'
     expandAboutCard: queryParams.expandAboutCard != 'false'
     expandMyCard: queryParams.expandMyCard != 'false'
-  }
   newProps
 ), Layout
 
