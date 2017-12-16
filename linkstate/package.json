@@ -9,6 +9,7 @@
     "chai": "^3.5.0",
     "create-react-class": "^15.0.0",
     "fbjs": "^0.8.5",
+    "graceful-fs": "^4.1.11",
     "invariant": "^2.2.1",
     "material-ui": "^0.15.0-alpha.2",
     "meteor-node-stubs": "~0.2.0",
