@@ -13,7 +13,7 @@
 if Meteor.settings?.public?.thumbalizr?
   @thumbalizr =  Meteor.settings.public.thumbalizr
 else
-  @thumbalizr= "5VmUR42gc4eGdLjBnZH2BRXa"
+  @thumbalizr= "UQ6CMod6tIkVLam271a7WdUlutEJJHTE"
 
 Meteor.methods
   NewQueryParams: (queryParams) ->

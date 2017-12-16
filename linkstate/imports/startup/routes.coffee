@@ -12,4 +12,6 @@ FlowRouter.route '/about',
 FlowRouter.route '/',
   name: 'front'
   action: (params, queryParams) ->
-    FlowRouter.go('/about?from=https%253A%252F%252Flinkstate.youiest.com%252F&lastTitle=Linkstates')
+    FlowRouter.go '/about?
+    from=https%253A%252F%252Flinkstate.youiest.com%252F
+    &lastTitle=Linkstates'
