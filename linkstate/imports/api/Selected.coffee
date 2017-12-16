@@ -13,7 +13,6 @@ Selected = require('../ui/SelectedUI.coffee').Selected
 #that builds list of objects from a number of sources.
 exports.selectedContainer = createContainer ((props) ->
   # update queryparams unless we're fromt he same place
-
   nProps = _.extend {}, props,
     value: setValue(props,setOptions(props),props.user)
     options: setOptions(props)
@@ -26,20 +25,23 @@ setOptions = (props) ->
   if props.user?.links?.out?
     dictWithCreatedAt = props.user.links.out['Bookmarks']
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
-    for index,value of deChaos
-      if typeof value is 'string' and value != 'undefined'
-        entryWeightExists = dictWithCreatedAt[value]?.meta?.weight?
-        entryWeightHigh = dictWithCreatedAt[value].meta.weight > 0
-        if entryWeightExists and entryWeightHigh
-          selectItem =
-            label: dictWithCreatedAt[value].meta.title
-            value: dictWithCreatedAt[value]
-          options.push selectItem
-        #else
-        # console.log 'irrelevant entry', dictWithCreatedAt[value].meta.title
-        # this needs cleaning up..? should we remove totally when 0
-        # or should we filter the list every time we build the select...
-        # this is executed a lot;.... so
+    for index, value of deChaos
+      continue if typeof value is not 'string'
+      continue if value is 'undefined'
+      console.log dictWithCreatedAt[value]
+      continue unless dictWithCreatedAt[value].meta.title?
+      #continue unless dictWithCreatedAt[value].meta.weight > 0
+      selectItem =
+        label: dictWithCreatedAt[value].meta.title
+        value: dictWithCreatedAt[value]
+      console.log selectItem
+      options.push selectItem
+      #else
+      # console.log 'irrelevant entry', dictWithCreatedAt[value].meta.title
+      # this needs cleaning up..? should we remove totally when 0
+      # or should we filter the list every time we build the select...
+      # this is executed a lot;.... so
+  console.log options.length, deChaos.length
   options
 
 #FIXME does not select value when from a place
