@@ -29,7 +29,7 @@ Meteor.methods
 
   GroundedUserInsert: ->
     if Meteor.isClient and Meteor.user()
-      localStorage.userUpdateObjectem 'latest', JSON.stringify(Meteor.user())
+      localStorage.setItem 'latest', JSON.stringify(Meteor.user())
   Linking: ({from, to, META}) ->
     unless META?
       META = {}
@@ -195,7 +195,7 @@ Meteor.methods
         if result
           unless result is Meteor.user().hits
             new Meteor.Error 16, "sync error? looks like user object not synced"
-          localStorage.userUpdateObjectem 'serverHits', result
+          localStorage.setItem 'serverHits', result
   resetUser: () ->
     if Meteor.isClient
       console.log 'remove localStorage'
