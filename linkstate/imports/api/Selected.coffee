@@ -30,24 +30,16 @@ setOptions = (props) ->
     for index, value of deChaos
       continue if typeof value is not 'string'
       continue if value is 'undefined'
-      console.log dictWithCreatedAt[value].meta.title
       continue unless dictWithCreatedAt[value]?.meta?.title?
       #continue unless dictWithCreatedAt[value].meta.weight > 0
       selectItem =
         label: dictWithCreatedAt[value].meta.title
         value: dictWithCreatedAt[value]
-      #console.log selectItem
       options.push selectItem
-      #else
-      # console.log 'irrelevant entry', dictWithCreatedAt[value].meta.title
-      # this needs cleaning up..? should we remove totally when 0
-      # or should we filter the list every time we build the select...
-      # this is executed a lot;.... so
   options
 
 #FIXME does not select value when from a place
 setValue = (props, options, user) ->
-  console.log user, props.user
   newProps = {}
   newProps.options = []
   value = {}
@@ -62,31 +54,20 @@ setValue = (props, options, user) ->
   dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
   dictValueExists = dictValue?.meta?.title?
   lastDictValue = dictWithCreatedAt[linkstate.store(user[props.type+'Last'])]
-  # what if ... you don't have a 'to' or from?  use
-  # use if we don't have a to, we need to change queryParams to last to project
   if !typeValue? and lastDictValue?
     value=
       label: lastDictValue.meta.title
       value: lastDictValue
-
   if props.type is 'from'
     if dictValueExists
       title = 'Linkstates for ' + dictValue.title + ' - ' + props.from
-      #props.from
       DocHead.setTitle(title)
-
   if dictValueExists and clientReady
-    #console.log typeValue
     value =
       label: dictValue.meta.title
       value: dictValue
   else
-    # the issue is here
-    #console.log oDict is vDict, dictValueExists, dictValue, props.type, value, dictWithCreatedAt, Meteor.user()#, dictWithCreatedAt
-    #console.log oDict is vDict, dictValue, linkstate.store(typeValue), typeValue, linkstate.store('Linkstates.youiest.com')
-    #console.log props.lastTitle, linkstate.store('Linkstates.youiest.com'),
     console.log typeValue, props.user.links.out.Bookmarks
-    #console.log linkstate.unddot(dictValue)
     value =
       label: props.lastTitle
       value:

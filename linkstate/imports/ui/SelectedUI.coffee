@@ -66,7 +66,6 @@ Selected = React.createClass
             hideResetButton: true
             renderValue: (item) ->
               reactKup (k) ->
-                console.log item.label, item
                 k.span
                   style:
                     textOverflow: "ellipsis"

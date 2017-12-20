@@ -27,22 +27,6 @@ linkstate.thumbalizrPic = (url) ->
   newUrl = "https://api.thumbalizr.com/?url="+url+"&width=250&api_key="+Meteor.settings.public.thumbalizr
   return newUrl
 
-String::toUnicode = ->
-  uni = []
-  i = @length
-  while i--
-    uni[i] = @charCodeAt(i)
-  '&#' + uni.join(';&#') + ';'
-toUnicode = (str) ->
-  str.split('').map((value, index, array) ->
-    temp = value.charCodeAt(0).toString(16).toUpperCase()
-    if temp.length > 2
-      return '\\u' + temp
-    value
-  ).join ''
-
-# mongo is replacing the % with unicode equivalent,
-# equality fails when accessing the key in some cases..
 dot = '%2E'
 ddot = '%25252E'
 linkstate.unddot = (url) ->
@@ -53,7 +37,6 @@ linkstate.store = (url) ->
   plainToEncode = encodeURIComponent url
   encodedToDotless = plainToEncode.replace /\./g, dot
   return encodedToDotless
-
 
 linkstate.see = (url) ->
   unless typeof url == 'string'
