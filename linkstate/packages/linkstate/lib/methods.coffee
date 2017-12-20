@@ -165,10 +165,10 @@ Meteor.methods
         title: 'Bookmarks'
         weight: 9
     Meteor.call "Linking",
-      from: 'Linkstates.youiest.com'
+      from: 'Linkstate.youiest.com'
       to: 'Bookmarks' # the thing we're defining
       meta:
-        title: 'Linkstates - Connecting is seeing'
+        title: 'Linkstate - Connecting is seeing'
         weight: 7
     if Meteor.user()?.services?.facebook?.link?
       Meteor.call "Linking",

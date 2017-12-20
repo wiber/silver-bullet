@@ -57,7 +57,7 @@ exports.Layout = React.createClass
               style:
                 position: 'fixed'
               onClick: () ->
-                window.open that.props.from, "_blank"
+                window.open 'http://' + that.props.from, "_blank"
             k.span 'g',-> # because... just because
             k.div
               style:

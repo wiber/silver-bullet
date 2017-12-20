@@ -67,7 +67,6 @@ setValue = (props, options, user) ->
       label: dictValue.meta.title
       value: dictValue
   else
-    console.log typeValue, props.user.links.out.Bookmarks
     value =
       label: props.lastTitle
       value:
