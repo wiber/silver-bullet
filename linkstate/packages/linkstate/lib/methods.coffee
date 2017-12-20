@@ -30,9 +30,12 @@ Meteor.methods
   GroundedUserInsert: ->
     if Meteor.isClient and Meteor.user()
       localStorage.setItem 'latest', JSON.stringify(Meteor.user())
-  Linking: ({from, to, META}) ->
+  Linking: ({from, to, meta}) ->
+    META = meta
+    console.log META, arguments, meta.title
     unless META?
       META = {}
+
     unless META.title?
       META.title = to
     unless typeof Meteor.userId() is 'string'
@@ -155,29 +158,18 @@ Meteor.methods
     ,
       $set:
         'services.thumbalizr': Meteor.settings.thumbalizr
-        #'fromLast': Meteor.user().services.facebook.link
-        #'toLast': 'Bookmarks'
-    console.log 'Just setupUser', Meteor.user().hits, Meteor.user()._id
-
     Meteor.call "Linking",
       from: 'Bookmarks'
       to: 'Bookmarks' # the thing we're defining
       meta:
         title: 'Bookmarks'
         weight: 9
-    , (error, result) ->
-      if error
-        new Meteor.Error 7
-        , "Reply Does the User object have facebook credentials?"
     Meteor.call "Linking",
-      from: linkstate.store('Linkstates.youiest.com')
+      from: 'Linkstates.youiest.com'
       to: 'Bookmarks' # the thing we're defining
       meta:
         title: 'Linkstates - Connecting is seeing'
-    , (error, result) ->
-      if error
-        new Meteor.Error 7
-        , "Reply Does the User object have facebook credentials?"
+        weight: 7
     if Meteor.user()?.services?.facebook?.link?
       Meteor.call "Linking",
         from: Meteor.user().services.facebook.link
@@ -187,6 +179,7 @@ Meteor.methods
           weight: 7
     else
       new Meteor.Error 22, "non facebook user tried to login"
+    console.log 'Just setupUser', Meteor.user().hits, Meteor.user()._id, Meteor.user().links.out.Bookmarks, Meteor.user().links.in.Bookmarks
   compareHits: ->
     if Meteor.isClient
       Meteor.call "checkHits", (error, result) ->
@@ -229,6 +222,7 @@ Meteor.methods
           toCreated: ''
           fromCreated: ''
           thumbalizr: ''
+          links: ''
       Meteor.call "setupUser"
   resetN: (node) ->
     if Meteor.user().services.facebook.id = "10154232419354595"

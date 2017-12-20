@@ -26,7 +26,8 @@
     "react-tap-event-plugin": "^1.0.0",
     "reify": "^0.3.8",
     "uri-js": "^3.0.2",
-    "urijs": "^1.18.10"
+    "urijs": "^1.18.10",
+    "utf8": "^3.0.0"
   },
   "peerDependencies": {
     "react": "15.0.0",

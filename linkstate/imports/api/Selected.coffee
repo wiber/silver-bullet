@@ -19,41 +19,45 @@ exports.selectedContainer = createContainer ((props) ->
   nProps
 ), Selected
 
-
+oDict = {}
+vDict = {}
 setOptions = (props) ->
   options = []
   if props.user?.links?.out?
     dictWithCreatedAt = props.user.links.out['Bookmarks']
+    oDict = dictWithCreatedAt
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
     for index, value of deChaos
       continue if typeof value is not 'string'
       continue if value is 'undefined'
-      console.log dictWithCreatedAt[value]
-      continue unless dictWithCreatedAt[value].meta.title?
+      console.log dictWithCreatedAt[value].meta.title
+      continue unless dictWithCreatedAt[value]?.meta?.title?
       #continue unless dictWithCreatedAt[value].meta.weight > 0
       selectItem =
         label: dictWithCreatedAt[value].meta.title
         value: dictWithCreatedAt[value]
-      console.log selectItem
+      #console.log selectItem
       options.push selectItem
       #else
       # console.log 'irrelevant entry', dictWithCreatedAt[value].meta.title
       # this needs cleaning up..? should we remove totally when 0
       # or should we filter the list every time we build the select...
       # this is executed a lot;.... so
-  console.log options.length, deChaos.length
   options
 
 #FIXME does not select value when from a place
 setValue = (props, options, user) ->
+  console.log user, props.user
   newProps = {}
   newProps.options = []
   value = {}
+  return unless props.user?.links?.out?['Bookmarks']?
   directedTo = typeof props.to is 'string' and props.to.length > 1
   clientReady = props.user?.services?.facebook? and Meteor.isClient
   gotFrom = typeof props.from is 'string' and props.from.length > 1
   bookmarked = props.user?.links?.out?.Bookmarks?
   dictWithCreatedAt = props.user.links.out['Bookmarks']
+  vDict = dictWithCreatedAt
   typeValue = props[props.type]
   dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
   dictValueExists = dictValue?.meta?.title?
@@ -64,7 +68,7 @@ setValue = (props, options, user) ->
     value=
       label: lastDictValue.meta.title
       value: lastDictValue
-  #console.log dictValueExists, dictValue, props.type#, dictWithCreatedAt
+
   if props.type is 'from'
     if dictValueExists
       title = 'Linkstates for ' + dictValue.title + ' - ' + props.from
@@ -76,13 +80,18 @@ setValue = (props, options, user) ->
     value =
       label: dictValue.meta.title
       value: dictValue
-
-
   else
-    #
+    # the issue is here
+    #console.log oDict is vDict, dictValueExists, dictValue, props.type, value, dictWithCreatedAt, Meteor.user()#, dictWithCreatedAt
+    #console.log oDict is vDict, dictValue, linkstate.store(typeValue), typeValue, linkstate.store('Linkstates.youiest.com')
+    #console.log props.lastTitle, linkstate.store('Linkstates.youiest.com'),
+    console.log typeValue, props.user.links.out.Bookmarks
+    #console.log linkstate.unddot(dictValue)
     value =
       label: props.lastTitle
       value:
         meta:
           FromLink: props.from
+          title: props.lastTitle
+
   value

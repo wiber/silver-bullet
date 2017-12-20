@@ -1,4 +1,6 @@
 # these are convenience functions for handling strings
+utf8 = require 'utf8'
+
 linkstate = {}
 linkstate.sortByKeys = (dict, many) ->
   toReturn = Object.keys(dict).sort (a, b) ->
@@ -24,18 +26,49 @@ linkstate.sortByMomentum = (dictDict, many) ->
 linkstate.thumbalizrPic = (url) ->
   newUrl = "https://api.thumbalizr.com/?url="+url+"&width=250&api_key="+Meteor.settings.public.thumbalizr
   return newUrl
+
+String::toUnicode = ->
+  uni = []
+  i = @length
+  while i--
+    uni[i] = @charCodeAt(i)
+  '&#' + uni.join(';&#') + ';'
+toUnicode = (str) ->
+  str.split('').map((value, index, array) ->
+    temp = value.charCodeAt(0).toString(16).toUpperCase()
+    if temp.length > 2
+      return '\\u' + temp
+    value
+  ).join ''
+
+# mongo is replacing the % with unicode equivalent,
+# equality fails when accessing the key in some cases..
+dot = '%2E'
+ddot = '%25252E'
+linkstate.unddot = (url) ->
+  url.replace ddot, '.'
 linkstate.store = (url) ->
   unless typeof url is 'string' or url is not 'undefined'
     return null
   plainToEncode = encodeURIComponent url
   encodedToDotless = plainToEncode.replace /\./g, '%2E'
-  encodedToDotless
+  #encodedToDotless = plainToEncode.replace /\./g, '&#46;'
+  #encodedToDotless.fromCharCode(parseInt(input,16))
+  #encodedToDotless = plainToEncode.replace /\./g, '%25252E'
+
+  #%252 25252Eyouiest &#46;
+  #console.log escape(url), plainToEncode
+  #escape url
+  console.log toUnicode(url), utf8.encode(url), utf8.encode(encodedToDotless)
+  return utf8.encode(encodedToDotless)
+
 
 linkstate.see = (url) ->
   unless typeof url == 'string'
     return null
   encodedToPlain = decodeURIComponent url
-  encodedToDotless = encodedToPlain.replace '%2E' , '.'
+  encodedToDotless = encodedToPlain.replace '%&#46;' , '.'
+  #encodedToDotless = encodedToPlain.replace '%25252E' , '.'
   encodedToDotless.replace('http://','').replace('https://','').replace('www.','')
 
 
