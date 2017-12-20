@@ -51,24 +51,15 @@ linkstate.store = (url) ->
   unless typeof url is 'string' or url is not 'undefined'
     return null
   plainToEncode = encodeURIComponent url
-  encodedToDotless = plainToEncode.replace /\./g, '%2E'
-  #encodedToDotless = plainToEncode.replace /\./g, '&#46;'
-  #encodedToDotless.fromCharCode(parseInt(input,16))
-  #encodedToDotless = plainToEncode.replace /\./g, '%25252E'
-
-  #%252 25252Eyouiest &#46;
-  #console.log escape(url), plainToEncode
-  #escape url
-  console.log toUnicode(url), utf8.encode(url), utf8.encode(encodedToDotless)
-  return utf8.encode(encodedToDotless)
+  encodedToDotless = plainToEncode.replace /\./g, dot
+  return encodedToDotless
 
 
 linkstate.see = (url) ->
   unless typeof url == 'string'
     return null
   encodedToPlain = decodeURIComponent url
-  encodedToDotless = encodedToPlain.replace '%&#46;' , '.'
-  #encodedToDotless = encodedToPlain.replace '%25252E' , '.'
+  encodedToDotless = encodedToPlain.replace dot, '.'
   encodedToDotless.replace('http://','').replace('https://','').replace('www.','')
 
 
