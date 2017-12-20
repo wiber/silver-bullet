@@ -127,7 +127,7 @@ VisualCue = React.createClass
                 display: 'inline'
               size: D/2
               src: that.props.ScreenshotUrl
-        if that.props?.user?.out?[linkstate.store that.props.from]?
+        if that.props?.user?.links?.out?[linkstate.store that.props.from]?
           out = that.props.user.links.out[linkstate.store that.props.from]
           n = 0
           outArrayByWeight = linkstate.sortByWeight(out, that.props.howMany)
