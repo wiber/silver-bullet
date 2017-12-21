@@ -19,7 +19,30 @@ MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 exports.Layout = React.createClass
   getDefaultProps: ->
     expandMainCard: true
+  componentDidMount: ->
+
+
   render: ->
+    window.fbAsyncInit = ->
+      console.log that.props.facebookAppId
+      FB.init
+        appId: that.props.facebookAppId
+        autoLogAppEvents: true
+        xfbml: true
+        version: 'v2.11'
+      return
+
+    ((d, s, id) ->
+      js = undefined
+      fjs = d.getElementsByTagName(s)[0]
+      if d.getElementById(id)
+        return
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://connect.facebook.net/en_US/sdk.js'
+      fjs.parentNode.insertBefore js, fjs
+      return
+    ) document, 'script', 'facebook-jssdk'
     that = this
     reactKup (k) ->
       if that.props.user?.links?.out?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
@@ -95,5 +118,11 @@ exports.Layout = React.createClass
                   thumbalizr: that.props.thumbalizr
                   howMany: 15
                   user: that.props.user
+            k.div
+              id: 'fb-root'
+            k.div
+              className:"fb-comments"
+              dataHref:"http://linkstate.youiest.com/about?from="+encodeURIComponent(that.props.from)
+              dataNumposts: "5"
             k.div ->
               k.build AccountsUIWrapper

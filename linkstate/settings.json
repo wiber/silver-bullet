@@ -2,6 +2,7 @@
     "facebookAppId": "710055149104819",
     "facebookSecret": "9ec1defc8144985305fbda0ff66100ed",
     "public": {
+        "facebookAppId": "710055149104819",
         "thumbalizr": "UQ6CMod6tIkVLam271a7WdUlutEJJHTE"
     },
     "devDependencies": {

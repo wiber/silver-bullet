@@ -32,7 +32,6 @@ Meteor.methods
       localStorage.setItem 'latest', JSON.stringify(Meteor.user())
   Linking: ({from, to, meta}) ->
     META = meta
-    console.log META, arguments, meta.title
     unless META?
       META = {}
 
