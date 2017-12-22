@@ -43,7 +43,7 @@ AboutCard = React.createClass
               display: 'inline'
               #flexWrap: 'wrap'
             -># CardText,
-            if that.props.node?.in?
+            if that.props.node?.links?.in?
               k.build GridList,
                 class: 'looplist'
                 cellHeight: 500
@@ -52,8 +52,9 @@ AboutCard = React.createClass
                   N = {} # the node we're on
                   N.node = that.props.node
 
-                  N.inLinks = that.props.node.in
-                  N.outLinks = that.props.node.out
+                  N.inLinks = that.props.node.links.in
+                  N.outLinks = that.props.node.links.out
+                  console.log N
                   N.allLinks = _.extend {}, N.inLinks, N.outLinks
 
                   N.linksByTime = linkstate.sortByKeysTime(N.allLinks

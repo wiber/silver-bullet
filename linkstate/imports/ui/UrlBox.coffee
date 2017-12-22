@@ -29,18 +29,18 @@ UrlBox = React.createClass
       # more correct to sort by date.. but why..
       firstUserHere = Object.keys(usersLinks)[0]
       #  at least one of the node ends points to here.
-      if N.node.in[dotlessLink]? and N.node.out[dotlessLink]?
+      if N.node.links.in[dotlessLink]? and N.node.links.out[dotlessLink]?
         firstWibeHere = usersLinks[firstUserHere]
         console.log "# we don't want to draw two if there's a self reference",firstWibeHere
         type = 3
       else
-        if N.node.in[dotlessLink]?
-          firstWibeHere = N.node.in[dotlessLink][Object.keys(N.node.in[dotlessLink])[0]]
+        if N.node.links.in[dotlessLink]?
+          firstWibeHere = N.node.links.in[dotlessLink][Object.keys(N.node.links.in[dotlessLink])[0]]
           firstWibeHere.subtitle = firstWibeHere.meta.FromLink
           type = 2
         else
-          if N.node.out[dotlessLink]?
-            firstWibeHere = N.node.out[dotlessLink][Object.keys(N.node.out[dotlessLink])[0]]
+          if N.node.links.out[dotlessLink]?
+            firstWibeHere = N.node.links.out[dotlessLink][Object.keys(N.node.links.out[dotlessLink])[0]]
             firstWibeHere.subtitle = firstWibeHere.meta.ToLink
             type = 1
           else
