@@ -24,7 +24,6 @@ exports.Layout = React.createClass
 
   render: ->
     window.fbAsyncInit = ->
-      console.log that.props.facebookAppId
       FB.init
         appId: that.props.facebookAppId
         autoLogAppEvents: true
@@ -33,6 +32,7 @@ exports.Layout = React.createClass
       return
 
     ((d, s, id) ->
+      return unless document?
       js = undefined
       fjs = d.getElementsByTagName(s)[0]
       if d.getElementById(id)
@@ -62,8 +62,7 @@ exports.Layout = React.createClass
         muiTheme: lightBaseUsTheme
         ->
           k.div ->
-            #className: 'onlyOne'
-            #->
+            className: 'row'
             k.div
               style: _.extend {}, style.base,
                 height: '100%'
@@ -81,48 +80,57 @@ exports.Layout = React.createClass
                 position: 'fixed'
               onClick: () ->
                 window.open 'http://' + that.props.from, "_blank"
-            k.span 'g',-> # because... just because
+            k.span 'g',-> # because... just because otherwise appbar bugs out
             k.div
               style:
                 marginTop: 150
-              #className: 'main'
+              className: 'column'
               ->
-                if that.props.user?.services?.facebook?
-                  k.build MainCard, # need comma here because the second arg is prop
-                    expanded: that.props.expandMainCard
-                    # redundant container? already have user obj here
+                k.div ->
+                  if that.props.user?.services?.facebook?
+                    k.build MainCard, # need comma here because the second arg is prop
+                      expanded: that.props.expandMainCard
+                      # redundant container? already have user obj here
+                      to: that.props.to
+                      from: that.props.from
+                      word: that.props.word
+                      content: that.props.content
+                      user: that.props.user
+                      lastTitle: that.props.lastTitle
+                    k.build MyCard,
+                      expanded: that.props.expandMyCard
+                      to: that.props.to
+                      lastTitle: that.props.lastTitle
+                      from: that.props.from
+                      word: that.props.word
+                      user: that.props.user
+                      incomming: that.props.incomming
+                      howMany: 10
+                      type: 'fromCreated'
+                      ScreenshotUrl: ScreenshotUrl
+                  else
+                    k.build Mexplain
+                  k.build AboutCard,
+                    expanded: that.props.expandAboutCard
                     to: that.props.to
                     from: that.props.from
                     word: that.props.word
-                    content: that.props.content
+                    thumbalizr: that.props.thumbalizr
+                    howMany: 15
                     user: that.props.user
-                    lastTitle: that.props.lastTitle
-                  k.build MyCard,
-                    expanded: that.props.expandMyCard
-                    to: that.props.to
-                    lastTitle: that.props.lastTitle
-                    from: that.props.from
-                    word: that.props.word
-                    user: that.props.user
-                    incomming: that.props.incomming
-                    howMany: 10
-                    type: 'fromCreated'
-                    ScreenshotUrl: ScreenshotUrl
-                else
-                  k.build Mexplain
-                k.build AboutCard,
-                  expanded: that.props.expandAboutCard
-                  to: that.props.to
-                  from: that.props.from
-                  word: that.props.word
-                  thumbalizr: that.props.thumbalizr
-                  howMany: 15
-                  user: that.props.user
+
             k.div
-              id: 'fb-root'
-            k.div
-              className:"fb-comments"
-              dataHref:"http://linkstate.youiest.com/about?from="+encodeURIComponent(that.props.from)
-              dataNumposts: "5"
-            k.div ->
-              k.build AccountsUIWrapper
+              className: 'column'
+              style:
+                marginTop: 150# '15%'
+              ->
+                k.div
+                  id: 'fb-root'
+                k.div
+                  style:
+                    marginTop: '15%'
+                  className:"fb-comments"
+                  dataHref:"http://linkstate.youiest.com/about?from="+encodeURIComponent(that.props.from)
+                  dataNumposts: "5"
+                k.div ->
+                  k.build AccountsUIWrapper
