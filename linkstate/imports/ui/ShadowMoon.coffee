@@ -161,15 +161,17 @@ VisualCue = React.createClass
 Winged = React.createClass
   render: ->
     that = this
-    {user,from,ScreenshotUrl,M,N,U,D, measurements,firstWibeHere} = that.props
+    {user,from,ScreenshotUrl,measurements,firstWibeHere} = that.props
+    {M,N,U,D} = measurements
+    console.log D, M
     reactKup (k) ->
       k.div ->
         k.build Paper,
           circle: true
           style:
-            width: D
-            height: D
-            marginRight: -D/2
+            maxWidth: D#'50%'
+            maxHeight: D#'50%'
+            marginRight: '50%'#0.5*D
             marginTop: M
             marginBottom: M
             float: 'right'

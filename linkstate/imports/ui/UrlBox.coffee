@@ -18,6 +18,8 @@ CardText =  require('material-ui/lib/card/card-text').default
 {GoMark} = require '../../imports/api/nav/GoMark.coffee'
 {Winged} = require '../ui/ShadowMoon'
 R = require 'ramda'
+
+# how does one break this one up?
 UrlBox = React.createClass
   propTypes:
     D: React.PropTypes.object

@@ -120,7 +120,7 @@ exports.Layout = React.createClass
                     user: that.props.user
 
             k.div
-              className: 'column'
+              className: 'columnR'
               style:
                 marginTop: 150# '15%'
               ->

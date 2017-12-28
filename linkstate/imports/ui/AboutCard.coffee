@@ -54,7 +54,6 @@ AboutCard = React.createClass
 
                   N.inLinks = that.props.node.links.in
                   N.outLinks = that.props.node.links.out
-                  console.log N
                   N.allLinks = _.extend {}, N.inLinks, N.outLinks
 
                   N.linksByTime = linkstate.sortByKeysTime(N.allLinks
