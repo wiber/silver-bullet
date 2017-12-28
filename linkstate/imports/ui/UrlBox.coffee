@@ -73,6 +73,7 @@ UrlBox = React.createClass
               d: 60
               M: 50
             N: N
+            dotlessLink: dotlessLink
 
 oldBullet = React.createClass
   render: ->

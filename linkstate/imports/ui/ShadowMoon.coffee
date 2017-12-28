@@ -161,48 +161,55 @@ VisualCue = React.createClass
 Winged = React.createClass
   render: ->
     that = this
-    {user,from,ScreenshotUrl,measurements,firstWibeHere} = that.props
-    {M,N,U,D} = measurements
-    console.log D, M
+    {user,from,N,ScreenshotUrl,measurements,firstWibeHere, dotlessLink} = that.props
+    #{D,d,M} = measurements
+
     reactKup (k) ->
       k.div ->
         k.build Paper,
           circle: true
           style:
-            maxWidth: D#'50%'
-            maxHeight: D#'50%'
-            marginRight: '50%'#0.5*D
-            marginTop: M
-            marginBottom: M
+            maxWidth: measurements.D#'50%'
+            maxHeight: measurements.D#'50%'
+            marginRight: 0.5*measurements.D - measurements.M
+            marginTop: measurements.M
+            marginBottom: measurements.M
             float: 'right'
             display: 'inline'
           zDepth: 5
           ->
             k.build Avatar,
               style:
-                width: D
-                height: D
+                width: measurements.D
+                height: measurements.D
                 marginRight: 0
                 marginTop: 0
                 marginBottom: 0
                 float: 'right'
                 display: 'inline'
-              size: D/2
+              size: measurements.D/2
               src: firstWibeHere.meta.ScreenshotUrl#that.props.ScreenshotUrl
-        inlink = N?.inLinks?[firstWibeHere.subtitle]?
-        outlink = N?.outLinks?[firstWibeHere.subtitle]?
+        inlink = N?.inLinks?[dotlessLink]?
+        outlink = N?.outLinks?[dotlessLink]?
         U = {}
         U.directionUserMeta = {}
         if outlink
-          U.directionUserMeta.OUTLINKS = N.outLinks[D.link]
+          U.directionUserMeta.OUTLINKS = N.outLinks[dotlessLink]
         if inlink
-          U.directionUserMeta.INLINKS = N.inLinks[D.link]
+          U.directionUserMeta.INLINKS = N.inLinks[dotlessLink]
         counted = 0
         for directedBunch of U.directionUserMeta
           for userVectorName of U.directionUserMeta[directedBunch]
             counted++
-            console.log counted, userVectorName, U.directionUserMeta[directedBunch], ScreenshotUrl, D.link, D
-        if that.props?.user?.out?[linkstate.store that.props.from]?
+            console.log counted, userVectorName, U.directionUserMeta[directedBunch], ScreenshotUrl
+        #console.log D, M, N, outlink, inlink, that.props?.user?.out?[linkstate.store that.props.from]?
+        console.log firstWibeHere
+        , N.inLinks[firstWibeHere.from]
+        , N.inLinks[firstWibeHere.to]
+        , that.props
+        , dotlessLink
+        # aboutness shouldn't depend on user.. test functional..
+        if that.props?.user?.links.out?[dotlessLink]?
           out = that.props.user.links.out[linkstate.store that.props.from]
           n = 0
           outArrayByWeight = linkstate.sortByWeight(out, that.props.howMany)
