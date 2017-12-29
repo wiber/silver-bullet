@@ -76,7 +76,8 @@ Selected = React.createClass
                     whiteSpace: 'nowrap'
                     textAling: 'top'
                     #maxWidth: '87%'
-                  item.label
+                  item.value.meta.title
+                  #item.label
           k.build IconButton,
             tooltip: tooltipText
             tooltipPosition: 'bottom'

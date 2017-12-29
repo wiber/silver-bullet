@@ -7,13 +7,15 @@
   },
   "dependencies": {
     "chai": "^3.5.0",
+    "create-react-class": "^15.0.0",
     "fbjs": "^0.8.5",
+    "graceful-fs": "^4.1.11",
     "invariant": "^2.2.1",
     "material-ui": "^0.15.0-alpha.2",
     "meteor-node-stubs": "~0.2.0",
     "nuka-carousel": "^2.0.3",
     "ramda": "^0.23.0",
-    "react": "~15.0.0",
+    "react": "^15.6.2",
     "react-addons-css-transition-group": "^15.0.0",
     "react-addons-pure-render-mixin": "^15.0.0",
     "react-addons-shallow-compare": "^15.0.0",
@@ -24,7 +26,8 @@
     "react-tap-event-plugin": "^1.0.0",
     "reify": "^0.3.8",
     "uri-js": "^3.0.2",
-    "urijs": "^1.18.10"
+    "urijs": "^1.18.10",
+    "utf8": "^3.0.0"
   },
   "peerDependencies": {
     "react": "15.0.0",

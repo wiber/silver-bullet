@@ -63,6 +63,9 @@ UrlBox = React.createClass
             for userVectorName of U.directionUserMeta[directedBunch]
               counted++
               meta = U.directionUserMeta[directedBunch][userVectorName].meta
+              # sometimes meta does not have a body
+              unless meta.body?
+                meta.body = ''
               if loopi.lastWeight == meta.weight
                 loopi.offsetSequence++
               else
@@ -76,24 +79,5 @@ UrlBox = React.createClass
                 meta: meta
                 directed: directedBunch
                 measurements: measurements
-###
-              weights = [0..9]
-              for directioned in ['INLINKS','OUTLINKS']
-                for weighted in [0..9]
-                  if loopi.lastWeight == meta.weight
-                    loopi.offsetSequence++
-                  else
-                    loopi.offsetSequence = 0
-                  k.build wingMark,
-                    weight: weighted
-                    n: 1
-                    counted: 1
-                    size: style.scalars.screenshotWidth
-                    meta: meta
-                    directed: directioned
-                    measurements: measurements
-###
-
-
 
 exports.UrlBox = UrlBox

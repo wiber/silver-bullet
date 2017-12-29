@@ -21,6 +21,7 @@ IconButton = require('material-ui/lib/icon-button').default
 Paper = require('material-ui/lib/paper').default
 Avatar = require('material-ui/lib/avatar').default
 {shadowFloor, upMargin, rightMargin,Position} = require '../api/strings'
+Lo = require 'lodash'
 
 shadowMoon = React.createClass
   render: ->
@@ -70,7 +71,7 @@ VisualCue = React.createClass
               width: D
               height: D
               left: D/2+M
-              marginTop: M
+              marginTop: 2*M
               marginBottom: M
               float: 'right'
               display: 'inline'
@@ -87,24 +88,24 @@ VisualCue = React.createClass
                   display: 'inline'
                 size: D/2
                 src: that.props.ScreenshotUrl
-          if that.props?.user?.out?[linkstate.store that.props.from]?
-            out = that.props.user.out[linkstate.store that.props.from]
+          if that.props?.user?.link?.to?[linkstate.store that.props.from]?
+            inLinks = that.props.user.link.to[linkstate.store that.props.from]
             n = 0
-            outArrayByWeight = linkstate.sortByWeight(out, that.props.howMany)
-            for key, mark of outArrayByWeight
-              target = out[mark]
-              arrayValue = outArrayByWeight[key]
-              dictWeight = out[arrayValue].meta.weight
-              lastKey = outArrayByWeight[key-1]
+            inLinksArrayByWeight = linkstate.sortByWeight(inLinks, that.props.howMany)
+            for key, mark of inLinksArrayByWeight
+              target = inLinks[mark]
+              arrayValue = inLinksArrayByWeight[key]
+              dictWeight = inLinks[arrayValue].meta.weight
+              lastKey = inLinksArrayByWeight[key-1]
               if lastKey?
-                if out[lastKey].meta.weight is out[mark].meta.weight
+                if inLinks[lastKey].meta.weight is inLinks[mark].meta.weight
                   n++
                 else
                   n = 0
               m = target.meta
               try
-                thisWeight = out[mark].meta.weight
-                lastWeight = (out[mark].meta.weight -1)
+                thisWeight = inLinks[mark].meta.weight
+                lastWeight = (inLinks[mark].meta.weight -1)
               catch error
               k.build yourMark,
                 user: that.props.user
@@ -119,7 +120,11 @@ yourMark = React.createClass
   render: ->
     that = this
     body = that.props.target.meta.body
-    L = body.length
+    if body?
+      L = body.length
+    else
+      L = 0
+      body = ''
     floor = 5
     top = 50
     shadow = floor-Math.round(floor/Math.round(.5+L*(floor/top)))
@@ -131,13 +136,13 @@ yourMark = React.createClass
         circle: true
         style:
           position: 'absolute'
-          top: Position
+          top: M+Position
             measurements: measurements
             weight: weight
             n: n
             directed: 'INLINKS'
             axis: 'y'
-          left: Position
+          left: D/2+Position
             measurements: measurements
             weight: weight
             n: n
@@ -145,17 +150,20 @@ yourMark = React.createClass
             axis: 'x'
           width: r
           height: r
-        zDepth: shadowFloor that.props.target.meta.body, 5 , 50
+        zDepth: shadowFloor body, 5 , 50
         overflow: 'hidden'
         ->
+          text = Lo.get that.props, 'target.meta.body'
+          if !text
+            text = ''
           k.div ->
             k.build IconButton,
               style:
                 padding: 0
                 width: r
                 height: r
-              tooltip: that.props.target.meta.body
-              tooltipPosition: 'bottom-right'
+              tooltip: text + ' - ' + linkstate.see(that.props.target.meta.FromLink) + ' to ' + linkstate.see(that.props.target.meta.ToLink)
+              tooltipPosition: 'top-right'
               className: 'YourMarks'
               onClick: (e) ->
                 changeQueryParamsObject
@@ -207,13 +215,17 @@ Winged = React.createClass
 wingMark = React.createClass
   render: ->
     that = this
-    body = that.props.meta.body
-    L = body.length
+    {loopi, meta, weight, counted, size, meta, directed, measurements, from, to, thumbalizr, word, user, n} = that.props
+    body = meta.body
+    try
+      bodyLen =  body.length
+    catch error
+      console.error 'this body does not have length', meta
+
     floor = 5
     top = 50
-    shadow = floor-Math.round(floor/Math.round(.5+L*(floor/top)))
+    shadow = floor-Math.round(floor/Math.round(.5+bodyLen*(floor/top)))
     reactKup (k) ->
-      {measurements,n,weight,meta,FromLink,ToLink,loopi,directed,from,to} = that.props
       {D,d,M} = measurements
       k.build Paper,
         circle: true
@@ -244,7 +256,7 @@ wingMark = React.createClass
                 width: D/d
                 height: D/d
               tooltip: that.props.meta.body
-              tooltipPosition: 'bottom-right'
+              tooltipPosition: 'top-right'
               className: 'YourMarks'
               onClick: (e) ->
                 changeQueryParamsObject

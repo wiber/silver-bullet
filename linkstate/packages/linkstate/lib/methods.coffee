@@ -13,7 +13,7 @@
 if Meteor.settings?.public?.thumbalizr?
   @thumbalizr =  Meteor.settings.public.thumbalizr
 else
-  @thumbalizr= "5VmUR42gc4eGdLjBnZH2BRXa"
+  @thumbalizr= "UQ6CMod6tIkVLam271a7WdUlutEJJHTE"
 
 Meteor.methods
   NewQueryParams: (queryParams) ->
@@ -26,18 +26,17 @@ Meteor.methods
       $set: queryParamsState
       $inc:
         'qpUpdates': 1
-
   GroundedUserInsert: ->
-    if Meteor.isClient and Meteor.user()
+    if Meteor.isClient and Meteor.user().services?.facebook?
       localStorage.setItem 'latest', JSON.stringify(Meteor.user())
-  Linking: (link) ->
-    #this.unblock() # allow next req without wait
-    #check(link.from,'string')
-    to = link.to
-    from = link.from
-    META = link.meta
+  GroundedNodeInsert: ->
+    if Meteor.isClient and Meteor.user().services?.facebook?
+      localStorage.setItem Nodes.findOne()._id, JSON.stringify(Nodes.findOne())
+  Linking: ({from, to, meta}) ->
+    META = meta
     unless META?
       META = {}
+
     unless META.title?
       META.title = to
     unless typeof Meteor.userId() is 'string'
@@ -48,9 +47,9 @@ Meteor.methods
         console.log 'Linking'
         , @isSimulation
         , META.title
-        , link.from
-        , link.meta.weight
-        , link.to
+        , from
+        , META.weight
+        , to
         , Meteor.user()?.services?.facebook?.name #,  Meteor.user().profile.name
         , Meteor.user().hits
     unless to? and from?
@@ -84,21 +83,23 @@ Meteor.methods
       username = 'EarlyBird'
     setEdgeIn = {}
     setEdgeOut = {}
-    setEdgeIn['out.' + FROM + '.' + username] = edge
+    #setEdgeIn['out.' + FROM + '.' + username] = edge
+    setEdgeIn['links.out.' + FROM + '.' + username] = edge
     edge.title = META.title# or TO # because we're in TO this
     setEdgeIn.title = edge.title
     edge.title = META.title or FROM # because we're out FROM this
-    setEdgeOut['in.' + TO + '.' + username] = edge
+    #setEdgeOut['in.' + TO + '.' + username] = edge
+    setEdgeOut['links.in.' + TO + '.' + username] = edge
     setEdgeOut.title = edge.title
 
-    setIt = {}
-    setIt.edited = time
+    userUpdateObject = {}
+    userUpdateObject.edited = time
     if from not in categoryTypes
-      setIt.fromLast = from
+      userUpdateObject.fromLast = from
     if to not in categoryTypes
-      setIt.toLast = to
-    setIt['in.'+FROM+'.'+TO] = edge
-    setIt['out.'+TO+'.'+FROM] = edge
+      userUpdateObject.toLast = to
+    userUpdateObject['links.in.'+FROM+'.'+TO] = edge
+    userUpdateObject['links.out.'+TO+'.'+FROM] = edge
     # totally kills latency compensation on page
     # load to avoid uncaught error in fast render
     if Meteor.isServer or UserHandle?.ready()
@@ -106,7 +107,7 @@ Meteor.methods
         Meteor.users.update # we need to know what our last connection was
           _id: Meteor.userId()
         ,
-          $set: setIt
+          $set: userUpdateObject
           $inc:
             'hits': 1
       else
@@ -116,11 +117,11 @@ Meteor.methods
         # in dropdown? are we sure they are unioque urls?
         # TODO break out model operations into tested functions
         # get my bookmarka, get a title for this place, etc
-        setIt['out.Bookmarks.'+FROM+'.meta.weight'] = 0
+        userUpdateObject['out.Bookmarks.'+FROM+'.meta.weight'] = 0
         Meteor.users.update # we need to know what our last connection was
           _id: Meteor.userId()
         ,
-          $set: setIt
+          $set: userUpdateObject
           $inc:
             'hits': 1
     if Meteor.isClient
@@ -158,29 +159,18 @@ Meteor.methods
     ,
       $set:
         'services.thumbalizr': Meteor.settings.thumbalizr
-        #'fromLast': Meteor.user().services.facebook.link
-        #'toLast': 'Bookmarks'
-    console.log 'Just setupUser', Meteor.user().hits, Meteor.user()._id
-
     Meteor.call "Linking",
       from: 'Bookmarks'
       to: 'Bookmarks' # the thing we're defining
       meta:
         title: 'Bookmarks'
         weight: 9
-    , (error, result) ->
-      if error
-        new Meteor.Error 7
-        , "Reply Does the User object have facebook credentials?"
     Meteor.call "Linking",
-      from: linkstate.store('Linkstates.youiest.com')
+      from: 'Linkstate.youiest.com'
       to: 'Bookmarks' # the thing we're defining
       meta:
-        title: 'Linkstates - Connecting is seeing'
-    , (error, result) ->
-      if error
-        new Meteor.Error 7
-        , "Reply Does the User object have facebook credentials?"
+        title: 'Linkstate - Connecting is seeing'
+        weight: 7
     if Meteor.user()?.services?.facebook?.link?
       Meteor.call "Linking",
         from: Meteor.user().services.facebook.link
@@ -190,6 +180,7 @@ Meteor.methods
           weight: 7
     else
       new Meteor.Error 22, "non facebook user tried to login"
+    console.log 'Just setupUser', Meteor.user().hits, Meteor.user()._id, Meteor.user().links.out.Bookmarks, Meteor.user().links.in.Bookmarks
   compareHits: ->
     if Meteor.isClient
       Meteor.call "checkHits", (error, result) ->
@@ -232,6 +223,7 @@ Meteor.methods
           toCreated: ''
           fromCreated: ''
           thumbalizr: ''
+          links: ''
       Meteor.call "setupUser"
   resetN: (node) ->
     if Meteor.user().services.facebook.id = "10154232419354595"

@@ -1,5 +1,47 @@
 R = require('ramda')
 linkstate = {}
+exports.Position = ({measurements,weight,n,directed,axis}) ->
+  if directed == 'OUTLINKS'
+    direction = -1
+    xDir = -1
+  else
+    direction = 1
+    xDir = 1
+  Coordinate = {}
+  {D,d,M} = measurements
+  r = D/2
+  Ra = r+(.6*n+.4)*(D/d)
+  center = M+r
+  weightDev = (weight-5)/4 # %
+  yDir =  -1*weightDev/Math.abs(weightDev)
+  ty = (weightDev)*r
+  x0 = M + r - .5*D/d  #D/2-.5*D/d#/2
+  y0 = M + r - .5*D/d
+  # angles from PI to 2*PI?
+  angleO = Math.PI*(1+weightDev)/2
+  speed = 15
+  angle = ((n)*(.5*Math.PI*direction)+(speed*angleO))/(n+speed)
+  if weight is 0
+    #Coordinate.x = Coordinate.x+ d
+    #Coordinate.y = Coordinate.y#+D/d
+    # not entirely correct. 1 should be opposite 9 and 0 off the grid.
+    angle = 0
+    Coordinate.y = y0 + Ra * Math.cos(angle)-((1+n)*D/d)# + .25*D/d
+    Coordinate.x = x0 - Ra *direction * Math.sin(angle)# -*D/d
+  else
+    Coordinate.y = y0 + Ra * Math.cos(angle)# + .25*D/d
+    Coordinate.x = x0 - Ra *direction * Math.sin(angle)# -*D/d
+  #asymptote = (3)/(n) @ no move angle by factor n towards straight line
+  # 0 -> 1 1
+  # 1 -> 1.4 , 0.8
+  # 2 -> 2 , .3
+  # 3 -> 3, 0
+  # delta towards horizontal line. we need Coordinate for n-1?
+  #Coordinate.x = Coordinate.x - (D/d) * n * .2 * (Coordinate.x/Math.abs(Coordinate.x))
+  #Coordinate.y = Coordinate.y - (D/d) * n * .2 * (Coordinate.y/Math.abs(Coordinate.y))
+  if 0 <= weight <= 9
+    return Coordinate[axis]
+  else return 0
 exports.store = (url) ->
   unless typeof url == 'string'
     ##console.log url,'store is encoded', url == decodeURIComponent url
@@ -51,6 +93,7 @@ exports.listByMomentum = (listOne, listTwo) ->
   R.uniq returner
 
 exports.shadowFloor = (L,floor,top) ->
+  return unless L?
   floor-Math.round(floor/Math.round(.5+L.length*(floor/top)))
 
 exports.upMargin = ({D,d,M},weight) ->

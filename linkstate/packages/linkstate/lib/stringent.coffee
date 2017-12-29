@@ -1,4 +1,6 @@
 # these are convenience functions for handling strings
+utf8 = require 'utf8'
+
 linkstate = {}
 linkstate.sortByKeys = (dict, many) ->
   toReturn = Object.keys(dict).sort (a, b) ->
@@ -11,6 +13,8 @@ linkstate.sortByKeysTime = (dict, many) ->
   toReturn[..many]
 
 linkstate.sortByWeight = (dict, many) ->
+  return unless dict?
+  return unless Object.keys(dict).length > 0
   toReturn = Object.keys(dict).sort (a, b) ->
     dict[b].meta.weight - (dict[a].meta.weight)
   toReturn[..many]
@@ -24,18 +28,23 @@ linkstate.sortByMomentum = (dictDict, many) ->
 linkstate.thumbalizrPic = (url) ->
   newUrl = "https://api.thumbalizr.com/?url="+url+"&width=250&api_key="+Meteor.settings.public.thumbalizr
   return newUrl
+
+dot = '%2E'
+ddot = '%25252E'
+linkstate.unddot = (url) ->
+  url.replace ddot, '.'
 linkstate.store = (url) ->
   unless typeof url is 'string' or url is not 'undefined'
     return null
   plainToEncode = encodeURIComponent url
-  encodedToDotless = plainToEncode.replace /\./g, '%2E'
-  encodedToDotless
+  encodedToDotless = plainToEncode.replace /\./g, dot
+  return encodedToDotless
 
 linkstate.see = (url) ->
   unless typeof url == 'string'
     return null
   encodedToPlain = decodeURIComponent url
-  encodedToDotless = encodedToPlain.replace '%2E' , '.'
+  encodedToDotless = encodedToPlain.replace dot, '.'
   encodedToDotless.replace('http://','').replace('https://','').replace('www.','')
 
 
@@ -56,7 +65,7 @@ linkstate.toDotless = (stringed) ->
   stringed.replace /\./g, '%2E'
 
 linkstate.fromDotless = (stringed) ->
-  check stringed, String
+  #check stringed, String
   stringed.replace /%2E/g, '.'
 linkstate.noProtocoll = (stringed) ->
   check stringed, String

@@ -14,11 +14,12 @@ Meteor.startup ->
     console.log error
 if Meteor.loggingIn()
   Meteor.call "setupUser"
-exports.state =
-  ssr: true
+state =
+  ssr: false
   timeInMillis: 1000 * 15
   window: window
-
-FlowRouter.setPageCacheTimeout exports.state.timeInMillis
+# not using react layout so ssr wont' work
+FlowRouter.setPageCacheTimeout state.timeInMillis
 ##console.log 'ssr', exports.state.ssr, exports.state.timeInMillis, window
-FlowRouter.setDeferScriptLoading exports.state.ssr
+FlowRouter.setDeferScriptLoading state.ssr
+exports.state = state
