@@ -44,6 +44,7 @@ AboutCard = React.createClass
               #flexWrap: 'wrap'
             -># CardText,
               # build in and out links.. so that we see our out connection right away
+
               if that.props.node?.links.in? or that.props.node?.links?.out?
                 k.build GridList,
                   class: 'looplist'
@@ -127,6 +128,7 @@ AboutCard = React.createClass
                         thumbalizr: that.props.thumbalizr
                         word: that.props.word
                         user: that.props.user
+
 
 drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
   # if the link.. is the place we are now...

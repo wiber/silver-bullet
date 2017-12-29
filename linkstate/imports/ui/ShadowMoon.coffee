@@ -88,12 +88,6 @@ VisualCue = React.createClass
                   display: 'inline'
                 size: D/2
                 src: that.props.ScreenshotUrl
-          # TODO mismatched queryparam with lastTitle, why?
-          # selectize needs to read the user object only..
-          # remove direct reliance on qp and harden localstore management of user model
-          #console.log that.props?.user?.link?.to
-          #console.log FlowRouter.getQueryParam('from'), FlowRouter.getQueryParam('lastTitle')
-          #console.log that.props?.user?.link?.to?[linkstate.store that.props.from]?
           if that.props?.user?.link?.to?[linkstate.store that.props.from]?
             inLinks = that.props.user.link.to[linkstate.store that.props.from]
             n = 0
@@ -232,7 +226,6 @@ wingMark = React.createClass
     top = 50
     shadow = floor-Math.round(floor/Math.round(.5+bodyLen*(floor/top)))
     reactKup (k) ->
-      #{measurements,n,weight,meta,FromLink,ToLink,loopi,directed,from,to} = that.props
       {D,d,M} = measurements
       k.build Paper,
         circle: true

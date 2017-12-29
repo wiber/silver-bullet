@@ -80,6 +80,4 @@ UrlBox = React.createClass
                 directed: directedBunch
                 measurements: measurements
 
-
-
 exports.UrlBox = UrlBox

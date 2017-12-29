@@ -23,7 +23,7 @@ Print =  require('material-ui/lib/svg-icons/action/print').default
 IconButton = require('material-ui/lib/icon-button').default
 Paper = require('material-ui/lib/paper').default
 Avatar = require('material-ui/lib/avatar').default
-{shadowFloor, upMargin, rightMargin} = require '../api/strings'
+{shadowFloor, upMargin, rightMargin, Position} = require '../api/strings'
 {VisualCue} = require '../ui/ShadowMoon.coffee'
 # TODO functional testable convenience functions, like strings, for math and attribute getting
 
@@ -35,10 +35,11 @@ exports.MyCard = React.createClass
     if @props.expanded is 'undefined'
       that.props.expanded = true
     reactKup (k) ->
-      D = 400
-      d = 80
-      M = 150
-      measurements = {D, d, M}
+
+      measurements =
+        D: 400
+        d: 5
+        M: 150
       k.build Card,
         expanded: that.props.expanded
         style: _.extend {}, style.card, style.yCard
