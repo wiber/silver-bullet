@@ -13,6 +13,8 @@ linkstate.sortByKeysTime = (dict, many) ->
   toReturn[..many]
 
 linkstate.sortByWeight = (dict, many) ->
+  return unless dict?
+  return unless Object.keys(dict).length > 0
   toReturn = Object.keys(dict).sort (a, b) ->
     dict[b].meta.weight - (dict[a].meta.weight)
   toReturn[..many]

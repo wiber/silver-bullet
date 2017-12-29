@@ -51,6 +51,7 @@ exports.listByMomentum = (listOne, listTwo) ->
   R.uniq returner
 
 exports.shadowFloor = (L,floor,top) ->
+  return unless L?
   floor-Math.round(floor/Math.round(.5+L.length*(floor/top)))
 
 exports.upMargin = ({D,d,M},weight) ->
