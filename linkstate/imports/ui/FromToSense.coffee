@@ -64,7 +64,7 @@ TextAbout = React.createClass
                   console.log 'no result?', result
             #changeQueryParams 'content', ''
             e.preventDefault()
-            window.to.refs.to.focus()
+            window.to.refs.to.focus() if window?.to?
           else
             changeQueryParams 'content', e.target.value
           if e.keyCode is 13

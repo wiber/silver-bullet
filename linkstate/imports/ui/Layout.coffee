@@ -30,19 +30,18 @@ exports.Layout = React.createClass
         xfbml: true
         version: 'v2.11'
       return
-
-    ((d, s, id) ->
-      return unless document?
-      js = undefined
-      fjs = d.getElementsByTagName(s)[0]
-      if d.getElementById(id)
+    if document?
+      ((d, s, id) ->
+        js = undefined
+        fjs = d.getElementsByTagName(s)[0]
+        if d.getElementById(id)
+          return
+        js = d.createElement(s)
+        js.id = id
+        js.src = 'https://connect.facebook.net/en_US/sdk.js'
+        fjs.parentNode.insertBefore js, fjs
         return
-      js = d.createElement(s)
-      js.id = id
-      js.src = 'https://connect.facebook.net/en_US/sdk.js'
-      fjs.parentNode.insertBefore js, fjs
-      return
-    ) document, 'script', 'facebook-jssdk'
+      ) document, 'script', 'facebook-jssdk'
     that = this
     reactKup (k) ->
       if that.props.user?.links?.out?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?

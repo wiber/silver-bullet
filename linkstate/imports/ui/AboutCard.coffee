@@ -16,15 +16,15 @@ CardText =  require('material-ui/lib/card/card-text').default
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 {bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
 {UrlBox} = require '../../imports/ui/UrlBox.coffee'
-{see,store} = require '../../imports/api/strings.coffee'
 R = require 'ramda'
-
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store, AByMomentum, listByMomentum} = require '../api/strings.coffee'
+n = 0
 AboutCard = React.createClass
   render: ->
     that = this
     reactKup (k) ->
+      console.log that.props
       k.build Card,
         expanded: that.props.expanded
         style: _.extend {}, style.card, style.mAcard
@@ -43,56 +43,134 @@ AboutCard = React.createClass
               display: 'inline'
               #flexWrap: 'wrap'
             -># CardText,
-            if that.props.node?.links?.in?
-              k.build GridList,
-                class: 'looplist'
-                cellHeight: 500
-                cols: 1
-                ->
-                  N = {} # the node we're on
-                  N.node = that.props.node
+              # build in and out links.. so that we see our out connection right away
+              if that.props.node?.links.in? or that.props.node?.links?.out?
+                k.build GridList,
+                  class: 'looplist'
+                  cellHeight: 500
+                  cols: 1
+                  ->
+                    N = {} # the node we're on
+                    N.node = that.props.node
+                    N.inLinks = that.props.node.links.in
+                    N.outLinks = that.props.node.links.out
+                    N.link = N.node.link
+                    N.allLinks = _.extend {}, N.inLinks, N.outLinks
 
-                  N.inLinks = that.props.node.links.in
-                  N.outLinks = that.props.node.links.out
-                  N.allLinks = _.extend {}, N.inLinks, N.outLinks
+                    N.linksByTime = linkstate.sortByKeysTime(N.allLinks
+                    , that.props.howMany)
+                    N.linkSort = {}
+                    console.log N
+                    for link in Object.keys(N.allLinks)
+                      N.sorts = linkstate.sortByKeysTime(N.allLinks[link],3)
+                      N.recent = N.sorts[0]
+                      N.linkSort[link] = N.allLinks[link][N.recent]
+                    #calculate momentum of a url by walking through voters on it
+                    N.momentum = {}
+                    N.vectors = {}
+                    N.sortByWeight = AByMomentum N.inLinks
+                    N.sortOutByWeight = AByMomentum N.outLinks
+                    N.rankedinLinks = AByMomentum( N.inLinks)
+                    N.rankedOutlinks = AByMomentum(N.outLinks)
+                    N.sortAllMomentum = listByMomentum(N.rankedinLinks, N.rankedOutlinks)
+                    draw = 0
+                    N.UrlBoxDraw = {}
+                    for linkByMomentum in N.sortAllMomentum #listByMomentum(AByMomentum(N.node.links.to), AByMomentum(N.node.links.from))
+                      D =
+                        N: N
+                        link: linkByMomentum
+                        users: N.allLinks[linkByMomentum]
 
-                  N.linksByTime = linkstate.sortByKeysTime(N.allLinks
-                  , that.props.howMany)
-                  N.linkSort = {}
-                  for link in Object.keys(N.allLinks)
-                    N.sorts = linkstate.sortByKeysTime(N.allLinks[link],3)
-                    N.recent = N.sorts[0]
-                    N.linkSort[link] = N.allLinks[link][N.recent]
-                  #calculate momentum of a url by walking through voters on it
-                  N.momentum = {}
-                  N.vectors = {}
-                  N.sortByWeight = AByMomentum N.inLinks
-                  N.sortOutByWeight = AByMomentum N.outLinks
-                  N.dir = {}
-                  N.dir.rankedinLinks = AByMomentum( N.inLinks)
-                  N.dir.rankedOutlinks = AByMomentum(N.outLinks)
-                  N.sortAllMomentum = listByMomentum(N.dir.rankedinLinks
-                  , N.dir.rankedOutlinks)
-                  for dotlessLink in N.sortAllMomentum
-                    k.build UrlBox,
-                      N: N
-                      from: that.props.from
-                      to: that.props.to
-                      props: that.props
-                      thumbalizr: that.props.thumbalizr
-                      word: that.props.word
-                      user: that.props.user
-                      dotlessLink: dotlessLink
 
+                      D.firstUsersLink = D.users[Object.keys(D.users)[0]]
+                      D.state =
+                        params:
+                          from: linkstate.store(that.props.from)
+                          to: linkstate.store(that.props.to)
+                        connections:
+                          from: D.firstUsersLink.from
+                          to: D.firstUsersLink.to
+                      D.m= D.firstUsersLink.meta
+                      U = # {} # users votes loop object
+                        D: D
+                        usersConnections: N.inLinks[D.link]
+                      #for type, tuple of D.state
+                      #console.log D
+                      for param, paramLink of D.state.params
+                        for here, nodeLink of D.state.connections
+                          # we want the one that is not params from
+                          notSameLink = paramLink != nodeLink
+                          notFrom = D.state.params.from != D.state.connections.from
+                          notTo = D.state.params.from != D.state.connections.to
+                          if notFrom
+                            D.drawTheOther = D.firstUsersLink.from
+                          else
+                            D.drawTheOther = D.firstUsersLink.to
+                          N.UrlBoxDraw[D.drawTheOther] =
+                            #obj: D.allLinks[D.drawTheOther]
+                            U: U
+                            D: D
+                          draw++
+                          if here is 'from' and param is 'to'
+                            D.drawTheOther = drawTheOther param, paramLink, here, nodeLink, D.firstUsersLink
+                            if D.drawTheOther?.ScreenshotUrl?
+                              N.UrlBoxDraw[linkByMomentum] = {D,U}
+                              draw++
+                    for key, object of N.UrlBoxDraw
+                      k.build UrlBox,
+                        D: object.D
+                        N: N
+                        U: object.U
+                        from: that.props.from
+                        to: that.props.to
+                        props: that.props
+                        thumbalizr: that.props.thumbalizr
+                        word: that.props.word
+                        user: that.props.user
+
+drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
+  # if the link.. is the place we are now...
+  # that should NOT be the ScreenshotUrl
+  # because it's assumed we're talking about the other
+  # does it matter if we point to a place? not just from? we could
+  #.. put it in the first position since it's of special interest
+  # how do we find ' the other?'
+  if paramLink == nodeLink and param == 'from'
+    n++
+    if here is 'to'
+      # we're point to the place we are, use the other link for ScreenshotUrl
+      returner =
+        ScreenshotUrl: linkstate.thumbalizrPic(hereNode.from)
+        otherUrl: hereNode.from
+        otherTitle: hereNode.meta.title
+      console.log returner
+    if here == 'from'
+      # self ref
+      returner = false
+    # how do we detect same orientation as queryParams?
+    console.log returner
+    return returner
+noNodeFirst = new Date().getTime()
+noNodeYet = 0
+gotNodeNow = 0
 
 exports.AboutCard = createContainer ((props) ->
-
   newProps = {}
   nodeHandle = Meteor.subscribe "Node", props.from
   if nodeHandle.ready()
-    N = Nodes.findOne(linkstate.store props.from)
+    nodeId =linkstate.store props.from
+    N = Nodes.findOne(nodeId)
     if N?
       newProps.node = N
+      gotNodeNow = new Date().getTime()
+      console.log 'node timing',  gotNodeNow - noNodeYet, gotNodeNow - noNodeFirst
+      Meteor.call 'GroundedNodeInsert', N
+  else
+    if Meteor.isClient
+      node = localStorage.getItem nodeId
+      if node?
+        N = JSON.parse node
+        noNodeYet = new Date().getTime()
   props = _.extend {}, props, newProps
   props
 ), AboutCard

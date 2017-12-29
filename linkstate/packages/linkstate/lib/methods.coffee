@@ -26,10 +26,12 @@ Meteor.methods
       $set: queryParamsState
       $inc:
         'qpUpdates': 1
-
   GroundedUserInsert: ->
-    if Meteor.isClient and Meteor.user()
+    if Meteor.isClient and Meteor.user().services?.facebook?
       localStorage.setItem 'latest', JSON.stringify(Meteor.user())
+  GroundedNodeInsert: ->
+    if Meteor.isClient and Meteor.user().services?.facebook?
+      localStorage.setItem Nodes.findOne()._id, JSON.stringify(Nodes.findOne())
   Linking: ({from, to, meta}) ->
     META = meta
     unless META?
