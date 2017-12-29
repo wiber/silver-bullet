@@ -33,6 +33,24 @@ Meteor.methods
     if Meteor.isClient and Meteor.user().services?.facebook?
       localStorage.setItem Nodes.findOne()._id, JSON.stringify(Nodes.findOne())
   Linking: ({from, to, meta}) ->
+    prevSet = Meteor.user()?.links?.in?[to]?[from]?
+    console.log prevSet
+    try
+      console.log Meteor.user().links.out[from][to]
+    catch error
+      console.log console.error
+    if Meteor.user()?.links?.in?[to]?[from]?
+      console.log 'is it an update or over write?'
+      console.log Meteor.user().links.in[to][from].meta, meta
+      umeta = Meteor.user().links.in[to][from].meta
+      if umeta.weight is meta.weight
+        if umeta.body? and meta.body?
+          if umeta.body is meta.body
+            console.log 'returning due to same body double call'
+            return
+        if !umeta.body? and !meta.body?
+          console.log 'returning due to no body, double call'
+          return
     META = meta
     unless META?
       META = {}
@@ -45,7 +63,7 @@ Meteor.methods
     else
       if Meteor.user()?.hits?
         console.log 'Linking'
-        , @isSimulation
+        , prevSet
         , META.title
         , from
         , META.weight

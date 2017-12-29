@@ -102,7 +102,6 @@ VisualCue = React.createClass
                 size: D/2
                 src: that.props.ScreenshotUrl
           linktohere = that.props?.user?.links?.in?[linkstate.store that.props.from]?
-          console.log linktohere
           if linktohere
             inLinks = that.props.user.links.in[linkstate.store that.props.from]
             n = 0
@@ -118,7 +117,6 @@ VisualCue = React.createClass
                 else
                   n = 0
               m = target.meta
-              console.log key, mark
               try
                 thisWeight = inLinks[mark].meta.weight
                 #lastWeight = inLinks[mark].meta.weight
@@ -132,14 +130,12 @@ VisualCue = React.createClass
                 weight: target.meta.weight
                 measurements: that.props.styles.measurements
                 styles: that.props.styles
-              console.log markprops
               k.build yourMark, markprops
 
 
 yourMark = React.createClass
   render: ->
     that = this
-    console.log @props
     floor = 5
     top = 50
     shadow = floor-Math.round(floor/Math.round(.5+L*(floor/top)))
