@@ -159,13 +159,13 @@ yourMark = React.createClass
         circle: true
         style:
           position: 'absolute'
-          top: M+Position
+          top: Position
             measurements: measurements
             weight: weight
             n: n
             directed: 'INLINKS'
             axis: 'y'
-          left: M+Position
+          left: Position
             measurements: measurements
             weight: weight
             n: n
