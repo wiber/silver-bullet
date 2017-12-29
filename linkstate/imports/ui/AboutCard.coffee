@@ -24,7 +24,6 @@ AboutCard = React.createClass
   render: ->
     that = this
     reactKup (k) ->
-      console.log that.props
       k.build Card,
         expanded: that.props.expanded
         style: _.extend {}, style.card, style.mAcard
@@ -60,7 +59,7 @@ AboutCard = React.createClass
                     N.linksByTime = linkstate.sortByKeysTime(N.allLinks
                     , that.props.howMany)
                     N.linkSort = {}
-                    console.log N
+                    #console.log N
                     for link in Object.keys(N.allLinks)
                       N.sorts = linkstate.sortByKeysTime(N.allLinks[link],3)
                       N.recent = N.sorts[0]
@@ -163,7 +162,7 @@ exports.AboutCard = createContainer ((props) ->
     if N?
       newProps.node = N
       gotNodeNow = new Date().getTime()
-      console.log 'node timing',  gotNodeNow - noNodeYet, gotNodeNow - noNodeFirst
+      #console.log 'node timing',  gotNodeNow - noNodeYet, gotNodeNow - noNodeFirst
       Meteor.call 'GroundedNodeInsert', N
   else
     if Meteor.isClient
