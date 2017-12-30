@@ -184,6 +184,13 @@ Meteor.methods
       meta:
         title: 'Linkstate - Connecting is seeing'
         weight: 7
+    Meteor.call "Linking",
+      from: 'Linkstate.youiest.com' # the thing we're defining
+      to: 'Linkstate.youiest.com/about'
+      meta:
+        title: 'Linkstate - Connecting is seeing'
+        weight: 8
+        body: 'The fate of bookmarks can tell us a lot about Linkstate'
     if Meteor.user()?.services?.facebook?.link?
       Meteor.call "Linking",
         from: Meteor.user().services.facebook.link
@@ -193,7 +200,7 @@ Meteor.methods
           weight: 7
     else
       new Meteor.Error 22, "non facebook user tried to login"
-    console.log 'Just setupUser', Meteor.user().hits, Meteor.user()._id, Meteor.user().links.out.Bookmarks, Meteor.user().links.in.Bookmarks
+    console.log 'Just setupUser', Meteor.user().hits#, Meteor.user()._id, Meteor.user().links.out.Bookmarks, Meteor.user().links.in.Bookmarks
   compareHits: ->
     if Meteor.isClient
       Meteor.call "checkHits", (error, result) ->

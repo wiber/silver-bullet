@@ -70,13 +70,14 @@ userSaved = (userE, queryParams, client) ->
     user = userE
   # sideffect but a good place to make sure we're not without direction
   for type in ['from', 'to']
-    if queryParams[type] is undefined and client
+    if queryParams[type] is undefined
       # double set them to avoid double render
+      console.log type, 'is undefined'
       if user[type+'Last']?
-        queryParams[type] = user[type+'Last']
+        #queryParams[type] = user[type+'Last']
         changeQueryParams(type, user[type+'Last'])
       else
-        console.log " haven't connected to anything? how is that possible?"
+        console.log 'haven nott connected to anything? how is that possible?'
   user
 # textbox should have your comment in it if empty
 # TODO write test for this

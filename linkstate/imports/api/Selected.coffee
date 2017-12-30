@@ -24,7 +24,8 @@ vDict = {}
 setOptions = (props) ->
   options = []
   if props.user?.links?.out?
-    dictWithCreatedAt = props.user.links.out['Bookmarks']
+    dictWithCreatedAt = props.user.links.in['Bookmarks']
+    console.log dictWithCreatedAt
     oDict = dictWithCreatedAt
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
     for index, value of deChaos
@@ -36,6 +37,7 @@ setOptions = (props) ->
         label: dictWithCreatedAt[value].meta.title
         value: dictWithCreatedAt[value]
       options.push selectItem
+      console.log options
   options
 
 #FIXME does not select value when from a place
@@ -43,12 +45,12 @@ setValue = (props, options, user) ->
   newProps = {}
   newProps.options = []
   value = {}
-  return unless props.user?.links?.out?['Bookmarks']?
+  return unless props.user?.links?.in?['Bookmarks']?
   directedTo = typeof props.to is 'string' and props.to.length > 1
   clientReady = props.user?.services?.facebook? and Meteor.isClient
   gotFrom = typeof props.from is 'string' and props.from.length > 1
-  bookmarked = props.user?.links?.out?.Bookmarks?
-  dictWithCreatedAt = props.user.links.out['Bookmarks']
+  bookmarked = props.user?.links?.in?.Bookmarks?
+  dictWithCreatedAt = props.user.links.in['Bookmarks']
   vDict = dictWithCreatedAt
   typeValue = props[props.type]
   dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
