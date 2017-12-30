@@ -14,7 +14,15 @@ if Meteor.settings?.public?.thumbalizr?
   @thumbalizr =  Meteor.settings.public.thumbalizr
 else
   @thumbalizr= "UQ6CMod6tIkVLam271a7WdUlutEJJHTE"
-
+allCallStack = {}
+stringedCallsExist = ({from, to, meta, userid}) ->
+  stringedArg = linkstate.store JSON.stringify({from, to, meta, userid})
+  #console.log allCallStack?[stringedArg]? , Object.keys(allCallStack).length, allCallStack[stringedArg], allCallStack
+  return true if allCallStack?[stringedArg]?
+  allCallStack[stringedArg] = new Date().getTime()
+  if Object.keys(allCallStack).length > 15
+    allCallStack = {}
+  return false
 Meteor.methods
   NewQueryParams: (queryParams) ->
     if Meteor.isClient
@@ -34,23 +42,10 @@ Meteor.methods
       localStorage.setItem Nodes.findOne()._id, JSON.stringify(Nodes.findOne())
   Linking: ({from, to, meta}) ->
     prevSet = Meteor.user()?.links?.in?[to]?[from]?
-    console.log prevSet
-    try
-      console.log Meteor.user().links.out[from][to]
-    catch error
-      console.log console.error
-    if Meteor.user()?.links?.in?[to]?[from]?
-      console.log 'is it an update or over write?'
-      console.log Meteor.user().links.in[to][from].meta, meta
-      umeta = Meteor.user().links.in[to][from].meta
-      if umeta.weight is meta.weight
-        if umeta.body? and meta.body?
-          if umeta.body is meta.body
-            console.log 'returning due to same body double call'
-            return
-        if !umeta.body? and !meta.body?
-          console.log 'returning due to no body, double call'
-          return
+    userId = Meteor.userId()
+    if stringedCallsExist({from, to, meta, userId})
+      console.log 'returning false due to doublecall'
+      return false
     META = meta
     unless META?
       META = {}
