@@ -105,32 +105,38 @@ VisualCue = React.createClass
           if linktohere
             inLinks = that.props.user.links.in[linkstate.store that.props.from]
             n = 0
-            inLinksArrayByWeight = linkstate.sortByWeight(inLinks, that.props.howMany)
-            for key, mark of inLinksArrayByWeight
-              target = inLinks[mark]
-              arrayValue = inLinksArrayByWeight[key]
-              dictWeight = inLinks[arrayValue].meta.weight
-              lastKey = inLinksArrayByWeight[key-1]
-              if lastKey?
-                if inLinks[lastKey].meta.weight is inLinks[mark].meta.weight
+            #LinksArrayByWeight = linkstate.sortByWeight(inLinks, that.props.howMany)
+            loopDirection =
+              INLINKS: linkstate.sortByWeight(that.props.user.links.in[linkstate.store that.props.from], that.props.howMany)
+              OUTLINKS: linkstate.sortByWeight(that.props.user.links.out[linkstate.store that.props.from], that.props.howMany)
+            loopDict =
+              INLINKS: that.props.user.links.in[linkstate.store that.props.from]
+              OUTLINKS: that.props.user.links.out[linkstate.store that.props.from]
+            console.log loopDict, loopDirection, linkstate.store that.props.from
+            for direction, LinksArrayByWeight of loopDirection
+              console.log direction, LinksArrayByWeight
+              n=0
+              for key, mark of LinksArrayByWeight
+                console.log key, mark
+                target = loopDict[direction][mark] #inLinks[mark]
+                dictWeight = target.meta.weight
+                lastKey = LinksArrayByWeight[key-1]
+                lastVectorExist = loopDict?[direction]?[lastKey]?.meta?.weight?
+                lastVector = loopDict[direction][lastKey] if lastVectorExist
+                if lastVectorExist and lastVector.meta.weight is target.meta.weight
                   n++
                 else
                   n = 0
-              m = target.meta
-              try
-                thisWeight = inLinks[mark].meta.weight
-                #lastWeight = inLinks[mark].meta.weight
-              catch error
-                console.log error
-              markprops =
-                user: that.props.user
-                ScreenshotUrl: that.props.ScreenshotUrl
-                n: n
-                target: target
-                weight: target.meta.weight
-                measurements: that.props.styles.measurements
-                styles: that.props.styles
-              k.build yourMark, markprops
+                markprops =
+                  user: that.props.user
+                  ScreenshotUrl: that.props.ScreenshotUrl
+                  n: n
+                  target: target
+                  weight: target.meta.weight
+                  measurements: that.props.styles.measurements
+                  styles: that.props.styles
+                  direction: direction
+                k.build yourMark, markprops
 
 
 yourMark = React.createClass
@@ -159,13 +165,13 @@ yourMark = React.createClass
             measurements: measurements
             weight: weight
             n: n
-            directed: 'INLINKS'
+            directed: that.props.direction
             axis: 'y'
           left: Position
             measurements: measurements
             weight: weight
             n: n
-            directed: 'INLINKS'
+            directed: that.props.direction
             axis: 'x'
           width: r
           height: r
