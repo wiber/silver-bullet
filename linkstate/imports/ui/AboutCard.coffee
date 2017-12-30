@@ -51,8 +51,8 @@ AboutCard = React.createClass
                   ->
                     N = {} # the node we're on
                     N.node = that.props.node
-                    N.inLinks = that.props.node.links.in
-                    N.outLinks = that.props.node.links.out
+                    N.inLinks = that.props.node.links.out
+                    N.outLinks = that.props.node.links.in
                     N.link = N.node.link
                     N.allLinks = _.extend {}, N.inLinks, N.outLinks
 
