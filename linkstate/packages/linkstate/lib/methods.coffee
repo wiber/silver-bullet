@@ -102,7 +102,7 @@ Meteor.methods
     setEdgeIn.title = edge.title
     edge.title = META.title or FROM # because we're out FROM this
     #setEdgeOut['in.' + TO + '.' + username] = edge
-    setEdgeOut['links.in.' + TO + '.' + username] = edge
+    setEdgeOut['links.out.' + TO + '.' + username] = edge
     setEdgeOut.title = edge.title
 
     userUpdateObject = {}
@@ -111,8 +111,8 @@ Meteor.methods
       userUpdateObject.fromLast = from
     if to not in categoryTypes
       userUpdateObject.toLast = to
-    userUpdateObject['links.in.'+FROM+'.'+TO] = edge
-    userUpdateObject['links.out.'+TO+'.'+FROM] = edge
+    userUpdateObject['links.out.'+FROM+'.'+TO] = edge
+    userUpdateObject['links.in.'+TO+'.'+FROM] = edge
     # totally kills latency compensation on page
     # load to avoid uncaught error in fast render
     if Meteor.isServer or UserHandle?.ready()

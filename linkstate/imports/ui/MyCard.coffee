@@ -47,7 +47,7 @@ exports.MyCard = React.createClass
             style:
               height: 'auto'
               minHeight: 500
-              overflow: 'hidden'
+              #overflow: 'hidden'
             expandable: false
             ->
               k.build selectedContainer,
@@ -176,7 +176,7 @@ yourMark = React.createClass
           width: r
           height: r
         zDepth: shadowFloor body, 5 , 50
-        overflow: 'hidden'
+        #overflow: 'hidden'
         ->
           text = Lo.get that.props, 'target.meta.body'
           if !text
