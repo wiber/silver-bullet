@@ -49,9 +49,17 @@ Meteor.methods
     META = meta
     unless META?
       META = {}
+    # causes an issue when connecting from bookmarks because it doesn't have a title
 
+    if Meteor.user()?.links?.in?.Bookmarks?[linkstate.store from]?.meta?.title?
+      titleOfTarget = Meteor.user().links.in.Bookmarks[linkstate.store from].meta.title
+      console.log titleOfTarget
     unless META.title?
-      META.title = to
+      if titleOfTarget?
+        META.title = titleOfTarget
+      else
+        META.title = from + ' to ' + to
+
     unless typeof Meteor.userId() is 'string'
       throw new Meteor.Error 1, "non-user tries to link"
       return 'nothing'
@@ -176,7 +184,7 @@ Meteor.methods
       from: 'Bookmarks'
       to: 'Bookmarks' # the thing we're defining
       meta:
-        title: 'Bookmarks'
+        title: 'Bookmarks - and other placeholders'
         weight: 9
     Meteor.call "Linking",
       from: 'Linkstate.youiest.com'

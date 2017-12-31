@@ -24,6 +24,7 @@ vDict = {}
 setOptions = (props) ->
   options = []
   if props.user?.links?.out?
+    # how titles get into selectize
     dictWithCreatedAt = props.user.links.in['Bookmarks']
     console.log dictWithCreatedAt
     oDict = dictWithCreatedAt
@@ -56,6 +57,8 @@ setValue = (props, options, user) ->
   dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
   dictValueExists = dictValue?.meta?.title?
   lastDictValue = dictWithCreatedAt[linkstate.store(user[props.type+'Last'])]
+
+
   if !typeValue? and lastDictValue?
     value=
       label: lastDictValue.meta.title
@@ -63,7 +66,7 @@ setValue = (props, options, user) ->
   if props.type is 'from'
     if dictValueExists
       title = 'Linkstates for ' + dictValue.title + ' - ' + props.from
-      DocHead.setTitle(title)
+      DocHead.setTitle(title) # needs attention
   if dictValueExists and clientReady
     value =
       label: dictValue.meta.title
