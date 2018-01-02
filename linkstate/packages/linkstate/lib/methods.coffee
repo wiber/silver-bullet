@@ -1,5 +1,9 @@
 
 {check} = require 'meteor/check'
+#{Urlbox} = require 'urlbox'
+`import Urlbox from 'urlbox';`
+# Set your options
+
 @storageEncode = (url) ->
   #r = encodeURIComponent url
   r =  toString(url).replace /\./g , '%2E'
@@ -9,6 +13,13 @@
   'Bookmarks'
   'Categories'
 ]
+if Meteor.settings?.public?.urlboxKey?
+  @urlboxKey =  Meteor.settings.public.urlboxKey
+  @urlboxSecret = Meteor.settings.urlboxSecret
+else
+  @urlboxKey= "FLMG5BM3XeqMGa42"
+
+urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
 
 if Meteor.settings?.public?.thumbalizr?
   @thumbalizr =  Meteor.settings.public.thumbalizr
@@ -35,7 +46,7 @@ Meteor.methods
       $inc:
         'qpUpdates': 1
   GroundedUserInsert: ->
-    if Meteor.isClient and Meteor.user()?.services?.facebook?
+    if Meteor.isClient and Meteor.user().services?.facebook?
       localStorage.setItem 'latest', JSON.stringify(Meteor.user())
   GroundedNodeInsert: ->
     if Meteor.isClient and Meteor.user().services?.facebook?
@@ -94,10 +105,23 @@ Meteor.methods
     edge.meta = META
     edge.meta.FromLink = from
     edge.meta.ToLink = to
-    thumbU1 = "https://api.thumbalizr.com/?url="
-    thumbU2 = "&width=250&api_key="
-    edge.meta.ScreenshotUrl = thumbU1+from+thumbU2+thumbalizr
-    edge.meta.ScreenshotUrlTo = thumbU1+to+thumbU2+thumbalizr
+    #if Meteor?.settings?.urlboxSecret?
+    edge.meta.ScreenshotUrl = urlbox.buildUrl
+      url: from
+      thumb_width: 320
+      format: 'png'
+      quality: 80
+    edge.meta.ScreenshotUrlTo = urlbox.buildUrl
+      url: to
+      thumb_width: 320
+      format: 'png'
+      quality: 80
+    console.log edge.meta, 'with url box screenshots'
+    ###else
+      thumbU1 = "https://api.thumbalizr.com/?url="
+      thumbU2 = "&width=250&api_key="
+      edge.meta.ScreenshotUrl = thumbU1+from+thumbU2+thumbalizr
+      edge.meta.ScreenshotUrlTo = thumbU1+to+thumbU2+thumbalizr###
     edge.author = Meteor.userId()
     edge.createdAt = time
     if Meteor.user()?.profile?.name?
