@@ -2,8 +2,9 @@
     "facebookAppId": "710055149104819",
     "facebookSecret": "9ec1defc8144985305fbda0ff66100ed",
     "thumbalizrSecret": "4aD1miZuCYNsXZi3uT5JtbBq2te",
-    "thumbalizr": "UQ6CMod6tIkVLam271a7WdUlutEJJHTE"
+    "thumbalizr": "UQ6CMod6tIkVLam271a7WdUlutEJJHTE",
     "public": {
+        "facebookAppId": "710055149104819",
         "thumbalizr": "UQ6CMod6tIkVLam271a7WdUlutEJJHTE"
     },
     "MONGO_URL": "mongodb://prod:Youiest2Guidethewibe@ds053926-a0.mlab.com:53926,ds053926-a1.mlab.com:53926/mlinks1?replicaSet=rs-ds053926"
