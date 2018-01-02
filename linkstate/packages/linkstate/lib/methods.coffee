@@ -35,7 +35,7 @@ Meteor.methods
       $inc:
         'qpUpdates': 1
   GroundedUserInsert: ->
-    if Meteor.isClient and Meteor.user().services?.facebook?
+    if Meteor.isClient and Meteor.user()?.services?.facebook?
       localStorage.setItem 'latest', JSON.stringify(Meteor.user())
   GroundedNodeInsert: ->
     if Meteor.isClient and Meteor.user().services?.facebook?
@@ -67,6 +67,8 @@ Meteor.methods
       if Meteor.user()?.hits?
         console.log 'Linking'
         , prevSet
+        , to not in categoryTypes
+        , Meteor.user().to
         , META.title
         , from
         , META.weight

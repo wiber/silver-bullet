@@ -26,7 +26,6 @@ setOptions = (props) ->
   if props.user?.links?.out?
     # how titles get into selectize
     dictWithCreatedAt = props.user.links.in['Bookmarks']
-    console.log dictWithCreatedAt
     oDict = dictWithCreatedAt
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
     for index, value of deChaos
@@ -38,7 +37,6 @@ setOptions = (props) ->
         label: dictWithCreatedAt[value].meta.title
         value: dictWithCreatedAt[value]
       options.push selectItem
-      console.log options
   options
 
 #FIXME does not select value when from a place
@@ -57,8 +55,12 @@ setValue = (props, options, user) ->
   dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
   dictValueExists = dictValue?.meta?.title?
   lastDictValue = dictWithCreatedAt[linkstate.store(user[props.type+'Last'])]
-
-
+  console.log props.type, lastDictValue
+  setLastTitle = true if props.newHere
+  # if we're in a new place, we want to point to the last place we connected to
+  # do we simply walk backwards untill we find a place not here?
+  # the problem is pointing to.. we are getting the wrong to value
+  # make negative cases...
   if !typeValue? and lastDictValue?
     value=
       label: lastDictValue.meta.title

@@ -17,6 +17,7 @@ containerLayout = createContainer ((props) ->
   user = userSaved(Meteor.user(), queryParams, Meteor.isClient)
   newHere = newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked'))
   lastTitle =  FlowRouter.getQueryParam('lastTitle')
+  # if newHere add this to the dropdown, set the to to lastTo
   if newHere and Meteor.isClient
     Meteor.call "Linking",
       from: queryParams.from
@@ -42,6 +43,7 @@ containerLayout = createContainer ((props) ->
     expandAboutCard: queryParams.expandAboutCard != 'false'
     expandMyCard: queryParams.expandMyCard != 'false'
     facebookAppId: Meteor.settings.public.facebookAppId
+    newHere: newHere
   newProps
 ), Layout
 newPlace = (user, queryParams, bookmarked) ->

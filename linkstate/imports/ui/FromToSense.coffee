@@ -28,6 +28,7 @@ exports.FromToSense = React.createClass
               user: that.props.user
               word: that.props.word
               type: 'to'
+              newHere: that.props.newHere
 
 TextAbout = React.createClass
   componentWillReceiveProps: ->

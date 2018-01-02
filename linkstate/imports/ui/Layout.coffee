@@ -96,6 +96,7 @@ exports.Layout = React.createClass
                       content: that.props.content
                       user: that.props.user
                       lastTitle: that.props.lastTitle
+                      newHere: that.props.newHere
                     k.build MyCard,
                       styles: style
                       expanded: that.props.expandMyCard

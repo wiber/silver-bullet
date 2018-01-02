@@ -74,6 +74,7 @@ exports.MainCard = React.createClass
                 word: that.props.word
                 content: that.props.content
                 user: that.props.user
+                newHere: that.props.newHere
               k.build shadowMoon,
                 measurements:
                   D: 80
