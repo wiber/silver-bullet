@@ -55,7 +55,6 @@ setValue = (props, options, user) ->
   dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
   dictValueExists = dictValue?.meta?.title?
   lastDictValue = dictWithCreatedAt[linkstate.store(user[props.type+'Last'])]
-  console.log props.type, lastDictValue
   setLastTitle = true if props.newHere
   # if we're in a new place, we want to point to the last place we connected to
   # do we simply walk backwards untill we find a place not here?

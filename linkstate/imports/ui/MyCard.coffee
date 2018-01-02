@@ -114,7 +114,6 @@ VisualCue = React.createClass
               OUTLINKS: that.props.user.links.out[linkstate.store that.props.from]
             console.log loopDict, loopDirection, linkstate.store that.props.from
             for direction, LinksArrayByWeight of loopDirection
-              console.log direction, LinksArrayByWeight
               n=0
               for key, mark of LinksArrayByWeight
                 console.log key, mark
