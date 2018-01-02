@@ -106,6 +106,7 @@ Meteor.methods
     edge.meta.FromLink = from
     edge.meta.ToLink = to
     #if Meteor?.settings?.urlboxSecret?
+    # is server the last write and therefore the secret is included next time?
     edge.meta.ScreenshotUrl = urlbox.buildUrl
       url: from
       thumb_width: 320

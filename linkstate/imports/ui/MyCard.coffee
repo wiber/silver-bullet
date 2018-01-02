@@ -112,11 +112,9 @@ VisualCue = React.createClass
             loopDict =
               INLINKS: that.props.user.links.in[linkstate.store that.props.from]
               OUTLINKS: that.props.user.links.out[linkstate.store that.props.from]
-            console.log loopDict, loopDirection, linkstate.store that.props.from
             for direction, LinksArrayByWeight of loopDirection
               n=0
               for key, mark of LinksArrayByWeight
-                console.log key, mark
                 target = loopDict[direction][mark] #inLinks[mark]
                 dictWeight = target.meta.weight
                 lastKey = LinksArrayByWeight[key-1]
