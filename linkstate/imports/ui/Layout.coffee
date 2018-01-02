@@ -16,6 +16,8 @@ Card = require 'material-ui/lib/card/card'
 URI = require 'uri-js'
 MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme} = require('../ui/theme.coffee')
+`import Urlbox from 'urlbox';`
+
 exports.Layout = React.createClass
   getDefaultProps: ->
     expandMainCard: true
@@ -44,10 +46,25 @@ exports.Layout = React.createClass
       ) document, 'script', 'facebook-jssdk'
     that = this
     reactKup (k) ->
-      if that.props.user?.links?.in?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
-        HERE = that.props.user.links.in.Bookmarks[ linkstate.store that.props.from]
-        ScreenshotUrl = HERE.meta.ScreenshotUrl
-        console.log ScreenshotUrl
+      try
+        if that?.props?.user?.links?.in?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
+          HERE = that.props.user.links.in.Bookmarks[ linkstate.store that.props.from]
+          ScreenshotUrl = HERE.meta.ScreenshotUrl
+          console.log ScreenshotUrl
+        # old way still here..
+        urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
+        before = ScreenshotUrl
+        ScreenshotUrl = urlbox.buildUrl
+          url: that.props.from
+          thumb_width: 320
+          format: 'png'
+          quality: 80
+        if before is ScreenshotUrl
+          console.log 'ScreenshotUrl was same'
+        #else
+        #  console.log '!!!!!!!!!!!ScreenshotUrl', before, ScreenshotUrl
+      catch error
+          console.error error, 'good try urlbox'
       if HERE?.title?
         titleHere = HERE.title
         host = URI.parse(that.props.from).host

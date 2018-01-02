@@ -3,6 +3,7 @@
 #Urlbox = require('urlbox').default
 `import Urlbox from 'urlbox';`
 # Set your options
+Lo = require 'lodash'
 
 @storageEncode = (url) ->
   #r = encodeURIComponent url
@@ -46,10 +47,10 @@ Meteor.methods
       $inc:
         'qpUpdates': 1
   GroundedUserInsert: ->
-    if Meteor.isClient and Meteor.user().services?.facebook?
+    if Meteor.isClient and Meteor?.user()?.services?.facebook?
       localStorage.setItem 'latest', JSON.stringify(Meteor.user())
   GroundedNodeInsert: ->
-    if Meteor.isClient and Meteor.user().services?.facebook?
+    if Meteor.isClient and Meteor?.user()?.services?.facebook?
       localStorage.setItem Nodes.findOne()._id, JSON.stringify(Nodes.findOne())
   Linking: ({from, to, meta}) ->
     prevSet = Meteor.user()?.links?.in?[to]?[from]?
@@ -91,10 +92,10 @@ Meteor.methods
       return 'nothing'
     if Meteor.user()?.services?.facebook?.id?
       p1 = "http://graph.facebook.com/v2.7/"
-      facebookId = Meteor.user().services.facebook.id
+      facebookId = Lo.get Meteor.user(), 'services.facebook.id'
       p2 = "/picture?type=square"
       META.face = p1 + facebookId + p2
-      META.profileLink = Meteor.user().services.facebook.link
+      META.profileLink = Lo.get Meteor.user(), 'services.facebook.link'
     FROM = linkstate.store(from) # from.replace(/\./g,'%2E')
     TO = linkstate.store(to) #to.replace(/\./g,'%2E')#.split('/').join('.');
     time = new Date().getTime()

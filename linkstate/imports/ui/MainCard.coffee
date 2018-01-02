@@ -42,10 +42,7 @@ exports.MainCard = React.createClass
       from: that.props.from
     if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.to]?
       THERE = that.props.user.links.out.Bookmarks[ linkstate.store that.props.to]
-      ThereScreenshotUrl = THERE.meta.ScreenshotUrl
-      # if not not known.. we're in an edge case and should use qp
-
-
+      ThereScreenshotUrl = Lo.get that.props, 'user.out.Bookmarks.'+linkstate.store(that.props.to)
     reactKup (k) ->
       k.build Card, # build the Card component
         expanded: that.props.expanded # add argument key value pairs

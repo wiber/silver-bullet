@@ -198,6 +198,6 @@ yourMark = React.createClass
                     height: r
                     float: 'left'
                   size: r
-                  src: that.props.target.meta.ScreenshotUrl
+                  src: Lo.get that.props, 'target.meta.ScreenshotUrl'
 #exports.yourMark = yourMark
 #exports.shadowMoon = shadowMoon
