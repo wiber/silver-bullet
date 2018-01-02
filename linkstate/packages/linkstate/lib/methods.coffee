@@ -1,6 +1,6 @@
 
 {check} = require 'meteor/check'
-#{Urlbox} = require 'urlbox'
+#Urlbox = require('urlbox').default
 `import Urlbox from 'urlbox';`
 # Set your options
 
