@@ -207,6 +207,8 @@ Meteor.methods
     ,
       $set:
         'services.thumbalizr': Meteor.settings.thumbalizr
+        'services.urlboxKey': Meteor.settings.urlboxKey
+    # bookmarks need to be actual customized routes on linkstates.youiest.com
     Meteor.call "Linking",
       from: 'Bookmarks'
       to: 'Bookmarks' # the thing we're defining
@@ -226,7 +228,7 @@ Meteor.methods
         title: 'Linkstate - Connecting is seeing'
         weight: 8
         body: 'The fate of bookmarks can tell us a lot about Linkstate'
-    if Meteor.user()?.services?.facebook?.link?
+    if Meteor?.user()?.services?.facebook?.link?
       Meteor.call "Linking",
         from: Meteor.user().services.facebook.link
         to: 'Bookmarks'

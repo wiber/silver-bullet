@@ -44,7 +44,7 @@ exports.Layout = React.createClass
       ) document, 'script', 'facebook-jssdk'
     that = this
     reactKup (k) ->
-      if that.props.user?.links?.in?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
+      if that?.props?.user?.links?.in?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
         HERE = that.props.user.links.in.Bookmarks[ linkstate.store that.props.from]
         ScreenshotUrl = HERE.meta.ScreenshotUrl
         console.log ScreenshotUrl
