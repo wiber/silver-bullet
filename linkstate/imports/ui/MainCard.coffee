@@ -13,10 +13,15 @@ CardText =  require('material-ui/lib/card/card-text').default
 IconButton = require('material-ui/lib/icon-button').default
 Flip =  require('material-ui/lib/svg-icons/communication/swap-calls').default
 ExitToPage =  require('material-ui/lib/svg-icons/action/exit-to-app').default
+ContentCopy =  require('material-ui/lib/svg-icons/content/content-copy').default
 Print =  require('material-ui/lib/svg-icons/action/print').default
 Edit =  require('material-ui/lib/svg-icons/editor/mode-edit').default
 FromIcon =  require('material-ui/lib/svg-icons/communication/call-received').default
 ToIcon =  require('material-ui/lib/svg-icons/communication/call-made').default
+`import ReactDOM from 'react-dom';`
+`import {CopyToClipboard} from 'react-copy-to-clipboard';`
+`import copy from 'copy-to-clipboard';`
+Lo = require 'lodash'
 
 {shadowMoon} = require '../ui/ShadowMoon'
 exports.MainCard = React.createClass
@@ -36,7 +41,7 @@ exports.MainCard = React.createClass
     that = this
     if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.from]?
       HERE = that.props.user.links.out.Bookmarks[ linkstate.store that.props.from]
-      ScreenshotUrl = HERE.meta.ScreenshotUrl
+      ScreenshotUrl = HERE.meta.ScreenshotUrl if HERE?.meta?
     else HERE =
       title: that.props.lastTitle
       from: that.props.from
@@ -86,6 +91,13 @@ exports.MainCard = React.createClass
                   position: 'absolute'
           k.build CardActions,
             ->
+              k.build IconButton,
+                tooltip: "Copy to clipboard because sharing -> " + window.location.href
+                tooltipPosition: 'bottom-right'
+                onClick: (e) ->
+                  copy window.location.href
+                ->
+                  k.build ContentCopy
               k.build IconButton,
                 tooltip: "Reverse - Point TO what you're now pointing FROM"
                 tooltipPosition: 'bottom-right'

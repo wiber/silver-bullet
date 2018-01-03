@@ -214,6 +214,11 @@ Meteor.methods
       meta:
         title: 'Bookmarks - and other placeholders'
         weight: 9
+        ScreenshotUrl: urlbox.buildUrl
+          url: 'en.wikipedia.org/wiki/bookmark'
+          thumb_width: 320
+          format: 'png'
+          quality: 80
     Meteor.call "Linking",
       from: 'Linkstate.youiest.com'
       to: 'Bookmarks' # the thing we're defining
