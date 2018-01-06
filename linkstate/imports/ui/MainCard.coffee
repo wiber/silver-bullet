@@ -18,8 +18,6 @@ Print =  require('material-ui/lib/svg-icons/action/print').default
 Edit =  require('material-ui/lib/svg-icons/editor/mode-edit').default
 FromIcon =  require('material-ui/lib/svg-icons/communication/call-received').default
 ToIcon =  require('material-ui/lib/svg-icons/communication/call-made').default
-`import ReactDOM from 'react-dom';`
-`import {CopyToClipboard} from 'react-copy-to-clipboard';`
 `import copy from 'copy-to-clipboard';`
 Lo = require 'lodash'
 
@@ -36,23 +34,25 @@ exports.MainCard = React.createClass
           window.textAbout.refs.MainCardTextInput.focus()
           #$('#textAbout').focus()
         console.log document.activeElement.id, document.activeElement.type
-    #setInterval(focusTextbox,650)
   render: ->
     that = this
-    if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.from]?
-      HERE = that.props.user.links.out.Bookmarks[ linkstate.store that.props.from]
-      ScreenshotUrl = HERE.meta.ScreenshotUrl if HERE?.meta?
-    else HERE =
-      title: that.props.lastTitle
-      from: that.props.from
-    if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.to]?
-      THERE = that.props.user.links.out.Bookmarks[ linkstate.store that.props.to]
-      ThereScreenshotUrl = Lo.get that.props, 'user.out.Bookmarks.'+linkstate.store(that.props.to)
+
+    HERE = Lo.get that.props, 'user.links.in.Bookmarks.' + linkstate.store(that.props.from)
+    ThereScreenshotUrl = Lo.get HERE, 'meta.ScreenshotUrl'
+    unless HERE?
+
+      HERE =
+        title: that.props.lastTitle
+        from: that.props.from
+      console.log 'we are noplace', HERE
+    THERE = Lo.get that.props, 'user.links.in.Bookmarks.' + linkstate.store(that.props.to)
+    ThereScreenshotUrl = Lo.get THERE, 'meta.ScreenshotUrl'
+    console.log THERE, ThereScreenshotUrl,'THERE, ThereScreenshotUrl', Lo.get that.props, 'user.links.in.Bookmarks'
     reactKup (k) ->
       k.build Card, # build the Card component
         expanded: that.props.expanded # add argument key value pairs
         style: _.extend {}, style.card, style.mCard,
-          overflow: 'hidden'
+          overflow: 'show'
         ->
           k.build CardHeader,
             title: HERE.title,
