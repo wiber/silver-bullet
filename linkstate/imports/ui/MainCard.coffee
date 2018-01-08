@@ -1,6 +1,7 @@
 reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
+{hereAndThere} = require('../api/ModelOperations.coffee')
 {changeQueryParams, changeQueryParamsObject} = require('../api/changeQueryParams.coffee')
 {FromToSense} = require('../ui/FromToSense.coffee')
 Card = require('material-ui/lib/card/card').default
@@ -36,17 +37,7 @@ exports.MainCard = React.createClass
         console.log document.activeElement.id, document.activeElement.type
   render: ->
     that = this
-
-    HERE = Lo.get that.props, 'user.links.in.Bookmarks.' + linkstate.store(that.props.from)
-    ThereScreenshotUrl = Lo.get HERE, 'meta.ScreenshotUrl'
-    unless HERE?
-
-      HERE =
-        title: that.props.lastTitle
-        from: that.props.from
-      console.log 'we are noplace', HERE
-    THERE = Lo.get that.props, 'user.links.in.Bookmarks.' + linkstate.store(that.props.to)
-    ThereScreenshotUrl = Lo.get THERE, 'meta.ScreenshotUrl'
+    {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl} = hereAndThere that.props.user, that.props
     console.log THERE, ThereScreenshotUrl,'THERE, ThereScreenshotUrl', Lo.get that.props, 'user.links.in.Bookmarks'
     reactKup (k) ->
       k.build Card, # build the Card component

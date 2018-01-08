@@ -16,9 +16,12 @@ CardText =  require('material-ui/lib/card/card-text').default
 {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 {bulletUnitContainer} = require '../../imports/api/bulletUnit.coffee'
 {UrlBox} = require '../../imports/ui/UrlBox.coffee'
+{hereAndThere} = require('../api/ModelOperations.coffee')
 R = require 'ramda'
+Lo = require 'lodash'
+
 {createContainer} = require 'meteor/react-meteor-data'
-{see, store, AByMomentum, listByMomentum} = require '../api/strings.coffee'
+{see, store, AByMomentum, listByMomentum, urlbox} = require '../api/strings.coffee'
 n = 0
 AboutCard = React.createClass
   render: ->
@@ -95,16 +98,34 @@ AboutCard = React.createClass
                         usersConnections: N.inLinks[D.link]
                       #for type, tuple of D.state
                       #console.log D
-                      for param, paramLink of D.state.params
+                      # find the link that is not
+                      # the place where we are.. because one of them is
+                      # is this outdate?
+                      # we want to draw all links in and out or here .
+                      # because we are at a place.. it's assumed to be the origin
+                      # so we simply draw the one that isn't the from
+                      #
+                      for param, paramLink of D.state.params # from/to url on the node link
                         for here, nodeLink of D.state.connections
                           # we want the one that is not params from
+                          binaryState =
+                            notSameLink: paramLink != nodeLink
+
+                            notFrom: D.state.params.from != D.state.connections.from
+                            notTo: D.state.params.from != D.state.connections.to
                           notSameLink = paramLink != nodeLink
+
                           notFrom = D.state.params.from != D.state.connections.from
                           notTo = D.state.params.from != D.state.connections.to
+                          # find the screenshoturl on the first users link there..
                           if notFrom
-                            D.drawTheOther = D.firstUsersLink.from
+                            D.drawTheOther = D.firstUsersLink.meta.ScreenshotUrl#from
+                            #Lo.get D, '.state.connections.from.meta.ScreenshotUrl'
                           else
-                            D.drawTheOther = D.firstUsersLink.to
+                            #D.drawTheOther = D.firstUsersLink.to
+                            D.drawTheOther = D.firstUsersLink.meta.ScreenshotUrlTo
+                          console.log D.drawTheOther, D.firstUsersLink #, binaryState, notSameLink, notFrom, D.state.params.from , D.state.connections.from
+                          console.log Lo.get(N.allLinks, D.drawTheOther)
                           N.UrlBoxDraw[D.drawTheOther] =
                             #obj: D.allLinks[D.drawTheOther]
                             U: U
@@ -115,7 +136,9 @@ AboutCard = React.createClass
                             if D.drawTheOther?.ScreenshotUrl?
                               N.UrlBoxDraw[linkByMomentum] = {D,U}
                               draw++
+
                     for key, object of N.UrlBoxDraw
+                      console.log object.D,'console.log object.D'
                       k.build UrlBox,
                         D: object.D
                         N: N
@@ -126,6 +149,8 @@ AboutCard = React.createClass
                         thumbalizr: that.props.thumbalizr
                         word: that.props.word
                         user: that.props.user
+                        ScreenshotUrl: Lo.get(N.allLinks, D.drawTheOther+'.meta.ScreenshotUrl')
+# which one isn't our from or to?
 
 drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
   # if the link.. is the place we are now...
@@ -134,12 +159,19 @@ drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
   # does it matter if we point to a place? not just from? we could
   #.. put it in the first position since it's of special interest
   # how do we find ' the other?'
+  console.log hereNode.from, arguments, '(param, paramLink, here, nodeLink, hereNode)'
+
   if paramLink == nodeLink and param == 'from'
     n++
     if here is 'to'
       # we're point to the place we are, use the other link for ScreenshotUrl
+
       returner =
-        ScreenshotUrl: linkstate.thumbalizrPic(hereNode.from)
+        ScreenshotUrl: urlbox.buildUrl #linkstate.thumbalizrPic(hereNode.from)
+          url: hereNode.from #that.props.from
+          thumb_width: 320
+          format: 'png'
+          quality: 80
         otherUrl: hereNode.from
         otherTitle: hereNode.meta.title
       console.log returner
@@ -147,7 +179,7 @@ drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
       # self ref
       returner = false
     # how do we detect same orientation as queryParams?
-    console.log returner
+      console.log returner
     return returner
 noNodeFirst = new Date().getTime()
 noNodeYet = 0

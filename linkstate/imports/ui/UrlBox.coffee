@@ -17,8 +17,10 @@ CardText =  require('material-ui/lib/card/card-text').default
 {LinkVote} = require '../../imports/ui/LinkVote.coffee'
 {GoMark} = require '../../imports/api/nav/GoMark.coffee'
 {Winged, VisualCue, wingMark} = require '../ui/ShadowMoon.coffee'
-
+{createContainer} = require 'meteor/react-meteor-data'
+Lo = require 'lodash'
 R = require 'ramda'
+# break this out into a dumb component and pre massaging
 UrlBox = React.createClass
   propTypes:
     D: React.PropTypes.object
@@ -43,8 +45,9 @@ UrlBox = React.createClass
             N: N.node
             user: that.props.user
         ->
+          console.log that.props.ScreenshotUrl #D.drawTheOther, N.allLinks[D.drawTheOther],
           k.build Winged,
-            ScreenshotUrl: D.drawTheOther.ScreenshotUrl
+            ScreenshotUrl: D.drawTheOther
             user: that.props.user
             from: that.props.from
             measurements: measurements

@@ -1,5 +1,9 @@
 R = require('ramda')
 linkstate = {}
+`import Urlbox from 'urlbox';`
+
+exports.urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
+
 exports.Position = ({measurements,weight,n,directed,axis}) ->
   if directed == 'OUTLINKS'
     direction = -1
