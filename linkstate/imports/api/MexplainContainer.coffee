@@ -1,4 +1,4 @@
-{changeQueryParams} = require('../api/changeQueryParams.coffee')
+{changeQueryParams} = require('../api/ModelOperations.coffee')
 {createContainer} = require 'meteor/react-meteor-data'
 {Mexplain} = require '../ui/mexplain.coffee'
 exports.Mexplain = createContainer ((props) ->

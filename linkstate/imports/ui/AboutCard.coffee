@@ -124,8 +124,6 @@ AboutCard = React.createClass
                           else
                             #D.drawTheOther = D.firstUsersLink.to
                             D.drawTheOther = D.firstUsersLink.meta.ScreenshotUrlTo
-                          console.log D.drawTheOther, D.firstUsersLink #, binaryState, notSameLink, notFrom, D.state.params.from , D.state.connections.from
-                          console.log Lo.get(N.allLinks, D.drawTheOther)
                           N.UrlBoxDraw[D.drawTheOther] =
                             #obj: D.allLinks[D.drawTheOther]
                             U: U
@@ -138,7 +136,6 @@ AboutCard = React.createClass
                               draw++
 
                     for key, object of N.UrlBoxDraw
-                      console.log object.D,'console.log object.D'
                       k.build UrlBox,
                         D: object.D
                         N: N
@@ -159,8 +156,6 @@ drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
   # does it matter if we point to a place? not just from? we could
   #.. put it in the first position since it's of special interest
   # how do we find ' the other?'
-  console.log hereNode.from, arguments, '(param, paramLink, here, nodeLink, hereNode)'
-
   if paramLink == nodeLink and param == 'from'
     n++
     if here is 'to'

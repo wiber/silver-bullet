@@ -2,7 +2,7 @@
 reactKup = require('react-kup')
 SimpleSelect = require("react-selectize").SimpleSelect
 React = require 'react'
-{changeQueryParams} = require('../api/changeQueryParams.coffee')
+{changeQueryParams} = require('../api/ModelOperations.coffee')
 {see, store} = require '../api/strings.coffee'
 
 exports.bulletUnit = React.createClass

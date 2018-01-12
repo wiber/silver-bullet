@@ -1,5 +1,5 @@
 {AByMomentum, listByMomentum} = require('../imports/api/strings')
-{setOptions, setValue} = require('../imports/api/ModelOperations')
+{setOptions, setValue, userSaved, newPlace, ifBodyContentHere} = require('../imports/api/ModelOperations')
 chai = require('chai')
 expect = chai.expect
 assert = chai.assert
@@ -1189,6 +1189,7 @@ describe 'Value', ->
   it 'returns an object with label', ->
     expect(typeof value).to.equal 'object'
     expect(typeof value.label).to.equal 'string'
+  it 'returns fromLast when if user is new', ->
 
 # why does it sometimes not work when coming from a place? need to stub methods..
 
