@@ -1189,7 +1189,19 @@ describe 'Value', ->
   it 'returns an object with label', ->
     expect(typeof value).to.equal 'object'
     expect(typeof value.label).to.equal 'string'
-  it 'returns fromLast when if user is new', ->
+  it 'returns toLast if type is to and queryparm has no to', ->
+    user2 = Object.assign {}, user
+    #user2.toLast = null
+    props2 = Object.assign {}, props
+    props2.type = 'from'
+    props2.to = null
+    value = setValue(props2, setOptions(props), user)
+    # point to the last target if no target
+    console.log user.toLast
+    console.log value
+    expect(typeof value.label).to.equal 'string'
+    expect(value.value.from).to.equal user.toLast
+    #expect(typeof user2.fromLast).to.not.equal('string')
 
 # why does it sometimes not work when coming from a place? need to stub methods..
 
