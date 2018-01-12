@@ -1,8 +1,8 @@
 R = require('ramda')
 linkstate = {}
-`import Urlbox from 'urlbox';`
+#`import Urlbox from 'urlbox';`
 
-exports.urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
+#exports.urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
 
 exports.Position = ({measurements,weight,n,directed,axis}) ->
   if directed == 'OUTLINKS'
@@ -141,3 +141,74 @@ while i < items
   $('#center').append '<div class=\'point\' style=\'left:' + x + 'px;top:' + y + 'px\'></div>'
   i++
 ###
+linkstate = {}
+linkstate.sortByKeys = (dict, many) ->
+  toReturn = Object.keys(dict).sort (a, b) ->
+    dict[b] - (dict[a])
+  toReturn[..many]
+
+linkstate.sortByKeysTime = (dict, many) ->
+  toReturn = Object.keys(dict).sort (a, b) ->
+    dict[b].createdAt - (dict[a].createdAt)
+  toReturn[..many]
+
+linkstate.sortByWeight = (dict, many) ->
+  return unless dict?
+  return unless Object.keys(dict).length > 0
+  toReturn = Object.keys(dict).sort (a, b) ->
+    dict[b].meta.weight - (dict[a].meta.weight)
+  toReturn[..many]
+
+linkstate.sortByMomentum = (dictDict, many) ->
+  keys = Object.keys(dictDict)
+  momentum = {}
+  toReturn = Object.keys(dictDict).sort (a, b) ->
+    dictDict[b].meta.weight - (dictDict[a].meta.weight)
+
+linkstate.thumbalizrPic = (url) ->
+  newUrl = "https://api.thumbalizr.com/?url="+url+"&width=250&api_key="+Meteor.settings.public.thumbalizr
+  return newUrl
+
+dot = '%2E'
+ddot = '%25252E'
+linkstate.unddot = (url) ->
+  url.replace ddot, '.'
+linkstate.store = (url) ->
+  unless typeof url is 'string' or url is not 'undefined'
+    return null
+  plainToEncode = encodeURIComponent url
+  encodedToDotless = plainToEncode.replace /\./g, dot
+  return encodedToDotless
+
+linkstate.see = (url) ->
+  unless typeof url == 'string'
+    return null
+  encodedToPlain = decodeURIComponent url
+  encodedToDotless = encodedToPlain.replace dot, '.'
+  encodedToDotless.replace('http://','').replace('https://','').replace('www.','')
+
+
+linkstate.storageEncode = (url) ->
+  r =  toString(url).replace /\./g , '%2E'
+  return r
+linkstate.nodeParam = (url) ->
+  check stringed, String
+  encoded = encodeURIComponent(url)
+  return "/node/?&url="+encoded
+
+linkstate.urlName = (stringed) ->
+  check stringed, String
+  stringed.replace /\.(.*)/g, ''
+
+linkstate.toDotless = (stringed) ->
+  check stringed, String
+  stringed.replace /\./g, '%2E'
+
+linkstate.fromDotless = (stringed) ->
+  #check stringed, String
+  stringed.replace /%2E/g, '.'
+linkstate.noProtocoll = (stringed) ->
+  check stringed, String
+  stringed.replace('http://','').replace('https://','').replace('www.','')
+#@linkstate = linkstate
+exports.linkstate = linkstate

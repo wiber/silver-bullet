@@ -8,7 +8,7 @@
 Selected = require('../ui/SelectedUI.coffee').Selected
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store} = require '../api/strings.coffee'
-
+{setOptions, setValue} = require '../api/ModelOperations'
 # goes through a simple loop
 #that builds list of objects from a number of sources.
 exports.selectedContainer = createContainer ((props) ->
@@ -18,7 +18,7 @@ exports.selectedContainer = createContainer ((props) ->
     options: setOptions(props)
   nProps
 ), Selected
-
+###
 oDict = {}
 vDict = {}
 setOptions = (props) ->
@@ -81,3 +81,4 @@ setValue = (props, options, user) ->
           title: props.lastTitle
 
   value
+###
