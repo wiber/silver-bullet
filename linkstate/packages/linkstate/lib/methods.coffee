@@ -220,13 +220,13 @@ Meteor.methods
           format: 'png'
           quality: 80
     Meteor.call "Linking",
-      from: 'Linkstate.youiest.com'
+      from: 'Linkstate.youiest.com/about'
       to: 'Bookmarks' # the thing we're defining
       meta:
         title: 'Linkstate - Connecting is seeing'
         weight: 7
     Meteor.call "Linking",
-      from: 'Linkstate.youiest.com' # the thing we're defining
+      from: 'Linkstate.youiest.com/about' # the thing we're defining
       to: 'Linkstate.youiest.com/about'
       meta:
         title: 'Linkstate - Connecting is seeing'

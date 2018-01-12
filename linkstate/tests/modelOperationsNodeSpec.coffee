@@ -1,5 +1,6 @@
-{AByMomentum, listByMomentum} = require('../imports/api/strings')
+{AByMomentum, listByMomentum, linkstate} = require('../imports/api/strings')
 {setOptions, setValue, userSaved, newPlace, ifBodyContentHere} = require('../imports/api/ModelOperations')
+
 chai = require('chai')
 expect = chai.expect
 assert = chai.assert
@@ -551,7 +552,7 @@ cNode =
   'title': 'Elias Moosman on Facebook'
 props =
   'from': 'Bookmarks'
-  'to': 'Linkstate.youiest.com'
+  'to': 'Linkstate.youiest.com/about'
   'lastTitle': 'Icon Button - Material-UI'
   'user':
     '_id': 'S54FphiBzL3KueFF4'
@@ -871,7 +872,7 @@ props =
     'FromTooltipText': 'FROM - The place we\'re on now. Below are your bookmarks about this place.'
   'type': 'to'
   'newHere': false
-user =
+userOld =
   '_id': 'S54FphiBzL3KueFF4'
   'profile': 'name': 'Elias Moosman'
   'createdAt': '2018-01-11T05:57:30.482Z'
@@ -1170,7 +1171,431 @@ user =
   'hits': 680
   'fromLast': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
   'toLast': 'Linkstate.youiest.com/about'
-
+user =
+  '_id': 'S54FphiBzL3KueFF4'
+  'profile': 'name': 'Elias Moosman'
+  'createdAt': '2018-01-11T05:57:30.482Z'
+  'services':
+    'facebook':
+      'expiresAt': 1520753914953
+      'id': '10154232419354595'
+      'email': 'eliasmoosman@gmail.com'
+      'name': 'Elias Moosman'
+      'first_name': 'Elias'
+      'last_name': 'Moosman'
+      'link': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+      'gender': 'male'
+      'locale': 'sv_SE'
+      'age_range': 'min': 21
+    'thumbalizr': null
+  'edited': 1515745059357
+  'links':
+    'in':
+      'Bookmarks':
+        'Bookmarks':
+          'from': 'Bookmarks'
+          'to': 'Bookmarks'
+          'meta':
+            'title': 'Bookmarks - and other placeholders'
+            'weight': 9
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'Bookmarks'
+            'ToLink': 'Bookmarks'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515745059109
+          'title': 'Bookmarks - and other placeholders'
+        'https%3A%2F%2Fwww%2Efacebook%2Ecom%2Fapp_scoped_user_id%2F10154232419354595%2F':
+          'from': 'https%3A%2F%2Fwww%2Efacebook%2Ecom%2Fapp_scoped_user_id%2F10154232419354595%2F'
+          'to': 'Bookmarks'
+          'meta':
+            'title': 'Elias Moosman on Facebook'
+            'weight': 7
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'ToLink': 'Bookmarks'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/9b1a5f128cbac84d2142d3377200235906e5a39e/png?url=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515745059357
+          'title': 'Elias Moosman on Facebook'
+        'Linkstate%2Eyouiest%2Ecom':
+          'from': 'Linkstate%2Eyouiest%2Ecom'
+          'to': 'Bookmarks'
+          'meta':
+            'title': 'Linkstate - Connecting is seeing'
+            'weight': 7
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'Linkstate.youiest.com'
+            'ToLink': 'Bookmarks'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/117475d1c2f4d6fac7710dcc2f841e06b46e06b3/png?url=Linkstate.youiest.com&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515745036583
+          'title': 'Linkstate - Connecting is seeing'
+        'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3DLinkstate%2Eyouiest%2Ecom%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DBookmarks%26Bookmarked%3Dtrue%26content%3D%26switched%3D':
+          'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3DLinkstate%2Eyouiest%2Ecom%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DBookmarks%26Bookmarked%3Dtrue%26content%3D%26switched%3D'
+          'to': 'Bookmarks'
+          'meta':
+            'weight': 5
+            'title': 'Linkstates for Linkstate - Connecting is seeing - Linkstate.youiest.com'
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'http://localhost:3000/about?from=Linkstate.youiest.com&lastTitle=Icon%2520Button%2520-%2520Material-UI&to=Bookmarks&Bookmarked=true&content=&switched='
+            'ToLink': 'Bookmarks'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/2a97329fccd9bea5497d209c411e6a54bbd03f76/png?url=http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3DLinkstate.youiest.com%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DBookmarks%26Bookmarked%3Dtrue%26content%3D%26switched%3D&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515650897280
+          'title': 'Linkstates for Linkstate - Connecting is seeing - Linkstate.youiest.com'
+        'https%3A%2F%2Fwww%2Efacebook%2Ecom%2FvViber%3Flst%3D532514594%253A532514594%253A1514878343':
+          'from': 'https%3A%2F%2Fwww%2Efacebook%2Ecom%2FvViber%3Flst%3D532514594%253A532514594%253A1514878343'
+          'to': 'Bookmarks'
+          'meta':
+            'weight': 5
+            'title': '(2) Elias Moosman'
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'https://www.facebook.com/vViber?lst=532514594%3A532514594%3A1514878343'
+            'ToLink': 'Bookmarks'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7f5979875238b6c4bc73ccfc7f6ec691414e8c8a/png?url=https%3A%2F%2Fwww.facebook.com%2FvViber%3Flst%3D532514594%253A532514594%253A1514878343&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515728165362
+          'title': '(2) Elias Moosman'
+        'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3DLinkstate%2Eyouiest%2Ecom%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DLinkstate%2Eyouiest%2Ecom%26Bookmarked%3Dtrue%26content%3D%26switched%3D':
+          'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3DLinkstate%2Eyouiest%2Ecom%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DLinkstate%2Eyouiest%2Ecom%26Bookmarked%3Dtrue%26content%3D%26switched%3D'
+          'to': 'Bookmarks'
+          'meta':
+            'weight': 5
+            'title': 'Linkstates for Linkstate - Connecting is seeing - Linkstate.youiest.com'
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'http://localhost:3000/about?from=Linkstate.youiest.com&lastTitle=Icon%2520Button%2520-%2520Material-UI&to=Linkstate.youiest.com&Bookmarked=true&content=&switched='
+            'ToLink': 'Bookmarks'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7e9eca309d75b57045a48ca0cda20fa74c9c66b0/png?url=http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3DLinkstate.youiest.com%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DLinkstate.youiest.com%26Bookmarked%3Dtrue%26content%3D%26switched%3D&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515728156303
+          'title': 'Linkstates for Linkstate - Connecting is seeing - Linkstate.youiest.com'
+        'Linkstate%2Eyouiest%2Ecom%2Fabout':
+          'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'to': 'Bookmarks'
+          'meta':
+            'title': 'Linkstate - Connecting is seeing'
+            'weight': 7
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'Linkstate.youiest.com/about'
+            'ToLink': 'Bookmarks'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515745059202
+          'title': 'Linkstate - Connecting is seeing'
+      'Linkstate%2Eyouiest%2Ecom': 'Bookmarks':
+        'from': 'Bookmarks'
+        'to': 'Linkstate%2Eyouiest%2Ecom'
+        'meta':
+          'body': 'hjkkwer'
+          'weight': 4
+          'title': 'Bookmarks - and other placeholders'
+          'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+          'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+          'FromLink': 'Bookmarks'
+          'ToLink': 'Linkstate.youiest.com'
+          'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+          'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/117475d1c2f4d6fac7710dcc2f841e06b46e06b3/png?url=Linkstate.youiest.com&thumb_width=320&quality=80'
+        'author': 'S54FphiBzL3KueFF4'
+        'createdAt': 1515675012528
+        'title': 'Bookmarks - and other placeholders'
+      'https%3A%2F%2Fwww%2Efacebook%2Ecom%2Fapp_scoped_user_id%2F10154232419354595%2F': 'Bookmarks':
+        'from': 'https%3A%2F%2Fwww%2Efacebook%2Ecom%2Fapp_scoped_user_id%2F10154232419354595%2F'
+        'to': 'Bookmarks'
+        'meta':
+          'title': 'Elias Moosman on Facebook'
+          'weight': 7
+          'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+          'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+          'FromLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+          'ToLink': 'Bookmarks'
+          'ScreenshotUrl': 'https://api.thumbalizr.com/?url=https://www.facebook.com/app_scoped_user_id/10154232419354595/&width=250&api_key=UQ6CMod6tIkVLam271a7WdUlutEJJHTE'
+          'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=UQ6CMod6tIkVLam271a7WdUlutEJJHTE'
+        'author': 'S54FphiBzL3KueFF4'
+        'createdAt': 1515650468975
+        'title': 'Elias Moosman on Facebook'
+      'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fwww%2Efacebook%2Ecom%25252Fapp_scoped_user_id%25252F10154232419354595%25252F%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DBookmarks%26Bookmarked%3Dtrue%26content%3Dhahah%26switched%3D': 'Bookmarks':
+        'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fwww%2Efacebook%2Ecom%25252Fapp_scoped_user_id%25252F10154232419354595%25252F%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DBookmarks%26Bookmarked%3Dtrue%26content%3Dhahah%26switched%3D'
+        'to': 'Bookmarks'
+        'meta':
+          'weight': 5
+          'title': 'Linkstates for Elias Moosman on Facebook - https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+          'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+          'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+          'FromLink': 'http://localhost:3000/about?from=https%253A%252F%252Fwww.facebook.com%252Fapp_scoped_user_id%252F10154232419354595%252F&lastTitle=Icon%2520Button%2520-%2520Material-UI&to=Bookmarks&Bookmarked=true&content=hahah&switched='
+          'ToLink': 'Bookmarks'
+          'ScreenshotUrl': 'https://api.thumbalizr.com/?url=http://localhost:3000/about?from=https%253A%252F%252Fwww.facebook.com%252Fapp_scoped_user_id%252F10154232419354595%252F&lastTitle=Icon%2520Button%2520-%2520Material-UI&to=Bookmarks&Bookmarked=true&content=hahah&switched=&width=250&api_key=UQ6CMod6tIkVLam271a7WdUlutEJJHTE'
+          'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=UQ6CMod6tIkVLam271a7WdUlutEJJHTE'
+        'author': 'S54FphiBzL3KueFF4'
+        'createdAt': 1515650383851
+        'title': 'Linkstates for Elias Moosman on Facebook - https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+      'https%3A%2F%2Fstackoverflow%2Ecom%2Fquestions%2F9529078%2Fhow-do-i-use-git-reset-hard-head-to-revert-to-a-previous-commit': 'Bookmarks':
+        'from': 'https%3A%2F%2Fstackoverflow%2Ecom%2Fquestions%2F9529078%2Fhow-do-i-use-git-reset-hard-head-to-revert-to-a-previous-commit'
+        'to': 'Bookmarks'
+        'meta':
+          'weight': 5
+          'title': 'How do I use \'git reset --hard HEAD\' to revert to a previous commit? - Stack Overflow'
+          'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+          'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+          'FromLink': 'https://stackoverflow.com/questions/9529078/how-do-i-use-git-reset-hard-head-to-revert-to-a-previous-commit'
+          'ToLink': 'Bookmarks'
+          'ScreenshotUrl': 'https://api.thumbalizr.com/?url=https://stackoverflow.com/questions/9529078/how-do-i-use-git-reset-hard-head-to-revert-to-a-previous-commit&width=250&api_key=UQ6CMod6tIkVLam271a7WdUlutEJJHTE'
+          'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=UQ6CMod6tIkVLam271a7WdUlutEJJHTE'
+        'author': 'S54FphiBzL3KueFF4'
+        'createdAt': 1515650480814
+        'title': 'How do I use \'git reset --hard HEAD\' to revert to a previous commit? - Stack Overflow'
+      'Linkstate%2Eyouiest%2Ecom%2Fabout':
+        'Linkstate%2Eyouiest%2Ecom':
+          'from': 'Linkstate%2Eyouiest%2Ecom'
+          'to': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'meta':
+            'title': 'Linkstate - Connecting is seeing'
+            'weight': 8
+            'body': 'The fate of bookmarks can tell us a lot about Linkstate'
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'Linkstate.youiest.com'
+            'ToLink': 'Linkstate.youiest.com/about'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/117475d1c2f4d6fac7710dcc2f841e06b46e06b3/png?url=Linkstate.youiest.com&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515744706613
+          'title': 'Linkstate - Connecting is seeing'
+        'Linkstate%2Eyouiest%2Ecom%2Fabout':
+          'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'to': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'meta':
+            'title': 'Linkstate - Connecting is seeing'
+            'weight': 8
+            'body': 'The fate of bookmarks can tell us a lot about Linkstate'
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'Linkstate.youiest.com/about'
+            'ToLink': 'Linkstate.youiest.com/about'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515745059277
+          'title': 'Linkstate - Connecting is seeing'
+    'out':
+      'Bookmarks':
+        'Bookmarks':
+          'from': 'Bookmarks'
+          'to': 'Bookmarks'
+          'meta':
+            'title': 'Bookmarks - and other placeholders'
+            'weight': 9
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'Bookmarks'
+            'ToLink': 'Bookmarks'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515745059109
+          'title': 'Bookmarks - and other placeholders'
+        'Linkstate%2Eyouiest%2Ecom':
+          'from': 'Bookmarks'
+          'to': 'Linkstate%2Eyouiest%2Ecom'
+          'meta':
+            'body': 'hjkkwer'
+            'weight': 4
+            'title': 'Bookmarks - and other placeholders'
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'Bookmarks'
+            'ToLink': 'Linkstate.youiest.com'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/117475d1c2f4d6fac7710dcc2f841e06b46e06b3/png?url=Linkstate.youiest.com&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515675012528
+          'title': 'Bookmarks - and other placeholders'
+        'https%3A%2F%2Fwww%2Efacebook%2Ecom%2Fapp_scoped_user_id%2F10154232419354595%2F':
+          'from': 'https%3A%2F%2Fwww%2Efacebook%2Ecom%2Fapp_scoped_user_id%2F10154232419354595%2F'
+          'to': 'Bookmarks'
+          'meta':
+            'title': 'Elias Moosman on Facebook'
+            'weight': 7
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'ToLink': 'Bookmarks'
+            'ScreenshotUrl': 'https://api.thumbalizr.com/?url=https://www.facebook.com/app_scoped_user_id/10154232419354595/&width=250&api_key=UQ6CMod6tIkVLam271a7WdUlutEJJHTE'
+            'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=UQ6CMod6tIkVLam271a7WdUlutEJJHTE'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515650468975
+          'title': 'Elias Moosman on Facebook'
+        'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fwww%2Efacebook%2Ecom%25252Fapp_scoped_user_id%25252F10154232419354595%25252F%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DBookmarks%26Bookmarked%3Dtrue%26content%3Dhahah%26switched%3D':
+          'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fwww%2Efacebook%2Ecom%25252Fapp_scoped_user_id%25252F10154232419354595%25252F%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DBookmarks%26Bookmarked%3Dtrue%26content%3Dhahah%26switched%3D'
+          'to': 'Bookmarks'
+          'meta':
+            'weight': 5
+            'title': 'Linkstates for Elias Moosman on Facebook - https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'http://localhost:3000/about?from=https%253A%252F%252Fwww.facebook.com%252Fapp_scoped_user_id%252F10154232419354595%252F&lastTitle=Icon%2520Button%2520-%2520Material-UI&to=Bookmarks&Bookmarked=true&content=hahah&switched='
+            'ToLink': 'Bookmarks'
+            'ScreenshotUrl': 'https://api.thumbalizr.com/?url=http://localhost:3000/about?from=https%253A%252F%252Fwww.facebook.com%252Fapp_scoped_user_id%252F10154232419354595%252F&lastTitle=Icon%2520Button%2520-%2520Material-UI&to=Bookmarks&Bookmarked=true&content=hahah&switched=&width=250&api_key=UQ6CMod6tIkVLam271a7WdUlutEJJHTE'
+            'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=UQ6CMod6tIkVLam271a7WdUlutEJJHTE'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515650383851
+          'title': 'Linkstates for Elias Moosman on Facebook - https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'https%3A%2F%2Fstackoverflow%2Ecom%2Fquestions%2F9529078%2Fhow-do-i-use-git-reset-hard-head-to-revert-to-a-previous-commit':
+          'from': 'https%3A%2F%2Fstackoverflow%2Ecom%2Fquestions%2F9529078%2Fhow-do-i-use-git-reset-hard-head-to-revert-to-a-previous-commit'
+          'to': 'Bookmarks'
+          'meta':
+            'weight': 5
+            'title': 'How do I use \'git reset --hard HEAD\' to revert to a previous commit? - Stack Overflow'
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'https://stackoverflow.com/questions/9529078/how-do-i-use-git-reset-hard-head-to-revert-to-a-previous-commit'
+            'ToLink': 'Bookmarks'
+            'ScreenshotUrl': 'https://api.thumbalizr.com/?url=https://stackoverflow.com/questions/9529078/how-do-i-use-git-reset-hard-head-to-revert-to-a-previous-commit&width=250&api_key=UQ6CMod6tIkVLam271a7WdUlutEJJHTE'
+            'ScreenshotUrlTo': 'https://api.thumbalizr.com/?url=Bookmarks&width=250&api_key=UQ6CMod6tIkVLam271a7WdUlutEJJHTE'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515650480814
+          'title': 'How do I use \'git reset --hard HEAD\' to revert to a previous commit? - Stack Overflow'
+      'https%3A%2F%2Fwww%2Efacebook%2Ecom%2Fapp_scoped_user_id%2F10154232419354595%2F': 'Bookmarks':
+        'from': 'https%3A%2F%2Fwww%2Efacebook%2Ecom%2Fapp_scoped_user_id%2F10154232419354595%2F'
+        'to': 'Bookmarks'
+        'meta':
+          'title': 'Elias Moosman on Facebook'
+          'weight': 7
+          'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+          'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+          'FromLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+          'ToLink': 'Bookmarks'
+          'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/9b1a5f128cbac84d2142d3377200235906e5a39e/png?url=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&thumb_width=320&quality=80'
+          'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+        'author': 'S54FphiBzL3KueFF4'
+        'createdAt': 1515745059357
+        'title': 'Elias Moosman on Facebook'
+      'Linkstate%2Eyouiest%2Ecom':
+        'Bookmarks':
+          'from': 'Linkstate%2Eyouiest%2Ecom'
+          'to': 'Bookmarks'
+          'meta':
+            'title': 'Linkstate - Connecting is seeing'
+            'weight': 7
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'Linkstate.youiest.com'
+            'ToLink': 'Bookmarks'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/117475d1c2f4d6fac7710dcc2f841e06b46e06b3/png?url=Linkstate.youiest.com&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515745036583
+          'title': 'Linkstate - Connecting is seeing'
+        'Linkstate%2Eyouiest%2Ecom%2Fabout':
+          'from': 'Linkstate%2Eyouiest%2Ecom'
+          'to': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'meta':
+            'title': 'Linkstate - Connecting is seeing'
+            'weight': 8
+            'body': 'The fate of bookmarks can tell us a lot about Linkstate'
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'Linkstate.youiest.com'
+            'ToLink': 'Linkstate.youiest.com/about'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/117475d1c2f4d6fac7710dcc2f841e06b46e06b3/png?url=Linkstate.youiest.com&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515744706613
+          'title': 'Linkstate - Connecting is seeing'
+      'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3DLinkstate%2Eyouiest%2Ecom%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DBookmarks%26Bookmarked%3Dtrue%26content%3D%26switched%3D': 'Bookmarks':
+        'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3DLinkstate%2Eyouiest%2Ecom%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DBookmarks%26Bookmarked%3Dtrue%26content%3D%26switched%3D'
+        'to': 'Bookmarks'
+        'meta':
+          'weight': 5
+          'title': 'Linkstates for Linkstate - Connecting is seeing - Linkstate.youiest.com'
+          'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+          'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+          'FromLink': 'http://localhost:3000/about?from=Linkstate.youiest.com&lastTitle=Icon%2520Button%2520-%2520Material-UI&to=Bookmarks&Bookmarked=true&content=&switched='
+          'ToLink': 'Bookmarks'
+          'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/2a97329fccd9bea5497d209c411e6a54bbd03f76/png?url=http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3DLinkstate.youiest.com%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DBookmarks%26Bookmarked%3Dtrue%26content%3D%26switched%3D&thumb_width=320&quality=80'
+          'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+        'author': 'S54FphiBzL3KueFF4'
+        'createdAt': 1515650897280
+        'title': 'Linkstates for Linkstate - Connecting is seeing - Linkstate.youiest.com'
+      'https%3A%2F%2Fwww%2Efacebook%2Ecom%2FvViber%3Flst%3D532514594%253A532514594%253A1514878343': 'Bookmarks':
+        'from': 'https%3A%2F%2Fwww%2Efacebook%2Ecom%2FvViber%3Flst%3D532514594%253A532514594%253A1514878343'
+        'to': 'Bookmarks'
+        'meta':
+          'weight': 5
+          'title': '(2) Elias Moosman'
+          'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+          'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+          'FromLink': 'https://www.facebook.com/vViber?lst=532514594%3A532514594%3A1514878343'
+          'ToLink': 'Bookmarks'
+          'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7f5979875238b6c4bc73ccfc7f6ec691414e8c8a/png?url=https%3A%2F%2Fwww.facebook.com%2FvViber%3Flst%3D532514594%253A532514594%253A1514878343&thumb_width=320&quality=80'
+          'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+        'author': 'S54FphiBzL3KueFF4'
+        'createdAt': 1515728165362
+        'title': '(2) Elias Moosman'
+      'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3DLinkstate%2Eyouiest%2Ecom%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DLinkstate%2Eyouiest%2Ecom%26Bookmarked%3Dtrue%26content%3D%26switched%3D': 'Bookmarks':
+        'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3DLinkstate%2Eyouiest%2Ecom%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DLinkstate%2Eyouiest%2Ecom%26Bookmarked%3Dtrue%26content%3D%26switched%3D'
+        'to': 'Bookmarks'
+        'meta':
+          'weight': 5
+          'title': 'Linkstates for Linkstate - Connecting is seeing - Linkstate.youiest.com'
+          'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+          'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+          'FromLink': 'http://localhost:3000/about?from=Linkstate.youiest.com&lastTitle=Icon%2520Button%2520-%2520Material-UI&to=Linkstate.youiest.com&Bookmarked=true&content=&switched='
+          'ToLink': 'Bookmarks'
+          'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7e9eca309d75b57045a48ca0cda20fa74c9c66b0/png?url=http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3DLinkstate.youiest.com%26lastTitle%3DIcon%252520Button%252520-%252520Material-UI%26to%3DLinkstate.youiest.com%26Bookmarked%3Dtrue%26content%3D%26switched%3D&thumb_width=320&quality=80'
+          'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+        'author': 'S54FphiBzL3KueFF4'
+        'createdAt': 1515728156303
+        'title': 'Linkstates for Linkstate - Connecting is seeing - Linkstate.youiest.com'
+      'Linkstate%2Eyouiest%2Ecom%2Fabout':
+        'Linkstate%2Eyouiest%2Ecom%2Fabout':
+          'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'to': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'meta':
+            'title': 'Linkstate - Connecting is seeing'
+            'weight': 8
+            'body': 'The fate of bookmarks can tell us a lot about Linkstate'
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'Linkstate.youiest.com/about'
+            'ToLink': 'Linkstate.youiest.com/about'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515745059277
+          'title': 'Linkstate - Connecting is seeing'
+        'Bookmarks':
+          'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'to': 'Bookmarks'
+          'meta':
+            'title': 'Linkstate - Connecting is seeing'
+            'weight': 7
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'Linkstate.youiest.com/about'
+            'ToLink': 'Bookmarks'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/f9ef8e3b40885a6acde8c71ffdac6aac3365525e/png?url=Bookmarks&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1515745059202
+          'title': 'Linkstate - Connecting is seeing'
+  'hits': 747
+  'fromLast': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+  'toLast': 'Linkstate.youiest.com/about'
 
 describe 'Options', ->
   options = setOptions(props)
@@ -1189,15 +1614,18 @@ describe 'Value', ->
   it 'returns an object with label', ->
     expect(typeof value).to.equal 'object'
     expect(typeof value.label).to.equal 'string'
-  it 'returns toLast if type is to and queryparm has no to', ->
+  it 'returns user.toLast if type is to and queryparm has no to', ->
     user2 = Object.assign {}, user
     #user2.toLast = null
     props2 = Object.assign {}, props
-    props2.type = 'from'
+    props2.type = 'to'
     props2.to = null
-    value = setValue(props2, setOptions(props), user)
-    # point to the last target if no target
     console.log user.toLast
+    console.log linkstate.see props[props.type]
+    #console.log user.links.in.Bookmarks[linkstate.store props[props.type]].to
+    value = setValue(props2, setOptions(props2), user2)
+    # point to the last target if no target
+
     console.log value
     expect(typeof value.label).to.equal 'string'
     expect(value.value.from).to.equal user.toLast
