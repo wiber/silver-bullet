@@ -42,20 +42,18 @@ setOptions = (props) ->
 # which type of select we have
 
 setValue = (props, options, user) ->
-  console.log options, user, props,'console.log options, user, props'
-  console.log props.type
   newProps = {}
   newProps.options = []
   value = {}
-  return unless props.user?.links?.in?['Bookmarks']?
-  directedTo = typeof props.to is 'string' and props.to.length > 1
+  bookmarked = props.user?.links?.in?.Bookmarks?
+  return unless bookmarked
+  #directedTo = typeof props.to is 'string' and props.to.length > 1
   clientReady = props.user?.services?.facebook?# and Meteor.isClient
   gotFrom = typeof props.from is 'string' and props.from.length > 1
-  bookmarked = props.user?.links?.in?.Bookmarks?
+
   dictWithCreatedAt = user.links.in['Bookmarks']
-  vDict = dictWithCreatedAt
+  #vDict = dictWithCreatedAt
   typeValue = props[props.type]
-  console.log typeValue
   dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
   dictValueExists = dictValue?.meta?.title?
   lastDictValue = dictWithCreatedAt[linkstate.store(user[props.type+'Last'])]
@@ -67,21 +65,10 @@ setValue = (props, options, user) ->
   # the problem is pointing to.. we are getting the wrong to value
   # make negative cases...
   # negative cases, return user.toLast if no to..
+  # case 1: qp exist but not
+  console.log props.to, props.from
   if props.type is 'to' and !props.to?
-    # how does this not exist in user object?
-    console.log linkstate.store(user[props.type+'Last'])
-    console.log dictValue?.meta?.title?
-    console.log dictWithCreatedAt
-    console.log linkstate.see(user[props.type+'Last'])
-    console.log lastDictValue
-    console.log dictWithCreatedAt
-    console.log dictValueUsertoLast
-    console.log props.user.links.in['Bookmarks'][linkstate.store user.toLast]
     return value =
-      label: lastDictValue.meta.title
-      value: lastDictValue
-  if !typeValue? and lastDictValue?
-    value=
       label: lastDictValue.meta.title
       value: lastDictValue
   if props.type is 'from'
@@ -90,19 +77,19 @@ setValue = (props, options, user) ->
       #DocHead.setTitle(title) # needs attention
       if document?
         document.title = title
-  if dictValueExists and clientReady
-    value =
+  if dictValueExists# and clientReady
+    return value =
       label: dictValue.meta.title
       value: dictValue
   else
-    value =
+    return value =
       label: props.lastTitle
       value:
         meta:
           FromLink: props.from
           title: props.lastTitle
 
-  value
+  #value
 # we need a schema for writes and reads from the same place
 ModelNamespaces =
   bookmarks: 'links.in.Bookmarks.'

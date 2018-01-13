@@ -1616,20 +1616,16 @@ describe 'Value', ->
     expect(typeof value.label).to.equal 'string'
   it 'returns user.toLast if type is to and queryparm has no to', ->
     user2 = Object.assign {}, user
-    #user2.toLast = null
-    props2 = Object.assign {}, props
-    props2.type = 'to'
-    props2.to = null
-    console.log user.toLast
-    console.log linkstate.see props[props.type]
-    #console.log user.links.in.Bookmarks[linkstate.store props[props.type]].to
+    props2 = Object.assign {}, props,
+      to: null
+      type: 'to'
+    #props2.type = 'to'
+    #props2.to = null
     value = setValue(props2, setOptions(props2), user2)
-    # point to the last target if no target
-
-    console.log value
+    expect(props2.to).to.equal null
     expect(typeof value.label).to.equal 'string'
-    expect(value.value.from).to.equal user.toLast
-    #expect(typeof user2.fromLast).to.not.equal('string')
+    expect(value.value.from).to.equal linkstate.store user.toLast
+
 
 # why does it sometimes not work when coming from a place? need to stub methods..
 

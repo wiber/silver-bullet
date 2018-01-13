@@ -14,6 +14,12 @@ Lo = require 'lodash'
   'Bookmarks'
   'Categories'
 ]
+@catTree =
+  categoryTypes: categoryTypes
+  categoryUrls:
+    Bookmarks: 'en.wikipedia.org/wiki/bookmark'
+  ModelNamespaces:
+    bookmarks: 'links.in.Bookmarks.'
 if Meteor.settings?.public?.urlboxKey?
   @urlboxKey =  Meteor.settings.public.urlboxKey
   @urlboxSecret = Meteor.settings.urlboxSecret
@@ -143,6 +149,7 @@ Meteor.methods
 
     userUpdateObject = {}
     userUpdateObject.edited = time
+    # we want to link on newtab but not have from and to the same..
     if from not in categoryTypes
       userUpdateObject.fromLast = from
     if to not in categoryTypes
