@@ -42,6 +42,23 @@ setOptions = (props) ->
 # which type of select we have
 
 setValue = (props, options, user) ->
+  if !props[props.type]
+    userValue = user[props.type+'Last']
+    console.log userValue
+    console.log linkstate.store(props[props.type])
+    BookmarkValue = Lo.get user, 'links.in.Bookmarks.'+linkstate.store(user[props.type+'Last'])
+    console.log BookmarkValue
+    console.log Lo.get BookmarkValue, 'meta.title'
+    if BookmarkValue?
+      return value =
+        label: Lo.get BookmarkValue, 'meta.title'
+        value: BookmarkValue
+  else
+    BookmarkValueProp = Lo.get user, 'links.in.Bookmarks.'+ linkstate.store props[props.type]
+    console.log BookmarkValueProp
+    return value =
+      label: Lo.get BookmarkValueProp, 'meta.title'
+      value: BookmarkValueProp
   newProps = {}
   newProps.options = []
   value = {}
