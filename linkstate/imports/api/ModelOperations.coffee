@@ -40,79 +40,40 @@ setOptions = (props) ->
 #FIXME does not select value when from a place
 # to set value we need to know which type of select,
 # which type of select we have
-
+moS =
+  bookmarks: 'links.in.Bookmarks.'
+  title: 'meta.title'
 setValue = (props, options, user) ->
   if !props[props.type]
     userValue = user[props.type+'Last']
-    console.log userValue
-    console.log linkstate.store(props[props.type])
-    BookmarkValue = Lo.get user, 'links.in.Bookmarks.'+linkstate.store(user[props.type+'Last'])
-    console.log BookmarkValue
-    console.log Lo.get BookmarkValue, 'meta.title'
+    BookmarkValue = Lo.get user, moS.bookmarks+linkstate.store(userValue)
+    label = Lo.get BookmarkValue, moS.title
+    console.log label
     if BookmarkValue?
       return value =
-        label: Lo.get BookmarkValue, 'meta.title'
+        label: label
         value: BookmarkValue
-  else
-    BookmarkValueProp = Lo.get user, 'links.in.Bookmarks.'+ linkstate.store props[props.type]
-    console.log BookmarkValueProp
+  console.log props[props.type]
+  console.log Lo.get user, moS.Bookmarks
+  place = moS.bookmarks+linkstate.store(props[props.type])
+  console.log place
+  BookmarkValueProp = Lo.get user, moS.bookmarks+linkstate.store(props[props.type])
+  label = Lo.get BookmarkValueProp, moS.title
+  console.log BookmarkValueProp
+  console.log label
+  if label? # we have it here.
     return value =
-      label: Lo.get BookmarkValueProp, 'meta.title'
+      label: label
       value: BookmarkValueProp
-  newProps = {}
-  newProps.options = []
-  value = {}
-  bookmarked = props.user?.links?.in?.Bookmarks?
-  return unless bookmarked
-  #directedTo = typeof props.to is 'string' and props.to.length > 1
-  clientReady = props.user?.services?.facebook?# and Meteor.isClient
-  gotFrom = typeof props.from is 'string' and props.from.length > 1
-
-  dictWithCreatedAt = user.links.in['Bookmarks']
-  #vDict = dictWithCreatedAt
-  typeValue = props[props.type]
-  dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
-  dictValueExists = dictValue?.meta?.title?
-  lastDictValue = dictWithCreatedAt[linkstate.store(user[props.type+'Last'])]
-  setLastTitle = true if props.newHere
-  console.log linkstate.store user.toLast
-  dictValueUsertoLast = dictWithCreatedAt[linkstate.store user.toLast]
-  # if we're in a new place, we want to point to the last place we connected to
-  # do we simply walk backwards untill we find a place not here?
-  # the problem is pointing to.. we are getting the wrong to value
-  # make negative cases...
-  # negative cases, return user.toLast if no to..
-  # case 1: qp exist but not
-  console.log props.to, props.from
-  if props.type is 'to' and !props.to?
-    return value =
-      label: lastDictValue.meta.title
-      value: lastDictValue
-  if props.type is 'from'
-    if dictValueExists
-      title = 'Linkstates for ' + dictValue.title + ' - ' + props.from
-      #DocHead.setTitle(title) # needs attention
-      if document?
-        document.title = title
-  if dictValueExists# and clientReady
-    return value =
-      label: dictValue.meta.title
-      value: dictValue
   else
-    return value =
-      label: props.lastTitle
-      value:
-        meta:
-          FromLink: props.from
-          title: props.lastTitle
+    storefrom = linkstate.store props.from
+    console.log 'proplem with',BookmarkValueProp,label,user,props
+    console.log user.links.in.Bookmarks
+    console.log storefrom
+    console.log user.links.in.Bookmarks[linkstate.store props.from]
 
-  #value
-# we need a schema for writes and reads from the same place
-ModelNamespaces =
-  bookmarks: 'links.in.Bookmarks.'
-# need to mock the actual method start sequence..
 newPlace = (user, queryParams, bookmarked) ->
-  inBookmarks = Lo.get user, ModelNamespaces.bookmarks + linkstate.store(queryParams.from)
+  inBookmarks = Lo.get user, moS.bookmarks + linkstate.store(queryParams.from)
   #user?.out?.Bookmarks?[linkstate.store(queryParams.from)]
   markExists = inBookmarks?.meta?
   if bookmarked != 'true' and !markExists
@@ -204,4 +165,4 @@ exports.setOptions = setOptions
 exports.newPlace = newPlace
 exports.userSaved = userSaved
 exports.ifBodyContentHere = ifBodyContentHere
-exports.ModelNamespaces = ModelNamespaces
+exports.moS = moS
