@@ -46,7 +46,9 @@ containerLayout = createContainer ((props) ->
     expandMyCard: queryParams.expandMyCard != 'false'
     facebookAppId: Meteor.settings.public.facebookAppId
     newHere: newHere
-  console.log newProps, queryParams.from, queryParams.to,'newProps, queryParams.from, queryParams.to'
+    url: window.location.href
+  #console.log newProps, queryParams.from, queryParams.to,'newProps, queryParams.from, queryParams.to'
+  window.props = newProps
   newProps
 ), Layout
 

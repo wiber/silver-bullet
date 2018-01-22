@@ -44,7 +44,15 @@ moS =
   bookmarks: 'links.in.Bookmarks.'
   title: 'meta.title'
 setValue = (props, options, user) ->
-  if !props[props.type]
+  # what do we do if from isn't in bookmarks
+  window.setValueState = {props,options,user} if window?
+  #copy(props,options,user) if copy?
+  bookmarkExistNot = !user.links.in.Bookmarks[linkstate.store(props[props.type])]
+  if bookmarkExistNot
+    console.log 'unknown new place not in bookmarks'
+  else
+    console.log 'bookmark exists', props.type, props[props.type]
+  if !props[props.type] or bookmarkExistNot
     userValue = user[props.type+'Last']
     BookmarkValue = Lo.get user, moS.bookmarks+linkstate.store(userValue)
     label = Lo.get BookmarkValue, moS.title
@@ -53,10 +61,7 @@ setValue = (props, options, user) ->
       return value =
         label: label
         value: BookmarkValue
-  console.log props[props.type]
-  console.log Lo.get user, moS.Bookmarks
   place = moS.bookmarks+linkstate.store(props[props.type])
-  console.log place
   BookmarkValueProp = Lo.get user, moS.bookmarks+linkstate.store(props[props.type])
   label = Lo.get BookmarkValueProp, moS.title
   console.log BookmarkValueProp
@@ -70,7 +75,7 @@ setValue = (props, options, user) ->
     console.log 'proplem with',BookmarkValueProp,label,user,props
     console.log user.links.in.Bookmarks
     console.log storefrom
-    console.log user.links.in.Bookmarks[linkstate.store props.from]
+    console.log user.links.in.Bookmarks[storefrom]
 
 newPlace = (user, queryParams, bookmarked) ->
   inBookmarks = Lo.get user, moS.bookmarks + linkstate.store(queryParams.from)
@@ -78,7 +83,7 @@ newPlace = (user, queryParams, bookmarked) ->
   markExists = inBookmarks?.meta?
   if bookmarked != 'true' and !markExists
     # must changeQueryParams here else it gets run multiple times
-    changeQueryParams('Bookmarked', true)
+    changeQueryParams('Bookmarked', true) #sideffect
     return true
   else
     return false
