@@ -27,7 +27,7 @@ Avatar = require('material-ui/lib/avatar').default
 # {VisualCue, yourMark} = require '../ui/ShadowMoon.coffee'
 # TODO functional testable convenience functions, like strings, for math and attribute getting
 Lo = require 'lodash'
-
+{see, store, linkstate} = require '../api/strings'
 
 exports.MyCard = React.createClass
   getDefaultProps: ->

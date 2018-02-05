@@ -3,7 +3,7 @@ Lo = require 'lodash'
 {linkstate} = require './strings'
 oDict = {}
 vDict = {}
-#{changeQueryParams} = require 'changeQueryParams'
+{changeQueryParams} = require '../api/changeQueryParams'
 hereAndThere = (user, props) ->
   {from,to} = props
   HERE = Lo.get props, 'user.links.in.Bookmarks.' + linkstate.store(from)
@@ -22,19 +22,31 @@ setOptions = (props) ->
   options = []
   if props.user?.links?.out?
     # how titles get into selectize
-    dictWithCreatedAt = props.user.links.in['Bookmarks']
-    oDict = dictWithCreatedAt
-    deChaos = linkstate.sortByKeysTime dictWithCreatedAt
+    thisBookmark = linkstate.store linkstate.catTree.categoryUrls.Bookmarks
+    theseKeys = Object.keys props.user.links.in
+    #console.log thisBookmark in theseKeys
+    #console.log  linkstate.catTree.categoryUrls.Bookmarks
+    console.log linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)
+    console.log props.user.links.in
+    optionKey = linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)
+    console.log 'optionKey', optionKey
+    for key, value of props.user.links.in
+      console.log key, value
+
+    oDict = props.user.links.in[optionKey]
+    #oDict = dictWithCreatedAt
+    console.log oDict
+    deChaos = linkstate.sortByKeysTime(oDict)
     for index, value of deChaos
       continue if typeof value is not 'string'
       continue if value is 'undefined'
-      continue unless dictWithCreatedAt[value]?.meta?.title?
+      continue unless oDict[value]?.meta?.title?
       #continue unless dictWithCreatedAt[value].meta.weight > 0
       selectItem =
-        label: dictWithCreatedAt[value].meta.title
-        value: dictWithCreatedAt[value]
+        label: oDict[value].meta.title
+        value: oDict[value]
       options.push selectItem
-  console.log options.length, props
+  #console.log options.length, props
   options
 
 #FIXME does not select value when from a place
@@ -46,17 +58,14 @@ moS =
 setValue = (props, options, user) ->
   # what do we do if from isn't in bookmarks
   window.setValueState = {props,options,user} if window?
-  #copy(props,options,user) if copy?
   bookmarkExistNot = !user.links.in.Bookmarks[linkstate.store(props[props.type])]
-  if bookmarkExistNot
-    console.log 'unknown new place not in bookmarks'
-  else
-    console.log 'bookmark exists', props.type, props[props.type]
+  #console.log 'unknown new place not in bookmarks' if bookmarkExistNot
+  #console.log 'bookmark exists', props.type, props[props.type] if !bookmarkExistNot
   if !props[props.type] or bookmarkExistNot
+    # because new users setupUser there should always be last actions
     userValue = user[props.type+'Last']
     BookmarkValue = Lo.get user, moS.bookmarks+linkstate.store(userValue)
     label = Lo.get BookmarkValue, moS.title
-    console.log label
     if BookmarkValue?
       return value =
         label: label
@@ -64,15 +73,15 @@ setValue = (props, options, user) ->
   place = moS.bookmarks+linkstate.store(props[props.type])
   BookmarkValueProp = Lo.get user, moS.bookmarks+linkstate.store(props[props.type])
   label = Lo.get BookmarkValueProp, moS.title
-  console.log BookmarkValueProp
-  console.log label
   if label? # we have it here.
+    if FlowRouter? # can't run this in the unit test
+      changeQueryParams props.type, props[props.type]
     return value =
       label: label
       value: BookmarkValueProp
   else
     storefrom = linkstate.store props.from
-    console.log 'proplem with',BookmarkValueProp,label,user,props
+    console.log 'proplem with, should not happen',BookmarkValueProp,label,user,props
     console.log user.links.in.Bookmarks
     console.log storefrom
     console.log user.links.in.Bookmarks[storefrom]
@@ -90,6 +99,31 @@ newPlace = (user, queryParams, bookmarked) ->
 
 
 userSaved = (userE, queryParams, client) ->
+  user = {}
+  if !userE?.services?.facebook? and client
+    u = JSON.parse(localStorage.getItem('latest'))
+    window.saved = new Date().getTime()
+    if u?
+      user = u
+  else
+    if !window?.sub? and Meteor.isClient
+      window.sub = new Date().getTime()
+      time = (window.sub - window.saved)
+      console.log time, 'ms of your load time saved by using localStorage'
+    user = userE
+  # sideffect but a good place to make sure we're not without direction
+  for type in ['from', 'to']
+    if queryParams[type] is undefined
+      # double set them to avoid double render
+      console.log type, 'is undefined'
+      if user[type+'Last']?
+        #queryParams[type] = user[type+'Last']
+        changeQueryParams(type, user[type+'Last'])
+      else
+        console.log 'have not connected to anything? how is that possible?'
+  user
+
+wholeParamSaved = (paramCandidate, queryParams, client) ->
   user = {}
   if !userE?.services?.facebook? and client
     u = JSON.parse(localStorage.getItem('latest'))

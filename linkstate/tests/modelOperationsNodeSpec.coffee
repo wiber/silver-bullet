@@ -4420,7 +4420,7 @@ describe 'Value', ->
     expect(props2.to).to.equal null
     expect(typeof value.label).to.equal 'string'
     expect(value.value.from).to.equal linkstate.store user.toLast
-  it.only 'works with worse state', ->
+  it 'works with worse state', ->
     {props,options,user} = badWindowState
     props.type = 'from'
     bookmarks =  user.links.in.Bookmarks
@@ -4438,4 +4438,6 @@ describe 'Value', ->
     console.log fro
     console.log linkstate.store(props.to) in fro
     console.log value3, props.type
-    expect(!value3!.label).to.equal(false)
+    expect(!value3.label).to.equal(false)
+describe 'savesParam', ->
+  it 'returns same object if no localStorage exist', ->

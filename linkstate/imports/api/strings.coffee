@@ -233,4 +233,18 @@ exports.changeQueryParamsObject = (changes) ->
   for key, value of changes
     exports.changeQueryParams key, value
 
+categoryTypes = [
+  'Bookmarks'
+  'Categories'
+]
+
+linkstate.catTree =
+  categoryTypes: categoryTypes
+  categoryUrls:
+    Bookmarks: 'en.wikipedia.org/wiki/bookmark'
+  ModelNamespaces:
+    bookmarks: 'links.in.Bookmarks.'
+
+#linkstate = {} if !linkstate?
+
 exports.linkstate = linkstate

@@ -10,16 +10,7 @@ Lo = require 'lodash'
   r =  toString(url).replace /\./g , '%2E'
   ##console.log r
   return r
-@categoryTypes = [
-  'Bookmarks'
-  'Categories'
-]
-@catTree =
-  categoryTypes: categoryTypes
-  categoryUrls:
-    Bookmarks: 'en.wikipedia.org/wiki/bookmark'
-  ModelNamespaces:
-    bookmarks: 'links.in.Bookmarks.'
+
 if Meteor.settings?.public?.urlboxKey?
   @urlboxKey =  Meteor.settings.public.urlboxKey
   @urlboxSecret = Meteor.settings.urlboxSecret
@@ -216,19 +207,23 @@ Meteor.methods
       $set:
         'services.thumbalizr': Meteor.settings.thumbalizr
     Meteor.call "Linking",
-      from: 'Bookmarks'
-      to: 'Bookmarks' # the thing we're defining
+      from: catTree.categoryUrls.Bookmarks
+      #from: 'Bookmarks'
+      #to: 'Bookmarks' # the thing we're defining
+      to: catTree.categoryUrls.Bookmarks
       meta:
         title: 'Bookmarks - and other placeholders'
         weight: 9
         ScreenshotUrl: urlbox.buildUrl
-          url: 'en.wikipedia.org/wiki/bookmark'
+          url: catTree.categoryUrls.Bookmarks
+          #url: 'en.wikipedia.org/wiki/bookmark'
           thumb_width: 320
           format: 'png'
           quality: 80
     Meteor.call "Linking",
       from: 'Linkstate.youiest.com/about'
-      to: 'Bookmarks' # the thing we're defining
+      to: catTree.categoryUrls.Bookmarks
+      #to: 'Bookmarks' # the thing we're defining
       meta:
         title: 'Linkstate - Connecting is seeing'
         weight: 7
@@ -242,7 +237,8 @@ Meteor.methods
     if Meteor.user()?.services?.facebook?.link?
       Meteor.call "Linking",
         from: Meteor.user().services.facebook.link
-        to: 'Bookmarks'
+        #to: 'Bookmarks'
+        to: catTree.categoryUrls.Bookmarks
         meta:
           title: Meteor.user().services.facebook.name+' on Facebook'
           weight: 7

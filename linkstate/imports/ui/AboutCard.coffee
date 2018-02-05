@@ -19,6 +19,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 {hereAndThere} = require('../api/ModelOperations.coffee')
 R = require 'ramda'
 Lo = require 'lodash'
+{see, store, linkstate} = require '../api/strings'
 
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store, AByMomentum, listByMomentum, urlbox} = require '../api/strings.coffee'

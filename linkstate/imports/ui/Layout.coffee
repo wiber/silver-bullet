@@ -18,6 +18,7 @@ MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme} = require('../ui/theme.coffee')
 `import Urlbox from 'urlbox';`
 Lo = require 'lodash'
+{see, store, linkstate} = require '../api/strings'
 
 exports.Layout = React.createClass
   getDefaultProps: ->

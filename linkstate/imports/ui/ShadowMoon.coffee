@@ -22,6 +22,7 @@ Paper = require('material-ui/lib/paper').default
 Avatar = require('material-ui/lib/avatar').default
 {shadowFloor, upMargin, rightMargin,Position} = require '../api/strings'
 Lo = require 'lodash'
+{see, store, linkstate} = require '../api/strings'
 
 shadowMoon = React.createClass
   render: ->

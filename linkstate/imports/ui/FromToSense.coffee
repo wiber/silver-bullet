@@ -5,8 +5,10 @@ React = require 'react'
 {changeQueryParams} = require '../api/changeQueryParams.coffee'
 # ui object calling a container.. not great?
 selectedContainer = require('../api/Selected.coffee').selectedContainer
-{see} = require '../api/strings.coffee'
+{see, store, linkstate} = require '../api/strings'
 TextField = require('material-ui/lib/TextField').default
+
+console.log typeof linkstate
 exports.FromToSense = React.createClass
   render: ->
     that = this
