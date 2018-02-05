@@ -3,6 +3,7 @@ require("react/package.json")
 ReactiveVar = require('meteor/reactive-var')
 reactKup = require('react-kup')
 require('../imports/startup/routes.coffee')
+require('../imports/startup/methods.coffee')
 #require('../imports/api/MainLayoutContainer.coffee')
 #injectTapEventPlugin = require('react-tap-event-plugin')
 #injectTapEventPlugin();

@@ -1,41 +1,40 @@
 R = require('ramda')
-Lo = require 'lodash'
+_ = require 'lodash'
 {linkstate} = require './strings'
+if typeof linkstate is undefined
+  console.log 'error linkstate'
 oDict = {}
 vDict = {}
 {changeQueryParams} = require '../api/changeQueryParams'
 hereAndThere = (user, props) ->
   {from,to} = props
-  HERE = Lo.get props, 'user.links.in.Bookmarks.' + linkstate.store(from)
-  HereScreenshotUrl = Lo.get HERE, 'meta.ScreenshotUrl'
+  HERE = _.get props, 'user.links.in.Bookmarks.' + linkstate.store(from)
+  HereScreenshotUrl = _.get HERE, 'meta.ScreenshotUrl'
   unless HERE?
     HERE =
       title: props.lastTitle
       from: props.from
     console.log 'we are noplace', HERE
-  THERE = Lo.get props, 'user.links.in.Bookmarks.' + linkstate.store(to)
-  ThereScreenshotUrl = Lo.get THERE, 'meta.ScreenshotUrl'
+  THERE = _.get props, 'user.links.in.Bookmarks.' + linkstate.store(to)
+  ThereScreenshotUrl = _.get THERE, 'meta.ScreenshotUrl'
   return {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl}
 
 # we need a tested way to extract select options, and a particular option selected among them
 setOptions = (props) ->
   options = []
-  if props.user?.links?.out?
+  if props.user?.links?.in?
     # how titles get into selectize
     thisBookmark = linkstate.store linkstate.catTree.categoryUrls.Bookmarks
     theseKeys = Object.keys props.user.links.in
-    #console.log thisBookmark in theseKeys
+    console.log thisBookmark in theseKeys
     #console.log  linkstate.catTree.categoryUrls.Bookmarks
-    console.log linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)
-    console.log props.user.links.in
+    #console.log linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)
+    #console.log props.user.links.in
     optionKey = linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)
-    console.log 'optionKey', optionKey
-    for key, value of props.user.links.in
-      console.log key, value
-
+    #console.log 'optionKey', optionKey
     oDict = props.user.links.in[optionKey]
     #oDict = dictWithCreatedAt
-    console.log oDict
+    console.log oDict, optionKey
     deChaos = linkstate.sortByKeysTime(oDict)
     for index, value of deChaos
       continue if typeof value is not 'string'
@@ -58,21 +57,23 @@ moS =
 setValue = (props, options, user) ->
   # what do we do if from isn't in bookmarks
   window.setValueState = {props,options,user} if window?
-  bookmarkExistNot = !user.links.in.Bookmarks[linkstate.store(props[props.type])]
+  bookmarkExistNot = !_.get user, 'links.in.Bookmarks.' + linkstate.store(props[props.type])
+  console.log bookmarkExistNot
+  # !user.links.in.Bookmarks[linkstate.store(props[props.type])]
   #console.log 'unknown new place not in bookmarks' if bookmarkExistNot
   #console.log 'bookmark exists', props.type, props[props.type] if !bookmarkExistNot
   if !props[props.type] or bookmarkExistNot
     # because new users setupUser there should always be last actions
     userValue = user[props.type+'Last']
-    BookmarkValue = Lo.get user, moS.bookmarks+linkstate.store(userValue)
-    label = Lo.get BookmarkValue, moS.title
+    BookmarkValue = _.get user, moS.bookmarks+linkstate.store(userValue)
+    label = _.get BookmarkValue, moS.title
     if BookmarkValue?
       return value =
         label: label
         value: BookmarkValue
   place = moS.bookmarks+linkstate.store(props[props.type])
-  BookmarkValueProp = Lo.get user, moS.bookmarks+linkstate.store(props[props.type])
-  label = Lo.get BookmarkValueProp, moS.title
+  BookmarkValueProp = _.get user, moS.bookmarks+linkstate.store(props[props.type])
+  label = _.get BookmarkValueProp, moS.title
   if label? # we have it here.
     if FlowRouter? # can't run this in the unit test
       changeQueryParams props.type, props[props.type]
@@ -84,10 +85,10 @@ setValue = (props, options, user) ->
     console.log 'proplem with, should not happen',BookmarkValueProp,label,user,props
     console.log user.links.in.Bookmarks
     console.log storefrom
-    console.log user.links.in.Bookmarks[storefrom]
+    #console.log user.links.in.Bookmarks[storefrom]
 
 newPlace = (user, queryParams, bookmarked) ->
-  inBookmarks = Lo.get user, moS.bookmarks + linkstate.store(queryParams.from)
+  inBookmarks = _.get user, moS.bookmarks + linkstate.store(queryParams.from)
   #user?.out?.Bookmarks?[linkstate.store(queryParams.from)]
   markExists = inBookmarks?.meta?
   if bookmarked != 'true' and !markExists

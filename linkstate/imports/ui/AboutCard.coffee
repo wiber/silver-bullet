@@ -20,7 +20,6 @@ CardText =  require('material-ui/lib/card/card-text').default
 R = require 'ramda'
 Lo = require 'lodash'
 {see, store, linkstate} = require '../api/strings'
-
 {createContainer} = require 'meteor/react-meteor-data'
 {see, store, AByMomentum, listByMomentum, urlbox} = require '../api/strings.coffee'
 n = 0
@@ -185,7 +184,7 @@ exports.AboutCard = createContainer ((props) ->
   newProps = {}
   nodeHandle = Meteor.subscribe "Node", props.from
   if nodeHandle.ready()
-    nodeId =linkstate.store props.from
+    nodeId = linkstate.store props.from
     N = Nodes.findOne(nodeId)
     if N?
       newProps.node = N

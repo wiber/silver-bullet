@@ -8,7 +8,6 @@ selectedContainer = require('../api/Selected.coffee').selectedContainer
 {see, store, linkstate} = require '../api/strings'
 TextField = require('material-ui/lib/TextField').default
 
-console.log typeof linkstate
 exports.FromToSense = React.createClass
   render: ->
     that = this

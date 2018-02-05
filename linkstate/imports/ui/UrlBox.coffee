@@ -21,6 +21,7 @@ CardText =  require('material-ui/lib/card/card-text').default
 Lo = require 'lodash'
 R = require 'ramda'
 # break this out into a dumb component and pre massaging
+{linkstate} = require '../api/strings'
 UrlBox = React.createClass
   propTypes:
     D: React.PropTypes.object

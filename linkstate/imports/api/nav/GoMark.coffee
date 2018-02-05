@@ -1,5 +1,5 @@
 {changeQueryParams} = require('../changeQueryParams.coffee')
-
+{linkstate} = require '../strings'
 # need to parse node for whole node object...
 # go to a clicked N .
 # we need to add it to our bookmarks if it doesn't exist
@@ -7,6 +7,7 @@ GoMark = (place) ->
   #console.log place.N.in.Bookmarks#[linkstate.store url],place.N[direction]
   for type, url of place.type
     # is from or to url bookmarked?
+
     notBookmarked = !place.user?.out?.Bookmarks?[linkstate.store url]?
     if !notBookmarked
       console.log 'got url in bookmarks', url

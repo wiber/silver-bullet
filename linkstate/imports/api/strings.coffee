@@ -237,7 +237,7 @@ categoryTypes = [
   'Bookmarks'
   'Categories'
 ]
-
+linkstate.categoryTypes = categoryTypes
 linkstate.catTree =
   categoryTypes: categoryTypes
   categoryUrls:

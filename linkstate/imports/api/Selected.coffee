@@ -7,15 +7,17 @@
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
 Selected = require('../ui/SelectedUI.coffee').Selected
 {createContainer} = require 'meteor/react-meteor-data'
-{see, store} = require '../api/strings.coffee'
+{linkstate, see, store} = require '../api/strings.coffee'
 {setOptions, setValue} = require '../api/ModelOperations'
 # goes through a simple loop
 #that builds list of objects from a number of sources.
 exports.selectedContainer = createContainer ((props) ->
   # update queryparams unless we're fromt he same place
+  window.selectedProps = props
   nProps = _.extend {}, props,
     value: setValue(props,setOptions(props),props.user)
     options: setOptions(props)
+  console.log nProps.value, typeof linkstate.store
   nProps
 ), Selected
 ###
