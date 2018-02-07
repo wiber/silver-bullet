@@ -238,13 +238,16 @@ categoryTypes = [
   'Bookmarks'
   'Categories'
 ]
+bookmarkUrl = 'en.wikipedia.org/wiki/bookmark'
+linkstate.constants =
+  bookmarkUrl: bookmarkUrl
 linkstate.categoryTypes = categoryTypes
 linkstate.catTree =
   categoryTypes: categoryTypes
   categoryUrls:
-    Bookmarks: 'en.wikipedia.org/wiki/bookmark'
+    Bookmarks: bookmarkUrl
   ModelNamespaces:
-    bookmarks: 'links.in.Bookmarks.'
+    bookmarks: 'links.in.'+linkstate.store(bookmarkUrl)
 linkstate.getBookmarkValue = (user, plainUrl) ->
   dotlessUrl = linkstate.store plainUrl
   path = 'links.in.'+linkstate.catTree.categoryUrls.Bookmarks+'.'+plainUrl

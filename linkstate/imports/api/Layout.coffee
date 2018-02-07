@@ -6,7 +6,7 @@ language = 'eng'
 #{URI} = require 'urijs'
 {newPlace, ifBodyContentHere, userSaved} = require '../api/ModelOperations'
 `import { Meteor } from 'meteor/meteor'`
-
+{linkstate} = require '../api/strings'
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   # store and use localStorage user untill user() received from server
@@ -23,7 +23,7 @@ containerLayout = createContainer ((props) ->
   if newHere and Meteor.isClient
     Meteor.call "Linking",
       from: queryParams.from
-      to: 'Bookmarks'
+      to: linkstate.catTree.categoryUrls.Bookmarks
       meta:
         weight: 5
         title: queryParams.lastTitle#FlowRouter.getQueryParam('lastTitle')

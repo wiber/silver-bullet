@@ -26,12 +26,12 @@ setOptions = (props) ->
     # how titles get into selectize
     thisBookmark = linkstate.store linkstate.catTree.categoryUrls.Bookmarks
     theseKeys = Object.keys props.user.links.in
-    console.log thisBookmark in theseKeys
+    #console.log thisBookmark in theseKeys
     #console.log  linkstate.catTree.categoryUrls.Bookmarks
     #console.log linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)
     #console.log props.user.links.in
     optionKey = linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)
-    #console.log 'optionKey', optionKey
+    console.log 'optionKey', optionKey
     oDict = props.user.links.in[optionKey]
     #oDict = dictWithCreatedAt
     console.log oDict, optionKey
@@ -54,7 +54,7 @@ setOptions = (props) ->
 moS =
   bookmarks: 'links.in.Bookmarks.'
   title: 'meta.title'
-setValue = (props, options, user) ->
+setValue = (props, options) ->
   # what do we do if from isn't in bookmarks
   user = props.user
   window.setValueState = {props,options,user} if window?
@@ -78,7 +78,9 @@ setValue = (props, options, user) ->
         label: label
         value: BookmarkValue
   place = moS.bookmarks+linkstate.store(props[props.type])
-  BookmarkValueProp = _.get user, moS.bookmarks+linkstate.store(props[props.type])
+  BookmarkValueProp = linkstate.getBookmarkValue props.user, props[props.type]
+  console.log BookmarkValueProp
+  #BookmarkValueProp = _.get user, moS.bookmarks+linkstate.store(props[props.type])
   label = _.get BookmarkValueProp, moS.title
   if label? # we have it here.
     if FlowRouter? # can't run this in the unit test
