@@ -24,26 +24,17 @@ setOptions = (props) ->
   options = []
   if props.user?.links?.in?
     # how titles get into selectize
-    thisBookmark = linkstate.store linkstate.catTree.categoryUrls.Bookmarks
-    theseKeys = Object.keys props.user.links.in
-    #console.log thisBookmark in theseKeys
-    #console.log  linkstate.catTree.categoryUrls.Bookmarks
-    #console.log linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)
-    #console.log props.user.links.in
-    optionKey = linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)
-    console.log 'optionKey', optionKey
-    oDict = props.user.links.in[optionKey]
-    #oDict = dictWithCreatedAt
-    console.log oDict, optionKey
-    deChaos = linkstate.sortByKeysTime(oDict)
+    bookmarks = linkstate.getAllBookmarksDict props.user
+    
+    deChaos = linkstate.sortByKeysTime(bookmarks)
     for index, value of deChaos
       continue if typeof value is not 'string'
       continue if value is 'undefined'
-      continue unless oDict[value]?.meta?.title?
+      continue unless bookmarks[value]?.meta?.title?
       #continue unless dictWithCreatedAt[value].meta.weight > 0
       selectItem =
-        label: oDict[value].meta.title
-        value: oDict[value]
+        label: bookmarks[value].meta.title
+        value: bookmarks[value]
       options.push selectItem
   #console.log options.length, props
   options

@@ -5400,13 +5400,13 @@ describe 'Value', ->
     props2 = Object.assign {}, props,
       to: null
       type: 'to'
-    value = setValue(props2, setOptions(props2), user2)
+    value = setValue(selectedProps, setOptions(selectedProps), selectedProps.user)
     userValue = linkstate.store props.user.toLast
     #console.log value.value.from
     #console.log value.value.from is userValue, userValue
     expect(props2.to).to.equal null
     expect(typeof value.label).to.equal 'string'
-    expect(value.value.from).to.equal userValue
+    expect(value.value.to).to.equal userValue
   it 'works with worse state', ->
     {props,options,user} = badWindowState
     props.type = 'from'

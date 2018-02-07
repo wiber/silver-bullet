@@ -248,6 +248,7 @@ linkstate.catTree =
     Bookmarks: bookmarkUrl
   ModelNamespaces:
     bookmarks: 'links.in.'+linkstate.store(bookmarkUrl)
+BookmarkPath = 'links.in.'+linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)
 linkstate.getBookmarkValue = (user, plainUrl) ->
   dotlessUrl = linkstate.store plainUrl
   path = 'links.in.'+linkstate.catTree.categoryUrls.Bookmarks+'.'+plainUrl
@@ -258,6 +259,12 @@ linkstate.getBookmarkValue = (user, plainUrl) ->
     console.log plainUrl, 'exist not in', user.links.in
   console.log BookmarkValue
   return BookmarkValue
+linkstate.getAllBookmarksDict = (user) ->
+  bookmarkDict = _.get user, BookmarkPath
+  console.log bookmarkDict
+  return bookmarkDict
+
+
 
 #linkstate = {} if !linkstate?
 

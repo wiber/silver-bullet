@@ -4,7 +4,8 @@ module.exports = function (w) {
     files: [
       'linkstate/imports/**/*Node.coffee',
       'linkstate/imports/api/strings.coffee',
-      'linkstate/imports/api/ModelOperations.coffee'
+      'linkstate/imports/api/ModelOperations.coffee',
+      'linkstate/imports/api/changeQueryParams.coffee'
     ],
 
     tests: [
