@@ -25,7 +25,6 @@ setOptions = (props) ->
   if props.user?.links?.in?
     # how titles get into selectize
     bookmarks = linkstate.getAllBookmarksDict props.user
-    
     deChaos = linkstate.sortByKeysTime(bookmarks)
     for index, value of deChaos
       continue if typeof value is not 'string'
@@ -46,24 +45,29 @@ moS =
   bookmarks: 'links.in.Bookmarks.'
   title: 'meta.title'
 setValue = (props, options) ->
+
   # what do we do if from isn't in bookmarks
-  user = props.user
+  {user, from, to, type} = props
+  console.log props[type]
+  bookmarks = linkstate.getAllBookmarksDict user
   window.setValueState = {props,options,user} if window?
-  bookmarkExistNot = !_.get user, 'links.in.Bookmarks.' + linkstate.store(props[props.type])
+  bookmarkExistNot = !_.get bookmarks, linkstate.store(props[type])
+  #!_.get user, 'links.in.Bookmarks.' + linkstate.store(props[props.type])
   console.log bookmarkExistNot
   # !user.links.in.Bookmarks[linkstate.store(props[props.type])]
   if bookmarkExistNot
     console.log 'unknown new place not in bookmarks'
   if !bookmarkExistNot
    console.log  props.type, props[props.type], 'bookmark exists',
-  if !props[props.type] or bookmarkExistNot
+  if !props[type] or bookmarkExistNot
     console.log bookmarkExistNot
     # because new users setupUser there should always be last actions
     userValue = user[props.type+'Last']
     #BookmarkValue = _.get user, 'links.in.'+linkstate.store(userValue)
-    BookmarkValue = linkstate.getBookmarkValue props.user, userValue
+    BookmarkValue = linkstate.getBookmarkValue user, userValue
     console.log BookmarkValue
     label = _.get BookmarkValue, moS.title
+    console.log label
     if BookmarkValue?
       return value =
         label: label
