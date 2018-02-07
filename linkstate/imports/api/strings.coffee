@@ -1,5 +1,6 @@
 R = require('ramda')
 linkstate = {}
+_ = require 'lodash'
 #`import Urlbox from 'urlbox';`
 
 #exports.urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
@@ -244,6 +245,16 @@ linkstate.catTree =
     Bookmarks: 'en.wikipedia.org/wiki/bookmark'
   ModelNamespaces:
     bookmarks: 'links.in.Bookmarks.'
+linkstate.getBookmarkValue = (user, plainUrl) ->
+  dotlessUrl = linkstate.store plainUrl
+  path = 'links.in.'+linkstate.catTree.categoryUrls.Bookmarks+'.'+plainUrl
+  console.log path
+  BookmarkValue = _.get user, 'links.in.'+linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)+'.'+dotlessUrl
+  if !BookmarkValue
+    console.log plainUrl
+    console.log plainUrl, 'exist not in', user.links.in
+  console.log BookmarkValue
+  return BookmarkValue
 
 #linkstate = {} if !linkstate?
 

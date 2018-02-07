@@ -56,16 +56,22 @@ moS =
   title: 'meta.title'
 setValue = (props, options, user) ->
   # what do we do if from isn't in bookmarks
+  user = props.user
   window.setValueState = {props,options,user} if window?
   bookmarkExistNot = !_.get user, 'links.in.Bookmarks.' + linkstate.store(props[props.type])
   console.log bookmarkExistNot
   # !user.links.in.Bookmarks[linkstate.store(props[props.type])]
-  #console.log 'unknown new place not in bookmarks' if bookmarkExistNot
-  #console.log 'bookmark exists', props.type, props[props.type] if !bookmarkExistNot
+  if bookmarkExistNot
+    console.log 'unknown new place not in bookmarks'
+  if !bookmarkExistNot
+   console.log  props.type, props[props.type], 'bookmark exists',
   if !props[props.type] or bookmarkExistNot
+    console.log bookmarkExistNot
     # because new users setupUser there should always be last actions
     userValue = user[props.type+'Last']
-    BookmarkValue = _.get user, moS.bookmarks+linkstate.store(userValue)
+    #BookmarkValue = _.get user, 'links.in.'+linkstate.store(userValue)
+    BookmarkValue = linkstate.getBookmarkValue props.user, userValue
+    console.log BookmarkValue
     label = _.get BookmarkValue, moS.title
     if BookmarkValue?
       return value =

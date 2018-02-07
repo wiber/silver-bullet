@@ -5204,6 +5204,180 @@ badWindowState =
     'hits': 822
     'fromLast': 'http://www.material-ui.com/v0.15.0/#/components/drawer'
     'toLast': 'Linkstate.youiest.com/about'
+selectedProps =
+  'from': 'Linkstate.youiest.com/about'
+  'to': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+  'lastTitle': 'Icon Button - Material-UI'
+  'user':
+    '_id': 'S54FphiBzL3KueFF4'
+    'profile': 'name': 'Elias Moosman'
+    'createdAt': '2018-01-11T05:57:30.482Z'
+    'services':
+      'facebook':
+        'expiresAt': 1520753914953
+        'id': '10154232419354595'
+        'email': 'eliasmoosman@gmail.com'
+        'name': 'Elias Moosman'
+        'first_name': 'Elias'
+        'last_name': 'Moosman'
+        'link': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+        'gender': 'male'
+        'locale': 'sv_SE'
+        'age_range': 'min': 21
+      'thumbalizr': null
+    'edited': 1517868118023
+    'commit': '1517817829986':
+      'in': null
+      'out': null
+    'fromLast': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+    'toLast': 'en.wikipedia.org/wiki/bookmark'
+    'links':
+      'out':
+        'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+          'from': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'title': 'Bookmarks - and other placeholders'
+            'weight': 9
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'en.wikipedia.org/wiki/bookmark'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1517868117818
+          'title': 'Bookmarks - and other placeholders'
+        'Linkstate%2Eyouiest%2Ecom%2Fabout':
+          'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+            'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+            'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+            'meta':
+              'title': 'Linkstate - Connecting is seeing'
+              'weight': 7
+              'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+              'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+              'FromLink': 'Linkstate.youiest.com/about'
+              'ToLink': 'en.wikipedia.org/wiki/bookmark'
+              'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+              'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+            'author': 'S54FphiBzL3KueFF4'
+            'createdAt': 1517868117916
+            'title': 'Linkstate - Connecting is seeing'
+          'Linkstate%2Eyouiest%2Ecom%2Fabout':
+            'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+            'to': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+            'meta':
+              'title': 'Linkstate - Connecting is seeing'
+              'weight': 8
+              'body': 'The fate of bookmarks can tell us a lot about Linkstate'
+              'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+              'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+              'FromLink': 'Linkstate.youiest.com/about'
+              'ToLink': 'Linkstate.youiest.com/about'
+              'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+              'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+            'author': 'S54FphiBzL3KueFF4'
+            'createdAt': 1517868117963
+            'title': 'Linkstate - Connecting is seeing'
+        'https%3A%2F%2Fwww%2Efacebook%2Ecom%2Fapp_scoped_user_id%2F10154232419354595%2F': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+          'from': 'https%3A%2F%2Fwww%2Efacebook%2Ecom%2Fapp_scoped_user_id%2F10154232419354595%2F'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'title': 'Elias Moosman on Facebook'
+            'weight': 7
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/9b1a5f128cbac84d2142d3377200235906e5a39e/png?url=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1517868118023
+          'title': 'Elias Moosman on Facebook'
+      'in':
+        'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+          'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+            'from': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+            'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+            'meta':
+              'title': 'Bookmarks - and other placeholders'
+              'weight': 9
+              'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+              'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+              'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+              'FromLink': 'en.wikipedia.org/wiki/bookmark'
+              'ToLink': 'en.wikipedia.org/wiki/bookmark'
+              'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+            'author': 'S54FphiBzL3KueFF4'
+            'createdAt': 1517868117818
+            'title': 'Bookmarks - and other placeholders'
+          'Linkstate%2Eyouiest%2Ecom%2Fabout':
+            'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+            'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+            'meta':
+              'title': 'Linkstate - Connecting is seeing'
+              'weight': 7
+              'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+              'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+              'FromLink': 'Linkstate.youiest.com/about'
+              'ToLink': 'en.wikipedia.org/wiki/bookmark'
+              'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+              'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+            'author': 'S54FphiBzL3KueFF4'
+            'createdAt': 1517868117916
+            'title': 'Linkstate - Connecting is seeing'
+          'https%3A%2F%2Fwww%2Efacebook%2Ecom%2Fapp_scoped_user_id%2F10154232419354595%2F':
+            'from': 'https%3A%2F%2Fwww%2Efacebook%2Ecom%2Fapp_scoped_user_id%2F10154232419354595%2F'
+            'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+            'meta':
+              'title': 'Elias Moosman on Facebook'
+              'weight': 7
+              'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+              'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+              'FromLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+              'ToLink': 'en.wikipedia.org/wiki/bookmark'
+              'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/9b1a5f128cbac84d2142d3377200235906e5a39e/png?url=https%3A%2F%2Fwww.facebook.com%2Fapp_scoped_user_id%2F10154232419354595%2F&thumb_width=320&quality=80'
+              'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+            'author': 'S54FphiBzL3KueFF4'
+            'createdAt': 1517868118023
+            'title': 'Elias Moosman on Facebook'
+        'Linkstate%2Eyouiest%2Ecom%2Fabout': 'Linkstate%2Eyouiest%2Ecom%2Fabout':
+          'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'to': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'meta':
+            'title': 'Linkstate - Connecting is seeing'
+            'weight': 8
+            'body': 'The fate of bookmarks can tell us a lot about Linkstate'
+            'face': 'http://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
+            'FromLink': 'Linkstate.youiest.com/about'
+            'ToLink': 'Linkstate.youiest.com/about'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+          'author': 'S54FphiBzL3KueFF4'
+          'createdAt': 1517868117963
+          'title': 'Linkstate - Connecting is seeing'
+    'hits': 40
+  'type': 'from'
+  'word':
+    'HeaderTitle': 'Linkstates for '
+    'MainCardTitle': 'About '
+    'MainCardSubtitle': 'Link it to something, find it there later'
+    'TextAboutfloatingLabelText': 'TAB here to say something memorable. '
+    'TextAboutHintText': 'Send with a 9 for dead on, 5 neutral, 1 oppose or 0 irrelevant.'
+    'digitAlert': 'You send by entering a digit from 0 to 9 where 9 means dead on, 5 neutral and 1 opposite. The 0 means irrelevant.'
+    'MyCardTitle': 'Your links to: '
+    'MyCardSubtitle': 'Go to Bookmarks or your project page and your resources appear here'
+    'MyCardStepsSubheader': 'You have connected from here recently'
+    'AboutCardTitle': 'What\'s the word on this?'
+    'AboutCardSubTitle': 'Connections talk. Yay sayers weigh in on the right.'
+    'to': 'to '
+    'defaultProject': 'Your last project was '
+    'defaultStart': 'Last on '
+    'ToTooltipText': 'TO - Point TO it to something about it.'
+    'FromTooltipText': 'FROM - The place we\'re on now. Below are your bookmarks about this place.'
+
 describe 'Options', ->
   options = setOptions(props)
   it 'should return right sized array', ->
@@ -5221,18 +5395,18 @@ describe 'Value', ->
   it 'returns an object with label', ->
     expect(typeof value).to.equal 'object'
     expect(typeof value.label).to.equal 'string'
-  it 'returns user.toLast if type is to and queryparm has no to', ->
+  it.only 'returns user.toLast if type is to and queryparm has no to', ->
     user2 = Object.assign {}, user
     props2 = Object.assign {}, props,
       to: null
       type: 'to'
-    #props2.type = 'to'
-    #props2.to = null
-
     value = setValue(props2, setOptions(props2), user2)
+    userValue = linkstate.store props.user.toLast
+    console.log value.value.from
+    console.log value.value.from is userValue, userValue
     expect(props2.to).to.equal null
     expect(typeof value.label).to.equal 'string'
-    expect(value.value.from).to.equal linkstate.store user.toLast
+    expect(value.value.from).to.equal userValue
   it 'works with worse state', ->
     {props,options,user} = badWindowState
     props.type = 'from'
@@ -5252,5 +5426,9 @@ describe 'Value', ->
     console.log linkstate.store(props.to) in fro
     console.log value3, props.type
     expect(!value3.label).to.equal(false)
+  it 'fails with selectedProps', ->
+    value2 = setValue(selectedProps,setOptions(selectedProps), selectedProps.user)
+
+
 describe 'savesParam', ->
   it 'returns same object if no localStorage exist', ->
