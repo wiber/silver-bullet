@@ -6,6 +6,7 @@ require('../imports/startup/routes.coffee') # one way to turn off ssr
 require('../imports/startup/methods.coffee') # one way to turn off ssr
 require('../imports/startup/publish.coffee') # one way to turn off ssr
 {linkstate} = require '../imports/api/strings'
+require('source-map-support').install()
 
 @window = {}
 window.innerWidth = 640

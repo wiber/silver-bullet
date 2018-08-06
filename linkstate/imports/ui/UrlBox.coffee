@@ -47,7 +47,7 @@ UrlBox = React.createClass
             user: that.props.user
         ->
           if !that.props.ScreenshotUrl #D.drawTheOther, N.allLinks[D.drawTheOther],
-            console.log that.props, D.m.FromLink, D.m.ToLink, 'no screenshoturl'
+            console.log 'no screenshoturl', D.m.FromLink, D.m.ToLink #,that.props,
           k.build Winged,
             ScreenshotUrl: D.drawTheOther
             user: that.props.user

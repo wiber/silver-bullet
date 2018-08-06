@@ -19,6 +19,7 @@ MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 `import Urlbox from 'urlbox';`
 Lo = require 'lodash'
 {see, store, linkstate} = require '../api/strings'
+{screenshotUrlHere} = require '../api/ModelOperations'
 
 exports.Layout = React.createClass
   getDefaultProps: ->
@@ -47,12 +48,14 @@ exports.Layout = React.createClass
         return
       ) document, 'script', 'facebook-jssdk'
     that = this
+    console.log screenshotUrlHere that.props.user, that.props.from
     reactKup (k) ->
+      #console.log that.props.user.services, Meteor.user().services
+
       try
         if that?.props?.user?.links?.in?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
           HERE = that.props.user.links.in.Bookmarks[ linkstate.store that.props.from]
           ScreenshotUrl = HERE.meta.ScreenshotUrl
-          console.log ScreenshotUrl
         # old way still here..
         urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
         before = ScreenshotUrl
@@ -106,7 +109,7 @@ exports.Layout = React.createClass
               className: 'column'
               ->
                 k.div ->
-                  if that.props.user?.services?.facebook?
+                  if that.props.user?.services?.facebook? or that.props.user?.services?.password?
                     k.build MainCard, # need comma here because the second arg is prop
                       expanded: that.props.expandMainCard
                       # redundant container? already have user obj here

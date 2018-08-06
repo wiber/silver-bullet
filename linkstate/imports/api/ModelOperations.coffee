@@ -199,6 +199,8 @@ changeQueryParamsObject = (changes) ->
   #R.mapObjIndexed changeFunc, changes
   for key, value of changes
     exports.changeQueryParams key, value
+screenshotUrlHere = (user, from) ->
+  R.prop user, 'links.in.Bookmarks'+linkstate.store(from)+'meta.ScreenshotUrl'
 
 exports.changeQueryParamsObject= changeQueryParamsObject
 exports.changeQueryParams = changeQueryParams
@@ -209,3 +211,4 @@ exports.newPlace = newPlace
 exports.userSaved = userSaved
 exports.ifBodyContentHere = ifBodyContentHere
 exports.moS = moS
+exports.screenshotUrlHere = screenshotUrlHere
