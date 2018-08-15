@@ -2,6 +2,8 @@
 language = 'eng'
 mount = require('react-mounter').mount
 {containerLayout} = require('../api/Layout.coffee')
+{AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
+
 
 FlowRouter.route '/about',
   name: 'home'
@@ -15,3 +17,8 @@ FlowRouter.route '/',
     FlowRouter.go '/about?
     from=https%253A%252F%252Flinkstate.youiest.com%252F
     &lastTitle=Linkstates'
+
+FlowRouter.route '/login',
+  name: 'login'
+  action: (params, queryParams) ->
+    mount AccountsUIWrapper
