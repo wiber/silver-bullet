@@ -9,7 +9,7 @@ require('../imports/startup/methods.coffee')
 #injectTapEventPlugin();
 @R = require('ramda')
 {Meteor}= require 'meteor/meteor'
-
+require 'typeface-roboto'
 
 
 lastLogin = () ->

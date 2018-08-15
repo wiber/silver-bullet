@@ -8,7 +8,10 @@ require('../imports/startup/publish.coffee') # one way to turn off ssr
 {linkstate} = require '../imports/api/strings'
 require('source-map-support').install()
 
+
 @window = {}
+@window.location = {}
+@window.location.href = 'linkstate.youiest.com'
 window.innerWidth = 640
 
 Meteor.startup ->
