@@ -133,7 +133,8 @@ exports.Layout = React.createClass
                       type: 'fromCreated'
                       ScreenshotUrl: ScreenshotUrl
                   else
-                    k.build Mexplain
+                    k.build Mexplain,
+                      word: that.props.word
                   k.build AboutCard,
                     expanded: that.props.expandAboutCard
                     to: that.props.to

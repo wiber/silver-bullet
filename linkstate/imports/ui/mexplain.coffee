@@ -43,11 +43,17 @@ exports.Mexplain = React.createClass
     reactKup (k) ->
       k.build Card,
         style: _.extend {}, style.card, style.yCard,
-          height: '370'
+          height: '470'
         #expanded: that.props.hide
         #expandable: true
         mixins: [Slider.ControllerMixin]
         ->
+          k.build CardHeader,
+            title: that.props.word.MexplainTitle
+            showExpandableButton: true
+            subtitle: that.props.word.MexplainSubtitle
+            onClick: (e) ->
+              window.open '/login', "_blank"
           k.build CardText,
             ->
               k.build Slider,
