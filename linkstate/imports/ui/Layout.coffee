@@ -150,6 +150,8 @@ exports.Layout = React.createClass
               style:
                 marginTop: 150# '15%'
               ->
+                k.div ->
+                  k.build AccountsUIWrapper
                 k.div
                   id: 'fb-root'
                 k.div
@@ -158,6 +160,5 @@ exports.Layout = React.createClass
                   className:"fb-comments"
                   dataHref:"http://linkstate.youiest.com/about?from="+encodeURIComponent(that.props.from)
                   dataNumposts: "5"
-                k.div ->
-                  k.build AccountsUIWrapper
+
                 k.build CookieConsent, "This site uses cookies to enhance the user experiece"
