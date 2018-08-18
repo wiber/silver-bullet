@@ -13,6 +13,7 @@ CardTitle = require('material-ui/lib/card/card-title').default
 Slider = require('nuka-carousel')
 CardText =  require('material-ui/lib/card/card-text').default
 # set the attr to a still on all, then, swap in the live one.. else flicker
+{AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 
 resetSlides = () ->
   for e in $('.gifSlide')
@@ -54,6 +55,7 @@ exports.Mexplain = React.createClass
             subtitle: that.props.word.MexplainSubtitle
             onClick: (e) ->
               window.open '/login', "_blank"
+
           k.build CardText,
             ->
               k.build Slider,

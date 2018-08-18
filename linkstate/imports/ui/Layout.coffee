@@ -20,7 +20,8 @@ MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 Lo = require 'lodash'
 {see, store, linkstate} = require '../api/strings'
 {screenshotUrlHere} = require '../api/ModelOperations'
-
+`import CookieConsent, { Cookies } from "react-cookie-consent";`
+#{CookieConsent} = require "react-cookie-consent"
 exports.Layout = React.createClass
   getDefaultProps: ->
     expandMainCard: true
@@ -159,3 +160,4 @@ exports.Layout = React.createClass
                   dataNumposts: "5"
                 k.div ->
                   k.build AccountsUIWrapper
+                k.build CookieConsent, "This site uses cookies to enhance the user experiece"

@@ -21,6 +21,7 @@
     "react-addons-css-transition-group": "^15.0.0",
     "react-addons-pure-render-mixin": "^15.0.0",
     "react-addons-shallow-compare": "^15.0.0",
+    "react-cookie-consent": "^1.7.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^15.4.1",
     "react-kup": "^1.0.0",
