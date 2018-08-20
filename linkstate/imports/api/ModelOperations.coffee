@@ -57,8 +57,8 @@ setValue = (props, options) ->
   # !user.links.in.Bookmarks[linkstate.store(props[props.type])]
   if bookmarkExistNot
     console.log 'unknown new place not in bookmarks'
-  if !bookmarkExistNot
-   console.log  props.type, props[props.type], 'bookmark exists',
+  #if !bookmarkExistNot
+  # console.log  props.type, props[props.type], 'bookmark exists',
   if !props[type] or bookmarkExistNot
     console.log bookmarkExistNot
     # because new users setupUser there should always be last actions
@@ -74,7 +74,7 @@ setValue = (props, options) ->
         value: BookmarkValue
   place = moS.bookmarks+linkstate.store(props[props.type])
   BookmarkValueProp = linkstate.getBookmarkValue props.user, props[props.type]
-  console.log BookmarkValueProp
+  #console.log BookmarkValueProp
   #BookmarkValueProp = _.get user, moS.bookmarks+linkstate.store(props[props.type])
   label = _.get BookmarkValueProp, moS.title
   if label? # we have it here.

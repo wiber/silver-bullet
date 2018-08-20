@@ -17,7 +17,7 @@ exports.selectedContainer = createContainer ((props) ->
   nProps = _.extend {}, props,
     value: setValue(props,setOptions(props),props.user)
     options: setOptions(props)
-  console.log nProps.value, typeof linkstate.store
+  #console.log nProps.value, typeof linkstate.store
   nProps
 ), Selected
 ###

@@ -2,6 +2,8 @@
 
 Think of linkstates as your superpower. Copmare it to the alien language in the movie arrival but instead of seeing the future it opens other doors. We call this ability wibing and it's both a very simple yet open ended activity. It occuppies the intersection of information overload, many-to-many communication and why you never return to look through your bookmarks. Think the structure that makes catching up on a reply-all chain a pain.
 
+To use try this out in the wild you'll need the chrome extension: https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA
+
 So what do you do with this visual-language-superpower? Well it's really up to you. Linkstates is an activity primarily for students, research teams and project managers. Since nobody uses bookmarking anymore Linkstates makes it easy to organizes web things in the context related to other web things.
 
 once you learn it reshapes the way you and your group make sense.
