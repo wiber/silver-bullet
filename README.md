@@ -75,6 +75,7 @@ meteor --settings settings.json
 DEPLOY_HOSTNAME=us-east-1.galaxy-deploy
 .meteor.com meteor deploy linkstate.youiest.com --settings Gsettings.json
 #### Todos
+- [ ] Uppgrade deps from https://v0.material-ui.com/v0.15.0-alpha.2/#/components/app-bar
 - [ ] one-liner installs dependencies. Does this work for you?
 - [x] chrome addon scaffolds your attention
     - [x] newtab opens app in iframe with last page you were on in queryparam

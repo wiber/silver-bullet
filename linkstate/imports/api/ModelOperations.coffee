@@ -6,6 +6,9 @@ if typeof linkstate is undefined
 oDict = {}
 vDict = {}
 {changeQueryParams} = require '../api/changeQueryParams'
+{see, store, linkstate} = require '../api/strings'
+
+
 hereAndThere = (user, props) ->
   {from,to} = props
   HERE = _.get props, 'user.links.in.Bookmarks.' + linkstate.store(from)
@@ -15,8 +18,10 @@ hereAndThere = (user, props) ->
       title: props.lastTitle
       from: props.from
     console.log 'we are noplace', HERE
-  THERE = _.get props, 'user.links.in.Bookmarks.' + linkstate.store(to)
-  ThereScreenshotUrl = _.get THERE, 'meta.ScreenshotUrl'
+  bookmarkDict = linkstate.getAllBookmarksDict props.user
+  targetO = bookmarkDict[linkstate.store(to)]
+  THERE = _.get bookmarkDict, linkstate.store(to)
+  ThereScreenshotUrl = _.get targetO, 'meta.ScreenshotUrl'
   return {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl}
 
 # we need a tested way to extract select options, and a particular option selected among them

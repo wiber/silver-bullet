@@ -150,6 +150,10 @@ exports.Layout = React.createClass
               style:
                 marginTop: 150# '15%'
               ->
+                k.a
+                  href: "https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA"
+                  target: "_blank"
+                  "To use this app properly you need the chrome extension. Download it here."
                 k.div ->
                   k.build AccountsUIWrapper
                 k.div
@@ -160,5 +164,4 @@ exports.Layout = React.createClass
                   className:"fb-comments"
                   dataHref:"http://linkstate.youiest.com/about?from="+encodeURIComponent(that.props.from)
                   dataNumposts: "5"
-
-                k.build CookieConsent, "This site uses cookies to enhance the user experiece"
+                k.build CookieConsent, "This site uses cookies to enhance the user experiece. Get the chrome extension here: https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA"
