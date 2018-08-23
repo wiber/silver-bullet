@@ -58,7 +58,7 @@ setValue = (props, options) ->
   window.setValueState = {props,options,user} if window?
   bookmarkExistNot = !_.get bookmarks, linkstate.store(props[type])
   #!_.get user, 'links.in.Bookmarks.' + linkstate.store(props[props.type])
-  console.log bookmarkExistNot
+  #console.log bookmarkExistNot
   # !user.links.in.Bookmarks[linkstate.store(props[props.type])]
   if bookmarkExistNot
     console.log 'unknown new place not in bookmarks'

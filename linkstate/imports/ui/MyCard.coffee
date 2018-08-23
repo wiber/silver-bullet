@@ -176,6 +176,8 @@ yourMark = React.createClass
         #overflow: 'hidden'
         ->
           text = Lo.get that.props, 'target.meta.body'
+          {direction} = that.props
+          {ScreenshotUrl, ScreenshotUrlTo} = that.props.target.meta
           if !text
             text = ''
           k.div ->
@@ -198,6 +200,6 @@ yourMark = React.createClass
                     height: r
                     float: 'left'
                   size: r
-                  src: Lo.get that.props, 'target.meta.ScreenshotUrl'
+                  src: if direction is "OUTLINKS" then ScreenshotUrlTo else ScreenshotUrl
 #exports.yourMark = yourMark
 #exports.shadowMoon = shadowMoon

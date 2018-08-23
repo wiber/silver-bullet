@@ -153,7 +153,7 @@ exports.Layout = React.createClass
                 k.a
                   href: "https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA"
                   target: "_blank"
-                  "To use this app properly you need the chrome extension. Download it here."
+                  "To use this app properly you need the chrome extension. Download, extract it and chrome://extensions unpacked."
                 k.div ->
                   k.build AccountsUIWrapper
                 k.div
