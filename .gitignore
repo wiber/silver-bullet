@@ -1,4 +1,5 @@
 node_modules/
 public/carousel/.DS_Store
 Gsettings.json
+Msettings.json
 chromeextension.zip

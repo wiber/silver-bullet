@@ -7,11 +7,13 @@ oDict = {}
 vDict = {}
 {changeQueryParams} = require '../api/changeQueryParams'
 {see, store, linkstate} = require '../api/strings'
+{catTree} = linkstate
 
 
 hereAndThere = (user, props) ->
-  {from,to} = props
-  HERE = _.get props, 'user.links.in.Bookmarks.' + linkstate.store(from)
+  {from,to, user} = props
+  console.log user.links.in
+  HERE = _.get user, 'links.in.' + catTree.bookmarkUrl + '.' + linkstate.store(from)
   HereScreenshotUrl = _.get HERE, 'meta.ScreenshotUrl'
   unless HERE?
     HERE =
