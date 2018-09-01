@@ -19,10 +19,11 @@ Print =  require('material-ui/lib/svg-icons/action/print').default
 Edit =  require('material-ui/lib/svg-icons/editor/mode-edit').default
 FromIcon =  require('material-ui/lib/svg-icons/communication/call-received').default
 ToIcon =  require('material-ui/lib/svg-icons/communication/call-made').default
+ShareFacebookButton =  require('material-ui/lib/svg-icons/action/print').default
 `import copy from 'copy-to-clipboard';`
 Lo = require 'lodash'
-
 {shadowMoon} = require '../ui/ShadowMoon'
+
 exports.MainCard = React.createClass
   getDefaultProps: ->
     expanded: true

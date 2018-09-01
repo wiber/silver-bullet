@@ -12,7 +12,6 @@ vDict = {}
 
 hereAndThere = (user, props) ->
   {from,to, user} = props
-  console.log user.links.in
   HERE = _.get user, 'links.in.' + catTree.bookmarkUrl + '.' + linkstate.store(from)
   HereScreenshotUrl = _.get HERE, 'meta.ScreenshotUrl'
   unless HERE?

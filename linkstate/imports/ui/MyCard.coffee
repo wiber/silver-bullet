@@ -28,11 +28,48 @@ Avatar = require('material-ui/lib/avatar').default
 # TODO functional testable convenience functions, like strings, for math and attribute getting
 Lo = require 'lodash'
 {see, store, linkstate} = require '../api/strings'
+`import {
+  FacebookShareButton,
+  GooglePlusShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  TelegramShareButton,
+  WhatsappShareButton,
+  PinterestShareButton,
+  VKShareButton,
+  OKShareButton,
+  RedditShareButton,
+  TumblrShareButton,
+  LivejournalShareButton,
+  MailruShareButton,
+  ViberShareButton,
+  WorkplaceShareButton,
+  EmailShareButton,
+} from 'react-share';`
+`import {
+  FacebookIcon,
+  TwitterIcon,
+  TelegramIcon,
+  WhatsappIcon,
+  GooglePlusIcon,
+  LinkedinIcon,
+  PinterestIcon,
+  VKIcon,
+  OKIcon,
+  RedditIcon,
+  TumblrIcon,
+  LivejournalIcon,
+  MailruIcon,
+  ViberIcon,
+  WorkplaceIcon,
+  EmailIcon,
+} from 'react-share';`
 
 exports.MyCard = React.createClass
   getDefaultProps: ->
     expanded: true
   render: ->
+    console.log window.location.href,'console.log window.location.href,'
     that = this
     if @props.expanded is 'undefined'
       that.props.expanded = true
@@ -46,7 +83,7 @@ exports.MyCard = React.createClass
           k.build CardText,
             style:
               height: 'auto'
-              minHeight: 500
+              minHeight: 600
               #overflow: 'hidden'
             expandable: false
             ->
@@ -58,6 +95,18 @@ exports.MyCard = React.createClass
                 type: 'from'
                 word: that.props.word
                 lastTitle: that.props.lastTitle
+              k.build CardActions,
+                ->
+                  k.build FacebookShareButton,
+                    #url: window.location.href
+                    url: 'linkstate.youiest.com/about/'+window.location.search
+                    quote: ''
+                    hastag: ''
+                    style:
+                      position: 'relative'
+                    ->
+                      k.build FacebookIcon,
+                        size: 33
               k.build VisualCue,
                 styles: that.props.styles
                 ScreenshotUrl: that.props.ScreenshotUrl

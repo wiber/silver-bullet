@@ -22,6 +22,8 @@ Lo = require 'lodash'
 {screenshotUrlHere} = require '../api/ModelOperations'
 `import CookieConsent, { Cookies } from "react-cookie-consent";`
 #{CookieConsent} = require "react-cookie-consent"
+
+
 exports.Layout = React.createClass
   getDefaultProps: ->
     expandMainCard: true
