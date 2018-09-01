@@ -100,22 +100,29 @@ exports.MyCard = React.createClass
                   k.build FacebookShareButton,
                     #url: window.location.href
                     url: 'linkstate.youiest.com/about/'+window.location.search
-                    quote: ''
-                    hastag: ''
+                    quote: "Is this for real? Let's find sources for and against this on linkstate!"
+                    hashtag: 'linkstate'
                     style:
-                      position: 'relative'
+                      display: "inline-block"
                     ->
                       k.build FacebookIcon,
+                        size: 33
+                  k.build GooglePlusShareButton,
+                    #url: window.location.href
+                    url: 'linkstate.youiest.com/about/'+window.location.search
+                    style:
+                      display: 'inline-block'
+                    ->
+                      k.build GooglePlusIcon,
                         size: 33
                   k.build WhatsappShareButton,
                     #url: window.location.href
                     url: 'linkstate.youiest.com/about/'+window.location.search
-                    quote: ''
-                    hastag: ''
+                    title: "Is this for real? Let's find sources for and against this on linkstate!"
                     style:
-                      position: 'relative'
+                      display: 'inline-block'
                     ->
-                      k.build WhatsappShareButton,
+                      k.build WhatsappIcon,
                         size: 33
               k.build VisualCue,
                 styles: that.props.styles

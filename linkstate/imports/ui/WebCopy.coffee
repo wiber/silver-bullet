@@ -18,6 +18,7 @@ exports.wordLanguages =
     FromTooltipText: "FROM - The place we're on now. Below are your bookmarks about this place."
     MexplainTitle: "Context is the kingdom"
     MexplainSubtitle: "Click here to login with facebook"
+    FacebookShareQuote: "Let's find sources for ang against this on linkstate!"
 ###
 dynamic sections navigatable by these awesome input tools. to grid? from grid? to recent bookmarks? the end result is keyboard navigatable connectable networks..
 only one list at a time? incomming, or outgoing,
