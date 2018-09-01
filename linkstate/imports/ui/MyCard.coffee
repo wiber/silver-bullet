@@ -107,6 +107,16 @@ exports.MyCard = React.createClass
                     ->
                       k.build FacebookIcon,
                         size: 33
+                  k.build WhatsappShareButton,
+                    #url: window.location.href
+                    url: 'linkstate.youiest.com/about/'+window.location.search
+                    quote: ''
+                    hastag: ''
+                    style:
+                      position: 'relative'
+                    ->
+                      k.build WhatsappShareButton,
+                        size: 33
               k.build VisualCue,
                 styles: that.props.styles
                 ScreenshotUrl: that.props.ScreenshotUrl
