@@ -1,8 +1,16 @@
 
-{cyan500, cyan700,
-grey100, grey300, grey400, grey500,
-pinkA200,
-white, darkBlack, fullBlack} = require('material-ui/lib/styles/colors')
+{
+  cyan500
+  cyan700
+  grey100
+  grey300
+  grey400
+  grey500
+  pinkA200
+  white
+  darkBlack
+  fullBlack
+} = require('material-ui/lib/styles/colors')
 ColorManipulator = require('material-ui/lib/utils/color-manipulator').default
 
 lightBaseUsThemeO =

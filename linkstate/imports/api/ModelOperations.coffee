@@ -95,6 +95,9 @@ setValue = (props, options) ->
     console.log user.links.in.Bookmarks
     console.log storefrom
     #console.log user.links.in.Bookmarks[storefrom]
+inBookmarks = (user, url) ->
+  console.log catTree
+  -> _.get user, 'links.in.' + catTree.categoryUrls.Bookmarks + linkstate.store(url)
 
 newPlace = (user, queryParams, bookmarked) ->
   inBookmarks = _.get user, moS.bookmarks + linkstate.store(queryParams.from)
@@ -218,3 +221,4 @@ exports.userSaved = userSaved
 exports.ifBodyContentHere = ifBodyContentHere
 exports.moS = moS
 exports.screenshotUrlHere = screenshotUrlHere
+exports.inBookmarks = inBookmarks

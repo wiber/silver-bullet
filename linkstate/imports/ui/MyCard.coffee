@@ -131,6 +131,15 @@ exports.MyCard = React.createClass
                     ->
                       k.build WhatsappIcon,
                         size: 33
+                  k.build EmailShareButton,
+                    url: 'linkstate.youiest.com/about/'+window.location.search
+                    body: "Is this for real? Let's find sources for and against this on linkstate!"
+                    sibject: "I found something. Seen anything like this?"
+                    style:
+                      display: 'inline-block'
+                    ->
+                      k.build EmailIcon,
+                        size: 33
               k.build VisualCue,
                 styles: that.props.styles
                 ScreenshotUrl: that.props.ScreenshotUrl
