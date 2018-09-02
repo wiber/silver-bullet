@@ -98,7 +98,6 @@ exports.MyCard = React.createClass
               k.build CardActions,
                 ->
                   k.build FacebookShareButton,
-                    #url: window.location.href
                     url: 'linkstate.youiest.com/about/'+window.location.search
                     quote: "Is this for real? Let's find sources for and against this on linkstate!"
                     hashtag: 'linkstate'
@@ -108,15 +107,23 @@ exports.MyCard = React.createClass
                       k.build FacebookIcon,
                         size: 33
                   k.build GooglePlusShareButton,
-                    #url: window.location.href
                     url: 'linkstate.youiest.com/about/'+window.location.search
                     style:
                       display: 'inline-block'
                     ->
                       k.build GooglePlusIcon,
                         size: 33
+                  k.build TwitterShareButton,
+                    url: 'http://linkstate.youiest.com/about/'+window.location.search
+                    title: "Is this for real? Let's find sources for and against this on linkstate!"
+                    via: "youiest"
+                    hashtags: ['linkstate','expose']
+                    style:
+                      display: 'inline-block'
+                    ->
+                      k.build TwitterIcon,
+                        size: 33
                   k.build WhatsappShareButton,
-                    #url: window.location.href
                     url: 'linkstate.youiest.com/about/'+window.location.search
                     title: "Is this for real? Let's find sources for and against this on linkstate!"
                     style:
