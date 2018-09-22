@@ -90,7 +90,7 @@ Meteor.methods
       throw new Meteor.Error 2, "to or from is missing "+from+' '+to
       return 'nothing'
     if Meteor.user()?.services?.facebook?.id?
-      p1 = "http://graph.facebook.com/v2.7/"
+      p1 = "https://graph.facebook.com/v2.7/"
       facebookId = Lo.get Meteor.user(), 'services.facebook.id'
       p2 = "/picture?type=square"
       META.face = p1 + facebookId + p2

@@ -20,7 +20,7 @@ hereAndThere = (user, props) ->
       from: props.from
     console.log 'we are noplace', HERE
   bookmarkDict = linkstate.getAllBookmarksDict props.user
-  targetO = bookmarkDict[linkstate.store(to)]
+  targetO = _.get bookmarkDict, linkstate.store(to) #bookmarkDict[linkstate.store(to)]
   THERE = _.get bookmarkDict, linkstate.store(to)
   ThereScreenshotUrl = _.get targetO, 'meta.ScreenshotUrl'
   return {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl}
@@ -96,7 +96,6 @@ setValue = (props, options) ->
     console.log storefrom
     #console.log user.links.in.Bookmarks[storefrom]
 inBookmarks = (user, url) ->
-  console.log catTree
   -> _.get user, 'links.in.' + catTree.categoryUrls.Bookmarks + linkstate.store(url)
 
 newPlace = (user, queryParams, bookmarked) ->

@@ -15,7 +15,7 @@ Card = require 'material-ui/lib/card/card'
 {Mexplain} = require '../api/MexplainContainer.coffee'
 URI = require 'uri-js'
 MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
-{lightBaseUsTheme} = require('../ui/theme.coffee')
+{lightBaseUsTheme, letsMeSeeTheme} = require('../ui/theme.coffee')
 `import Urlbox from 'urlbox';`
 Lo = require 'lodash'
 {see, store, linkstate} = require '../api/strings'
@@ -84,6 +84,7 @@ exports.Layout = React.createClass
       else
         title = that.props.from
       k.build MuiThemeProvider,
+        #muiTheme: letsMeSeeTheme # #
         muiTheme: lightBaseUsTheme
         ->
           k.div ->
