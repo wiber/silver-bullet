@@ -7,6 +7,7 @@ Lo = require 'lodash'
 {linkstate} = require '../api/strings'
 console.log typeof linkstate
 {catTree, categoryTypes} = linkstate
+R = require 'ramda'
 @storageEncode = (url) ->
   #r = encodeURIComponent url
   r =  toString(url).replace /\./g , '%2E'

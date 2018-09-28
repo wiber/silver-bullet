@@ -66,5 +66,5 @@ LinkVote = React.createClass
                 position: 'absolute'
                 opacity: .5
                 borderRadius: bullet
-              src: that.props.meta.face
+              src: that.props.meta.face.replace('http','https')
 exports.LinkVote = LinkVote
