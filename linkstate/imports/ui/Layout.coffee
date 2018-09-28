@@ -105,7 +105,7 @@ exports.Layout = React.createClass
               style:
                 position: 'fixed'
               onClick: () ->
-                window.open 'http://' + that.props.from, "_blank"
+                window.open 'https://' + that.props.from, "_blank"
             k.span 'g',-> # because... just because otherwise appbar bugs out
             k.div
               style:
@@ -165,6 +165,6 @@ exports.Layout = React.createClass
                   style:
                     marginTop: '15%'
                   className:"fb-comments"
-                  dataHref:"http://linkstate.youiest.com/about?from="+encodeURIComponent(that.props.from)
+                  dataHref:"https://linkstate.youiest.com/about?from="+encodeURIComponent(that.props.from)
                   dataNumposts: "5"
                 k.build CookieConsent, "This site uses cookies to enhance the user experiece. Get the chrome extension here: https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA"

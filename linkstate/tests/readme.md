@@ -36,8 +36,8 @@ Next, log in with Facebook and start sharing resources. Premium accounts are in 
 
 ## Developer Resources
 
-* Announcement list: sign up at http://www.linkstates.youiest.com/
-* Having problems? Ask for help at: http://stackoverflow.com/questions/tagged/linkstates
+* Announcement list: sign up at https://www.linkstates.youiest.com/
+* Having problems? Ask for help at: https://stackoverflow.com/questions/tagged/linkstates
 
 Interested in contributing to Linkstates?
 
