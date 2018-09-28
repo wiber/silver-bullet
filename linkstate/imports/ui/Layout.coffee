@@ -161,10 +161,12 @@ exports.Layout = React.createClass
                   k.build AccountsUIWrapper
                 k.div
                   id: 'fb-root'
+                ###
                 k.div
                   style:
                     marginTop: '15%'
                   className:"fb-comments"
                   dataHref:"https://linkstate.youiest.com/about?from="+encodeURIComponent(that.props.from)
                   dataNumposts: "5"
+                ###
                 k.build CookieConsent, "This site uses cookies to enhance the user experiece. Get the chrome extension here: https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA"
