@@ -277,7 +277,7 @@ wingMark = React.createClass
                     height: D/d
                     float: 'left'
                   size: D/d
-                  src: that.props.meta.face.replace('htpp','https')
+                  src: that.props.meta.face.replace('http:','https:')
 
 exports.VisualCue = VisualCue
 exports.yourMark = yourMark
