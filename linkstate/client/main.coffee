@@ -11,7 +11,7 @@ require('../imports/startup/methods.coffee')
 {Meteor}= require 'meteor/meteor'
 require 'typeface-roboto'
 
-
+injectTapEventPlugin()
 lastLogin = () ->
   user = Meteor.user()
   if user?.services?.facebook?.link
