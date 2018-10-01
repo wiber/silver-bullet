@@ -128,7 +128,7 @@ userSaved = (userE, queryParams, client) ->
     if queryParams[type] is undefined
       # double set them to avoid double render
       console.log type, 'is undefined'
-      if user[type+'Last']?
+      if user? and user[type+'Last']?
         #queryParams[type] = user[type+'Last']
         changeQueryParams(type, user[type+'Last'])
       else
