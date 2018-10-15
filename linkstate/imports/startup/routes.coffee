@@ -3,7 +3,7 @@ language = 'eng'
 mount = require('react-mounter').mount
 {containerLayout} = require('../api/Layout.coffee')
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
-
+{ HomePage } = require '../ui/HomePage.jsx'
 
 FlowRouter.route '/about',
   name: 'home'
@@ -22,3 +22,9 @@ FlowRouter.route '/login',
   name: 'login'
   action: (params, queryParams) ->
     mount AccountsUIWrapper
+
+
+FlowRouter.route '/home',
+  name: 'home'
+  action: (params, queryParams) ->
+    mount HomePage

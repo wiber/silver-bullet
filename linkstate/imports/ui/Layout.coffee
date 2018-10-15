@@ -100,7 +100,7 @@ exports.Layout = React.createClass
                 opacity: '.3'
                 zIndex: -1
             k.build AppBar,
-              title: that.props.word.HeaderTitle + title # that.props.from
+              title: that.props.word.HeaderTitle + (title? title: "") # that.props.from
               iconElementLeft: k.span ''
               style:
                 position: 'fixed'

@@ -1,3 +1,5 @@
+import '../imports/ui/materialize.min.css';
+import '../imports/ui/style.css';
 #Template = require('meteor/templating')
 require("react/package.json")
 ReactiveVar = require('meteor/reactive-var')
@@ -34,3 +36,8 @@ wf.type = 'text/javascript'
 wf.async = 'true'
 s = document.getElementsByTagName('script')[0]
 s.parentNode.insertBefore wf, s
+
+loader = (link)=>
+  ele = document.createElement('link');
+  ele.href = link;
+  document.body.appendChild(ele);
