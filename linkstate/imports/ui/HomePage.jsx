@@ -67,6 +67,7 @@ class HomePage extends React.Component {
     this.onLogout = this.onLogout.bind(this);
     this.onLogin = this.onLogin.bind(this);
     this.loginComponent = this.loginComponent.bind(this);
+    this.menu = this.menu.bind(this);
     
     this.state = this.onState();
 
@@ -112,6 +113,15 @@ class HomePage extends React.Component {
       return(<li onClick={this.onLogin}><a href="#">Login with Facebook</a></li>);
     }
   }
+
+  menu(){
+    if($('.side-nav').css('left') === '0px'){
+      $(".side-nav").css({'left': '-105%', 'transform': 'translateX(-105%)'});
+    }else{
+      $(".side-nav").css({'left': '0px', 'transform': 'translateX(0px)'});
+    }
+  }
+
   // https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA
   render() {
     const loginComponent = this.loginComponent();
@@ -130,8 +140,9 @@ class HomePage extends React.Component {
                 <ul id="nav-mobile" className="side-nav">
                   {loginComponent}
                   <li><a target="_blank" href="https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA">Download</a></li>
+                  <li onClick={this.menu} ><a href="#">Close</a></li>
                 </ul>
-                <a href="#" data-activates="nav-mobile" className="button-collapse"><i className="mdi-navigation-menu" /></a>
+                <a onClick={this.menu} href="#" data-activates="nav-mobile" className="button-collapse"><i className="mdi-navigation-menu" /></a>
               </div>
             </div>
           </nav>
@@ -242,7 +253,7 @@ class HomePage extends React.Component {
               <div className="col s12 m3">
                 <div className="card card-avatar">
                   <div className="waves-effect waves-block waves-light">
-                    <img className="activator" src="img/avatar1.png" />
+                    <img className="activator" src="/img/elias.jpeg" />
                   </div>
                   <div className="card-content">
                     <span className="card-title activator grey-text text-darken-4">Flash <br />
@@ -254,7 +265,7 @@ class HomePage extends React.Component {
               <div className="col s12 m3">
                 <div className="card card-avatar">
                   <div className="waves-effect waves-block waves-light">
-                    <img className="activator" src="img/avatar2.png" />
+                    <img className="activator" src="/img/nicolson.jpeg" />
                   </div>
                   <div className="card-content">
                     <span className="card-title activator grey-text text-darken-4">Cat Woman<br />
