@@ -59,7 +59,62 @@ class LoginHeader extends React.Component {
 };
 
 class HomePage extends React.Component {
+  constructor(props){
+    super(props);
+    const self = this;
+
+    this.onState = this.onState.bind(this);
+    this.onLogout = this.onLogout.bind(this);
+    this.onLogin = this.onLogin.bind(this);
+    this.loginComponent = this.loginComponent.bind(this);
+    
+    this.state = this.onState();
+
+  }
+  componentDidMount() { 
+    this._ismounted = true;
+    const self = this;
+    Tracker.autorun(function(){
+      if(self._ismounted){
+        self.setState(self.onState());
+      }
+    });
+  }
+  
+  componentWillUnmount() {
+     this._ismounted = false;
+  }
+  onState(){
+    return {
+      user : Meteor.user() || {profile: {name: ''}},
+      userId : Meteor.userId()
+    };
+  }
+  onLogout(){
+    const self = this;
+    Meteor.logout(function(){
+      self.setState(self.onState());
+    });
+  };
+
+  onLogin(){
+    const self = this;
+    Meteor.loginWithFacebook(function(){
+      self.setState(self.onState());
+      FlowRouter.go('/about?from=https%253A%252F%252Flinkstate.youiest.com%252F&lastTitle=Linkstates')
+    });
+  };
+
+  loginComponent(){
+    if(this.state.userId){
+      return(<li><a href="#">{this.state.user.profile.name}</a></li>);
+    }else{
+      return(<li onClick={this.onLogin}><a href="#">Login with Facebook</a></li>);
+    }
+  }
+  // https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA
   render() {
+    const loginComponent = this.loginComponent();
     return (
       <div>
         {/*Navigation*/}
@@ -69,14 +124,12 @@ class HomePage extends React.Component {
               <div className="nav-wrapper">
                 <a href="#" id="logo-container" className="brand-logo">Linkstate for </a>
                 <ul className="right hide-on-med-and-down">
-                  {/* <li><a href="#work">Elias Moosman</a></li> */}
-                  <li onClick={this.onLogin}><a href="#">Login with Facebook</a></li>
-                  <li><a href="#">Download</a></li>
+                  {loginComponent}
+                  <li><a target="_blank" href="https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA">Download</a></li>
                 </ul>
                 <ul id="nav-mobile" className="side-nav">
-                  {/* <li><a href="#work">Elias Moosman</a></li> */}
-                  <li onClick={this.onLogin}><a href="#">Login with Facebook</a></li>
-                  <li><a href="#">Download</a></li>
+                  {loginComponent}
+                  <li><a target="_blank" href="https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA">Download</a></li>
                 </ul>
                 <a href="#" data-activates="nav-mobile" className="button-collapse"><i className="mdi-navigation-menu" /></a>
               </div>
