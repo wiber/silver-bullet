@@ -20,14 +20,19 @@ lastLogin = () ->
     Meteor.call "setupUser"
 
 sinceLogin = false
-if Meteor.loggingIn()
-  sinceLogin = true
-Meteor.startup ->
-  sinceLogin = true
-Tracker.autorun ->
-  if Meteor.user() and sinceLogin
-    lastLogin()
-    sinceLogin = false
+
+# @elias, please provide with the logic definition.
+# Why not use a flow router to fix the routing?
+# Just a question..
+# if Meteor.loggingIn()
+#   sinceLogin = true
+# Meteor.startup ->
+#   sinceLogin = true
+# Tracker.autorun ->
+#   if Meteor.user() and sinceLogin
+#     lastLogin()
+#     sinceLogin = false
+
 # FIXME not loading
 WebFontConfig = google: families: [ 'Roboto:400,300,500:latin' ]
 wf = document.createElement('script')

@@ -58,8 +58,8 @@ class LoginHeader extends React.Component {
   }
 };
 
-var HomePage = React.createClass({
-  render: function() {
+class HomePage extends React.Component {
+  render() {
     return (
       <div>
         {/*Navigation*/}
@@ -69,13 +69,13 @@ var HomePage = React.createClass({
               <div className="nav-wrapper">
                 <a href="#" id="logo-container" className="brand-logo">Linkstate for </a>
                 <ul className="right hide-on-med-and-down">
-                  <li><a href="#work">Elias Moosman</a></li>
-                  <li><a href="#">Login with Facebook</a></li>
+                  {/* <li><a href="#work">Elias Moosman</a></li> */}
+                  <li onClick={this.onLogin}><a href="#">Login with Facebook</a></li>
                   <li><a href="#">Download</a></li>
                 </ul>
                 <ul id="nav-mobile" className="side-nav">
-                  <li><a href="#work">Elias Moosman</a></li>
-                  <li><a href="#">Login with Facebook</a></li>
+                  {/* <li><a href="#work">Elias Moosman</a></li> */}
+                  <li onClick={this.onLogin}><a href="#">Login with Facebook</a></li>
                   <li><a href="#">Download</a></li>
                 </ul>
                 <a href="#" data-activates="nav-mobile" className="button-collapse"><i className="mdi-navigation-menu" /></a>
@@ -239,8 +239,7 @@ var HomePage = React.createClass({
           </div>
         </div>
       </div>
-    );
-  }
-});
+    )};
+};
 
 module.exports = { HomePage }
