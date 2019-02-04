@@ -48,7 +48,6 @@ containerLayout = createContainer ((props) ->
     facebookAppId: Meteor.settings.public.facebookAppId
     newHere: newHere
     url: window.location.href
-  #console.log newProps, queryParams.from, queryParams.to,'newProps, queryParams.from, queryParams.to'
   window.props = newProps
   newProps
 ), Layout

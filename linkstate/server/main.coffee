@@ -16,11 +16,6 @@ window.innerWidth = 640
 
 Meteor.startup ->
 
-  try
-    #console.log process.env.MONGO_URL
-    #console.log Meteor.settings, Meteor.settings?.MONGO_URL?
-  catch error
-    console.log error
 if Meteor.loggingIn()
   Meteor.call "setupUser"
 state =

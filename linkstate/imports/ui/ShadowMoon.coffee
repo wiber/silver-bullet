@@ -92,9 +92,6 @@ VisualCue = React.createClass
           # TODO mismatched queryparam with lastTitle, why?
           # selectize needs to read the user object only..
           # remove direct reliance on qp and harden localstore management of user model
-          #console.log that.props?.user?.link?.to
-          #console.log FlowRouter.getQueryParam('from'), FlowRouter.getQueryParam('lastTitle')
-          #console.log that.props?.user?.link?.to?[linkstate.store that.props.from]?
           if that.props?.user?.link?.to?[linkstate.store that.props.from]?
             inLinks = that.props.user.link.to[linkstate.store that.props.from]
             n = 0
@@ -217,7 +214,6 @@ Winged = React.createClass
                 display: 'inline'
               size: D/2
               src: that.props.ScreenshotUrl
-        # draw the bullets.. as wings.. ed faces
 
 wingMark = React.createClass
   render: ->
@@ -228,6 +224,11 @@ wingMark = React.createClass
       bodyLen =  body.length
     catch error
       console.error 'this body does not have length', meta
+    try
+      that.props.meta.face.replace('http:','https:')
+    catch error
+      console.error error
+
 
     floor = 5
     top = 50
@@ -277,7 +278,8 @@ wingMark = React.createClass
                     height: D/d
                     float: 'left'
                   size: D/d
-                  src: that.props.meta.face.replace('http:','https:')
+                  src: that.props.meta.face#.replace('http:','https:')
+                  # src: that.props.meta.face.replace('http:','https:')
 
 exports.VisualCue = VisualCue
 exports.yourMark = yourMark

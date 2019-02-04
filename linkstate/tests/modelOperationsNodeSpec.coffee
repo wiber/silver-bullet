@@ -5395,15 +5395,13 @@ describe 'Value', ->
   it 'returns an object with label', ->
     expect(typeof value).to.equal 'object'
     expect(typeof value.label).to.equal 'string'
-  it.only 'returns user.toLast if type is to and queryparm has no to', ->
+  it 'returns user.toLast if type is to and queryparm has no to', ->
     user2 = Object.assign {}, user
     props2 = Object.assign {}, props,
       to: null
       type: 'to'
     value = setValue(selectedProps, setOptions(selectedProps), selectedProps.user)
     userValue = linkstate.store props.user.toLast
-    #console.log value.value.from
-    #console.log value.value.from is userValue, userValue
     expect(props2.to).to.equal null
     expect(typeof value.label).to.equal 'string'
     expect(value.value.to).to.equal userValue
@@ -5412,9 +5410,8 @@ describe 'Value', ->
     props.type = 'from'
     bookmarks =  user.links.in.Bookmarks
     fEx = props.from in bookmarks
-    console.log fEx
+
     value3 = setValue props, options, user
-    console.log props[props.type]
     # what we want value to reflect
     lab = (l) -> _.get l, 'value'
     values = _.map options, lab
@@ -5425,6 +5422,7 @@ describe 'Value', ->
     console.log fro
     console.log linkstate.store(props.to) in fro
     console.log value3, props.type
+    expect(typeof(value3)).to.equal('object')
     expect(!value3.label).to.equal(false)
   it 'fails with selectedProps', ->
     value2 = setValue(selectedProps,setOptions(selectedProps), selectedProps.user)

@@ -16,7 +16,6 @@ runTests = () ->
     TO = 'linkedinProfile' + testNumber
     META = {}
     Meteor.insecureUserLogin 'user' + testNumber, (res, err) ->
-      ##console.log 'now idenity ','user' + testNumber, Meteor.userId()
       Meteor.call 'Linking', FROM, TO, META, (res, err) ->
     # recheck when sync'd data arrives, better ideas?
       Tracker.autorun (computation) ->
@@ -41,7 +40,7 @@ runTests = () ->
         Meteor.call "Here", TO, (error, result) ->
           # now located on linkedinProfileN
           if error
-            ##console.log "error", error
+            console.log "error", error
           if result
             # linkedinProfile6.in.article6.user6.from.article6
             # this shows allows the double reference to article6 by design
@@ -51,78 +50,3 @@ runTests = () ->
             test.equal result.in[FROM][username].meta, META
             Meteor.logout ->
           next()
-
-  ###testNumber+= 1
-  Tinytest.addAsync testNumber+' re-publish locations', (test, next) ->
-    testNumber+= 1
-    FROM = 'article' + testNumber
-    TO = 'linkedinProfile' + testNumber
-    META = {}
-    Meteor.insecureUserLogin 'user' + testNumber, (res, err) ->
-      ##console.log 'now idenity '
-      ,'user' + testNumber
-      , Meteor.userId()
-      , Meteor.users.findOne(Meteor.userId())
-      Meteor.call 'Linking', FROM, TO, META, (res, err) ->
-        Meteor.call "Here", TO, (error, result) ->
-    Tracker.autorun (computation) ->
-      unless !Nodes.findOne(_id: TO)
-        # when linking TO, does it create a Node with the incomming link FROM
-        # and subscribes to it, not just returns it..
-        # here should be handled by a flow-router package
-        test.equal Object.keys(Nodes.findOne(_id: TO).in)[0], FROM
-        Meteor.logout ->
-          computation.stop()
-          next()###
-Meteor.startup ->
-  if Meteor.isClient
-    ConsoleMe.subscribe()
-    runTests()
-
-  else
-    ConsoleMe.enabled = true
-    #truncateLogs()
-    Meteor.users.allow insert: ->
-      true
-    Meteor.users.allow remove: ->
-      true
-    Meteor.users.allow update: ->
-      true
-    truncateLogs()
-
-Meteor.methods resetss: () ->
-  if Meteor.isClient
-
-  else
-    Meteor.users.remove {}
-    Edges.remove {}
-    Nodes.remove {}
-    -> true
-
-# so that logs start clean on each startup, easily see where you are
-truncateLogs = ->
-  spawn = Npm.require('child_process').spawn
-  grep = spawn('grep')
-  grep.on 'close', (code, signal) ->
-    fs = Npm.require('fs')
-    appRoot = process.env.PWD
-    logPath = '/logs/all.log'
-    firstPartIndex = appRoot.lastIndexOf '/'
-    firstPart = appRoot.substring 0, firstPartIndex
-    webl = fs.truncate(appRoot + logPath, 0, ->
-      return
-    )
-    return
-  # send SIGHUP to process
-  grep.kill 'SIGHUP'
-  return
-
-  runningOurselves = () ->
-    packageName = _.find(Object.keys(Package), (p) ->
-      p.search(/local-test/) > -1
-    ).replace('local-test:', '')
-    runningOurselves = packageName.indexOf("linkstate") isnt -1
-    if runningOurselves
-      runTests()
-      runTests2()
-    return runningOurselves
