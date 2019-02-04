@@ -7,8 +7,7 @@ reactKup = require('react-kup')
 require('../imports/startup/routes.coffee')
 require('../imports/startup/methods.coffee')
 #require('../imports/api/MainLayoutContainer.coffee')
-#injectTapEventPlugin = require('react-tap-event-plugin')
-#injectTapEventPlugin();
+injectTapEventPlugin = require('react-tap-event-plugin')
 @R = require('ramda')
 {Meteor}= require 'meteor/meteor'
 require 'typeface-roboto'
