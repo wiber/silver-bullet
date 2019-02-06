@@ -106,13 +106,6 @@ exports.MyCard = React.createClass
                     ->
                       k.build FacebookIcon,
                         size: 33
-                  k.build GooglePlusShareButton,
-                    url: 'https://linkstate.youiest.com/about/'+window.location.search
-                    style:
-                      display: 'inline-block'
-                    ->
-                      k.build GooglePlusIcon,
-                        size: 33
                   k.build TwitterShareButton,
                     url: 'https://linkstate.youiest.com/about/'+window.location.search
                     title: "Is this for real? Let's find sources for and against this on linkstate!"
