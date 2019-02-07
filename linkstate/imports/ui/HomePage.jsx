@@ -68,11 +68,11 @@ class HomePage extends React.Component {
     this.onLogin = this.onLogin.bind(this);
     this.loginComponent = this.loginComponent.bind(this);
     this.menu = this.menu.bind(this);
-    
+
     this.state = this.onState();
 
   }
-  componentDidMount() { 
+  componentDidMount() {
     this._ismounted = true;
     const self = this;
     Tracker.autorun(function(){
@@ -81,7 +81,7 @@ class HomePage extends React.Component {
       }
     });
   }
-  
+
   componentWillUnmount() {
      this._ismounted = false;
   }
@@ -155,7 +155,7 @@ class HomePage extends React.Component {
               <div className="col s12 m4 l4">
                 <div className="card">
                   <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="img/project1.jpg" />
+                    <img className="activator" src="img/project1b.jpg" />
                   </div>
                   <div className="card-content">
                     <span className="card-title activator grey-text text-darken-4">Project Title <i className="mdi-navigation-more-vert right" /></span>
