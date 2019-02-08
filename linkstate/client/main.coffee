@@ -21,6 +21,10 @@ lastLogin = () ->
 sinceLogin = false
 
 # @elias, please provide with the logic definition.
+# @nicolson if we have logged in with a facebook user,
+# we need to setup that user with default data..
+# couldn't think of a better way
+# there are lots of these that need to be architected ..
 # Why not use a flow router to fix the routing?
 # Just a question..
 if Meteor.loggingIn()
