@@ -36,7 +36,7 @@ Tracker.autorun ->
     lastLogin()
     sinceLogin = false
 
-# FIXME not loading
+# FIXME not loading (?)
 WebFontConfig = google: families: [ 'Roboto:400,300,500:latin' ]
 wf = document.createElement('script')
 wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js'

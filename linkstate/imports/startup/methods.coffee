@@ -52,6 +52,15 @@ Meteor.methods
   GroundedNodeInsert: ->
     if Meteor.isClient and Meteor?.user()?.services?.facebook?
       localStorage.setItem Nodes.findOne()._id, JSON.stringify(Nodes.findOne())
+  # create a ling when we navigate in the app -
+  # from : me to: origin
+  # answers the question - what are originating from (be)
+  # the link to wikipedia on origin dictates where we now originate (from) in the app
+  #= what should be in the "from" dropdown
+  # that means the model (db) dictates what's on the package
+  # model writes to queryParams
+  # model updates page
+  # we don't change queryParams to update page.. bad pattern!
   Linking: ({from, to, meta}) ->
     prevSet = Meteor.user()?.links?.in?[to]?[from]?
     userId = Meteor.userId()

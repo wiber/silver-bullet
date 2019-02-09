@@ -185,6 +185,15 @@ exports.AboutCard = createContainer ((props) ->
   nodeHandle = Meteor.subscribe "Node", props.from
   if nodeHandle.ready()
     nodeId = linkstate.store props.from
+    # @nicolson # fixme this should be done in layout api container
+    # so that we can resolve app state before we load the app
+    # where should we point to? what should be in the select fields?
+    # functions in ModelOperations
+    # save the whole model to localStorage untill db is hot
+    # one interface for the model.
+    # set the state to the url param from the ModelOperations
+    # indicate to user with grayish background / opacity that data is loading
+
     N = Nodes.findOne(nodeId)
     if N?
       newProps.node = N

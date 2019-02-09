@@ -81,6 +81,11 @@ exports.MainCard = React.createClass
                   #display: 'block'
                   opacity: .5
                   position: 'absolute'
+          # replace all kup with ccorcos method of pure coffee
+          # user
+          # div {}, (coffeescript is happy with an object literal as first arg)
+          #if necessary
+          # then update to new meteor.. new react..
           k.build CardActions,
             ->
               k.build IconButton,
