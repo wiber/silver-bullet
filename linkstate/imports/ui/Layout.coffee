@@ -23,12 +23,70 @@ Lo = require 'lodash'
 `import CookieConsent, { Cookies } from "react-cookie-consent";`
 #{CookieConsent} = require "react-cookie-consent"
 
+{div,nav, a, ul, li} = React.DOM
+
+Nav = React.createClass
+ render: ->
+   nav
+     id: "nav_f"
+     className: "default_color"
+     role: "navigation"
+     div
+       className: 'container'
+       div
+        className: 'nav-wrapper'
+        a
+          href: '#'
+          id: 'logo-container'
+          className: 'brand-logo'
+          ul
+            className: 'right hide-on-med-and-down'
+            li
+              className: 'xyz'
+              a
+                className: 'a'
+                href='#'
+                "nicolson"
+            li
+              className: 'xyz'
+              a
+                className: 'a'
+                target: '_blank'
+                href:'https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA'
+                "Download"
+          ul
+            id: 'nav-mobile',
+            className: "side-nav"
+            li
+              className: 'xyz'
+              a
+                className: 'a'
+                href='#'
+                "nicolson"
+            li
+              className: 'xyz'
+              a
+                className: 'a'
+                target: '_blank'
+                href:'https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA'
+                "Download"
+            li
+              className: 'xyz'
+              a
+                className: 'a'
+                href='#'
+                "Close"
+        a
+          href: '#',
+          'data-activates': 'nav-mobile'
+          className: 'button-collapse'
+
 
 exports.Layout = React.createClass
   getDefaultProps: ->
     expandMainCard: true
   componentDidMount: ->
-
+    f
 
   render: ->
     window.fbAsyncInit = ->
@@ -99,13 +157,14 @@ exports.Layout = React.createClass
                 backgroundSize: '100% 110%'#'cover' #'100% auto'
                 opacity: '.3'
                 zIndex: -1
-            k.build AppBar,
-              title: that.props.word.HeaderTitle + (title? title: "") # that.props.from
-              iconElementLeft: k.span ''
-              style:
-                position: 'fixed'
-              onClick: () ->
-                window.open 'https://' + that.props.from, "_blank"
+            k.build Nav
+            # k.build AppBar,
+            #   title: that.props.word.HeaderTitle + (title? title: "") # that.props.from
+            #   iconElementLeft: k.span ''
+            #   style:
+            #     position: 'fixed'
+            #   onClick: () ->
+            #     window.open 'https://' + that.props.from, "_blank"
             k.span 'g',-> # because... just because otherwise appbar bugs out
             k.div
               style:
