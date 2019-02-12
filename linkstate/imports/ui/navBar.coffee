@@ -12,8 +12,6 @@ Nav = React.createClass
      style : {
          color : "#00bcd4"
      }
-    #  console.log("==========================props===========")
-    #  console.log(props)
      div
        className: 'container'
        div

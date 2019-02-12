@@ -10,8 +10,6 @@ Span = React.createClass
       tabIndex: -1
       ref: 'container'
       id: 'loginContainer'
-      # console.log("=======================that");
-      # console.log(props);
 
 exports.AccountsUIWrapper = React.createClass
   componentDidMount: ->
