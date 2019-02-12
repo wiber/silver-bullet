@@ -1,6 +1,7 @@
 reactKup = require('react-kup')
 React = require('react')
 ReactDOM = require('react-dom')
+{NavBar} = require './navBar.coffee'
 {MainCard} = require './MainCard.coffee'
 {MyCard} = require './MyCard.coffee'
 {AboutCard} = require './AboutCard.coffee'
@@ -24,11 +25,12 @@ Lo = require 'lodash'
 #{CookieConsent} = require "react-cookie-consent"
 
 
+
 exports.Layout = React.createClass
   getDefaultProps: ->
     expandMainCard: true
   componentDidMount: ->
-
+    f
 
   render: ->
     window.fbAsyncInit = ->
@@ -99,14 +101,15 @@ exports.Layout = React.createClass
                 backgroundSize: '100% 110%'#'cover' #'100% auto'
                 opacity: '.3'
                 zIndex: -1
-            k.build AppBar,
-              title: that.props.word.HeaderTitle + (title? title: "") # that.props.from
-              iconElementLeft: k.span ''
-              style:
-                position: 'fixed'
-              onClick: () ->
-                window.open 'https://' + that.props.from, "_blank"
-            k.span 'g',-> # because... just because otherwise appbar bugs out
+            k.build NavBar
+            # k.build AppBar,
+            #   title: that.props.word.HeaderTitle + (title? title: "") # that.props.from
+            #   iconElementLeft: k.span ''
+            #   style:
+            #     position: 'fixed'
+            #   onClick: () ->
+            #     window.open 'https://' + that.props.from, "_blank"
+            # k.span 'g',-> # because... just because otherwise appbar bugs out
             k.div
               style:
                 marginTop: 150
