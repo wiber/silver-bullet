@@ -24,13 +24,12 @@ Lo = require 'lodash'
 `import CookieConsent, { Cookies } from "react-cookie-consent";`
 #{CookieConsent} = require "react-cookie-consent"
 
-
+{div, a,} = React.DOM
 
 exports.Layout = React.createClass
   getDefaultProps: ->
     expandMainCard: true
   componentDidMount: ->
-    f
 
   render: ->
     window.fbAsyncInit = ->
@@ -53,123 +52,88 @@ exports.Layout = React.createClass
         return
       ) document, 'script', 'facebook-jssdk'
     that = this
-    console.log screenshotUrlHere that.props.user, that.props.from
-    reactKup (k) ->
-      #console.log that.props.user.services, Meteor.user().services
 
-      try
-        if that?.props?.user?.links?.in?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
-          HERE = that.props.user.links.in.Bookmarks[ linkstate.store that.props.from]
-          ScreenshotUrl = HERE.meta.ScreenshotUrl
-        # old way still here..
-        urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
-        before = ScreenshotUrl
-        ScreenshotUrl = urlbox.buildUrl
-          url: that.props.from
-          thumb_width: 320
-          format: 'png'
-          quality: 80
-        if before is ScreenshotUrl
-          console.log 'ScreenshotUrl was same'
-        #else
-        #  console.log '!!!!!!!!!!!ScreenshotUrl', before, ScreenshotUrl
-      catch error
-          console.error error, 'good try urlbox'
-      if HERE?.title?
-        titleHere = HERE.title
-        host = URI.parse(that.props.from).host
-        if host?
-          slash = R.concat host, ' / '
-        else
-          slash = R.concat that.props.from, ' / '
-        title = R.concat slash, titleHere
+    try
+      if that?.props?.user?.links?.in?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
+        HERE = that.props.user.links.in.Bookmarks[ linkstate.store that.props.from]
+        ScreenshotUrl = HERE.meta.ScreenshotUrl
+      # old way still here..
+      urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
+      before = ScreenshotUrl
+      ScreenshotUrl = urlbox.buildUrl
+        url: that.props.from
+        thumb_width: 320
+        format: 'png'
+        quality: 80
+      if before is ScreenshotUrl
+        console.log 'ScreenshotUrl was same'
+      #else
+      #  console.log '!!!!!!!!!!!ScreenshotUrl', before, ScreenshotUrl
+    catch error
+        console.error error, 'good try urlbox'
+    if HERE?.title?
+      titleHere = HERE.title
+      host = URI.parse(that.props.from).host
+      if host?
+        slash = R.concat host, ' / '
       else
-        title = that.props.from
-      k.build MuiThemeProvider,
-        #muiTheme: letsMeSeeTheme # #
-        muiTheme: lightBaseUsTheme
-        ->
-          k.div ->
-            className: 'row'
-            k.div
-              style: _.extend {}, style.base,
-                height: '100%'
-                widht: '100%'
-                position: 'fixed'
-                backgroundImage: 'url(' + ScreenshotUrl + ')'
-                backgroundRepeat: 'no-repeat'
-                backgroundSize: '100% 110%'#'cover' #'100% auto'
-                opacity: '.3'
-                zIndex: -1
-            k.build NavBar
-            # k.build AppBar,
-            #   title: that.props.word.HeaderTitle + (title? title: "") # that.props.from
-            #   iconElementLeft: k.span ''
-            #   style:
-            #     position: 'fixed'
-            #   onClick: () ->
-            #     window.open 'https://' + that.props.from, "_blank"
-            # k.span 'g',-> # because... just because otherwise appbar bugs out
-            k.div
-              style:
-                marginTop: 150
-              className: 'column'
-              ->
-                k.div ->
-                  if that.props.user?.services?.facebook? or that.props.user?.services?.password?
-                    k.build MainCard, # need comma here because the second arg is prop
-                      expanded: that.props.expandMainCard
-                      # redundant container? already have user obj here
-                      to: that.props.to
-                      from: that.props.from
-                      word: that.props.word
-                      content: that.props.content
-                      user: that.props.user
-                      lastTitle: that.props.lastTitle
-                      newHere: that.props.newHere
-                    k.build MyCard,
-                      styles: style
-                      expanded: that.props.expandMyCard
-                      to: that.props.to
-                      lastTitle: that.props.lastTitle
-                      from: that.props.from
-                      word: that.props.word
-                      user: that.props.user
-                      incomming: that.props.incomming
-                      howMany: 10
-                      type: 'fromCreated'
-                      ScreenshotUrl: ScreenshotUrl
-                  else
-                    k.build Mexplain,
-                      word: that.props.word
-                  k.build AboutCard,
-                    expanded: that.props.expandAboutCard
-                    to: that.props.to
-                    from: that.props.from
-                    word: that.props.word
-                    thumbalizr: that.props.thumbalizr
-                    howMany: 15
-                    user: that.props.user
-
-            k.div
-              className: 'columnR'
-              style:
-                marginTop: 150# '15%'
-              ->
-                k.a
-                  href: "https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA"
-                  target: "_blank"
-                  "To use this app properly you need the chrome extension. Download, extract it and chrome://extensions unpacked."
-                k.div ->
-                  k.build AccountsUIWrapper
-                k.div
-                  id: 'fb-root'
-                ###
-                k.div
-                  style:
-                    marginTop: '15%'
-                  className:"fb-comments"
-                  dataHref:"https://linkstate.youiest.com/about?from="+encodeURIComponent(that.props.from)
-                  dataNumposts: "5"
-                ###
-                k.build CookieConsent, "This site uses cookies to enhance the user experiece. Get the chrome extension here: https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA"
+        slash = R.concat that.props.from, ' / '
+      title = R.concat slash, titleHere
+    else
+      title = that.props.from
+    # console.log that.props.user.services, Meteor.user().services
+    div
+      className: 'row'
+      div
+        style: _.extend {}, style.base,
+          height: '100%'
+          widht: '100%'
+          position: 'fixed'
+          backgroundImage: 'url(' + ScreenshotUrl + ')'
+          backgroundRepeat: 'no-repeat'
+          backgroundSize: '100% 110%'#'cover' #'100% auto'
+          opacity: '.3'
+          zIndex: -1
+      React.createElement AppBar, {"title": that.props.word.HeaderTitle, "style": {"position": 'fixed'}} #this is header
+      div
+        style:
+          marginTop: 150
+        className: 'column'
+        div
+          if that.props.user?.services?.facebook? or that.props.user?.services?.password?
+            React.createElement MainCard, {
+              "expanded": that.props.expandMainCard
+              "to": that.props.to
+              "from": that.props.from
+              "word": that.props.word
+              "content": that.props.content
+              "user": that.props.user
+              "lastTitle": that.props.lastTitle
+              "newHere": that.props.newHere
+              }
+          else
+            React.createElement Mexplain, {
+              "word": that.props.word
+              }
+          React.createElement AboutCard, {
+              "expanded": that.props.expandAboutCard
+              "to": that.props.to
+              "from": that.props.from
+              "word": that.props.word
+              "thumbalizr": that.props.thumbalizr
+              "howMany": 15
+              "user": that.props.user
+              }
+          div
+            className: 'columnR'
+            style: _.extend {}, style.base,
+              marginTop: "150# '15%'"
+            a
+              href: "https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA"
+              target: "_blank"
+              "To use this app properly you need the chrome extension. Download, extract it and chrome://extensions unpacked."
+            div
+              React.createElement AccountsUIWrapper, {}
+            div
+              id: 'fb-root'
+              React.createElement CookieConsent, {}
