@@ -6,7 +6,6 @@ React = require 'react'
 {see, store} = require '../api/strings.coffee'
 
 
-#bulletUnitDiv = React.createClass
 exports.bulletUnit = React.createClass
  render: ->
     console.log 'exports.bulletUnit'
@@ -29,11 +28,3 @@ exports.bulletUnit = React.createClass
         target: '_blank'
         k.img
           src: props?.srcFrom
-
-###
-exports.bulletUnit = React.createClass
-  render: ->
-    that = this
-    reactKup (k) ->
-      k.build bulletUnitDiv
-###

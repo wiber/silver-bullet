@@ -26,128 +26,119 @@ n = 0
 AboutCard = React.createClass
   render: ->
     that = this
-    reactKup (k) ->
-      k.build Card,
-        expanded: that.props.expanded
-        style: _.extend {}, style.card, style.mAcard
-        ->
-          k.build CardHeader,
-            title: that.props.word.AboutCardTitle
-            showExpandableButton: true
-            subtitle: that.props.word.AboutCardSubTitle
-            onClick: (e) ->
-              changeQueryParams 'expandAboutCard', !that.props.expande
-          k.build CardText,
-            style:
-              height: 'auto'
-          k.div
-            style:
-              display: 'inline'
-              #flexWrap: 'wrap'
-            -># CardText,
-              # build in and out links.. so that we see our out connection right away
-              if that.props.node?.links?.in? or that.props.node?.links?.out?
-                k.build GridList,
-                  class: 'looplist'
-                  cellHeight: 500
-                  cols: 1
-                  ->
-                    N = {} # the node we're on
-                    N.node = that.props.node
-                    N.inLinks = that.props.node.links.out
-                    N.outLinks = that.props.node.links.in
-                    N.link = N.node.link
-                    N.allLinks = _.extend {}, N.inLinks, N.outLinks
+    div
+      className: 'nothing'
+      React.createElement Card, {"expanded": that.props.expanded, "style": _.extend {}, style.card, style.mAcard},
+        React.createElement CardHeader, {
+          "title": that.props.word.AboutCardTitle
+          "showExpandableButton": true
+          "subtitle": that.props.word.AboutCardSubTitle
+          }
+        React.createElement CardText, {
+          "style": {"height": 'auto'}
+          }
+        div
+          style: _.extend {}, style.base,
+            display: 'inline'
+            # flexWrap: 'wrap'
+          if that.props.node?.links?.in? or that.props.node?.links?.out?
+            N = {} 
+            N.node = that.props.node
+            N.inLinks = that.props.node.links.out
+            N.outLinks = that.props.node.links.in
+            N.link = N.node.link
+            N.allLinks = _.extend {}, N.inLinks, N.outLinks
 
-                    N.linksByTime = linkstate.sortByKeysTime(N.allLinks
-                    , that.props.howMany)
-                    N.linkSort = {}
-                    #console.log N
-                    for link in Object.keys(N.allLinks)
-                      N.sorts = linkstate.sortByKeysTime(N.allLinks[link],3)
-                      N.recent = N.sorts[0]
-                      N.linkSort[link] = N.allLinks[link][N.recent]
-                    #calculate momentum of a url by walking through voters on it
-                    N.momentum = {}
-                    N.vectors = {}
-                    N.sortByWeight = AByMomentum N.inLinks
-                    N.sortOutByWeight = AByMomentum N.outLinks
-                    N.rankedinLinks = AByMomentum( N.inLinks)
-                    N.rankedOutlinks = AByMomentum(N.outLinks)
-                    N.sortAllMomentum = listByMomentum(N.rankedinLinks, N.rankedOutlinks)
-                    draw = 0
-                    N.UrlBoxDraw = {}
-                    for linkByMomentum in N.sortAllMomentum #listByMomentum(AByMomentum(N.node.links.to), AByMomentum(N.node.links.from))
-                      D =
-                        N: N
-                        link: linkByMomentum
-                        users: N.allLinks[linkByMomentum]
+            N.linksByTime = linkstate.sortByKeysTime(N.allLinks
+            , that.props.howMany)
+            N.linkSort = {}
+            #console.log N
+            for link in Object.keys(N.allLinks)
+              N.sorts = linkstate.sortByKeysTime(N.allLinks[link],3)
+              N.recent = N.sorts[0]
+              N.linkSort[link] = N.allLinks[link][N.recent]
+            #calculate momentum of a url by walking through voters on it
+            N.momentum = {}
+            N.vectors = {}
+            N.sortByWeight = AByMomentum N.inLinks
+            N.sortOutByWeight = AByMomentum N.outLinks
+            N.rankedinLinks = AByMomentum( N.inLinks)
+            N.rankedOutlinks = AByMomentum(N.outLinks)
+            N.sortAllMomentum = listByMomentum(N.rankedinLinks, N.rankedOutlinks)
+            draw = 0
+            N.UrlBoxDraw = {}
+            for linkByMomentum in N.sortAllMomentum #listByMomentum(AByMomentum(N.node.links.to), AByMomentum(N.node.links.from))
+              D =
+                N: N
+                link: linkByMomentum
+                users: N.allLinks[linkByMomentum]
 
 
-                      D.firstUsersLink = D.users[Object.keys(D.users)[0]]
-                      D.state =
-                        params:
-                          from: linkstate.store(that.props.from)
-                          to: linkstate.store(that.props.to)
-                        connections:
-                          from: D.firstUsersLink.from
-                          to: D.firstUsersLink.to
-                      D.m= D.firstUsersLink.meta
-                      U = # {} # users votes loop object
-                        D: D
-                        usersConnections: N.inLinks[D.link]
-                      #for type, tuple of D.state
-                      #console.log D
-                      # find the link that is not
-                      # the place where we are.. because one of them is
-                      # is this outdate?
-                      # we want to draw all links in and out or here .
-                      # because we are at a place.. it's assumed to be the origin
-                      # so we simply draw the one that isn't the from
-                      #
-                      for param, paramLink of D.state.params # from/to url on the node link
-                        for here, nodeLink of D.state.connections
-                          # we want the one that is not params from
-                          binaryState =
-                            notSameLink: paramLink != nodeLink
+              D.firstUsersLink = D.users[Object.keys(D.users)[0]]
+              D.state =
+                params:
+                  from: linkstate.store(that.props.from)
+                  to: linkstate.store(that.props.to)
+                connections:
+                  from: D.firstUsersLink.from
+                  to: D.firstUsersLink.to
+              D.m= D.firstUsersLink.meta
+              U = # {} # users votes loop object
+                D: D
+                usersConnections: N.inLinks[D.link]
+              #for type, tuple of D.state
+              #console.log D
+              # find the link that is not
+              # the place where we are.. because one of them is
+              # is this outdate?
+              # we want to draw all links in and out or here .
+              # because we are at a place.. it's assumed to be the origin
+              # so we simply draw the one that isn't the from
+              #
+              for param, paramLink of D.state.params # from/to url on the node link
+                for here, nodeLink of D.state.connections
+                  # we want the one that is not params from
+                  binaryState =
+                    notSameLink: paramLink != nodeLink
 
-                            notFrom: D.state.params.from != D.state.connections.from
-                            notTo: D.state.params.from != D.state.connections.to
-                          notSameLink = paramLink != nodeLink
+                    notFrom: D.state.params.from != D.state.connections.from
+                    notTo: D.state.params.from != D.state.connections.to
+                  notSameLink = paramLink != nodeLink
 
-                          notFrom = D.state.params.from != D.state.connections.from
-                          notTo = D.state.params.from != D.state.connections.to
-                          # find the screenshoturl on the first users link there..
-                          if notFrom
-                            D.drawTheOther = D.firstUsersLink.meta.ScreenshotUrl#from
-                            #Lo.get D, '.state.connections.from.meta.ScreenshotUrl'
-                          else
-                            #D.drawTheOther = D.firstUsersLink.to
-                            D.drawTheOther = D.firstUsersLink.meta.ScreenshotUrlTo
-                          N.UrlBoxDraw[D.drawTheOther] =
-                            #obj: D.allLinks[D.drawTheOther]
-                            U: U
-                            D: D
-                          draw++
-                          if here is 'from' and param is 'to'
-                            D.drawTheOther = drawTheOther param, paramLink, here, nodeLink, D.firstUsersLink
-                            if D.drawTheOther?.ScreenshotUrl?
-                              N.UrlBoxDraw[linkByMomentum] = {D,U}
-                              draw++
-
-                    for key, object of N.UrlBoxDraw
-                      k.build UrlBox,
-                        D: object.D
-                        N: N
-                        U: object.U
-                        from: that.props.from
-                        to: that.props.to
-                        props: that.props
-                        thumbalizr: that.props.thumbalizr
-                        word: that.props.word
-                        user: that.props.user
-                        ScreenshotUrl: Lo.get(N.allLinks, D.drawTheOther+'.meta.ScreenshotUrl')
-# which one isn't our from or to?
+                  notFrom = D.state.params.from != D.state.connections.from
+                  notTo = D.state.params.from != D.state.connections.to
+                  # find the screenshoturl on the first users link there..
+                  if notFrom
+                    D.drawTheOther = D.firstUsersLink.meta.ScreenshotUrl#from
+                    #Lo.get D, '.state.connections.from.meta.ScreenshotUrl'
+                  else
+                    #D.drawTheOther = D.firstUsersLink.to
+                    D.drawTheOther = D.firstUsersLink.meta.ScreenshotUrlTo
+                  N.UrlBoxDraw[D.drawTheOther] =
+                    #obj: D.allLinks[D.drawTheOther]
+                    U: U
+                    D: D
+                  draw++
+                  if here is 'from' and param is 'to'
+                    D.drawTheOther = drawTheOther param, paramLink, here, nodeLink, D.firstUsersLink
+                    if D.drawTheOther?.ScreenshotUrl?
+                      N.UrlBoxDraw[linkByMomentum] = {D,U}
+                      draw++
+            React.createElement GridList, {"className": "looplist", "cellHeight": 500, "cols": 1},
+              for key, object of N.UrlBoxDraw
+                React.createElement UrlBox, {
+                  "D": object.D
+                  "N": N
+                  "U": object.U
+                  "from": that.props.from
+                  "to": that.props.to
+                  "props": that.props
+                  "thumbalizr": that.props.thumbalizr
+                  "word": that.props.word
+                  "user": that.props.user
+                  "ScreenshotUrl": Lo.get(N.allLinks, D.drawTheOther+'.meta.ScreenshotUrl')
+                  }
+                
 
 drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
   # if the link.. is the place we are now...

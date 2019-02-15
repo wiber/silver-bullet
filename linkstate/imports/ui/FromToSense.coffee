@@ -1,35 +1,39 @@
 reactKup = require('react-kup')
 {style} = require '../ui/style.coffee'
 SimpleSelect = require("react-selectize").SimpleSelect
-React = require 'react'
+React = require('react')
 {changeQueryParams} = require '../api/changeQueryParams.coffee'
 # ui object calling a container.. not great?
 selectedContainer = require('../api/Selected.coffee').selectedContainer
 {see, store, linkstate} = require '../api/strings'
 TextField = require('material-ui/lib/TextField').default
 
+{div, a,} = React.DOM
+
 exports.FromToSense = React.createClass
   render: ->
     that = this
-    reactKup (k) ->
-      k.div ->
-        k.build TextAbout,
-          word: that.props.word
-          type: 'MainCardTextInput'
-          content: that.props.content
-        k.div
-          style:
-            maxWidth: '100%'
-            whiteSpace: "nowrap"
-          ->
-            k.build selectedContainer,
-              from: that.props.from
-              to: that.props.to
-              lastTitle: that.props.lastTitle
-              user: that.props.user
-              word: that.props.word
-              type: 'to'
-              newHere: that.props.newHere
+    div ->
+      React.createElement TextAbout, {
+        "word": that.props.word
+        "type": "MainCardTextInput"
+        "content": that.props.content
+        }
+      div
+        style:
+          maxWidth: '100%'
+          whiteSpace: "nowrap"
+        ->
+          React.createElement selectedContainer, {
+            "from": that.props.from
+            "to": that.props.to
+            "lastTitle": that.props.lastTitle
+            "user": that.props.user
+            "word": that.props.word
+            "type": "to"
+            "newHere": that.props.newHere
+            }
+
 
 TextAbout = React.createClass
   componentWillReceiveProps: ->
