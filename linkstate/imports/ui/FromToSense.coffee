@@ -1,39 +1,39 @@
 reactKup = require('react-kup')
 {style} = require '../ui/style.coffee'
 SimpleSelect = require("react-selectize").SimpleSelect
-React = require('react')
+React = require 'react'
 {changeQueryParams} = require '../api/changeQueryParams.coffee'
 # ui object calling a container.. not great?
 selectedContainer = require('../api/Selected.coffee').selectedContainer
-{see, store, linkstate} = require '../api/strings'
+{see} = require '../api/strings.coffee'
 TextField = require('material-ui/lib/TextField').default
+
 
 {div, a,} = React.DOM
 
 exports.FromToSense = React.createClass
   render: ->
     that = this
-    div ->
+    div
+      "style": _.extend {}
       React.createElement TextAbout, {
         "word": that.props.word
-        "type": "MainCardTextInput"
+        "type": 'MainCardTextInput'
         "content": that.props.content
-        }
+      }
       div
-        style:
-          maxWidth: '100%'
-          whiteSpace: "nowrap"
-        ->
-          React.createElement selectedContainer, {
-            "from": that.props.from
-            "to": that.props.to
-            "lastTitle": that.props.lastTitle
-            "user": that.props.user
-            "word": that.props.word
-            "type": "to"
-            "newHere": that.props.newHere
-            }
-
+        "style":
+          "maxWidth": '100%'
+          "whiteSpace": "nowrap"
+        React.createElement selectedContainer, {
+          "from": that.props.from
+          "to": that.props.to
+          "lastTitle": that.props.lastTitle
+          "user": that.props.user
+          "word": that.props.word
+          "type": 'to'
+        }
+              
 
 TextAbout = React.createClass
   componentWillReceiveProps: ->
@@ -70,7 +70,7 @@ TextAbout = React.createClass
                   console.log 'no result?', result
             #changeQueryParams 'content', ''
             e.preventDefault()
-            #window.to.refs.to.focus() if window?.to?.refs?.to?
+            window.to.refs.to.focus() if window?.to?
           else
             changeQueryParams 'content', e.target.value
           if e.keyCode is 13

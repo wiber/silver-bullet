@@ -51,7 +51,7 @@ exports.Mexplain = React.createClass
         ->
           k.build CardHeader,
             title: that.props.word.MexplainTitle
-            showExpandableButton: true
+            # showExpandableButton: true
             subtitle: that.props.word.MexplainSubtitle
             onClick: (e) ->
               window.open '/login', "_blank"

@@ -77,7 +77,7 @@ exports.MyCard = React.createClass
       {D,d,M} = that.props.styles.measurements
       measurements = {D, d, M}
       k.build Card,
-        expanded: that.props.expanded
+        # expanded: that.props.expanded
         style: _.extend {}, style.card, style.yCard
         ->
           k.build CardText,

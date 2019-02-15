@@ -28,10 +28,10 @@ AboutCard = React.createClass
     that = this
     div
       className: 'nothing'
-      React.createElement Card, {"expanded": that.props.expanded, "style": _.extend {}, style.card, style.mAcard},
+      React.createElement Card, {"style": _.extend {}, style.card, style.mAcard},#"expanded": that.props.expanded, 
         React.createElement CardHeader, {
           "title": that.props.word.AboutCardTitle
-          "showExpandableButton": true
+          # "showExpandableButton": true
           "subtitle": that.props.word.AboutCardSubTitle
           }
         React.createElement CardText, {
