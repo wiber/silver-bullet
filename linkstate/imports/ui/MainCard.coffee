@@ -42,7 +42,7 @@ exports.MainCard = React.createClass
     #console.log THERE, ThereScreenshotUrl,'THERE, ThereScreenshotUrl', Lo.get that.props, 'user.links.in.Bookmarks'
     # reactKup (k) ->
     div
-      className: 'hasten'
+      className: 'xxx'
       React.createElement Card, { "style": _.extend {}, style.card, style.mAcard },#"expanded": that.props.expanded, 
         React.createElement CardHeader, {
           "title": HERE.title
