@@ -237,15 +237,27 @@ exports.changeQueryParamsObject = (changes) ->
 categoryTypes = [
   'Bookmarks'
   'Categories'
+  'From'
+  'To'
 ]
+# these should be editable? hard coded linkstate.youiest.com/from
 bookmarkUrl = 'en.wikipedia.org/wiki/bookmark'
-linkstate.constants =
-  bookmarkUrl: bookmarkUrl
+fromConceptDefinition = 'linkstate.youiest.com/from'
+toConceptDefinition = 'linkstate.youiest.com/to'
+
+c =
+  bookmarkUrl: 'en.wikipedia.org/wiki/bookmark'
+  fromConceptDefinition: 'linkstate.youiest.com/from'
+  toConceptDefinition: 'linkstate.youiest.com/to'
+linkstate.constants = c
 linkstate.categoryTypes = categoryTypes
 linkstate.catTree =
   categoryTypes: categoryTypes
   categoryUrls:
     Bookmarks: bookmarkUrl
+    from: c.fromConceptDefinition
+    to: c.toConceptDefinition
+
   ModelNamespaces:
     bookmarks: 'links.in.'+linkstate.store(bookmarkUrl)
 BookmarkPath = 'links.in.'+linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)

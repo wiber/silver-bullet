@@ -101,7 +101,8 @@ exports.Layout = React.createClass
                 backgroundSize: '100% 110%'#'cover' #'100% auto'
                 opacity: '.3'
                 zIndex: -1
-            k.build NavBar
+            k.build NavBar,
+              props: that.props
             # k.build AppBar,
             #   title: that.props.word.HeaderTitle + (title? title: "") # that.props.from
             #   iconElementLeft: k.span ''

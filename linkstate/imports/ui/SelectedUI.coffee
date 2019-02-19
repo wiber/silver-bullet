@@ -3,7 +3,10 @@ reactKup = require('react-kup')
 SimpleSelect = require("react-selectize").SimpleSelect
 React = require 'react'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
-{see, store} = require '../api/strings.coffee'
+{see, store, linkstate} = require '../api/strings.coffee'
+{catTree} = linkstate
+{categoryUrls} = catTree
+console.log categoryUrls, 'onValueChange'
 IconButton = require('material-ui/lib/icon-button').default
 FromIcon =  require('material-ui/lib/svg-icons/communication/call-received').default
 ToIcon =  require('material-ui/lib/svg-icons/communication/call-made').default
@@ -49,8 +52,25 @@ Selected = React.createClass
               window.textAbout.refs.MainCardTextInput.focus()
             transitionEnter: true
             onValueChange: (val) ->
-              if val.value.meta.FromLink
+              if val.value?.meta?.FromLink?
                 changeQueryParams that.props.type, val.value.meta.FromLink
+                console.log val,that.props.type,'onValueChange', {
+                  to: val.value.meta.FromLink
+                  from: categoryUrls[that.props.type]}
+                # antipattern? should do this logic in container
+                # if it's not the same from / to as before, call methods
+                Meteor.call 'Linking',
+                  to: val.value.meta.FromLink
+                  from: categoryUrls[that.props.type]
+                  meta:
+                    body: new Date().getTime()
+                ,
+                  (error, result) ->
+                    if error
+                      console.log "error", error
+                    if result
+                      console.log 'result onValueChange', result
+
             value: that.props.value
             ref: 'selecters'
             id: that.props.type

@@ -50,8 +50,15 @@ setOptions = (props) ->
 moS =
   bookmarks: 'links.in.Bookmarks.'
   title: 'meta.title'
-setValue = (props, options) ->
 
+setValueModel = (props, options) ->
+  {from,to, user} = props
+  console.log {props,options, user}, 'setValueModel'
+
+
+
+setValue = (props, options) ->
+  console.log setValueModel(props, options)
   # what do we do if from isn't in bookmarks
   {user, from, to, type} = props
   console.log props[type]
