@@ -3,7 +3,7 @@ reactKup = require('react-kup')
 
 {div,nav, a, ul, li} = React.DOM
 
-Nav = React.createClass
+exports.NavBar = React.createClass
   render: ->
     nav
       id: "nav_f"
@@ -63,17 +63,3 @@ Nav = React.createClass
             href: '#',
             'data-activates': 'nav-mobile'
             className: 'button-collapse'
-
-
-
-exports.NavBar = React.createClass
-  componentDidMount: ->
-    # @view = Blaze.render Template.loginButtons, document.getElementById 'loginContainer'
-
-  #componentWillUnmount: ->
-  #  Blaze.remove @view
-  render: ->
-
-    that = this
-    reactKup (k) ->
-      k.build Nav
