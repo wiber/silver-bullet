@@ -199,35 +199,37 @@ Winged = React.createClass
   render: ->
     {D, d, M} = @props.measurements
     that = this
-    reactKup (k) ->
-      k.div ->
-        k.build Paper,
-          circle: true
-          style:
-            width: D
-            height: D
-            #marginRight: style.scalars.boxWidth/2-.75*D#'25%' #'auto' #Right: D/2
-            left: M#D/2
-            #marginRight: '25%'
-            top: M
-            marginBottom: M
-            #float: 'left'
-            #display: 'block'
-            position: 'absolute'
-          zDepth: 5
-          ->
-            k.build Avatar,
-              style:
-                width: D
-                height: D
-                marginRight: 0
-                marginTop: 0
-                marginBottom: 0
-                float: 'right'
-                display: 'inline'
-              size: D/2
-              src: that.props.ScreenshotUrl
-        # draw the bullets.. as wings.. ed faces
+    div
+      className: 'showmoon'
+      React.createElement Paper, {
+        "circle": true
+        "style": {
+          "width": D
+          "height": D
+          #marginRight: style.scalars.boxWidth/2-.75*D#'25%' #'auto' #Right: D/2
+          "left": M#D/2
+          #marginRight: '25%'
+          "top": M
+          "marginBottom": M
+          #float: 'left'
+          #display: 'block'
+          "position": 'absolute'
+        }
+        "zDepth": 5
+      },
+        React.createElement Avatar, {
+          "style": {
+            "width": D
+            "height": D
+            "marginRight": 0
+            "marginTop": 0
+            "marginBottom": 0
+            "float": 'right'
+            "display": 'inline'
+          }
+          "size": D/2
+          "src": that.props.ScreenshotUrl
+        }
         
 wingMark = React.createClass
   render: ->
