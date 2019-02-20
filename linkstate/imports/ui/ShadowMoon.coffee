@@ -118,13 +118,14 @@ VisualCue = React.createClass
               thisWeight = inLinks[mark].meta.weight
               lastWeight = (inLinks[mark].meta.weight -1)
             catch error
-            k.build yourMark,
-              user: that.props.user
-              ScreenshotUrl: that.props.ScreenshotUrl
-              n: n
-              target: target
-              weight: target.meta.weight
-              measurements: that.props.measurements
+            React.createElement yourMark,{
+              "user": that.props.user
+              "ScreenshotUrl": that.props.ScreenshotUrl
+              "n": n
+              "target": target
+              "weight": target.meta.weight
+              "measurements": that.props.measurements
+            }
 
 
 yourMark = React.createClass
