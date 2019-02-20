@@ -73,72 +73,75 @@ exports.MyCard = React.createClass
     that = this
     if @props.expanded is 'undefined'
       that.props.expanded = true
-    reactKup (k) ->
-      {D,d,M} = that.props.styles.measurements
-      measurements = {D, d, M}
-      k.build Card,
-        # expanded: that.props.expanded
-        style: _.extend {}, style.card, style.yCard
-        ->
-          k.build CardText,
-            style:
-              height: 'auto'
-              minHeight: 600
-              #overflow: 'hidden'
-            expandable: false
-            ->
-              k.build selectedContainer,
-                from: that.props.from
-                to: that.props.to
-                lastTitle: that.props.lastTitle
-                user: that.props.user
-                type: 'from'
-                word: that.props.word
-                lastTitle: that.props.lastTitle
-              k.build CardActions,
-                ->
-                  k.build FacebookShareButton,
-                    url: 'https://linkstate.youiest.com/about/'+window.location.search
-                    quote: "Is this for real? Let's find sources for and against this on linkstate!"
-                    hashtag: 'linkstate'
-                    style:
-                      display: "inline-block"
-                    ->
-                      k.build FacebookIcon,
-                        size: 33
-                  k.build TwitterShareButton,
-                    url: 'https://linkstate.youiest.com/about/'+window.location.search
-                    title: "Is this for real? Let's find sources for and against this on linkstate!"
-                    via: "youiest"
-                    hashtags: ['linkstate','expose']
-                    style:
-                      display: 'inline-block'
-                    ->
-                      k.build TwitterIcon,
-                        size: 33
-                  k.build WhatsappShareButton,
-                    url: 'https://linkstate.youiest.com/about/'+window.location.search
-                    title: "Is this for real? Let's find sources for and against this on linkstate!"
-                    style:
-                      display: 'inline-block'
-                    ->
-                      k.build WhatsappIcon,
-                        size: 33
-                  k.build EmailShareButton,
-                    url: 'https://linkstate.youiest.com/about/'+window.location.search
-                    body: "Is this for real? Let's find sources for and against this on linkstate!"
-                    sibject: "I found something. Seen anything like this?"
-                    style:
-                      display: 'inline-block'
-                    ->
-                      k.build EmailIcon,
-                        size: 33
-              k.build VisualCue,
-                styles: that.props.styles
-                ScreenshotUrl: that.props.ScreenshotUrl
-                user: that.props.user
-                from: that.props.from
-                measurements: measurements
+    # reactKup (k) ->
+    {D,d,M} = that.props.styles.measurements
+    measurements = {D, d, M}
+    React.createElement Card,{
+      # expanded: that.props.expanded
+      "style": _.extend {}, style.card, style.yCard
+    },
+      React.createElement CardText,{
+        "style":{
+          "height": 'auto'
+          "minHeight": 600
+          #overflow: 'hidden'
+        }
+        expandable: false
+      },
+        React.createElement selectedContainer,{
+          "from": that.props.from
+          "to": that.props.to
+          "lastTitle": that.props.lastTitle
+          "user": that.props.user
+          "type": 'from'
+          "word": that.props.word
+          "lastTitle": that.props.lastTitle
+        }
+        React.createElement CardActions,
+          ->
+            React.createElement FacebookShareButton,
+              url: 'https://linkstate.youiest.com/about/'+window.location.search
+              quote: "Is this for real? Let's find sources for and against this on linkstate!"
+              hashtag: 'linkstate'
+              style:
+                display: "inline-block"
+              ->
+                React.createElement FacebookIcon,
+                  size: 33
+            React.createElement TwitterShareButton,
+              url: 'https://linkstate.youiest.com/about/'+window.location.search
+              title: "Is this for real? Let's find sources for and against this on linkstate!"
+              via: "youiest"
+              hashtags: ['linkstate','expose']
+              style:
+                display: 'inline-block'
+              ->
+                React.createElement TwitterIcon,
+                  size: 33
+            React.createElement WhatsappShareButton,
+              url: 'https://linkstate.youiest.com/about/'+window.location.search
+              title: "Is this for real? Let's find sources for and against this on linkstate!"
+              style:
+                display: 'inline-block'
+              ->
+                React.createElement WhatsappIcon,
+                  size: 33
+            React.createElement EmailShareButton,
+              url: 'https://linkstate.youiest.com/about/'+window.location.search
+              body: "Is this for real? Let's find sources for and against this on linkstate!"
+              sibject: "I found something. Seen anything like this?"
+              style:
+                display: 'inline-block'
+              ->
+                React.createElement EmailIcon,
+                  size: 33
+        React.createElement VisualCue,{
+          "styles": that.props.styles
+          "ScreenshotUrl": that.props.ScreenshotUrl
+          "user": that.props.user
+          "from": that.props.from
+          "measurements": measurements
+        }
 
 
 
@@ -146,69 +149,73 @@ VisualCue = React.createClass
   render: ->
     {D, d, M} = @props.styles.measurements
     that = this
-    reactKup (k) ->
-      k.div
-        style:
-          position: 'relative'
+    # reactKup (k) ->
+    div
+      style:
+        position: 'relative'
+      ->
+        React.createElement Paper,{
+          "circle": true
+          "style":{
+            "width": D
+            "height": D
+            "top": M
+            "left": M#D/2+M
+            #marginTop: 2*M
+            #marginBottom: M
+            #float: 'right'
+            "position": 'absolute'
+            "display": 'inline'
+          }
+          "zDepth": 5
+        }
         ->
-          k.build Paper,
-            circle: true
-            style:
-              width: D
-              height: D
-              top: M
-              left: M#D/2+M
-              #marginTop: 2*M
-              #marginBottom: M
-              #float: 'right'
-              position: 'absolute'
-              display: 'inline'
-            zDepth: 5
-            ->
-              k.build Avatar,
-                style:
-                  width: D
-                  height: D
-                  marginRight: 0
-                  marginTop: 0
-                  marginBottom: 0
-                  float: 'right'
-                  display: 'inline'
-                size: D/2
-                src: that.props.ScreenshotUrl
-          linktohere = that.props?.user?.links?.in?[linkstate.store that.props.from]?
-          if linktohere
-            inLinks = that.props.user.links.in[linkstate.store that.props.from]
-            n = 0
-            #LinksArrayByWeight = linkstate.sortByWeight(inLinks, that.props.howMany)
-            loopDirection =
-              INLINKS: linkstate.sortByWeight(that.props.user.links.in[linkstate.store that.props.from], that.props.howMany)
-              OUTLINKS: linkstate.sortByWeight(that.props.user.links.out[linkstate.store that.props.from], that.props.howMany)
-            loopDict =
-              INLINKS: that.props.user.links.in[linkstate.store that.props.from]
-              OUTLINKS: that.props.user.links.out[linkstate.store that.props.from]
-            for direction, LinksArrayByWeight of loopDirection
-              n=0
-              for key, mark of LinksArrayByWeight
-                target = loopDict[direction][mark] #inLinks[mark]
-                dictWeight = target.meta.weight
-                lastKey = LinksArrayByWeight[key-1]
-                lastVectorExist = loopDict?[direction]?[lastKey]?.meta?.weight?
-                lastVector = loopDict[direction][lastKey] if lastVectorExist
-                if lastVectorExist and lastVector.meta.weight is target.meta.weight
-                  n++
-                else
-                  n = 0
-                markprops =
-                  user: that.props.user
-                  ScreenshotUrl: that.props.ScreenshotUrl
-                  n: n
-                  target: target
-                  weight: target.meta.weight
-                  measurements: that.props.styles.measurements
-                  styles: that.props.styles
-                  direction: direction
-                k.build yourMark, markprops
+          React.createElement Avatar,{
+            "style":{
+              "width": D
+              "height": D
+              "marginRight": 0
+              "marginTop": 0
+              "marginBottom": 0
+              "float": 'right'
+              "display": 'inline'
+            }
+            "size": D/2
+            "src": that.props.ScreenshotUrl
+          }
+      linktohere = that.props?.user?.links?.in?[linkstate.store that.props.from]?
+      if linktohere
+        inLinks = that.props.user.links.in[linkstate.store that.props.from]
+        n = 0
+        #LinksArrayByWeight = linkstate.sortByWeight(inLinks, that.props.howMany)
+        loopDirection =
+          INLINKS: linkstate.sortByWeight(that.props.user.links.in[linkstate.store that.props.from], that.props.howMany)
+          OUTLINKS: linkstate.sortByWeight(that.props.user.links.out[linkstate.store that.props.from], that.props.howMany)
+        loopDict =
+          INLINKS: that.props.user.links.in[linkstate.store that.props.from]
+          OUTLINKS: that.props.user.links.out[linkstate.store that.props.from]
+        for direction, LinksArrayByWeight of loopDirection
+          n=0
+          for key, mark of LinksArrayByWeight
+            target = loopDict[direction][mark] #inLinks[mark]
+            dictWeight = target.meta.weight
+            lastKey = LinksArrayByWeight[key-1]
+            lastVectorExist = loopDict?[direction]?[lastKey]?.meta?.weight?
+            lastVector = loopDict[direction][lastKey] if lastVectorExist
+            if lastVectorExist and lastVector.meta.weight is target.meta.weight
+              n++
+            else
+              n = 0
+            markprops =
+              user: that.props.user
+              ScreenshotUrl: that.props.ScreenshotUrl
+              n: n
+              target: target
+              weight: target.meta.weight
+              measurements: that.props.styles.measurements
+              styles: that.props.styles
+              direction: direction
+            React.createElement yourMark, markprops
 
 
 yourMark = React.createClass
@@ -228,53 +235,59 @@ yourMark = React.createClass
       L = 0
       body = ''
 
-    reactKup (k) ->
-      k.build Paper,
-        circle: true
-        style:
-          position: 'absolute'
-          top: Position
-            measurements: measurements
-            weight: weight
-            n: n
-            directed: that.props.direction
-            axis: 'y'
-          left: Position
-            measurements: measurements
-            weight: weight
-            n: n
-            directed: that.props.direction
-            axis: 'x'
-          width: r
-          height: r
-        zDepth: shadowFloor body, 5 , 50
-        #overflow: 'hidden'
+    # reactKup (k) ->
+    React.createElement Paper,{
+      "circle": true
+      "style":{
+        "position": 'absolute'
+        "top": Position
+          "measurements": measurements
+          "weight": weight
+          "n": n
+          "directed": that.props.direction
+          "axis": 'y'
+        "left": Position
+          "measurements": measurements
+          "weight": weight
+          "n": n
+          "directed": that.props.direction
+          "axis": 'x'
+        "width": r
+        "height": r
+      }
+      "zDepth": shadowFloor body, 5 , 50
+    }
+    #overflow: 'hidden'
+    ->
+      text = Lo.get that.props, 'target.meta.body'
+      {direction} = that.props
+      {ScreenshotUrl, ScreenshotUrlTo} = that.props.target.meta
+      if !text
+        text = ''
+      div ->
+        React.createElement IconButton,{
+          "style":{
+            "padding": 0
+            "width": r
+            "height": r
+          }
+          "tooltip": text + ' - ' + linkstate.see(that.props.target.meta.FromLink) + ' to ' + linkstate.see(that.props.target.meta.ToLink)
+          "tooltipPosition": 'top-right'
+          "className": 'YourMarks'
+        }
+        onClick: (e) ->
+          changeQueryParamsObject
+            from: that.props.target.from
+            to: that.props.target.to
         ->
-          text = Lo.get that.props, 'target.meta.body'
-          {direction} = that.props
-          {ScreenshotUrl, ScreenshotUrlTo} = that.props.target.meta
-          if !text
-            text = ''
-          k.div ->
-            k.build IconButton,
-              style:
-                padding: 0
-                width: r
-                height: r
-              tooltip: text + ' - ' + linkstate.see(that.props.target.meta.FromLink) + ' to ' + linkstate.see(that.props.target.meta.ToLink)
-              tooltipPosition: 'top-right'
-              className: 'YourMarks'
-              onClick: (e) ->
-                changeQueryParamsObject
-                  from: that.props.target.from
-                  to: that.props.target.to
-              ->
-                k.build Avatar,
-                  style:
-                    width: r
-                    height: r
-                    float: 'left'
-                  size: r
-                  src: if direction is "OUTLINKS" then ScreenshotUrlTo else ScreenshotUrl
+          React.createElement Avatar,{
+            "style":{
+              "width": r
+              "height": r
+              "float": 'left'
+            }
+            "size": r
+            "src": if direction is "OUTLINKS" then ScreenshotUrlTo else ScreenshotUrl
+          }
 #exports.yourMark = yourMark
 #exports.shadowMoon = shadowMoon
