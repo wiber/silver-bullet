@@ -1,5 +1,5 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+requireReact from 'react'
+requireReactDOM from 'react-dom'
 
 // class HomePage extends React.Component {
 //   render () {

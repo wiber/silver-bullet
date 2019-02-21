@@ -28,7 +28,7 @@ Avatar = require('material-ui/lib/avatar').default
 # TODO functional testable convenience functions, like strings, for math and attribute getting
 Lo = require 'lodash'
 {see, store, linkstate} = require '../api/strings'
-`import {
+`require{
   FacebookShareButton,
   GooglePlusShareButton,
   LinkedinShareButton,
@@ -46,7 +46,7 @@ Lo = require 'lodash'
   WorkplaceShareButton,
   EmailShareButton,
 } from 'react-share';`
-`import {
+`require{
   FacebookIcon,
   TwitterIcon,
   TelegramIcon,

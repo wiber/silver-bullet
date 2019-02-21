@@ -1,7 +1,7 @@
 
 {check} = require 'meteor/check'
 #Urlbox = require('urlbox').default
-`import Urlbox from 'urlbox';`
+`requireUrlbox from 'urlbox';`
 # Set your options
 Lo = require 'lodash'
 {linkstate} = require '../api/strings'

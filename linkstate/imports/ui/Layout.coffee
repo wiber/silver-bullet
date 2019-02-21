@@ -17,11 +17,11 @@ Card = require 'material-ui/lib/card/card'
 URI = require 'uri-js'
 MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme, letsMeSeeTheme} = require('../ui/theme.coffee')
-`import Urlbox from 'urlbox';`
+`requireUrlbox from 'urlbox';`
 Lo = require 'lodash'
 {see, store, linkstate} = require '../api/strings'
 {screenshotUrlHere} = require '../api/ModelOperations'
-`import CookieConsent, { Cookies } from "react-cookie-consent";`
+`requireCookieConsent, { Cookies } from "react-cookie-consent";`
 #{CookieConsent} = require "react-cookie-consent"
 
 {div, a,} = React.DOM
