@@ -16,47 +16,49 @@ import ReactDOM from 'react-dom'
 //   }
 // }
 
-class LoginHeader extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      user : Meteor.user(),
-      userId : Meteor.userId()
-    }
-    this.onLogout = this.onLogout.bind(this);
-    this.onLogin = this.onLogin.bind(this);
+// class LoginHeader extends React.Component {
+//   constructor(props){
+//     super(props);
+//     this.state = {
+//       user : Meteor.user(),
+//       userId : Meteor.userId()
+//     }
+//     this.onLogout = this.onLogout.bind(this);
+//     this.onLogin = this.onLogin.bind(this);
 
-  }
-  onLogout(){
-    const self = this;
-    Meteor.logout(function(){
-      self.setState({
-        user : null,
-        userId : null
-      });
-    });
-  };
+//   }
+//   onLogout(){
+//     const self = this;
+//     Meteor.logout(function(){
+//       self.setState({
+//         user : null,
+//         userId : null
+//       });
+//     });
+//   };
 
-  onLogin(){
-    const self = this;
-    Meteor.loginWithFacebook(function(){
-      self.setState({
-        user : Meteor.user(),
-        userId : Meteor.userId()
-      });
-    });
-  };
+//   onLogin(){
+//     const self = this;
+//     Meteor.loginWithFacebook(function(){
+//       Meteor.call('setupUser', function(){
+//         self.setState({
+//           user : Meteor.user(),
+//           userId : Meteor.userId()
+//         });
+//       }); 
+//     });
+//   };
 
-  render() {
-      if(this.state.user){
-        return (
-          <li onClick={this.onLogout}><a href="">{this.state.user.profile.name} Logout</a></li>
-        );
-      }else{
-        return (<li onClick={this.onLogin}><a href="">Login with Facebook</a></li>)
-      }
-  }
-};
+//   render() {
+//       if(this.state.user){
+//         return (
+//           <li onClick={this.onLogout}><a href="">{this.state.user.profile.name} Logout</a></li>
+//         );
+//       }else{
+//         return (<li onClick={this.onLogin}><a href="">Login with Facebook</a></li>)
+//       }
+//   }
+// };
 
 class HomePage extends React.Component {
   constructor(props){
@@ -100,9 +102,15 @@ class HomePage extends React.Component {
 
   onLogin(){
     const self = this;
-    Meteor.loginWithFacebook(function(){
-      self.setState(self.onState());
-      FlowRouter.go('/about?from=https%253A%252F%252Flinkstate.youiest.com%252F&lastTitle=Linkstates')
+    Meteor.loginWithFacebook({}, function(err){
+      if(!Meteor.userId()){
+        return;
+      }
+      Meteor.call('setupUser', function(){
+        self.setState(self.onState());
+        FlowRouter.go('/about?from=https%253A%252F%252Flinkstate.youiest.com%252F&lastTitle=Linkstates');
+        // location.reload();
+      });
     });
   };
 
