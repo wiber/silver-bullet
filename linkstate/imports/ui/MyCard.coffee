@@ -2,7 +2,7 @@
 # because if you go TO bookmarks, you will see your bookmarks
 # this is because bookmarks are links to bookmarks
 # Bookmarks are here steps, auto generated when you newtab from a page.
-reactKup = require('react-kup')
+#reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
 {changeQueryParams, changeQueryParamsObject} = require('../api/changeQueryParams.coffee')
@@ -71,9 +71,9 @@ exports.MyCard = React.createClass
   render: ->
     console.log window.location.href,'console.log window.location.href,'
     that = this
-    if @props.expanded is 'undefined'
+    if typeof @props.expanded is 'undefined'
       that.props.expanded = true
-    # reactKup (k) ->
+    # #reactKup (k) ->
     {D,d,M} = that.props.styles.measurements
     measurements = {D, d, M}
     React.createElement Card,{
@@ -149,7 +149,7 @@ VisualCue = React.createClass
   render: ->
     {D, d, M} = @props.styles.measurements
     that = this
-    # reactKup (k) ->
+    # #reactKup (k) ->
     div
       style:
         position: 'relative'
@@ -235,7 +235,7 @@ yourMark = React.createClass
       L = 0
       body = ''
 
-    # reactKup (k) ->
+    # #reactKup (k) ->
     React.createElement Paper,{
       "circle": true
       "style":{

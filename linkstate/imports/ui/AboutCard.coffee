@@ -1,5 +1,5 @@
 # renders the aboutness node from here
-reactKup = require('react-kup')
+#reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
@@ -28,7 +28,7 @@ AboutCard = React.createClass
     that = this
     div
       className: 'nothing'
-      React.createElement Card, {"style": _.extend {}, style.card, style.mAcard},#"expanded": that.props.expanded, 
+      React.createElement Card, {"style": _.extend {}, style.card, style.mAcard},#"expanded": that.props.expanded,
         React.createElement CardHeader, {
           "title": that.props.word.AboutCardTitle
           # "showExpandableButton": true
@@ -42,7 +42,7 @@ AboutCard = React.createClass
             display: 'inline'
             # flexWrap: 'wrap'
           if that.props.node?.links?.in? or that.props.node?.links?.out?
-            N = {} 
+            N = {}
             N.node = that.props.node
             N.inLinks = that.props.node.links.out
             N.outLinks = that.props.node.links.in
@@ -138,7 +138,7 @@ AboutCard = React.createClass
                   "user": that.props.user
                   "ScreenshotUrl": Lo.get(N.allLinks, D.drawTheOther+'.meta.ScreenshotUrl')
                   }
-                
+
 
 drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
   # if the link.. is the place we are now...

@@ -1,4 +1,4 @@
-reactKup = require('react-kup')
+#reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
@@ -27,7 +27,7 @@ UrlBox = React.createClass
     D: React.PropTypes.object
   render: ->
     that = this
-    # reactKup (k) ->
+    # #reactKup (k) ->
     {D,N,U} = that.props
     U.directionUserMeta = {}
     inlink = N.inLinks?[D.link]?

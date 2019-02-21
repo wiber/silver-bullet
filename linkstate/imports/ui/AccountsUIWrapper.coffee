@@ -1,5 +1,5 @@
 React = require 'react'
-reactKup = require('react-kup')
+#reactKup = require('react-kup')
 
 
 {div,nav, a, ul, li} = React.DOM

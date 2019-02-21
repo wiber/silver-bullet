@@ -1,5 +1,5 @@
 
-reactKup = require('react-kup')
+#reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
 {changeQueryParams, changeQueryParamsObject} = require('../api/changeQueryParams.coffee')

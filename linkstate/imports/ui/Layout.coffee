@@ -1,4 +1,4 @@
-reactKup = require('react-kup')
+#reactKup = require('react-kup')
 React = require('react')
 ReactDOM = require('react-dom')
 {NavBar} = require './navBar.coffee'

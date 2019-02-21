@@ -1,4 +1,4 @@
-reactKup = require('react-kup')
+#reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
 {hereAndThere} = require('../api/ModelOperations.coffee')
@@ -40,19 +40,19 @@ exports.MainCard = React.createClass
     that = this
     {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl} = hereAndThere that.props.user, that.props
     #console.log THERE, ThereScreenshotUrl,'THERE, ThereScreenshotUrl', Lo.get that.props, 'user.links.in.Bookmarks'
-    # reactKup (k) ->
+    # #reactKup (k) ->
     div
       className: 'xxx'
-      React.createElement Card, { "style": _.extend {}, style.card, style.mAcard },#"expanded": that.props.expanded, 
+      React.createElement Card, { "style": _.extend {}, style.card, style.mAcard },#"expanded": that.props.expanded,
         React.createElement CardHeader, {
           "title": HERE.title
           "subtitle": that.props.word.MainCardSubtitle
-          onClick: -> 
+          onClick: ->
             window.open HERE.meta.FromLink
         }
         React.createElement CardMedia, {
           "style": style.overlayPercentage
-          onClick: -> 
+          onClick: ->
             win = window.open(decodeURIComponent HERE.from, '_blank')
             win.focus()
         }
@@ -87,7 +87,7 @@ exports.MainCard = React.createClass
           React.createElement IconButton, {
             "tooltip": "Copy to clipboard because sharing -> " + window.location.href
             "tooltipPosition": 'bottom-right'
-            onClick: -> 
+            onClick: ->
               copy window.location.href
           },
             React.createElement ContentCopy, {

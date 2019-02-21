@@ -1,5 +1,5 @@
 {style} = require '../ui/style.coffee'
-reactKup = require('react-kup')
+#reactKup = require('react-kup')
 SimpleSelect = require("react-selectize").SimpleSelect
 React = require 'react'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
@@ -25,9 +25,9 @@ Selected = React.createClass
     if @props.type is 'from'
       tooltipText = @props.word.FromTooltipText
     else
-      tooltipText = @props.word.ToTooltipText 
+      tooltipText = @props.word.ToTooltipText
     that = this
-    # reactKup (k) ->
+    # #reactKup (k) ->
     div
       ref: 'dadiv'
       "style": {
@@ -35,7 +35,7 @@ Selected = React.createClass
         "textOverflow": "ellipsis"
         "whiteSpace": "nowrap"
       }
-      
+
       React.createElement SimpleSelect,{
         "maxValues": 1
         "theme": "material"
@@ -45,7 +45,7 @@ Selected = React.createClass
         "id": that.props.type
         "options": that.props.options
         "tabindex": if that.props.type is 'from' then '2' else '3'
-        "tether": true 
+        "tether": true
         "tetherProps":
           "attachment": 'top center'
           "targetAttachment": 'bottom center'

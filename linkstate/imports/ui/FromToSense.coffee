@@ -1,4 +1,4 @@
-reactKup = require('react-kup')
+#reactKup = require('react-kup')
 {style} = require '../ui/style.coffee'
 SimpleSelect = require("react-selectize").SimpleSelect
 React = require 'react'
@@ -33,7 +33,7 @@ exports.FromToSense = React.createClass
           "word": that.props.word
           "type": 'to'
         }
-              
+
 
 TextAbout = React.createClass
   componentWillReceiveProps: ->
@@ -43,11 +43,11 @@ TextAbout = React.createClass
   render: ->
     window.textAbout = this
     that = this
-    # reactKup (k) ->
+    # #reactKup (k) ->
     React.createElement TextField,{
       "ref": 'MainCardTextInput'
       "autoFocus": true
-  
+
     onSelect: (e) ->
       if e.target.value.length < 1
         e.target.value = that.props.content

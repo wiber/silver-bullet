@@ -1,5 +1,5 @@
 # imports/ui/mexplain.coffee shows a slideshow untill a user makes two connections
-reactKup = require('react-kup')
+#reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
@@ -25,7 +25,7 @@ gifSlide = React.createClass
   componentDidMount: resetSlides
   render: ->
     that = this
-    # reactKup (k) ->
+    # #reactKup (k) ->
     div ->
       img
         id: 'Nuka'+that.props.slideNumber
@@ -42,7 +42,7 @@ gifSlide = React.createClass
 exports.Mexplain = React.createClass
   render: ->
     that = this
-    # reactKup (k) ->
+    # #reactKup (k) ->
     React.createElement Card,{
       "style": _.extend {}, style.card, style.yCard,
       "height": '470'

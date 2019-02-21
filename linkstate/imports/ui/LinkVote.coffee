@@ -1,4 +1,4 @@
-reactKup = require('react-kup')
+#reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
@@ -26,7 +26,7 @@ LinkVote = React.createClass
     directed: React.PropTypes.bool
   render: ->
     that = this
-    # reactKup (k) ->
+    # #reactKup (k) ->
     if that.props.meta?.weight?
       positionOffset = -50
       imgHeightFunc = (c) -> 50*(1/Math.pow(1.66,c-1))
@@ -67,4 +67,4 @@ LinkVote = React.createClass
             opacity: .5
             borderRadius: bullet
           src: that.props.meta.face.replace('http:','https:') if that?.props?.meta?.face?
-exports.LinkVote = LinkVote 
+exports.LinkVote = LinkVote

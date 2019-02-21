@@ -1,5 +1,5 @@
 {style} = require '../ui/style.coffee'
-reactKup = require('react-kup')
+#reactKup = require('react-kup')
 SimpleSelect = require("react-selectize").SimpleSelect
 React = require 'react'
 {changeQueryParams} = require('../api/ModelOperations.coffee')
