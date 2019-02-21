@@ -112,10 +112,9 @@ exports.Layout = React.createClass
               "newHere": that.props.newHere
               }
           else
-            React.createElement Mexplain, {
+            React.createElement Mexplain,
               "word": that.props.word
-              }
-          React.createElement AboutCard, {
+          React.createElement AboutCard,
               "expanded": that.props.expandAboutCard
               "to": that.props.to
               "from": that.props.from
@@ -123,7 +122,6 @@ exports.Layout = React.createClass
               "thumbalizr": that.props.thumbalizr
               "howMany": 15
               "user": that.props.user
-              }
           div
             className: 'columnR'
             style: _.extend {}, style.base,
