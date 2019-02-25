@@ -228,7 +228,50 @@ Meteor.methods
           format: 'png'
           quality: 80
     Meteor.call "Linking",
-      from: 'Linkstate.youiest.com/about'
+      from: catTree.categoryUrls.Bookmarks
+      #from: 'from' # the thing we are defining
+      #to: 'from' # the thing we're sending, where we are now
+      to: catTree.categoryUrls.from
+      meta:
+        title: "Where you are FROM -  Where you are now"
+        weight: 9
+        ScreenshotUrl: urlbox.buildUrl
+          url: catTree.categoryUrls.from
+          #url: 'en.wikipedia.org/wiki/bookmark'
+          thumb_width: 320
+          format: 'png'
+          quality: 80
+    Meteor.call "Linking",
+      from: catTree.categoryUrls.Bookmarks
+      #from: 'from' # the thing we are defining
+      #to: 'from' # the thing we're sending, where we are now
+      to: catTree.categoryUrls.to
+      meta:
+        title: "Point TO something to define it"
+        weight: 9
+        ScreenshotUrl: urlbox.buildUrl
+          url: catTree.categoryUrls.to
+          #url: 'en.wikipedia.org/wiki/bookmark'
+          thumb_width: 320
+          format: 'png'
+          quality: 80
+    # this one sets state for the app of what the select box should point to
+    Meteor.call "Linking",
+      from: catTree.categoryUrls.LinkstateHome
+      #from: 'from' # the thing we are defining
+      #to: 'from' # the thing we're sending, where we are now
+      to: catTree.categoryUrls.from
+      meta:
+        title: "Start out FROM here, go anywhere"
+        weight: 9
+        ScreenshotUrl: urlbox.buildUrl
+          url: catTree.categoryUrls.to
+          #url: 'en.wikipedia.org/wiki/bookmark'
+          thumb_width: 320
+          format: 'png'
+          quality: 80
+    Meteor.call "Linking",
+      from: catTree.categoryUrls.LinkstateHome
       to: catTree.categoryUrls.Bookmarks
       #to: 'Bookmarks' # the thing we're defining
       meta:

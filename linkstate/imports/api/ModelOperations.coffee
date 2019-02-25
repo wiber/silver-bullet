@@ -50,11 +50,17 @@ setOptions = (props) ->
 moS =
   bookmarks: 'links.in.Bookmarks.'
   title: 'meta.title'
+# we want a function that tells us what we are pointing to TO and to FROM
+categoryPointing = (category, user) ->
+  console.log category, user
+  def = R.prop user, ".links.in.to."+linkstate.catTree[category]
+  def
 setValue = (props, options) ->
 
   # what do we do if from isn't in bookmarks
   {user, from, to, type} = props
-  console.log props[type]
+  console.log props[type], categoryPointing(type, user),'categoryPointing'
+
   bookmarks = linkstate.getAllBookmarksDict user
   window.setValueState = {props,options,user} if window?
   bookmarkExistNot = !_.get bookmarks, linkstate.store(props[type])

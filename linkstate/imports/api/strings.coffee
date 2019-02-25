@@ -233,19 +233,25 @@ exports.changeQueryParamsObject = (changes) ->
   #R.mapObjIndexed changeFunc, changes
   for key, value of changes
     exports.changeQueryParams key, value
-
+# should be a function to return the keys if any?
 categoryTypes = [
   'Bookmarks'
   'Categories'
+  'from'
+  'to'
 ]
 bookmarkUrl = 'en.wikipedia.org/wiki/bookmark'
 linkstate.constants =
-  bookmarkUrl: bookmarkUrl
+  bookmarkUrl: 'en.wikipedia.org/wiki/bookmark'
 linkstate.categoryTypes = categoryTypes
 linkstate.catTree =
   categoryTypes: categoryTypes
   categoryUrls:
     Bookmarks: bookmarkUrl
+    from: 'https://poetrysociety.org.uk/poems/where-im-from/'
+    to: 'https://www.all-creatures.org/poetry/pointing.html'
+    Categories: 'https://www.reddit.com/r/askphilosophy/comments/6x8gg8/is_mathematical_category_theory_postmodern_or/'
+    LinkstateHome: 'Linkstate.youiest.com/about'
   ModelNamespaces:
     bookmarks: 'links.in.'+linkstate.store(bookmarkUrl)
 BookmarkPath = 'links.in.'+linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)
