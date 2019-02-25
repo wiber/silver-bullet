@@ -2,7 +2,7 @@ require('react/package.json')
 {Meteor} = require('meteor/meteor')
 #reactKup = require('react-kup')
 require '../imports/startup/configs/serviceconfiguration'
-require('/imports/startup/routes.coffee') # one way to turn off ssr
+import { xyz } from '../imports/startup/routes.coffee' # one way to turn off ssr
 require('../imports/startup/methods.coffee') # one way to turn off ssr
 require('../imports/startup/publish.coffee') # one way to turn off ssr
 {linkstate} = require '../imports/api/strings'

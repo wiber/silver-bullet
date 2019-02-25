@@ -1,7 +1,7 @@
 {wordLanguages} = require('../ui/WebCopy.coffee')
 language = 'eng'
 mount = require('react-mounter').mount
-{containerLayout} = require('../apx/Layout.coffee')
+import { containerLayout }  from  ('../api/Layout.coffee')
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 { HomePage } = require '../ui/HomePage.jsx'
 
@@ -31,3 +31,5 @@ FlowRouter.route '/home',
   name: 'home'
   action: (params, queryParams) ->
     mount HomePage
+
+exports.xyz = null
