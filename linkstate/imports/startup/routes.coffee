@@ -1,7 +1,7 @@
 {wordLanguages} = require('../ui/WebCopy.coffee')
 language = 'eng'
 mount = require('react-mounter').mount
-{containerLayout} = require('../api/Layout.coffee')
+{containerLayout} = require('../apx/Layout.coffee')
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 { HomePage } = require '../ui/HomePage.jsx'
 
@@ -9,8 +9,8 @@ FlowRouter.route '/about',
   name: 'home'
   action: (params, queryParams) ->
     if Meteor.userId()
-      mount containerLayout,
-        queryParams: queryParams # to optiomize redraw on changed params
+      # mount containerLayout,
+      #   queryParams: queryParams # to optiomize redraw on changed params
     else
       FlowRouter.go '/home'
 

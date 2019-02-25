@@ -7,12 +7,13 @@ ReactiveVar = require('meteor/reactive-var')
 require('../imports/startup/routes.coffee')
 require('../imports/startup/methods.coffee')
 #require('../imports/api/MainLayoutContainer.coffee')
-injectTapEventPlugin = require('react-tap-event-plugin')
+# injectTapEventPlugin = require('react-tap-event-plugin')
 @R = require('ramda')
-{Meteor}= require 'meteor/meteor'
+{Meteor} = require 'meteor/meteor'
+console.log(Meteor)
 require 'typeface-roboto'
 
-injectTapEventPlugin()
+# injectTapEventPlugin()
 lastLogin = () ->
   user = Meteor.user()
   if user?.services?.facebook?.link

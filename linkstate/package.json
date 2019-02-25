@@ -6,6 +6,7 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "@babel/runtime": "^7.3.1",
     "chai": "^3.5.0",
     "copy-to-clipboard": "^3.0.8",
     "create-react-class": "^15.6.2",
@@ -35,7 +36,7 @@
     "typeface-roboto": "0.0.54",
     "uri-js": "^3.0.2",
     "urijs": "^1.18.10",
-    "urlbox": "^1.3.1",
+    "urlbox": "^1.3.3",
     "utf8": "^3.0.0",
     "uuid": "^3.1.0"
   },

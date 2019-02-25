@@ -1,11 +1,10 @@
 
 {check} = require 'meteor/check'
 #Urlbox = require('urlbox').default
-`requireUrlbox from 'urlbox';`
+Urlbox = require 'urlbox'
 # Set your options
 Lo = require 'lodash'
-{linkstate} = require '../api/strings'
-console.log typeof linkstate
+{linkstate} = require('../api/strings')
 {catTree, categoryTypes} = linkstate
 R = require 'ramda'
 @storageEncode = (url) ->

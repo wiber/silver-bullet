@@ -1,5 +1,5 @@
-requireReact from 'react'
-requireReactDOM from 'react-dom'
+React = require("react")
+ReactDOM = require("react-dom")
 
 // class HomePage extends React.Component {
 //   render () {

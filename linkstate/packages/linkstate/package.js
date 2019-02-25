@@ -14,8 +14,9 @@ Package.onUse( function ( api ) {
   api.versionsFrom( '1.2.1' );
   api.use( [ 'ecmascript', 'mongo', 'accounts-base', 'coffeescript'] );
   api.use('tracker')
+  api.use('reactive-var')
   api.use('underscore')
-  api.use('peerlibrary:reactive-publish')
+  // api.use('peerlibrary:reactive-publish')
   api.addFiles(['lib/jsUrl.js'],['client','server']);
   api.addFiles( [ 'lib/collections.coffee', 'lib/methods.coffee' ] ,['client','server']);
   api.addFiles( [ 'lib/publish.coffee' ], [ 'server' ] );
