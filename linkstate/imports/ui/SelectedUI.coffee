@@ -30,49 +30,51 @@ Selected = React.createClass
     # #reactKup (k) ->
     div
       ref: 'dadiv'
-      "style": {
-        "overflow": 'hidden'
-        "textOverflow": "ellipsis"
-        "whiteSpace": "nowrap"
+      style: {
+        overflow: 'hidden'
+        textOverflow: "ellipsis"
+        whiteSpace: "nowrap"
       }
 
       React.createElement SimpleSelect,{
-        "maxValues": 1
-        "theme": "material"
-        "transitionEnter": true
-        "value": that.props.value
-        "ref": 'selecters'
-        "id": that.props.type
-        "options": that.props.options
-        "tabindex": if that.props.type is 'from' then '2' else '3'
-        "tether": true
-        "tetherProps":
-          "attachment": 'top center'
-          "targetAttachment": 'bottom center'
-        "hideResetButton": true
-        "style": {
-          "overflow": 'hidden'
-          "display": 'absolute'
-          "whiteSpace": "nowrap"
-          "maxWidth": '92%' #150
-          "minWidth": '89%'
-          "left": '11%'
+        maxValues: 1
+        theme: "material"
+        transitionEnter: true
+        value: that.props.value
+        ref: 'selecters'
+        id: that.props.type
+        options: that.props.options
+        tabindex: if that.props.type is 'from' then '2' else '3'
+        tether: true
+        tetherProps:
+          attachment: 'top center'
+          targetAttachment: 'bottom center'
+        hideResetButton: true
+        style: {
+          overflow: 'hidden'
+          display: 'absolute'
+          whiteSpace: "nowrap"
+          maxWidth: '92%' #150
+          minWidth: '89%'
+          left: '11%'
         }
         onBlur: () ->
           window.textAbout.refs.MainCardTextInput.focus()
         onValueChange: (val) ->
+          # this is the problem. use the user object instead of queryParams for state
+          # always and everywhere where it's having with the actual app to do
           if val.value.meta.FromLink
             changeQueryParams that.props.type, val.value.meta.FromLink
         renderValue: (item) ->
           span
-            "style":{
-              "textOverflow": "ellipsis"
-              "position": 'absolute'
-              "bottom": '0.4em'
-              "display": 'inline-block'
-              "overflow": "hidden"
-              "whiteSpace": 'nowrap'
-              "textAling": 'top'
+            style:{
+              textOverflow: "ellipsis"
+              position: 'absolute'
+              bottom: '0.4em'
+              display: 'inline-block'
+              overflow: "hidden"
+              whiteSpace: 'nowrap'
+              textAlign: 'top'
             }
             item.value.meta.title
       }
