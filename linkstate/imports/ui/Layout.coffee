@@ -39,18 +39,18 @@ exports.Layout = React.createClass
         xfbml: true
         version: 'v2.11'
       return
-    # if document?
-    #   ((d, s, id) ->
-    #     js = undefined
-    #     fjs = d.getElementsByTagName(s)[0]
-    #     if d.getElementById(id)
-    #       return
-    #     js = d.createElement(s)
-    #     js.id = id
-    #     js.src = 'https://connect.facebook.net/en_US/sdk.js'
-    #     fjs.parentNode.insertBefore js, fjs
-    #     return
-    #   ) document, 'script', 'facebook-jssdk'
+    if document?
+      ((d, s, id) ->
+        js = undefined
+        fjs = d.getElementsByTagName(s)[0]
+        if d.getElementById(id)
+          return
+        js = d.createElement(s)
+        js.id = id
+        js.src = 'https://connect.facebook.net/en_US/sdk.js'
+        fjs.parentNode.insertBefore js, fjs
+        return
+      ) document, 'script', 'facebook-jssdk'
     that = this
 
     try

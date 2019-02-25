@@ -10,8 +10,8 @@ FlowRouter.route '/about',
   name: 'home'
   action: (params, queryParams) ->
     if Meteor.userId()
-      # mount containerLayout,
-      #   queryParams: queryParams # to optiomize redraw on changed params
+      mount containerLayout,
+        queryParams: queryParams # to optiomize redraw on changed params
     else
       FlowRouter.go '/home'
 
