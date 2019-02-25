@@ -20,7 +20,7 @@ Edit =  require('material-ui/lib/svg-icons/editor/mode-edit').default
 FromIcon =  require('material-ui/lib/svg-icons/communication/call-received').default
 ToIcon =  require('material-ui/lib/svg-icons/communication/call-made').default
 ShareFacebookButton =  require('material-ui/lib/svg-icons/action/print').default
-`requirecopy from 'copy-to-clipboard';`
+copy = require 'copy-to-clipboard'
 Lo = require 'lodash'
 {shadowMoon} = require '../ui/ShadowMoon'
 
@@ -43,7 +43,7 @@ exports.MainCard = React.createClass
     # #reactKup (k) ->
     div
       className: 'xxx'
-      React.createElement Card, { "style": _.extend {}, style.card, style.mAcard },#"expanded": that.props.expanded,
+      React.createElement Card, { "style": _.extend {}, style.card, style.mAcard }, #"expanded": that.props.expanded,
         React.createElement CardHeader, {
           "title": HERE.title
           "subtitle": that.props.word.MainCardSubtitle

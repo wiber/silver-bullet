@@ -1,7 +1,8 @@
 {wordLanguages} = require('../ui/WebCopy.coffee')
 language = 'eng'
 mount = require('react-mounter').mount
-import { containerLayout }  from  ('../api/Layout.coffee')
+
+containerLayout = require('../api/Layout.coffee').containerLayout
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 { HomePage } = require '../ui/HomePage.jsx'
 

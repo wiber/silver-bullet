@@ -5,7 +5,8 @@ language = 'eng'
 {changeQueryParams} = require('../api/ModelOperations.coffee')
 #{URI} = require 'urijs'
 {newPlace, ifBodyContentHere, userSaved} = require '../api/ModelOperations'
-{ Meteor } from 'meteor/meteor'`
+
+{ Meteor } = require 'meteor/meteor'
 {linkstate} = require '../api/strings'
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams

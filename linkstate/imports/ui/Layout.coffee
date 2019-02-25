@@ -17,11 +17,11 @@ Card = require 'material-ui/lib/card/card'
 URI = require 'uri-js'
 MuiThemeProvider = require('material-ui/lib/MuiThemeProvider.js').default
 {lightBaseUsTheme, letsMeSeeTheme} = require('../ui/theme.coffee')
-`requireUrlbox from 'urlbox';`
+Urlbox = require 'urlbox'
 Lo = require 'lodash'
 {see, store, linkstate} = require '../api/strings'
 {screenshotUrlHere} = require '../api/ModelOperations'
-`requireCookieConsent, { Cookies } from "react-cookie-consent";`
+{ CookieConsent, Cookies } = require "react-cookie-consent"
 #{CookieConsent} = require "react-cookie-consent"
 
 {div, a,} = React.DOM
@@ -39,18 +39,18 @@ exports.Layout = React.createClass
         xfbml: true
         version: 'v2.11'
       return
-    if document?
-      ((d, s, id) ->
-        js = undefined
-        fjs = d.getElementsByTagName(s)[0]
-        if d.getElementById(id)
-          return
-        js = d.createElement(s)
-        js.id = id
-        js.src = 'https://connect.facebook.net/en_US/sdk.js'
-        fjs.parentNode.insertBefore js, fjs
-        return
-      ) document, 'script', 'facebook-jssdk'
+    # if document?
+    #   ((d, s, id) ->
+    #     js = undefined
+    #     fjs = d.getElementsByTagName(s)[0]
+    #     if d.getElementById(id)
+    #       return
+    #     js = d.createElement(s)
+    #     js.id = id
+    #     js.src = 'https://connect.facebook.net/en_US/sdk.js'
+    #     fjs.parentNode.insertBefore js, fjs
+    #     return
+    #   ) document, 'script', 'facebook-jssdk'
     that = this
 
     try

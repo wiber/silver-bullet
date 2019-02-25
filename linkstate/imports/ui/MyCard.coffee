@@ -28,7 +28,7 @@ Avatar = require('material-ui/lib/avatar').default
 # TODO functional testable convenience functions, like strings, for math and attribute getting
 Lo = require 'lodash'
 {see, store, linkstate} = require '../api/strings'
-`require{
+{
   FacebookShareButton,
   GooglePlusShareButton,
   LinkedinShareButton,
@@ -45,8 +45,8 @@ Lo = require 'lodash'
   ViberShareButton,
   WorkplaceShareButton,
   EmailShareButton,
-} from 'react-share';`
-`require{
+} = require 'react-share'
+{
   FacebookIcon,
   TwitterIcon,
   TelegramIcon,
@@ -63,7 +63,7 @@ Lo = require 'lodash'
   ViberIcon,
   WorkplaceIcon,
   EmailIcon,
-} from 'react-share';`
+} = require 'react-share'
 
 exports.MyCard = React.createClass
   getDefaultProps: ->
