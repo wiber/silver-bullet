@@ -21,16 +21,15 @@ Urlbox = require 'urlbox'
 Lo = require 'lodash'
 {see, store, linkstate} = require '../api/strings'
 {screenshotUrlHere} = require '../api/ModelOperations'
-{ CookieConsent, Cookies } = require "react-cookie-consent"
+CookieConsent = require "react-cookie-consent"
 #{CookieConsent} = require "react-cookie-consent"
-
+# console.log("Nicolson here..")
+# console.log(CookieConsent)
 {div, a,} = React.DOM
 
 exports.Layout = React.createClass
   getDefaultProps: ->
     expandMainCard: true
-  componentDidMount: ->
-
   render: ->
     window.fbAsyncInit = ->
       FB.init
@@ -132,6 +131,6 @@ exports.Layout = React.createClass
               "To use this app properly you need the chrome extension. Download, extract it and chrome://extensions unpacked."
             div
               React.createElement AccountsUIWrapper, {}
-            div
-              id: 'fb-root'
-              React.createElement CookieConsent, {}
+            # div
+            #   id: 'fb-root'
+            #   React.createElement CookieConsent, {}
