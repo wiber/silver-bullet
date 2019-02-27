@@ -8,58 +8,21 @@ vDict = {}
 {changeQueryParams} = require '../api/changeQueryParams'
 {see, store, linkstate} = require '../api/strings'
 {catTree} = linkstate
-
-
-hereAndThere = (user, props) ->
-  {from,to, user} = props
-  HERE = _.get user, 'links.in.' + catTree.bookmarkUrl + '.' + linkstate.store(from)
-  HereScreenshotUrl = _.get HERE, 'meta.ScreenshotUrl'
-  unless HERE?
-    HERE =
-      title: props.lastTitle
-      from: props.from
-    console.log 'we are noplace', HERE
-  bookmarkDict = linkstate.getAllBookmarksDict props.user
-  targetO = _.get bookmarkDict, linkstate.store(to) #bookmarkDict[linkstate.store(to)]
-  THERE = _.get bookmarkDict, linkstate.store(to)
-  ThereScreenshotUrl = _.get targetO, 'meta.ScreenshotUrl'
-  return {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl}
-
-# we need a tested way to extract select options, and a particular option selected among them
-setOptions = (props) ->
-  options = []
-  if props.user?.links?.in?
-    # how titles get into selectize
-    bookmarks = linkstate.getAllBookmarksDict props.user
-    deChaos = linkstate.sortByKeysTime(bookmarks)
-    for index, value of deChaos
-      continue if typeof value is not 'string'
-      continue if value is 'undefined'
-      continue unless bookmarks[value]?.meta?.title?
-      #continue unless dictWithCreatedAt[value].meta.weight > 0
-      selectItem =
-        label: bookmarks[value].meta.title
-        value: bookmarks[value]
-      options.push selectItem
-  #console.log options.length, props
-  options
-
-#FIXME does not select value when from a place
-# to set value we need to know which type of select,
-# which type of select we have
 moS =
   bookmarks: 'links.in.Bookmarks.'
   title: 'meta.title'
 # we want a function that tells us what we are pointing to TO and to FROM
 categoryPointing = (category, user) ->
-  console.log category, user
+  console.log category
   def = R.prop user, ".links.in.to."+linkstate.catTree[category]
+  console.log def, categoryPointing
   def
 setValue = (props, options) ->
 
   # what do we do if from isn't in bookmarks
   {user, from, to, type} = props
-  console.log props[type], categoryPointing(type, user),'categoryPointing'
+  console.log props[type], categoryPointing(type, user)
+  ,'categoryPointing',categoryPointing('from', user)
 
   bookmarks = linkstate.getAllBookmarksDict user
   window.setValueState = {props,options,user} if window?
@@ -115,6 +78,41 @@ newPlace = (user, queryParams, bookmarked) ->
   else
     return false
 
+
+
+hereAndThere = (user, props) ->
+  {from,to, user} = props
+  HERE = _.get user, 'links.in.' + catTree.bookmarkUrl + '.' + linkstate.store(from)
+  HereScreenshotUrl = _.get HERE, 'meta.ScreenshotUrl'
+  unless HERE?
+    HERE =
+      title: props.lastTitle
+      from: props.from
+    console.log 'we are noplace', HERE
+  bookmarkDict = linkstate.getAllBookmarksDict props.user
+  targetO = _.get bookmarkDict, linkstate.store(to) #bookmarkDict[linkstate.store(to)]
+  THERE = _.get bookmarkDict, linkstate.store(to)
+  ThereScreenshotUrl = _.get targetO, 'meta.ScreenshotUrl'
+  return {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl}
+
+# we need a tested way to extract select options, and a particular option selected among them
+setOptions = (props) ->
+  options = []
+  if props.user?.links?.in?
+    # how titles get into selectize
+    bookmarks = linkstate.getAllBookmarksDict props.user
+    deChaos = linkstate.sortByKeysTime(bookmarks)
+    for index, value of deChaos
+      continue if typeof value is not 'string'
+      continue if value is 'undefined'
+      continue unless bookmarks[value]?.meta?.title?
+      #continue unless dictWithCreatedAt[value].meta.weight > 0
+      selectItem =
+        label: bookmarks[value].meta.title
+        value: bookmarks[value]
+      options.push selectItem
+  #console.log options.length, props
+  options
 
 userSaved = (userE, queryParams, client) ->
   user = {}

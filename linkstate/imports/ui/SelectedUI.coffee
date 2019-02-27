@@ -51,8 +51,21 @@ Selected = React.createClass
         onValueChange: (val) ->
           # this is the problem. use the user object instead of queryParams for state
           # always and everywhere where it's having with the actual app to do
+          # how do we update user when we are from (switchedPlace)
           if val.value.meta.FromLink
-            changeQueryParams that.props.type, val.value.meta.FromLink
+            #changeQueryParams that.props.type, val.value.meta.FromLink
+            payload =
+              from: val.value.meta.FromLink
+              to: catTree.categoryUrls[that.props.type]
+              meta:
+                title: new Date().getTime() + ' changed Select'
+            # we only point to places and swap pointing for being from now
+            # TODO rewrite swap  button. swap model.
+            # some way to check if we have new queryParamsState is needed.
+            Meteor.call 'Linking', payload, (error, result) ->
+              console.log error, result, 'categorySelect', that.props.type, payload
+
+
         hideResetButton: true
         style:
           overflow: 'hidden'
