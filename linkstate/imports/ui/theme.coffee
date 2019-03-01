@@ -79,6 +79,6 @@ letsMeSeeTheme =
     shadowColor: fullBlack
   userAgent: 'all'
 
-getMuiTheme = require('material-ui/lib/styles/getMuiTheme').default
+getMuiTheme = require('material-ui/styles/getMuiTheme').default
 exports.lightBaseUsTheme = getMuiTheme(lightBaseUsThemeO)
 exports.letsMeSeeTheme = getMuiTheme(letsMeSeeTheme)

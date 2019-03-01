@@ -2,18 +2,18 @@
 #reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
-{changeQueryParams} = require('../api/changeQueryParams.coffee')
-Card = require('material-ui/lib/card/card').default
-CardActions = require('material-ui/lib/card/card-actions' ).default
-CardHeader = require('material-ui/lib/card/card-header').default
-CardMedia = require('material-ui/lib/card/card-media').default
-CardTitle = require('material-ui/lib/card/card-title').default
-{Subheader} = require 'material-ui/lib/Subheader'
-{StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
+# {changeQueryParams} = require('../api/changeQueryParams.coffee')
+Card = require('@material-ui/core/Card').default
+# CardActions = require('material-ui/lib/card/card-actions' ).default
+CardHeader = require('@material-ui/core/CardHeader').default
+# CardMedia = require('material-ui/lib/card/card-media').default
+# CardTitle = require('material-ui/lib/card/card-title').default
+# {Subheader} = require 'material-ui/lib/Subheader'
+# {StarBorder} = require 'material-ui/lib/svg-icons/toggle/star-border'
 Slider = require('nuka-carousel')
-CardText =  require('material-ui/lib/card/card-text').default
+CardText =  require('@material-ui/core/CardContent').default #change CardText To CardContent
 # set the attr to a still on all, then, swap in the live one.. else flicker
-{AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
+# # {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 
 resetSlides = () ->
   for e in $('.gifSlide')

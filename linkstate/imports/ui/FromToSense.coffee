@@ -1,12 +1,12 @@
 #reactKup = require('react-kup')
 {style} = require '../ui/style.coffee'
-SimpleSelect = require("react-selectize").SimpleSelect
+# SimpleSelect = require("react-selectize").SimpleSelect
 React = require 'react'
 {changeQueryParams} = require '../api/changeQueryParams.coffee'
 # ui object calling a container.. not great?
 selectedContainer = require('../api/Selected.coffee').selectedContainer
-{see} = require '../api/strings.coffee'
-TextField = require('material-ui/lib/TextField').default
+# {see} = require '../api/strings.coffee'
+TextField = require('material-ui/lib/TextField').default #not working @material-ui/core/TextField
 
 
 {div, a,} = React.DOM

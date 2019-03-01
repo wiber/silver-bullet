@@ -1,7 +1,7 @@
 R = require('ramda')
 linkstate = {}
 _ = require 'lodash'
-Urlbox = require 'urlbox'
+# Urlbox = require 'urlbox'
 
 #exports.urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
 

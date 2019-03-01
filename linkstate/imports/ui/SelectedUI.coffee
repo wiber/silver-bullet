@@ -3,10 +3,10 @@
 SimpleSelect = require("react-selectize").SimpleSelect
 React = require 'react'
 {changeQueryParams} = require('../api/changeQueryParams.coffee')
-{see, store} = require '../api/strings.coffee'
-IconButton = require('material-ui/lib/icon-button').default
-FromIcon =  require('material-ui/lib/svg-icons/communication/call-received').default
-ToIcon =  require('material-ui/lib/svg-icons/communication/call-made').default
+# {see, store} = require '../api/strings.coffee'
+IconButton = require('material-ui/lib/icon-button').default #not working @material-ui/core/IconButton
+FromIcon =  require('material-ui/lib/svg-icons/communication/call-received').default #not in material-ui default-@material-ui/core/Icon
+ToIcon =  require('material-ui/lib/svg-icons/communication/call-made').default #not in material-ui
 
 Selected = React.createClass
   propTypes: (props) ->

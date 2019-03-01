@@ -4,10 +4,10 @@
 # Builds the FROM and TO boxes from user object and props from queryparams
 # from and to are plain decodeURIComponent urls
 # which are then used to select defaultValue in the stateless ui component
-{changeQueryParams} = require('../api/changeQueryParams.coffee')
+# {changeQueryParams} = require('../api/changeQueryParams.coffee')
 Selected = require('../ui/SelectedUI.coffee').Selected
 {createContainer} = require 'meteor/react-meteor-data'
-{linkstate, see, store} = require '../api/strings.coffee'
+# {linkstate, see, store} = require '../api/strings.coffee'
 {setOptions, setValue} = require '../api/ModelOperations'
 # goes through a simple loop
 #that builds list of objects from a number of sources.
