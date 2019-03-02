@@ -56,7 +56,7 @@ Selected = React.createClass
             #changeQueryParams that.props.type, val.value.meta.FromLink
             payload =
               from: val.value.meta.FromLink
-              to: catTree.categoryUrls[that.props.type]
+              to: catTree.categoryUrls[that.props.type] # to usually..
               meta:
                 title: new Date().getTime() + ' changed Select'
             # we only point to places and swap pointing for being from now

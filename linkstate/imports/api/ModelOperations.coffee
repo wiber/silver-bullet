@@ -12,18 +12,39 @@ moS =
   bookmarks: 'links.in.Bookmarks.'
   title: 'meta.title'
 # we want a function that tells us what we are pointing to TO and to FROM
+window = {} if !window
 categoryPointing = (category, user) ->
-  console.log category
-  def = R.prop user, ".links.in.to."+linkstate.catTree[category]
-  console.log def, categoryPointing
-  def
+  # impossible as many of mine can point.. from last and tolast is required unles..
+  # we use a meta field...
+  # how can we ensure only one.. must be a three way T..
+  # use toLast for this.. fixes?
+  # another facility is needed. either a T connection or
+  # extend method that user keeps track of last time connection to a
+  # definitional place was created user.definitions.from = last url from
+
+  S = {category, user}
+  S.cat = catTree.categoryUrls[category]
+  S.def = R.prop user, "links.out."+linkstate.store(S.cat)
+  for type in ['from', 'to']
+    S['path'+'.'+type] = linkstate.store(linkstate.catTree.categoryUrls.from)
+  S.pointState =
+    from: R.prop ".links.in."+linkstate.store(linkstate.catTree.categoryUrls.from), user
+    to: R.prop "links.in."+linkstate.catTree.categoryUrls.to, user
+  S.pointLast = R.prop category+'Last', user
+  S.pointCat = user[category+'Last']
+  console.log user["links.in."+linkstate.store(linkstate.catTree.categoryUrls.from)]
+  #S.catMark = R.prop links.in
+  console.log S,'category pointState S'
+  window.S = S
+  S.def
+  S.pointLast
 setValue = (props, options) ->
 
   # what do we do if from isn't in bookmarks
   {user, from, to, type} = props
   console.log props[type], categoryPointing(type, user)
   ,'categoryPointing',categoryPointing('from', user)
-
+  categoryPointing = categoryPointing('from', user)
   bookmarks = linkstate.getAllBookmarksDict user
   window.setValueState = {props,options,user} if window?
   bookmarkExistNot = !_.get bookmarks, linkstate.store(props[type])
@@ -214,6 +235,7 @@ changeQueryParamsObject = (changes) ->
 screenshotUrlHere = (user, from) ->
   R.prop user, 'links.in.Bookmarks'+linkstate.store(from)+'meta.ScreenshotUrl'
 
+exports.categoryPointing = categoryPointing
 exports.changeQueryParamsObject= changeQueryParamsObject
 exports.changeQueryParams = changeQueryParams
 exports.hereAndThere = hereAndThere

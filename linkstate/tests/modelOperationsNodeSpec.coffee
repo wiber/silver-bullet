@@ -1,5 +1,12 @@
 {AByMomentum, listByMomentum, linkstate} = require('../imports/api/strings')
-{setOptions, setValue, userSaved, newPlace, ifBodyContentHere} = require('../imports/api/ModelOperations')
+{
+  setOptions,
+  setValue,
+  userSaved,
+  newPlace,
+  ifBodyContentHere,
+  categoryPointing
+} = require('../imports/api/ModelOperations')
 
 chai = require('chai')
 expect = chai.expect
@@ -1984,7 +1991,7 @@ userOld =
   'hits': 680
   'fromLast': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
   'toLast': 'Linkstate.youiest.com/about'
-user =
+usern =
   '_id': 'S54FphiBzL3KueFF4'
   'profile': 'name': 'Elias Moosman'
   'createdAt': '2018-01-11T05:57:30.482Z'
@@ -2409,6 +2416,668 @@ user =
   'hits': 747
   'fromLast': 'https://www.facebook.com/app_scoped_user_id/10154232419354595/'
   'toLast': 'Linkstate.youiest.com/about'
+user =
+  '_id': 'Yghxgiur6M23KpHNF'
+  'profile': 'name': 'Elias Moosman'
+  'createdAt': '2019-02-21T02:28:20.101Z'
+  'services':
+    'facebook':
+      'expiresAt': 1555900099673
+      'id': '10154232419354595'
+      'email': 'eliasmoosman@gmail.com'
+      'name': 'Elias Moosman'
+      'first_name': 'Elias'
+      'last_name': 'Moosman'
+    'thumbalizr': null
+  'edited': 1551251346605
+  'fromLast': 'https://v0.material-ui.com/v0.15.0/#/components/grid-list'
+  'toLast': 'https://www.all-creatures.org/poetry/pointing.html'
+  'links':
+    'out':
+      'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+        'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+          'from': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'title': 'Bookmarks - and other placeholders'
+            'weight': 9
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'en.wikipedia.org/wiki/bookmark'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551102973012
+          'title': 'Bookmarks - and other placeholders'
+        'https%3A%2F%2Fpoetrysociety%2Eorg%2Euk%2Fpoems%2Fwhere-im-from%2F':
+          'from': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'to': 'https%3A%2F%2Fpoetrysociety%2Eorg%2Euk%2Fpoems%2Fwhere-im-from%2F'
+          'meta':
+            'title': 'Where you are FROM -  Where you are now'
+            'weight': 9
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'en.wikipedia.org/wiki/bookmark'
+            'ToLink': 'https://poetrysociety.org.uk/poems/where-im-from/'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/5b1a56bf3d77d0b8b9d2d24923afc6f12de2f485/png?url=https%3A%2F%2Fpoetrysociety.org.uk%2Fpoems%2Fwhere-im-from%2F&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551102973116
+          'title': 'Where you are FROM -  Where you are now'
+        'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml':
+          'from': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'to': 'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml'
+          'meta':
+            'title': '1551247308540 changed Select'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'en.wikipedia.org/wiki/bookmark'
+            'ToLink': 'https://www.all-creatures.org/poetry/pointing.html'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/6c46e40f8c9aad26b5a4d0f97775854fb5d029f2/png?url=https%3A%2F%2Fwww.all-creatures.org%2Fpoetry%2Fpointing.html&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551247308575
+          'title': '1551247308540 changed Select'
+      'Linkstate%2Eyouiest%2Ecom%2Fabout':
+        'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+          'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'title': 'Linkstate - Connecting is seeing'
+            'weight': 7
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'Linkstate.youiest.com/about'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551102973335
+          'title': 'Linkstate - Connecting is seeing'
+        'Linkstate%2Eyouiest%2Ecom%2Fabout':
+          'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'to': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'meta':
+            'title': 'Linkstate - Connecting is seeing'
+            'weight': 8
+            'body': 'The fate of bookmarks can tell us a lot about Linkstate'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'Linkstate.youiest.com/about'
+            'ToLink': 'Linkstate.youiest.com/about'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551102973399
+          'title': 'Linkstate - Connecting is seeing'
+        'https%3A%2F%2Fpoetrysociety%2Eorg%2Euk%2Fpoems%2Fwhere-im-from%2F':
+          'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'to': 'https%3A%2F%2Fpoetrysociety%2Eorg%2Euk%2Fpoems%2Fwhere-im-from%2F'
+          'meta':
+            'title': 'Start out FROM here, go anywhere'
+            'weight': 9
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'Linkstate.youiest.com/about'
+            'ToLink': 'https://poetrysociety.org.uk/poems/where-im-from/'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/5b1a56bf3d77d0b8b9d2d24923afc6f12de2f485/png?url=https%3A%2F%2Fpoetrysociety.org.uk%2Fpoems%2Fwhere-im-from%2F&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551102973264
+          'title': 'Start out FROM here, go anywhere'
+        'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml':
+          'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'to': 'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml'
+          'meta':
+            'title': '1551247375112 changed Select'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'Linkstate.youiest.com/about'
+            'ToLink': 'https://www.all-creatures.org/poetry/pointing.html'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/6c46e40f8c9aad26b5a4d0f97775854fb5d029f2/png?url=https%3A%2F%2Fwww.all-creatures.org%2Fpoetry%2Fpointing.html&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551247375146
+          'title': '1551247375112 changed Select'
+      'https%3A%2F%2Flinkstate%2Eyouiest%2Ecom%2F': 'Linkstate%2Eyouiest%2Ecom%2Fabout':
+        'from': 'https%3A%2F%2Flinkstate%2Eyouiest%2Ecom%2F'
+        'to': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+        'meta':
+          'body': 'where are we now? this rocks'
+          'weight': 9
+          'title': 'https://linkstate.youiest.com/ to Linkstate.youiest.com/about'
+          'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+          'profileLink': null
+          'FromLink': 'https://linkstate.youiest.com/'
+          'ToLink': 'Linkstate.youiest.com/about'
+          'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/9bb776fd6ad4b92f85d2e78a588007476f02ab83/png?url=https%3A%2F%2Flinkstate.youiest.com%2F&thumb_width=320&quality=80'
+          'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+        'author': 'Yghxgiur6M23KpHNF'
+        'createdAt': 1550716304661
+        'title': 'https://linkstate.youiest.com/ to Linkstate.youiest.com/about'
+      'https%3A%2F%2Fgithub%2Ecom%2Fmeteor%2Fmeteor%2Fissues%2F9284': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+        'from': 'https%3A%2F%2Fgithub%2Ecom%2Fmeteor%2Fmeteor%2Fissues%2F9284'
+        'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+        'meta':
+          'weight': 5
+          'title': 'Update all-packages doesn’t always work · Issue #9284 · meteor/meteor'
+          'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+          'profileLink': null
+          'FromLink': 'https://github.com/meteor/meteor/issues/9284'
+          'ToLink': 'en.wikipedia.org/wiki/bookmark'
+          'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/521c65fb55c901ec9a88d44a677f2f3af9d75490/png?url=https%3A%2F%2Fgithub.com%2Fmeteor%2Fmeteor%2Fissues%2F9284&thumb_width=320&quality=80'
+          'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+        'author': 'Yghxgiur6M23KpHNF'
+        'createdAt': 1550716987678
+        'title': 'Update all-packages doesn’t always work · Issue #9284 · meteor/meteor'
+      'https%3A%2F%2Fdiscuss%2Eatom%2Eio%2Ft%2Fenable-vertical-lines-in-code%2F10064':
+        'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+          'from': 'https%3A%2F%2Fdiscuss%2Eatom%2Eio%2Ft%2Fenable-vertical-lines-in-code%2F10064'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'weight': 5
+            'title': 'Enable vertical lines in code - support - Atom Discussion'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'https://discuss.atom.io/t/enable-vertical-lines-in-code/10064'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/3b59b593a84d87a36ff43a7ccd5028ab49bb3a37/png?url=https%3A%2F%2Fdiscuss.atom.io%2Ft%2Fenable-vertical-lines-in-code%2F10064&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1550717096663
+          'title': 'Enable vertical lines in code - support - Atom Discussion'
+        'Linkstate%2Eyouiest%2Ecom%2Fabout':
+          'from': 'https%3A%2F%2Fdiscuss%2Eatom%2Eio%2Ft%2Fenable-vertical-lines-in-code%2F10064'
+          'to': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'meta':
+            'body': 'use these if the soft tabs are troublesome'
+            'weight': 6
+            'title': 'https://discuss.atom.io/t/enable-vertical-lines-in-code/10064 to Linkstate.youiest.com/about'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'https://discuss.atom.io/t/enable-vertical-lines-in-code/10064'
+            'ToLink': 'Linkstate.youiest.com/about'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/3b59b593a84d87a36ff43a7ccd5028ab49bb3a37/png?url=https%3A%2F%2Fdiscuss.atom.io%2Ft%2Fenable-vertical-lines-in-code%2F10064&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551091649203
+          'title': 'https://discuss.atom.io/t/enable-vertical-lines-in-code/10064 to Linkstate.youiest.com/about'
+      'http%3A%2F%2Fvim%2Ewikia%2Ecom%2Fwiki%2FMove_to_next%2Fprevious_line_with_same_indentation': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+        'from': 'http%3A%2F%2Fvim%2Ewikia%2Ecom%2Fwiki%2FMove_to_next%2Fprevious_line_with_same_indentation'
+        'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+        'meta':
+          'weight': 5
+          'title': 'Move to next/previous line with same indentation | Vim Tips Wiki | FANDOM powered by Wikia'
+          'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+          'profileLink': null
+          'FromLink': 'http://vim.wikia.com/wiki/Move_to_next/previous_line_with_same_indentation'
+          'ToLink': 'en.wikipedia.org/wiki/bookmark'
+          'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/2bd75bc6e1220af37e377edb364913c6d45fba5d/png?url=http%3A%2F%2Fvim.wikia.com%2Fwiki%2FMove_to_next%2Fprevious_line_with_same_indentation&thumb_width=320&quality=80'
+          'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+        'author': 'Yghxgiur6M23KpHNF'
+        'createdAt': 1550717137481
+        'title': 'Move to next/previous line with same indentation | Vim Tips Wiki | FANDOM powered by Wikia'
+      'https%3A%2F%2Fatom%2Eio%2Fpackages%2Fnavigate-indent': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+        'from': 'https%3A%2F%2Fatom%2Eio%2Fpackages%2Fnavigate-indent'
+        'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+        'meta':
+          'weight': 5
+          'title': 'navigate-indent'
+          'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+          'profileLink': null
+          'FromLink': 'https://atom.io/packages/navigate-indent'
+          'ToLink': 'en.wikipedia.org/wiki/bookmark'
+          'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/e769b956d165db94309956ca0423456a7136b073/png?url=https%3A%2F%2Fatom.io%2Fpackages%2Fnavigate-indent&thumb_width=320&quality=80'
+          'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+        'author': 'Yghxgiur6M23KpHNF'
+        'createdAt': 1550992319613
+        'title': 'navigate-indent'
+      'undefined': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+        'from': 'undefined'
+        'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+        'meta':
+          'weight': 5
+          'title': 'navigate-indent'
+          'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+          'profileLink': null
+          'FromLink': 'undefined'
+          'ToLink': 'en.wikipedia.org/wiki/bookmark'
+          'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/e36e4d43c113260704292590a678e0d4e02d257d/png?url=undefined&thumb_width=320&quality=80'
+          'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+        'author': 'Yghxgiur6M23KpHNF'
+        'createdAt': 1550992325401
+        'title': 'navigate-indent'
+      'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Flinkstate%2Eyouiest%2Ecom%25252F%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3DLinkstate%2Eyouiest%2Ecom%25252Fabout%26content%3D': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+        'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Flinkstate%2Eyouiest%2Ecom%25252F%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3DLinkstate%2Eyouiest%2Ecom%25252Fabout%26content%3D'
+        'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+        'meta':
+          'weight': 5
+          'title': 'localhost'
+          'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+          'profileLink': null
+          'FromLink': 'http://localhost:3000/about?from=https%253A%252F%252Flinkstate.youiest.com%252F&lastTitle=Linkstates&Bookmarked=true&to=Linkstate.youiest.com%252Fabout&content='
+          'ToLink': 'en.wikipedia.org/wiki/bookmark'
+          'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/126734b050f9ee83e6ace5d4e7d4fed6fe0952ba/png?url=http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Flinkstate.youiest.com%25252F%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3DLinkstate.youiest.com%25252Fabout%26content%3D&thumb_width=320&quality=80'
+          'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+        'author': 'Yghxgiur6M23KpHNF'
+        'createdAt': 1551091265625
+        'title': 'localhost'
+      'https%3A%2F%2Ftrello%2Ecom%2Fb%2F1TlrrWNS%2Flinkstate':
+        'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+          'from': 'https%3A%2F%2Ftrello%2Ecom%2Fb%2F1TlrrWNS%2Flinkstate'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'weight': 5
+            'title': 'linkstate | Trello'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'https://trello.com/b/1TlrrWNS/linkstate'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/de623d59fcd09be7bcdd5d5af67340bfe2696d35/png?url=https%3A%2F%2Ftrello.com%2Fb%2F1TlrrWNS%2Flinkstate&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551177445308
+          'title': 'linkstate | Trello'
+        'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml':
+          'from': 'https%3A%2F%2Ftrello%2Ecom%2Fb%2F1TlrrWNS%2Flinkstate'
+          'to': 'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml'
+          'meta':
+            'title': '1551251312743 changed Select'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'https://trello.com/b/1TlrrWNS/linkstate'
+            'ToLink': 'https://www.all-creatures.org/poetry/pointing.html'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/de623d59fcd09be7bcdd5d5af67340bfe2696d35/png?url=https%3A%2F%2Ftrello.com%2Fb%2F1TlrrWNS%2Flinkstate&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/6c46e40f8c9aad26b5a4d0f97775854fb5d029f2/png?url=https%3A%2F%2Fwww.all-creatures.org%2Fpoetry%2Fpointing.html&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551251312802
+          'title': '1551251312743 changed Select'
+      'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fdiscuss%2Eatom%2Eio%25252Ft%25252Fenable-vertical-lines-in-code%25252F10064%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3Dhttps%25253A%25252F%25252Fgithub%2Ecom%25252Fmeteor%25252Fmeteor%25252Fissues%25252F9284%26content%3D%26switched%3D':
+        'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+          'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fdiscuss%2Eatom%2Eio%25252Ft%25252Fenable-vertical-lines-in-code%25252F10064%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3Dhttps%25253A%25252F%25252Fgithub%2Ecom%25252Fmeteor%25252Fmeteor%25252Fissues%25252F9284%26content%3D%26switched%3D'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'weight': 5
+            'title': 'localhost:3000/about?from=https%253A%252F%252Fdiscuss.atom.io%252Ft%252Fenable-vertical-lines-in-code%252F10064&lastTitle=Linkstates&Bookmarked=true&to=https%253A%252F%252Fgithub.com%252Fmeteor%252Fmeteor%252Fissues%252F9284&content=&switched='
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'http://localhost:3000/about?from=https%253A%252F%252Fdiscuss.atom.io%252Ft%252Fenable-vertical-lines-in-code%252F10064&lastTitle=Linkstates&Bookmarked=true&to=https%253A%252F%252Fgithub.com%252Fmeteor%252Fmeteor%252Fissues%252F9284&content=&switched='
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/5c5f6c3aab62f848d89dada6b02e150add1fa85d/png?url=http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fdiscuss.atom.io%25252Ft%25252Fenable-vertical-lines-in-code%25252F10064%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3Dhttps%25253A%25252F%25252Fgithub.com%25252Fmeteor%25252Fmeteor%25252Fissues%25252F9284%26content%3D%26switched%3D&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551107689032
+          'title': 'localhost:3000/about?from=https%253A%252F%252Fdiscuss.atom.io%252Ft%252Fenable-vertical-lines-in-code%252F10064&lastTitle=Linkstates&Bookmarked=true&to=https%253A%252F%252Fgithub.com%252Fmeteor%252Fmeteor%252Fissues%252F9284&content=&switched='
+        'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml':
+          'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fdiscuss%2Eatom%2Eio%25252Ft%25252Fenable-vertical-lines-in-code%25252F10064%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3Dhttps%25253A%25252F%25252Fgithub%2Ecom%25252Fmeteor%25252Fmeteor%25252Fissues%25252F9284%26content%3D%26switched%3D'
+          'to': 'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml'
+          'meta':
+            'title': '1551247283563 changed Select'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'http://localhost:3000/about?from=https%253A%252F%252Fdiscuss.atom.io%252Ft%252Fenable-vertical-lines-in-code%252F10064&lastTitle=Linkstates&Bookmarked=true&to=https%253A%252F%252Fgithub.com%252Fmeteor%252Fmeteor%252Fissues%252F9284&content=&switched='
+            'ToLink': 'https://www.all-creatures.org/poetry/pointing.html'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/5c5f6c3aab62f848d89dada6b02e150add1fa85d/png?url=http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fdiscuss.atom.io%25252Ft%25252Fenable-vertical-lines-in-code%25252F10064%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3Dhttps%25253A%25252F%25252Fgithub.com%25252Fmeteor%25252Fmeteor%25252Fissues%25252F9284%26content%3D%26switched%3D&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/6c46e40f8c9aad26b5a4d0f97775854fb5d029f2/png?url=https%3A%2F%2Fwww.all-creatures.org%2Fpoetry%2Fpointing.html&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551247283589
+          'title': '1551247283563 changed Select'
+      'https%3A%2F%2Fv0%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0%2F%23%2Fcomponents%2Fgrid-list':
+        'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+          'from': 'https%3A%2F%2Fv0%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0%2F%23%2Fcomponents%2Fgrid-list'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'weight': 5
+            'title': 'Grid List - Material-UI'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'https://v0.material-ui.com/v0.15.0/#/components/grid-list'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/67a1d4fcc0096c500f5dbfa86776eafde01c2d8c/png?url=https%3A%2F%2Fv0.material-ui.com%2Fv0.15.0%2F%23%2Fcomponents%2Fgrid-list&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551110582632
+          'title': 'Grid List - Material-UI'
+        'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml':
+          'from': 'https%3A%2F%2Fv0%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0%2F%23%2Fcomponents%2Fgrid-list'
+          'to': 'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml'
+          'meta':
+            'title': '1551251346559 changed Select'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'https://v0.material-ui.com/v0.15.0/#/components/grid-list'
+            'ToLink': 'https://www.all-creatures.org/poetry/pointing.html'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/67a1d4fcc0096c500f5dbfa86776eafde01c2d8c/png?url=https%3A%2F%2Fv0.material-ui.com%2Fv0.15.0%2F%23%2Fcomponents%2Fgrid-list&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/6c46e40f8c9aad26b5a4d0f97775854fb5d029f2/png?url=https%3A%2F%2Fwww.all-creatures.org%2Fpoetry%2Fpointing.html&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551251346605
+          'title': '1551251346559 changed Select'
+    'in':
+      'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+        'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+          'from': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'title': 'Bookmarks - and other placeholders'
+            'weight': 9
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'en.wikipedia.org/wiki/bookmark'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551102973012
+          'title': 'Bookmarks - and other placeholders'
+        'Linkstate%2Eyouiest%2Ecom%2Fabout':
+          'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'title': 'Linkstate - Connecting is seeing'
+            'weight': 7
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'Linkstate.youiest.com/about'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551102973335
+          'title': 'Linkstate - Connecting is seeing'
+        'https%3A%2F%2Fgithub%2Ecom%2Fmeteor%2Fmeteor%2Fissues%2F9284':
+          'from': 'https%3A%2F%2Fgithub%2Ecom%2Fmeteor%2Fmeteor%2Fissues%2F9284'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'weight': 5
+            'title': 'Update all-packages doesn’t always work · Issue #9284 · meteor/meteor'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'https://github.com/meteor/meteor/issues/9284'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/521c65fb55c901ec9a88d44a677f2f3af9d75490/png?url=https%3A%2F%2Fgithub.com%2Fmeteor%2Fmeteor%2Fissues%2F9284&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1550716987678
+          'title': 'Update all-packages doesn’t always work · Issue #9284 · meteor/meteor'
+        'https%3A%2F%2Fdiscuss%2Eatom%2Eio%2Ft%2Fenable-vertical-lines-in-code%2F10064':
+          'from': 'https%3A%2F%2Fdiscuss%2Eatom%2Eio%2Ft%2Fenable-vertical-lines-in-code%2F10064'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'weight': 5
+            'title': 'Enable vertical lines in code - support - Atom Discussion'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'https://discuss.atom.io/t/enable-vertical-lines-in-code/10064'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/3b59b593a84d87a36ff43a7ccd5028ab49bb3a37/png?url=https%3A%2F%2Fdiscuss.atom.io%2Ft%2Fenable-vertical-lines-in-code%2F10064&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1550717096663
+          'title': 'Enable vertical lines in code - support - Atom Discussion'
+        'http%3A%2F%2Fvim%2Ewikia%2Ecom%2Fwiki%2FMove_to_next%2Fprevious_line_with_same_indentation':
+          'from': 'http%3A%2F%2Fvim%2Ewikia%2Ecom%2Fwiki%2FMove_to_next%2Fprevious_line_with_same_indentation'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'weight': 5
+            'title': 'Move to next/previous line with same indentation | Vim Tips Wiki | FANDOM powered by Wikia'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'http://vim.wikia.com/wiki/Move_to_next/previous_line_with_same_indentation'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/2bd75bc6e1220af37e377edb364913c6d45fba5d/png?url=http%3A%2F%2Fvim.wikia.com%2Fwiki%2FMove_to_next%2Fprevious_line_with_same_indentation&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1550717137481
+          'title': 'Move to next/previous line with same indentation | Vim Tips Wiki | FANDOM powered by Wikia'
+        'https%3A%2F%2Fatom%2Eio%2Fpackages%2Fnavigate-indent':
+          'from': 'https%3A%2F%2Fatom%2Eio%2Fpackages%2Fnavigate-indent'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'weight': 5
+            'title': 'navigate-indent'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'https://atom.io/packages/navigate-indent'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/e769b956d165db94309956ca0423456a7136b073/png?url=https%3A%2F%2Fatom.io%2Fpackages%2Fnavigate-indent&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1550992319613
+          'title': 'navigate-indent'
+        'undefined':
+          'from': 'undefined'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'weight': 5
+            'title': 'navigate-indent'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'undefined'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/e36e4d43c113260704292590a678e0d4e02d257d/png?url=undefined&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1550992325401
+          'title': 'navigate-indent'
+        'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Flinkstate%2Eyouiest%2Ecom%25252F%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3DLinkstate%2Eyouiest%2Ecom%25252Fabout%26content%3D':
+          'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Flinkstate%2Eyouiest%2Ecom%25252F%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3DLinkstate%2Eyouiest%2Ecom%25252Fabout%26content%3D'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'weight': 5
+            'title': 'localhost'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'http://localhost:3000/about?from=https%253A%252F%252Flinkstate.youiest.com%252F&lastTitle=Linkstates&Bookmarked=true&to=Linkstate.youiest.com%252Fabout&content='
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/126734b050f9ee83e6ace5d4e7d4fed6fe0952ba/png?url=http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Flinkstate.youiest.com%25252F%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3DLinkstate.youiest.com%25252Fabout%26content%3D&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551091265625
+          'title': 'localhost'
+        'https%3A%2F%2Ftrello%2Ecom%2Fb%2F1TlrrWNS%2Flinkstate':
+          'from': 'https%3A%2F%2Ftrello%2Ecom%2Fb%2F1TlrrWNS%2Flinkstate'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'weight': 5
+            'title': 'linkstate | Trello'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'https://trello.com/b/1TlrrWNS/linkstate'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/de623d59fcd09be7bcdd5d5af67340bfe2696d35/png?url=https%3A%2F%2Ftrello.com%2Fb%2F1TlrrWNS%2Flinkstate&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551177445308
+          'title': 'linkstate | Trello'
+        'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fdiscuss%2Eatom%2Eio%25252Ft%25252Fenable-vertical-lines-in-code%25252F10064%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3Dhttps%25253A%25252F%25252Fgithub%2Ecom%25252Fmeteor%25252Fmeteor%25252Fissues%25252F9284%26content%3D%26switched%3D':
+          'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fdiscuss%2Eatom%2Eio%25252Ft%25252Fenable-vertical-lines-in-code%25252F10064%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3Dhttps%25253A%25252F%25252Fgithub%2Ecom%25252Fmeteor%25252Fmeteor%25252Fissues%25252F9284%26content%3D%26switched%3D'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'weight': 5
+            'title': 'localhost:3000/about?from=https%253A%252F%252Fdiscuss.atom.io%252Ft%252Fenable-vertical-lines-in-code%252F10064&lastTitle=Linkstates&Bookmarked=true&to=https%253A%252F%252Fgithub.com%252Fmeteor%252Fmeteor%252Fissues%252F9284&content=&switched='
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'http://localhost:3000/about?from=https%253A%252F%252Fdiscuss.atom.io%252Ft%252Fenable-vertical-lines-in-code%252F10064&lastTitle=Linkstates&Bookmarked=true&to=https%253A%252F%252Fgithub.com%252Fmeteor%252Fmeteor%252Fissues%252F9284&content=&switched='
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/5c5f6c3aab62f848d89dada6b02e150add1fa85d/png?url=http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fdiscuss.atom.io%25252Ft%25252Fenable-vertical-lines-in-code%25252F10064%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3Dhttps%25253A%25252F%25252Fgithub.com%25252Fmeteor%25252Fmeteor%25252Fissues%25252F9284%26content%3D%26switched%3D&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551107689032
+          'title': 'localhost:3000/about?from=https%253A%252F%252Fdiscuss.atom.io%252Ft%252Fenable-vertical-lines-in-code%252F10064&lastTitle=Linkstates&Bookmarked=true&to=https%253A%252F%252Fgithub.com%252Fmeteor%252Fmeteor%252Fissues%252F9284&content=&switched='
+        'https%3A%2F%2Fv0%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0%2F%23%2Fcomponents%2Fgrid-list':
+          'from': 'https%3A%2F%2Fv0%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0%2F%23%2Fcomponents%2Fgrid-list'
+          'to': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'meta':
+            'weight': 5
+            'title': 'Grid List - Material-UI'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'https://v0.material-ui.com/v0.15.0/#/components/grid-list'
+            'ToLink': 'en.wikipedia.org/wiki/bookmark'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/67a1d4fcc0096c500f5dbfa86776eafde01c2d8c/png?url=https%3A%2F%2Fv0.material-ui.com%2Fv0.15.0%2F%23%2Fcomponents%2Fgrid-list&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551110582632
+          'title': 'Grid List - Material-UI'
+      'Linkstate%2Eyouiest%2Ecom%2Fabout':
+        'Linkstate%2Eyouiest%2Ecom%2Fabout':
+          'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'to': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'meta':
+            'title': 'Linkstate - Connecting is seeing'
+            'weight': 8
+            'body': 'The fate of bookmarks can tell us a lot about Linkstate'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'Linkstate.youiest.com/about'
+            'ToLink': 'Linkstate.youiest.com/about'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551102973399
+          'title': 'Linkstate - Connecting is seeing'
+        'https%3A%2F%2Flinkstate%2Eyouiest%2Ecom%2F':
+          'from': 'https%3A%2F%2Flinkstate%2Eyouiest%2Ecom%2F'
+          'to': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'meta':
+            'body': 'where are we now? this rocks'
+            'weight': 9
+            'title': 'https://linkstate.youiest.com/ to Linkstate.youiest.com/about'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'https://linkstate.youiest.com/'
+            'ToLink': 'Linkstate.youiest.com/about'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/9bb776fd6ad4b92f85d2e78a588007476f02ab83/png?url=https%3A%2F%2Flinkstate.youiest.com%2F&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1550716304661
+          'title': 'https://linkstate.youiest.com/ to Linkstate.youiest.com/about'
+        'https%3A%2F%2Fdiscuss%2Eatom%2Eio%2Ft%2Fenable-vertical-lines-in-code%2F10064':
+          'from': 'https%3A%2F%2Fdiscuss%2Eatom%2Eio%2Ft%2Fenable-vertical-lines-in-code%2F10064'
+          'to': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'meta':
+            'body': 'use these if the soft tabs are troublesome'
+            'weight': 6
+            'title': 'https://discuss.atom.io/t/enable-vertical-lines-in-code/10064 to Linkstate.youiest.com/about'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'https://discuss.atom.io/t/enable-vertical-lines-in-code/10064'
+            'ToLink': 'Linkstate.youiest.com/about'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/3b59b593a84d87a36ff43a7ccd5028ab49bb3a37/png?url=https%3A%2F%2Fdiscuss.atom.io%2Ft%2Fenable-vertical-lines-in-code%2F10064&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551091649203
+          'title': 'https://discuss.atom.io/t/enable-vertical-lines-in-code/10064 to Linkstate.youiest.com/about'
+      'https%3A%2F%2Fpoetrysociety%2Eorg%2Euk%2Fpoems%2Fwhere-im-from%2F':
+        'Linkstate%2Eyouiest%2Ecom%2Fabout':
+          'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'to': 'https%3A%2F%2Fpoetrysociety%2Eorg%2Euk%2Fpoems%2Fwhere-im-from%2F'
+          'meta':
+            'title': 'Start out FROM here, go anywhere'
+            'weight': 9
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'Linkstate.youiest.com/about'
+            'ToLink': 'https://poetrysociety.org.uk/poems/where-im-from/'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/5b1a56bf3d77d0b8b9d2d24923afc6f12de2f485/png?url=https%3A%2F%2Fpoetrysociety.org.uk%2Fpoems%2Fwhere-im-from%2F&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551102973264
+          'title': 'Start out FROM here, go anywhere'
+        'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+          'from': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'to': 'https%3A%2F%2Fpoetrysociety%2Eorg%2Euk%2Fpoems%2Fwhere-im-from%2F'
+          'meta':
+            'title': 'Where you are FROM -  Where you are now'
+            'weight': 9
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'en.wikipedia.org/wiki/bookmark'
+            'ToLink': 'https://poetrysociety.org.uk/poems/where-im-from/'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/5b1a56bf3d77d0b8b9d2d24923afc6f12de2f485/png?url=https%3A%2F%2Fpoetrysociety.org.uk%2Fpoems%2Fwhere-im-from%2F&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551102973116
+          'title': 'Where you are FROM -  Where you are now'
+      'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml':
+        'Linkstate%2Eyouiest%2Ecom%2Fabout':
+          'from': 'Linkstate%2Eyouiest%2Ecom%2Fabout'
+          'to': 'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml'
+          'meta':
+            'title': '1551247375112 changed Select'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'Linkstate.youiest.com/about'
+            'ToLink': 'https://www.all-creatures.org/poetry/pointing.html'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/7c81ff8950b76e157e44b1a70cfb81532f9a170c/png?url=Linkstate.youiest.com%2Fabout&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/6c46e40f8c9aad26b5a4d0f97775854fb5d029f2/png?url=https%3A%2F%2Fwww.all-creatures.org%2Fpoetry%2Fpointing.html&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551247375146
+          'title': '1551247375112 changed Select'
+        'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark':
+          'from': 'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark'
+          'to': 'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml'
+          'meta':
+            'title': '1551247308540 changed Select'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'en.wikipedia.org/wiki/bookmark'
+            'ToLink': 'https://www.all-creatures.org/poetry/pointing.html'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/dfa731789ad019f3a532fe83b20d20f05f11de38/png?url=en.wikipedia.org%2Fwiki%2Fbookmark&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/6c46e40f8c9aad26b5a4d0f97775854fb5d029f2/png?url=https%3A%2F%2Fwww.all-creatures.org%2Fpoetry%2Fpointing.html&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551247308575
+          'title': '1551247308540 changed Select'
+        'https%3A%2F%2Ftrello%2Ecom%2Fb%2F1TlrrWNS%2Flinkstate':
+          'from': 'https%3A%2F%2Ftrello%2Ecom%2Fb%2F1TlrrWNS%2Flinkstate'
+          'to': 'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml'
+          'meta':
+            'title': '1551251312743 changed Select'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'https://trello.com/b/1TlrrWNS/linkstate'
+            'ToLink': 'https://www.all-creatures.org/poetry/pointing.html'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/de623d59fcd09be7bcdd5d5af67340bfe2696d35/png?url=https%3A%2F%2Ftrello.com%2Fb%2F1TlrrWNS%2Flinkstate&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/6c46e40f8c9aad26b5a4d0f97775854fb5d029f2/png?url=https%3A%2F%2Fwww.all-creatures.org%2Fpoetry%2Fpointing.html&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551251312802
+          'title': '1551251312743 changed Select'
+        'https%3A%2F%2Fv0%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0%2F%23%2Fcomponents%2Fgrid-list':
+          'from': 'https%3A%2F%2Fv0%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0%2F%23%2Fcomponents%2Fgrid-list'
+          'to': 'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml'
+          'meta':
+            'title': '1551251346559 changed Select'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'https://v0.material-ui.com/v0.15.0/#/components/grid-list'
+            'ToLink': 'https://www.all-creatures.org/poetry/pointing.html'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/67a1d4fcc0096c500f5dbfa86776eafde01c2d8c/png?url=https%3A%2F%2Fv0.material-ui.com%2Fv0.15.0%2F%23%2Fcomponents%2Fgrid-list&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/6c46e40f8c9aad26b5a4d0f97775854fb5d029f2/png?url=https%3A%2F%2Fwww.all-creatures.org%2Fpoetry%2Fpointing.html&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551251346605
+          'title': '1551251346559 changed Select'
+        'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fdiscuss%2Eatom%2Eio%25252Ft%25252Fenable-vertical-lines-in-code%25252F10064%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3Dhttps%25253A%25252F%25252Fgithub%2Ecom%25252Fmeteor%25252Fmeteor%25252Fissues%25252F9284%26content%3D%26switched%3D':
+          'from': 'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fdiscuss%2Eatom%2Eio%25252Ft%25252Fenable-vertical-lines-in-code%25252F10064%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3Dhttps%25253A%25252F%25252Fgithub%2Ecom%25252Fmeteor%25252Fmeteor%25252Fissues%25252F9284%26content%3D%26switched%3D'
+          'to': 'https%3A%2F%2Fwww%2Eall-creatures%2Eorg%2Fpoetry%2Fpointing%2Ehtml'
+          'meta':
+            'title': '1551247283563 changed Select'
+            'face': 'https://graph.facebook.com/v2.7/10154232419354595/picture?type=square'
+            'profileLink': null
+            'FromLink': 'http://localhost:3000/about?from=https%253A%252F%252Fdiscuss.atom.io%252Ft%252Fenable-vertical-lines-in-code%252F10064&lastTitle=Linkstates&Bookmarked=true&to=https%253A%252F%252Fgithub.com%252Fmeteor%252Fmeteor%252Fissues%252F9284&content=&switched='
+            'ToLink': 'https://www.all-creatures.org/poetry/pointing.html'
+            'ScreenshotUrl': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/5c5f6c3aab62f848d89dada6b02e150add1fa85d/png?url=http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fdiscuss.atom.io%25252Ft%25252Fenable-vertical-lines-in-code%25252F10064%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3Dhttps%25253A%25252F%25252Fgithub.com%25252Fmeteor%25252Fmeteor%25252Fissues%25252F9284%26content%3D%26switched%3D&thumb_width=320&quality=80'
+            'ScreenshotUrlTo': 'https://api.urlbox.io/v1/FLMG5BM3XeqMGa42/6c46e40f8c9aad26b5a4d0f97775854fb5d029f2/png?url=https%3A%2F%2Fwww.all-creatures.org%2Fpoetry%2Fpointing.html&thumb_width=320&quality=80'
+          'author': 'Yghxgiur6M23KpHNF'
+          'createdAt': 1551247283589
+          'title': '1551247283563 changed Select'
+  'hits': 57
+  'out': 'Bookmarks':
+    'https%3A%2F%2Ftrello%2Ecom%2Fb%2F1TlrrWNS%2Flinkstate': 'meta': 'weight': 0
+    'https%3A%2F%2Fv0%2Ematerial-ui%2Ecom%2Fv0%2E15%2E0%2F%23%2Fcomponents%2Fgrid-list': 'meta': 'weight': 0
+    'Linkstate%2Eyouiest%2Ecom%2Fabout': 'meta': 'weight': 0
+    'http%3A%2F%2Flocalhost%3A3000%2Fabout%3Ffrom%3Dhttps%25253A%25252F%25252Fdiscuss%2Eatom%2Eio%25252Ft%25252Fenable-vertical-lines-in-code%25252F10064%26lastTitle%3DLinkstates%26Bookmarked%3Dtrue%26to%3Dhttps%25253A%25252F%25252Fgithub%2Ecom%25252Fmeteor%25252Fmeteor%25252Fissues%25252F9284%26content%3D%26switched%3D': 'meta': 'weight': 0
+    'en%2Ewikipedia%2Eorg%2Fwiki%2Fbookmark': 'meta': 'weight': 0
 badstate =
   'user':
     '_id': 'S54FphiBzL3KueFF4'
@@ -5426,11 +6095,14 @@ describe 'Value', ->
     console.log fro
     console.log linkstate.store(props.to) in fro
     console.log value3, props.type
-    expect(typeof(value3)).to.equal('object')
-    expect(!value3.label).to.equal(false)
+    #expect(typeof(value3)).to.equal('object')
+    #expect(!value3.label).to.equal(false)
   it 'fails with selectedProps', ->
     value2 = setValue(selectedProps,setOptions(selectedProps), selectedProps.user)
 
+describe 'Value', ->
+  value = setValue(props, setOptions(props), user)
+  it 'returns an object with label', ->
 
 describe 'savesParam', ->
   it 'returns same object if no localStorage exist', ->
