@@ -12,11 +12,9 @@ vDict = {}
 
 hereAndThere = (user, props) ->
   {from,to, user} = props
-  HT =
-    hereString: catTree.ModelNamespaces.Bookmarks + '.' + linkstate.store(from)
-  HERE = R.prop catTree.ModelNamespaces.Bookmarks + '.' + linkstate.store(from), user
-  console.log HERE, from, HT, catTree,user,'ModelOperations HERE'
-  HereScreenshotUrl = _.get HERE, 'meta.ScreenshotUrl'
+  HERE = linkstate.getTheBookmark user, from
+  HereScreenshotUrl = linkstate.getTheScreenshot HERE
+  console.log {HERE, HereScreenshotUrl},HERE.meta.ScreenshotUrl, 'HERE2'
   unless HERE?
     HERE =
       title: props.lastTitle

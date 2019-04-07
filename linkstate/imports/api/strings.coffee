@@ -247,7 +247,7 @@ linkstate.catTree =
   categoryUrls:
     Bookmarks: bookmarkUrl
   ModelNamespaces:
-    bookmarks: 'links.in.'+linkstate.store(bookmarkUrl)
+    Bookmarks: 'links.in.'+linkstate.store(bookmarkUrl)
 BookmarkPath = 'links.in.'+linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)
 linkstate.getBookmarkValue = (user, plainUrl) ->
   dotlessUrl = linkstate.store plainUrl
@@ -263,6 +263,14 @@ linkstate.getAllBookmarksDict = (user) ->
   bookmarkDict = _.get user, BookmarkPath
   console.log bookmarkDict
   return bookmarkDict
+linkstate.getTheBookmark = (user, target) ->
+  bookmarkDict = linkstate.getAllBookmarksDict(user)
+  theBookmark = R.prop linkstate.store(target), bookmarkDict
+  theBookmark
+linkstate.getTheScreenshot = (node) ->
+  theScreenshot =  R.prop 'meta.ScreenshotUrl', node
+  theScreenshot
+
 
 
 
