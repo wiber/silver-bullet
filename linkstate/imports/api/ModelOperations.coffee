@@ -9,12 +9,18 @@ vDict = {}
 {see, store, linkstate} = require '../api/strings'
 {catTree} = linkstate
 
+# we need a function that takes props, user
+# and returns full state of the app model.
+theModel = (props) ->
+  {HERE,HereScreenshotUrl,THERE,ThereScreenshotUrl} = hereAndThere(props, props.user)
 
+  returnThis = {HERE,HereScreenshotUrl,THERE,ThereScreenshotUrl,options,value,props}
+  console.log returnThis,'theModel'
+  returnThis
 hereAndThere = (user, props) ->
   {from,to, user} = props
   HERE = linkstate.getTheBookmark user, from
   HereScreenshotUrl = linkstate.getTheScreenshot HERE
-  console.log {HERE, HereScreenshotUrl},HERE.meta.ScreenshotUrl, 'HERE2'
   unless HERE?
     HERE =
       title: props.lastTitle
@@ -48,29 +54,25 @@ setOptions = (props) ->
 #FIXME does not select value when from a place
 # to set value we need to know which type of select,
 # which type of select we have
+# needs to gurarantee there's a value, if not take it from last on user.lastTo
 moS =
   bookmarks: 'links.in.Bookmarks.'
   title: 'meta.title'
 setValue = (props, options) ->
-
   # what do we do if from isn't in bookmarks
+  # what do we point to if we're not pointing to something..
+  # method call connect something to save state needs T connection.
   {user, from, to, type} = props
   console.log props[type]
   bookmarks = linkstate.getAllBookmarksDict user
   window.setValueState = {props,options,user} if window?
   bookmarkExistNot = !_.get bookmarks, linkstate.store(props[type])
-  #!_.get user, 'links.in.Bookmarks.' + linkstate.store(props[props.type])
-  #console.log bookmarkExistNot
-  # !user.links.in.Bookmarks[linkstate.store(props[props.type])]
   if bookmarkExistNot
     console.log 'unknown new place not in bookmarks'
-  #if !bookmarkExistNot
-  # console.log  props.type, props[props.type], 'bookmark exists',
   if !props[type] or bookmarkExistNot
     console.log bookmarkExistNot
     # because new users setupUser there should always be last actions
     userValue = user[props.type+'Last']
-    #BookmarkValue = _.get user, 'links.in.'+linkstate.store(userValue)
     BookmarkValue = linkstate.getBookmarkValue user, userValue
     console.log BookmarkValue
     label = _.get BookmarkValue, moS.title
@@ -81,8 +83,6 @@ setValue = (props, options) ->
         value: BookmarkValue
   place = moS.bookmarks+linkstate.store(props[props.type])
   BookmarkValueProp = linkstate.getBookmarkValue props.user, props[props.type]
-  #console.log BookmarkValueProp
-  #BookmarkValueProp = _.get user, moS.bookmarks+linkstate.store(props[props.type])
   label = _.get BookmarkValueProp, moS.title
   if label? # we have it here.
     if FlowRouter? # can't run this in the unit test
@@ -222,3 +222,4 @@ exports.ifBodyContentHere = ifBodyContentHere
 exports.moS = moS
 exports.screenshotUrlHere = screenshotUrlHere
 exports.inBookmarks = inBookmarks
+exports.theModel = theModel
