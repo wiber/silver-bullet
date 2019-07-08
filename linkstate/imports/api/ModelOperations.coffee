@@ -29,6 +29,7 @@ hereAndThere = (user, props) ->
   bookmarkDict = linkstate.getAllBookmarksDict props.user
   targetO = _.get bookmarkDict, linkstate.store(to) #bookmarkDict[linkstate.store(to)]
   THERE = _.get bookmarkDict, linkstate.store(to)
+  # could be an issue
   ThereScreenshotUrl = _.get targetO, 'meta.ScreenshotUrl'
   return {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl}
 
