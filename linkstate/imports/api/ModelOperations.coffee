@@ -30,6 +30,11 @@ hereAndThere = (user, props) ->
   targetO = _.get bookmarkDict, linkstate.store(to) #bookmarkDict[linkstate.store(to)]
   THERE = _.get bookmarkDict, linkstate.store(to)
   # could be an issue
+  try
+    ThereScreenshotUrl = _.get targetO, 'meta.ScreenshotUrl'
+  catch error
+    console.error targetO, '501 no attribute .ScreenshotUrl'
+
   ThereScreenshotUrl = _.get targetO, 'meta.ScreenshotUrl'
   return {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl}
 
