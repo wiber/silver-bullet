@@ -1,6 +1,6 @@
 exports.wordLanguages =
   eng:
-    HeaderTitle: 'Linkstates for '
+    HeaderTitle: 'Linkstates '
     MainCardTitle: 'About '
     MainCardSubtitle:  "Link it to something, find it there later"
     TextAboutfloatingLabelText: 'TAB here to say something memorable. '

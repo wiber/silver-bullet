@@ -150,50 +150,50 @@ class HomePage extends React.Component {
         {/*Work*/}
         <div className="section scrollspy" id="work">
           <div className="container">
-            <h2 className="header text_b">Video Tutorials </h2>
+            <h2 className="header text_b">What you've been missing</h2>
             <div className="row">
               <div className="col s12 m4 l4">
                 <div className="card">
                   <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="img/project1b.jpg" />
+                    <img className="activator" src="/carousel/s1whysense.gif" />
                   </div>
                   <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Project Title <i className="mdi-navigation-more-vert right" /></span>
-                    <p><a href="#">Project link</a></p>
+                    <span className="card-title activator grey-text text-darken-4">Meaningful <i className="mdi-navigation-more-vert right" /></span>
+                    <p><a href="#">Contributions</a></p>
                   </div>
                   <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Project Title <i className="mdi-navigation-close right" /></span>
-                    <p>Here is some more information about this project that is only revealed once clicked on.</p>
+                    <span className="card-title grey-text text-darken-4"> <i className="mdi-navigation-close right" /></span>
+                    <p>What would it take to make your time count? Linkstate adds all those moments together so they count.</p>
                   </div>
                 </div>
               </div>
               <div className="col s12 m4 l4">
                 <div className="card">
                   <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="img/project2.jpeg" />
+                    <img className="activator" src="/carousel/s2duo.gif" />
                   </div>
                   <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Project Title <i className="mdi-navigation-more-vert right" /></span>
-                    <p><a href="#">Project link</a></p>
+                    <span className="card-title activator grey-text text-darken-4">Collaboration <i className="mdi-navigation-more-vert right" /></span>
+                    <p><a href="#">See their voices</a></p>
                   </div>
                   <div className="card-reveal">
                     <span className="card-title grey-text text-darken-4">Project Title <i className="mdi-navigation-close right" /></span>
-                    <p>Here is some more information about this project that is only revealed once clicked on.</p>
+                    <p>Rally your team and watch the a quantum leap. See them connect in real-time. Decide what this is about as one unified entity.  </p>
                   </div>
                 </div>
               </div>
               <div className="col s12 m4 l4">
                 <div className="card">
                   <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="img/project3.png" />
+                    <img className="activator" src="/carousel/slide3c.gif" />
                   </div>
                   <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Project Title <i className="mdi-navigation-more-vert right" /></span>
-                    <p><a href="#">Project link</a></p>
+                    <span className="card-title activator grey-text text-darken-4">Context <i className="mdi-navigation-more-vert right" /></span>
+                    <p><a href="#">Cogntitive Ease</a></p>
                   </div>
                   <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Project Title <i className="mdi-navigation-close right" /></span>
-                    <p>Here is some more information about this project that is only revealed once clicked on.</p>
+                    <span className="card-title grey-text text-darken-4"> <i className="mdi-navigation-close right" /></span>
+                    <p>It's easy to keep your attention yours with context. Linkstate creates context to supercharge your senses. Think of it as your superpower!</p>
                   </div>
                 </div>
               </div>

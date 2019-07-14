@@ -10,7 +10,6 @@ require('../imports/startup/methods.coffee')
 # injectTapEventPlugin = require('react-tap-event-plugin')
 @R = require('ramda')
 {Meteor} = require 'meteor/meteor'
-console.log(Meteor)
 require 'typeface-roboto'
 
 # injectTapEventPlugin()
