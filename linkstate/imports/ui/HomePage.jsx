@@ -162,7 +162,7 @@ class HomePage extends React.Component {
                     <p><a href="#">Contributions</a></p>
                   </div>
                   <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4"> <i className="mdi-navigation-close right" /></span>
+                    <span className="card-title grey-text text-darken-4">Meaningful <i className="mdi-navigation-close right" /></span>
                     <p>What would it take to make your time count? Linkstate adds all those moments together so they count.</p>
                   </div>
                 </div>
@@ -177,8 +177,8 @@ class HomePage extends React.Component {
                     <p><a href="#">See their voices</a></p>
                   </div>
                   <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Project Title <i className="mdi-navigation-close right" /></span>
-                    <p>Rally your team and watch the a quantum leap. See them connect in real-time. Decide what this is about as one unified entity.  </p>
+                    <span className="card-title grey-text text-darken-4">Collaboration <i className="mdi-navigation-close right" /></span>
+                    <p>Rally your team and watch the a quantum leap. See them connect in real-time. Decide what this is about as together or stash it in the right place yourself.</p>
                   </div>
                 </div>
               </div>
@@ -192,7 +192,7 @@ class HomePage extends React.Component {
                     <p><a href="#">Cogntitive Ease</a></p>
                   </div>
                   <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4"> <i className="mdi-navigation-close right" /></span>
+                    <span className="card-title grey-text text-darken-4">Context <i className="mdi-navigation-close right" /></span>
                     <p>It's easy to keep your attention yours with context. Linkstate creates context to supercharge your senses. Think of it as your superpower!</p>
                   </div>
                 </div>
@@ -203,7 +203,7 @@ class HomePage extends React.Component {
                     <img className="activator" src="img/project4.jpg" />
                   </div>
                   <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Project Title <i className="mdi-navigation-more-vert right" /></span>
+                    <span className="card-title activator grey-text text-darken-4">Research<i className="mdi-navigation-more-vert right" /></span>
                     <p><a href="#">Project link</a></p>
                   </div>
                   <div className="card-reveal">
@@ -218,7 +218,7 @@ class HomePage extends React.Component {
                     <img className="activator" src="img/project5.png" />
                   </div>
                   <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Project Title <i className="mdi-navigation-more-vert right" /></span>
+                    <span className="card-title activator grey-text text-darken-4">Feedback<i className="mdi-navigation-more-vert right" /></span>
                     <p><a href="#">Project link</a></p>
                   </div>
                   <div className="card-reveal">
@@ -233,7 +233,7 @@ class HomePage extends React.Component {
                     <img className="activator" src="img/project6.jpeg" />
                   </div>
                   <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Project Title <i className="mdi-navigation-more-vert right" /></span>
+                    <span className="card-title activator grey-text text-darken-4">Organize<i className="mdi-navigation-more-vert right" /></span>
                     <p><a href="#">Project link</a></p>
                   </div>
                   <div className="card-reveal">
