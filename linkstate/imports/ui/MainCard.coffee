@@ -17,7 +17,7 @@ Flip =  require('material-ui/lib/svg-icons/communication/swap-calls').default #n
 ContentCopy =  require('material-ui/lib/svg-icons/content/content-copy').default #not in material-ui
 Print =  require('material-ui/lib/svg-icons/action/print').default #not in material-ui
 Edit =  require('material-ui/lib/svg-icons/editor/mode-edit').default #not in material-ui
-# FromIcon =  require('material-ui/lib/svg-icons/communication/call-received').default
+FromIcon =  require('material-ui/lib/svg-icons/communication/call-received').default
 ToIcon =  require('material-ui/lib/svg-icons/communication/call-made').default #not in material-ui
 # ShareFacebookButton =  require('material-ui/lib/svg-icons/action/print').default
 copy = require 'copy-to-clipboard'
@@ -122,7 +122,7 @@ exports.MainCard = React.createClass
             onClick: ->
               window.open that.props.from
           },
-            React.createElement ToIcon, {
+            React.createElement FromIcon, {
               "style": _.extend {},
             }
           React.createElement IconButton, {
