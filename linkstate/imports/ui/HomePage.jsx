@@ -163,7 +163,8 @@ class HomePage extends React.Component {
                   </div>
                   <div className="card-reveal">
                     <span className="card-title grey-text text-darken-4">Meaningful <i className="mdi-navigation-close right" /></span>
-                    <p>What would it take to make your time count? Linkstate adds all those moments together so they count.</p>
+                    <br></br>
+                    <p>What would it take to make your clicks add up to something greater? Linkstate adds all those moments together so they count.</p>
                   </div>
                 </div>
               </div>
@@ -178,7 +179,8 @@ class HomePage extends React.Component {
                   </div>
                   <div className="card-reveal">
                     <span className="card-title grey-text text-darken-4">Collaboration <i className="mdi-navigation-close right" /></span>
-                    <p>Rally your team and watch the a quantum leap. See them connect in real-time. Decide what this is about as together or stash it in the right place yourself.</p>
+                    <br></br>
+                    <p>Rally your team and watch the a quantum leap. See them connect in real-time. Decide what this is about as together - or - stash it in the right place yourself.</p>
                   </div>
                 </div>
               </div>
@@ -193,7 +195,10 @@ class HomePage extends React.Component {
                   </div>
                   <div className="card-reveal">
                     <span className="card-title grey-text text-darken-4">Context <i className="mdi-navigation-close right" /></span>
-                    <p>It's easy to keep your attention yours with context. Linkstate creates context to supercharge your senses. Think of it as your superpower!</p>
+                    <br></br>
+                    <p>It's easy to keep your attention yours with context.</p>
+                    <br></br>
+                    <p>Linkstate creates context to supercharge your senses. Think of it as your superpower!</p>
                   </div>
                 </div>
               </div>
@@ -204,11 +209,12 @@ class HomePage extends React.Component {
                   </div>
                   <div className="card-content">
                     <span className="card-title activator grey-text text-darken-4">Research<i className="mdi-navigation-more-vert right" /></span>
-                    <p><a href="#">Project link</a></p>
+                    <p><a href="#">Externalise</a></p>
                   </div>
                   <div className="card-reveal">
                     <span className="card-title grey-text text-darken-4">Project Title <i className="mdi-navigation-close right" /></span>
-                    <p>Here is some more information about this project that is only revealed once clicked on.</p>
+                    <br></br>
+                    <p>Born out of the desire for a simple way to rally around a subject. This tool - or visual language - is many things to many. Try using it as a way to send links, comments and clips to a google doc. </p>
                   </div>
                 </div>
               </div>
@@ -219,11 +225,12 @@ class HomePage extends React.Component {
                   </div>
                   <div className="card-content">
                     <span className="card-title activator grey-text text-darken-4">Feedback<i className="mdi-navigation-more-vert right" /></span>
-                    <p><a href="#">Project link</a></p>
+                    <p><a href="#">Voice made visible</a></p>
                   </div>
                   <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Project Title <i className="mdi-navigation-close right" /></span>
-                    <p>Here is some more information about this project that is only revealed once clicked on.</p>
+                    <span className="card-title grey-text text-darken-4">Visualise qualitative and quantitative feedback together. <i className="mdi-navigation-close right" /></span>
+                    <br></br>
+                    <p>Overcome information overload like you organize the physical world.</p>
                   </div>
                 </div>
               </div>
@@ -234,11 +241,12 @@ class HomePage extends React.Component {
                   </div>
                   <div className="card-content">
                     <span className="card-title activator grey-text text-darken-4">Organize<i className="mdi-navigation-more-vert right" /></span>
-                    <p><a href="#">Project link</a></p>
+                    <p><a href="#">Relevant here</a></p>
                   </div>
                   <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Project Title <i className="mdi-navigation-close right" /></span>
-                    <p>Here is some more information about this project that is only revealed once clicked on.</p>
+                    <span className="card-title grey-text text-darken-4">Stick it to a page<i className="mdi-navigation-close right" /></span>
+                    <br></br>
+                    <p>Keep your bookmarks sorted and ranked by page not subject. Everyone sees the links about the webpage or google doc when they leave that page.</p>
                   </div>
                 </div>
               </div>

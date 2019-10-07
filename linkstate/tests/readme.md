@@ -1,5 +1,9 @@
 # Design - Implement - Maintain
 
+Design questions
+
+What would it take for the whole team to work in parallel gathering, sorting and making sense of resources for a project. What if the whole team could speak and listen at the same time? What if we uncovered the truth about a subject by weighing sources for and against in real time? All this is possible without conference calls or reply all email chains. 
+
 Imagine an activity where your everyday searching and researching habit created a beautiful tapestry of connections. Projects, resources and people supporting each other in meaningful lasting ways.
 
 Like a splinter in your mind, driving you mad... Because there's something missing in the web. We all know it. We all feel it. The promise is there but instead we get so many great but fragmenting forces.
