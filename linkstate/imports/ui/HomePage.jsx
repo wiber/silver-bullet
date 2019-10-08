@@ -264,8 +264,8 @@ class HomePage extends React.Component {
                     <img className="activator" src="/img/elias.jpeg" />
                   </div>
                   <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Flash <br />
-                      <small><em><a className="red-text text-darken-1" href="#">CEO</a></em></small>
+                    <span className="card-title activator grey-text text-darken-4">Elias <br />
+                      <small><em><a className="red-text text-darken-1" href="#">Founder</a></em></small>
                     </span>
                   </div>
                 </div>
@@ -276,7 +276,7 @@ class HomePage extends React.Component {
                     <img className="activator" src="/img/nicolson.jpeg" />
                   </div>
                   <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Cat Woman<br />
+                    <span className="card-title activator grey-text text-darken-4">Nicolson<br />
                       <small><em><a className="red-text text-darken-1" href="#">Designer</a></em></small>
                     </span>
                   </div>
