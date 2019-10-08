@@ -65,7 +65,15 @@ Meteor.methods
     userId = Meteor.userId()
     if stringedCallsExist({from, to, meta, userId})
       console.log 'returning false due to doublecall'
+      doublecall =  true
+      if linkstate.bookmarkExistHere Meteor.user(), from
+        console.log 'yay we got bookmark'
+
+      else
+        console.log 'no bookmark here, we should proceed once - need a flag'
       return false
+
+
     META = meta
     unless META?
       META = {}
@@ -87,7 +95,7 @@ Meteor.methods
       if Meteor.user()?.hits?
         console.log 'Linking'
         , prevSet
-        , to not in categoryTypes
+        #, to not in categoryTypes
         , Meteor.user().to
         , META.title
         , from
@@ -147,9 +155,10 @@ Meteor.methods
     userUpdateObject = {}
     userUpdateObject.edited = time
     # we want to link on newtab but not have from and to the same..
-    if from not in categoryTypes
+    console.log categoryTypes,"categoryTypes"
+    if categoryTypes? and from not of categoryTypes
       userUpdateObject.fromLast = from
-    if to not in categoryTypes
+    if to not of categoryTypes
       userUpdateObject.toLast = to
     userUpdateObject['links.out.'+FROM+'.'+TO] = edge
     userUpdateObject['links.in.'+TO+'.'+FROM] = edge

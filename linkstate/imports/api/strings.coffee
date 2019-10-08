@@ -93,6 +93,7 @@ exports.AByMomentum = (UrlUserMeta) ->
 exports.listByMomentum = (listOne, listTwo) ->
   returner = []
   for list in arguments
+    console.log list
     if list?.length?
       returner = R.concat(returner, list)
   R.uniq returner
@@ -260,20 +261,48 @@ linkstate.getBookmarkValue = (user, plainUrl) ->
     console.log plainUrl, 'exist not in', user.links.in
   console.log BookmarkValue
   BookmarkValue
-
+# why isn't the call updating the bookmark list? we need a specialised layer talking to an api?
 linkstate.getAllBookmarksDict = (user) ->
   bookmarkDict = _.get user, BookmarkPath
   console.log bookmarkDict
   bookmarkDict
-
+# what do we do if the 'here' bookmark doesn't exist in the dict - it should!
 linkstate.getTheBookmark = (user, target) ->
+  # false false true ... change propaged here
+  console.log linkstate.bookmarkExistHere user, target
+  # always
+  # not always
+  console.log linkstate.store(target)
+  # the issue
+  #,linkstate.store(target) of bookmarkDict
+  , bookmarkDict
+  , "should zero"
   bookmarkDict = linkstate.getAllBookmarksDict(user)
   theBookmark = R.prop linkstate.store(target), bookmarkDict
   theBookmark
-  
+linkstate.bookmarkExistHere = (user, target) ->
+  bookDict = linkstate.getAllBookmarksDict(user)
+  storeTarget = linkstate.store(target)
+  console.log "bookmarkExistHere"
+  , bookDict
+  , storeTarget
+  , 'bookDict'
+  # console.log linkstate.store(target) of linkstate.getAllBookmarksDict(user), 'getAllBookmarksDict'
+  #, linkstate.store(target) in linkstate.getAllBookmarksDict(user)
+  # console.log  linkstate.store(target) of linkstate.getAllBookmarksDict(user)
+  # console.log  linkstate.getAllBookmarksDict(user)[linkstate.store(target)]
+  unless !linkstate.getAllBookmarksDict(user)
+    return linkstate.store(target) of linkstate.getAllBookmarksDict(user)
+  else
+    return false
+
 linkstate.getTheScreenshot = (node) ->
-  theScreenshot =  R.prop 'meta.ScreenshotUrl', node
-  theScreenshot
+  #console.log node
+  #console.log R.prop 'meta.ScreenshotUrl', node
+  #theScreenshot =  R.prop 'meta.ScreenshotUrl', node
+  #theScreenshot
+  unless !node
+    return R.prop 'meta.ScreenshotUrl', node
 
 
 

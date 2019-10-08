@@ -38,8 +38,9 @@ exports.MainCard = React.createClass
         console.log document.activeElement.id, document.activeElement.type
   render: ->
     that = this
+    console.log that.props
     {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl} = hereAndThere that.props.user, that.props
-    #console.log THERE, ThereScreenshotUrl,'THERE, ThereScreenshotUrl', Lo.get that.props, 'user.links.in.Bookmarks'
+    console.log THERE, ThereScreenshotUrl,'THERE, ThereScreenshotUrl', Lo.get that.props, 'user.links.in.Bookmarks'
     # #reactKup (k) ->
     div
       className: 'xxx'

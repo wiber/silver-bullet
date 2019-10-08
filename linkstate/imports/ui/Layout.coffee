@@ -20,7 +20,7 @@ URI = require 'uri-js'
 Urlbox = require 'urlbox'
 Lo = require 'lodash'
 {see, store, linkstate} = require '../api/strings'
-# {screenshotUrlHere} = require '../api/ModelOperations'
+{screenshotUrlHere, hereAndThere} = require '../api/ModelOperations'
 # CookieConsent = require "react-cookie-consent"
 #{CookieConsent} = require "react-cookie-consent"
 # console.log("Nicolson here..")
@@ -51,6 +51,7 @@ exports.Layout = React.createClass
         return
       ) document, 'script', 'facebook-jssdk'
     that = this
+
 
     try
       if that?.props?.user?.links?.in?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?

@@ -19,12 +19,16 @@ theModel = (props) ->
   returnThis
 hereAndThere = (user, props) ->
   {from,to, user} = props
+  console.log {from,to, user},'should not first'
   HERE = linkstate.getTheBookmark user, from
+  console.log HERE, "shouldn't be undefined"
   HereScreenshotUrl = linkstate.getTheScreenshot HERE
   unless HERE?
     HERE =
       title: props.lastTitle
       from: props.from
+      meta:
+        screenshoturl: 'nothing'
     console.log 'we are noplace', HERE
   bookmarkDict = linkstate.getAllBookmarksDict props.user
   targetO = _.get bookmarkDict, linkstate.store(to) #bookmarkDict[linkstate.store(to)]
@@ -34,8 +38,7 @@ hereAndThere = (user, props) ->
     ThereScreenshotUrl = _.get targetO, 'meta.ScreenshotUrl'
   catch error
     console.error targetO, '501 no attribute .ScreenshotUrl'
-
-  ThereScreenshotUrl = _.get targetO, 'meta.ScreenshotUrl'
+    ThereScreenshotUrl = _.get targetO, 'meta.ScreenshotUrl'
   return {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl}
 
 # we need a tested way to extract select options, and a particular option selected among them
@@ -216,7 +219,8 @@ changeQueryParamsObject = (changes) ->
     exports.changeQueryParams key, value
 screenshotUrlHere = (user, from) ->
   R.prop user, 'links.in.Bookmarks'+linkstate.store(from)+'meta.ScreenshotUrl'
-
+Gt= {}
+exports.gt = Gt
 exports.changeQueryParamsObject= changeQueryParamsObject
 exports.changeQueryParams = changeQueryParams
 exports.hereAndThere = hereAndThere
