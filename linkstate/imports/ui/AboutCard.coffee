@@ -108,16 +108,12 @@ AboutCard = React.createClass
                   notFrom = D.state.params.from != D.state.connections.from
                   notTo = D.state.params.from != D.state.connections.to
                   # find the screenshoturl on the first users link there..
-                  try
-                    if notFrom
-                      D.drawTheOther = D.firstUsersLink.meta.ScreenshotUrl#from
-                      #Lo.get D, '.state.connections.from.meta.ScreenshotUrl'
-                    else
-                      #D.drawTheOther = D.firstUsersLink.to
-                      D.drawTheOther = D.firstUsersLink.meta.ScreenshotUrlTo
-                  catch error
-                     new Meteor.Error(error, "screenshoturl issue", D.firstUsersLink)
-
+                  if notFrom
+                    D.drawTheOther = D.firstUsersLink.meta.ScreenshotUrl#from
+                    #Lo.get D, '.state.connections.from.meta.ScreenshotUrl'
+                  else
+                    #D.drawTheOther = D.firstUsersLink.to
+                    D.drawTheOther = D.firstUsersLink.meta.ScreenshotUrlTo
                   N.UrlBoxDraw[D.drawTheOther] =
                     #obj: D.allLinks[D.drawTheOther]
                     U: U
@@ -130,9 +126,6 @@ AboutCard = React.createClass
                       draw++
             React.createElement GridList, {"className": "looplist", "cellHeight": 500, "cols": 1},
               for key, object of N.UrlBoxDraw
-                console.log N.allLinks
-                , D.drawTheOther
-                console.log Lo.get(N.allLinks, D.drawTheOther+'.meta.ScreenshotUrl')
                 React.createElement UrlBox, {
                   "D": object.D
                   "N": N
