@@ -104,6 +104,9 @@ setValue = (props, options) ->
     console.log 'proplem with, should not happen',BookmarkValueProp,label,user,props
     console.log user.links.in.Bookmarks
     console.log storefrom
+    return value =
+      label: 'blank'
+      value: BookmarkValueProp
     #console.log user.links.in.Bookmarks[storefrom]
 inBookmarks = (user, url) ->
   -> _.get user, 'links.in.' + catTree.categoryUrls.Bookmarks + linkstate.store(url)

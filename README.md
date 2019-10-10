@@ -154,3 +154,395 @@ DEPLOY_HOSTNAME=us-east-1.galaxy-deploy
     - [ ] redux maintainability
     - [ ] wallaby
     - [x] silver-bullet
+
+
+my current npm list output:
+    silver-bullet@0.1.0
+    ├─┬ @babel/runtime@7.3.1
+    │ └── regenerator-runtime@0.12.1
+    ├─┬ @material-ui/core@3.9.2
+    │ ├── @babel/runtime@7.3.1 deduped
+    │ ├─┬ @material-ui/system@3.0.0-alpha.2
+    │ │ ├── @babel/runtime@7.3.1 deduped
+    │ │ ├── deepmerge@3.2.0 deduped
+    │ │ ├── prop-types@15.6.0 deduped
+    │ │ └─┬ warning@4.0.3
+    │ │   └── loose-envify@1.3.1 deduped
+    │ ├─┬ @material-ui/utils@3.0.0-alpha.3
+    │ │ ├── @babel/runtime@7.3.1 deduped
+    │ │ ├── prop-types@15.6.0 deduped
+    │ │ └── react-is@16.8.3 deduped
+    │ ├─┬ @types/jss@9.5.7
+    │ │ ├── csstype@2.6.2 deduped
+    │ │ └─┬ indefinite-observable@1.0.2
+    │ │   └── symbol-observable@1.2.0 deduped
+    │ ├─┬ @types/react-transition-group@2.0.16
+    │ │ └─┬ @types/react@16.8.5
+    │ │   ├── @types/prop-types@15.5.9
+    │ │   └── csstype@2.6.2 deduped
+    │ ├── brcast@3.0.1
+    │ ├── classnames@2.2.6
+    │ ├── csstype@2.6.2
+    │ ├── debounce@1.2.0
+    │ ├── deepmerge@3.2.0
+    │ ├── dom-helpers@3.2.1
+    │ ├─┬ hoist-non-react-statics@3.3.0
+    │ │ └── react-is@16.8.3
+    │ ├─┬ is-plain-object@2.0.4
+    │ │ └── isobject@3.0.1
+    │ ├─┬ jss@9.8.7
+    │ │ ├── is-in-browser@1.1.3
+    │ │ ├── symbol-observable@1.2.0 deduped
+    │ │ └── warning@3.0.0 deduped
+    │ ├─┬ jss-camel-case@6.1.0
+    │ │ └── hyphenate-style-name@1.0.2 deduped
+    │ ├── jss-default-unit@8.0.2
+    │ ├── jss-global@3.0.0
+    │ ├─┬ jss-nested@6.0.1
+    │ │ └── warning@3.0.0 deduped
+    │ ├── jss-props-sort@6.0.0
+    │ ├─┬ jss-vendor-prefixer@7.0.0
+    │ │ └─┬ css-vendor@0.3.8
+    │ │   └── is-in-browser@1.1.3 deduped
+    │ ├── normalize-scroll-left@0.1.2
+    │ ├── popper.js@1.14.7
+    │ ├─┬ prop-types@15.6.0
+    │ │ ├─┬ fbjs@0.8.16
+    │ │ │ ├── core-js@1.2.7 deduped
+    │ │ │ ├── isomorphic-fetch@2.2.1 deduped
+    │ │ │ ├── loose-envify@1.3.1 deduped
+    │ │ │ ├── object-assign@4.1.1 deduped
+    │ │ │ ├── promise@7.3.1 deduped
+    │ │ │ ├── setimmediate@1.0.5 deduped
+    │ │ │ └── ua-parser-js@0.7.17 deduped
+    │ │ ├── loose-envify@1.3.1 deduped
+    │ │ └── object-assign@4.1.1 deduped
+    │ ├─┬ react-event-listener@0.6.6
+    │ │ ├── @babel/runtime@7.3.1 deduped
+    │ │ ├── prop-types@15.6.0 deduped
+    │ │ └── warning@4.0.3 deduped
+    │ ├─┬ react-transition-group@2.6.0
+    │ │ ├─┬ dom-helpers@3.4.0
+    │ │ │ └── @babel/runtime@7.3.1 deduped
+    │ │ ├─┬ loose-envify@1.4.0
+    │ │ │ └── js-tokens@3.0.2 deduped
+    │ │ ├─┬ prop-types@15.7.2
+    │ │ │ ├── loose-envify@1.4.0 deduped
+    │ │ │ ├── object-assign@4.1.1 deduped
+    │ │ │ └── react-is@16.8.3 deduped
+    │ │ └── react-lifecycles-compat@3.0.4
+    │ ├─┬ recompose@0.30.0
+    │ │ ├── @babel/runtime@7.3.1 deduped
+    │ │ ├── change-emitter@0.1.6
+    │ │ ├── fbjs@0.8.16 deduped
+    │ │ ├── hoist-non-react-statics@2.5.5
+    │ │ ├── react-lifecycles-compat@3.0.4 deduped
+    │ │ └── symbol-observable@1.2.0
+    │ └─┬ warning@4.0.3
+    │   └── loose-envify@1.3.1 deduped
+    ├─┬ chai@3.5.0
+    │ ├── assertion-error@1.1.0
+    │ ├─┬ deep-eql@0.1.3
+    │ │ └── type-detect@0.1.1
+    │ └── type-detect@1.0.0
+    ├─┬ copy-to-clipboard@3.0.8
+    │ └── toggle-selection@1.0.6
+    ├─┬ create-react-class@15.6.2
+    │ ├── fbjs@0.8.16 deduped
+    │ ├─┬ loose-envify@1.3.1
+    │ │ └── js-tokens@3.0.2
+    │ └── object-assign@4.1.1
+    ├─┬ fbjs@0.8.16
+    │ ├── core-js@1.2.7
+    │ ├─┬ isomorphic-fetch@2.2.1
+    │ │ ├─┬ node-fetch@1.7.3
+    │ │ │ ├─┬ encoding@0.1.12
+    │ │ │ │ └── iconv-lite@0.4.19
+    │ │ │ └── is-stream@1.1.0
+    │ │ └── whatwg-fetch@2.0.3
+    │ ├── loose-envify@1.3.1 deduped
+    │ ├── object-assign@4.1.1 deduped
+    │ ├─┬ promise@7.3.1
+    │ │ └── asap@2.0.6
+    │ ├── setimmediate@1.0.5
+    │ └── ua-parser-js@0.7.17
+    ├── graceful-fs@4.1.11
+    ├── hyphenate-style-name@1.0.2
+    ├─┬ invariant@2.2.4
+    │ └── loose-envify@1.3.1 deduped
+    ├── lodash@4.17.11
+    ├─┬ material-ui@0.15.0-alpha.2
+    │ ├─┬ inline-style-prefixer@1.0.4
+    │ │ ├── bowser@1.9.4
+    │ │ └── inline-style-prefix-all@2.0.2
+    │ ├── keycode@2.2.0
+    │ ├── lodash.flowright@3.5.0
+    │ ├── lodash.merge@4.6.1
+    │ ├── lodash.throttle@4.1.1
+    │ ├── UNMET PEER DEPENDENCY react@^0.14.8
+    │ ├── react-addons-create-fragment@0.14.8
+    │ ├── react-addons-pure-render-mixin@0.14.8
+    │ ├── react-addons-transition-group@0.14.8
+    │ ├── react-addons-update@0.14.8
+    │ ├── react-event-listener@0.1.2
+    │ ├─┬ recompose@0.15.1
+    │ │ ├── hoist-non-react-statics@1.2.0
+    │ │ └── lodash@4.17.11 deduped
+    │ ├── simple-assign@0.1.0
+    │ └─┬ warning@2.1.0
+    │   └── loose-envify@1.3.1 deduped
+    ├─┬ material-ui-build@0.20.2 (git+https://github.com/mui-org/material-ui.git#1b1c1fce216b5b2f5ecd52d21f8ec6a326c00cd5)
+    │ ├─┬ babel-runtime@6.26.0
+    │ │ ├── core-js@2.5.1
+    │ │ └── regenerator-runtime@0.11.0
+    │ ├─┬ inline-style-prefixer@3.0.8
+    │ │ ├── bowser@1.9.4 deduped
+    │ │ └─┬ css-in-js-utils@2.0.1
+    │ │   ├── hyphenate-style-name@1.0.2 deduped
+    │ │   └── isobject@3.0.1 deduped
+    │ ├── keycode@2.2.0 deduped
+    │ ├── lodash.merge@4.6.1 deduped
+    │ ├── lodash.throttle@4.1.1 deduped
+    │ ├── prop-types@15.6.0 deduped
+    │ ├─┬ react-event-listener@0.6.6
+    │ │ ├── @babel/runtime@7.3.1 deduped
+    │ │ ├── prop-types@15.6.0 deduped
+    │ │ └─┬ warning@4.0.3
+    │ │   └── loose-envify@1.3.1 deduped
+    │ ├─┬ react-transition-group@1.2.1
+    │ │ ├── chain-function@1.0.0
+    │ │ ├── dom-helpers@3.2.1 deduped
+    │ │ ├── loose-envify@1.3.1 deduped
+    │ │ ├── prop-types@15.6.0 deduped
+    │ │ └── warning@3.0.0 deduped
+    │ ├─┬ recompose@0.26.0
+    │ │ ├── change-emitter@0.1.6 deduped
+    │ │ ├── fbjs@0.8.16 deduped
+    │ │ ├── hoist-non-react-statics@2.5.5
+    │ │ └── symbol-observable@1.2.0 deduped
+    │ ├── simple-assign@0.1.0 deduped
+    │ └─┬ warning@3.0.0
+    │   └── loose-envify@1.3.1 deduped
+    ├─┬ meteor-node-stubs@0.2.11
+    │ ├─┬ assert@1.4.1
+    │ │ └── util@0.10.3 deduped
+    │ ├─┬ browserify-zlib@0.1.4
+    │ │ └── pako@0.2.9
+    │ ├─┬ buffer@4.9.1
+    │ │ ├── base64-js@1.2.0
+    │ │ ├── ieee754@1.1.8
+    │ │ └── isarray@1.0.0
+    │ ├─┬ console-browserify@1.1.0
+    │ │ └── date-now@0.1.4
+    │ ├── constants-browserify@1.0.0
+    │ ├─┬ crypto-browserify@3.11.0
+    │ │ ├─┬ browserify-cipher@1.0.0
+    │ │ │ ├─┬ browserify-aes@1.0.6
+    │ │ │ │ ├── buffer-xor@1.0.3
+    │ │ │ │ ├── cipher-base@1.0.3 deduped
+    │ │ │ │ ├── create-hash@1.1.2 deduped
+    │ │ │ │ ├── evp_bytestokey@1.0.0 deduped
+    │ │ │ │ └── inherits@2.0.1 deduped
+    │ │ │ ├─┬ browserify-des@1.0.0
+    │ │ │ │ ├── cipher-base@1.0.3 deduped
+    │ │ │ │ ├─┬ des.js@1.0.0
+    │ │ │ │ │ ├── inherits@2.0.1 deduped
+    │ │ │ │ │ └── minimalistic-assert@1.0.0
+    │ │ │ │ └── inherits@2.0.1 deduped
+    │ │ │ └─┬ evp_bytestokey@1.0.0
+    │ │ │   └── create-hash@1.1.2 deduped
+    │ │ ├─┬ browserify-sign@4.0.0
+    │ │ │ ├── bn.js@4.11.6
+    │ │ │ ├─┬ browserify-rsa@4.0.1
+    │ │ │ │ ├── bn.js@4.11.6 deduped
+    │ │ │ │ └── randombytes@2.0.3 deduped
+    │ │ │ ├── create-hash@1.1.2 deduped
+    │ │ │ ├── create-hmac@1.1.4 deduped
+    │ │ │ ├─┬ elliptic@6.3.2
+    │ │ │ │ ├── bn.js@4.11.6 deduped
+    │ │ │ │ ├── brorand@1.0.6
+    │ │ │ │ ├─┬ hash.js@1.0.3
+    │ │ │ │ │ └── inherits@2.0.1 deduped
+    │ │ │ │ └── inherits@2.0.1 deduped
+    │ │ │ ├── inherits@2.0.1 deduped
+    │ │ │ └─┬ parse-asn1@5.0.0
+    │ │ │   ├─┬ asn1.js@4.9.0
+    │ │ │   │ ├── bn.js@4.11.6 deduped
+    │ │ │   │ ├── inherits@2.0.1 deduped
+    │ │ │   │ └── minimalistic-assert@1.0.0 deduped
+    │ │ │   ├── browserify-aes@1.0.6 deduped
+    │ │ │   ├── create-hash@1.1.2 deduped
+    │ │ │   ├── evp_bytestokey@1.0.0 deduped
+    │ │ │   └── pbkdf2@3.0.9 deduped
+    │ │ ├─┬ create-ecdh@4.0.0
+    │ │ │ ├── bn.js@4.11.6 deduped
+    │ │ │ └── elliptic@6.3.2 deduped
+    │ │ ├─┬ create-hash@1.1.2
+    │ │ │ ├─┬ cipher-base@1.0.3
+    │ │ │ │ └── inherits@2.0.1 deduped
+    │ │ │ ├── inherits@2.0.1 deduped
+    │ │ │ ├── ripemd160@1.0.1
+    │ │ │ └─┬ sha.js@2.4.8
+    │ │ │   └── inherits@2.0.1 deduped
+    │ │ ├─┬ create-hmac@1.1.4
+    │ │ │ ├── create-hash@1.1.2 deduped
+    │ │ │ └── inherits@2.0.1 deduped
+    │ │ ├─┬ diffie-hellman@5.0.2
+    │ │ │ ├── bn.js@4.11.6 deduped
+    │ │ │ ├─┬ miller-rabin@4.0.0
+    │ │ │ │ ├── bn.js@4.11.6 deduped
+    │ │ │ │ └── brorand@1.0.6 deduped
+    │ │ │ └── randombytes@2.0.3 deduped
+    │ │ ├── inherits@2.0.1
+    │ │ ├─┬ pbkdf2@3.0.9
+    │ │ │ └── create-hmac@1.1.4 deduped
+    │ │ ├─┬ public-encrypt@4.0.0
+    │ │ │ ├── bn.js@4.11.6 deduped
+    │ │ │ ├── browserify-rsa@4.0.1 deduped
+    │ │ │ ├── create-hash@1.1.2 deduped
+    │ │ │ ├── parse-asn1@5.0.0 deduped
+    │ │ │ └── randombytes@2.0.3 deduped
+    │ │ └── randombytes@2.0.3
+    │ ├── domain-browser@1.1.7
+    │ ├── events@1.1.1
+    │ ├─┬ http-browserify@1.7.0
+    │ │ ├── Base64@0.2.1
+    │ │ └── inherits@2.0.1 deduped
+    │ ├── https-browserify@0.0.1
+    │ ├── os-browserify@0.2.1
+    │ ├── path-browserify@0.0.0
+    │ ├── process@0.11.9
+    │ ├── process-nextick-args@1.0.7 extraneous
+    │ ├── punycode@1.4.1
+    │ ├── querystring-es3@0.2.1
+    │ ├─┬ readable-stream@2.3.5 (git+https://github.com/meteor/readable-stream.git#2e9112d7d31a2af6e0682db0e18679b1e5fd4694)
+    │ │ ├── inherits@2.0.4
+    │ │ ├── isarray@1.0.0 deduped
+    │ │ ├── process-nextick-args@2.0.1
+    │ │ ├── safe-buffer@5.1.2
+    │ │ ├─┬ string_decoder@1.1.1
+    │ │ │ └── safe-buffer@5.1.2 deduped
+    │ │ └── util-deprecate@1.0.2
+    │ ├── rimraf@2.6.1 extraneous
+    │ ├─┬ stream-browserify@2.0.1
+    │ │ ├── inherits@2.0.1 deduped
+    │ │ └── readable-stream@2.3.5 deduped (git+https://github.com/meteor/readable-stream.git#2e9112d7d31a2af6e0682db0e18679b1e5fd4694)
+    │ ├─┬ string_decoder@1.0.1
+    │ │ └── safe-buffer@5.0.1
+    │ ├─┬ timers-browserify@1.4.2
+    │ │ └── process@0.11.9 deduped
+    │ ├── tty-browserify@0.0.0
+    │ ├─┬ url@0.11.0
+    │ │ ├── punycode@1.3.2
+    │ │ └── querystring@0.2.0
+    │ ├─┬ util@0.10.3
+    │ │ └── inherits@2.0.1 deduped
+    │ └─┬ vm-browserify@0.0.4
+    │   └── indexof@0.0.1
+    ├─┬ nuka-carousel@2.3.0
+    │ ├── exenv@1.2.2
+    │ ├─┬ kw-react-tween-state@0.1.5
+    │ │ ├─┬ raf@3.4.0
+    │ │ │ └── performance-now@2.1.0
+    │ │ └── tween-functions@1.2.0
+    │ ├── object-assign@4.1.1 deduped
+    │ ├── UNMET PEER DEPENDENCY react@^0.14.8 || ^15.0.1
+    │ └── UNMET PEER DEPENDENCY react-dom@^0.14.8 || ^15.0.1
+    ├── ramda@0.23.0
+    ├─┬ UNMET DEPENDENCY react@16.10.2
+    │ ├── loose-envify@1.3.1 deduped
+    │ ├── object-assign@4.1.1 deduped
+    │ └─┬ UNMET DEPENDENCY prop-types@15.7.2
+    │   ├─┬ UNMET DEPENDENCY loose-envify@1.4.0
+    │   │ └── js-tokens@3.0.2 deduped
+    │   ├── object-assign@4.1.1 deduped
+    │   └── react-is@16.8.3 deduped
+    ├─┬ react-addons-css-transition-group@15.6.2
+    │ └── react-transition-group@1.2.1 deduped
+    ├─┬ react-addons-pure-render-mixin@15.6.2
+    │ ├── fbjs@0.8.16 deduped
+    │ └── object-assign@4.1.1 deduped
+    ├─┬ react-addons-shallow-compare@15.6.2
+    │ ├─┬ fbjs@0.8.16
+    │ │ ├── core-js@1.2.7 deduped
+    │ │ ├── isomorphic-fetch@2.2.1 deduped
+    │ │ ├── loose-envify@1.3.1 deduped
+    │ │ ├── object-assign@4.1.1 deduped
+    │ │ ├── promise@7.3.1 deduped
+    │ │ ├── setimmediate@1.0.5 deduped
+    │ │ └── ua-parser-js@0.7.17 deduped
+    │ └── object-assign@4.1.1 deduped
+    ├─┬ react-cookie-consent@1.7.0
+    │ ├── js-cookie@2.2.0
+    │ └─┬ react@16.4.2
+    │   ├── fbjs@0.8.16 deduped
+    │   ├─┬ loose-envify@1.4.0
+    │   │ └── js-tokens@4.0.0
+    │   ├── object-assign@4.1.1
+    │   └─┬ prop-types@15.6.2
+    │     ├── loose-envify@1.4.0 deduped
+    │     └── object-assign@4.1.1 deduped
+    ├─┬ react-copy-to-clipboard@5.0.1
+    │ ├── copy-to-clipboard@3.0.8 deduped
+    │ └── prop-types@15.6.0 deduped
+    ├─┬ UNMET DEPENDENCY react-dom@16.3.0
+    │ ├── fbjs@0.8.16 deduped
+    │ ├── loose-envify@1.3.1 deduped
+    │ ├── object-assign@4.1.1 deduped
+    │ └── prop-types@15.6.0 deduped
+    ├─┬ react-mounter@1.2.0
+    │ ├── babel-runtime@6.26.0 deduped
+    │ └── domready@1.0.8
+    ├─┬ react-selectize@2.1.0
+    │ ├─┬ prelude-extension@0.0.13
+    │ │ └── prelude-ls@1.1.2 deduped
+    │ ├── prelude-ls@1.1.2
+    │ └── tether@1.4.5
+    ├─┬ react-share@2.3.1
+    │ ├── babel-runtime@6.26.0 deduped
+    │ ├── classnames@2.2.6 deduped
+    │ ├─┬ jsonp@0.2.1
+    │ │ └─┬ debug@2.6.9
+    │ │   └── ms@2.0.0
+    │ └─┬ prop-types@15.6.2
+    │   ├─┬ loose-envify@1.4.0
+    │   │ └── js-tokens@4.0.0
+    │   └── object-assign@4.1.1
+    ├─┬ UNMET PEER DEPENDENCY react-tap-event-plugin@1.0.0
+    │ └─┬ fbjs@0.2.1
+    │   ├── core-js@1.2.7 deduped
+    │   ├── promise@7.3.1 deduped
+    │   └── whatwg-fetch@0.9.0
+    ├─┬ reify@0.3.8
+    │ ├── acorn@3.3.0
+    │ ├── acorn-es7-plugin@1.0.18
+    │ ├── ast-types@0.9.14
+    │ └─┬ magic-string@0.16.0
+    │   └── vlq@0.2.3
+    ├─┬ source-map-support@0.5.6
+    │ ├── buffer-from@1.1.1
+    │ └── source-map@0.6.1
+    ├─┬ sshpk@1.13.1
+    │ ├── asn1@0.2.3
+    │ ├── assert-plus@1.0.0
+    │ ├─┬ bcrypt-pbkdf@1.0.1
+    │ │ └── tweetnacl@0.14.5 deduped
+    │ ├─┬ dashdash@1.14.1
+    │ │ └── assert-plus@1.0.0 deduped
+    │ ├─┬ ecc-jsbn@0.1.1
+    │ │ └── jsbn@0.1.1 deduped
+    │ ├─┬ getpass@0.1.7
+    │ │ └── assert-plus@1.0.0 deduped
+    │ ├── jsbn@0.1.1
+    │ └── tweetnacl@0.14.5
+    ├── typeface-roboto@0.0.54
+    ├─┬ uri-js@3.0.2
+    │ └── punycode@2.1.0
+    ├── urijs@1.19.1
+    ├─┬ urlbox@1.3.3
+    │ ├── crypto-js@3.1.9-1
+    │ ├── lodash@4.17.11 deduped
+    │ ├── lodash.includes@4.3.0
+    │ └── qs@6.6.0
+    ├── utf8@3.0.0
+    └── uuid@3.1.0
