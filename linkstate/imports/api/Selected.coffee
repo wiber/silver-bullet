@@ -18,6 +18,7 @@ exports.selectedContainer = createContainer ((props) ->
     value: setValue(props,setOptions(props),props.user)
     options: setOptions(props)
   #console.log nProps.value, typeof linkstate.store
+  console.log 'lowerc',nProps.options
   nProps
 ), Selected
 ###

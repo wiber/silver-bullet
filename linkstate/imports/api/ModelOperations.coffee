@@ -44,20 +44,25 @@ hereAndThere = (user, props) ->
 # we need a tested way to extract select options, and a particular option selected among them
 setOptions = (props) ->
   options = []
-  if props.user?.links?.in?
-    # how titles get into selectize
-    bookmarks = linkstate.getAllBookmarksDict props.user
-    deChaos = linkstate.sortByKeysTime(bookmarks)
-    for index, value of deChaos
-      continue if typeof value is not 'string'
-      continue if value is 'undefined'
-      continue unless bookmarks[value]?.meta?.title?
-      #continue unless dictWithCreatedAt[value].meta.weight > 0
-      selectItem =
-        label: bookmarks[value].meta.title
-        value: bookmarks[value]
-      options.push selectItem
+  return false if !props.user?.links?.in?
+  # how titles get into selectize
+  bookmarks = linkstate.getAllBookmarksDict props.user
+  deChaos = linkstate.sortByKeysTime(bookmarks)
+  for index, value of deChaos
+    #break if typeof value is not 'string'
+    #FIXME sometimes there's an array instead of string for label here.
+    continue unless typeof bookmarks[value].meta.title is 'string'
+    #console.log typeof bookmarks[value].meta.title is 'string', 'lowerc break'
+    continue if value is 'undefined'
+    continue unless bookmarks[value]?.meta?.title?
+    #continue unless dictWithCreatedAt[value].meta.weight > 0
+    selectItem =
+      label: bookmarks[value].meta.title
+      value: bookmarks[value]
+    options.push selectItem
   #console.log options.length, props
+  for o in options
+    console.log typeof o.label, 'lowerc'
   options
 
 #FIXME does not select value when from a place
