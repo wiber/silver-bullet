@@ -1,6 +1,6 @@
 React = require("react")
 ReactDOM = require("react-dom")
-
+Footer = require("./Footer.jsx").Footer
 // class HomePage extends React.Component {
 //   render () {
 //     return (
@@ -128,26 +128,7 @@ class HomePage extends React.Component {
     return (
       <div>
         {/*Navigation*/}
-        <div className="navbar-fixed">
-          <nav id="nav_f" className="default_color" role="navigation">
-            <div className="container">
-              <div className="nav-wrapper">
-                <a href="#" id="logo-container" className="brand-logo">Linkstate for </a>
-                <ul className="right hide-on-med-and-down">
-                  {loginComponent}
-                  <li><a target="_blank" href="https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA">Download</a></li>
-                </ul>
-                <ul id="nav-mobile" className="side-nav">
-                  {loginComponent}
-                  <li><a target="_blank" href="https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA">Download</a></li>
-                  <li onClick={this.menu} ><a href="#">Close</a></li>
-                </ul>
-                <a onClick={this.menu} href="#" data-activates="nav-mobile" className="button-collapse"><i className="mdi-navigation-menu" /></a>
-              </div>
-            </div>
-          </nav>
-        </div>
-        {/*Work*/}
+                {/*Work*/}
         <div className="section scrollspy" id="work">
           <div className="container">
             <h2 className="header text_b">What you've been missing</h2>
@@ -304,12 +285,15 @@ class HomePage extends React.Component {
                     <span className="card-title activator grey-text text-darken-4">Robin<br />
                       <small><em><a className="red-text text-darken-1" href="#">Developer</a></em></small>
                     </span>
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
+        <Footer />
       </div>
     )};
 };
