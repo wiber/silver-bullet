@@ -124,15 +124,15 @@ exports.Layout = React.createClass
               "howMany": 15
               "user": that.props.user
           div
-            className: 'columnR'
-            style: _.extend {}, style.base,
-              marginTop: "150# '15%'"
-            a
-              href: "https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA"
-              target: "_blank"
-              "To use this app properly you need the chrome extension. Download, extract it and chrome://extensions unpacked."
-            div
-              React.createElement AccountsUIWrapper, {}
+            # className: 'columnR'
+            # style: _.extend {}, style.base,
+            #   marginTop: "150# '15%'"
+            # a
+            #   href: "https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA"
+            #   target: "_blank"
+            #   "To use this app properly you need the chrome extension. Download, extract it and chrome://extensions unpacked."
+            # div
+            #   React.createElement AccountsUIWrapper, {}
             div
               React.createElement Footer, {}
             # div
