@@ -18,7 +18,7 @@ class Footer extends React.Component {
   }
   onLogout(){
     Meteor.logout(function(){
-      window.reload();
+      location.reload();
     });
   };
 
@@ -29,7 +29,7 @@ class Footer extends React.Component {
           <div className="row">
             <div className="col l6 s12">
               <h5 className="white-text">Instruction</h5>
-              <p className="grey-text text-lighten-4">To use this app properly you need the chrome extension.</p>
+              <p className="grey-text text-lighten-4">To use this app properly, you will need the chrome extension.</p>
               <br/>
               <p className="grey-text text-lighten-4">{this.state.user.profile.name}</p>
               <br/>
@@ -46,9 +46,6 @@ class Footer extends React.Component {
         <div className="footer-copyright">
           <div className="container">
             © 2019 Copyright Youiest LLC
-            {/* <a className="grey-text text-lighten-4 right" href="#!" onClick={this.onLogout}>
-              {this.state.user.profile.name} <a className="waves-effect waves-light btn blue darken-4">Logout</a>
-            </a> */}
           </div>
         </div>
       </footer>

@@ -95,7 +95,7 @@ exports.Layout = React.createClass
           backgroundSize: '100% 110%'#'cover' #'100% auto'
           opacity: '.3'
           zIndex: -1
-      React.createElement AppBar, {"title": that.props.word.HeaderTitle, "style": {"position": 'fixed'}} #this is header
+      # React.createElement AppBar, {"title": that.props.word.HeaderTitle, "style": {"position": 'fixed'}} #this is header
       div
         style:
           marginTop: 150
