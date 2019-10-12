@@ -49,7 +49,6 @@ exports.Position = ({measurements,weight,n,directed,axis}) ->
   else return 0
 exports.store = (url) ->
   unless typeof url == 'string'
-    ##console.log url,'store is encoded', url == decodeURIComponent url
     return ''
   encodedToDotless = url.replace /\./g, '%2E'
   plainToEncode = encodeURIComponent url
@@ -58,7 +57,6 @@ exports.store = (url) ->
 exports.see = (url) ->
 
   unless typeof url == 'string'
-    ##console.log url,'see is encoded', url == decodeURIComponent url
     return ''
   encodedToPlain = decodeURIComponent url
   encodedToDotless = encodedToPlain.replace '%2E' , '.'
@@ -93,7 +91,6 @@ exports.AByMomentum = (UrlUserMeta) ->
 exports.listByMomentum = (listOne, listTwo) ->
   returner = []
   for list in arguments
-    console.log list
     if list?.length?
       returner = R.concat(returner, list)
   R.uniq returner
@@ -108,7 +105,6 @@ exports.upMargin = ({D,d,M},weight) ->
   upper = D + M + M
   upm = .1*d+upper - scalar*upper
   #position = 1.3*M+d-(((weight-4)/5)*(D+M))
-  #console.log 'position',weight, scalar*upper, upm, upper
   upm
 exports.rightMargin = ({D,d,M},weight,n) ->
   # 150 + 200
@@ -120,7 +116,6 @@ exports.rightMargin = ({D,d,M},weight,n) ->
   sin = Math.sin deg
   cos = Math.cos deg
   right = d+(n*d*.66)+sin*rad-cos*rad
-  #console.log 'margin', weight, deg, sin, right, right
   rightPosition = .7*D+d+(-n*d*.66) - scalar*.5*D+d
   if weight is 0
     rightPosition = rightPosition+d/8
@@ -257,40 +252,21 @@ linkstate.getBookmarkValue = (user, plainUrl) ->
   console.log path
   BookmarkValue = _.get user, 'links.in.'+linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)+'.'+dotlessUrl
   if !BookmarkValue
-    console.log plainUrl
-    console.log plainUrl, 'exist not in', user.links.in
-  console.log BookmarkValue
+    console.log {plainUrl}, 'exist not in', user.links.in
   BookmarkValue
 # why isn't the call updating the bookmark list? we need a specialised layer talking to an api?
 linkstate.getAllBookmarksDict = (user) ->
   bookmarkDict = _.get user, BookmarkPath
-  console.log bookmarkDict
+  #console.log {bookmarkDict}
   bookmarkDict
 # what do we do if the 'here' bookmark doesn't exist in the dict - it should!
 linkstate.getTheBookmark = (user, target) ->
-  # false false true ... change propaged here
-  console.log linkstate.bookmarkExistHere user, target
-  # always
-  # not always
-  console.log linkstate.store(target)
-  # the issue
-  #,linkstate.store(target) of bookmarkDict
-  , bookmarkDict
-  , "should zero"
   bookmarkDict = linkstate.getAllBookmarksDict(user)
   theBookmark = R.prop linkstate.store(target), bookmarkDict
   theBookmark
 linkstate.bookmarkExistHere = (user, target) ->
   bookDict = linkstate.getAllBookmarksDict(user)
   storeTarget = linkstate.store(target)
-  console.log "bookmarkExistHere"
-  , bookDict
-  , storeTarget
-  , 'bookDict'
-  # console.log linkstate.store(target) of linkstate.getAllBookmarksDict(user), 'getAllBookmarksDict'
-  #, linkstate.store(target) in linkstate.getAllBookmarksDict(user)
-  # console.log  linkstate.store(target) of linkstate.getAllBookmarksDict(user)
-  # console.log  linkstate.getAllBookmarksDict(user)[linkstate.store(target)]
   unless !linkstate.getAllBookmarksDict(user)
     return linkstate.store(target) of linkstate.getAllBookmarksDict(user)
   else

@@ -19,9 +19,8 @@ theModel = (props) ->
   returnThis
 hereAndThere = (user, props) ->
   {from,to, user} = props
-  console.log {from,to, user},'should not first'
+  #console.log {from,to, user},'should not first'
   HERE = linkstate.getTheBookmark user, from
-  console.log HERE, "shouldn't be undefined"
   HereScreenshotUrl = linkstate.getTheScreenshot HERE
   unless HERE?
     HERE =
@@ -51,7 +50,6 @@ setOptions = (props) ->
   for index, value of deChaos
     #break if typeof value is not 'string'
     continue unless typeof bookmarks[value].meta.title is 'string'
-    console.log typeof bookmarks[value].meta.title is 'string', 'lowerc break'
     continue if value is 'undefined'
     continue unless bookmarks[value]?.meta?.title?
     #continue unless dictWithCreatedAt[value].meta.weight > 0
@@ -73,7 +71,6 @@ setValue = (props, options) ->
   # what do we point to if we're not pointing to something..
   # method call connect something to save state needs T connection.
   {user, from, to, type} = props
-  console.log props[type]
   bookmarks = linkstate.getAllBookmarksDict user
   window.setValueState = {props,options,user} if window?
   bookmarkExistNot = !_.get bookmarks, linkstate.store(props[type])
@@ -84,9 +81,7 @@ setValue = (props, options) ->
     # because new users setupUser there should always be last actions
     userValue = user[props.type+'Last']
     BookmarkValue = linkstate.getBookmarkValue user, userValue
-    console.log BookmarkValue
     label = _.get BookmarkValue, moS.title
-    console.log label
     if BookmarkValue?
       return value =
         label: label

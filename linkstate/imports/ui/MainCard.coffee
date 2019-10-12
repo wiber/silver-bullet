@@ -35,13 +35,10 @@ exports.MainCard = React.createClass
         if false is true and window?.textAbout?.refs?.MainCardTextInput?.focus()
           window.textAbout.refs.MainCardTextInput.focus()
           #$('#textAbout').focus()
-        console.log document.activeElement.id, document.activeElement.type
+        #console.log document.activeElement.id, document.activeElement.type
   render: ->
     that = this
-    console.log that.props
     {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl} = hereAndThere that.props.user, that.props
-    console.log THERE, ThereScreenshotUrl,'THERE, ThereScreenshotUrl', Lo.get that.props, 'user.links.in.Bookmarks'
-    # #reactKup (k) ->
     div
       className: 'xxx'
       React.createElement Card, { "style": _.extend {}, style.card, style.mAcard }, #"expanded": that.props.expanded,
