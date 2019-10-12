@@ -11,6 +11,7 @@ React = require('react')
 # FlatButton = require 'material-ui/lib/flat-button'
 # CardText = require 'material-ui/lib/card/card-text'
 AppBar =  require('@material-ui/core/AppBar').default
+{Footer} = require('./Footer.jsx')
 # Card = require 'material-ui/lib/card/card'
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 {Mexplain} = require '../api/MexplainContainer.coffee'
@@ -132,6 +133,8 @@ exports.Layout = React.createClass
               "To use this app properly you need the chrome extension. Download, extract it and chrome://extensions unpacked."
             div
               React.createElement AccountsUIWrapper, {}
+            div
+              React.createElement Footer, {}
             # div
             #   id: 'fb-root'
             #   React.createElement CookieConsent, {}
