@@ -19,6 +19,9 @@ exports.selectedContainer = createContainer ((props) ->
     options: setOptions(props)
   #console.log nProps.value, typeof linkstate.store
   console.log 'lowerc',nProps.options
+  for option in setOptions(props)
+    console.log option, 'lowerc'
+    console.log option.value.meta, 'lowerc meta'
   nProps
 ), Selected
 ###

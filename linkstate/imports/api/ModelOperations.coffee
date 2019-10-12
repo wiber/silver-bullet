@@ -95,6 +95,7 @@ setValue = (props, options) ->
   place = moS.bookmarks+linkstate.store(props[props.type])
   BookmarkValueProp = linkstate.getBookmarkValue props.user, props[props.type]
   label = _.get BookmarkValueProp, moS.title
+  TYPE = props[props.type]
   if label? # we have it here.
     if FlowRouter? # can't run this in the unit test
       changeQueryParams props.type, props[props.type]
@@ -102,13 +103,17 @@ setValue = (props, options) ->
       label: label
       value: BookmarkValueProp
   else
+    # this happens now
     storefrom = linkstate.store props.from
-    console.log 'proplem with, should not happen',BookmarkValueProp,label,user,props
+    console.log 'proplem with, should not happen'
+    ,{BookmarkValueProp,label,user,props,place, TYPE}
     console.log user.links.in.Bookmarks
     console.log storefrom
     return value =
-      label: 'blank'
-      value: BookmarkValueProp
+      label: 'picke someplace'
+      value:
+        meta:
+          title: 'the title to pick someplace'
     #console.log user.links.in.Bookmarks[storefrom]
 inBookmarks = (user, url) ->
   -> _.get user, 'links.in.' + catTree.categoryUrls.Bookmarks + linkstate.store(url)

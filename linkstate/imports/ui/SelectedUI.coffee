@@ -65,7 +65,7 @@ Selected = React.createClass
             changeQueryParams that.props.type, val.value.meta.FromLink
         renderValue: (item) ->
           span
-            "style":{
+            style:
               "textOverflow": "ellipsis"
               "position": 'absolute'
               "bottom": '0.4em'
@@ -73,9 +73,9 @@ Selected = React.createClass
               "overflow": "hidden"
               "whiteSpace": 'nowrap'
               "textAling": 'top'
-            }
+            console.log item, 'lowerc'
             item.value.meta.title
-      }
+          }
 
         React.createElement IconButton,
           tooltip: tooltipText
