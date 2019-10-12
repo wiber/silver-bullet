@@ -49,7 +49,6 @@ setOptions = (props) ->
   bookmarks = linkstate.getAllBookmarksDict props.user
   deChaos = linkstate.sortByKeysTime(bookmarks)
   for index, value of deChaos
-    #console.log typeof bookmarks[value].meta.title,'lowerc'
     #break if typeof value is not 'string'
     continue unless typeof bookmarks[value].meta.title is 'string'
     console.log typeof bookmarks[value].meta.title is 'string', 'lowerc break'
@@ -103,18 +102,15 @@ setValue = (props, options) ->
       label: label
       value: BookmarkValueProp
   else
-    # this happens now
     storefrom = linkstate.store props.from
     console.log 'proplem with, should not happen'
     ,{BookmarkValueProp,label,user,props,place, TYPE}
-    console.log user.links.in.Bookmarks
-    console.log storefrom
+
     return value =
       label: 'picke someplace'
       value:
         meta:
           title: 'the title to pick someplace'
-    #console.log user.links.in.Bookmarks[storefrom]
 inBookmarks = (user, url) ->
   -> _.get user, 'links.in.' + catTree.categoryUrls.Bookmarks + linkstate.store(url)
 

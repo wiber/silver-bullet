@@ -73,7 +73,6 @@ Selected = React.createClass
               "overflow": "hidden"
               "whiteSpace": 'nowrap'
               "textAling": 'top'
-            console.log item, 'lowerc'
             item.value.meta.title
           }
 
