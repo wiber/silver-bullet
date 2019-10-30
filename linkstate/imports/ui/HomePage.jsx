@@ -246,7 +246,7 @@ class HomePage extends React.Component {
                   <div className="card-reveal">
                     <span className="card-title grey-text text-darken-4">Stick it to a page<i className="mdi-navigation-close right" /></span>
                     <br></br>
-                    <p>Keep your bookmarks sorted and ranked by page not subject. Everyone sees the links about the webpage or google doc when they leave that page.</p>
+                    <p>Keep your bookmarks sorted and ranked by project page not subject. Everyone sees the links about the webpage or google doc when they leave that page.</p>
                   </div>
                 </div>
               </div>
