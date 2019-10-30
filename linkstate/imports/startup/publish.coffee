@@ -8,7 +8,7 @@
 Meteor.publish "Node", (from) ->
   one = Nodes.find
     _id: linkstate.store from
-  all = Nodes.find {}
+  #all = Nodes.find {}
   return one
 
 Meteor.publish 'reactableFrom', (howMany) ->
