@@ -42,7 +42,7 @@
             }],
             "rating": [{
                 "createdBy": "google",
-                "rating": "sentiment_satisfied",
+                "rating": "sentiment_dissatisfied",
                 "createdAt": "01-05-2019"
             }]
         }
