@@ -39,7 +39,7 @@
     <div class="container bsa">
       <div class="row">
         <div class="col s12 m12">
-          <div class="card">
+          <div class="card" id="card_container">
             <div class="card-content white-text">
               <div class="row">
                 <div class="col s3" style="margin-top: 5px;">
@@ -108,68 +108,67 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <div id="modal" class="modal">
-        <div class="modal-content">
-          <h4>
-            <input type="text" id="modal_header" class="center-align">
-          </h4>
-          <div class="row">
-            <div class="input-field">
-              <div class="row">
-                <label class="" for="memorable_txt">Write here something memorable.</label>
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <h4>
+              <input type="text" id="modal_header" class="center-align">
+            </h4>
+            <div class="row">
+              <div class="input-field">
+                <div class="row">
+                  <label class="" for="memorable_txt">Write here something memorable.</label>
+                </div>
+                <div class="row">
+                  <textarea id="memorable_txt" class="materialize-textarea border-box focused"></textarea>
+                </div>
               </div>
-              <div class="row">
-                <textarea id="memorable_txt" class="materialize-textarea border-box focused"></textarea>
+            </div>
+            <div class="row s10">
+              <div class="col m2">
+                <i class="emoji_icon small material-icons">sentiment_dissatisfied</i>
+              </div>
+              <div class="col m2">
+                <i class="emoji_icon small material-icons">sentiment_neutral</i>
+              </div>
+              <div class="col m2">
+                <i class="emoji_icon small material-icons">sentiment_satisfied</i>
+              </div>
+              <div class="col m2">
+                <i class="emoji_icon small material-icons">sentiment_very_dissatisfied</i>
+              </div>
+              <div class="col m2">
+                <i class="emoji_icon small material-icons">sentiment_very_satisfied</i>
+              </div>
+            </div>
+            <div class="row ">
+              <div class="col m2">
+                <i class="small material-icons">content_copy</i>
+              </div>
+              <div class="col m2">
+                <i class="small material-icons">swap_calls</i>
+              </div>
+              <div class="col m2">
+                <i class="small material-icons">call_made</i>
+              </div>
+              <div class="col m2">
+                <i class="small material-icons">call_received</i>
+              </div>
+              <div class="col m2">
+                <i class="small material-icons" aria-disabled="true">mode_edit</i>
+              </div>
+              <div class="col m2">
+                <i class="small material-icons" aria-disabled="true">print</i>
               </div>
             </div>
           </div>
-          <div class="row s10">
-            <div class="col m2">
-              <i class="emoji_icon small material-icons">sentiment_dissatisfied</i>
-            </div>
-            <div class="col m2">
-              <i class="emoji_icon small material-icons">sentiment_neutral</i>
-            </div>
-            <div class="col m2">
-              <i class="emoji_icon small material-icons">sentiment_satisfied</i>
-            </div>
-            <div class="col m2">
-              <i class="emoji_icon small material-icons">sentiment_very_dissatisfied</i>
-            </div>
-            <div class="col m2">
-              <i class="emoji_icon small material-icons">sentiment_very_satisfied</i>
-            </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="save">Save</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="close">Close</a>
           </div>
-          <div class="row ">
-            <div class="col m2">
-              <i class="small material-icons">content_copy</i>
-            </div>
-            <div class="col m2">
-              <i class="small material-icons">swap_calls</i>
-            </div>
-            <div class="col m2">
-              <i class="small material-icons">call_made</i>
-            </div>
-            <div class="col m2">
-              <i class="small material-icons">call_received</i>
-            </div>
-            <div class="col m2">
-              <i class="small material-icons" aria-disabled="true">mode_edit</i>
-            </div>
-            <div class="col m2">
-              <i class="small material-icons" aria-disabled="true">print</i>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="save">Save</a>
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="close">Close</a>
         </div>
       </div>
     </div>
-
   </main>
 
   <footer class="page-footer blue">
