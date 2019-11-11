@@ -16,11 +16,11 @@ $(function () {
         data = f
     });
     $('.tabs').tabs();
-    // $(".emoji_icon").click(function () {
-    //     var temp = $(this).text()
-    //     $(".emoji").html(temp);
-    //     $(".emoji").addClass("active");
-    // });
+    $(".emoji_icon").click(function () {
+        var temp = $(this).text()
+        $(".emoji").html(temp);
+        $(".emoji").addClass("active");
+    });
 
     $(".title").text(data.title);
     $("#modal_header").val(data.title);
@@ -40,15 +40,26 @@ $(function () {
         // console.log("userData", f);
         var temp_id = f._id
         var rating1 = {}
+        var memorable1 = {}
+        var comment1 = {}
         var temp_data = f
         $.each(f.rating, function (i, f) {
-        // console.log("userData_function", f.rating);  
-            rating1 = f.rating
-        // console.log("userData_function", f.memorable);
+            rating1 = f
+            // console.log("userData_function", f.memorable);
         });
-        // console.log("rating1",temp_data._id);
+        $.each(f.comment, function (i, f) {
+            comment1 = f
+            // console.log("userData_function", f.memorable);
+        });
+        $.each(f.memorable, function (i, f) {
+            // console.log("userData_function", f.memorable);  
+            // console.log("userData_function", f.rating);  
+                memorable1 = f
+            // console.log("userData_function", f.memorable);
+            });
+        console.log("memorable1",memorable1.memorable);
         // $("#card_container").append('<div class="card-content white-text"><div class="row"><div class="col s3" style="margin-top: 5px;"><i class="medium material-icons emoji brand-logo" id="emoji'+temp_id+'">'+rating1+'</i></div><div class="col s6"><h4 class="grey-text text-darken-4 title center-align card-title truncate">'+temp_data.title+'</h4></div><div class="col s3" style="margin-top: 10px;"><a href="#modal" id="modal_btn"class="secondary-content  btn-floating waves-effect waves-light modal-trigger"><i class="small material-icons">edit</i></a></div></div>');
-        $("#card_container").append('<div class="card-content white-text"><div class="row"><div class="col s3" style="margin-top: 5px;"><i class="medium material-icons emoji brand-logo" id="emoji'+temp_data._id+'">'+ rating1 +'</i></div><div class="col s6"><h4 class="grey-text text-darken-4 title center-align card-title truncate">'+temp_data.title+'</h4></div><div class="col s3" style="margin-top: 10px;"><a href="#modal" id="modal_btn" class="secondary-content  btn-floating waves-effect waves-light modal-trigger"><i class="small material-icons" id="edit'+temp_id+'">edit</i></a></div></div><div class="row"><div class="col s5"></div><div class="col s2" id="img_res'+temp_id+'"><img src="images/img_avatar.jpg" alt="" class="circle responsive-img"></div><div class="col s5"></div></div><div class="row valign-wrapper"><div class="col s2"><img src="images/img_avatar.jpg" alt="" class="circle responsive-img"></div><div class="col s8 center-align"><img src="images/img_avatar.jpg" alt="" class="circle responsive-img"></div><div class="col s2"><img src="images/img_avatar.jpg" alt="" class="circle responsive-img"></div></div><div class="row"><div class="col s5"></div><div class="col s2"><img src="images/img_avatar.jpg" alt="" class="circle responsive-img"></div><div class="col s5"></div></div><div class="row"><div class="card-tabs"><ul class="tabs tabs-fixed-width"><li class="tab" id="tab_id'+temp_id+'"><a href="#memorable_div" class="blue white-text" id="memo_id'+temp_id+'">Memorable</a></li><li class="tab"><a href="#comment_div" class="blue white-text" id="comm_id'+temp_id+'">Comment</a></li></ul></div><div class="card-content black-text"><div id="memorable_div"><ul class="collection" id="memorable_ul"></ul></div><div id="comment_div"><ul class="collection" id="comment_ul"></ul><div class="input-field"><i class="material-icons prefix send_comment">mode_edit</i><textarea id="comment_txt" class="materialize-textarea"></textarea></div></div></div></div></div>')
+        $("#card_container").append('<div class="card-content white-text"><div class="row"><div class="col s3" style="margin-top: 5px;"><i class="medium material-icons emoji brand-logo" id="emoji'+temp_data._id  +'">'+ rating1.rating +'</i></div><div class="col s6"><h4 class="grey-text text-darken-4 title center-align card-title truncate">'+temp_data.title+'</h4></div><div class="col s3" style="margin-top: 10px;"><a href="#modal" id="modal_btn" class="secondary-content  btn-floating waves-effect waves-light modal-trigger"><i class="small material-icons" id="edit'+temp_id+'">edit</i></a></div></div><div class="row"><div class="col s5"></div><div class="col s2" id="img_res'+temp_id+'"><img src="images/img_avatar.jpg" alt="" class="circle responsive-img"></div><div class="col s5"></div></div><div class="row valign-wrapper"><div class="col s2"><img src="images/img_avatar.jpg" alt="" class="circle responsive-img"></div><div class="col s8 center-align"><img src="images/img_avatar.jpg" alt="" class="circle responsive-img"></div><div class="col s2"><img src="images/img_avatar.jpg" alt="" class="circle responsive-img"></div></div><div class="row"><div class="col s5"></div><div class="col s2"><img src="images/img_avatar.jpg" alt="" class="circle responsive-img"></div><div class="col s5"></div></div><div class="row"><div class="card-tabs" id="tab_id'+temp_id+'"><ul class="tabs tabs-fixed-width" id="tab_id'+temp_id+'"><li class="tab"><a href="#memorable_div" class="blue white-text" id="memo_id'+temp_id+'">Memorable</a></li><li class="tab"><a href="#comment_div" class="blue white-text" id="comm_id'+temp_id+'">Comment</a></li></ul></div><div class="card-content black-text"><div id="memorable_div"><ul class="collection" id="memorable_ul"><li class="collection-item record_id">'+ temp_id +'<p class="add_memorable" id='+ temp_id +'> '+ memorable1.memorable +' </p><p class="createdBy_name">'+ memorable1.createdBy +' </p><p class="createdAt_date" id="date'+temp_id+'">'+ memorable1.createdAt +'</p></li></ul></div><div id="comment_div"><ul class="collection" id="comment_ul"><li class="collection-item avatar">'+ temp_id +'<img src="'+ temp_data.screenshot +'" alt="" class="circle"><span class="creater_name">'+ comment1.comment +'</span><p class="created_data">'+ comment1.createdBy +' </br> '+ comment1.createdAt +'</p></li></ul><div class="input-field"><i class="material-icons prefix send_comment">mode_edit</i><textarea id="comment_txt" class="materialize-textarea"></textarea></div></div></div></div></div>')
 
     });
 

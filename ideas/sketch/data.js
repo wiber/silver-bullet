@@ -19,7 +19,7 @@
             }],
             "rating": [{
                 "createdBy": "nicolsondsouza",
-                "rating": "sentiment_very_satisfied",
+                "rating": "sentiment_dissatisfied",
                 "createdAt": "25-8-2019"
             }]
         },
@@ -42,7 +42,7 @@
             }],
             "rating": [{
                 "createdBy": "google",
-                "rating": "sentiment_dissatisfied",
+                "rating": "sentiment_very_satisfied",
                 "createdAt": "01-05-2019"
             }]
         }
