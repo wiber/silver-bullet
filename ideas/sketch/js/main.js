@@ -11,7 +11,6 @@ $(function () {
     var comment_retrievedObject = localStorage.getItem('commentObject');
     var obj_data = JSON.parse(retrievedObject)
     var comment_obj = JSON.parse(comment_retrievedObject)
-    // console.log("comment_obj",comment_obj);
     
     $.each(userData, function(i, f) {
         data = f 
@@ -79,14 +78,10 @@ $(function () {
     $(document).on('keypress',function(e) {
         if(e.which == 13) {
             comment_function();
-            // console.log("items",items);
             localStorage.setItem('commentObject', JSON.stringify(items));
         }
     });
-    // $(".send_comment").click(function () {
-    //     comment_function();
-    // }); 
-
+    
     $("#save").click(function () {
         var emoj = $(".emoji").text()
         var c = $("#memorable_txt").val();
@@ -114,7 +109,6 @@ $(function () {
         // console.log("retrievedObject",obj_data);
     }
     else{
-        
         $(".emoji").text(obj_data.emoj);
         $("#memorable_txt").text(obj_data.memorable);
         var update_memorable = $($('#'+$(".add_memorable").length))[0]
@@ -127,10 +121,8 @@ $(function () {
         // console.log("comment_obj",comment_obj);
     }
     else{
-        
         $.each(comment_obj, function(i, f) {
             $("#comment_ul").append('<li class="collection-item avatar"><img src="'+ f.comment_icon +'" alt="" class="circle"><span class="creater_name">'+ f.comment_text   +'</span><p class="created_data">'+ f.comment_user_name +' </br> '+ f.comment_date +'</p></li>');
         });
-        
     }
 });
