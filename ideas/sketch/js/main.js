@@ -24,7 +24,7 @@ $(function () {
     });  
   
     $(".title").text(data.title);
-    $("#modal_header").text(data.title);
+    $("#modal_header").val(data.title);
 
     $.each(userData, function(i, f) {
         var temp_id = f._id
