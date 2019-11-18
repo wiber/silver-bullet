@@ -3,10 +3,13 @@ scalars =
   fontScale: -> 1
   goldenRatio: -> ((1 + Math.sqrt(5)) / 2)
   screenshotWidth: 250
-  boxWidth: 640
-
+measurements =
+  D: 300
+  d: 4
+  M: 100
 style =
   scalars: scalars
+  measurements: measurements
   base:
     #background: 'rgba(54, 99, 25, 0.05)'
     height: '100%'
@@ -18,7 +21,7 @@ style =
     background: 'rgba(255, 255, 255, 0.8)'
     margin: '2em'
     padding: '1em'
-    maxWidth: scalars.boxWidth
+    maxWidth: 640
   mCard:
     background: 'rgba(255, 255, 255, .9)'
     marginTop: '15%'
@@ -46,4 +49,3 @@ style =
   h2:
     fontSize: scalars.goldenRatio() * scalars.fontScale() + 'em'
 exports.style = style
-exports.scalars = scalars

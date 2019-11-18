@@ -1,4 +1,7 @@
 {changeQueryParams} = require('../changeQueryParams.coffee')
+{linkstate} = require '../strings'
+{catTree} = linkstate
+{inBookmarks} = require '../ModelOperations'
 
 # need to parse node for whole node object...
 # go to a clicked N .
@@ -7,9 +10,12 @@ GoMark = (place) ->
   #console.log place.N.in.Bookmarks#[linkstate.store url],place.N[direction]
   for type, url of place.type
     # is from or to url bookmarked?
-    notBookmarked = !place.user?.out?.Bookmarks?[linkstate.store url]?
-    if !notBookmarked
-      console.log 'got url in bookmarks', url
+
+    #notBookmarked = !place.user?.out?.Bookmarks?[linkstate.store url]?
+    #console.log 'got url in bookmarks', url, inBookmarks(place.user, url), place.user
+    Bookmarked = inBookmarks(place.user, url)
+    if Bookmarked
+      console.log 'got url in bookmarks', url, inBookmarks(place.user, url)
       changeQueryParams type, url
     else
       # best we can do is show user the article they don't have..

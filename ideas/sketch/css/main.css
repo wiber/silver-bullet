@@ -1,0 +1,11 @@
+i.emoji_icon,i.emoji {
+    color: blue;
+}
+
+#modal_header{
+    font-size: smaller;
+     border: none;
+}
+div.hiddendiv.common {
+    width: 100% !important;
+}

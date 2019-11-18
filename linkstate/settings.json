@@ -1,7 +1,10 @@
 {
     "facebookAppId": "710055149104819",
     "facebookSecret": "9ec1defc8144985305fbda0ff66100ed",
+    "urlboxSecret": "b8c3d1fe6ca44d4583800106af436879",
+    "oauthSecretKey": "QBsLrTjxFwZQ6HxsLvdYFQ==",
     "public": {
+        "urlboxKey": "FLMG5BM3XeqMGa42",
         "facebookAppId": "710055149104819",
         "thumbalizr": "UQ6CMod6tIkVLam271a7WdUlutEJJHTE"
     },

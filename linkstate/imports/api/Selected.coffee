@@ -4,27 +4,29 @@
 # Builds the FROM and TO boxes from user object and props from queryparams
 # from and to are plain decodeURIComponent urls
 # which are then used to select defaultValue in the stateless ui component
-{changeQueryParams} = require('../api/changeQueryParams.coffee')
+# {changeQueryParams} = require('../api/changeQueryParams.coffee')
 Selected = require('../ui/SelectedUI.coffee').Selected
 {createContainer} = require 'meteor/react-meteor-data'
-{see, store} = require '../api/strings.coffee'
-
+# {linkstate, see, store} = require '../api/strings.coffee'
+{setOptions, setValue} = require '../api/ModelOperations'
 # goes through a simple loop
 #that builds list of objects from a number of sources.
 exports.selectedContainer = createContainer ((props) ->
   # update queryparams unless we're fromt he same place
+  window.selectedProps = props
   nProps = _.extend {}, props,
     value: setValue(props,setOptions(props),props.user)
     options: setOptions(props)
   nProps
 ), Selected
-
+###
 oDict = {}
 vDict = {}
 setOptions = (props) ->
   options = []
   if props.user?.links?.out?
-    dictWithCreatedAt = props.user.links.out['Bookmarks']
+    # how titles get into selectize
+    dictWithCreatedAt = props.user.links.in['Bookmarks']
     oDict = dictWithCreatedAt
     deChaos = linkstate.sortByKeysTime dictWithCreatedAt
     for index, value of deChaos
@@ -43,17 +45,22 @@ setValue = (props, options, user) ->
   newProps = {}
   newProps.options = []
   value = {}
-  return unless props.user?.links?.out?['Bookmarks']?
+  return unless props.user?.links?.in?['Bookmarks']?
   directedTo = typeof props.to is 'string' and props.to.length > 1
   clientReady = props.user?.services?.facebook? and Meteor.isClient
   gotFrom = typeof props.from is 'string' and props.from.length > 1
-  bookmarked = props.user?.links?.out?.Bookmarks?
-  dictWithCreatedAt = props.user.links.out['Bookmarks']
+  bookmarked = props.user?.links?.in?.Bookmarks?
+  dictWithCreatedAt = props.user.links.in['Bookmarks']
   vDict = dictWithCreatedAt
   typeValue = props[props.type]
   dictValue = dictWithCreatedAt[linkstate.store(typeValue)]
   dictValueExists = dictValue?.meta?.title?
   lastDictValue = dictWithCreatedAt[linkstate.store(user[props.type+'Last'])]
+  setLastTitle = true if props.newHere
+  # if we're in a new place, we want to point to the last place we connected to
+  # do we simply walk backwards untill we find a place not here?
+  # the problem is pointing to.. we are getting the wrong to value
+  # make negative cases...
   if !typeValue? and lastDictValue?
     value=
       label: lastDictValue.meta.title
@@ -61,7 +68,7 @@ setValue = (props, options, user) ->
   if props.type is 'from'
     if dictValueExists
       title = 'Linkstates for ' + dictValue.title + ' - ' + props.from
-      DocHead.setTitle(title)
+      DocHead.setTitle(title) # needs attention
   if dictValueExists and clientReady
     value =
       label: dictValue.meta.title
@@ -75,3 +82,4 @@ setValue = (props, options, user) ->
           title: props.lastTitle
 
   value
+###
