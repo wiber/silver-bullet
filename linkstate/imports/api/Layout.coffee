@@ -35,6 +35,7 @@ containerLayout = createContainer ((props) ->
   else
     thumbalizr = undefined
   #content = ifBodyContentHere queryParams.content, queryParams, user
+  nodeHandle = Meteor.subscribe "Node", linkstate.store(decodeURIComponent queryParams.from)
   newProps =
     user: user
     thumbalizr: thumbalizr
