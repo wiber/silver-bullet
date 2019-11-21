@@ -38,7 +38,29 @@ TextAbout = React.createClass
     if FlowRouter.getQueryParam('switched') is 'true'
       @refs.MainCardTextInput.input.setValue(@props.content)
       changeQueryParams('switched','')
+  onUpdate: (weight) =>
+    content = {}
+    content.body = $("#textAbout").val() # e.target.value #FlowRouter.getQueryParam('content')
+    # weight is between 0 and 9
+    payload =
+      from: FlowRouter.getQueryParam('from')
+      to: FlowRouter.getQueryParam('to')
+      meta: content
+    content.weight = weight || 0 # e.keyCode - 48
+    Meteor.defer ->
+      Meteor.call "Linking", payload, (error, result) ->
+        if error
+          console.log "error", error
+        if result?
+          console.log result, 'returned from linking'
+        else
+          console.log 'no result?', result
+  onChangeWeight: (event, value)->
+    this.onUpdate(value);
+
   render: ->
+    onChangeWeight = this.onChangeWeight.bind(this);
+    onUpdate = this.onUpdate.bind(this);
     window.textAbout = this
     that = this
     # #reactKup (k) ->
@@ -52,23 +74,8 @@ TextAbout = React.createClass
             e.target.value = that.props.content
         onKeyDown: (e) ->
           if 48 <= e.keyCode <= 57 and !e.ctrlKey and !e.shiftKey and !e.altKey
-            content = {}
-            content.body = e.target.value #FlowRouter.getQueryParam('content')
-            # weight is between 0 and 9
-            payload =
-              from: FlowRouter.getQueryParam('from')
-              to: FlowRouter.getQueryParam('to')
-              meta: content
-            content.weight = e.keyCode - 48
-            Meteor.defer ->
-              Meteor.call "Linking", payload, (error, result) ->
-                if error
-                  console.log "error", error
-                if result?
-                  console.log result, 'returned from linking'
-                else
-                  console.log 'no result?', result
             #changeQueryParams 'content', ''
+            onUpdate(e.keyCode - 48);
             e.preventDefault()
             #window.to.refs.to.focus() if window?.to?.refs?
           else
@@ -92,6 +99,7 @@ TextAbout = React.createClass
           marginRight: 7
           bottom: 9
       React.createElement Slider, {
-        step: that ? that.props ? that.props.weight
+        step: that ? that.props ? that.props.weight,
+        onChangeWeight: onChangeWeight
       }
 

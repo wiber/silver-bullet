@@ -7,9 +7,10 @@ exports.Slider = React.createClass
 
   onChangeWeight: (event, value) ->
     this.setState({step: value})
+    if this.props.onChangeWeight
+      this.props.onChangeWeight(event, value)
 
   render: ->
-    console.log(this.props.step);
     onChangeWeight = this.onChangeWeight.bind(this)
     div
       className: 'xyz'
