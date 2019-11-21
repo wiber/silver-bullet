@@ -65,7 +65,8 @@ exports.MainCard = React.createClass
             "word": that.props.word
             "content": that.props.content
             "user": that.props.user
-            "newHere": that.props.newHere
+            "newHere": that.props.newHere,
+            "meta": HERE.meta
           }
           React.createElement shadowMoon, {
             "measurements":

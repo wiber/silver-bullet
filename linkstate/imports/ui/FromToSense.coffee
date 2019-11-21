@@ -99,7 +99,7 @@ TextAbout = React.createClass
           marginRight: 7
           bottom: 9
       React.createElement Slider, {
-        step: that ? that.props ? that.props.weight,
+        step: that ? that.props ? that.props.meta ? that.props.meta.weight,
         onChangeWeight: onChangeWeight
       }
 

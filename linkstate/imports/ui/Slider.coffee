@@ -3,10 +3,10 @@ Slider = require('material-ui/lib/Slider').default
 
 exports.Slider = React.createClass
   getInitialState: ->
-    step: this.props.step || 0
+    weight: this.props.weight || 0
 
   onChangeWeight: (event, value) ->
-    this.setState({step: value})
+    this.setState({weight: value})
     if this.props.onChangeWeight
       this.props.onChangeWeight(event, value)
 
@@ -18,8 +18,8 @@ exports.Slider = React.createClass
         min: 0,
         max: 9,
         step: 1,
-        defaultValue: this.state.step,
+        defaultValue: this.state.weight,
         onChange: onChangeWeight
       }
-      "Your weight is " +this.state.step
+      "Your weight is " +this.state.weight
 
