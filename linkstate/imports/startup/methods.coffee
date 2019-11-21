@@ -51,6 +51,11 @@ Meteor.methods
   GroundedNodeInsert: ->
     if Meteor.isClient and Meteor?.user()?.services?.facebook?
       localStorage.setItem Nodes.findOne()._id, JSON.stringify(Nodes.findOne())
+  getStaticNode: (id) ->
+
+    node = Nodes.findOne(linkstate.store(id))
+    console.log id, Meteor.isClient, 'client get staticNode', node
+    return node
   # create a ling when we navigate in the app -
   # from : me to: origin
   # answers the question - what are originating from (be)

@@ -36,6 +36,11 @@ containerLayout = createContainer ((props) ->
     thumbalizr = undefined
   #content = ifBodyContentHere queryParams.content, queryParams, user
   nodeHandle = Meteor.subscribe "Node", linkstate.store(decodeURIComponent queryParams.from)
+  Meteor.call 'getStaticNode', decodeURIComponent(queryParams.from), (error, result) ->
+    staticNode = result
+    console.log staticNode
+  if !staticNode
+    staticNode = {}
   newProps =
     user: user
     thumbalizr: thumbalizr
@@ -52,6 +57,7 @@ containerLayout = createContainer ((props) ->
     facebookAppId: Meteor.settings.public.facebookAppId
     newHere: newHere
     url: window.location.href
+    staticNode: staticNode
   #console.log newProps, queryParams.from, queryParams.to,'newProps, queryParams.from, queryParams.to'
   window.props = newProps
   newProps
