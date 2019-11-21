@@ -5,19 +5,20 @@ exports.Slider = React.createClass
   getInitialState: ->
     step: this.props.step || 0
 
-  onChangeOpinion: (event, value) ->
+  onChangeWeight: (event, value) ->
     this.setState({step: value})
 
   render: ->
-    onChangeOpinion = this.onChangeOpinion.bind(this)
+    console.log(this.props.step);
+    onChangeWeight = this.onChangeWeight.bind(this)
     div
-      className: 'slider'
+      className: 'xyz'
       React.createElement Slider, {
         min: 0,
         max: 9,
         step: 1,
         defaultValue: this.state.step,
-        onChange: onChangeOpinion
+        onChange: onChangeWeight
       }
-      "Your opinion is " +this.state.step
+      "Your weight is " +this.state.step
 

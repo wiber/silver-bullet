@@ -23,7 +23,6 @@ ToIcon =  require('material-ui/lib/svg-icons/communication/call-made').default #
 copy = require 'copy-to-clipboard'
 Lo = require 'lodash'
 {shadowMoon} = require '../ui/ShadowMoon'
-{Slider} = require './Slider'
 
 exports.MainCard = React.createClass
   getDefaultProps: ->
@@ -106,10 +105,6 @@ exports.MainCard = React.createClass
             React.createElement Flip, {
               "style": _.extend {},
             }
-          React.createElement Slider, {
-            "style": _.extend {},
-              overflow: 'hidden'
-          },
           React.createElement IconButton, {
             "tooltip": "TO - Visit the page you're connecting TO " + that.props.to
             "tooltipPosition": 'bottom-right'
