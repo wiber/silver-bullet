@@ -1,7 +1,7 @@
 #reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
-{hereAndThere} = require('../api/ModelOperations.coffee')
+{hereAndThere, hereToThereMeta} = require('../api/ModelOperations.coffee')
 {changeQueryParams, changeQueryParamsObject} = require('../api/changeQueryParams.coffee')
 {FromToSense} = require('../ui/FromToSense.coffee')
 Card = require('@material-ui/core/Card').default
@@ -39,6 +39,8 @@ exports.MainCard = React.createClass
   render: ->
     that = this
     {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl} = hereAndThere that.props.user, that.props
+    {hereToThereObj} = hereToThereMeta(@props.user,@props)
+    console.log HERE,THERE,"metas"
     div
       className: 'xxx'
       React.createElement Card, { "style": _.extend {}, style.card, style.mAcard }, #"expanded": that.props.expanded,
@@ -67,6 +69,7 @@ exports.MainCard = React.createClass
             "user": that.props.user
             "newHere": that.props.newHere,
             "meta": HERE.meta
+            HERE: HERE
           }
           React.createElement shadowMoon, {
             "measurements":

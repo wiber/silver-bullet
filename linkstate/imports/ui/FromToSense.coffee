@@ -14,6 +14,7 @@ TextField = require('material-ui/lib/TextField').default #not working @material-
 
 exports.FromToSense = React.createClass
   render: ->
+    console.log @props.meta.weight, "metas"
     that = this
     div
       "style": _.extend {}
@@ -21,6 +22,7 @@ exports.FromToSense = React.createClass
         "word": that.props.word
         "type": 'MainCardTextInput'
         "content": that.props.content
+        weight: @props.meta.weight
       div
         "style":
           "maxWidth": '100%'
@@ -59,6 +61,7 @@ TextAbout = React.createClass
     this.onUpdate(value);
 
   render: ->
+    console.log @props,"metas"
     onChangeWeight = this.onChangeWeight.bind(this);
     onUpdate = this.onUpdate.bind(this);
     window.textAbout = this
@@ -101,5 +104,6 @@ TextAbout = React.createClass
       React.createElement Slider, {
         step: that ? that.props ? that.props.meta ? that.props.meta.weight || 0,
         onChangeWeight: onChangeWeight
+        meta: that.props.meta
+        weight: that.props.weight
       }
-
