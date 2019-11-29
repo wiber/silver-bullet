@@ -1,5 +1,6 @@
 React = require("react")
 ReactDOM = require("react-dom")
+import { Login } from './Login';
 
 class Footer extends React.Component {
   constructor(props){
@@ -18,7 +19,7 @@ class Footer extends React.Component {
   }
   onLogout(){
     Meteor.logout(function(){
-      location.reload();
+      // location.reload();
     });
   };
 
@@ -34,7 +35,7 @@ class Footer extends React.Component {
               <p className="grey-text text-lighten-4">{this.state.user.profile.name}</p>
               <br/>
               <p className="grey-text text-lighten-4"><a className="waves-effect waves-light btn blue darken-4" onClick={this.onLogout}>Logout</a></p>
-          </div>
+            </div>
             <div className="col l4 offset-l2 s12">
               <h5 className="white-text">Links</h5>
               <ul>
@@ -43,6 +44,7 @@ class Footer extends React.Component {
             </div>
           </div>
         </div>
+        <Login />
         <div className="footer-copyright">
           <div className="container">
             © 2019 Copyright Youiest LLC
