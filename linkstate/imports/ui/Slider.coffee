@@ -5,6 +5,8 @@ Slider = require('material-ui/lib/Slider').default
 exports.Slider = React.createClass
   getInitialState: ->
     weight: this.props.weight || 0
+  componentDidReceiveProps: ->
+    this.setState({weight: @props.weight})
 
   onChangeWeight: (event, value) ->
     this.setState({weight: value})
