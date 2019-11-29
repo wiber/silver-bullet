@@ -22,7 +22,7 @@ exports.FromToSense = React.createClass
         "word": that.props.word
         "type": 'MainCardTextInput'
         "content": that.props.content
-        weight: @props.meta.weight
+        weight: @props.hereToThereObjWeight
       div
         "style":
           "maxWidth": '100%'

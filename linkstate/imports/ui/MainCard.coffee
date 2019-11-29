@@ -39,7 +39,7 @@ exports.MainCard = React.createClass
   render: ->
     that = this
     {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl} = hereAndThere that.props.user, that.props
-    {hereToThereObj} = hereToThereMeta(@props.user,@props)
+    {hereToThereObj,hereToThereObjWeight} = hereToThereMeta(@props.user,@props)
     console.log HERE,THERE,"metas"
     div
       className: 'xxx'
@@ -69,7 +69,7 @@ exports.MainCard = React.createClass
             "user": that.props.user
             "newHere": that.props.newHere,
             "meta": HERE.meta
-            HERE: HERE
+            hereToThereObjWeight: hereToThereObjWeight
           }
           React.createElement shadowMoon, {
             "measurements":
