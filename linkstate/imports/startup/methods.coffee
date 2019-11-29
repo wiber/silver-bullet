@@ -15,11 +15,11 @@ R = require 'ramda'
 
 if Meteor.settings?.public?.urlboxKey?
   @urlboxKey =  Meteor.settings.public.urlboxKey
-  @urlboxSecret = Meteor.settings.urlboxSecret
+  @urlboxSecret = Meteor.settings.urlbox.secret
 else
   @urlboxKey= "FLMG5BM3XeqMGa42"
 
-urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
+urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlbox.secret)
 
 if Meteor.settings?.public?.thumbalizr?
   @thumbalizr =  Meteor.settings.public.thumbalizr
@@ -122,7 +122,7 @@ Meteor.methods
     edge.meta = META
     edge.meta.FromLink = from
     edge.meta.ToLink = to
-    #if Meteor?.settings?.urlboxSecret?
+    #if Meteor?.settings?.urlbox?.secret?
     # is server the last write and therefore the secret is included next time?
     edge.meta.ScreenshotUrl = urlbox.buildUrl
       url: from

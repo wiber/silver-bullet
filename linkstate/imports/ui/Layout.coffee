@@ -59,7 +59,7 @@ exports.Layout = React.createClass
         HERE = that.props.user.links.in.Bookmarks[ linkstate.store that.props.from]
         ScreenshotUrl = HERE.meta.ScreenshotUrl
       # old way still here..
-      urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
+      urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlbox.secret)
       before = ScreenshotUrl
       ScreenshotUrl = urlbox.buildUrl
         url: that.props.from

@@ -8,19 +8,13 @@
       "secret": "9ec1defc8144985305fbda0ff66100ed",
       "oauthSecretKey": "QBsLrTjxFwZQ6HxsLvdYFQ=="
     },
-    "facebookAppId": "710055149104819",
-    "facebookSecret": "9ec1defc8144985305fbda0ff66100ed",
-    "urlboxSecret": "b8c3d1fe6ca44d4583800106af436879",
-    "oauthSecretKey": "QBsLrTjxFwZQ6HxsLvdYFQ==",
-    "linkedInSecret": "3X96vpypVrBblWl3"
-
+    "urlbox": {
+      "secret": "b8c3d1fe6ca44d4583800106af436879"
+    },
     "public": {
         "urlboxKey": "FLMG5BM3XeqMGa42",
         "facebookAppId": "710055149104819",
         "thumbalizr": "UQ6CMod6tIkVLam271a7WdUlutEJJHTE",
-        "linkedInKey": "81bjsrhmw6fa9s",
-    },
-    "devDependencies": {
-    "chai": "^2.2.0"
-  }
+        "linkedInKey": "81bjsrhmw6fa9s"
+    }
 }

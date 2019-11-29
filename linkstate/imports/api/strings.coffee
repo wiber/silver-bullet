@@ -3,7 +3,7 @@ linkstate = {}
 _ = require 'lodash'
 # Urlbox = require 'urlbox'
 
-#exports.urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
+#exports.urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlbox.secret)
 
 exports.Position = ({measurements,weight,n,directed,axis}) ->
   if directed == 'OUTLINKS'
