@@ -61,7 +61,7 @@ TextAbout = React.createClass
     this.onUpdate(value);
 
   render: ->
-    console.log @props,"metas"
+    console.log @props,"metas", props.weight
     onChangeWeight = this.onChangeWeight.bind(this);
     onUpdate = this.onUpdate.bind(this);
     window.textAbout = this

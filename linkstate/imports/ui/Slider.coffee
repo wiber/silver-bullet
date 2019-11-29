@@ -15,6 +15,7 @@ exports.Slider = React.createClass
     console.log meta,'metas', this.props
   render: ->
     onChangeWeight = this.onChangeWeight.bind(this)
+    console.log @props.weight, 'metas'
     div
       className: 'xyz'
       React.createElement Slider, {
