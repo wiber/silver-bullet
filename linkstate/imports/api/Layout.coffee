@@ -23,7 +23,7 @@ containerLayout = createContainer ((props) ->
   # if newHere add this to the dropdown, set the to to lastTo
   markExist = linkstate.bookmarkExistHere user, queryParams.from
   if newHere or !markExist and Meteor.isClient
-    console.log queryParams.from, linkstate.catTree.categoryUrls.Bookmarks
+    # console.log queryParams.from, linkstate.catTree.categoryUrls.Bookmarks
     Meteor.call "Linking",
       from: queryParams.from
       to: linkstate.catTree.categoryUrls.Bookmarks

@@ -1,4 +1,13 @@
 {
+    "linkedin": {
+      "clientId": "783xj7ou7kqw29",
+      "secret": "HYlNiSfIZwU93sAK"
+    },
+    "facebook": {
+      "appId": "710055149104819",
+      "secret": "9ec1defc8144985305fbda0ff66100ed",
+      "oauthSecretKey": "QBsLrTjxFwZQ6HxsLvdYFQ=="
+    },
     "facebookAppId": "710055149104819",
     "facebookSecret": "9ec1defc8144985305fbda0ff66100ed",
     "urlboxSecret": "b8c3d1fe6ca44d4583800106af436879",
