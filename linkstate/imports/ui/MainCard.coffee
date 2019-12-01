@@ -40,7 +40,6 @@ exports.MainCard = React.createClass
     that = this
     {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl} = hereAndThere that.props.user, that.props
     {hereToThereObj,hereToThereObjWeight} = hereToThereMeta(@props.user,@props)
-    console.log HERE,THERE,"metas"
     div
       className: 'xxx'
       React.createElement Card, { "style": _.extend {}, style.card, style.mAcard }, #"expanded": that.props.expanded,

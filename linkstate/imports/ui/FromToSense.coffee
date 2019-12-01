@@ -14,7 +14,6 @@ TextField = require('material-ui/lib/TextField').default #not working @material-
 
 exports.FromToSense = React.createClass
   render: ->
-    console.log @props.meta.weight, "metas"
     that = this
     div
       "style": _.extend {}
@@ -61,7 +60,6 @@ TextAbout = React.createClass
     this.onUpdate(value);
 
   render: ->
-    console.log @props,"metas", props.weight
     onChangeWeight = this.onChangeWeight.bind(this);
     onUpdate = this.onUpdate.bind(this);
     window.textAbout = this

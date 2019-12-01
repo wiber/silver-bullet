@@ -25,7 +25,6 @@ hereToThereMeta = (user,props) ->
   getMetaWeight = _.property ['links','out',storeFrom,storeTo,'meta','weight']
   hereToThereObj = getMeta user
   hereToThereObjWeight = getMetaWeight user
-  console.log {user,props,from,to, storeFrom, storeTo, hereToThereObj,hereToThereObjWeight}, 'metas'
   {hereToThereObj, hereToThereObjWeight}
 
 hereAndThere = (user, props) ->
