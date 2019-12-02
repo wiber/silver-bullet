@@ -21,6 +21,7 @@ exports.FromToSense = React.createClass
         "word": that.props.word
         "type": 'MainCardTextInput'
         "content": that.props.content
+        weight: @props.hereToThereObjWeight
       div
         "style":
           "maxWidth": '100%'
@@ -101,5 +102,6 @@ TextAbout = React.createClass
       React.createElement Slider, {
         step: that ? that.props ? that.props.meta ? that.props.meta.weight || 0,
         onChangeWeight: onChangeWeight
+        meta: that.props.meta
+        weight: that.props.weight
       }
-
