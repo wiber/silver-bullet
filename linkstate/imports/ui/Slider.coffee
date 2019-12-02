@@ -20,6 +20,6 @@ exports.Slider = React.createClass
         value: @props.weight
         valueLabelDisplay: "on"
         #ariaLabelledby: "discrete-slider-always"
-        #valueLabelDisplay: @showThisAlways
+        #valueLabelDisplay: @showThisAlways # "Your weight is " +this.state.weight
       }
       #{}"Your weight is " +this.state.weight
