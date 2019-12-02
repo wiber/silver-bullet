@@ -13,6 +13,9 @@ exports.Slider = React.createClass
       this.props.onChangeWeight(event, value)
   newWeight: (value) ->
     this.setState({weight: value})
+  showThisAlways: () ->
+    console.log 'metas', @props.weight
+    @props.weight
   render: ->
     onChangeWeight = this.onChangeWeight.bind(this)
     div
@@ -24,5 +27,8 @@ exports.Slider = React.createClass
         defaultValue: this.state.weight,
         onChange: onChangeWeight
         value: @props.weight
+        valueLabelDisplay: "on"
+        #ariaLabelledby: "discrete-slider-always"
+        #valueLabelDisplay: @showThisAlways
       }
-      "Your weight is " +this.state.weight
+      #{}"Your weight is " +this.state.weight
