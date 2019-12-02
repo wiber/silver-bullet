@@ -30,7 +30,7 @@ class Footer extends React.Component {
           <div className="row">
             <div className="col l6 s12">
               <h5 className="white-text">Instruction</h5>
-              <p className="grey-text text-lighten-4">To use this app properly, you will need the chrome extension.</p>
+              <p className="grey-text text-lighten-4">To use this app properly, you will need the extension below.</p>
               <br/>
               <p className="grey-text text-lighten-4">{this.state.user.profile.name}</p>
               <br/>
@@ -39,7 +39,7 @@ class Footer extends React.Component {
             <div className="col l4 offset-l2 s12">
               <h5 className="white-text">Links</h5>
               <ul>
-                <a className="grey-text text-lighten-4 right" href="https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA">Download</a>
+                <a className="grey-text text-lighten-4 right" href="https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA">Download Chrome Extension</a>
               </ul>
             </div>
           </div>
