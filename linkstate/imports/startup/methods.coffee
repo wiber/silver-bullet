@@ -13,13 +13,7 @@ R = require 'ramda'
   ##console.log r
   return r
 
-if Meteor.settings?.public?.urlboxKey?
-  @urlboxKey =  Meteor.settings.public.urlboxKey
-  @urlboxSecret = Meteor.settings.urlbox.secret
-else
-  @urlboxKey= "FLMG5BM3XeqMGa42"
-
-urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlbox.secret)
+urlbox = Urlbox(Meteor.settings.public.urlbox.key, Meteor.settings.public.urlbox.secret)
 
 if Meteor.settings?.public?.thumbalizr?
   @thumbalizr =  Meteor.settings.public.thumbalizr

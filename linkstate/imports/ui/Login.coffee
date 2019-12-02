@@ -41,7 +41,7 @@ exports.Login = React.createClass
       margin: 2
     }
 
-    if this.props.props.user
+    if @props.props.user
       div
         className: 'container'
           div

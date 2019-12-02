@@ -12,6 +12,7 @@ React = require('react')
 # CardText = require 'material-ui/lib/card/card-text'
 AppBar =  require('@material-ui/core/AppBar').default
 {Footer} = require('./Footer.jsx')
+{Login} = require('./Login')
 # Card = require 'material-ui/lib/card/card'
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 {Mexplain} = require '../api/MexplainContainer.coffee'
@@ -59,7 +60,7 @@ exports.Layout = React.createClass
         HERE = that.props.user.links.in.Bookmarks[ linkstate.store that.props.from]
         ScreenshotUrl = HERE.meta.ScreenshotUrl
       # old way still here..
-      urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlbox.secret)
+      urlbox = Urlbox(Meteor.settings.public.urlbox.key, Meteor.settings.public.urlbox.secret)
       before = ScreenshotUrl
       ScreenshotUrl = urlbox.buildUrl
         url: that.props.from
@@ -134,7 +135,7 @@ exports.Layout = React.createClass
             # div
             #   React.createElement AccountsUIWrapper, {}
             div
-              React.createElement Footer, {props: this.props}
+              React.createElement Login, {props: @props}
             # div
             #   id: 'fb-root'
             #   React.createElement CookieConsent, {}
