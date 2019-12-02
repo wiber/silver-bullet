@@ -17,6 +17,16 @@ theModel = (props) ->
   returnThis = {HERE,HereScreenshotUrl,THERE,ThereScreenshotUrl,options,value,props}
   console.log returnThis,'theModel'
   returnThis
+hereToThereMeta = (user,props) ->
+  {from, to} = props
+  storeFrom = linkstate.store from
+  storeTo = linkstate.store to
+  getMeta = _.property ['links','in',storeFrom,storeTo]
+  getMetaWeight = _.property ['links','out',storeFrom,storeTo,'meta','weight']
+  hereToThereObj = getMeta user
+  hereToThereObjWeight = getMetaWeight user
+  {hereToThereObj, hereToThereObjWeight}
+
 hereAndThere = (user, props) ->
   {from,to, user} = props
   #console.log {from,to, user},'should not first'
@@ -234,3 +244,4 @@ exports.moS = moS
 exports.screenshotUrlHere = screenshotUrlHere
 exports.inBookmarks = inBookmarks
 exports.theModel = theModel
+exports.hereToThereMeta = hereToThereMeta
