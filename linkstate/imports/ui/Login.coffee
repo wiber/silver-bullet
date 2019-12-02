@@ -11,17 +11,6 @@ exports.Login = React.createClass
 
   componentDidMount: ->
     self = this;
-    setTimeout ()->
-      user = Meteor.user();
-      isLoggedIn = false
-      if user
-        isLoggedIn = true
-
-      # self.setState {
-      #   name: user?user.profile?user.profile.name || ""
-      #   isLoggedIn: isLoggedIn
-      # }
-    ,5000
 
   onLoginWithFacebook: () ->
     console.log "onLoginWithFacebook"
@@ -36,11 +25,12 @@ exports.Login = React.createClass
     console.log "onRegister"
 
   onLogout: () ->
-    # Meteor.logout(()->{})
-    console.log "onLogout"
+    Meteor.logout ()->
+      console.log "onLogout"
+
 
   render: ->
-
+    # console.log(this.props.props.user);
     onLoginWithFacebook = this.onLoginWithFacebook.bind(this)
     onLoginWithLinkedIn = this.onLoginWithLinkedIn.bind(this)
     onLogin = this.onLogin.bind(this)
@@ -51,7 +41,7 @@ exports.Login = React.createClass
       margin: 2
     }
 
-    if this.state.isLoggedIn
+    if this.props.props.user
       div
         className: 'container'
           div

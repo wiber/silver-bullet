@@ -134,7 +134,7 @@ exports.Layout = React.createClass
             # div
             #   React.createElement AccountsUIWrapper, {}
             div
-              React.createElement Footer, {}
+              React.createElement Footer, {props: this.props}
             # div
             #   id: 'fb-root'
             #   React.createElement CookieConsent, {}

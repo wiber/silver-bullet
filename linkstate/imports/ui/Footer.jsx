@@ -44,7 +44,7 @@ class Footer extends React.Component {
             </div>
           </div>
         </div>
-        <Login />
+        <Login props={this.props.props}/>
         <div className="footer-copyright">
           <div className="container">
             © 2019 Copyright Youiest LLC
