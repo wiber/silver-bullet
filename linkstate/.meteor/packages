@@ -37,3 +37,4 @@ underscore@1.0.10
 kadira:flow-router
 accounts-password
 pauli:accounts-linkedin
+mdg:meteor-apm-agent
