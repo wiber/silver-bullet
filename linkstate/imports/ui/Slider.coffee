@@ -12,11 +12,8 @@ exports.Slider = React.createClass
     div
       className: 'xyz'
       React.createElement Slider, {
-        style:
-          inert: "true"
-          tabIndex: -1
         onFocus: () ->
-          window.textAbout.refs.MainCardTextInput.focus()
+          window.to.refs.selecters.focus()
         min: 0,
         max: 9,
         step: 1,
