@@ -63,6 +63,7 @@ VisualCue = React.createClass
   render: ->
     {D, d, M} = @props.measurements
     that = this
+<<<<<<< HEAD
     div
       style:
         position: 'relative'
@@ -126,6 +127,62 @@ VisualCue = React.createClass
               "weight": target.meta.weight
               "measurements": that.props.measurements
             }
+=======
+    reactKup (k) ->
+      k.div
+        style:
+          position: 'relative'
+        ->
+          k.build Paper,
+            circle: true
+            style:
+              width: D
+              height: D
+              left: D/2+M
+              marginTop: 2*M
+              marginBottom: M
+              float: 'right'
+              display: 'inline'
+            zDepth: 5
+            ->
+              k.build Avatar,
+                style:
+                  width: D
+                  height: D
+                  marginRight: 0
+                  marginTop: 0
+                  marginBottom: 0
+                  float: 'right'
+                  display: 'inline'
+                size: D/2
+                src: that.props.ScreenshotUrl
+          if that.props?.user?.link?.to?[linkstate.store that.props.from]?
+            inLinks = that.props.user.link.to[linkstate.store that.props.from]
+            n = 0
+            inLinksArrayByWeight = linkstate.sortByWeight(inLinks, that.props.howMany)
+            for key, mark of inLinksArrayByWeight
+              target = inLinks[mark]
+              arrayValue = inLinksArrayByWeight[key]
+              dictWeight = inLinks[arrayValue].meta.weight
+              lastKey = inLinksArrayByWeight[key-1]
+              if lastKey?
+                if inLinks[lastKey].meta.weight is inLinks[mark].meta.weight
+                  n++
+                else
+                  n = 0
+              m = target.meta
+              try
+                thisWeight = inLinks[mark].meta.weight
+                lastWeight = (inLinks[mark].meta.weight -1)
+              catch error
+              k.build yourMark,
+                user: that.props.user
+                ScreenshotUrl: that.props.ScreenshotUrl
+                n: n
+                target: target
+                weight: target.meta.weight
+                measurements: that.props.measurements
+>>>>>>> master
 
 
 yourMark = React.createClass
@@ -244,6 +301,7 @@ wingMark = React.createClass
     floor = 5
     top = 50
     shadow = floor-Math.round(floor/Math.round(.5+bodyLen*(floor/top)))
+<<<<<<< HEAD
     #{measurements,n,weight,meta,FromLink,ToLink,loopi,directed,from,to} = that.props
     {D,d,M} = measurements
     React.createElement Paper,{
@@ -290,6 +348,53 @@ wingMark = React.createClass
               "size": D/d
               "src": that.props.meta.face.replace('http:','https:') if that?.props?.meta?.face?
             }
+=======
+    reactKup (k) ->
+      {D,d,M} = measurements
+      k.build Paper,
+        circle: true
+        style:
+          meta: meta
+          position: 'absolute'
+          top: Position
+            measurements: measurements
+            weight: weight
+            n: n
+            directed: directed
+            axis: 'y'
+          left: Position
+            measurements: measurements
+            weight: weight
+            n: n
+            directed: directed
+            axis: 'x'
+          width: D/d
+          height: D/d
+        zDepth: shadowFloor that.props.meta.body, 5 , 50
+        overflow: 'hidden'
+        ->
+          k.div ->
+            k.build IconButton,
+              style:
+                padding: 0
+                width: D/d
+                height: D/d
+              tooltip: that.props.meta.body
+              tooltipPosition: 'top-right'
+              className: 'YourMarks'
+              onClick: (e) ->
+                changeQueryParamsObject
+                  from: that.props.FromLink
+                  to: that.props.meta.FromLink
+              ->
+                k.build Avatar,
+                  style:
+                    width: D/d
+                    height: D/d
+                    float: 'left'
+                  size: D/d
+                  src: that.props.meta.face
+>>>>>>> master
 
 exports.VisualCue = VisualCue
 exports.yourMark = yourMark

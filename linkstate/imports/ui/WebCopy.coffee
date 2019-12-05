@@ -10,7 +10,7 @@ exports.wordLanguages =
     MyCardSubtitle: "Go to Bookmarks or your project page and your resources appear here"
     MyCardStepsSubheader: "You have connected from here recently"
     AboutCardTitle: "What's the word on this?"
-    AboutCardSubTitle: "Connections talk. Yay sayers weigh in on the right."
+    AboutCardSubTitle: "Connections talk. Yay sayers are up. Left talks about it and right points back."
     to: "to "
     defaultProject: "Your last project was "
     defaultStart: "Last on "
