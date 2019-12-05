@@ -12,6 +12,11 @@ exports.Slider = React.createClass
     div
       className: 'xyz'
       React.createElement Slider, {
+        style:
+          inert: "true"
+          tabIndex: -1
+        onFocus: () ->
+          window.textAbout.refs.MainCardTextInput.focus()
         min: 0,
         max: 9,
         step: 1,
@@ -19,7 +24,7 @@ exports.Slider = React.createClass
         onChange: onChangeWeight
         value: @props.weight
         valueLabelDisplay: "on"
-        #ariaLabelledby: "discrete-slider-always"
+        ariaLabelledby: "discrete-slider-always"
         #valueLabelDisplay: @showThisAlways # "Your weight is " +this.state.weight
       }
       #{}"Your weight is " +this.state.weight

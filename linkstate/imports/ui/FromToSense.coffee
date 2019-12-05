@@ -104,4 +104,5 @@ TextAbout = React.createClass
         onChangeWeight: onChangeWeight
         meta: that.props.meta
         weight: that.props.weight
+        inert: "true"
       }
