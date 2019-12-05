@@ -1,6 +1,6 @@
 React = require 'react'
 Slider = require('material-ui/lib/Slider').default
-
+# https://v0.material-ui.com/v0.15.0/#/components/slider
 
 exports.Slider = React.createClass
   onChangeWeight: (event, value) ->
