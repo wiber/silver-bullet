@@ -11,22 +11,15 @@ exports.Slider = React.createClass
     onChangeWeight = this.onChangeWeight.bind(this)
     div
       className: 'xyz'
-      React.createElement Slider, {
+      React.createElement Slider,
         onFocus: () ->
-          window.to.refs.selecters.focus()
+          try
+            window.to.refs.selecters.focus()
+          catch error
         min: 0,
         max: 9,
         step: 1,
         defaultValue: @props.weight#this.state.weight,
         onChange: onChangeWeight
         value: @props.weight
-<<<<<<< HEAD
-        # valueLabelDisplay: "on"
-        #ariaLabelledby: "discrete-slider-always"
-=======
-        valueLabelDisplay: "on"
-        ariaLabelledby: "discrete-slider-always"
->>>>>>> mergeDS
-        #valueLabelDisplay: @showThisAlways # "Your weight is " +this.state.weight
-      }
-      #{}"Your weight is " +this.state.weight
+#{}"Your weight is " +this.state.weight

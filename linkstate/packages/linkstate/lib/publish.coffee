@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 # reactively publishes last n nodes you landed on
 # this includes changing dropdown selection because
 # it counts as a new route call, calls linking again
@@ -65,4 +63,3 @@ Meteor.publish "myMarksTo", (URL) ->
       limit: 20
       sort:
         createdAt: -1
->>>>>>> master

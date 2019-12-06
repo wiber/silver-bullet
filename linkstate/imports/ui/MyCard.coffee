@@ -19,21 +19,12 @@ CardText =  require('material-ui/lib/card/card-text').default #not in material-u
 # Toggle = require('material-ui/lib/toggle').default
 # {Mexplain} = require '../api/MexplainContainer.coffee'
 {selectedContainer} = require '../api/Selected.coffee'
-<<<<<<< HEAD
 # Print =  require('material-ui/lib/svg-icons/action/print').default
 IconButton = require('@material-ui/core/IconButton').default
 Paper = require('@material-ui/core/Paper').default
 Avatar = require('@material-ui/core/Avatar').default
 {shadowFloor, upMargin, rightMargin, Position} = require '../api/strings'
 {VisualCue, yourMark} = require '../ui/ShadowMoon.coffee'
-=======
-Print =  require('material-ui/lib/svg-icons/action/print').default
-IconButton = require('material-ui/lib/icon-button').default
-Paper = require('material-ui/lib/paper').default
-Avatar = require('material-ui/lib/avatar').default
-{shadowFloor, upMargin, rightMargin, Position} = require '../api/strings'
-{VisualCue} = require '../ui/ShadowMoon.coffee'
->>>>>>> master
 # TODO functional testable convenience functions, like strings, for math and attribute getting
 Lo = require 'lodash'
 {see, store, linkstate} = require '../api/strings'
@@ -82,7 +73,6 @@ exports.MyCard = React.createClass
     that = this
     if typeof @props.expanded is 'undefined'
       that.props.expanded = true
-<<<<<<< HEAD
     # #reactKup (k) ->
     {D,d,M} = that.props.styles.measurements
     measurements = {D, d, M}
@@ -289,17 +279,6 @@ yourMark = React.createClass
           changeQueryParamsObject
             from: that.props.target.from
             to: that.props.target.to
-=======
-    reactKup (k) ->
-
-      measurements =
-        D: 400
-        d: 5
-        M: 150
-      k.build Card,
-        expanded: that.props.expanded
-        style: _.extend {}, style.card, style.yCard
->>>>>>> master
         ->
           React.createElement Avatar,{
             "style":{
