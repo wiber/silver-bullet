@@ -23,7 +23,7 @@ LinkVote = React.createClass
     from: React.PropTypes.string
     to: React.PropTypes.string
     meta: React.PropTypes.object
-    directed: React.PropTypes.bool
+    directed: React.PropTypes.string
   render: ->
     that = this
     # #reactKup (k) ->

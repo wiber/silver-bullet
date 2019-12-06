@@ -57,6 +57,7 @@ livedata@1.0.18
 localstorage@1.2.0
 logging@1.1.20
 materialize:materialize@0.100.2
+mdg:meteor-apm-agent@3.2.3
 meteor@1.9.3
 meteor-base@1.4.0
 minifier-css@1.4.2
@@ -72,6 +73,7 @@ mongo@1.6.2
 mongo-decimal@0.1.1
 mongo-dev-server@1.1.0
 mongo-id@1.0.7
+mongo-livedata@1.0.12
 npm-bcrypt@0.9.3
 npm-mongo@3.1.2
 oauth@1.2.8

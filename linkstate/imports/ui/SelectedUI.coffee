@@ -41,7 +41,7 @@ Selected = React.createClass
         "theme": "material"
         "transitionEnter": true
         "value": that.props.value
-        "ref": 'selecters'
+        ref: 'selecters'#+that.props.type
         "id": that.props.type
         options: that.props.options #error here
         "tabindex": if that.props.type is 'from' then '2' else '3'

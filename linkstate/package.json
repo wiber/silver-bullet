@@ -6,13 +6,18 @@
     "start": "meteor run"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@babel/runtime": "^7.3.1",
     "@material-ui/core": "^3.9.2",
+=======
+    "babel-runtime": "^6.26.0",
+>>>>>>> master
     "chai": "^3.5.0",
     "copy-to-clipboard": "^3.0.8",
     "create-react-class": "^15.6.2",
     "fbjs": "^0.8.16",
     "graceful-fs": "^4.1.11",
+<<<<<<< HEAD
     "hyphenate-style-name": "^1.0.2",
     "invariant": "^2.2.2",
     "lodash": "^4.17.11",
@@ -20,6 +25,13 @@
     "material-ui-build": "git+https://github.com/mui-org/material-ui.git#v0.x",
     "meteor-node-stubs": "^0.2.11",
     "nuka-carousel": "^2.3.0",
+=======
+    "invariant": "^2.2.1",
+    "lodash": "^4.17.4",
+    "material-ui": "^0.15.0-alpha.2",
+    "meteor-node-stubs": "~0.2.0",
+    "nuka-carousel": "^2.0.3",
+>>>>>>> master
     "ramda": "^0.23.0",
     "react": "^16.4.2",
     "react-addons-css-transition-group": "^15.6.2",

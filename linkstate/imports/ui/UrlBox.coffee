@@ -87,6 +87,4 @@ UrlBox = React.createClass
               "measurements": measurements
             }
 
-
-
 exports.UrlBox = UrlBox
