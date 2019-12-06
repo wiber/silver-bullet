@@ -133,7 +133,8 @@ newPlace = (user, queryParams, bookmarked) ->
 
 userSaved = (userE, queryParams, client) ->
   user = {}
-  if !userE?.services?.facebook? and client
+
+  if client and !userE?.services?#.facebook? or !userE?.services?.password? or !userE?.services?.linkedin? and client
     u = JSON.parse(localStorage.getItem('latest'))
     window.saved = new Date().getTime()
     if u?
@@ -144,6 +145,7 @@ userSaved = (userE, queryParams, client) ->
       time = (window.sub - window.saved)
       console.log time, 'ms of your load time saved by using localStorage'
     user = userE
+  console.log {userE,queryParams,client,user}
   # sideffect but a good place to make sure we're not without direction
   for type in ['from', 'to']
     if queryParams[type] is undefined

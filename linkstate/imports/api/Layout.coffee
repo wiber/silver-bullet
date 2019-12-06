@@ -35,7 +35,7 @@ containerLayout = createContainer ((props) ->
   else
     thumbalizr = undefined
   #content = ifBodyContentHere queryParams.content, queryParams, user
-
+  console.log {user}
   newProps =
     user: user
     thumbalizr: thumbalizr

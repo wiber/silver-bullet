@@ -102,7 +102,9 @@ exports.Layout = React.createClass
           marginTop: 150
         className: 'column'
         div
-          if that.props.user?.services?.facebook? or that.props.user?.services?.password?
+
+          if that.props.user?.services?#.facebook? or that.props.user?.services?.password?
+            console.log {that}
             React.createElement MainCard,
               "expanded": that.props.expandMainCard
               "to": that.props.to
