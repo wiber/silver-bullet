@@ -102,20 +102,19 @@ exports.Layout = React.createClass
           marginTop: 150
         className: 'column'
         div
-          #if that.props.user?.services?.facebook? or that.props.user?.services?.password?
-          React.createElement MainCard, {
-            "expanded": that.props.expandMainCard
-            "to": that.props.to
-            "from": that.props.from
-            "word": that.props.word
-            "content": that.props.content
-            "user": that.props.user
-            "lastTitle": that.props.lastTitle
-            "newHere": that.props.newHere
-            }
-          #else
-          #  React.createElement Mexplain,
-          #    "word": that.props.word
+          if that.props.user?.services?.facebook? or that.props.user?.services?.password?
+            React.createElement MainCard,
+              "expanded": that.props.expandMainCard
+              "to": that.props.to
+              "from": that.props.from
+              "word": that.props.word
+              "content": that.props.content
+              "user": that.props.user
+              "lastTitle": that.props.lastTitle
+              "newHere": that.props.newHere
+          else
+            React.createElement Mexplain,
+              "word": that.props.word
           React.createElement AboutCard,
               "expanded": that.props.expandAboutCard
               "to": that.props.to
