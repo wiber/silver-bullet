@@ -197,6 +197,15 @@ exports.AboutCard = createContainer ((props) ->
       if node?
         N = JSON.parse node
         noNodeYet = new Date().getTime()
-  props = _.extend {}, props, newProps
-  props
+  #nodeHandle = Meteor.subscribe "Node", linkstate.store(decodeURIComponent queryParams.from)
+  Meteor.call 'getStaticNode', props.from, (error, result) ->
+    staticNode = result
+  if !staticNode
+    staticNode = {}
+  newProps.staticNode = staticNode
+  #if nodeHandle.ready()
+  #  node = Nodes.findOne(linkstate.store(decodeURIComponent(queryParams.from)))
+  returnProps = _.extend {}, props, newProps
+  console.log {staticNode, node, props,newProps, returnProps, nodeHandle, N}
+  returnProps
 ), AboutCard
