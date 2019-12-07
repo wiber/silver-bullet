@@ -13,6 +13,7 @@ React = require('react')
 AppBar =  require('@material-ui/core/AppBar').default
 {Footer} = require('./Footer.jsx')
 {Login} = require('./Login')
+{Disqus} = require('./Disqus')
 # Card = require 'material-ui/lib/card/card'
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 {Mexplain} = require '../api/MexplainContainer.coffee'
@@ -27,11 +28,35 @@ Lo = require 'lodash'
 #{CookieConsent} = require "react-cookie-consent"
 # console.log("Nicolson here..")
 # console.log(CookieConsent)
+
 {div, a,} = React.DOM
 
 exports.Layout = React.createClass
   getDefaultProps: ->
     expandMainCard: true
+  componentDidUpdate: ->
+    disqus_config = ->
+      @page.url = window.location
+      # Replace PAGE_URL with your page's canonical URL variable
+      @page.identifier = linkstate.store @props.from
+      # Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      return
+
+    do ->
+      # DON'T EDIT BELOW THIS LINE
+      d = document
+      s = d.createElement('script')
+      s.src = 'https://decivote.disqus.com/embed.js'
+      s.setAttribute 'data-timestamp', +new Date
+      (d.head or d.body).appendChild s
+      return
+  componentDidMount: ->
+
+    script = document.createElement('script')
+    script.src = "//decivote.disqus.com/count.js"
+    script.async = true
+    script.id = "dsq-count-scr"
+    document.body.appendChild script
   render: ->
 
     window.fbAsyncInit = ->
@@ -85,21 +110,7 @@ exports.Layout = React.createClass
     else
       title = that.props.from
 
-    disqus_config = ->
-      @page.url = window.location
-      # Replace PAGE_URL with your page's canonical URL variable
-      @page.identifier = linkstate.store that.props.from
-      # Replace PAGE_IDENTIFIER with your page's unique identifier variable
-      return
 
-    do ->
-      # DON'T EDIT BELOW THIS LINE
-      d = document
-      s = d.createElement('script')
-      s.src = 'https://decivote.disqus.com/embed.js'
-      s.setAttribute 'data-timestamp', +new Date
-      (d.head or d.body).appendChild s
-      return
     div
       className: 'row'
       div
@@ -162,5 +173,5 @@ exports.Layout = React.createClass
           style:
             class: "column"
           # FIXME rerenders too often
-          div
-            id: "disqus_thread"
+          React.createElement Disqus,
+            from: that.props.from
