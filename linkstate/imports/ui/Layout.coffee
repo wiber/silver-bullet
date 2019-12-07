@@ -161,5 +161,6 @@ exports.Layout = React.createClass
         div
           style:
             class: "column"
+          # FIXME rerenders too often
           div
             id: "disqus_thread"
