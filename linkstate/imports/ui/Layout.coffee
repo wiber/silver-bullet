@@ -33,6 +33,7 @@ exports.Layout = React.createClass
   getDefaultProps: ->
     expandMainCard: true
   render: ->
+
     window.fbAsyncInit = ->
       FB.init
         appId: that.props.facebookAppId
@@ -83,7 +84,22 @@ exports.Layout = React.createClass
       title = R.concat slash, titleHere
     else
       title = that.props.from
-    # console.log that.props.user.services, Meteor.user().services
+
+    disqus_config = ->
+      @page.url = window.location
+      # Replace PAGE_URL with your page's canonical URL variable
+      @page.identifier = linkstate.store that.props.from
+      # Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      return
+
+    do ->
+      # DON'T EDIT BELOW THIS LINE
+      d = document
+      s = d.createElement('script')
+      s.src = 'https://decivote.disqus.com/embed.js'
+      s.setAttribute 'data-timestamp', +new Date
+      (d.head or d.body).appendChild s
+      return
     div
       className: 'row'
       div
@@ -125,6 +141,7 @@ exports.Layout = React.createClass
               "thumbalizr": that.props.thumbalizr
               "howMany": 15
               "user": that.props.user
+
           div
             # className: 'columnR'
             # style: _.extend {}, style.base,
@@ -140,3 +157,8 @@ exports.Layout = React.createClass
             # div
             #   id: 'fb-root'
             #   React.createElement CookieConsent, {}
+            div
+              style:
+                class: "column"
+              div
+                id: "disqus_thread"
