@@ -141,24 +141,25 @@ exports.Layout = React.createClass
               "thumbalizr": that.props.thumbalizr
               "howMany": 15
               "user": that.props.user
-
           div
-            # className: 'columnR'
-            # style: _.extend {}, style.base,
-            #   marginTop: "150# '15%'"
-            # a
-            #   href: "https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA"
-            #   target: "_blank"
-            #   "To use this app properly you need the chrome extension. Download, extract it and chrome://extensions unpacked."
-            # div
-            #   React.createElement AccountsUIWrapper, {}
-            div
-              React.createElement Login, {props: @props}
-            # div
-            #   id: 'fb-root'
-            #   React.createElement CookieConsent, {}
-            div
-              style:
-                class: "column"
-              div
-                id: "disqus_thread"
+            React.createElement Login, {props: @props}
+
+      div
+        className: 'columnR'
+        style:# _.extend {}, style.base,
+          marginTop: "150px"# '15%'"
+        # a
+        #   href: "https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA"
+        #   target: "_blank"
+        #   "To use this app properly you need the chrome extension. Download, extract it and chrome://extensions unpacked."
+        # div
+        #   React.createElement AccountsUIWrapper, {}
+
+        #div
+        #  id: 'fb-root'
+        #   React.createElement CookieConsent, {}
+        div
+          style:
+            class: "column"
+          div
+            id: "disqus_thread"
