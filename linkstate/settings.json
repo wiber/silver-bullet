@@ -13,7 +13,6 @@
     },
     "public": {
         "urlbox": {
-          "secret": "b8c3d1fe6ca44d4583800106af436879",
           "key": "FLMG5BM3XeqMGa42"
         },
         "facebookAppId": "710055149104819",
