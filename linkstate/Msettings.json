@@ -7,6 +7,10 @@
     "urlboxSecret": "b8c3d1fe6ca44d4583800106af436879",
     "oauthSecretKey": "TyxQosvq+AnKdyyERNBHRQ==",
     "ROOT_URL": "https://linkstate.youiest.com",
+    "linkedin": {
+      "clientId": "783xj7ou7kqw29",
+      "secret": "HYlNiSfIZwU93sAK"
+    },
     "public": {
       "urlboxKey": "FLMG5BM3XeqMGa42",
       "facebookAppId": "710055149104819",
