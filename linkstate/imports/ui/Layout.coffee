@@ -175,3 +175,4 @@ exports.Layout = React.createClass
           # FIXME rerenders too often
           React.createElement Disqus,
             from: that.props.from
+            url: that.props.url

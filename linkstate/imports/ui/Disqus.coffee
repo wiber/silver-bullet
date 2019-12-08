@@ -11,7 +11,7 @@ exports.Disqus = React.createClass
       # Replace PAGE_URL with your page's canonical URL variable
       @page.identifier = linkstate.store @props.from
       # Replace PAGE_IDENTIFIER with your page's unique identifier variable
-      console.log {page,@props}
+
       return
 
     do ->
@@ -30,5 +30,6 @@ exports.Disqus = React.createClass
     script.id = "dsq-count-scr"
     document.body.appendChild script
   render: ->
+    #console.log {@props}
     div
       id: "disqus_thread"
