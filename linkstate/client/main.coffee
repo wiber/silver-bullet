@@ -49,3 +49,20 @@ loader = (link)=>
   ele = document.createElement('link');
   ele.href = link;
   document.body.appendChild(ele);
+### load Disqus
+
+script = document.createElement('script')
+script.src = "//decivote.disqus.com/count.js"
+script.async = true
+script.id = "dsq-count-scr"
+document.body.appendChild script
+
+do ->
+  # DON'T EDIT BELOW THIS LINE
+  d = document
+  s = d.createElement('script')
+  s.src = 'https://decivote.disqus.com/embed.js'
+  s.setAttribute 'data-timestamp', +new Date
+  (d.head or d.body).appendChild s
+  return
+###

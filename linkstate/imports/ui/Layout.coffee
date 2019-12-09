@@ -41,15 +41,25 @@ exports.Layout = React.createClass
       @page.identifier = linkstate.store @props.from
       # Replace PAGE_IDENTIFIER with your page's unique identifier variable
       return
-
-    do ->
-      # DON'T EDIT BELOW THIS LINE
-      d = document
-      s = d.createElement('script')
-      s.src = 'https://decivote.disqus.com/embed.js'
-      s.setAttribute 'data-timestamp', +new Date
-      (d.head or d.body).appendChild s
-      return
+    unless window.disqusLoaded
+      do ->
+        # DON'T EDIT BELOW THIS LINE
+        d = document
+        s = d.createElement('script')
+        s.src = 'https://decivote.disqus.com/embed.js'
+        s.setAttribute 'data-timestamp', +new Date
+        (d.head or d.body).appendChild s
+        window.disqusLoaded = true
+        return
+    window.resetDisqus = (newIdentifier, newUrl, newTitle, newLanguage) ->
+      DISQUS.reset
+        reload: true
+        config: ->
+          @page.identifier = newIdentifier
+          @page.url = newUrl
+          #@page.title = newTitle
+          #@language = newLanguage
+    return
   componentDidMount: ->
 
     script = document.createElement('script')
@@ -58,7 +68,6 @@ exports.Layout = React.createClass
     script.id = "dsq-count-scr"
     document.body.appendChild script
   render: ->
-
     window.fbAsyncInit = ->
       FB.init
         appId: that.props.facebookAppId
@@ -175,4 +184,5 @@ exports.Layout = React.createClass
           # FIXME rerenders too often
           React.createElement Disqus,
             #from: that.props.from
-            url: that.props.url
+            #url: that.props.url
+            from: that.props.from

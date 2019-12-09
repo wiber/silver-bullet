@@ -7,42 +7,29 @@ TextField = require('material-ui/lib/TextField').default
 exports.Disqus = React.createClass
   shouldComponentUpdate: (nextProps, nextState)->
     rerender = false
-    oldUrl = @props.url
-    newUrl = nextProps.url
+    oldUrl = @props.from
+    newUrl = nextProps.from
     if oldUrl !=  newUrl
       rerender =  true
-    console.log {rerender, oldUrl, newUrl}, 'model'
+    if !rerender
+      console.log {rerender, oldUrl, newUrl}, 'model rerenders'
     #console.log {props, nextProps, nextState, location, 'model'},@props
     rerender
   # componentDidUpdate: ->
   componentDidMount: ->
-    script = document.createElement('script')
-    script.src = "//decivote.disqus.com/count.js"
-    script.async = true
-    script.id = "dsq-count-scr"
-    document.body.appendChild script
+
     window.disqus_config = ->
       #console.log props.url, 'urlll',@props.from,@props,props
-      #@page.url = props.url
+      @page.url = window.location
       # Replace PAGE_URL with your page's canonical URL variable
+      # only identify comments by where we're from..
       @page.identifier = window.props.from
       #@props.from
       #linkstate.store @props.from
       # Replace PAGE_IDENTIFIER with your page's unique identifier variable
-
-      return
-
-    do ->
-      # DON'T EDIT BELOW THIS LINE
-      d = document
-      s = d.createElement('script')
-      s.src = 'https://decivote.disqus.com/embed.js'
-      s.setAttribute 'data-timestamp', +new Date
-      (d.head or d.body).appendChild s
-      return
+  componentDidUpdate: ->
+    window.resetDisqus(window.props.from,window.location)
   render: ->
-    #console.log {@props}
-
     div
       id: "disqus_thread"
 
