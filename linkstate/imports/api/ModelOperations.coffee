@@ -11,6 +11,19 @@ vDict = {}
 
 # we need a function that takes props, user
 # and returns full state of the app model.
+simpleUrlFlag = false
+exports.simpleUrl = (queryParams) ->
+  host = (new URL(window.location).host)
+  thisURL = (new URL(window.location))
+  {from,to} = queryParams
+  # ,to # if we want to comment on individual connections - but we comment on sites here..
+  simplePath = FlowRouter.path('about', {}, {to})
+  returnThis = thisURL.origin+simplePath
+    #host+"/"+simplePath
+  console.log {from,to,queryParams,simplePath,host,returnThis,simpleUrlFlag},'model url',host+"/"+simplePath, returnThis is simpleUrlFlag,thisURL.pathname
+  simpleUrlFlag = returnThis
+  returnThis
+
 theModel = (props) ->
   {HERE,HereScreenshotUrl,THERE,ThereScreenshotUrl} = hereAndThere(props, props.user)
 

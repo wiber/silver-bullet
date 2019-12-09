@@ -32,8 +32,8 @@ Lo = require 'lodash'
 {div, a,} = React.DOM
 
 exports.Layout = React.createClass
-  getDefaultProps: ->
-    expandMainCard: true
+  #getDefaultProps: ->
+  #  expandMainCard: true
   componentDidUpdate: ->
     disqus_config = ->
       @page.url = window.location
@@ -133,7 +133,7 @@ exports.Layout = React.createClass
           if that.props.user?.services?#.facebook? or that.props.user?.services?.password?
             console.log {that}
             React.createElement MainCard,
-              "expanded": that.props.expandMainCard
+              #{}"expanded": that.props.expandMainCard
               "to": that.props.to
               "from": that.props.from
               "word": that.props.word
@@ -174,5 +174,5 @@ exports.Layout = React.createClass
             class: "column"
           # FIXME rerenders too often
           React.createElement Disqus,
-            from: that.props.from
+            #from: that.props.from
             url: that.props.url

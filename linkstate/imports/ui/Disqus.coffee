@@ -5,11 +5,22 @@ TextField = require('material-ui/lib/TextField').default
 {div, br, span} = React.DOM
 
 exports.Disqus = React.createClass
+  shouldComponentUpdate: (nextProps, nextState)->
+    rerender = false
+    oldUrl = @props.url
+    newUrl = nextProps.url
+    if oldUrl !=  newUrl
+      rerender =  true
+    console.log {rerender, oldUrl, newUrl}, 'model'
+    #console.log {props, nextProps, nextState, location, 'model'},@props
+    rerender
   componentDidUpdate: ->
     disqus_config = ->
-      @page.url = that.props.url
+      console.log that.props.url, 'urlll'
+      #@page.url = that.props.url
       # Replace PAGE_URL with your page's canonical URL variable
-      @page.identifier = linkstate.store @props.from
+      @page.identifier = that.props.url
+      #linkstate.store @props.from
       # Replace PAGE_IDENTIFIER with your page's unique identifier variable
 
       return
@@ -22,7 +33,7 @@ exports.Disqus = React.createClass
       s.setAttribute 'data-timestamp', +new Date
       (d.head or d.body).appendChild s
       return
-  componentDidMount: ->
+    componentDidMount: ->
     script = document.createElement('script')
     script.src = "//decivote.disqus.com/count.js"
     script.async = true

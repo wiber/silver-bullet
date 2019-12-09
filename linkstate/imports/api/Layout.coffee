@@ -4,7 +4,7 @@ language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
 {changeQueryParams} = require('../api/ModelOperations.coffee')
 #{URI} = require 'urijs'
-{newPlace, ifBodyContentHere, userSaved} = require '../api/ModelOperations'
+{newPlace, ifBodyContentHere, userSaved, simpleUrl} = require '../api/ModelOperations'
 
 { Meteor } = require 'meteor/meteor'
 {linkstate} = require '../api/strings'
@@ -46,12 +46,12 @@ containerLayout = createContainer ((props) ->
     content: ifBodyContentHere(queryParams, user) #content
     lastTitle: queryParams.lastTitle
     word: wordLanguages[language] # don't prematurely optimize!
-    expandMainCard: queryParams.expandMainCard != 'false'
-    expandAboutCard: queryParams.expandAboutCard != 'false'
-    expandMyCard: queryParams.expandMyCard != 'false'
+    #expandMainCard: queryParams.expandMainCard != 'false'
+    #expandAboutCard: queryParams.expandAboutCard != 'false'
+    #expandMyCard: queryParams.expandMyCard != 'false'
     facebookAppId: Meteor.settings.public.facebookAppId
     newHere: newHere
-    url: window.location.href
+    url: simpleUrl(queryParams)#window.location.href
   #console.log newProps, queryParams.from, queryParams.to,'newProps, queryParams.from, queryParams.to'
   window.props = newProps
   newProps
