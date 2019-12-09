@@ -23,7 +23,6 @@ exports.Disqus = React.createClass
       (d.head or d.body).appendChild s
       return
   componentDidMount: ->
-
     script = document.createElement('script')
     script.src = "//decivote.disqus.com/count.js"
     script.async = true
