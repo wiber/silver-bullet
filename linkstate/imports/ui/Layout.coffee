@@ -185,4 +185,5 @@ exports.Layout = React.createClass
           React.createElement Disqus,
             #from: that.props.from
             #url: that.props.url
+            # we only rerender when from changes
             from: that.props.from

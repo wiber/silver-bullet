@@ -12,8 +12,9 @@ R = require 'ramda'
   r =  toString(url).replace /\./g , '%2E'
   ##console.log r
   return r
-
-urlbox = Urlbox(Meteor.settings.public.urlbox.key, Meteor.settings.urlbox.secret)
+#console.log Meteor.settings
+# this is sloppy.. should not need secrets on the front end.. but else we get delays?
+urlbox = Urlbox(Meteor.settings.public.urlbox.key, Meteor.settings.public.urlbox.secret)
 
 if Meteor.settings?.public?.thumbalizr?
   @thumbalizr =  Meteor.settings.public.thumbalizr

@@ -160,12 +160,10 @@ drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
           quality: 80
         otherUrl: hereNode.from
         otherTitle: hereNode.meta.title
-      console.log returner
     if here == 'from'
       # self ref
       returner = false
     # how do we detect same orientation as queryParams?
-      console.log returner
     return returner
 noNodeFirst = new Date().getTime()
 noNodeYet = 0
@@ -206,6 +204,6 @@ exports.AboutCard = createContainer ((props) ->
   #if nodeHandle.ready()
   #  node = Nodes.findOne(linkstate.store(decodeURIComponent(queryParams.from)))
   returnProps = _.extend {}, props, newProps
-  console.log {staticNode, node, props,newProps, returnProps, nodeHandle, N}
+  #console.log {staticNode, node, props,newProps, returnProps, nodeHandle, N}
   returnProps
 ), AboutCard

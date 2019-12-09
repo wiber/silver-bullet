@@ -11,21 +11,14 @@ exports.Disqus = React.createClass
     newUrl = nextProps.from
     if oldUrl !=  newUrl
       rerender =  true
-    if !rerender
-      console.log {rerender, oldUrl, newUrl}, 'model rerenders'
-    #console.log {props, nextProps, nextState, location, 'model'},@props
     rerender
   # componentDidUpdate: ->
   componentDidMount: ->
-
     window.disqus_config = ->
-      #console.log props.url, 'urlll',@props.from,@props,props
       @page.url = window.location
       # Replace PAGE_URL with your page's canonical URL variable
       # only identify comments by where we're from..
       @page.identifier = window.props.from
-      #@props.from
-      #linkstate.store @props.from
       # Replace PAGE_IDENTIFIER with your page's unique identifier variable
   componentDidUpdate: ->
     window.resetDisqus(window.props.from,window.location)
