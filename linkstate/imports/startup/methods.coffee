@@ -81,7 +81,8 @@ Meteor.methods
 
     if Meteor.user()?.links?.in?.Bookmarks?[linkstate.store from]?.meta?.title?
       titleOfTarget = Meteor.user().links.in.Bookmarks[linkstate.store from].meta.title
-      console.log titleOfTarget
+      console.log {titleOfTarget}
+    console.log {META}
     unless META.title?
       if titleOfTarget?
         META.title = titleOfTarget

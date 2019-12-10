@@ -13,14 +13,8 @@ exports.Disqus = React.createClass
       rerender =  true
     rerender
   # componentDidUpdate: ->
-  componentDidMount: ->
-    window.disqus_config = ->
-      @page.url = window.location
-      # Replace PAGE_URL with your page's canonical URL variable
-      # only identify comments by where we're from..
-      @page.identifier = window.props.from
-      # Replace PAGE_IDENTIFIER with your page's unique identifier variable
   componentDidUpdate: ->
+    # can't find a better way ...
     window.resetDisqus(window.props.from,window.location)
   render: ->
     div
