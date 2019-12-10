@@ -10,10 +10,11 @@ containerLayout = require('../api/Layout.coffee').containerLayout
 FlowRouter.route '/about',
   name: 'home'
   action: (params, queryParams) ->
-    console.log typeof DocHead,{DocHead}
+    title = "Linkstates for "+queryParams.lastTitle
     DocHead.addMeta
       property: "og:title",
-      content: "Linkstates for "+queryParams.lastTitle
+      content: title
+    document.title = title
     mount containerLayout,
       queryParams: queryParams # to optiomize redraw on changed params
     # if Meteor.userId()
