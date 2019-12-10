@@ -2,9 +2,9 @@
 {wordLanguages} = require('../ui/WebCopy.coffee')
 language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
-{changeQueryParams} = require('../api/ModelOperations.coffee')
+{changeQueryParams,changeQueryParamsObject} = require('../api/ModelOperations.coffee')
 #{URI} = require 'urijs'
-{newPlace, ifBodyContentHere, userSaved, simpleUrl} = require '../api/ModelOperations'
+{newPlace, ifBodyContentHere, userSaved, simpleUrl, hereAndThere,hereToThereMeta,theModel} = require '../api/ModelOperations'
 
 { Meteor } = require 'meteor/meteor'
 {linkstate} = require '../api/strings'
@@ -30,6 +30,20 @@ containerLayout = createContainer ((props) ->
       meta:
         weight: 5
         title: queryParams.lastTitle#FlowRouter.getQueryParam('lastTitle')
+    changeQueryParamsObject
+      title: queryParams.lastTitle
+    document.title = "Linkstate @ "+queryParams.lastTitle
+  else
+    # set title - here meta title
+    #herethere = hereToThereMeta user, queryParams
+    #model = theModel queryParams
+    bookmark = linkstate.getTheBookmark user, queryParams.from
+    #console.log {bookmark,herethere,user, queryParams,markExist,newHere}
+    document.title = bookmark.title
+    changeQueryParamsObject
+      title: bookmark.title
+
+
   if Meteor?.settings?.public?.thumbalizr?
     thumbalizr = Meteor.settings.public.thumbalizr
   else

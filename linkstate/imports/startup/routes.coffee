@@ -10,11 +10,13 @@ containerLayout = require('../api/Layout.coffee').containerLayout
 FlowRouter.route '/about',
   name: 'home'
   action: (params, queryParams) ->
-    title = "Linkstates for "+queryParams.lastTitle
-    DocHead.addMeta
+    title = "Linkstates for "+queryParams.title
+    # this works (and updates) but facebook doesn't pick it up
+    DocHead.addMeta #og:image
       property: "og:title",
       content: title
     document.title = title
+    console.log {title,queryParams},document.title, document.getElementsByTagName('meta')[0]
     mount containerLayout,
       queryParams: queryParams # to optiomize redraw on changed params
     # if Meteor.userId()
