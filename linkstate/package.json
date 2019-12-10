@@ -28,6 +28,7 @@
     "react-cookie-consent": "^1.7.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.3.0",
+    "react-helmet": "^5.2.1",
     "react-mounter": "^1.2.0",
     "react-selectize": "^2.1.0",
     "react-share": "^2.3.1",
