@@ -39,7 +39,7 @@ containerLayout = createContainer ((props) ->
     #model = theModel queryParams
     bookmark = linkstate.getTheBookmark user, queryParams.from
     #console.log {bookmark,herethere,user, queryParams,markExist,newHere}
-    document.title = bookmark.title
+    document.title = "Linkstate for "+bookmark.title
     changeQueryParamsObject
       title: bookmark.title
 
