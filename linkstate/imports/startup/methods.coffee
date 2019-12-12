@@ -12,14 +12,9 @@ R = require 'ramda'
   r =  toString(url).replace /\./g , '%2E'
   ##console.log r
   return r
-
-if Meteor.settings?.public?.urlboxKey?
-  @urlboxKey =  Meteor.settings.public.urlboxKey
-  @urlboxSecret = Meteor.settings.urlboxSecret
-else
-  @urlboxKey= "FLMG5BM3XeqMGa42"
-
-urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
+#console.log Meteor.settings
+# this is sloppy.. should not need secrets on the front end.. but else we get delays?
+urlbox = Urlbox(Meteor.settings.public.urlbox.key, Meteor.settings.public.urlbox.secret)
 
 if Meteor.settings?.public?.thumbalizr?
   @thumbalizr =  Meteor.settings.public.thumbalizr
@@ -51,6 +46,11 @@ Meteor.methods
   GroundedNodeInsert: ->
     if Meteor.isClient and Meteor?.user()?.services?.facebook?
       localStorage.setItem Nodes.findOne()._id, JSON.stringify(Nodes.findOne())
+  getStaticNode: (id) ->
+
+    node = Nodes.findOne(linkstate.store(id))
+    console.log id, Meteor.isClient, 'client get staticNode', node
+    return node
   # create a ling when we navigate in the app -
   # from : me to: origin
   # answers the question - what are originating from (be)
@@ -81,7 +81,8 @@ Meteor.methods
 
     if Meteor.user()?.links?.in?.Bookmarks?[linkstate.store from]?.meta?.title?
       titleOfTarget = Meteor.user().links.in.Bookmarks[linkstate.store from].meta.title
-      console.log titleOfTarget
+      console.log {titleOfTarget}
+    console.log {META}
     unless META.title?
       if titleOfTarget?
         META.title = titleOfTarget
@@ -122,7 +123,7 @@ Meteor.methods
     edge.meta = META
     edge.meta.FromLink = from
     edge.meta.ToLink = to
-    #if Meteor?.settings?.urlboxSecret?
+    #if Meteor?.settings?.urlbox?.secret?
     # is server the last write and therefore the secret is included next time?
     edge.meta.ScreenshotUrl = urlbox.buildUrl
       url: from

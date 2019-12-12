@@ -48,7 +48,6 @@ AboutCard = React.createClass
             N.outLinks = that.props.node.links.in
             N.link = N.node.link
             N.allLinks = _.extend {}, N.inLinks, N.outLinks
-
             N.linksByTime = linkstate.sortByKeysTime(N.allLinks
             , that.props.howMany)
             N.linkSort = {}
@@ -140,6 +139,7 @@ AboutCard = React.createClass
                   }
 
 
+
 drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
   # if the link.. is the place we are now...
   # that should NOT be the ScreenshotUrl
@@ -160,12 +160,10 @@ drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
           quality: 80
         otherUrl: hereNode.from
         otherTitle: hereNode.meta.title
-      console.log returner
     if here == 'from'
       # self ref
       returner = false
     # how do we detect same orientation as queryParams?
-      console.log returner
     return returner
 noNodeFirst = new Date().getTime()
 noNodeYet = 0
@@ -197,6 +195,15 @@ exports.AboutCard = createContainer ((props) ->
       if node?
         N = JSON.parse node
         noNodeYet = new Date().getTime()
-  props = _.extend {}, props, newProps
-  props
+  #nodeHandle = Meteor.subscribe "Node", linkstate.store(decodeURIComponent queryParams.from)
+  Meteor.call 'getStaticNode', props.from, (error, result) ->
+    staticNode = result
+  if !staticNode
+    staticNode = {}
+  newProps.staticNode = staticNode
+  #if nodeHandle.ready()
+  #  node = Nodes.findOne(linkstate.store(decodeURIComponent(queryParams.from)))
+  returnProps = _.extend {}, props, newProps
+  #console.log {staticNode, node, props,newProps, returnProps, nodeHandle, N}
+  returnProps
 ), AboutCard

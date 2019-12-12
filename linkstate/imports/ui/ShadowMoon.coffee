@@ -75,7 +75,7 @@ VisualCue = React.createClass
             "height": D
             "left": D/2+M
             "marginTop": 2*M
-            "marginBottom": M 
+            "marginBottom": M
             "float": 'right'
             "display": 'inline'
           }
@@ -230,7 +230,7 @@ Winged = React.createClass
           "size": D/2
           "src": that.props.ScreenshotUrl
         }
-        
+
 wingMark = React.createClass
   render: ->
     that = this

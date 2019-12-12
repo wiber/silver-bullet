@@ -6,10 +6,10 @@
 # because we want to be sure of what we are subscribed to right now
 {linkstate} = require '../api/strings'
 Meteor.publish "Node", (from) ->
-  one = Nodes.find
+  oneNode = Nodes.find
     _id: linkstate.store from
-  all = Nodes.find {}
-  return one
+  console.log oneNode._id,'oneNode'
+  oneNode
 
 Meteor.publish 'reactableFrom', (howMany) ->
   @autorun (computation) ->

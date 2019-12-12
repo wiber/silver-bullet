@@ -43,52 +43,51 @@ exports.Mexplain = React.createClass
   render: ->
     that = this
     # #reactKup (k) ->
-    React.createElement Card,{
+    React.createElement Card,
       "style": _.extend {}, style.card, style.yCard,
       "height": '470'
-    }
-    
-    #expanded: that.props.hide
-    #expandable: true
-    mixins: [Slider.ControllerMixin]
-    ->
-      React.createElement CardHeader,{
-        "title": that.props.word.MexplainTitle
-        # showExpandableButton: true
-        "subtitle": that.props.word.MexplainSubtitle
-      }
-      onClick: (e) ->
-        window.open '/login', "_blank"
 
-      React.createElement CardText,
-        ->
-          React.createElement Slider,{
-            #tabIndex: -1
-            "ref": 'nuka-carousel'
-            "style": Object.assign {},
-              "height": 300
-              "width": 'auto'
-              #width: 610
-          }
-          "autoplay": false
-          "autoplayInterval": 5000
-          "initialSlideHeight": 480
-          "framePadding": 0
-          "wrapAround": true
-          "dragging": true
-          "slideIndex": that.props.slideIndex or 0
-          "beforeSlide": resetSlides
-          #componentDidMount: resetSlides # problematic
+      #expanded: that.props.hide
+      #expandable: true
+      mixins: [Slider.ControllerMixin]
+      ->
+        React.createElement CardHeader,{
+          "title": that.props.word.MexplainTitle
+          # showExpandableButton: true
+          "subtitle": that.props.word.MexplainSubtitle
+        }
+        onClick: (e) ->
+          window.open '/login', "_blank"
+
+        React.createElement CardText,
           ->
-            React.createElement gifSlide,{
-              "src": '/carousel/s1whysense.gif'
-              "slideNumber": 0
+            React.createElement Slider,{
+              #tabIndex: -1
+              "ref": 'nuka-carousel'
+              "style": Object.assign {},
+                "height": 300
+                "width": 'auto'
+                #width: 610
             }
-            React.createElement gifSlide,{
-              "src": '/carousel/s2duo.gif'
-              "slideNumber": 1
-            }
-            React.createElement gifSlide,{
-              "src": '/carousel/slide3c.gif'
-              "slideNumber": 2
-            }
+            "autoplay": false
+            "autoplayInterval": 5000
+            "initialSlideHeight": 480
+            "framePadding": 0
+            "wrapAround": true
+            "dragging": true
+            "slideIndex": that.props.slideIndex or 0
+            "beforeSlide": resetSlides
+            #componentDidMount: resetSlides # problematic
+            ->
+              React.createElement gifSlide,{
+                "src": '/carousel/s1whysense.gif'
+                "slideNumber": 0
+              }
+              React.createElement gifSlide,{
+                "src": '/carousel/s2duo.gif'
+                "slideNumber": 1
+              }
+              React.createElement gifSlide,{
+                "src": '/carousel/slide3c.gif'
+                "slideNumber": 2
+              }
