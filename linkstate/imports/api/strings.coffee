@@ -3,7 +3,7 @@ linkstate = {}
 _ = require 'lodash'
 # Urlbox = require 'urlbox'
 
-#exports.urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
+#exports.urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlbox.secret)
 
 exports.Position = ({measurements,weight,n,directed,axis}) ->
   if directed == 'OUTLINKS'
@@ -261,9 +261,12 @@ linkstate.getAllBookmarksDict = (user) ->
   bookmarkDict
 # what do we do if the 'here' bookmark doesn't exist in the dict - it should!
 linkstate.getTheBookmark = (user, target) ->
-  bookmarkDict = linkstate.getAllBookmarksDict(user)
-  theBookmark = R.prop linkstate.store(target), bookmarkDict
-  theBookmark
+  try
+    bookmarkDict = linkstate.getAllBookmarksDict(user)
+    theBookmark = R.prop linkstate.store(target), bookmarkDict
+    return theBookmark
+  catch err
+    return ""
 linkstate.bookmarkExistHere = (user, target) ->
   bookDict = linkstate.getAllBookmarksDict(user)
   storeTarget = linkstate.store(target)

@@ -11,6 +11,19 @@ vDict = {}
 
 # we need a function that takes props, user
 # and returns full state of the app model.
+simpleUrlFlag = false
+exports.simpleUrl = (queryParams) ->
+  host = (new URL(window.location).host)
+  thisURL = (new URL(window.location))
+  {from,to} = queryParams
+  # ,to # if we want to comment on individual connections - but we comment on sites here..
+  simplePath = FlowRouter.path('about', {}, {to})
+  returnThis = thisURL.origin+simplePath
+    #host+"/"+simplePath
+  console.log {from,to,queryParams,simplePath,host,returnThis,simpleUrlFlag},'model url',host+"/"+simplePath, returnThis is simpleUrlFlag,thisURL.pathname
+  simpleUrlFlag = returnThis
+  returnThis
+
 theModel = (props) ->
   {HERE,HereScreenshotUrl,THERE,ThereScreenshotUrl} = hereAndThere(props, props.user)
 
@@ -133,7 +146,8 @@ newPlace = (user, queryParams, bookmarked) ->
 
 userSaved = (userE, queryParams, client) ->
   user = {}
-  if !userE?.services?.facebook? and client
+
+  if client and !userE?.services?#.facebook? or !userE?.services?.password? or !userE?.services?.linkedin? and client
     u = JSON.parse(localStorage.getItem('latest'))
     window.saved = new Date().getTime()
     if u?
@@ -144,6 +158,7 @@ userSaved = (userE, queryParams, client) ->
       time = (window.sub - window.saved)
       console.log time, 'ms of your load time saved by using localStorage'
     user = userE
+  console.log {userE,queryParams,client,user}
   # sideffect but a good place to make sure we're not without direction
   for type in ['from', 'to']
     if queryParams[type] is undefined

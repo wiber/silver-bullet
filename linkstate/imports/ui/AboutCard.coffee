@@ -26,7 +26,6 @@ n = 0
 AboutCard = React.createClass
   render: ->
     that = this
-<<<<<<< HEAD
     div
       className: 'nothing'
       React.createElement Card, {"style": _.extend {}, style.card, style.mAcard},#"expanded": that.props.expanded,
@@ -49,43 +48,6 @@ AboutCard = React.createClass
             N.outLinks = that.props.node.links.in
             N.link = N.node.link
             N.allLinks = _.extend {}, N.inLinks, N.outLinks
-=======
-    reactKup (k) ->
-      console.log that.props
-      k.build Card,
-        expanded: that.props.expanded
-        style: _.extend {}, style.card, style.mAcard
-        ->
-          k.build CardHeader,
-            title: that.props.word.AboutCardTitle
-            showExpandableButton: true
-            subtitle: that.props.word.AboutCardSubTitle
-            onClick: (e) ->
-              changeQueryParams 'expandAboutCard', !that.props.expande
-          k.build CardText,
-            style:
-              height: 'auto'
-          k.div
-            style:
-              display: 'inline'
-              #flexWrap: 'wrap'
-            -># CardText,
-              # build in and out links.. so that we see our out connection right away
-
-              if that.props.node?.links.in? or that.props.node?.links?.out?
-                k.build GridList,
-                  class: 'looplist'
-                  cellHeight: 500
-                  cols: 1
-                  ->
-                    N = {} # the node we're on
-                    N.node = that.props.node
-                    N.inLinks = that.props.node.links.in
-                    N.outLinks = that.props.node.links.out
-                    N.link = N.node.link
-                    N.allLinks = _.extend {}, N.inLinks, N.outLinks
->>>>>>> master
-
             N.linksByTime = linkstate.sortByKeysTime(N.allLinks
             , that.props.howMany)
             N.linkSort = {}
@@ -198,12 +160,10 @@ drawTheOther = (param, paramLink, here, nodeLink, hereNode) ->
           quality: 80
         otherUrl: hereNode.from
         otherTitle: hereNode.meta.title
-      console.log returner
     if here == 'from'
       # self ref
       returner = false
     # how do we detect same orientation as queryParams?
-      console.log returner
     return returner
 noNodeFirst = new Date().getTime()
 noNodeYet = 0
@@ -235,6 +195,15 @@ exports.AboutCard = createContainer ((props) ->
       if node?
         N = JSON.parse node
         noNodeYet = new Date().getTime()
-  props = _.extend {}, props, newProps
-  props
+  #nodeHandle = Meteor.subscribe "Node", linkstate.store(decodeURIComponent queryParams.from)
+  Meteor.call 'getStaticNode', props.from, (error, result) ->
+    staticNode = result
+  if !staticNode
+    staticNode = {}
+  newProps.staticNode = staticNode
+  #if nodeHandle.ready()
+  #  node = Nodes.findOne(linkstate.store(decodeURIComponent(queryParams.from)))
+  returnProps = _.extend {}, props, newProps
+  #console.log {staticNode, node, props,newProps, returnProps, nodeHandle, N}
+  returnProps
 ), AboutCard

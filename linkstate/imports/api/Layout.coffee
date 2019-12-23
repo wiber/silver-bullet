@@ -2,9 +2,9 @@
 {wordLanguages} = require('../ui/WebCopy.coffee')
 language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
-{changeQueryParams} = require('../api/ModelOperations.coffee')
+{changeQueryParams,changeQueryParamsObject} = require('../api/ModelOperations.coffee')
 #{URI} = require 'urijs'
-{newPlace, ifBodyContentHere, userSaved} = require '../api/ModelOperations'
+{newPlace, ifBodyContentHere, userSaved, simpleUrl, hereAndThere,hereToThereMeta,theModel} = require '../api/ModelOperations'
 
 { Meteor } = require 'meteor/meteor'
 {linkstate} = require '../api/strings'
@@ -22,19 +22,37 @@ containerLayout = createContainer ((props) ->
   lastTitle =  FlowRouter.getQueryParam('lastTitle')
   # if newHere add this to the dropdown, set the to to lastTo
   markExist = linkstate.bookmarkExistHere user, queryParams.from
+  # break these out into meteor methods -
+  # named and knowing weather it's the first visit etc
+  # eventing system?
   if newHere or !markExist and Meteor.isClient
-    console.log queryParams.from, linkstate.catTree.categoryUrls.Bookmarks
+    # console.log queryParams.from, linkstate.catTree.categoryUrls.Bookmarks
     Meteor.call "Linking",
       from: queryParams.from
       to: linkstate.catTree.categoryUrls.Bookmarks
       meta:
         weight: 5
         title: queryParams.lastTitle#FlowRouter.getQueryParam('lastTitle')
+    changeQueryParamsObject
+      title: queryParams.lastTitle
+    document.title = "Linkstate @ "+queryParams.lastTitle
+  else
+    # set title - here meta title
+    #herethere = hereToThereMeta user, queryParams
+    #model = theModel queryParams
+    bookmark = linkstate.getTheBookmark user, queryParams.from
+    #console.log {bookmark,herethere,user, queryParams,markExist,newHere}
+    document.title = "Linkstate for "+bookmark.title
+    changeQueryParamsObject
+      title: bookmark.title
+
+
   if Meteor?.settings?.public?.thumbalizr?
     thumbalizr = Meteor.settings.public.thumbalizr
   else
     thumbalizr = undefined
   #content = ifBodyContentHere queryParams.content, queryParams, user
+  console.log {user}
   newProps =
     user: user
     thumbalizr: thumbalizr
@@ -45,12 +63,12 @@ containerLayout = createContainer ((props) ->
     content: ifBodyContentHere(queryParams, user) #content
     lastTitle: queryParams.lastTitle
     word: wordLanguages[language] # don't prematurely optimize!
-    expandMainCard: queryParams.expandMainCard != 'false'
-    expandAboutCard: queryParams.expandAboutCard != 'false'
-    expandMyCard: queryParams.expandMyCard != 'false'
+    #expandMainCard: queryParams.expandMainCard != 'false'
+    #expandAboutCard: queryParams.expandAboutCard != 'false'
+    #expandMyCard: queryParams.expandMyCard != 'false'
     facebookAppId: Meteor.settings.public.facebookAppId
     newHere: newHere
-    url: window.location.href
+    url: simpleUrl(queryParams)#window.location.href
   #console.log newProps, queryParams.from, queryParams.to,'newProps, queryParams.from, queryParams.to'
   window.props = newProps
   newProps

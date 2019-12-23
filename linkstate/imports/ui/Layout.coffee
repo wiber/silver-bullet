@@ -12,6 +12,8 @@ React = require('react')
 # CardText = require 'material-ui/lib/card/card-text'
 AppBar =  require('@material-ui/core/AppBar').default
 {Footer} = require('./Footer.jsx')
+{Login} = require('./Login')
+{Disqus} = require('./Disqus')
 # Card = require 'material-ui/lib/card/card'
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 {Mexplain} = require '../api/MexplainContainer.coffee'
@@ -26,31 +28,48 @@ Lo = require 'lodash'
 #{CookieConsent} = require "react-cookie-consent"
 # console.log("Nicolson here..")
 # console.log(CookieConsent)
+
 {div, a,} = React.DOM
 
 exports.Layout = React.createClass
-  getDefaultProps: ->
-    expandMainCard: true
-  render: ->
-    window.fbAsyncInit = ->
-      FB.init
-        appId: that.props.facebookAppId
-        autoLogAppEvents: true
-        xfbml: true
-        version: 'v2.11'
+  #getDefaultProps: ->
+  #  expandMainCard: true
+  componentDidUpdate: ->
+    disqus_config = ->
+      @page.url = window.location
+      # Replace PAGE_URL with your page's canonical URL variable
+      @page.identifier = linkstate.store @props.from
+      # Replace PAGE_IDENTIFIER with your page's unique identifier variable
       return
-    if document?
-      ((d, s, id) ->
-        js = undefined
-        fjs = d.getElementsByTagName(s)[0]
-        if d.getElementById(id)
-          return
-        js = d.createElement(s)
-        js.id = id
-        js.src = 'https://connect.facebook.net/en_US/sdk.js'
-        fjs.parentNode.insertBefore js, fjs
+    unless window.disqusLoaded
+      do ->
+        # DON'T EDIT BELOW THIS LINE
+        d = document
+        s = d.createElement('script')
+        s.src = 'https://decivote.disqus.com/embed.js'
+        s.setAttribute 'data-timestamp', +new Date
+        (d.head or d.body).appendChild s
+        window.disqusLoaded = true
         return
-      ) document, 'script', 'facebook-jssdk'
+    window.resetDisqus = (newIdentifier, newUrl, newTitle, newLanguage) ->
+      console.log 'DISQUS reload',{newIdentifier, newUrl, newTitle, newLanguage}
+      DISQUS.reset
+        reload: true
+        config: ->
+          @page.identifier = newIdentifier
+          @page.url = newUrl
+          @page.title = "Linkstates for "+document.title
+          console.log {@page,DISQUS,'loading DISQUS'}
+          #@language = newLanguage
+    return
+  componentDidMount: ->
+
+    script = document.createElement('script')
+    script.src = "//decivote.disqus.com/count.js"
+    script.async = true
+    script.id = "dsq-count-scr"
+    document.body.appendChild script
+  render: ->
     that = this
 
 
@@ -59,7 +78,7 @@ exports.Layout = React.createClass
         HERE = that.props.user.links.in.Bookmarks[ linkstate.store that.props.from]
         ScreenshotUrl = HERE.meta.ScreenshotUrl
       # old way still here..
-      urlbox = Urlbox(Meteor.settings.public.urlboxKey, Meteor.settings.urlboxSecret)
+      urlbox = Urlbox(Meteor.settings.public.urlbox.key, Meteor.settings.public.urlbox.secret)
       before = ScreenshotUrl
       ScreenshotUrl = urlbox.buildUrl
         url: that.props.from
@@ -82,7 +101,8 @@ exports.Layout = React.createClass
       title = R.concat slash, titleHere
     else
       title = that.props.from
-    # console.log that.props.user.services, Meteor.user().services
+
+
     div
       className: 'row'
       div
@@ -101,20 +121,21 @@ exports.Layout = React.createClass
           marginTop: 150
         className: 'column'
         div
-          #if that.props.user?.services?.facebook? or that.props.user?.services?.password?
-          React.createElement MainCard, {
-            "expanded": that.props.expandMainCard
-            "to": that.props.to
-            "from": that.props.from
-            "word": that.props.word
-            "content": that.props.content
-            "user": that.props.user
-            "lastTitle": that.props.lastTitle
-            "newHere": that.props.newHere
-            }
-          #else
-          #  React.createElement Mexplain,
-          #    "word": that.props.word
+
+          if that.props.user?.services?#.facebook? or that.props.user?.services?.password?
+            console.log {that}
+            React.createElement MainCard,
+              #{}"expanded": that.props.expandMainCard
+              "to": that.props.to
+              "from": that.props.from
+              "word": that.props.word
+              "content": that.props.content
+              "user": that.props.user
+              "lastTitle": that.props.lastTitle
+              "newHere": that.props.newHere
+          else
+            React.createElement Mexplain,
+              "word": that.props.word
           React.createElement AboutCard,
               "expanded": that.props.expandAboutCard
               "to": that.props.to
@@ -124,17 +145,28 @@ exports.Layout = React.createClass
               "howMany": 15
               "user": that.props.user
           div
-            # className: 'columnR'
-            # style: _.extend {}, style.base,
-            #   marginTop: "150# '15%'"
-            # a
-            #   href: "https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA"
-            #   target: "_blank"
-            #   "To use this app properly you need the chrome extension. Download, extract it and chrome://extensions unpacked."
-            # div
-            #   React.createElement AccountsUIWrapper, {}
-            div
-              React.createElement Footer, {}
-            # div
-            #   id: 'fb-root'
-            #   React.createElement CookieConsent, {}
+            React.createElement Login, {props: @props}
+
+      div
+        className: 'columnR'
+        style:# _.extend {}, style.base,
+          marginTop: "150px"# '15%'"
+        # a
+        #   href: "https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA"
+        #   target: "_blank"
+        #   "To use this app properly you need the chrome extension. Download, extract it and chrome://extensions unpacked."
+        # div
+        #   React.createElement AccountsUIWrapper, {}
+
+        #div
+        #  id: 'fb-root'
+        #   React.createElement CookieConsent, {}
+        div
+          style:
+            class: "column"
+          # FIXME rerenders too often
+          React.createElement Disqus,
+            #from: that.props.from
+            #url: that.props.url
+            # we only rerender when from changes
+            from: that.props.from

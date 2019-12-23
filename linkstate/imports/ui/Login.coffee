@@ -6,52 +6,66 @@ TextField = require('material-ui/lib/TextField').default
 
 exports.Login = React.createClass
   getInitialState: ->
-    isLoggedIn: false,
+    isLoggedIn: Meteor.userId(),
     name: ""
 
   componentDidMount: ->
     self = this;
-    setTimeout ()->
-      user = Meteor.user();
-      isLoggedIn = false
-      if user
-        isLoggedIn = true
-
-      # self.setState {
-      #   name: user?user.profile?user.profile.name || ""
-      #   isLoggedIn: isLoggedIn
-      # }
-    ,5000
 
   onLoginWithFacebook: () ->
     console.log "onLoginWithFacebook"
+    Meteor.loginWithFacebook ()->
+      console.log Meteor.userId()
 
   onLoginWithLinkedIn: () ->
     console.log "onLoginWithLinkedIn"
+    Meteor.loginWithLinkedin ["r_emailaddress", "r_liteprofile"], ()->
+      console.log Meteor.userId()
 
   onLogin: () ->
     console.log "onLogin"
+    userLogin = {
+      email: @refs.email.getValue(),
+      password: @refs.password.getValue()
+    }
+    if @validate(userLogin)
+      Meteor.loginWithPassword userLogin.email, userLogin.password, ()->
+        console.log Meteor.userId()
 
   onRegister: () ->
     console.log "onRegister"
+    registerLogin = {
+      email: @refs.email.getValue(),
+      password: @refs.password.getValue()
+    }
+    if @validate(registerLogin)
+      Accounts.createUser registerLogin, ()->
+        console.log Meteor.userId()
 
   onLogout: () ->
-    # Meteor.logout(()->{})
     console.log "onLogout"
+    Meteor.logout ()->
+      console.log Meteor.userId()
+
+  validate: (userInfo)->
+    if userInfo.email && userInfo.password
+      true
+    else
+      console.log "Invalid information."
 
   render: ->
-
-    onLoginWithFacebook = this.onLoginWithFacebook.bind(this)
-    onLoginWithLinkedIn = this.onLoginWithLinkedIn.bind(this)
-    onLogin = this.onLogin.bind(this)
-    onRegister = this.onRegister.bind(this)
-    onLogout = this.onLogout.bind(this)
+    # console.log(this.props.props.user);
+    # onLoginWithFacebook = this.onLoginWithFacebook.bind(this)
+    # onLoginWithLinkedIn = this.onLoginWithLinkedIn.bind(this)
+    # onLogin = this.onLogin.bind(this)
+    # onRegister = this.onRegister.bind(this)
+    # onLogout = this.onLogout.bind(this)
 
     style = {
       margin: 2
     }
 
-    if this.state.isLoggedIn
+    if @state.isLoggedIn # @props?.props?.user
       div
         className: 'container'
           div
@@ -62,7 +76,7 @@ exports.Login = React.createClass
                 label: "Logout",
                 secondary: true,
                 style: style,
-                onMouseDown: onLogout
+                onMouseDown: @onLogout
               }
     else
       div
@@ -75,25 +89,28 @@ exports.Login = React.createClass
               label: "Login with Facebook",
               primary: true,
               style: style,
-              onMouseDown: onLoginWithFacebook
+              onMouseDown: @onLoginWithFacebook
             }
             React.createElement RaisedButton, {
               label: "Login with LinkedIn",
               primary: true,
               style: style,
-              onMouseDown: onLoginWithLinkedIn
+              onMouseDown: @onLoginWithLinkedIn
             }
         div
           className: 'row'
           div
             className: "s6"
             React.createElement TextField, {
-              hintText: "john@example.com"
+              hintText: "john@example.com",
+              ref: "email"
             }
           div
             className: "s6"
             React.createElement TextField, {
-              hintText: "password"
+              hintText: "password",
+              ref: "password",
+              type: "password"
             }
           div
             className: "s12"
@@ -101,13 +118,13 @@ exports.Login = React.createClass
               label: "Login",
               primary: true,
               style: style,
-              onMouseDown: onLogin
+              onMouseDown: @onLogin
             }
             React.createElement RaisedButton, {
               label: "Register",
               primary: true,
               style: style,
-              onMouseDown: onRegister
+              onMouseDown: @onRegister
             }
         # div
         #   className: 'row'

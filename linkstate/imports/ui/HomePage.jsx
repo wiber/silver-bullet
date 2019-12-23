@@ -50,7 +50,7 @@ class LoginHeader extends React.Component {
   render() {
       if(this.state.user){
         return (
-          <li onClick={this.onLogout}><a href="">{this.state.user.profile.name} Logout</a></li>
+          <li onClick={this.onLogout}><a href="">Logout</a></li>
         );
       }else{
         return (<li onClick={this.onLogin}><a href="">Login with Facebook</a></li>)

@@ -3,15 +3,12 @@ scalars =
   fontScale: -> 1
   goldenRatio: -> ((1 + Math.sqrt(5)) / 2)
   screenshotWidth: 250
-<<<<<<< HEAD
 measurements =
   D: 300
   d: 4
   M: 100
-=======
   boxWidth: 640
 
->>>>>>> master
 style =
   scalars: scalars
   measurements: measurements

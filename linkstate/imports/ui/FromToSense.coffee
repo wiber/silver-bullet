@@ -43,10 +43,13 @@ TextAbout = React.createClass
     content = {}
     content.body = $("#textAbout").val() # e.target.value #FlowRouter.getQueryParam('content')
     # weight is between 0 and 9
+    META = _.extend content,
+      title: @props.lastTitle
+    console.log {content,META},@props.lastTitle, "META"
     payload =
       from: FlowRouter.getQueryParam('from')
       to: FlowRouter.getQueryParam('to')
-      meta: content
+      meta: META
     content.weight = weight || 0 # e.keyCode - 48
     Meteor.defer ->
       Meteor.call "Linking", payload, (error, result) ->
