@@ -52,12 +52,14 @@ exports.Layout = React.createClass
         window.disqusLoaded = true
         return
     window.resetDisqus = (newIdentifier, newUrl, newTitle, newLanguage) ->
+      console.log 'DISQUS reload',{newIdentifier, newUrl, newTitle, newLanguage}
       DISQUS.reset
         reload: true
         config: ->
           @page.identifier = newIdentifier
           @page.url = newUrl
-          #@page.title = newTitle
+          @page.title = "Linkstates for "+document.title
+          console.log {@page,DISQUS,'loading DISQUS'}
           #@language = newLanguage
     return
   componentDidMount: ->

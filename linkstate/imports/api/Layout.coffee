@@ -22,6 +22,9 @@ containerLayout = createContainer ((props) ->
   lastTitle =  FlowRouter.getQueryParam('lastTitle')
   # if newHere add this to the dropdown, set the to to lastTo
   markExist = linkstate.bookmarkExistHere user, queryParams.from
+  # break these out into meteor methods -
+  # named and knowing weather it's the first visit etc
+  # eventing system?
   if newHere or !markExist and Meteor.isClient
     # console.log queryParams.from, linkstate.catTree.categoryUrls.Bookmarks
     Meteor.call "Linking",
