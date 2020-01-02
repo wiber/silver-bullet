@@ -64,8 +64,8 @@ exports.Login = React.createClass
     style = {
       margin: 2
     }
-
-    if @state.isLoggedIn # @props?.props?.user
+    console.log {@props},@props.props.user?
+    if @props.props.user?#@state.isLoggedIn # @props?.props?.user
       div
         className: 'container'
           div
