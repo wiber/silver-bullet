@@ -11,7 +11,7 @@ onMessageListener = function(request, sender, sendResponse) {
       //var title = document.getElementsByTagName("title")[0].innerHTML;
       //console.log(title);
       //console.log(tab.title);
-      console.log('onHighlighted pre sending message',tab,tab.title);
+      //console.log('onHighlighted pre sending message',tab,tab.title);
       window.lastTabHighlighted.unshift(tab)
       sendResponse({farewell: tab});
       oneSteps(tab)
@@ -27,35 +27,22 @@ oneSteps = function ( tab) {
   pendingUrl = tab.pendingUrl
   urlNT = "chrome://newtab/"
   pageTabStep = {url,title,pendingUrl}
-  console.log(page,pageTabStep,"oneSteps precondition")
+  //console.log(page,pageTabStep,"oneSteps precondition")
   if ( url == urlNT || pendingUrl == urlNT ) {
      console.log(tab.title,'oneSteps',pageTabStep)
   } else {
-    console.log( url, title );
+    //console.log( url, title );
     window.page = {
       'last': {
           'url': url,
           'title': title
       }
     }
-    if (!page.last.url){
-      console.log('missing url oneSteps')
-    } else {
-      console.log(page,'oneSteps', page.last.url, window.lastTabHighlighted);
-    }
-    
-    try {
-      console.log(chrome.storage.sync.get('last'));
-    } catch (e) {
-      console.log(e)
-    } finally {
-
-    }
 
     chrome.storage.sync.set({last:page.last})
 
     try {
-      console.log(chrome.storage.sync.get('last'));
+      //console.log(chrome.storage.sync.get(['last']));
     } catch (e) {
       console.log(e)
     } finally {
@@ -72,6 +59,7 @@ chrome.tabs.onHighlighted.addListener( function ( highlightInfo ) {
     //console.log(tab.title);
     console.log('onHighlighted',tab,tab.title,window.lastTabHighlighted);
     //window.lastTabHighlighted.unshift(tab)
+    window.lastTabHighlighted.unshift(tab)
     oneSteps(tab)
   } )
 } );
@@ -81,7 +69,6 @@ chrome.tabs.onUpdated.addListener( function ( tabId, changeInfo, tab ) {
   if (tab.id == window.lastTabHighlighted.id) {
     console.log('this tab was highlighted last',tab.title);
    // oneSteps( tab.url , tab.title);
-    window.lastTabHighlighted.unshift(tab)
   } else {
     //console.log('onUpdated but not last highlighted',tab.title,tab);
   }

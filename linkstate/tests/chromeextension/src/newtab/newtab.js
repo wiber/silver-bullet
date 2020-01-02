@@ -1,8 +1,8 @@
 websiteURL = "http://localhost:3000/about?"
 window.background = chrome.extension.getBackgroundPage(); //do this in global scope for popup.js
-console.log(background.websiteURL);
-console.log(background.background);
-console.log(window.background.pageTabStep);
+//console.log(background.websiteURL);
+//console.log(background.background);
+//console.log(window.background.pageTabStep);
 window.globalLast = {}
 // an update might have broken the messaging api so using globals instead
 try {
@@ -12,7 +12,7 @@ try {
 } catch (e) {
 
 } finally {
-  console.log({globalLast},'not pretty but works')
+  //console.log({globalLast},'not pretty but works')
 }
 
 
@@ -30,14 +30,14 @@ frameit = function(lastPlace) {
         }
         return parts.join("&");
     }
-    console.log({lastPlace});
+    //console.log({lastPlace});
     try {
       queryParams = {}
       queryParams.from = lastPlace.url
       queryParams.lastTitle = lastPlace.title //.replace(/[\-_.!~*'()]/g,"_")
       qp = toQueryString(queryParams)
       src = websiteURL + qp
-      console.log("queryParams", queryParams, src, lastPlace);
+      //console.log("queryParams", queryParams, src, lastPlace);
       iFrame = document.getElementById('linkstateframe')
       iFrame.src = src
     } catch (e) {
@@ -49,14 +49,13 @@ frameit = function(lastPlace) {
 }
 window.onload = function(){
   last = globalLast
-  console.log({last},"onload");
   frameit(last)
 }
 
 chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
   backroundPageUrl = window.background.page.last.url
-  console.log({backroundPageUrl});
-  console.log({response});
+  //console.log({backroundPageUrl});
+  //console.log({response});
   if(response.farewell && response.farewell.last){
     console.log('got response', response.farewell);
     frameit(response.farewell)
@@ -65,18 +64,3 @@ chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
     chrome.storage.sync.get("last", frameit);
   }
 });
-/*
-chrome.runtime.sendMessage({greeting: "tab"}, function(response) {
-  if(response.tab && response.tab.title){
-    console.log('got response', response.farewell);
-    frameit({
-      from: response.tab.url,
-      lastTitle: response.tab.title
-    })
-  } else {
-    console.log('no response, from storage instead');
-    chrome.storage.sync.get("last", frameit);
-  }
-
-});
-*/
