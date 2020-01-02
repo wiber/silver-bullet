@@ -13,6 +13,7 @@ onMessageListener = function(request, sender, sendResponse) {
       //console.log(tab.title);
       console.log('onHighlighted pre sending message',tab,tab.title);
       window.lastTabHighlighted.unshift(tab)
+      sendResponse({farewell: tab});
       oneSteps(tab)
     } )
     // why is this undefined? we're in some kind of non global space..
