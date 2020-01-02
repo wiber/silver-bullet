@@ -1,6 +1,16 @@
 websiteURL = "http://localhost:3000/about?"
 window.background = chrome.extension.getBackgroundPage(); //do this in global scope for popup.js
-console.log({websiteURL},{background});
+console.log(background.websiteURL);
+console.log(background.background);
+console.log(window.background.pageTabStep);
+try {
+  console.log(window.background.page.last, window.background.page.last.title)
+} catch (e) {
+
+} finally {
+
+}
+
 frameit = function(lastPlace) {
     lastPlace = lastPlace.last
     function toQueryString(obj) {
@@ -26,6 +36,9 @@ frameit = function(lastPlace) {
 }
 
 chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
+  backroundPageUrl = window.background.page.last.url
+  console.log({backroundPageUrl});
+  console.log({response});
   if(response.farewell && response.farewell.last){
     console.log('got response', response.farewell);
     frameit(response.farewell)
