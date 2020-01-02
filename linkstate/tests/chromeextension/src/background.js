@@ -32,6 +32,7 @@ oneSteps = function ( tab) {
      console.log(tab.title,'oneSteps',pageTabStep)
   } else {
     //console.log( url, title );
+    // in a fit of rage as the chrome api must have been updated we now do globals
     window.page = {
       'last': {
           'url': url,
