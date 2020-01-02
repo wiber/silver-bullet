@@ -10,6 +10,7 @@ language = 'eng'
 {linkstate} = require '../api/strings'
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
+  {from,to,bookmarked,lastTitle} = queryParams
   # store and use localStorage user untill user() received from server
   if Meteor.isClient
     Tracker.autorun ->
@@ -52,13 +53,17 @@ containerLayout = createContainer ((props) ->
   else
     thumbalizr = undefined
   #content = ifBodyContentHere queryParams.content, queryParams, user
-  console.log {user}
+  console.log {user,from},!!from,{from,to,bookmarked,lastTitle}
+  # TODO rewrite this so the default case is to use the meteor user to set params
+  # over write with params if they exist
+  # figure out if the app was loaded by copying the url... how?
+
   newProps =
     user: user
     thumbalizr: thumbalizr
     queryParams: queryParams
-    from: decodeURIComponent queryParams.from
-    to: decodeURIComponent queryParams.to
+    from: decodeURIComponent queryParams.from or user.fromLast
+    to: decodeURIComponent queryParams.to or user.toLast
     incomming: queryParams.incomming
     content: ifBodyContentHere(queryParams, user) #content
     lastTitle: queryParams.lastTitle

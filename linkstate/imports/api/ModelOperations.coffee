@@ -20,7 +20,7 @@ exports.simpleUrl = (queryParams) ->
   simplePath = FlowRouter.path('about', {}, {to})
   returnThis = thisURL.origin+simplePath
     #host+"/"+simplePath
-  console.log {from,to,queryParams,simplePath,host,returnThis,simpleUrlFlag},'model url',host+"/"+simplePath, returnThis is simpleUrlFlag,thisURL.pathname
+  #console.log {from,to,queryParams,simplePath,host,returnThis,simpleUrlFlag},'model url',host+"/"+simplePath, returnThis is simpleUrlFlag,thisURL.pathname
   simpleUrlFlag = returnThis
   returnThis
 

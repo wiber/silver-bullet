@@ -61,9 +61,15 @@ exports.Layout = React.createClass
           @page.title = "Linkstates for "+document.title
           console.log {@page,DISQUS,'loading DISQUS'}
           #@language = newLanguage
+          ###
+          shortname
+          this.page.identifier
+          this.page.title
+          this.page.url
+          this.page.category_id
+          ###
     return
   componentDidMount: ->
-
     script = document.createElement('script')
     script.src = "//decivote.disqus.com/count.js"
     script.async = true
@@ -145,7 +151,9 @@ exports.Layout = React.createClass
               "howMany": 15
               "user": that.props.user
           div
-            React.createElement Login, {props: @props}
+            React.createElement Login,
+              props: @props
+              user: @props.user
 
       div
         className: 'columnR'

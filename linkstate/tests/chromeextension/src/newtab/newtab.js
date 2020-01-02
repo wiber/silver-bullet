@@ -1,6 +1,6 @@
 websiteURL = "http://localhost:3000/about?"
-
-console.log(websiteURL);
+window.background = chrome.extension.getBackgroundPage(); //do this in global scope for popup.js
+console.log({websiteURL},{background});
 frameit = function(lastPlace) {
     lastPlace = lastPlace.last
     function toQueryString(obj) {

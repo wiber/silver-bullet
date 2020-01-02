@@ -63,6 +63,12 @@ Meteor.methods
   Linking: ({from, to, meta}) ->
     prevSet = Meteor.user()?.links?.in?[to]?[from]?
     userId = Meteor.userId()
+    console.log {from},from?, !!from, !!!from
+    if !!!from
+      throw new Meteor.Error 'must be from someplace',
+        {arguments}
+      return arguments
+      #  "you can't connect without starting somewhere"
     if stringedCallsExist({from, to, meta, userId})
       console.log 'returning false due to doublecall'
       doublecall =  true
@@ -104,7 +110,7 @@ Meteor.methods
         , to
         , Meteor.user()?.services?.facebook?.name #,  Meteor.user().profile.name
         , Meteor.user().hits
-    unless to? and from?
+    unless !!to and !!from
       throw new Meteor.Error 2, "to or from is missing "+from+' '+to
       return 'nothing'
     if Meteor.user()?.services?.facebook?.id?
