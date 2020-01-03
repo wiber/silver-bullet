@@ -139,9 +139,9 @@ exports.Layout = React.createClass
               "user": that.props.user
               "lastTitle": that.props.lastTitle
               "newHere": that.props.newHere
-          else
-            React.createElement Mexplain,
-              "word": that.props.word
+          #else
+          #  React.createElement Mexplain,
+          #    "word": that.props.word
           React.createElement AboutCard,
               "expanded": that.props.expandAboutCard
               "to": that.props.to
