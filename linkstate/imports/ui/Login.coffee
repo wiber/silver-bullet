@@ -2,7 +2,7 @@ React = require 'react'
 IconButton = require('material-ui/lib/icon-button').default #@material-ui/core/IconButton not working
 RaisedButton = require('material-ui/lib/raised-button').default
 TextField = require('material-ui/lib/TextField').default
-{div, br, span} = React.DOM
+{div, br, span,a} = React.DOM
 
 exports.Login = React.createClass
   getInitialState: ->
@@ -64,7 +64,7 @@ exports.Login = React.createClass
     style = {
       margin: 2
     }
-    #console.log {@props},@props.props.user?
+    console.log {@props},@props.props.user?
     if @props?.user?.services?#@state.isLoggedIn # @props?.props?.user
       div
         className: 'container'
@@ -78,6 +78,13 @@ exports.Login = React.createClass
                 style: style,
                 onMouseDown: @onLogout
               }
+        a
+          href: "https://drive.google.com/open?id=1sS_aKc6q1COs7yxP8hiKfW5UTVAP_X1a"
+          target: "_blank"
+          rel: "noreferrer"
+          "Next 1) download the chrome extension 2) unzip it 3) go to chrome://extensions 4) enable developer mode and load unpacked extension"
+
+
     else
       div
         className: 'container'
