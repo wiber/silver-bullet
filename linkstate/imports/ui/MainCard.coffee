@@ -1,24 +1,29 @@
-reactKup = require('react-kup')
+#reactKup = require('react-kup')
 React = require('react')
 {style} = require('../ui/style.coffee')
+{hereAndThere, hereToThereMeta} = require('../api/ModelOperations.coffee')
 {changeQueryParams, changeQueryParamsObject} = require('../api/changeQueryParams.coffee')
 {FromToSense} = require('../ui/FromToSense.coffee')
-Card = require('material-ui/lib/card/card').default
-CardActions = require('material-ui/lib/card/card-actions' ).default
-CardHeader = require('material-ui/lib/card/card-header').default
-CardMedia = require('material-ui/lib/card/card-media').default
-CardTitle = require('material-ui/lib/card/card-title').default
-FlatButton = require('material-ui/lib/flat-button' ).default
-CardText =  require('material-ui/lib/card/card-text').default
-IconButton = require('material-ui/lib/icon-button').default
-Flip =  require('material-ui/lib/svg-icons/communication/swap-calls').default
-ExitToPage =  require('material-ui/lib/svg-icons/action/exit-to-app').default
-Print =  require('material-ui/lib/svg-icons/action/print').default
-Edit =  require('material-ui/lib/svg-icons/editor/mode-edit').default
+Card = require('@material-ui/core/Card').default
+CardActions = require('material-ui/lib/card/card-actions').default #(@material-ui/core/CardActions) not working
+CardHeader = require('@material-ui/core/CardHeader').default
+CardMedia = require('@material-ui/core/CardMedia').default
+# CardTitle = require('material-ui/lib/card/card-title').default
+# FlatButton = require('material-ui/lib/flat-button' ).default
+CardText =  require('material-ui/lib/card/card-text').default #change CardText to CardContent(@material-ui/core/CardContent) not working
+IconButton = require('material-ui/lib/icon-button').default #@material-ui/core/IconButton not working
+Flip =  require('material-ui/lib/svg-icons/communication/swap-calls').default #not in material-ui
+# ExitToPage =  require('material-ui/lib/svg-icons/action/exit-to-app').default
+ContentCopy =  require('material-ui/lib/svg-icons/content/content-copy').default #not in material-ui
+Print =  require('material-ui/lib/svg-icons/action/print').default #not in material-ui
+Edit =  require('material-ui/lib/svg-icons/editor/mode-edit').default #not in material-ui
 FromIcon =  require('material-ui/lib/svg-icons/communication/call-received').default
-ToIcon =  require('material-ui/lib/svg-icons/communication/call-made').default
-
+ToIcon =  require('material-ui/lib/svg-icons/communication/call-made').default #not in material-ui
+# ShareFacebookButton =  require('material-ui/lib/svg-icons/action/print').default
+copy = require 'copy-to-clipboard'
+Lo = require 'lodash'
 {shadowMoon} = require '../ui/ShadowMoon'
+
 exports.MainCard = React.createClass
   getDefaultProps: ->
     expanded: true
@@ -30,132 +35,134 @@ exports.MainCard = React.createClass
         if false is true and window?.textAbout?.refs?.MainCardTextInput?.focus()
           window.textAbout.refs.MainCardTextInput.focus()
           #$('#textAbout').focus()
-        console.log document.activeElement.id, document.activeElement.type
-    #setInterval(focusTextbox,650)
+        #console.log document.activeElement.id, document.activeElement.type
   render: ->
     that = this
-    if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.from]?
-      HERE = that.props.user.links.out.Bookmarks[ linkstate.store that.props.from]
-      ScreenshotUrl = HERE.meta.ScreenshotUrl
-    else HERE =
-      title: that.props.lastTitle
-      from: that.props.from
-    if that?.props?.user?.out?.Bookmarks?[ linkstate.store that.props.to]?
-      THERE = that.props.user.links.out.Bookmarks[ linkstate.store that.props.to]
-      ThereScreenshotUrl = THERE.meta.ScreenshotUrl
-      # if not not known.. we're in an edge case and should use qp
-
-
-    reactKup (k) ->
-      k.build Card, # build the Card component
-        expanded: that.props.expanded # add argument key value pairs
-        style: _.extend {}, style.card, style.mCard,
-          overflow: 'hidden'
-        ->
-          k.build CardHeader,
-            title: HERE.title,
-            subtitle: that.props.word.MainCardSubtitle
-            showExpandableButton: false
-            onClick: (e) ->
-              window.open HERE.meta.FromLink
-          k.build CardMedia,
-            style: style.overlayPercentage
-            onClick: (e) ->
-              win = window.open(decodeURIComponent HERE.from, '_blank')
-              win.focus()
-          k.build CardText,
-            style:
-              overflow: 'hidden'
-            ->
-              k.build FromToSense,
-                from: that.props.from
-                to: that.props.to
-                lastTitle: that.props.lastTitle
-                word: that.props.word
-                content: that.props.content
-                user: that.props.user
-              k.build shadowMoon,
-                measurements:
-                  D: 80
-                  d: 80
-                  M: 150
-                ScreenshotUrl: ThereScreenshotUrl
-                styler:
-                  marginLeft: -20# -100
-                  marginTop: -200
-                  #display: 'block'
-                  opacity: .5
-                  position: 'absolute'
-          k.build CardActions,
-            ->
-              k.build IconButton,
-                tooltip: "Reverse - Point TO what you're now pointing FROM"
-                tooltipPosition: 'bottom-right'
-                ref: 'blurer'
-                onFocus: () ->
-                  window.textAbout.refs.MainCardTextInput.focus()
-                onClick: () ->
-                  changeQueryParamsObject
-                    from: that.props.to
-                    to: that.props.from
-                ->
-                  k.build Flip
-              k.build IconButton,
-                tooltip: "TO - Visit the page you're connecting TO " + that.props.to
-                tooltipPosition: 'bottom-right'
-                onClick: () ->
-                  window.open that.props.to
-                ->
-                  k.build ToIcon
-              k.build IconButton,
-                tooltip: "FROM - Visit the page you're looking FROM "+that.props.from
-                tooltipPosition: 'bottom-right'
-                onClick: () ->
-                  window.open that.props.from
-                ->
-                  k.build FromIcon
-              k.build IconButton,
-                tooltip: "Rich editing and markup of the page. Quote it for your notes. Screenshot a part perhaps?"
-                tooltipPosition: 'bottom-right'
-                style:
-                  opacity: .4
-                onClick: () ->
-                  window.open that.props.to
-                ->
-                  k.build Edit
-              k.build IconButton,
-                #style:
-                #  height: 0
-                tooltip: "Archive the whole page for me. Request this or other features if you need it."
-                tooltipPosition: 'bottom-right'
-                ref: 'blurer4'
-                style:
-                  opacity: .4
-                onFocus: () ->
-                  window.textAbout.refs.MainCardTextInput.focus()
-                onClick: () ->
-                  window.open that.props.to
-                ->
-                  k.build Print
-              k.build IconButton,
-                #style:
-                #  height: 0
-                tooltip: "What are people tweeting about this?"
-                tooltipPosition: 'bottom-right'
-                ref: 'blurerTweet'
-                style:
-                  opacity: .4
-                onFocus: () ->
-                  window.textAbout.refs.MainCardTextInput.focus()
-                onClick: () ->
-                  # request feature by connecting to it....
-                  ###
-                  payload =
-                    from: that.props.user.services.facebook.link
-                    to: "http://youiest.com/features/socialStats"
-                  console.log payload
-                  changeQueryParamsObject payload
-                  ###
-                  window.open 'linkstate.youiest.com'
-                ->
-                  k.build Print
+    {HERE, HereScreenshotUrl, THERE, ThereScreenshotUrl} = hereAndThere that.props.user, that.props
+    {hereToThereObj,hereToThereObjWeight} = hereToThereMeta(@props.user,@props)
+    div
+      className: 'xxx'
+      React.createElement Card, { "style": _.extend {}, style.card, style.mAcard }, #"expanded": that.props.expanded,
+        React.createElement CardHeader, {
+          "title": HERE.title
+          "subtitle": that.props.word.MainCardSubtitle
+          onClick: ->
+            window.open HERE.meta.FromLink
+        }
+        React.createElement CardMedia, {
+          "style": style.overlayPercentage
+          onClick: ->
+            win = window.open(decodeURIComponent HERE.from, '_blank')
+            win.focus()
+        }
+        React.createElement CardText, {
+          "style": _.extend {},
+            overflow: 'hidden'
+        },
+          React.createElement FromToSense, {
+            "from": that.props.from
+            "to": that.props.to
+            "lastTitle": that.props.lastTitle
+            "word": that.props.word
+            "content": that.props.content
+            "user": that.props.user
+            "newHere": that.props.newHere,
+            "meta": HERE.meta
+            hereToThereObjWeight: hereToThereObjWeight
+          }
+          React.createElement shadowMoon, {
+            "measurements":
+              "D": 80
+              "d": 80
+              "M": 150
+            "ScreenshotUrl": ThereScreenshotUrl
+            "styler":
+              "marginLeft": -20# -100
+              "marginTop": -200
+              "opacity": .5
+              "position": 'absolute'
+          }
+        React.createElement CardActions, {
+          "style": _.extend {},
+        },
+          React.createElement IconButton, {
+            "tooltip": "Copy to clipboard because sharing -> " + window.location.href
+            "tooltipPosition": 'bottom-right'
+            onClick: ->
+              copy window.location.href
+          },
+            React.createElement ContentCopy, {
+              "style": _.extend {},
+            }
+          React.createElement IconButton, {
+            "tooltip": "Reverse - Point TO what you're now pointing FROM"
+            "tooltipPosition": 'bottom-right'
+            "ref": 'blurer'
+            onFocus: ->
+              window.textAbout.refs.MainCardTextInput.focus()
+            onClick: ->
+              changeQueryParamsObject
+                from: that.props.to
+                to: that.props.from
+          },
+            React.createElement Flip, {
+              "style": _.extend {},
+            }
+          React.createElement IconButton, {
+            "tooltip": "TO - Visit the page you're connecting TO " + that.props.to
+            "tooltipPosition": 'bottom-right'
+            onClick: ->
+              window.open that.props.to
+          },
+            React.createElement ToIcon, {
+              "style": _.extend {},
+            }
+          React.createElement IconButton, {
+            "tooltip": "FROM - Visit the page you're looking FROM "+that.props.from
+            "tooltipPosition": 'bottom-right'
+            onClick: ->
+              window.open that.props.from
+          },
+            React.createElement FromIcon, {
+              "style": _.extend {},
+            }
+          React.createElement IconButton, {
+            "tooltip": "Rich editing and markup of the page. Quote it for your notes. Screenshot a part perhaps?"
+            "tooltipPosition": 'bottom-right'
+            "style":
+                "opacity": .4
+            onClick: ->
+              window.open that.props.to
+          },
+            React.createElement Edit, {
+              "style": _.extend {},
+            }
+          React.createElement IconButton, {
+            "tooltip": "Archive the whole page for me. Request this or other features if you need it."
+            "tooltipPosition": 'bottom-right'
+            "ref": 'blurer4'
+            "style":
+                "opacity": .4
+            onFocus: ->
+              window.textAbout.refs.MainCardTextInput.focus()
+            onClick: ->
+              changeQueryParamsObject ->
+                window.open that.props.to
+          },
+            React.createElement Print, {
+              "style": _.extend {},
+            }
+          React.createElement IconButton, {
+            "tooltip": "What are people tweeting about this?"
+            "tooltipPosition": 'bottom-right'
+            "ref": 'blurerTweet'
+            "style":
+                "opacity": .4
+            onFocus: ->
+              window.textAbout.refs.MainCardTextInput.focus()
+            onClick: ->
+              window.open 'linkstate.youiest.com'
+          },
+            React.createElement Print, {
+              "style": _.extend {},
+            }

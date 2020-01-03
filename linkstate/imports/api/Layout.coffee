@@ -2,11 +2,15 @@
 {wordLanguages} = require('../ui/WebCopy.coffee')
 language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
-{changeQueryParams} = require('../api/changeQueryParams.coffee')
+{changeQueryParams,changeQueryParamsObject} = require('../api/ModelOperations.coffee')
 #{URI} = require 'urijs'
+{newPlace, ifBodyContentHere, userSaved, simpleUrl, hereAndThere,hereToThereMeta,theModel} = require '../api/ModelOperations'
 
+{ Meteor } = require 'meteor/meteor'
+{linkstate} = require '../api/strings'
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
+  {from,to,bookmarked,lastTitle} = queryParams
   # store and use localStorage user untill user() received from server
   if Meteor.isClient
     Tracker.autorun ->
@@ -17,93 +21,63 @@ containerLayout = createContainer ((props) ->
   user = userSaved(Meteor.user(), queryParams, Meteor.isClient)
   newHere = newPlace(user, queryParams, FlowRouter.getQueryParam('Bookmarked'))
   lastTitle =  FlowRouter.getQueryParam('lastTitle')
-  if newHere and Meteor.isClient
+  # if newHere add this to the dropdown, set the to to lastTo
+  markExist = linkstate.bookmarkExistHere user, queryParams.from
+  # break these out into meteor methods -
+  # named and knowing weather it's the first visit etc
+  # eventing system?
+  if newHere or !markExist and Meteor.isClient
+    # console.log queryParams.from, linkstate.catTree.categoryUrls.Bookmarks
     Meteor.call "Linking",
       from: queryParams.from
-      to: 'Bookmarks'
+      to: linkstate.catTree.categoryUrls.Bookmarks
       meta:
         weight: 5
         title: queryParams.lastTitle#FlowRouter.getQueryParam('lastTitle')
+    changeQueryParamsObject
+      title: queryParams.lastTitle
+    document.title = "Linkstate @ "+queryParams.lastTitle
+  else
+    # set title - here meta title
+    #herethere = hereToThereMeta user, queryParams
+    #model = theModel queryParams
+    bookmark = linkstate.getTheBookmark user, queryParams.from
+    #console.log {bookmark,herethere,user, queryParams,markExist,newHere}
+    document.title = "Linkstate for "+bookmark.title
+    changeQueryParamsObject
+      title: bookmark.title
+
+
   if Meteor?.settings?.public?.thumbalizr?
     thumbalizr = Meteor.settings.public.thumbalizr
   else
     thumbalizr = undefined
   #content = ifBodyContentHere queryParams.content, queryParams, user
+  console.log {user,from},!!from,{from,to,bookmarked,lastTitle}
+  # TODO rewrite this so the default case is to use the meteor user to set params
+  # over write with params if they exist
+  # figure out if the app was loaded by copying the url... how?
+
   newProps =
     user: user
     thumbalizr: thumbalizr
-    from: decodeURIComponent queryParams.from
-    to: decodeURIComponent queryParams.to
+    queryParams: queryParams
+    from: decodeURIComponent queryParams.from or user.fromLast
+    to: decodeURIComponent queryParams.to or user.toLast
     incomming: queryParams.incomming
     content: ifBodyContentHere(queryParams, user) #content
     lastTitle: queryParams.lastTitle
     word: wordLanguages[language] # don't prematurely optimize!
-    expandMainCard: queryParams.expandMainCard != 'false'
-    expandAboutCard: queryParams.expandAboutCard != 'false'
-    expandMyCard: queryParams.expandMyCard != 'false'
+    #expandMainCard: queryParams.expandMainCard != 'false'
+    #expandAboutCard: queryParams.expandAboutCard != 'false'
+    #expandMyCard: queryParams.expandMyCard != 'false'
     facebookAppId: Meteor.settings.public.facebookAppId
+    newHere: newHere
+    url: simpleUrl(queryParams)#window.location.href
+  #console.log newProps, queryParams.from, queryParams.to,'newProps, queryParams.from, queryParams.to'
+  window.props = newProps
   newProps
 ), Layout
-newPlace = (user, queryParams, bookmarked) ->
-  inBookmarks = user?.out?.Bookmarks?[linkstate.store(queryParams.from)]
-  markExists = inBookmarks?.meta?
-  if bookmarked != 'true' and !markExists
-    # must changeQueryParams here else it gets run multiple times
-    changeQueryParams('Bookmarked', true)
-    return true
-  else
-    return false
-
-
-userSaved = (userE, queryParams, client) ->
-  user = {}
-  if !userE?.services?.facebook? and client
-    u = JSON.parse(localStorage.getItem('latest'))
-    window.saved = new Date().getTime()
-    if u?
-      user = u
-  else
-    if !window?.sub? and Meteor.isClient
-      window.sub = new Date().getTime()
-      time = (window.sub - window.saved)
-      console.log time, 'ms of your load time saved by using localStorage'
-    user = userE
-  # sideffect but a good place to make sure we're not without direction
-  for type in ['from', 'to']
-    if queryParams[type] is undefined and client
-      # double set them to avoid double render
-      if user[type+'Last']?
-        queryParams[type] = user[type+'Last']
-        changeQueryParams(type, user[type+'Last'])
-      else
-        console.log " haven't connected to anything? how is that possible?"
-  user
-# textbox should have your comment in it if empty
-# TODO write test for this
-ifBodyContentHere = (queryParams, user)->
-  paramContent = queryParams.content
-  # we wish to dig up old content and fill in the box..
-  #when a flag says we have changed FROM location
-  # and we have old content on user object.
-  # have we checked if there's content here?
-  # last checked.. if last checked is.. then swap and do. on user object?
-
-  if paramContent is 'undefined' or typeof paramContent is 'undefined'
-    content = ''
-  to = linkstate.store queryParams.to
-  from = linkstate.store queryParams.from
-  lastFrom = user?.lastFrom
-  switched = lastFrom != queryParams.from
-  cInExists = user?.out?[to]?[from]?
-  switchedPlace = FlowRouter.getQueryParam('switched') is 'true'
-  if cInExists and switchedPlace
-    cIn = user.out[to][from]
-    #changeQueryParams 'content', cIn.meta.body # 'content', cIn,
-    content = cIn.meta.body
-  if typeof content is 'undefined'
-    return ''
-  else
-    return content
 
 
 

@@ -1,0 +1,204 @@
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/materialize.min.css">
+  <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/104946/animate.min.css" ,rel="stylesheet">
+  <link type="text/css" href="css/emoji.css" rel="stylesheet">
+  <link type="text/css" href="css/main.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
+  <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+
+  <script src="js/materialize.min.js"></script>
+  <script type="text/javascript" src="data.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+
+</head>
+
+<body>
+
+  <header>
+
+    <nav>
+      <div class="nav-wrapper blue">
+        <a href="#" class="brand-logo">&nbsp;&nbsp;&nbsp;&nbsp;Silver Bullet </a>
+        <ul id="" class="right hide-on-med-and-down">
+          <li>
+            <a href="#">Login with Facebook</a>
+          </li>
+          <li>
+            <a href="https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA">Download</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+  </header>
+
+  <main>
+    <div class="container bsa">
+      <div class="row">
+        <div class="col s12 m12">
+          <div class="card" id="card_container">
+            <!-- <div class="card-content white-text">
+              <div class="row">
+                <div class="col s3" style="margin-top: 5px;">
+                  <i class="medium material-icons emoji brand-logo">sentiment_dissatisfied</i>
+                </div>
+                <div class="col s6">
+                  <h4 class="grey-text text-darken-4 title center-align card-title truncate"></h4>
+                </div>
+                <div class="col s3" style="margin-top: 10px;">
+                  <a href="#modal" id="modal_btn"
+                    class="secondary-content  btn-floating waves-effect waves-light modal-trigger">
+                    <i class="small material-icons">edit</i>
+                  </a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s5"></div>
+                <div class="col s2">
+                  <img src="images/img_avatar.jpg" alt="" class="circle responsive-img">
+                </div>
+                <div class="col s5"></div>
+              </div>
+              <div class="row valign-wrapper">
+                <div class="col s2">
+                  <img src="images/img_avatar.jpg" alt="" class="circle responsive-img">
+                </div>
+                <div class="col s8 center-align">
+                  <img src="images/img_avatar.jpg" alt="" class="circle responsive-img">
+                </div>
+                <div class="col s2">
+                  <img src="images/img_avatar.jpg" alt="" class="circle responsive-img">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s5"></div>
+                <div class="col s2">
+                  <img src="images/img_avatar.jpg" alt="" class="circle responsive-img">
+                </div>
+                <div class="col s5"></div>
+              </div>
+              <div class="row">
+                <div class="card-tabs">
+                  <ul class="tabs tabs-fixed-width">
+                    <li class="tab">
+                      <a href="#memorable_div" class="blue white-text">Memorable</a>
+                    </li>
+                    <li class="tab">
+                      <a href="#comment_div" class="blue white-text">Comment</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-content black-text">
+                  <div id="memorable_div">
+                    <ul class="collection" id="memorable_ul"></ul>
+                  </div>
+
+                  <div id="comment_div">
+                    <ul class="collection" id="comment_ul"></ul>
+                    <div class="input-field">
+                      <i class="material-icons prefix send_comment">mode_edit</i>
+                      <textarea id="comment_txt" class="materialize-textarea"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <h4>
+              <input type="text" id="modal_header" class="center-align">
+            </h4>
+            <div class="row">
+              <div class="input-field">
+                <div class="row">
+                  <label class="" for="memorable_txt">Write here something memorable.</label>
+                </div>
+                <div class="row">
+                  <textarea id="memorable_txt" class="materialize-textarea border-box focused"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row s10">
+              <div class="col m2">
+                <i class="emoji_icon small material-icons">sentiment_dissatisfied</i>
+              </div>
+              <div class="col m2">
+                <i class="emoji_icon small material-icons">sentiment_neutral</i>
+              </div>
+              <div class="col m2">
+                <i class="emoji_icon small material-icons">sentiment_satisfied</i>
+              </div>
+              <div class="col m2">
+                <i class="emoji_icon small material-icons">sentiment_very_dissatisfied</i>
+              </div>
+              <div class="col m2">
+                <i class="emoji_icon small material-icons">sentiment_very_satisfied</i>
+              </div>
+            </div>
+            <div class="row ">
+              <div class="col m2">
+                <i class="small material-icons">content_copy</i>
+              </div>
+              <div class="col m2">
+                <i class="small material-icons">swap_calls</i>
+              </div>
+              <div class="col m2">
+                <i class="small material-icons">call_made</i>
+              </div>
+              <div class="col m2">
+                <i class="small material-icons">call_received</i>
+              </div>
+              <div class="col m2">
+                <i class="small material-icons" aria-disabled="true">mode_edit</i>
+              </div>
+              <div class="col m2">
+                <i class="small material-icons" aria-disabled="true">print</i>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="save">Save</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="close">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="page-footer blue">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Instruction</h5>
+          <p class="grey-text text-lighten-4">To use this app properly, you will need the chrome extension.</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Links</h5>
+          <ul>
+            <li>
+              <a class="grey-text text-lighten-3" href="#!">Download chrome extension</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <p class="grey-text text-lighten-4">Nicolson D'souza</p>
+      <p class="grey-text text-lighten-4">
+        <a class="waves-effect waves-light btn blue darken-4">Logout</a>
+      </p>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        © 2019 Copyright Youiest LLC
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

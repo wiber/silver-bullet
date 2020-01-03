@@ -1,0 +1,25 @@
+React = require 'react'
+Slider = require('material-ui/lib/Slider').default
+# https://v0.material-ui.com/v0.15.0/#/components/slider
+
+exports.Slider = React.createClass
+  onChangeWeight: (event, value) ->
+    this.setState({weight: value})
+    if this.props.onChangeWeight
+      this.props.onChangeWeight(event, value)
+  render: ->
+    onChangeWeight = this.onChangeWeight.bind(this)
+    div
+      className: 'xyz'
+      React.createElement Slider,
+        onFocus: () ->
+          try
+            window.to.refs.selecters.focus()
+          catch error
+        min: 0,
+        max: 9,
+        step: 1,
+        defaultValue: @props.weight#this.state.weight,
+        onChange: onChangeWeight
+        value: @props.weight
+#{}"Your weight is " +this.state.weight

@@ -3,10 +3,15 @@ scalars =
   fontScale: -> 1
   goldenRatio: -> ((1 + Math.sqrt(5)) / 2)
   screenshotWidth: 250
+measurements =
+  D: 300
+  d: 4
+  M: 100
   boxWidth: 640
 
 style =
   scalars: scalars
+  measurements: measurements
   base:
     #background: 'rgba(54, 99, 25, 0.05)'
     height: '100%'

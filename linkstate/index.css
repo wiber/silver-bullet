@@ -14,7 +14,7 @@ body {
 }
 .columnR {
     float: left;
-    width: 400px;
+    width: 600px;
     padding: 10px;
 }
 /* Clear floats after the columns */
