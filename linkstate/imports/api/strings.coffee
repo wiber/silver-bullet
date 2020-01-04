@@ -259,7 +259,8 @@ linkstate.getBookmarkValue = (user, plainUrl) ->
   console.log path
   BookmarkValue = _.get user, 'links.in.'+linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)+'.'+dotlessUrl
   if !BookmarkValue
-    console.log {plainUrl}, 'exist not in', user.links#.in # broke the whole app on new user
+    #.in # broke the whole app on new user
+    console.log {plainUrl}, 'exist not in', user.links,_.get user, 'links.in'
   BookmarkValue
 # why isn't the call updating the bookmark list? we need a specialised layer talking to an api?
 linkstate.getAllBookmarksDict = (user) ->

@@ -84,7 +84,6 @@ exports.Login = React.createClass
           rel: "noreferrer"
           "Next 1) download this chrome extension 2) unzip it 3) go to chrome://extensions 4) enable developer mode and load unpacked extension"
 
-
     else
       div
         className: 'container'
