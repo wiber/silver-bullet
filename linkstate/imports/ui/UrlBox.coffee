@@ -63,8 +63,8 @@ UrlBox = React.createClass
           "from": that.props.from
           "measurements": measurements
         }
-        if !that.props.ScreenshotUrl #D.drawTheOther, N.allLinks[D.drawTheOther],
-          console.log 'no screenshoturl here', D.m.FromLink, D.m.ToLink #,that.props,
+        #if !that.props.ScreenshotUrl #D.drawTheOther, N.allLinks[D.drawTheOther],
+        #  console.log 'no screenshoturl here', D.m.FromLink, D.m.ToLink #,that.props,
         for directedBunch of U.directionUserMeta
           for userVectorName of U.directionUserMeta[directedBunch]
             counted++

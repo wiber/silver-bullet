@@ -278,6 +278,7 @@ wingMark = React.createClass
               "width": D/d
               "height": D/d
             "tooltip": that.props.meta.body
+            touch: true
             "tooltipPosition": 'top-right'
             "className": 'YourMarks'
           },

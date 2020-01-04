@@ -255,6 +255,28 @@ sortByKeysTime = (dict, many) ->
   toReturn = Object.keys(dict).sort (a, b) ->
     dict[b].createdAt - (dict[a].createdAt)
   toReturn[..many]
+
+getFiveLatestBookmarks = (user, number)  ->
+  bookmarkDict = linkstate.getAllBookmarksDict user
+  sortedKeys = sortByKeysTime bookmarkDict
+  newestBookmarks = sortByKeysTime(bookmarkDict,5)
+  count = 0
+  number = number or 5
+  position = 0
+  arrSorted = []
+  while count < number
+    thisKey = sortedKeys[position]
+    if thisKey != 'undefined'
+      node = bookmarkDict[thisKey]
+      arrSorted.push(node)
+      count++
+      position++
+    else
+      position++
+    break if position > 10*number
+  #console.log arrSorted#, count, bookmarkDict[sortedKeys[count]]
+  return arrSorted
+exports.getFiveLatestBookmarks = getFiveLatestBookmarks
 Gt= {}
 exports.gt = Gt
 exports.sortByKeysTime = sortByKeysTime
