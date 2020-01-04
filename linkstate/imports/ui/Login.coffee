@@ -82,7 +82,7 @@ exports.Login = React.createClass
           href: "https://drive.google.com/open?id=1sS_aKc6q1COs7yxP8hiKfW5UTVAP_X1a"
           target: "_blank"
           rel: "noreferrer"
-          "Next 1) download the chrome extension 2) unzip it 3) go to chrome://extensions 4) enable developer mode and load unpacked extension"
+          "Next 1) download this chrome extension 2) unzip it 3) go to chrome://extensions 4) enable developer mode and load unpacked extension"
 
 
     else
