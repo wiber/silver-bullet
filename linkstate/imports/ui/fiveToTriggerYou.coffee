@@ -3,6 +3,7 @@ IconButton = require('material-ui/lib/icon-button').default #@material-ui/core/I
 RaisedButton = require('material-ui/lib/raised-button').default
 TextField = require('material-ui/lib/TextField').default
 Avatar = require('material-ui/lib/avatar').default # @material-ui/core/Avatar not working
+{changeQueryParams, changeQueryParamsObject} = require('../api/changeQueryParams.coffee')
 
 {div, br, span,a,img} = React.DOM
 R = require 'ramda'
@@ -30,9 +31,13 @@ exports.fiveToTriggerYou = React.createClass
           React.createElement IconButton,
             tooltip: _.get N, 'title'
             touch: true
+            from: N.from
             style:
               width: "20%"
               left: "-20%"
+            onClick: (e) ->
+              changeQueryParamsObject
+                to: @from
             React.createElement Avatar,
               size: 200
               src: ScreenshotUrl
