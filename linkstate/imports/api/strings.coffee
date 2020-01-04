@@ -145,6 +145,13 @@ linkstate.sortByKeys = (dict, many) ->
   toReturn[..many]
 
 linkstate.sortByKeysTime = (dict, many) ->
+
+  if !dict
+    console.log 'dict is nothing!',dict
+    return {}
+  console.log typeof(Object.keys(dict)),{dict},Object.keys(dict)
+  if typeof(Object.keys(dict)) is not "object"
+    return {}
   toReturn = Object.keys(dict).sort (a, b) ->
     dict[b].createdAt - (dict[a].createdAt)
   toReturn[..many]
@@ -252,7 +259,7 @@ linkstate.getBookmarkValue = (user, plainUrl) ->
   console.log path
   BookmarkValue = _.get user, 'links.in.'+linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)+'.'+dotlessUrl
   if !BookmarkValue
-    console.log {plainUrl}, 'exist not in', user.links.in
+    console.log {plainUrl}, 'exist not in', user.links#.in # broke the whole app on new user
   BookmarkValue
 # why isn't the call updating the bookmark list? we need a specialised layer talking to an api?
 linkstate.getAllBookmarksDict = (user) ->
@@ -283,6 +290,7 @@ linkstate.getTheScreenshot = (node) ->
   unless !node
     return R.prop 'meta.ScreenshotUrl', node
 
+linkstate.mustPointSomewhere = (user ) ->
 
 
 

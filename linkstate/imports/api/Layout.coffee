@@ -4,7 +4,8 @@ language = 'eng'
 {Layout} = require '../ui/Layout.coffee'
 {changeQueryParams,changeQueryParamsObject} = require('../api/ModelOperations.coffee')
 #{URI} = require 'urijs'
-{newPlace, ifBodyContentHere, userSaved, simpleUrl, hereAndThere,hereToThereMeta,theModel} = require '../api/ModelOperations'
+{newPlace,
+ifBodyContentHere, userSaved, simpleUrl, hereAndThere,hereToThereMeta,theModel} = require '../api/ModelOperations'
 
 { Meteor } = require 'meteor/meteor'
 {linkstate} = require '../api/strings'
@@ -53,7 +54,7 @@ containerLayout = createContainer ((props) ->
   else
     thumbalizr = undefined
   #content = ifBodyContentHere queryParams.content, queryParams, user
-  console.log {user,from},!!from,{from,to,bookmarked,lastTitle}
+  console.log {user,from},!!from,{from,to,bookmarked,lastTitle},!!user.services,"!!user.services,"
   # TODO rewrite this so the default case is to use the meteor user to set params
   # over write with params if they exist
   # figure out if the app was loaded by copying the url... how?
