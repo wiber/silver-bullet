@@ -245,8 +245,19 @@ changeQueryParamsObject = (changes) ->
     exports.changeQueryParams key, value
 screenshotUrlHere = (user, from) ->
   R.prop user, 'links.in.Bookmarks'+linkstate.store(from)+'meta.ScreenshotUrl'
+sortByKeysTime = (dict, many) ->
+  if !dict
+    console.log 'dict is nothing!',dict
+    return {}
+  #console.log typeof(Object.keys(dict)),{dict},Object.keys(dict)
+  if typeof(Object.keys(dict)) is not "object"
+    return {}
+  toReturn = Object.keys(dict).sort (a, b) ->
+    dict[b].createdAt - (dict[a].createdAt)
+  toReturn[..many]
 Gt= {}
 exports.gt = Gt
+exports.sortByKeysTime = sortByKeysTime
 exports.changeQueryParamsObject= changeQueryParamsObject
 exports.changeQueryParams = changeQueryParams
 exports.hereAndThere = hereAndThere
