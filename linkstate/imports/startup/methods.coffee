@@ -49,7 +49,7 @@ Meteor.methods
   getStaticNode: (id) ->
 
     node = Nodes.findOne(linkstate.store(id))
-    console.log id, Meteor.isClient, 'client get staticNode', node
+    #console.log id, Meteor.isClient, 'client get staticNode', node
     return node
   # create a ling when we navigate in the app -
   # from : me to: origin
@@ -63,7 +63,7 @@ Meteor.methods
   Linking: ({from, to, meta}) ->
     prevSet = Meteor.user()?.links?.in?[to]?[from]?
     userId = Meteor.userId()
-    console.log {from},from?, !!from, !!!from
+    #console.log {from},from?, !!from, !!!from
     if !!!from
       throw new Meteor.Error 'must be from someplace',
         {arguments}
@@ -88,7 +88,7 @@ Meteor.methods
     if Meteor.user()?.links?.in?.Bookmarks?[linkstate.store from]?.meta?.title?
       titleOfTarget = Meteor.user().links.in.Bookmarks[linkstate.store from].meta.title
       console.log {titleOfTarget}
-    console.log {META}
+    #console.log {META}
     unless META.title?
       if titleOfTarget?
         META.title = titleOfTarget
@@ -141,7 +141,7 @@ Meteor.methods
       thumb_width: 320
       format: 'png'
       quality: 80
-    console.log edge.meta, 'with url box screenshots'
+    #console.log edge.meta, 'with url box screenshots'
     edge.author = Meteor.userId()
     edge.createdAt = time
     if Meteor.user()?.profile?.name?
@@ -162,7 +162,7 @@ Meteor.methods
     userUpdateObject = {}
     userUpdateObject.edited = time
     # we want to link on newtab but not have from and to the same..
-    console.log categoryTypes,"categoryTypes"
+    #console.log categoryTypes,"categoryTypes"
     if categoryTypes? and from not of categoryTypes
       userUpdateObject.fromLast = from
     if to not of categoryTypes

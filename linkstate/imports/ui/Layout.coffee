@@ -129,7 +129,7 @@ exports.Layout = React.createClass
         div
 
           if that.props.user?.services?#.facebook? or that.props.user?.services?.password?
-            console.log {that}
+            #console.log {that}
             React.createElement MainCard,
               #{}"expanded": that.props.expandMainCard
               "to": that.props.to

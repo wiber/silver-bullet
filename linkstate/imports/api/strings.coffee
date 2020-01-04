@@ -149,7 +149,7 @@ linkstate.sortByKeysTime = (dict, many) ->
   if !dict
     console.log 'dict is nothing!',dict
     return {}
-  console.log typeof(Object.keys(dict)),{dict},Object.keys(dict)
+  #console.log typeof(Object.keys(dict)),{dict},Object.keys(dict)
   if typeof(Object.keys(dict)) is not "object"
     return {}
   toReturn = Object.keys(dict).sort (a, b) ->

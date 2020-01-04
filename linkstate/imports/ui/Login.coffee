@@ -64,7 +64,7 @@ exports.Login = React.createClass
     style = {
       margin: 2
     }
-    console.log {@props},@props.props.user?
+    #console.log {@props},@props.props.user?
     if @props?.user?.services?#@state.isLoggedIn # @props?.props?.user
       div
         className: 'container'
@@ -79,7 +79,7 @@ exports.Login = React.createClass
                 onMouseDown: @onLogout
               }
         a
-          href: "https://drive.google.com/open?id=1sS_aKc6q1COs7yxP8hiKfW5UTVAP_X1a"
+          href: "https://drive.google.com/open?id=16L1927q4yEmSb6j-LHUC7K92vv_CFpDW"
           target: "_blank"
           rel: "noreferrer"
           "Next 1) download this chrome extension 2) unzip it 3) go to chrome://extensions 4) enable developer mode and load unpacked extension"

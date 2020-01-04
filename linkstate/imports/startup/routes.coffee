@@ -16,7 +16,7 @@ FlowRouter.route '/about',
       property: "og:title",
       content: title
     document.title = title
-    console.log {title,queryParams},document.title, document.getElementsByTagName('meta')[0]
+    #console.log {title,queryParams},document.title, document.getElementsByTagName('meta')[0]
     mount containerLayout,
       queryParams: queryParams # to optiomize redraw on changed params
     # if Meteor.userId()

@@ -158,7 +158,7 @@ userSaved = (userE, queryParams, client) ->
       time = (window.sub - window.saved)
       console.log time, 'ms of your load time saved by using localStorage'
     user = userE
-  console.log {userE,queryParams,client,user}
+  #console.log {userE,queryParams,client,user}
   # sideffect but a good place to make sure we're not without direction
   for type in ['from', 'to']
     if queryParams[type] is undefined

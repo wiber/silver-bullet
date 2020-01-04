@@ -54,7 +54,7 @@ containerLayout = createContainer ((props) ->
   else
     thumbalizr = undefined
   #content = ifBodyContentHere queryParams.content, queryParams, user
-  console.log {user,from},!!from,{from,to,bookmarked,lastTitle},!!user.services,"!!user.services,"
+  #console.log {user,from},!!from,{from,to,bookmarked,lastTitle},!!user.services,"!!user.services,"
   # TODO rewrite this so the default case is to use the meteor user to set params
   # over write with params if they exist
   # figure out if the app was loaded by copying the url... how?

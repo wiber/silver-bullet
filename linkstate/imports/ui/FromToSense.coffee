@@ -45,7 +45,6 @@ TextAbout = React.createClass
     # weight is between 0 and 9
     META = _.extend content,
       title: @props.lastTitle
-    console.log {content,META},@props.lastTitle, "META"
     payload =
       from: FlowRouter.getQueryParam('from')
       to: FlowRouter.getQueryParam('to')
@@ -60,6 +59,7 @@ TextAbout = React.createClass
         else
           console.log 'no result?', result
   onChangeWeight: (event, value)->
+    console.log {event,value}
     this.onUpdate(value);
 
   render: ->
