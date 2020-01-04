@@ -61,9 +61,9 @@ Meteor.methods
   # model updates page
   # we don't change queryParams to update page.. bad pattern!
   Linking: ({from, to, meta}) ->
+    user = Meteor.user()
     prevSet = Meteor.user()?.links?.in?[to]?[from]?
     userId = Meteor.userId()
-    #console.log {from},from?, !!from, !!!from
     if !!!from
       throw new Meteor.Error 'must be from someplace',
         {arguments}
@@ -103,7 +103,7 @@ Meteor.methods
         console.log 'Linking'
         , prevSet
         #, to not in categoryTypes
-        , Meteor.user().to
+        #, Meteor.user().to
         , META.title
         , from
         , META.weight
