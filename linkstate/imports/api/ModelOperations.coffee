@@ -262,15 +262,11 @@ getFiveTargets = (user, number) ->
   targets = Object.keys(user.links.out)
   targetDict = {}
   for fromLink, toLinkDict of user.links.in
-    #console.log {fromLink,toLinkDict}
     sortedKeysToDict = sortByKeysTime toLinkDict
     firstLink = _.get toLinkDict, sortedKeysToDict[0]
-    unless !firstLink
-      if linkstate.store(catTree.categoryUrls.Bookmarks) is fromLink
-        console.log catTree.categoryUrls.Bookmarks, {fromLink},"noo need for bookmarks to be last project"
-      else
+    if !!firstLink
+      unless fromLink is linkstate.store(catTree.categoryUrls.Bookmarks)
         targetDict[fromLink] = firstLink
-  #sortedKeys = sortByKeysTime sortedKeysToDict
   sortedKeys = sortByKeysTime targetDict
   count = 0
   number = number or 5
