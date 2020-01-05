@@ -18,30 +18,34 @@ exports.fiveToTriggerYou = React.createClass
     if @props?.user?.services?#@state.isLoggedIn # @props?.props?.user
       div
         className: 'container'
-        for N in getFiveTargets(@props.user,5)
-          console.log N
-          counter++
-          ScreenshotUrl = _.get(N,'meta.ScreenshotUrlTo')
-          #console.log N,ScreenshotUrl,counter
-          React.createElement IconButton,
-            tooltip: _.get N, 'meta.ToLink'
-            tooltipStyles:
-              top: -50
-              position: "absolute"
-            touch: true
-            to: N.to
-            style:
-              width: "20%"
-              left: "-20%"
-              zIndex: 5-counter
-            onClick: (e) ->
-              changeQueryParamsObject
-                to: @to
-            React.createElement Avatar,
-              size: 200
-              src: ScreenshotUrl
-              position: "relative"
-              float: "left"
+        style:
+          position: 'relative'
+        div
+          for N in getFiveTargets(@props.user,5)
+            console.log N
+            counter++
+            ScreenshotUrl = _.get(N,'meta.ScreenshotUrlTo')
+            #console.log N,ScreenshotUrl,counter
+            React.createElement IconButton,
+              tooltip: _.get N, 'meta.ToLink'
+              tooltipStyles:
+                top: -5
+                position: "absolute"
+              tooltipPosition: "top-right"
+              touch: true
+              to: N.to
+              style:
+                width: "20%"
+                left: "-20%"
+                zIndex: 5-counter
+              onClick: (e) ->
+                changeQueryParamsObject
+                  to: @to
+              React.createElement Avatar,
+                size: 200
+                src: ScreenshotUrl
+                position: "relative"
+                float: "left"
         # should be replaced by last active tabs from extensions
         # the array of you bouncing around between steps
         # take
