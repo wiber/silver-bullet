@@ -255,6 +255,48 @@ sortByKeysTime = (dict, many) ->
   toReturn = Object.keys(dict).sort (a, b) ->
     dict[b].createdAt - (dict[a].createdAt)
   toReturn[..many]
+getFiveTargets = (user, number) ->
+  # this requires double for looplist
+  # it's [from][to][node] so two(three) levels deep.
+  number = number or 5
+  targets = Object.keys(user.links.out)
+  targetDict = {}
+  for fromLink, toLinkDict of user.links.in
+    #console.log {fromLink,toLinkDict}
+    for toLink, node of toLinkDict
+      T = _.get node, 'createdAt'# or 9999999999999
+      # doesn't work why?
+      Exist = targetDict[fromLink]
+      Lexist =_.get targetDict, fromLink.toString()
+      unless targetDict[fromLink]
+        targetDict[fromLink] = node
+      existNow = targetDict[fromLink]
+      LexistNow =_.get targetDict, fromLink
+      # if there's NO T here, this is broken
+      # console.log LexistNow.createdAt > T, 8>undefined
+      if LexistNow.createdAt > T
+        targetDict[fromLink] = node
+        # cut out the middle tier
+        # this is the most recent node
+        #console.log {T,Exist,existNow,LexistNow,targetDict,fromLink,toLink,node,Lexist}
+  sortedKeys = sortByKeysTime targetDict
+  count = 0
+  number = number or 5
+  position = 0
+  arrSorted = []
+  while count < number
+    thisKey = sortedKeys[position]
+    if thisKey != 'undefined'
+      node = targetDict[thisKey]
+      arrSorted.push(node)
+      count++
+      position++
+    else
+      position++
+    break if position > 10*number
+  #console.log arrSorted#, count, bookmarkDict[sortedKeys[count]]
+  return arrSorted
+
 
 getFiveLatestBookmarks = (user, number)  ->
   bookmarkDict = linkstate.getAllBookmarksDict user
@@ -277,6 +319,7 @@ getFiveLatestBookmarks = (user, number)  ->
   #console.log arrSorted#, count, bookmarkDict[sortedKeys[count]]
   return arrSorted
 exports.getFiveLatestBookmarks = getFiveLatestBookmarks
+exports.getFiveTargets = getFiveTargets
 Gt= {}
 exports.gt = Gt
 exports.sortByKeysTime = sortByKeysTime

@@ -256,7 +256,7 @@ BookmarkPath = 'links.in.'+linkstate.store(linkstate.catTree.categoryUrls.Bookma
 linkstate.getBookmarkValue = (user, plainUrl) ->
   dotlessUrl = linkstate.store plainUrl
   path = 'links.in.'+linkstate.catTree.categoryUrls.Bookmarks+'.'+plainUrl
-  console.log path
+  #console.log path
   BookmarkValue = _.get user, 'links.in.'+linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)+'.'+dotlessUrl
   if !BookmarkValue
     #.in # broke the whole app on new user

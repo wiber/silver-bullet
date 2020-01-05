@@ -7,7 +7,7 @@ Avatar = require('material-ui/lib/avatar').default # @material-ui/core/Avatar no
 
 {div, br, span,a,img} = React.DOM
 R = require 'ramda'
-{getFiveLatestBookmarks} = require '../api/ModelOperations'
+{getFiveLatestBookmarks, getFiveTargets} = require '../api/ModelOperations'
 _ = require 'lodash'
 exports.fiveToTriggerYou = React.createClass
   render: ->
@@ -23,11 +23,33 @@ exports.fiveToTriggerYou = React.createClass
             div
               className: ''
               # best to do this as a carousel - but more libs and complexity..
-
+        for N in getFiveTargets(@props.user,5)
+          console.log N
+          counter++
+          ScreenshotUrl = _.get(N,'meta.ScreenshotUrlTo')
+          #console.log N,ScreenshotUrl,counter
+          React.createElement IconButton,
+            tooltip: _.get N, 'meta.ToLink'
+            touch: true
+            to: N.to
+            style:
+              width: "20%"
+              left: "-20%"
+            onClick: (e) ->
+              changeQueryParamsObject
+                to: @to
+            React.createElement Avatar,
+              size: 200
+              src: ScreenshotUrl
+              position: "relative"
+              float: "left"
+        # should be replaced by last active tabs from extensions
+        # the array of you bouncing around between steps
+        # take
         for N in getFiveLatestBookmarks(@props.user, number)
           counter++
           ScreenshotUrl = _.get(N,'meta.ScreenshotUrl')
-          console.log N,ScreenshotUrl,counter
+          #console.log N,ScreenshotUrl,counter
           React.createElement IconButton,
             tooltip: _.get N, 'title'
             touch: true
