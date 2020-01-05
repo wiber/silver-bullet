@@ -13,14 +13,11 @@ exports.fiveToTriggerYou = React.createClass
   render: ->
     counter = 0
     number = 5
-    style =
-      margin: 0
     if @props?.user?.services?#@state.isLoggedIn # @props?.props?.user
       div
         className: 'container'
         div
           for N in getFiveTargets(@props.user,5)
-            console.log N
             counter++
             ScreenshotUrl = _.get(N,'meta.ScreenshotUrlTo')
             #console.log N,ScreenshotUrl,counter

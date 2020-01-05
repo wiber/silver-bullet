@@ -263,22 +263,14 @@ getFiveTargets = (user, number) ->
   targetDict = {}
   for fromLink, toLinkDict of user.links.in
     #console.log {fromLink,toLinkDict}
-    for toLink, node of toLinkDict
-      T = _.get node, 'createdAt'# or 9999999999999
-      # doesn't work why?
-      Exist = targetDict[fromLink]
-      Lexist =_.get targetDict, fromLink.toString()
-      unless targetDict[fromLink]
-        targetDict[fromLink] = node
-      existNow = targetDict[fromLink]
-      LexistNow =_.get targetDict, fromLink
-      # if there's NO T here, this is broken
-      # console.log LexistNow.createdAt > T, 8>undefined
-      if LexistNow.createdAt > T
-        targetDict[fromLink] = node
-        # cut out the middle tier
-        # this is the most recent node
-        #console.log {T,Exist,existNow,LexistNow,targetDict,fromLink,toLink,node,Lexist}
+    sortedKeysToDict = sortByKeysTime toLinkDict
+    firstLink = _.get toLinkDict, sortedKeysToDict[0]
+    unless !firstLink
+      if linkstate.store(catTree.categoryUrls.Bookmarks) is fromLink
+        console.log catTree.categoryUrls.Bookmarks, {fromLink},"noo need for bookmarks to be last project"
+      else
+        targetDict[fromLink] = firstLink
+  #sortedKeys = sortByKeysTime sortedKeysToDict
   sortedKeys = sortByKeysTime targetDict
   count = 0
   number = number or 5
