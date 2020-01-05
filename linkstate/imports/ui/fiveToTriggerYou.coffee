@@ -18,8 +18,6 @@ exports.fiveToTriggerYou = React.createClass
     if @props?.user?.services?#@state.isLoggedIn # @props?.props?.user
       div
         className: 'container'
-        style:
-          position: 'relative'
         div
           for N in getFiveTargets(@props.user,5)
             console.log N
@@ -37,7 +35,6 @@ exports.fiveToTriggerYou = React.createClass
               style:
                 width: "20%"
                 left: "-20%"
-                zIndex: 5-counter
               onClick: (e) ->
                 changeQueryParamsObject
                   to: @to
