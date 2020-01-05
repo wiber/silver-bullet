@@ -18,11 +18,6 @@ exports.fiveToTriggerYou = React.createClass
     if @props?.user?.services?#@state.isLoggedIn # @props?.props?.user
       div
         className: 'container'
-          div
-            className: 'row'
-            div
-              className: ''
-              # best to do this as a carousel - but more libs and complexity..
         for N in getFiveTargets(@props.user,5)
           console.log N
           counter++
@@ -30,11 +25,15 @@ exports.fiveToTriggerYou = React.createClass
           #console.log N,ScreenshotUrl,counter
           React.createElement IconButton,
             tooltip: _.get N, 'meta.ToLink'
+            tooltipStyles:
+              top: -50
+              position: "absolute"
             touch: true
             to: N.to
             style:
               width: "20%"
               left: "-20%"
+              zIndex: 5-counter
             onClick: (e) ->
               changeQueryParamsObject
                 to: @to
@@ -46,6 +45,7 @@ exports.fiveToTriggerYou = React.createClass
         # should be replaced by last active tabs from extensions
         # the array of you bouncing around between steps
         # take
+        ###
         for N in getFiveLatestBookmarks(@props.user, number)
           counter++
           ScreenshotUrl = _.get(N,'meta.ScreenshotUrl')
@@ -61,7 +61,8 @@ exports.fiveToTriggerYou = React.createClass
               changeQueryParamsObject
                 to: @from
             React.createElement Avatar,
-              size: 200
+              size: 100
               src: ScreenshotUrl
               position: "relative"
               float: "left"
+###
