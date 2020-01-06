@@ -13,6 +13,7 @@ exports.fiveToTriggerYou = React.createClass
   render: ->
     counter = 0
     number = 5
+    # TODO multistep process to valudate the user setupUser - user obj flag ie user.setup
     if @props?.user?.services?#@state.isLoggedIn # @props?.props?.user
       div
         className: 'container'

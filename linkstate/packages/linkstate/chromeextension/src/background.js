@@ -32,6 +32,7 @@ oneSteps = function ( tab) {
      console.log(tab.title,'oneSteps',pageTabStep)
   } else {
     //console.log( url, title );
+    // in a fit of rage as the chrome api must have been updated we now do globals
     window.page = {
       'last': {
           'url': url,
@@ -39,8 +40,8 @@ oneSteps = function ( tab) {
       }
     }
 
-    chrome.storage.sync.set({last:page.last})
-
+    chrome.storage.sync.set({last:window.page})
+    window.lastTabHighlighted.unshift(window.page)
     try {
       //console.log(chrome.storage.sync.get(['last']));
     } catch (e) {
@@ -59,18 +60,20 @@ chrome.tabs.onHighlighted.addListener( function ( highlightInfo ) {
     //console.log(tab.title);
     console.log('onHighlighted',tab,tab.title,window.lastTabHighlighted);
     //window.lastTabHighlighted.unshift(tab)
-    window.lastTabHighlighted.unshift(tab)
+    window.lastTabHighlighted.push(tab)
     oneSteps(tab)
   } )
 } );
 
 chrome.tabs.onUpdated.addListener( function ( tabId, changeInfo, tab ) {
-
+  console.log('onUpdated',tab,tab.title,window.lastTabHighlighted);
+  //window.lastTabHighlighted.unshift(tab)
+  oneSteps(tab)
   if (tab.id == window.lastTabHighlighted.id) {
     console.log('this tab was highlighted last',tab.title);
    // oneSteps( tab.url , tab.title);
   } else {
-    //console.log('onUpdated but not last highlighted',tab.title,tab);
+    console.log('onUpdated but not last highlighted',tab.title);
   }
 
 } );
