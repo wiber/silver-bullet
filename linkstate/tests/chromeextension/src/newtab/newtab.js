@@ -38,6 +38,7 @@ frameit = function(lastPlace) {
       queryParams.from = lastPlace.url
       queryParams.lastTitle = lastPlace.title //.replace(/[\-_.!~*'()]/g,"_")
       queryParams.lastTabHighlighted = JSON.stringify(lastPlace.lastTabHighlighted.slice(0,15))
+      //queryParams.lastTabHighlighted = lastPlace.lastTabHighlighted.slice(0,15)
       //queryParams.lastTabHighlighted = window.background.lastTabHighlighted
       qp = toQueryString(queryParams)
       src = websiteURL + qp

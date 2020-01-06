@@ -51,6 +51,13 @@ exports.Layout = React.createClass
         (d.head or d.body).appendChild s
         window.disqusLoaded = true
         return
+    return
+  componentDidMount: ->
+    script = document.createElement('script')
+    script.src = "//decivote.disqus.com/count.js"
+    script.async = true
+    script.id = "dsq-count-scr"
+    document.body.appendChild script
     window.resetDisqus = (newIdentifier, newUrl, newTitle, newLanguage) ->
       console.log 'DISQUS reload',{newIdentifier, newUrl, newTitle, newLanguage}
       DISQUS.reset
@@ -68,13 +75,6 @@ exports.Layout = React.createClass
           this.page.url
           this.page.category_id
           ###
-    return
-  componentDidMount: ->
-    script = document.createElement('script')
-    script.src = "//decivote.disqus.com/count.js"
-    script.async = true
-    script.id = "dsq-count-scr"
-    document.body.appendChild script
   render: ->
     that = this
 
