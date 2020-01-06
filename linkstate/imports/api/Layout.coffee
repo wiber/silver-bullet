@@ -11,7 +11,13 @@ ifBodyContentHere, userSaved, simpleUrl, hereAndThere,hereToThereMeta,theModel} 
 {linkstate} = require '../api/strings'
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
-  {from,to,bookmarked,lastTitle} = queryParams
+  {from,to,bookmarked,lastTitle,lastTabHighlighted} = queryParams
+  try
+    lastTabHighlighted = JSON.parse(lastTabHighlighted)
+  catch error
+    console.log error
+
+  console.log {lastTabHighlighted}
   # store and use localStorage user untill user() received from server
   if Meteor.isClient
     Tracker.autorun ->
