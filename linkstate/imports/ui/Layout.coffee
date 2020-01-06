@@ -65,7 +65,7 @@ exports.Layout = React.createClass
         config: ->
           @page.identifier = newIdentifier
           @page.url = newUrl
-          @page.title = "Linkstates for "+document.title
+          @page.title = newTitle#{}"Linkstates for "+document.title
           console.log {@page,DISQUS,'loading DISQUS'}
           #@language = newLanguage
           ###

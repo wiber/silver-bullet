@@ -30,11 +30,10 @@ Selected = React.createClass
     # #reactKup (k) ->
     div
       ref: 'dadiv'
-      "style": {
+      style:
         "overflow": 'hidden'
         "textOverflow": "ellipsis"
         "whiteSpace": "nowrap"
-      }
       #if  that.props.value.label is 'string' # undefined first time?
       React.createElement SimpleSelect,{
         "maxValues": 1

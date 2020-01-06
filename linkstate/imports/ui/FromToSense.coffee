@@ -8,7 +8,7 @@ selectedContainer = require('../api/Selected.coffee').selectedContainer
 # {see} = require '../api/strings.coffee'
 TextField = require('material-ui/lib/TextField').default #not working @material-ui/core/TextField
 {Slider} = require './Slider'
-
+{fiveToTriggerYou} = require '../ui/fiveToTriggerYou'
 
 {div, a,} = React.DOM
 
@@ -16,16 +16,19 @@ exports.FromToSense = React.createClass
   render: ->
     that = this
     div
-      "style": _.extend {}
+      style: _.extend {},
+        zIndex: 10000
       React.createElement TextAbout,
-        "word": that.props.word
-        "type": 'MainCardTextInput'
-        "content": that.props.content
+        word: that.props.word
+        type: 'MainCardTextInput'
+        content: that.props.content
         weight: @props.hereToThereObjWeight
+      React.createElement fiveToTriggerYou,
+        user: that.props.user
       div
-        "style":
-          "maxWidth": '100%'
-          "whiteSpace": "nowrap"
+        style:
+          maxWidth: '100%'
+          whiteSpace: "nowrap"
         React.createElement selectedContainer,
           "from": that.props.from
           "to": that.props.to
@@ -33,6 +36,8 @@ exports.FromToSense = React.createClass
           "user": that.props.user
           "word": that.props.word
           "type": 'to'
+          style: #_.extend {},
+            zIndex: 50
 
 TextAbout = React.createClass
   componentWillReceiveProps: ->

@@ -31,8 +31,10 @@ exports.fiveToTriggerYou = React.createClass
               touch: true
               to: N.to
               style:
+                marginTop: -50
                 width: "20%"
                 left: "-20%"
+                zIndex: 6-counter
               onClick: (e) ->
                 changeQueryParamsObject
                   to: @to

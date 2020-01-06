@@ -23,7 +23,7 @@ ToIcon =  require('material-ui/lib/svg-icons/communication/call-made').default #
 copy = require 'copy-to-clipboard'
 Lo = require 'lodash'
 {shadowMoon} = require '../ui/ShadowMoon'
-{fiveToTriggerYou} = require '../ui/fiveToTriggerYou'
+
 
 exports.MainCard = React.createClass
   getDefaultProps: ->
@@ -83,8 +83,6 @@ exports.MainCard = React.createClass
               "opacity": .5
               "position": 'absolute'
           }
-        React.createElement fiveToTriggerYou,
-          user: that.props.user
         React.createElement CardActions, {
           "style": _.extend {},
         },
