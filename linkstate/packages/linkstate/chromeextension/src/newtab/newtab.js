@@ -1,4 +1,4 @@
-websiteURL = "http://linkstate.youiest.com/about?"
+//websiteURL = "http://localhost:3000/about?"
 window.background = chrome.extension.getBackgroundPage(); //do this in global scope for popup.js
 //console.log(background.websiteURL);
 //console.log(background.background);
@@ -9,10 +9,12 @@ try {
   console.log(window.background.page.last, window.background.page.last.title)
   globalLast.url = window.background.page.last.url
   globalLast.title = window.background.page.last.title
+  globalLast.lastTabHighlighted = window.background.lastTabHighlighted.slice(1,8)
+  console.log(globalLast);
 } catch (e) {
 
 } finally {
-  //console.log({globalLast},'not pretty but works')
+  console.log(globalLast,'not pretty but works')
 }
 
 
@@ -35,15 +37,19 @@ frameit = function(lastPlace) {
       queryParams = {}
       queryParams.from = lastPlace.url
       queryParams.lastTitle = lastPlace.title //.replace(/[\-_.!~*'()]/g,"_")
+      queryParams.lastTabHighlighted = JSON.stringify(lastPlace.lastTabHighlighted)
+      //queryParams.lastTabHighlighted = lastPlace.lastTabHighlighted.slice(0,15)
+      //queryParams.lastTabHighlighted = window.background.lastTabHighlighted
       qp = toQueryString(queryParams)
       src = websiteURL + qp
+      console.log(src.length,' should be less than 2000')
       //console.log("queryParams", queryParams, src, lastPlace);
       iFrame = document.getElementById('linkstateframe')
       iFrame.src = src
     } catch (e) {
       console.log(e);
     } finally {
-
+      console.log(src)
     }
 
 }

@@ -13,11 +13,15 @@ containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   {from,to,bookmarked,lastTitle,lastTabHighlighted} = queryParams
   try
-    lastTabHighlighted = JSON.parse(lastTabHighlighted)
+    lastTabHighlighted = JSON.parse(decodeURIComponent lastTabHighlighted)
+    #lastTabHighlighted = decodeURIComponent lastTabHighlighted
+    if !!lastTabHighlighted
+      console.log {lastTabHighlighted}, typeof(lastTabHighlighted)
   catch error
-    console.log error
+    console.log error, lastTabHighlighted
+    lastTabHighlighted = {}
 
-  console.log {lastTabHighlighted}
+
   # store and use localStorage user untill user() received from server
   if Meteor.isClient
     Tracker.autorun ->

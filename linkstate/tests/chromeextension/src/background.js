@@ -28,6 +28,10 @@ oneSteps = function ( tab) {
   urlNT = "chrome://newtab/"
   pageTabStep = {url,title,pendingUrl}
   //console.log(page,pageTabStep,"oneSteps precondition")
+  if (window.lastTabHighlighted.length > 500) {
+    window.lastTabHighlighted= window.lastTabHighlighted.slice(0,400)
+    console.log('trimmed array',window.lastTabHighlighted.length);
+  } else { console.log('window.lastTabHighlighted.length is',window.lastTabHighlighted.length);}
   if ( url == urlNT || pendingUrl == urlNT ) {
      console.log(tab.title,'oneSteps',pageTabStep)
   } else {
@@ -36,18 +40,21 @@ oneSteps = function ( tab) {
     window.page = {
       'last': {
           'url': url,
-          'title': title
+          'title': title,
+
       }
     }
-
     chrome.storage.sync.set({last:window.page})
-    window.lastTabHighlighted.unshift(window.page)
+    justSendUrlAndTime = {}
+    justSendUrlAndTime.url = tab.url
+    justSendUrlAndTime.createdAt = new Date().getTime()
+    window.lastTabHighlighted.unshift(justSendUrlAndTime)
     try {
       //console.log(chrome.storage.sync.get(['last']));
     } catch (e) {
       console.log(e)
     } finally {
-
+      console.log(window.lastTabHighlighted[0]);
     }
   }
 }
@@ -60,13 +67,13 @@ chrome.tabs.onHighlighted.addListener( function ( highlightInfo ) {
     //console.log(tab.title);
     console.log('onHighlighted',tab,tab.title,window.lastTabHighlighted);
     //window.lastTabHighlighted.unshift(tab)
-    window.lastTabHighlighted.push(tab)
+    //window.lastTabHighlighted.push(tab)
     oneSteps(tab)
   } )
 } );
 
 chrome.tabs.onUpdated.addListener( function ( tabId, changeInfo, tab ) {
-  console.log('onUpdated',tab,tab.title,window.lastTabHighlighted.slice(0,15));
+  console.log('onUpdated',tab,tab.title,window.lastTabHighlighted);
   //window.lastTabHighlighted.unshift(tab)
   oneSteps(tab)
   if (tab.id == window.lastTabHighlighted.id) {
