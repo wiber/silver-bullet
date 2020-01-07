@@ -306,6 +306,9 @@ getFiveLatestBookmarks = (user, number)  ->
     break if position > 10*number
   #console.log arrSorted#, count, bookmarkDict[sortedKeys[count]]
   return arrSorted
+
+
+
 exports.getFiveLatestBookmarks = getFiveLatestBookmarks
 exports.getFiveTargets = getFiveTargets
 Gt= {}

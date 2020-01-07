@@ -31,15 +31,33 @@ stringedCallsExist = ({from, to, meta, userid}) ->
   return false
 Meteor.methods
   NewQueryParams: (queryParams) ->
+    #lastTabHighlighted = linkstate.lastTabHighlightedObjectify queryParams
+    updater = {}
+    try
+      lastTabHighlighted = JSON.parse(decodeURIComponent queryParams.lastTabHighlighted)
+      if !!lastTabHighlighted
+        for tabStep in lastTabHighlighted
+          updater[tabStep.url] =
+            from: tabStep.url
+            ScreenshotUrl: urlbox.buildUrl
+              url: tabStep.url
+            createdAt: tabStep.createdAt
+
+    catch error
+      console.log error,'uri bad', queryParams
+
     if Meteor.isClient
-      console.log Meteor.user(), queryParams
-    queryParamsState = queryParams
+      console.log Meteor.user(), {queryParams,lastTabHighlighted, updater}
+    queryParamsState =
+      lastQueryParams: queryParams
+      lastTabHighlighted: lastTabHighlighted
     Meteor.users.update
       _id: Meteor.userId()
     ,
-      $set: queryParamsState
+      $set: {queryParamsState}
       $inc:
         'qpUpdates': 1
+    return updater
   GroundedUserInsert: ->
     if Meteor.isClient and Meteor?.user()?.services?.facebook?
       localStorage.setItem 'latest', JSON.stringify(Meteor.user())

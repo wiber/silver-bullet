@@ -293,6 +293,21 @@ linkstate.getTheScreenshot = (node) ->
 
 linkstate.mustPointSomewhere = (user ) ->
 
+linkstate.lastTabHighlightedObjectify = (queryParams) ->
+  updater = {}
+  try
+    lastTabHighlighted = JSON.parse(decodeURIComponent queryParams.lastTabHighlighted)
+    if !!lastTabHighlighted
+      for tabStep in lastTabHighlighted
+        updater[tabStep.url] =
+          from: tabStep.url
+          ScreenshotUrl: urlbox.buildUrl
+            url: tabStep.url
+          createdAt: tabStep.createdAt
+
+  catch error
+    console.log error,'uri bad', queryParams
+
 
 
 #linkstate = {} if !linkstate?

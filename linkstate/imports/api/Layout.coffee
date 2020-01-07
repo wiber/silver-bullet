@@ -9,8 +9,18 @@ ifBodyContentHere, userSaved, simpleUrl, hereAndThere,hereToThereMeta,theModel} 
 
 { Meteor } = require 'meteor/meteor'
 {linkstate} = require '../api/strings'
+
+
+
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
+  receiveMessage = (event) ->
+    console.log event.origin, 'lastTabHighlighted', event
+    if event.origin != 'http://example.org:8080'
+      return
+    return
+
+  window.addEventListener 'message', receiveMessage, false
   {from,to,bookmarked,lastTitle,lastTabHighlighted} = queryParams
   try
     lastTabHighlighted = JSON.parse(decodeURIComponent lastTabHighlighted)
@@ -18,7 +28,7 @@ containerLayout = createContainer ((props) ->
     if !!lastTabHighlighted
       console.log {lastTabHighlighted}, typeof(lastTabHighlighted)
   catch error
-    console.log error, lastTabHighlighted
+    console.log error, lastTabHighlighted, lastTabHighlighted[-35..]
     lastTabHighlighted = {}
 
 
