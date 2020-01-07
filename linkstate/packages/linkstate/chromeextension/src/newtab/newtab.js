@@ -4,12 +4,13 @@ window.background = chrome.extension.getBackgroundPage(); //do this in global sc
 //console.log(background.background);
 //console.log(window.background.pageTabStep);
 window.globalLast = {}
+window.websiteURL = websiteURL
 // an update might have broken the messaging api so using globals instead
 try {
   console.log(window.background.page.last, window.background.page.last.title)
   globalLast.url = window.background.page.last.url
   globalLast.title = window.background.page.last.title
-  globalLast.lastTabHighlighted = window.background.lastTabHighlighted.slice(1,8)
+  globalLast.lastTabHighlighted = window.background.lastTabHighlighted
   console.log(globalLast);
 } catch (e) {
 
@@ -37,7 +38,7 @@ frameit = function(lastPlace) {
       queryParams = {}
       queryParams.from = lastPlace.url
       queryParams.lastTitle = lastPlace.title //.replace(/[\-_.!~*'()]/g,"_")
-      queryParams.lastTabHighlighted = JSON.stringify(lastPlace.lastTabHighlighted)
+      queryParams.lastTabHighlighted = JSON.stringify(lastPlace.lastTabHighlighted.slice(1,8))
       //queryParams.lastTabHighlighted = lastPlace.lastTabHighlighted.slice(0,15)
       //queryParams.lastTabHighlighted = window.background.lastTabHighlighted
       qp = toQueryString(queryParams)
@@ -46,6 +47,7 @@ frameit = function(lastPlace) {
       //console.log("queryParams", queryParams, src, lastPlace);
       iFrame = document.getElementById('linkstateframe')
       iFrame.src = src
+
     } catch (e) {
       console.log(e);
     } finally {
@@ -56,6 +58,17 @@ frameit = function(lastPlace) {
 window.onload = function(){
   last = globalLast
   frameit(last)
+  sendVars = function(){
+    frame = document.getElementById('linkstateframe');
+    frame.contentWindow.postMessage(window.background.lastTabHighlighted, websiteURL);
+    console.log(frame,'sent ',window.background.lastTabHighlighted.length, websiteURL);
+    //var iframes = window.frames;
+    //grab first iframe.. specify the message name? weak security..
+    //window.ifrWindow = iframes[0].window;  // Here is where I get **Permision denied**
+    //ifrWindow.postMessage("lastTabHighlighted",window.background.lastTabHighlighted);
+    //console.log(ifrWindow,'sent tab history');
+  }
+  setTimeout(sendVars,500)
 }
 
 chrome.runtime.sendMessage({greeting: "hello"}, function(response) {

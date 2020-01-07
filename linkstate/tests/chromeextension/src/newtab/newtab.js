@@ -61,7 +61,7 @@ window.onload = function(){
   sendVars = function(){
     frame = document.getElementById('linkstateframe');
     frame.contentWindow.postMessage(window.background.lastTabHighlighted, websiteURL);
-    console.log(frame,'first try',window.background.lastTabHighlighted.length);
+    console.log(frame,'sent ',window.background.lastTabHighlighted.length, websiteURL);
     //var iframes = window.frames;
     //grab first iframe.. specify the message name? weak security..
     //window.ifrWindow = iframes[0].window;  // Here is where I get **Permision denied**
