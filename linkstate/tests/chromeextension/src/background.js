@@ -47,7 +47,8 @@ oneSteps = function ( tab) {
     chrome.storage.sync.set({last:window.page})
     justSendUrlAndTime = {}
     justSendUrlAndTime.url = tab.url
-    justSendUrlAndTime.createdAt = new Date().getTime()
+    //justSendUrlAndTime.createdAt = new Date().getTime()
+    //they're one batch, timestamp them as received
     window.lastTabHighlighted.unshift(justSendUrlAndTime)
     try {
       //console.log(chrome.storage.sync.get(['last']));
