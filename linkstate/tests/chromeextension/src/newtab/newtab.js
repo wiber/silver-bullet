@@ -5,6 +5,8 @@ window.background = chrome.extension.getBackgroundPage(); //do this in global sc
 //console.log(window.background.pageTabStep);
 window.globalLast = {}
 window.websiteURL = websiteURL
+RandomId = Math.round(Math.random()*10000000)
+window.sOrigin = self.origin
 // an update might have broken the messaging api so using globals instead
 try {
   console.log(window.background.page.last, window.background.page.last.title)
@@ -38,15 +40,19 @@ frameit = function(lastPlace) {
       queryParams = {}
       queryParams.from = lastPlace.url
       queryParams.lastTitle = lastPlace.title //.replace(/[\-_.!~*'()]/g,"_")
-      queryParams.lastTabHighlighted = JSON.stringify(lastPlace.lastTabHighlighted.slice(1,8))
+      queryParams.RandomId = RandomId
+      queryParams.origin = window.sOrigin
+      // bad way to do it
+      // queryParams.lastTabHighlighted = JSON.stringify(lastPlace.lastTabHighlighted.slice(1,8))
       //queryParams.lastTabHighlighted = lastPlace.lastTabHighlighted.slice(0,15)
       //queryParams.lastTabHighlighted = window.background.lastTabHighlighted
       qp = toQueryString(queryParams)
       src = websiteURL + qp
-      console.log(src.length,' should be less than 2000')
+
       //console.log("queryParams", queryParams, src, lastPlace);
       iFrame = document.getElementById('linkstateframe')
       iFrame.src = src
+      console.log(src.length,' should be less than 2000',queryParams,src.slice(src.length-60,src.length))
 
     } catch (e) {
       console.log(e);
@@ -60,8 +66,16 @@ window.onload = function(){
   frameit(last)
   sendVars = function(){
     frame = document.getElementById('linkstateframe');
-    frame.contentWindow.postMessage(window.background.lastTabHighlighted, websiteURL);
-    console.log(frame,'sent ',window.background.lastTabHighlighted.length, websiteURL);
+    //frame.contentWindow.postMessage({window.background.lastTabHighlighted, websiteURL});
+    frame.contentWindow.postMessage(window.background.lastTabHighlighted, window.sOrigin);
+    frame.contentWindow.postMessage(window.background.lastTabHighlighted, '*');
+    frame.contentWindow.postMessage(window.background.lastTabHighlighted, '*');
+    console.log(frame,'sent ',window.background.lastTabHighlighted.length, websiteURL, window.sOrigin);
+    document.getElementById('linkstateframe').contentWindow.postMessage({
+      event_id: 'white_label_message',
+      data: window.background.lastTabHighlighted,
+      message: 'some message!'}
+    , '*')
     //var iframes = window.frames;
     //grab first iframe.. specify the message name? weak security..
     //window.ifrWindow = iframes[0].window;  // Here is where I get **Permision denied**

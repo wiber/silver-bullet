@@ -15,21 +15,33 @@ ifBodyContentHere, userSaved, simpleUrl, hereAndThere,hereToThereMeta,theModel} 
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   receiveMessage = (event) ->
-    console.log event.origin, 'lastTabHighlighted', event
-    if event.origin != 'http://example.org:8080'
+    window.rEvent = event
+    if (event.data.indexOf('Meteor._setImmediate.') is -1)
+      console.log event.data,'not conflicting with Meteor'
+    else
+      console.log 'Meteor _setImmediate took over', event.data
       return
+    console.log event.data, 'lastTabHighlighted'
+    if event.origin.startsWith('http://localhost:3000')
+      console.log 'on localhost lastTabHighlighted', event.data, event.message
+    if event.origin.startsWith('https://disqus.com')
+      console.log event.origin#, 'lastTabHighlighted', event, event.message, event.srcElement, rEvent, event.data
+    if event.origin.startsWith('https://linkstate.youiest.com')
+      console.log 'on linkstate', event.data
     return
 
-  window.addEventListener 'message', receiveMessage, false
+  window.addEventListener 'message', receiveMessage, true#, false
   {from,to,bookmarked,lastTitle,lastTabHighlighted} = queryParams
+  ###
   try
     lastTabHighlighted = JSON.parse(decodeURIComponent lastTabHighlighted)
     #lastTabHighlighted = decodeURIComponent lastTabHighlighted
     if !!lastTabHighlighted
       console.log {lastTabHighlighted}, typeof(lastTabHighlighted)
   catch error
-    console.log error, lastTabHighlighted, lastTabHighlighted[-35..]
+    console.log error, lastTabHighlighted#, lastTabHighlighted[-35..]
     lastTabHighlighted = {}
+  ###
 
 
   # store and use localStorage user untill user() received from server

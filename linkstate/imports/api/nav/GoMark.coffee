@@ -37,7 +37,7 @@ GoMark = (place) ->
         meta:
           weight: 5
           title: title
-      window.open(url,'_blank')
+      window.open(url)
       #Meteor.call 'Linking', payload
       #console.log payload, place.user.out.Bookmarks[linkstate.store url]
       #changeQueryParams type, url
