@@ -10,43 +10,13 @@ ifBodyContentHere, userSaved, simpleUrl, hereAndThere,hereToThereMeta,theModel} 
 { Meteor } = require 'meteor/meteor'
 {linkstate} = require '../api/strings'
 
-
-
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
-  receiveMessage = (event) ->
-    #window.rEvent = event
-    #if (event.data.indexOf('Meteor._setImmediate.') is -1)
-    #  console.log event.data,'not conflicting with Meteor'
-    #else
-    #  console.log 'Meteor _setImmediate took over', event.data
-    #  return
-    #console.log event.data, 'lastTabHighlighted'
-    #if event.origin.startsWith('http://localhost:3000')
-    #  console.log 'on localhost lastTabHighlighted', event.data, event.message
-    #if event.origin.startsWith('https://disqus.com')
-    #  console.log event.origin#, 'lastTabHighlighted', event, event.message, event.srcElement, rEvent, event.data
-    #if event.origin.startsWith('https://linkstate.youiest.com')
-    #  console.log 'on linkstate', event.data
-    return
-
   #window.addEventListener 'message', receiveMessage, true#, false
   {from,to,bookmarked,lastTitle,lastTabHighlighted} = queryParams
-  for lastU in ['a','b','c','d','e']
-    console.log lastU, queryParams[lastU], queryParams
-   ###
-  try
-    lastTabHighlighted = JSON.parse(decodeURIComponent lastTabHighlighted)
-    #lastTabHighlighted = decodeURIComponent lastTabHighlighted
-    if !!lastTabHighlighted
-      console.log {lastTabHighlighted}, typeof(lastTabHighlighted)
-    Meteor.call 'newQueryParams', queryParams, (res,err) ->
-
-  catch error
-    console.log error,'broken queryparam', lastTabHighlighted, lastTabHighlighted[-35..]
-    lastTabHighlighted = {}
-  ###
-
+  if queryParams?.a?
+    Meteor.call 'NewQueryParams', queryParams, (res,err) ->
+      console.log {err,res}
 
   # store and use localStorage user untill user() received from server
   if Meteor.isClient
@@ -96,6 +66,7 @@ containerLayout = createContainer ((props) ->
   # figure out if the app was loaded by copying the url... how?
 
   newProps =
+    #lastTab: lastTab
     user: user
     thumbalizr: thumbalizr
     queryParams: queryParams
@@ -119,3 +90,32 @@ containerLayout = createContainer ((props) ->
 
 
 exports.containerLayout = containerLayout
+###
+receiveMessage = (event) ->
+  #window.rEvent = event
+  #if (event.data.indexOf('Meteor._setImmediate.') is -1)
+  #  console.log event.data,'not conflicting with Meteor'
+  #else
+  #  console.log 'Meteor _setImmediate took over', event.data
+  #  return
+  #console.log event.data, 'lastTabHighlighted'
+  #if event.origin.startsWith('http://localhost:3000')
+  #  console.log 'on localhost lastTabHighlighted', event.data, event.message
+  #if event.origin.startsWith('https://disqus.com')
+  #  console.log event.origin#, 'lastTabHighlighted', event, event.message, event.srcElement, rEvent, event.data
+  #if event.origin.startsWith('https://linkstate.youiest.com')
+  #  console.log 'on linkstate', event.data
+  return
+
+
+try
+  lastTabHighlighted = JSON.parse(decodeURIComponent lastTabHighlighted)
+  #lastTabHighlighted = decodeURIComponent lastTabHighlighted
+  if !!lastTabHighlighted
+    console.log {lastTabHighlighted}, typeof(lastTabHighlighted)
+  Meteor.call 'newQueryParams', queryParams, (res,err) ->
+
+catch error
+  console.log error,'broken queryparam', lastTabHighlighted, lastTabHighlighted[-35..]
+  lastTabHighlighted = {}
+###

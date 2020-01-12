@@ -55,7 +55,7 @@ oneSteps = function ( tab) {
     } catch (e) {
       console.log(e)
     } finally {
-      console.log(window.lastTabHighlighted[0]);
+      console.log(window.lastTabHighlighted[0],window.lastTabHighlighted);
     }
   }
 }

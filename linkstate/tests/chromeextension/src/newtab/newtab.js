@@ -53,13 +53,20 @@ frameit = function(lastPlace) {
       //queryParams.origin = window.sOrigin
       // bad way to do it
       //globalLast
-      queryParams.a = globalLast.lastTabHighlighted[0].url
-      queryParams.b = globalLast.lastTabHighlighted[1].url
-      queryParams.c = globalLast.lastTabHighlighted[2].url
-      queryParams.d = globalLast.lastTabHighlighted[3].url
-      queryParams.e = globalLast.lastTabHighlighted[4].url
+      try {
+        queryParams.a = globalLast.lastTabHighlighted[0].url
+        queryParams.b = globalLast.lastTabHighlighted[1].url
+        queryParams.c = globalLast.lastTabHighlighted[2].url
+        queryParams.d = globalLast.lastTabHighlighted[3].url
+        queryParams.e = globalLast.lastTabHighlighted[4].url
+      } catch (e) {
+        console.log(e);
+      } finally {
+
+      }
+
       //queryParams.lastTabHighlighted = encodeURIComponent(JSON.stringify(lastPlace.lastTabHighlighted))
-      console.log(queryParams.lastTabHighlighted);
+      //console.log(queryParams.lastTabHighlighted);
       //queryParams.lastTabHighlighted = lastPlace.lastTabHighlighted.slice(0,15)
       //queryParams.lastTabHighlighted = window.background.lastTabHighlighted
       qp = toQueryString(queryParams)

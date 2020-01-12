@@ -19,6 +19,7 @@ exports.fiveToTriggerYou = React.createClass
         className: 'container'
         div
           for N in getFiveTargets(@props.user,5)
+            break if !N
             counter++
             ScreenshotUrl = _.get(N,'meta.ScreenshotUrlTo')
             #console.log N,ScreenshotUrl,counter
