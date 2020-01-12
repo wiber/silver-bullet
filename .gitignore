@@ -2,6 +2,7 @@ node_modules/
 public/carousel/.DS_Store
 Gsettings.json
 Msettings.json
+oldMsettings.json
 Asettings.json
 chromeextension.zip
 DS_Store

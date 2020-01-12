@@ -59,10 +59,10 @@ TextAbout = React.createClass
       Meteor.call "Linking", payload, (error, result) ->
         if error
           console.log "error", error
-        if result?
-          console.log result, 'returned from linking'
-        else
-          console.log 'no result?', result
+        #if result?
+        #  console.log result, 'returned from linking'
+        #else
+        #  console.log 'no result?', result
   onChangeWeight: (event, value)->
     console.log {event,value}
     this.onUpdate(value);
