@@ -19,7 +19,7 @@ try {
   globalLast.title = window.background.page.last.title
   console.log(window.background.lastTabHighlighted.length);
   uniqueLast = window.background.lastTabHighlighted.filter(onlyUnique)
-  globalLast.lastTabHighlighted = window.background.lastTabHighlighted.splice(1,5)
+  globalLast.lastTabHighlighted = uniqueLast.splice(1,5)
   console.log(window.background.lastTabHighlighted.length,window.background.lastTabHighlighted);
   console.log(globalLast);
 } catch (e) {

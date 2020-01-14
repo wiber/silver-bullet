@@ -46,12 +46,16 @@ Meteor.methods
     queryParamsState =
       lastQueryParams: queryParams
       lastTab: lastTab
+    if Meteor.user()
+      console.log Object.keys(Meteor.user().lastTab).length,'lastTab'
     Meteor.users.update
       _id: Meteor.userId()
     ,
       $set: queryParamsState
       $inc:
         'count.qpUpdates': 1
+    if Meteor.user()
+      console.log Object.keys(Meteor.user().lastTab).length,'lastTab'
     return lastTab
   GroundedUserInsert: ->
     if Meteor.isClient and Meteor?.user()?.services?.facebook?
@@ -270,6 +274,7 @@ Meteor.methods
         weight: 8
         body: 'The fate of bookmarks can tell us a lot about Linkstate'
     if Meteor.user()?.services?.facebook?.link?
+      console.log 'facebook profile create',
       Meteor.call "Linking",
         from: Meteor.user().services.facebook.link
         #to: 'Bookmarks'
@@ -277,6 +282,35 @@ Meteor.methods
         meta:
           title: Meteor.user().services.facebook.name+' on Facebook'
           weight: 7
+    Linkedin = Lo.get Meteor.user(), 'services.linkedin'
+    LinkedinPicArray = Lo.get Linkedin, 'profilePicture.identifiersUrl'
+
+    LinkedinLocalized = Lo.get Linkedin, 'firstName.localized'
+    PreferredLanguage = Lo.get Linkedin, 'linkedin.firstName.preferredLocale.language'
+    PreferredCountry = Lo.get Linkedin, 'linkedin.firstName.preferredLocale.country'
+    LinkedinLocalizedString = Lo.get LinkedinLocalized, PreferredLanguage+"_"+PreferredCountry
+    console.log {LinkedinLocalizedString}
+    LinkedinFirstName = Lo.get Linkedin, 'firstName.'+LinkedinLocalizedString
+    LinkedinLastname = Lo.get Linkedin, 'lastname.'+LinkedinLocalizedString
+    console.log {LinkedinFirstName,LinkedinLastname}
+    unless !LinkedinPicArray or !LinkedinLocalizedString
+      profilePicture = LinkedinPicArray[3]
+      console.log 'profilePicture', profilePicture
+      console.log 'facebook profile create', profilePicture
+      Meteor.call "Linking",
+        from: profilePicture
+        #to: 'Bookmarks'
+        to: catTree.categoryUrls.Services
+        meta:
+          title: Meteor.user().services.facebook.name+' on Linkedin'
+          weight: 1 #negative weights private? need namespace.
+      Meteor.users.update
+        _id: Meteor.userId()
+      ,
+        $set:
+          'profile.facePic': linkstate.store profilePicture
+        $inc:
+          'count.facePic': 1
     else
       new Meteor.Error 22, "non facebook user tried to login"
     console.log 'Just setupUser', Meteor.user().hits#, Meteor.user()._id, Meteor.user().links.out.Bookmarks, Meteor.user().links.in.Bookmarks

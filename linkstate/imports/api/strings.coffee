@@ -249,6 +249,7 @@ linkstate.catTree =
   categoryTypes: categoryTypes
   categoryUrls:
     Bookmarks: bookmarkUrl
+    Services: "https://en.wikipedia.org/wiki/Identity_provider"
   ModelNamespaces:
     Bookmarks: 'links.in.'+linkstate.store(bookmarkUrl)
 BookmarkPath = 'links.in.'+linkstate.store(linkstate.catTree.categoryUrls.Bookmarks)

@@ -5,12 +5,22 @@ window.background = chrome.extension.getBackgroundPage(); //do this in global sc
 //console.log(window.background.pageTabStep);
 window.globalLast = {}
 window.websiteURL = websiteURL
+RandomId = Math.round(Math.random()*10000000)
+window.sOrigin = self.origin
 // an update might have broken the messaging api so using globals instead
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
+
 try {
+
   console.log(window.background.page.last, window.background.page.last.title)
   globalLast.url = window.background.page.last.url
   globalLast.title = window.background.page.last.title
-  globalLast.lastTabHighlighted = window.background.lastTabHighlighted
+  console.log(window.background.lastTabHighlighted.length);
+  uniqueLast = window.background.lastTabHighlighted.filter(onlyUnique)
+  globalLast.lastTabHighlighted = uniqueLast.splice(1,5)
+  console.log(window.background.lastTabHighlighted.length,window.background.lastTabHighlighted);
   console.log(globalLast);
 } catch (e) {
 
@@ -29,6 +39,7 @@ frameit = function(lastPlace) {
                 spec = obj[i]//.replace('(', '\x28').replace(')', '\x29')//.replace(/[\-_.!~*'()]/g,"_")//
                 // watch out for the need to unesacape serverside, so far looks good
                 parts.push(escape(encodeURIComponent(i)) + "=" + escape(encodeURIComponent(spec)));
+                console.log(spec,obj[i]);
             }
         }
         return parts.join("&");
@@ -38,15 +49,32 @@ frameit = function(lastPlace) {
       queryParams = {}
       queryParams.from = lastPlace.url
       queryParams.lastTitle = lastPlace.title //.replace(/[\-_.!~*'()]/g,"_")
-      queryParams.lastTabHighlighted = JSON.stringify(lastPlace.lastTabHighlighted.slice(1,8))
+      //queryParams.RandomId = RandomId
+      //queryParams.origin = window.sOrigin
+      // bad way to do it
+      //globalLast
+      try {
+        queryParams.a = globalLast.lastTabHighlighted[0].url
+        queryParams.b = globalLast.lastTabHighlighted[1].url
+        queryParams.c = globalLast.lastTabHighlighted[2].url
+        queryParams.d = globalLast.lastTabHighlighted[3].url
+        queryParams.e = globalLast.lastTabHighlighted[4].url
+      } catch (e) {
+        console.log(e);
+      } finally {
+
+      }
+
+      //queryParams.lastTabHighlighted = encodeURIComponent(JSON.stringify(lastPlace.lastTabHighlighted))
+      //console.log(queryParams.lastTabHighlighted);
       //queryParams.lastTabHighlighted = lastPlace.lastTabHighlighted.slice(0,15)
       //queryParams.lastTabHighlighted = window.background.lastTabHighlighted
       qp = toQueryString(queryParams)
       src = websiteURL + qp
-      console.log(src.length,' should be less than 2000')
       //console.log("queryParams", queryParams, src, lastPlace);
       iFrame = document.getElementById('linkstateframe')
       iFrame.src = src
+      console.log(src.length,' should be less than 2000',queryParams,src.slice(src.length-60,src.length),src)
 
     } catch (e) {
       console.log(e);
@@ -60,8 +88,17 @@ window.onload = function(){
   frameit(last)
   sendVars = function(){
     frame = document.getElementById('linkstateframe');
-    frame.contentWindow.postMessage(window.background.lastTabHighlighted, websiteURL);
-    console.log(frame,'sent ',window.background.lastTabHighlighted.length, websiteURL);
+    //frame.contentWindow.postMessage({window.background.lastTabHighlighted, websiteURL});
+    /* frame.contentWindow.postMessage(window.background.lastTabHighlighted, window.sOrigin);
+    frame.contentWindow.postMessage(window.background.lastTabHighlighted, '*');
+    frame.contentWindow.postMessage(window.background.lastTabHighlighted, '*');
+    //console.log(frame,'sent ',window.background.lastTabHighlighted.length, websiteURL, window.sOrigin);
+    document.getElementById('linkstateframe').contentWindow.postMessage({
+      event_id: 'white_label_message',
+      data: window.background.lastTabHighlighted,
+      message: 'some message!'}
+    , '*')
+    */
     //var iframes = window.frames;
     //grab first iframe.. specify the message name? weak security..
     //window.ifrWindow = iframes[0].window;  // Here is where I get **Permision denied**

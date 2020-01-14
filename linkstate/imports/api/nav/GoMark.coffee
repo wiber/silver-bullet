@@ -15,7 +15,7 @@ GoMark = (place) ->
     #console.log 'got url in bookmarks', url, inBookmarks(place.user, url), place.user
     Bookmarked = inBookmarks(place.user, url)
     if Bookmarked
-      console.log 'got url in bookmarks', url, inBookmarks(place.user, url)
+      console.log 'got url in bookmarks', url#, inBookmarks(place.user, url)
       changeQueryParams type, url
     else
       # best we can do is show user the article they don't have..
