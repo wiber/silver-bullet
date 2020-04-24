@@ -259,8 +259,10 @@ getFiveTargets = (user, number) ->
   # this requires double for looplist
   # it's [from][to][node] so two(three) levels deep.
   number = number or 5
-  targets = Object.keys(user.links.out)
+  targets = Object.keys _.get(user,"links.out")
   targetDict = {}
+  # bad taste perhaps..
+  # get each newest link to my inLinks
   for fromLink, toLinkDict of user.links.in
     sortedKeysToDict = sortByKeysTime toLinkDict
     firstLink = _.get toLinkDict, sortedKeysToDict[0]
@@ -282,9 +284,8 @@ getFiveTargets = (user, number) ->
     else
       position++
     break if position > 10*number
-  #console.log arrSorted#, count, bookmarkDict[sortedKeys[count]]
+  console.log arrSorted#, count, bookmarkDict[sortedKeys[count]]
   return arrSorted
-
 
 getFiveLatestBookmarks = (user, number)  ->
   bookmarkDict = linkstate.getAllBookmarksDict user

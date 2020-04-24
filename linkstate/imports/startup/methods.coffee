@@ -42,7 +42,6 @@ Meteor.methods
       console.log lastU, queryParams[lastU],{ queryParams,lastTab}
     if Meteor.isClient
       changeQueryParamsObject nuller
-
     queryParamsState =
       lastQueryParams: queryParams
       lastTab: lastTab
@@ -87,7 +86,8 @@ Meteor.methods
       return arguments
       #  "you can't connect without starting somewhere"
     if stringedCallsExist({from, to, meta, userId})
-      console.log 'returning false due to doublecall'
+      if Meteor.isServer
+        console.log 'returning false due to doublecall'
       doublecall =  true
       if linkstate.bookmarkExistHere Meteor.user(), from
         console.log 'yay we got bookmark'
@@ -273,15 +273,21 @@ Meteor.methods
         title: 'Linkstate - Connecting is seeing'
         weight: 8
         body: 'The fate of bookmarks can tell us a lot about Linkstate'
-    if Meteor.user()?.services?.facebook?.link?
+    if Meteor.user()?.services?.facebook?
       console.log 'facebook profile create',
       Meteor.call "Linking",
-        from: Meteor.user().services.facebook.link
+        from: Lo.get Meteor.user(), 'services.facebook.picture.data.url'
         #to: 'Bookmarks'
         to: catTree.categoryUrls.Bookmarks
         meta:
           title: Meteor.user().services.facebook.name+' on Facebook'
           weight: 7
+      # no longer possible
+      Meteor.users.update
+        _id: Meteor.userId()
+      ,
+        $set:
+          'profile.facePic': linkstate.store profilePicture
     Linkedin = Lo.get Meteor.user(), 'services.linkedin'
     LinkedinPicArray = Lo.get Linkedin, 'profilePicture.identifiersUrl'
 

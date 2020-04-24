@@ -50,7 +50,7 @@ UrlBox = React.createClass
       "title": linkstate.see D.drawTheOther.otherUrl#m.FromLink
       #subtitle: D.drawTheOther.otherTitle#that.props.word.to + D.m.ToLink
       onClick: ->
-        console.log {D}
+        #console.log {D}
         windowOpen = (url, name, specs) ->
           if !url.match(/^https?:\/\//i)
             url = 'http://' + url

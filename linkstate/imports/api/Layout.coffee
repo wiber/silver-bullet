@@ -14,10 +14,10 @@ containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
   #window.addEventListener 'message', receiveMessage, true#, false
   {from,to,bookmarked,lastTitle,lastTabHighlighted} = queryParams
+  console.log queryParams?.a?,{props}
   if queryParams?.a?
     Meteor.call 'NewQueryParams', queryParams, (res,err) ->
-      console.log {err,res}
-
+      console.log {err,res},'newQueryParams'
   # store and use localStorage user untill user() received from server
   if Meteor.isClient
     Tracker.autorun ->
