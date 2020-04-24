@@ -5,6 +5,29 @@ TextField = require('material-ui/lib/TextField').default
 {div, br, span} = React.DOM
 
 exports.Disqus = React.createClass
+  componentDidMount: ->
+    script = document.createElement('script')
+    script.src = "//decivote.disqus.com/count.js"
+    script.async = true
+    script.id = "dsq-count-scr"
+    document.body.appendChild script
+    window.resetDisqus = (newIdentifier, newUrl, newTitle, newLanguage) ->
+      console.log 'DISQUS reload',{newIdentifier, newUrl, newTitle, newLanguage}
+      DISQUS.reset
+        reload: true
+        config: ->
+          @page.identifier = newIdentifier
+          @page.url = newUrl
+          @page.title = newTitle#{}"Linkstates for "+document.title
+          console.log {@page,DISQUS,'loading DISQUS'}
+          #@language = newLanguage
+          ###
+          shortname
+          this.page.identifier
+          this.page.title
+          this.page.url
+          this.page.category_id
+          ###
   shouldComponentUpdate: (nextProps, nextState)->
     rerender = false
     oldUrl = @props.from
