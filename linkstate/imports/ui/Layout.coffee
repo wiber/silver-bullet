@@ -13,7 +13,7 @@ React = require('react')
 AppBar =  require('@material-ui/core/AppBar').default
 {Footer} = require('./Footer.jsx')
 {Login} = require('./Login')
-{Disqus} = require('./Disqus')
+{Disqus,DisqusConfig} = require('./Disqus')
 # Card = require 'material-ui/lib/card/card'
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 {Mexplain} = require '../api/MexplainContainer.coffee'
@@ -35,27 +35,9 @@ exports.Layout = React.createClass
   #getDefaultProps: ->
   #  expandMainCard: true
   componentDidUpdate: ->
-    disqus_config = ->
-      @page.url = window.location
-      # Replace PAGE_URL with your page's canonical URL variable
-      @page.identifier = linkstate.store @props.from
-      # Replace PAGE_IDENTIFIER with your page's unique identifier variable
-      return
-    unless window.disqusLoaded
-      do ->
-        # DON'T EDIT BELOW THIS LINE
-        d = document
-        s = d.createElement('script')
-        s.src = 'https://decivote.disqus.com/embed.js'
-        s.setAttribute 'data-timestamp', +new Date
-        (d.head or d.body).appendChild s
-        window.disqusLoaded = true
-        return
-    return
+    DisqusConfig(@props.from)
   render: ->
     that = this
-
-
     try
       if that?.props?.user?.links?.in?.Bookmarks?[linkstate.store that.props.from]?.meta?.ScreenshotUrl?
         HERE = that.props.user.links.in.Bookmarks[ linkstate.store that.props.from]

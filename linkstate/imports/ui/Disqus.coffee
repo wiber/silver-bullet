@@ -3,7 +3,42 @@ IconButton = require('material-ui/lib/icon-button').default #@material-ui/core/I
 RaisedButton = require('material-ui/lib/raised-button').default
 TextField = require('material-ui/lib/TextField').default
 {div, br, span} = React.DOM
+exports.DisqusConfig = (from) ->
+  if window? and window?.document?
+    disqus_config = ->
+      @page.url = window.location
+      # Replace PAGE_URL with your page's canonical URL variable
+      @page.identifier = linkstate.store from
+      # Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      return
+    unless window.disqusLoaded
+      do ->
+        # DON'T EDIT BELOW THIS LINE
+        d = document
+        s = d.createElement('script')
+        s.src = 'https://decivote.disqus.com/embed.js'
+        s.setAttribute 'data-timestamp', +new Date
+        (d.head or d.body).appendChild s
+        window.disqusLoaded = true
 
+exports.DisqusConfig = () ->
+  disqus_config = ->
+    @page.url = window.location
+    # Replace PAGE_URL with your page's canonical URL variable
+    @page.identifier = linkstate.store @props.from
+    # Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    return
+  unless window.disqusLoaded
+    do ->
+      # DON'T EDIT BELOW THIS LINE
+      d = document
+      s = d.createElement('script')
+      s.src = 'https://decivote.disqus.com/embed.js'
+      s.setAttribute 'data-timestamp', +new Date
+      (d.head or d.body).appendChild s
+      window.disqusLoaded = true
+      return
+  return
 exports.Disqus = React.createClass
   componentDidMount: ->
     script = document.createElement('script')
@@ -38,10 +73,12 @@ exports.Disqus = React.createClass
   # componentDidUpdate: ->
   componentDidUpdate: ->
     # can't find a better way ...
+    console.log 'componentDidUpdate DISQUS', @props.from, props.from
     window.resetDisqus(window.props.from,window.location,"Linkstates for "+document.title)
   render: ->
     div
       id: "disqus_thread"
+      arbitraryThing: props.from
 
 ###
 
