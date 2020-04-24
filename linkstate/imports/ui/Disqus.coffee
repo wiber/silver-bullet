@@ -21,24 +21,6 @@ exports.DisqusConfig = (from) ->
         (d.head or d.body).appendChild s
         window.disqusLoaded = true
 
-exports.DisqusConfig = () ->
-  disqus_config = ->
-    @page.url = window.location
-    # Replace PAGE_URL with your page's canonical URL variable
-    @page.identifier = linkstate.store @props.from
-    # Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    return
-  unless window.disqusLoaded
-    do ->
-      # DON'T EDIT BELOW THIS LINE
-      d = document
-      s = d.createElement('script')
-      s.src = 'https://decivote.disqus.com/embed.js'
-      s.setAttribute 'data-timestamp', +new Date
-      (d.head or d.body).appendChild s
-      window.disqusLoaded = true
-      return
-  return
 exports.Disqus = React.createClass
   componentDidMount: ->
     script = document.createElement('script')
