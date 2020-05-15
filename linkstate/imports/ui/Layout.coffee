@@ -13,7 +13,8 @@ React = require('react')
 AppBar =  require('@material-ui/core/AppBar').default
 {Footer} = require('./Footer.jsx')
 {Login} = require('./Login')
-{Disqus,DisqusConfig} = require('./Disqus')
+{DQ} = require('./Disqus')
+{Disqus,DisqusConfig,LoadDisqus} = DQ
 # Card = require 'material-ui/lib/card/card'
 {AccountsUIWrapper} = require '../ui/AccountsUIWrapper.coffee'
 {Mexplain} = require '../api/MexplainContainer.coffee'
@@ -35,7 +36,7 @@ exports.Layout = React.createClass
   #getDefaultProps: ->
   #  expandMainCard: true
   componentDidUpdate: ->
-    DisqusConfig(@props.from)
+    DQ.DisqusConfig(@props.from)
   render: ->
     that = this
     try
@@ -131,9 +132,15 @@ exports.Layout = React.createClass
         div
           style:
             class: "column"
-          # FIXME rerenders too often
-          React.createElement Disqus,
-            #from: that.props.from
-            #url: that.props.url
-            # we only rerender when from changes
+          ### unless window.disqusLoaded
+            console.log @props.from
+            React.createElement DQ.LoadDisqusButton,
+              from: that.props.from
+              onClick: (event) ->
+                console.log event, DQ, that.props.from
+                DQ.DisqusConfig that.props.from
+                return React.createElement DQ.Disqus,
+                  from: that.props.from
+          else ###
+          React.createElement DQ.Disqus,
             from: that.props.from

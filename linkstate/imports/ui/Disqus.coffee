@@ -3,7 +3,9 @@ IconButton = require('material-ui/lib/icon-button').default #@material-ui/core/I
 RaisedButton = require('material-ui/lib/raised-button').default
 TextField = require('material-ui/lib/TextField').default
 {div, br, span} = React.DOM
-exports.DisqusConfig = (from) ->
+DQ = {}
+
+DQ.DisqusConfig = (from) ->
   if window? and window?.document?
     disqus_config = ->
       @page.url = window.location
@@ -20,8 +22,18 @@ exports.DisqusConfig = (from) ->
         s.setAttribute 'data-timestamp', +new Date
         (d.head or d.body).appendChild s
         window.disqusLoaded = true
+DQ.LoadDisqusButton = React.createClass
+  render: ->
+    console.log @props
+    React.createElement RaisedButton,
+        label: "Start Disqus"
+        onClick: (event) ->
+          console.log event, DQ, that.props.from
+          DQ.DisqusConfig that.props.from
+          return React.createElement DQ.Disqus,
+            from: that.props.from
 
-exports.Disqus = React.createClass
+DQ.Disqus = React.createClass
   componentDidMount: ->
     script = document.createElement('script')
     script.src = "//decivote.disqus.com/count.js"
@@ -85,3 +97,4 @@ do ->
   (d.head or d.body).appendChild s
   return
 ###
+exports.DQ = DQ
