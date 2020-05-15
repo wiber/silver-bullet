@@ -25,16 +25,9 @@ Urlbox = require 'urlbox'
 Lo = require 'lodash'
 {see, store, linkstate} = require '../api/strings'
 {screenshotUrlHere, hereAndThere} = require '../api/ModelOperations'
-# CookieConsent = require "react-cookie-consent"
-#{CookieConsent} = require "react-cookie-consent"
-# console.log("Nicolson here..")
-# console.log(CookieConsent)
-
 {div, a,} = React.DOM
 
 exports.Layout = React.createClass
-  #getDefaultProps: ->
-  #  expandMainCard: true
   componentDidUpdate: ->
     DQ.DisqusConfig(@props.from)
   render: ->
@@ -53,8 +46,6 @@ exports.Layout = React.createClass
         quality: 80
       if before is ScreenshotUrl
         console.log 'ScreenshotUrl was same'
-      #else
-      #  console.log '!!!!!!!!!!!ScreenshotUrl', before, ScreenshotUrl
     catch error
         console.error error, 'good try urlbox'
     if HERE?.title?
@@ -67,8 +58,6 @@ exports.Layout = React.createClass
       title = R.concat slash, titleHere
     else
       title = that.props.from
-
-
     div
       className: 'row'
       div
@@ -78,20 +67,17 @@ exports.Layout = React.createClass
           position: 'fixed'
           backgroundImage: 'url(' + ScreenshotUrl + ')'
           backgroundRepeat: 'no-repeat'
-          backgroundSize: '100% 110%'#'cover' #'100% auto'
+          backgroundSize: '100% 110%'
           opacity: '.3'
           zIndex: -1
-      # React.createElement AppBar, {"title": that.props.word.HeaderTitle, "style": {"position": 'fixed'}} #this is header
       div
         style:
           marginTop: 150
         className: 'column'
         div
 
-          if that.props.user?.services?#.facebook? or that.props.user?.services?.password?
-            #console.log {that}
+          if that.props.user?.services?
             React.createElement MainCard,
-              #{}"expanded": that.props.expandMainCard
               "to": that.props.to
               "from": that.props.from
               "word": that.props.word
@@ -99,9 +85,6 @@ exports.Layout = React.createClass
               "user": that.props.user
               "lastTitle": that.props.lastTitle
               "newHere": that.props.newHere
-          #else
-          #  React.createElement Mexplain,
-          #    "word": that.props.word
           React.createElement AboutCard,
               "expanded": that.props.expandAboutCard
               "to": that.props.to
@@ -117,22 +100,12 @@ exports.Layout = React.createClass
 
       div
         className: 'columnR'
-        style:# _.extend {}, style.base,
-          marginTop: "150px"# '15%'"
-        # a
-        #   href: "https://drive.google.com/open?id=0BxESHlfBQRFGazlwYzVYaThRczA"
-        #   target: "_blank"
-        #   "To use this app properly you need the chrome extension. Download, extract it and chrome://extensions unpacked."
-        # div
-        #   React.createElement AccountsUIWrapper, {}
-
-        #div
-        #  id: 'fb-root'
-        #   React.createElement CookieConsent, {}
+        style:
+          marginTop: "150px"
         div
           style:
             class: "column"
-          ### unless window.disqusLoaded
+          unless window.disqusLoadedFalse
             console.log @props.from
             React.createElement DQ.LoadDisqusButton,
               from: that.props.from
@@ -141,6 +114,6 @@ exports.Layout = React.createClass
                 DQ.DisqusConfig that.props.from
                 return React.createElement DQ.Disqus,
                   from: that.props.from
-          else ###
+          #else
           React.createElement DQ.Disqus,
             from: that.props.from
