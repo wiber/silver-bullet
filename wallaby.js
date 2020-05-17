@@ -1,18 +1,21 @@
-module.exports = function (w) {
-
+module.exports = function () {
   return {
     files: [
-      'linkstate/imports/*Browser.coffee'
+      { pattern: "lib/require.js", instrument: false },
+      {
+        pattern: "linkstate/imports/*Browser.coffee",
+        instrument: false,
+        load: false,
+      },
+      { pattern: "*/*.coffee", load: false },
+      { pattern: "tests/test-main.js", instrument: false },
     ],
 
     tests: [
-      'linkstate/tests/*BrowserSpec.coffee'
-    ]
-
-    // CoffeeScript compiler is on by default with default options,
-    // you can configure built-in compiler by passing options to it
-    //compilers: {
-    //  '**/*.coffee': w.compilers.coffeeScript({})
-    //}
+      {
+        pattern: "linkstate/tests/modelOperationsNodeSpec.coffee",
+        load: false,
+      },
+    ],
   };
 };

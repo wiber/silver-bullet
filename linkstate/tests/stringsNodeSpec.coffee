@@ -290,7 +290,6 @@ realNode =
       'author': 'cqWYJrZCGeWoPc68T'
       'createdAt': 1487402699730
       'title': 'ramda'
-
 inout =
   '_id': 'https%3A%2F%2Fgithub%2Ecom%2Fjunegunn%2Fvim-plug'
   'in':

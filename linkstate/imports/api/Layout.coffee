@@ -12,9 +12,10 @@ ifBodyContentHere, userSaved, simpleUrl, hereAndThere,hereToThereMeta,theModel} 
 
 containerLayout = createContainer ((props) ->
   queryParams = props.queryParams
+  console.log props
   #window.addEventListener 'message', receiveMessage, true#, false
-  {from,to,bookmarked,lastTitle,lastTabHighlighted} = queryParams
-  console.log queryParams?.a?,{props}
+  { from,to,bookmarked,lastTitle,lastTabHighlighted } = queryParams
+  console.log queryParams?.a? , { props }
   if queryParams?.a?
     Meteor.call 'NewQueryParams', queryParams, (res,err) ->
       console.log {err,res},'newQueryParams'

@@ -1,4 +1,5 @@
 {
+    "wallaby.node": "/Users/user/.nvm/versions/node/v12.16.1/bin/node",
     "linkedin": {
       "clientId": "783xj7ou7kqw29",
       "secret": "HYlNiSfIZwU93sAK"
