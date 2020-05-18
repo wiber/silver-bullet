@@ -1,4 +1,4 @@
-require '../imports/ui/materialize.min.css';
+#require '../imports/ui/materialize.min.css';
 require '../imports/ui/style.css';
 #Template = require('meteor/templating')
 require("react/package.json")
