@@ -17,5 +17,12 @@ module.exports = function () {
         load: false,
       },
     ],
+
+    env: {
+      type: "node",
+      params: {
+        runner: `-r ${require.resolve("esm")}`,
+      },
+    },
   };
 };
